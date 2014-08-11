@@ -1,0 +1,285 @@
+/*
+4.72
+7.64
+12.36
+20
+32.36
+52.36
+84.72
+137.08
+
+blue        0065BF
+blue-l      0388ff
+blue-d      004d92
+
+green       00c76d
+green-l     01fc8a
+green-d     009c55
+
+indigo      1200c8
+indigo-l    3723fc
+indigo-d    0e009d
+
+*/
+
+body{
+    font-size:12px;
+    letter-spacing: 0.016em;
+}
+
+/* HEADER
+******************************/
+header #banner-header{
+    background-image: url("images/header-background.jpg");
+    padding:5px 10px;
+}
+
+/* NAV search */
+#sub-header{
+    width:100%;
+    float:left;
+    min-height: 1px;
+    position: relative;
+    border-bottom:1px solid #ddd;
+}
+
+/* NAV tabs */
+.nav{
+    margin:20px 0;
+}
+.nav li {
+    padding:0;
+}
+.nav > li > a {
+    display: block;
+    padding: 8px 15px;
+    position: relative;
+}
+ul#nav-dir li a{
+    font-weight: bold;
+    font-size:13px;
+}
+
+
+/*table content */
+.table-bordered > thead > tr > th,
+.table-bordered > thead > tr > td {
+    border-bottom-width: 1px;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    padding: 4px;
+    display:table-cell;
+    vertical-align: middle;
+}
+div#doc-list div.tab-pane div.col-md-9 table.table tbody tr td:first-child{
+    display:table-cell;
+    text-align: center;
+}
+div#doc-list div.tab-pane div.col-md-9 table.table tbody tr td,
+div#doc-list div.tab-pane div.col-md-9 table.table tbody tr td a{
+/*    font-size: 12px;*/
+}
+
+.icon-cell{
+    width:52px;
+    display:table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+
+/* table : dropdown button */
+div#doc-list div.tab-pane div table thead tr th div.btn-group button.btn{
+    border:0;
+    font-size: 12px;
+}
+
+.btn-group.open .dropdown-toggle {
+    box-shadow: 0 0px 0px rgba(0, 0, 0) inset;
+}
+.btn:active,
+.btn.active,
+.open .btn,
+.open .btn {
+    box-shadow: 0 0px 0px rgba(0, 0, 0) inset;
+    color:#0065bf;
+}
+div#doc-list div.tab-pane div table thead tr th div.btn-group button.btn-default:hover,
+div#doc-list div.tab-pane div table thead tr th div.btn-group button.btn-default:focus,
+div#doc-list div.tab-pane div table thead tr th div.btn-group button.btn-default:active,
+div#doc-list div.tab-pane div table thead tr th div.btn-group button.btn-default.active,
+div#doc-list div.tab-pane div table thead tr th div.btn-group button.open > .dropdown-toggle.btn-default {
+    background-color: #fff;
+    border-color: #fff;
+    color: #333333;
+    box-shadow: 0 !important;
+}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+    background-color: #fff;
+    border-color: #fff;
+    color: #333333;
+}
+
+
+div#doc-list div.tab-pane div table thead tr th div.btn-group .dropdown-menu {
+    border-radius: 0px;
+    font-size: 12px;
+}
+
+/* PAGINATION */
+.pagination-sm > li:first-child > a, .pagination-sm > li:first-child > span {
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+/* button download files */
+div#doc-list div.tab-pane div.col-md-9 table.table tfoot tr td{
+    margin:0;
+    padding:0;
+}
+
+div#doc-list div.tab-pane div.col-md-9 table.table tfoot tr td {
+    /*line-height:52px;*/
+    display:table-cell;
+    vertical-align: middle;
+}
+
+/******************************/
+
+/* overwrite Bootstrap
+******************************/
+
+/* border-radius */
+input, textarea,
+[class^="btn-"],
+.btn,
+.btn-lg,
+.nav-pills > li > a,
+.jumbotron,
+.well,
+.input-group-addon
+{
+    border-radius:0px !important;
+}
+
+
+
+/*
+
+ pixlr grabber
+ pixel perfect
+ user-agent-switche
+ */
+
+
+
+
+/* collapse */
+.panel-group .panel,
+.panel-heading
+{
+    border-radius:0px !important;
+}
+.panel-group {
+    margin-bottom: 0px;
+}
+.panel-group:last-child {
+    margin-bottom: 20px;
+}
+.panel {
+    border:0;
+    box-shadow: none;
+}
+.panel-default > .panel-heading {
+    background-color: #FFF;
+}
+.panel-heading {
+    background-color: #E5E5E5;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    padding: 5px 12px;
+    font-size:13px;
+}
+.panel-heading.active,
+.panel-heading:active,
+.panel-heading:focus,
+.panel-heading:hover{
+    border-right: 1px solid #0e009d;
+}
+.panel-heading a.active,
+.panel-heading a:active,
+.panel-heading a:focus,
+.panel-heading a:hover{
+    text-decoration: none;
+}
+.panel-group div.panel div.panel-collapse ul{
+    margin:0;
+}
+.panel-group div.panel div.panel-collapse ul li{
+    padding: 3px 0 3px;
+}
+.panel-group div.panel div.panel-heading a{
+    color:#1200c8;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=180, Color=#ffffff)";/*IE 8*/
+    text-shadow: 0px 1px 1px #ffffff;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=180, Color=#ffffff); /*IE 5.5-7*/
+
+}
+.panel-group div.panel div.panel-collapse ul li{
+    list-style: none;
+    cursor: pointer;
+    display:block;
+    color:#0e009d;
+    font-size:12px;
+}
+.panel-group div.panel div.panel-collapse ul li:last-child{
+    padding-bottom:4px;
+}
+.panel-group div.panel div.panel-collapse ul li.active,
+.panel-group div.panel div.panel-collapse ul li:active,
+.panel-group div.panel div.panel-collapse ul li:hover,
+.panel-group div.panel div.panel-collapse ul li:focus{
+    border-right: 1px solid #0e009d;
+}
+
+/******************************/
+
+
+
+
+
+/* MISCELlANEOUS */
+
+.wide{
+    width: 100%;
+    display:block;
+}
+/*
+.golden-ratio{
+    :1.618033988em;
+}
+*/
+
+.golden-l{
+    width: 61.8033988%;
+}
+.golden-s{
+    width: 38.1966109%;
+}
+/******************************/
+
+/*
+$golden-ratio:    1.6180339887498948482;
+$golden-l:       (1 / $golden-ratio);
+$golden-s:       (1 - $golden-lg);
+*/
