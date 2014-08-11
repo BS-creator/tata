@@ -47,7 +47,7 @@ header #banner-header{
 }
 
 header nav.navbar div.container-fluid div a.navbar-brand{
-    padding:0 12px;
+    padding:0 12px 0 32px;
     height: 32px;
     line-height: 32px;
 }
@@ -72,6 +72,7 @@ div.container div.row div a#btn-upload-toggle{
     color:#0065BF;
     padding:16px 12px;
     font-size: 14px;
+    border: 1px dotted #0065BF;
 }
 div.container div.row div a#btn-upload-toggle.active,
 div.container div.row div a#btn-upload-toggle:active
@@ -80,10 +81,32 @@ div.container div.row div a#btn-upload-toggle:hover{
     background-color:#EEEEEE;
     color:#004d92;
 }
-.panel-group .panel-heading + .panel-collapse > .panel-body {
-    border-bottom: 1px solid #DDDDDD;
+div#upload-content.panel-group .panel.panel-default .panel-collapse{
+    min-height: 1px;
+    margin-left: 15px;
+    margin-right: 15px;
+    position: relative;
+/*    border-bottom: 1px solid #DDDDDD;*/
     border-top: 0;
 }
+div#up div div.panel-body,
+#drop-field {
+    padding:20px;
+}
+#drop-field {
+    border:4px dashed #dddddd;
+    font-size:36px;
+    lin-height:48px;
+    color:#dddddd;
+    text-align: center;
+    padding:20px;
+    margin: 20px 20px 0 0;
+}
+
+
+
+
+
 /* NAV tabs */
 
 /*recherche*/
@@ -108,16 +131,16 @@ ul#nav-dir li a{
 }
 
 
-/* doc-list */
-div#doc-list{
+/* file-list */
+div#file-list{
     min-height:580px;
 }
-div#doc-list div.tab-pane div.col-md-9 table.table tbody tr td:first-child{
+div#file-list div.tab-pane div.col-md-9 table.table tbody tr td:first-child{
     display:table-cell;
     text-align: center;
 }
-div#doc-list div.tab-pane div.col-md-9 table.table tbody tr td,
-div#doc-list div.tab-pane div.col-md-9 table.table tbody tr td a{
+div#file-list div.tab-pane div.col-md-9 table.table tbody tr td,
+div#file-list div.tab-pane div.col-md-9 table.table tbody tr td a{
 /*    font-size: 12px;*/
 }
 
@@ -148,7 +171,7 @@ div#doc-list div.tab-pane div.col-md-9 table.table tbody tr td a{
 }
 
 /* table : dropdown button */
-div#doc-list div.tab-pane div table thead tr th div.btn-group button.btn{
+div#file-list div.tab-pane div table thead tr th div.btn-group button.btn{
     border:0;
     font-size: 12px;
 }
@@ -163,11 +186,11 @@ div#doc-list div.tab-pane div table thead tr th div.btn-group button.btn{
     box-shadow: 0 0px 0px rgba(0, 0, 0) inset;
     color:#0065bf;
 }
-div#doc-list div.tab-pane div table thead tr th div.btn-group button.btn-default:hover,
-div#doc-list div.tab-pane div table thead tr th div.btn-group button.btn-default:focus,
-div#doc-list div.tab-pane div table thead tr th div.btn-group button.btn-default:active,
-div#doc-list div.tab-pane div table thead tr th div.btn-group button.btn-default.active,
-div#doc-list div.tab-pane div table thead tr th div.btn-group button.open > .dropdown-toggle.btn-default {
+div#file-list div.tab-pane div table thead tr th div.btn-group button.btn-default:hover,
+div#file-list div.tab-pane div table thead tr th div.btn-group button.btn-default:focus,
+div#file-list div.tab-pane div table thead tr th div.btn-group button.btn-default:active,
+div#file-list div.tab-pane div table thead tr th div.btn-group button.btn-default.active,
+div#file-list div.tab-pane div table thead tr th div.btn-group button.open > .dropdown-toggle.btn-default {
     background-color: #fff;
     border-color: #fff;
     color: #333333;
@@ -184,7 +207,7 @@ div#doc-list div.tab-pane div table thead tr th div.btn-group button.open > .dro
 }
 
 
-div#doc-list div.tab-pane div table thead tr th div.btn-group .dropdown-menu {
+div#file-list div.tab-pane div table thead tr th div.btn-group .dropdown-menu {
     border-radius: 0px;
     font-size: 12px;
 }
@@ -196,12 +219,12 @@ div#doc-list div.tab-pane div table thead tr th div.btn-group .dropdown-menu {
 }
 
 /* button download files */
-div#doc-list div.tab-pane div.col-md-9 table.table tfoot tr td{
+div#file-list div.tab-pane div.col-md-9 table.table tfoot tr td{
     margin:0;
     padding:0;
 }
 
-div#doc-list div.tab-pane div.col-md-9 table.table tfoot tr td {
+div#file-list div.tab-pane div.col-md-9 table.table tfoot tr td {
     /*line-height:52px;*/
     display:table-cell;
     vertical-align: middle;
@@ -261,7 +284,7 @@ input, textarea,
     background-color: #E5E5E5;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
-    padding: 5px 12px;
+    padding: 5px 12px 5px 20px;
     font-size:13px;
 }
 .panel-heading.active,

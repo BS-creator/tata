@@ -32,5 +32,10 @@ $( document ).ready(function() {
         });
 
 
-// LIB_CATEGORIE_F
+
+
+    // INCLUDING FILES
+    $(function(){
+        $("#file-list").load("view/index.file-list.html");
+    });
 });
