@@ -103,11 +103,26 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <p id="drop-field">
-                                            <i class="glyphicon glyphicon-inbox" ></i>
-                                            <br />
-                                            Glissez vos fichiers
-                                        </p>
+                                        <div class="panel-body">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                    Sélectionnez le dossier de réception <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu " role="menu">
+                                                    <li><a href="#">Presta</a></li>
+                                                    <li><a href="#">Dimona</a></li>
+                                                    <li><a href="#">Afas</a></li>
+                                                    <li><a href="#">DmFA</a></li>
+                                                    <li><a href="#">DOC</a></li>
+                                                    <li><a href="#">Autre ...</a></li>
+                                                </ul>
+                                            </div>
+                                            <p id="drop-field">
+                                                <i class="glyphicon glyphicon-inbox" ></i>
+                                                <br />
+                                                Glissez vos fichiers
+                                            </p>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -150,9 +165,20 @@
             <!-- FILE-LIST -->
             <div class="row">
 
-                <!-- INCLUDE index.file-list.html -->
-                <div class="tab-content" id="file-list"></div>
+                <div class="tab-content" id="file-list">
+                    <!-- INCLUDE index.file-list.html -->
+                </div>
 
+                <!-- PAGINATION -->
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <ul class="pagination pagination-sm">
+                            <li class="disabled"><a href="#">«</a></li>
+                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">»</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
         </div>

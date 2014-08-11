@@ -86,8 +86,12 @@ div#upload-content.panel-group .panel.panel-default .panel-collapse{
     margin-left: 15px;
     margin-right: 15px;
     position: relative;
-/*    border-bottom: 1px solid #DDDDDD;*/
     border-top: 0;
+}
+#upload-content .collapse.in {
+    display: table;
+    border-bottom:1px solid #dddddd;
+    padding-bottom:32px;
 }
 div#up div div.panel-body,
 #drop-field {
@@ -99,10 +103,10 @@ div#up div div.panel-body,
     lin-height:48px;
     color:#dddddd;
     text-align: center;
-    padding:20px;
+    padding:32px 20px;
     margin: 20px 20px 0 0;
+    border-radius:12px;
 }
-
 
 
 
@@ -133,7 +137,7 @@ ul#nav-dir li a{
 
 /* file-list */
 div#file-list{
-    min-height:580px;
+    /*min-height:580px;*/
 }
 div#file-list div.tab-pane div.col-md-9 table.table tbody tr td:first-child{
     display:table-cell;
@@ -205,6 +209,30 @@ div#file-list div.tab-pane div table thead tr th div.btn-group button.open > .dr
     border-color: #fff;
     color: #333333;
 }
+
+/* dropdown button upload module */
+div#up div div.panel-body div.btn-group button.btn-default,
+div#up div div.panel-body div.btn-group button.btn-default:hover,
+div#up div div.panel-body div.btn-group button.btn-default:focus,
+div#up div div.panel-body div.btn-group button.btn-default:active,
+div#up div div.panel-body div.btn-group button.btn-default.active,
+div#up div div.panel-body div.btn-group button.open > .dropdown-toggle.btn-default {
+    border-color: #ddd;
+}
+div#up div div.panel-body div.btn-group ul.dropdown-menu{
+    border-radius:0;
+}
+div#up.panel-group div.panel div.panel-collapse ul li.active,
+div#up.panel-group div.panel div.panel-collapse ul li:active,
+div#up.panel-group div.panel div.panel-collapse ul li:hover,
+div#up.panel-group div.panel div.panel-collapse ul li:focus,
+div#up.panel-collapse div.col-md-6 div.panel-body div.btn-group ul.dropdown-menu li{
+    border-right:0;
+}
+/* *** */
+
+
+
 
 
 div#file-list div.tab-pane div table thead tr th div.btn-group .dropdown-menu {
