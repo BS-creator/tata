@@ -35,14 +35,22 @@ header #banner-header{
 }
 
 /* NAV search */
-#sub-header{
-    width:100%;
-    float:left;
-    min-height: 1px;
-    position: relative;
-    border-bottom:1px solid #ddd;
+.navbar-default {
+    background-color: red;
+    border-color: red;
 }
-
+.navbar {
+    border-radius: 4px;
+}
+.navbar {
+    border: 1px solid rgba(0, 0, 0, 0);
+    margin-bottom: 20px;
+    min-height: 50px;
+    position: relative;
+}
+header nav.navbar div.container-fluid div ul.nav{
+    margin:0;
+}
 /* NAV tabs */
 .nav{
     margin:20px 0;
