@@ -23,8 +23,6 @@
                 <a id="header-logo" class="clickable"><img alt="Group S Logo" src="css/images/header-logo-groups.png"></a>
             </div>
 
-
-
             <nav class="navbar navbar-default" role="navigation">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -41,7 +39,7 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
-                            <li>Username</li>
+                            <li><a>Username</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-cog"></i> <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
@@ -69,13 +67,33 @@
         </header>
 
         <div class="container">
+
             <div class="row">
                 <div class="col-md-12">
-                    <button class="btn btn-default wide" style="margin:20px 0;">
-                        <i class="glyphicon glyphicon-upload"></i>&nbsp;&nbsp;&nbsp;Charger des fichiers sur le serveur
-                    </button>
+                    <div class="panel-group" id="upload-content">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a id="btn-upload-toggle" class="btn btn-default wide" data-toggle="collapse" data-parent="#upload-content" href="#up">
+                                        Télécharger des fichiers
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="up" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <blockquote>
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+                                    </blockquote>
+                                    <p>
+                                        <a class="btn btn-primary" role="button" id="btn-upload"><i class="glyphicon glyphicon-upload"></i>&nbsp;&nbsp;Ajouter des fichiers</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-md-3">
                     <ul class="nav list-inline" >
@@ -215,15 +233,11 @@
                                 </tbody>
 
                             </table>
-                            <button class="btn btn-success"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Télécharger</button>
+                            <button class="btn btn-success"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Télécharger</button>
                             <div class="text-center">
                                 <ul class="pagination pagination-sm">
                                     <li class="disabled"><a href="#">«</a></li>
                                     <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
                                     <li><a href="#">»</a></li>
                                 </ul>
                             </div>

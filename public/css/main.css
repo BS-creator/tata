@@ -34,24 +34,63 @@ header #banner-header{
     padding:5px 10px;
 }
 
-/* NAV search */
+/* NAV */
 .navbar-default {
-    background-color: red;
-    border-color: red;
+    background-color: #ffffff;
 }
 .navbar {
-    border-radius: 4px;
-}
-.navbar {
-    border: 1px solid rgba(0, 0, 0, 0);
-    margin-bottom: 20px;
-    min-height: 50px;
+    border-radius: 0px;
+    border-bttom: 1px solid #DDDDDD;
+    margin:0 0 32px 0;
+    min-height: 32px;
     position: relative;
+}
+
+header nav.navbar div.container-fluid div a.navbar-brand{
+    padding:0 12px;
+    height: 32px;
+    line-height: 32px;
 }
 header nav.navbar div.container-fluid div ul.nav{
     margin:0;
 }
+
+
+/* upload module */
+div#upload-content div.panel div.panel-heading{
+    padding:0;
+}
+div#upload-content div.panel div.panel-heading.active,
+div#upload-content div.panel div.panel-heading:active,
+div#upload-content div.panel div.panel-heading:focus,
+div#upload-content div.panel div.panel-heading:hover {
+    border-right: 0 !important;
+}
+div.container div.row div a#btn-upload-toggle{
+    margin-bottom:12px;
+    border:0;
+    color:#0065BF;
+    padding:16px 12px;
+    font-size: 14px;
+}
+div.container div.row div a#btn-upload-toggle.active,
+div.container div.row div a#btn-upload-toggle:active
+div.container div.row div a#btn-upload-toggle:focus,
+div.container div.row div a#btn-upload-toggle:hover{
+    background-color:#EEEEEE;
+    color:#004d92;
+}
+.panel-group .panel-heading + .panel-collapse > .panel-body {
+    border-bottom: 1px solid #DDDDDD;
+    border-top: 0;
+}
 /* NAV tabs */
+
+/*recherche*/
+ul.nav li form input.form-control{
+    height:32px;
+}
+
 .nav{
     margin:20px 0;
 }
@@ -60,7 +99,7 @@ header nav.navbar div.container-fluid div ul.nav{
 }
 .nav > li > a {
     display: block;
-    padding: 8px 15px;
+    padding: 7px 15px;
     position: relative;
 }
 ul#nav-dir li a{
@@ -69,20 +108,9 @@ ul#nav-dir li a{
 }
 
 
-/*table content */
-.table-bordered > thead > tr > th,
-.table-bordered > thead > tr > td {
-    border-bottom-width: 1px;
-}
-.table > thead > tr > th,
-.table > tbody > tr > th,
-.table > tfoot > tr > th,
-.table > thead > tr > td,
-.table > tbody > tr > td,
-.table > tfoot > tr > td {
-    padding: 4px;
-    display:table-cell;
-    vertical-align: middle;
+/* doc-list */
+div#doc-list{
+    min-height:580px;
 }
 div#doc-list div.tab-pane div.col-md-9 table.table tbody tr td:first-child{
     display:table-cell;
@@ -100,7 +128,24 @@ div#doc-list div.tab-pane div.col-md-9 table.table tbody tr td a{
     text-align: center;
 }
 
-
+/*table content */
+.table-bordered{
+    margin-bottom:12px;
+}
+.table-bordered > thead > tr > th,
+.table-bordered > thead > tr > td {
+    border-bottom-width: 1px;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    padding: 4px;
+    display:table-cell;
+    vertical-align: middle;
+}
 
 /* table : dropdown button */
 div#doc-list div.tab-pane div table thead tr th div.btn-group button.btn{
@@ -163,7 +208,6 @@ div#doc-list div.tab-pane div.col-md-9 table.table tfoot tr td {
 }
 
 /******************************/
-
 /* overwrite Bootstrap
 ******************************/
 
@@ -179,7 +223,9 @@ input, textarea,
 {
     border-radius:0px !important;
 }
-
+.btn{
+    padding: 5px 12px;
+}
 
 
 /*
