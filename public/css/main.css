@@ -62,8 +62,9 @@ div#up div div div.btn-group{
 }
 .dropdown-menu {
     right:0;
-    min-width: 137px;
-
+}
+div#upload-content div.panel div.panel-heading{
+    padding:0;
 }
 div#upload-content div.panel div.panel-heading.active,
 div#upload-content div.panel div.panel-heading:active,
