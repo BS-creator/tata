@@ -57,8 +57,13 @@ header nav.navbar div.container-fluid div ul.nav{
 
 
 /* upload module */
-div#upload-content div.panel div.panel-heading{
-    padding:0;
+div#up div div div.btn-group{
+    margin-bottom:32px;
+}
+.dropdown-menu {
+    right:0;
+    min-width: 137px;
+
 }
 div#upload-content div.panel div.panel-heading.active,
 div#upload-content div.panel div.panel-heading:active,
@@ -104,8 +109,8 @@ div#up div div.panel-body,
     color:#dddddd;
     text-align: center;
     padding:32px 20px;
-    margin: 20px 20px 0 0;
-    border-radius:12px;
+    margin: 20px 0 0 0;
+    /*border-radius:12px;*/
 }
 
 
@@ -222,11 +227,11 @@ div#up div div.panel-body div.btn-group button.open > .dropdown-toggle.btn-defau
 div#up div div.panel-body div.btn-group ul.dropdown-menu{
     border-radius:0;
 }
-div#up.panel-group div.panel div.panel-collapse ul li.active,
-div#up.panel-group div.panel div.panel-collapse ul li:active,
-div#up.panel-group div.panel div.panel-collapse ul li:hover,
-div#up.panel-group div.panel div.panel-collapse ul li:focus,
-div#up.panel-collapse div.col-md-6 div.panel-body div.btn-group ul.dropdown-menu li{
+div#up ul li.active,
+div#up ul li:active,
+div#up ul li:hover,
+div#up ul li:focus,
+div#up ul.dropdown-menu li{
     border-right:0;
 }
 /* *** */
