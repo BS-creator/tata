@@ -237,7 +237,14 @@ div#up ul.dropdown-menu li{
 }
 /* *** */
 
-
+/* progress bar */
+.panel-body-progress{
+    padding:0 32px;
+}
+.progress {
+    background-color: #F2F2F2;
+    border-radius: 0px;
+}
 
 
 
@@ -370,6 +377,10 @@ input, textarea,
 
 
 /* MISCELlANEOUS */
+.caret.caret-reversed {
+    border-top-width: 0;
+    border-bottom: 4px solid #000000;
+}
 
 .wide{
     width: 100%;
