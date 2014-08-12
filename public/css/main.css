@@ -55,8 +55,16 @@ header nav.navbar div.container-fluid div ul.nav{
     margin:0;
 }
 
+/******************************/
 
-/* upload module */
+
+/*  #CONTENT
+******************************/
+#content{
+    min-height:600px;
+}
+
+/* UPLOAD */
 div#up div div div.btn-group{
     margin-bottom:32px;
 }
@@ -78,7 +86,7 @@ div.container div.row div a#btn-upload-toggle{
     color:#0065BF;
     padding:16px 12px;
     font-size: 14px;
-    border: 1px dotted #0065BF;
+    border: 2px dashed #0065BF;
 }
 div.container div.row div a#btn-upload-toggle.active,
 div.container div.row div a#btn-upload-toggle:active
@@ -93,6 +101,9 @@ div#upload-content.panel-group .panel.panel-default .panel-collapse{
     margin-right: 15px;
     position: relative;
     border-top: 0;
+}
+div#up div div p{
+    margin-bottom:32px;
 }
 #upload-content .collapse.in {
     display: table;
