@@ -83,17 +83,18 @@ div#upload-content div.panel div.panel-heading:hover {
 div.container div.row div a#btn-upload-toggle{
     margin-bottom:12px;
     border:0;
-    color:#0065BF;
+    color:#CCC;
     padding:16px 12px;
     font-size: 14px;
-    border: 2px dashed #0065BF;
+    border: 2px dashed #CCC;
 }
 div.container div.row div a#btn-upload-toggle.active,
 div.container div.row div a#btn-upload-toggle:active
 div.container div.row div a#btn-upload-toggle:focus,
 div.container div.row div a#btn-upload-toggle:hover{
-    background-color:#EEEEEE;
+    background-color:#fff;
     color:#004d92;
+    border-color: #0065BF;
 }
 div#upload-content.panel-group .panel.panel-default .panel-collapse{
     min-height: 1px;
