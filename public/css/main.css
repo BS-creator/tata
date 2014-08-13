@@ -20,6 +20,8 @@ indigo      1200c8
 indigo-l    3723fc
 indigo-d    0e009d
 
+info        D9EDF7
+info-d      5dc0de
 */
 
 body{
@@ -80,7 +82,8 @@ div#upload-content div.panel div.panel-heading:focus,
 div#upload-content div.panel div.panel-heading:hover {
     border-right: 0 !important;
 }
-div.container div.row div a#btn-upload-toggle{
+
+div#upload-content div.panel div.panel-heading h4.panel-title a#btn-upload-toggle{
     margin-bottom:12px;
     border:0;
     color:#CCC;
@@ -88,10 +91,11 @@ div.container div.row div a#btn-upload-toggle{
     font-size: 14px;
     border: 2px dashed #CCC;
 }
-div.container div.row div a#btn-upload-toggle.active,
-div.container div.row div a#btn-upload-toggle:active
-div.container div.row div a#btn-upload-toggle:focus,
-div.container div.row div a#btn-upload-toggle:hover{
+
+a#btn-upload-toggle.active,
+a#btn-upload-toggle:active
+a#btn-upload-toggle:focus,
+a#btn-upload-toggle:hover{
     background-color:#fff;
     color:#004d92;
     border-color: #0065BF;
@@ -166,6 +170,10 @@ div#file-list div.tab-pane div.col-md-9 table.table tbody tr td a{
 /*    font-size: 12px;*/
 }
 
+#file-list .type-count{
+    width:30px;
+}
+
 .icon-cell{
     width:52px;
     display:table-cell;
@@ -181,6 +189,7 @@ div#file-list div.tab-pane div.col-md-9 table.table tbody tr td a{
 .table-bordered > thead > tr > td {
     border-bottom-width: 1px;
 }
+
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfoot > tr > th,
@@ -190,8 +199,12 @@ div#file-list div.tab-pane div.col-md-9 table.table tbody tr td a{
     padding: 4px;
     display:table-cell;
     vertical-align: middle;
+    color:#707070;
 }
 
+.table > tbody > tr > td:first-child {
+    text-align: center;
+}
 /* table : dropdown button */
 div#file-list div.tab-pane div table thead tr th div.btn-group button.btn{
     border:0;
@@ -314,7 +327,7 @@ input, textarea,
 
 
 
-/* collapse */
+/* collapse SIDEBAR LEFT */
 .panel-group .panel,
 .panel-heading
 {
@@ -331,45 +344,59 @@ input, textarea,
     box-shadow: none;
 }
 .panel-default > .panel-heading {
-    background-color: #FFF;
+    background-color: #F6F6F6;
 }
 .panel-heading {
-    background-color: #E5E5E5;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    padding: 5px 12px 5px 20px;
-    font-size:13px;
+     background-color: #F6F6F6;
+     border-top-left-radius: 0px;
+     border-top-right-radius: 0px;
+     padding: 5px 12px 5px 5px;
+     font-size:13px;
 }
 .panel-heading.active,
 .panel-heading:active,
 .panel-heading:focus,
 .panel-heading:hover{
-    border-right: 1px solid #0e009d;
+    border-right: 1px solid #0065BF;
+    color:#0065BF;
 }
 .panel-heading a.active,
 .panel-heading a:active,
 .panel-heading a:focus,
 .panel-heading a:hover{
     text-decoration: none;
+    color:#0065BF;
 }
 .panel-group div.panel div.panel-collapse ul{
     margin:0;
+}
+div.panel div.panel-collapse ul{
+    padding-left:12px;
 }
 .panel-group div.panel div.panel-collapse ul li{
     padding: 3px 0 3px;
 }
 .panel-group div.panel div.panel-heading a{
-    color:#1200c8;
+    color:#808080;
     -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=180, Color=#ffffff)";/*IE 8*/
     text-shadow: 0px 1px 1px #ffffff;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
     filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=180, Color=#ffffff); /*IE 5.5-7*/
-
+}
+.panel-group div.panel div.panel-heading a{
+    font-weight: bold;
+}
+.panel-group div.panel div.panel-heading a.active,
+.panel-group div.panel div.panel-heading a:active,
+.panel-group div.panel div.panel-heading a:hover,
+.panel-group div.panel div.panel-heading a:focus{
+    color:#0065BF;
+    /*color:#1200c8;*/
 }
 .panel-group div.panel div.panel-collapse ul li{
     list-style: none;
     cursor: pointer;
     display:block;
-    color:#0e009d;
+    color:#737373;
     font-size:12px;
 }
 .panel-group div.panel div.panel-collapse ul li:last-child{
@@ -379,7 +406,12 @@ input, textarea,
 .panel-group div.panel div.panel-collapse ul li:active,
 .panel-group div.panel div.panel-collapse ul li:hover,
 .panel-group div.panel div.panel-collapse ul li:focus{
-    border-right: 1px solid #0e009d;
+    border-right: 1px solid #0065BF;
+    color:#0065BF;
+    /*color:#0388ff;*/
+/*    color: #5dc0de;*/
+    /*color:#1200c8;*/
+
 }
 
 /******************************/
@@ -405,10 +437,26 @@ input, textarea,
 */
 
 .golden-l{
-    width: 61.8033988%;
+    width: 61.80%;
+    float:left;
 }
 .golden-s{
-    width: 38.1966109%;
+    width: 38.19%;
+    float:left;
+}
+
+/* COLOR     */
+.bg-new{
+     background-color: #EEFFFF;
+ }
+
+.new{
+    color: #EEFFFF;
+    border:1px solid #dddddd;
+}
+.highlight{
+    background-color: #01fc8a;
+    color: #555;
 }
 /******************************/
 
@@ -416,4 +464,19 @@ input, textarea,
 $golden-ratio:    1.6180339887498948482;
 $golden-l:       (1 / $golden-ratio);
 $golden-s:       (1 - $golden-lg);
+
+blue        0065BF
+blue-l      0388ff
+blue-d      004d92
+
+green       00c76d
+green-l     01fc8a
+green-d     009c55
+
+indigo      1200c8
+indigo-l    3723fc
+indigo-d    0e009d
+
+info        D9EDF7
+info-d      5dc0de
 */

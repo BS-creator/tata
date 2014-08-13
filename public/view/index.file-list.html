@@ -1,21 +1,89 @@
 
 
 <div id="all" class="tab-pane fade active in">
-    <!-- tab-content -->
-    <div class="col-md-offset-3 col-md-9 col-xs-12">
+
+    <!-- SIDEBAR -->
+    <div class="col-md-4 col-xs-12">
+
+        <div class="panel-group" id="test-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a data-toggle="collapse" data-parent="#test-1" href="#all-1">
+                        Documents de paie
+                    </a>
+                </div>
+                <div id="all-1" class="panel-collapse collapse in">
+                    <ul id="" class=""  data-type="">
+                        <li id="{{type}}" data-type=""><div class="pull-left type-count"><span class="pull-right">31</span></div>&nbsp;-&nbsp;Bulletin de paie</li>
+                        <li id="{{type}}" data-type=""><div class="pull-left type-count"><span class="pull-right">261</span></div>&nbsp;-&nbsp;Récapitulatif des rémunérations</li>
+                        <li id="{{type}}" data-type=""><div class="pull-left type-count"><span class="pull-right">317</span></div>&nbsp;-&nbsp;Relevé de rémunération</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-group" id="test-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a data-toggle="collapse" data-parent="#test-2" href="#all-2">
+                        Attestations
+                    </a>
+                </div>
+                <div id="all-2" class="panel-collapse collapse in">
+                    <ul id="" class=""  data-type="">
+                        <li id="" data-type=""><div class="pull-left type-count"><span class="pull-right">16</span></div>&nbsp;-&nbsp;Attestations d'occupation</li>
+                        <li id="" data-type=""><div class="pull-left type-count"><span class="pull-right">18</span></div>&nbsp;-&nbsp;Attestations de vacances</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-group" id="test-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a data-toggle="collapse" data-parent="#test-3" href="#all-3">
+                        Fichiers de données
+                    </a>
+                </div>
+                <div id="all-3" class="panel-collapse collapse in">
+                    <ul id="" class=""  data-type="">
+                        <li id="" data-type=""><div class="pull-left type-count"><span class="pull-right">651</span></div>&nbsp;-&nbsp;Retour numéro DIMONA</li>
+                        <li id="" data-type=""><div class="pull-left type-count"><span class="pull-right">823</span></div>&nbsp;-&nbsp;Fichier CIRI</li>
+                        <li id="" data-type=""><div class="pull-left type-count"><span class="pull-right">881</span></div>&nbsp;-&nbsp;Fichier Paiements Sepa TRAVAILLEURS (affilié)</li>
+                        <li id="" data-type=""><div class="pull-left type-count"><span class="pull-right">887</span></div>&nbsp;-&nbsp;Fichier Paiements Hors-Sepa TIERS (affilié)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-group" id="test-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <a data-toggle="collapse" data-parent="#test-4" href="#all-4">
+                        Documents DMFA
+                    </a>
+                </div>
+                <div id="all-4" class="panel-collapse collapse in">
+                    <ul id="" class=""  data-type="">
+                        <li id="" data-type=""><div class="pull-left type-count"><span class="pull-right">2012</span></div>&nbsp;-&nbsp;Relevé Trav. ETA8 pour AWIPH (format fichier)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT LIST -->
+    <div class="col-md-8 col-xs-12">
         <table class="table table-bordered">
+
+            <!-- NAV_PILLS -->
             <thead>
             <tr>
-                <th class="icon-cell"><a href="">All</a></th>
-                <th class="icon-cell">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            Libellé <span class="caret"></span>
-                        </button>
-                    </div>
-                </th>
 
-                <!--date-->
+                <!-- Selection -->
+                <th class="icon-cell"><a href="">Tous</a></th>
+
+                <!-- Date -->
                 <th>
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -29,7 +97,16 @@
                     </div>
                 </th>
 
-                <!--libellé-->
+                <!-- Libellé -->
+                <th class="">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            Libellé
+                        </button>
+                    </div>
+                </th>
+
+                <!-- Type -->
                 <th>
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -42,7 +119,7 @@
                     </div>
                 </th>
 
-                <!--sous-libellé-->
+                <!-- sous-Type -->
                 <th>
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -56,11 +133,11 @@
                     </div>
                 </th>
 
-                <!--employe-->
+                <!-- # employe -->
                 <th>
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            Employé <span class="caret"></span>
+                            # Employé <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">Action</a></li>
@@ -69,11 +146,12 @@
                         </ul>
                     </div>
                 </th>
-                <!--extention-->
+
+                <!-- Extention-->
                 <th>
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            Extention <span class="caret"></span>
+                            *.ext <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="#">Action</a></li>
@@ -84,209 +162,326 @@
                 </th>
             </tr>
             </thead>
+
             <tbody>
-            <tr>
+            <tr class="bg-new">
                 <td><input type="checkbox"/> </td>
-                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Type</a></td>
-                <td>2014-02-14</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>2014-08-14</td>
+                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Bulletin de paie</a></td>
+                <td>FOPAI</td>
+                <td>910</td>
+                <td>20370</td>
+                <td>DAT</td>
+            </tr>
+            <tr class="bg-new">
+                <td><input type="checkbox"/> </td>
+                <td>2014-07-14</td>
+                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Bulletin de paie</a></td>
+                <td>FOPAI</td>
+                <td>910</td>
+                <td>20370</td>
+                <td>DAT</td>
+            </tr>
+            <tr class="bg-new">
+                <td><input type="checkbox"/> </td>
+                <td>2014-07-14</td>
+                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Bulletin de paie</a></td>
+                <td>FOPAI</td>
+                <td>910</td>
+                <td>20370</td>
+                <td>DAT</td>
+            </tr>
+            <tr class="bg-new">
+                <td><input type="checkbox"/> </td>
+                <td>2014-06-14</td>
+                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Bulletin de paie</a></td>
+                <td>FOPAI</td>
+                <td>910</td>
+                <td>20370</td>
+                <td>DAT</td>
             </tr>
             <tr>
                 <td><input type="checkbox"/> </td>
-                <td><a href="" id="">Type</a></td>
-                <td>2014-02-14</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>2014-06-14</td>
+                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Attestations d'occupation</a></td>
+                <td>FIDMF</td>
+                <td>ATT</td>
+                <td>20370</td>
+                <td>PDF</td>
             </tr>
             <tr>
                 <td><input type="checkbox"/> </td>
-                <td><a href="" id="">Type</a></td>
-                <td>2014-02-14</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>2014-05-14</td>
+                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Attestations d'occupation</a></td>
+                <td>FIDMF</td>
+                <td>ATT</td>
+                <td>20370</td>
+                <td>PDF</td>
             </tr>
+            <tr>
+                <td><input type="checkbox"/> </td>
+                <td>2014-05-14</td>
+                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Retour numéro DIMONA</a></td>
+                <td>FODIM</td>
+                <td>ACR</td>
+                <td>20370</td>
+                <td>PDF</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"/> </td>
+                <td>2014-05-14</td>
+                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Retour numéro DIMONA</a></td>
+                <td>FODIM</td>
+                <td>AVR</td>
+                <td>20370</td>
+                <td>PDF</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"/> </td>
+                <td>2014-04-14</td>
+                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Retour numéro DIMONA</a></td>
+                <td>FODIM</td>
+                <td>AVR</td>
+                <td>20370</td>
+                <td>PDF</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"/> </td>
+                <td>2014-04-14</td>
+                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Retour numéro DIMONA</a></td>
+                <td>FODIM</td>
+                <td>AVR</td>
+                <td>20370</td>
+                <td>PDF</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"/> </td>
+                <td>2014-04-14</td>
+                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Fichiers paiements SEPA TRAVAILLEURS (affilié)</a></td>
+                <td>DMPTR</td>
+                <td>FFI</td>
+                <td>20370</td>
+                <td>XML</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"/> </td>
+                <td>2014-03-14</td>
+                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Fichiers paiements SEPA TRAVAILLEURS (affilié)</a></td>
+                <td>DMPTR</td>
+                <td>FFI</td>
+                <td>20370</td>
+                <td>XML</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"/> </td>
+                <td>2014-02-14</td>
+                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Fichier CIRI</a></td>
+                <td>DMPTR</td>
+                <td>FFI</td>
+                <td>20370</td>
+                <td>XML</td>
+            </tr>
+
             </tbody>
 
         </table>
 
-        <button class="btn btn-success"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Télécharger</button>
+        <!--<p class="text-right text-muted"><small>Nouveaux documents </small><i class="glyphicon glyphicon-stop new"></i> </p>-->
+        <!--<button class="btn btn-success"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Télécharger</button>-->
 
     </div>
 </div>
 
 <div id="presta" class="tab-pane fade ">
 
-    <!-- tab-sidebar -->
-    <div class="col-md-3 col-xs-12">
-        <div class="panel-group" id="presta-category-1">
+    <!-- SIDEBAR -->
+    <div class="col-md-4 col-xs-12">
+
+        <div class="panel-group" id="test-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a data-toggle="collapse" data-parent="#presta-category-1" href="#presta-libellé-1">
-                        presta-category-1
+                    <a data-toggle="collapse" data-parent="#test-1" href="#all-1">
+                        Documents de paie
                     </a>
                 </div>
-                <div id="presta-libellé-1" class="panel-collapse collapse">
+                <div id="all-1" class="panel-collapse collapse in">
                     <ul id="" class=""  data-type="">
-                        <li id="" data-type="">presta-category-1 libellé-1</li>
-                        <li id="" data-type="">presta-category-1 libellé-2</li>
-                        <li id="" data-type="">presta-category-1 libellé-3</li>
-                        <li id="" data-type="">presta-category-1 libellé-4</li>
+                        <li id="{{type}}" data-type=""><div class="pull-left type-count"><span class="pull-right">31</span></div>&nbsp;-&nbsp;Bulletin de paie</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <div class="panel-group" id="presta-category-2">
+        <div class="panel-group" id="test-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a data-toggle="collapse" data-parent="#presta-category-2" href="#presta-libellé-2">
-                        presta-category-2
+                    <a data-toggle="collapse" data-parent="#test-2" href="#all-2">
+                        Attestations
                     </a>
                 </div>
-                <div id="presta-libellé-2" class="panel-collapse collapse">
+                <div id="all-2" class="panel-collapse collapse in">
                     <ul id="" class=""  data-type="">
-                        <li id="" data-type="">presta-category-2 libellé-1</li>
-                        <li id="" data-type="">presta-category-2 libellé-2</li>
-                        <li id="" data-type="">presta-category-2 libellé-3</li>
-                        <li id="" data-type="">presta-category-2 libellé-4</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="panel-group" id="presta-category-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <a data-toggle="collapse" data-parent="#presta-category-3" href="#presta-libellé-3">
-                        presta-category-3
-                    </a>
-                </div>
-                <div id="presta-libellé-3" class="panel-collapse collapse">
-                    <ul id="" class=""  data-type="">
-                        <li id="" data-type="">presta-category-3 libellé-1</li>
-                        <li id="" data-type="">presta-category-3 libellé-2</li>
-                        <li id="" data-type="">presta-category-3 libellé-3</li>
-                        <li id="" data-type="">presta-category-3 libellé-4</li>
-                        <li id="" data-type="">presta-category-3 libellé-5</li>
-                        <li id="" data-type="">presta-category-3 libellé-6</li>
-                        <li id="" data-type="">presta-category-3 libellé-7</li>
-                        <li id="" data-type="">presta-category-3 libellé-8</li>
-                        <li id="" data-type="">presta-category-3 libellé-9</li>
-                        <li id="" data-type="">presta-category-3 libellé-10</li>
-                        <li id="" data-type="">presta-category-3 libellé-11</li>
+                        <li id="" data-type=""><div class="pull-left type-count"><span class="pull-right">16</span></div>&nbsp;-&nbsp;Attestations d'occupation</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- tab-content -->
-    <div class="col-md-9 col-xs-12">
+    <!-- CONTENT LIST -->
+    <div class="col-md-8 col-xs-12">
         <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th class="icon-cell"><a href="">All</a></th>
-                <th class="icon-cell">Libellé</th>
 
-                <!--date-->
-                <th>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            Date <span class="caret"></span><span class="caret caret-reversed"></span>
-                        </button>
-                    </div>
-                </th>
+    <!-- NAV_PILLS -->
+    <thead>
+    <tr>
 
-                <!--libellé-->
-                <th>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            Type <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                        </ul>
-                    </div>
-                </th>
+        <!-- Selection -->
+        <th class="icon-cell"><a href="">Tous</a></th>
 
-                <!--sous-libellé-->
-                <th>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            Sous-type <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                        </ul>
-                    </div>
-                </th>
+        <!-- Date -->
+        <th>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Date <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                </ul>
+            </div>
+        </th>
 
-                <!--employe-->
-                <th>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            Employé <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                        </ul>
-                    </div>
-                </th>
-                <!--new-->
-                <th>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            Nouveaux
-                        </button>
-                    </div>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td><input type="checkbox"/> </td>
-                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Type</a></td>
-                <td>2014-02-14</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"/> </td>
-                <td><a href="" id="">Type</a></td>
-                <td>2014-02-14</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"/> </td>
-                <td><a href="" id="">Type</a></td>
-                <td>2014-02-14</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            </tbody>
+        <!-- Libellé -->
+        <th class="">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Libellé
+                </button>
+            </div>
+        </th>
 
-        </table>
+        <!-- Type -->
+        <th>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Type <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+            </div>
+        </th>
 
-        <button class="btn btn-success"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;&nbsp;&nbsp;Télécharger</button>
+        <!-- sous-Type -->
+        <th>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    Sous-type <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                </ul>
+            </div>
+        </th>
+
+        <!-- # employe -->
+        <th>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    # Employé <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                </ul>
+            </div>
+        </th>
+
+        <!-- Extention-->
+        <th>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    *.ext <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                </ul>
+            </div>
+        </th>
+    </tr>
+    </thead>
+
+    <tbody>
+<!--    <tr class="bg-new">
+        <td><input type="checkbox"/> </td>
+        <td>2014-08-14</td>
+        <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Bulletin de paie</a></td>
+        <td>FOPAI</td>
+        <td>910</td>
+        <td>20370</td>
+        <td>DAT</td>
+    </tr>
+    <tr class="bg-new">
+        <td><input type="checkbox"/> </td>
+        <td>2014-07-14</td>
+        <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Bulletin de paie</a></td>
+        <td>FOPAI</td>
+        <td>910</td>
+        <td>20370</td>
+        <td>DAT</td>
+    </tr>
+    <tr class="bg-new">
+        <td><input type="checkbox"/> </td>
+        <td>2014-07-14</td>
+        <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Bulletin de paie</a></td>
+        <td>FOPAI</td>
+        <td>910</td>
+        <td>20370</td>
+        <td>DAT</td>
+    </tr>
+    <tr class="bg-new">
+        <td><input type="checkbox"/> </td>
+        <td>2014-06-14</td>
+        <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Bulletin de paie</a></td>
+        <td>FOPAI</td>
+        <td>910</td>
+        <td>20370</td>
+        <td>DAT</td>
+    </tr>-->
+    <tr>
+        <td><input type="checkbox"/> </td>
+        <td>2014-06-14</td>
+        <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Attestations d'occupation</a></td>
+        <td>FIDMF</td>
+        <td>ATT</td>
+        <td>20370</td>
+        <td>PDF</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"/> </td>
+        <td>2014-05-14</td>
+        <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Attestations d'occupation</a></td>
+        <td>FIDMF</td>
+        <td>ATT</td>
+        <td>20370</td>
+        <td>PDF</td>
+    </tr>
+
+
+    </tbody>
+
+    </table>
+
+    <!--<p class="text-right text-muted"><small>Nouveaux documents </small><i class="glyphicon glyphicon-stop new"></i> </p>-->
+    <!--<button class="btn btn-success"><i class="glyphicon glyphicon-download-alt"></i>&nbsp;&nbsp;Télécharger</button>-->
 
     </div>
 </div>
