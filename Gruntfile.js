@@ -17,7 +17,7 @@ module.exports = function (grunt) {
 
     // Configurable paths
     var config = {
-        app: 'app',
+        app: 'public',
         dist: 'dist'
     };
 
@@ -47,10 +47,10 @@ module.exports = function (grunt) {
             gruntfile: {
                 files: ['Gruntfile.js']
             },
-            sass: {
-                files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
+/*            sass: {
+                files: ['<%= config.app %>/css/{,*//*}*.{scss,sass}'],
                 tasks: ['sass:server', 'autoprefixer']
-            },
+            },*/
             styles: {
                 files: ['<%= config.app %>/styles/{,*/}*.css'],
                 tasks: ['newer:copy:styles', 'autoprefixer']
@@ -139,6 +139,7 @@ module.exports = function (grunt) {
         },
 
         // Mocha testing framework configuration options
+/*
         mocha: {
             all: {
                 options: {
@@ -147,23 +148,61 @@ module.exports = function (grunt) {
                 }
             }
         },
-
+*/
+        less: {
+            /*development: {
+                options: {
+                    paths: ["<%= config.app %>/"]
+                },
+                files: {
+                    "css/custom-bootstrap.css": "less/custom-bootstrap.less"
+                }
+            },
+            production: {
+                options: {
+                    paths: ["<%= config.app %>/"]},
+                    *//*,
+                    cleancss: true,
+                    modifyVars: {
+                        imgPath: '"http://mycdn.com/path/to/images"',
+                        bgColor: 'red'
+                    }
+                },*//*
+                files: {
+                    "css/custom-bootstrap.css": "less/custom-bootstrap.less"
+                }
+            }*/
+            production: {
+                options: {
+                    paths: ["<%= config.app %>"]
+                },
+                files: {
+                    "css/custom-bootstrap.css": "public/less/custom-bootstrap.less"
+                }
+            }
+        },
         // Compiles Sass to CSS and generates necessary files if requested
-        sass: {
+        /*sass: {
             options: {
                 includePaths: [
                     'bower_components'
                 ]
             },
             dist: {
+                options: {                       // Target options
+                    style: 'expanded'
+                },
                 files: [{
-                    expand: true,
-                    cwd: '<%= config.app %>/styles',
+                    *//*expand: true,*//*
+                    *//*cwd: '<%= config.app %>/styles',
                     src: ['*.scss'],
                     dest: '.tmp/styles',
-                    ext: '.css'
+                    ext: '.css',*//*
+                    cwd: '<%= config.app %>/css/',
+                    'custom-bootstrap.css': 'main.scss'
                 }]
-            },
+            }*/
+            /*,
             server: {
                 files: [{
                     expand: true,
@@ -172,8 +211,8 @@ module.exports = function (grunt) {
                     dest: '.tmp/styles',
                     ext: '.css'
                 }]
-            }
-        },
+            }*/
+        /*},*/
 
         // Add vendor prefixed styles
         autoprefixer: {
@@ -372,6 +411,9 @@ module.exports = function (grunt) {
         }
     });
 
+    // k
+    grunt.loadNpmTasks('grunt-contrib-less');
+    // /k
 
     grunt.registerTask('serve', function (target) {
         if (target === 'dist') {
