@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="js/handlebars-v1.3.0.js"></script>
         <script src="js/itransfer.js"></script>
         <script scr="js/jquery.tidy.table.js"></script>
     </head>
@@ -127,106 +128,6 @@
                                 </div><!--/ SIDEBAR-->
                             </div>
 
-                            <div class="col-md-8 col-xs-12">
-
-                                <!--CONTENT-->
-                                <table class="table table-bordered">
-
-                                        <!-- NAV_PILLS -->
-                                        <thead>
-                                        <tr>
-                                            <!-- Selection -->
-                                            <th class="icon-cell"><a href="">Tous</a></th>
-
-                                            <!-- Date -->
-                                            <th>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                        Date <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="#">Action</a></li>
-                                                    </ul>
-                                                </div>
-                                            </th>
-
-                                            <!-- Libellé -->
-                                            <th class="">
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                        Libellé
-                                                    </button>
-                                                </div>
-                                            </th>
-
-                                            <!-- Type -->
-                                            <th>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                        Type <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="#">Action</a></li>
-                                                </div>
-                                            </th>
-
-                                            <!-- sous-Type -->
-                                            <th>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                        Sous-type <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="#">Action</a></li>
-                                                    </ul>
-                                                </div>
-                                            </th>
-
-                                            <!-- # employe -->
-                                            <th>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                        # Employé <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="#">Action</a></li>
-                                                    </ul>
-                                                </div>
-                                            </th>
-
-                                            <!-- Extention-->
-                                            <th>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                        *.ext <span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" role="menu">
-                                                        <li><a href="#">Action</a></li>
-                                                    </ul>
-                                                </div>
-                                            </th>
-                                        </tr>
-                                        </thead>
-
-                                        <tbody>
-
-                                            <!--boucle sur la rangée-->
-                                            <tr class="bg-new">
-                                                <td><input type="checkbox"/> </td>
-                                                <td>2014-08-14</td>
-                                                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Bulletin de paie</a></td>
-                                                <td>FOPAI</td>
-                                                <td>910</td>
-                                                <td>20370</td>
-                                                <td>DAT</td>
-                                            </tr>
-                                            <!--/ boucle sur la rangée-->
-                                        </tbody>
-
-                                    </table><!--/ CONTENT TABLE-->
-
-                            </div>
-
                         </div>
 
                         <!--TOUT est actif par défaut et liste tous fichiers ordonnés par date-->
@@ -251,8 +152,10 @@
                                 </div><!--/ SIDEBAR-->
                             </div>
 
-                            <div class="col-md-8 col-xs-12">
+                            <div id="mycontainerfortemplate" class="col-md-8 col-xs-12">
 
+                            </div>
+                            <script id="datatmpl" type="text/x-handlebars-template">
                                 <!--CONTENT-->
                                 <table class="table table-bordered">
 
@@ -291,6 +194,7 @@
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li><a href="#">Action</a></li>
+                                                </ul>
                                             </div>
                                         </th>
 
@@ -334,22 +238,32 @@
 
                                     <tbody>
 
-                                    <!--boucle sur la rangée-->
+                                    {{#each data}}
                                     <tr class="bg-new">
                                         <td><input type="checkbox"/> </td>
-                                        <td>2014-08-14</td>
-                                        <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Bulletin de paie</a></td>
-                                        <td>FOPAI</td>
-                                        <td>910</td>
-                                        <td>20370</td>
-                                        <td>DAT</td>
+                                        <td>{{this.filename}}</td>
+                                        <td>{{this.idFile}}</td>
+                                        <td>{{this.idFile}}</td>
+                                        <td>{{this.idFile}}</td>
+                                        <td>{{this.idFile}}</td>
+                                        <td>{{this.idFile}}</td>
                                     </tr>
+                                    {{/each}}
+                                    <!--boucle sur la rangée-->
+                                    <!-- <tr class="bg-new">
+                                         <td><input type="checkbox"/> </td>
+                                         <td>2014-08-14</td>
+                                         <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Bulletin de paie</a></td>
+                                         <td>FOPAI</td>
+                                         <td>910</td>
+                                         <td>20370</td>
+                                         <td>DAT</td>
+                                     </tr>-->
                                     <!--/ boucle sur la rangée-->
                                     </tbody>
 
                                 </table><!--/ CONTENT TABLE-->
-
-                            </div>
+                            </script>
 
                         </div>
                     </div>
