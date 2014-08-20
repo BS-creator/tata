@@ -1,6 +1,15 @@
 $( document ).ready(function() {
 
-    var label = [];
+
+    // sidenav //////////////////////////////////
+
+    $("#sidenav h3").click(function(){
+        $(this).next("ul").toggle();
+    });
+
+
+
+        var label = [];
 
 
 
@@ -36,7 +45,7 @@ $( document ).ready(function() {
 
     // INCLUDING FILES
     $(function(){
-        $("#file-list").load("view/index.file-list.html");
+        $("#content").load("view/index.file-list.html");
     });
 
 });

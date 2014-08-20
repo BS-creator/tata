@@ -1,0 +1,36 @@
+// Padding, to be divided by two and applied to the left and right of all columns
+@grid-gutter-width:         30px;
+
+// A quick project by Philippe Dionne (http://phildionne.com)
+// Golden-ratio
+
+@gold-ratio: 1.6180339887498948482;
+@gold-l: (1 / @gold-ratio);
+@gold-s: (1 - @gold-l);
+
+//
+// Grid
+// --------------------------------------------------
+.make-col-gold (@grid-gutter-width) {
+  float: left;
+  position: relative;
+  // Prevent columns from collapsing when empty
+  min-height: 1px;
+  // Inner gutter via padding
+  padding-left: (@grid-gutter-width / 2);
+  padding-right: (@grid-gutter-width / 2);
+}
+.col-gold-s {
+  .make-col-gold(@grid-gutter-width);
+  width: percentage(@gold-s);
+}
+.col-gold-l {
+  .make-col-gold(@grid-gutter-width);
+  width: percentage(@gold-l);
+}
+.col-gold-offset-s {
+  margin-left: percentage(@gold-s);
+}
+.col-gold-offset-l {
+  margin-left: percentage(@gold-l);
+}

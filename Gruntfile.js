@@ -138,82 +138,6 @@ module.exports = function (grunt) {
             ]
         },
 
-        // Mocha testing framework configuration options
-/*
-        mocha: {
-            all: {
-                options: {
-                    run: true,
-                    urls: ['http://<%= connect.test.options.hostname %>:<%= connect.test.options.port %>/index.html']
-                }
-            }
-        },
-*/
-        less: {
-            /*development: {
-                options: {
-                    paths: ["<%= config.app %>/"]
-                },
-                files: {
-                    "css/custom-bootstrap.css": "less/custom-bootstrap.less"
-                }
-            },
-            production: {
-                options: {
-                    paths: ["<%= config.app %>/"]},
-                    *//*,
-                    cleancss: true,
-                    modifyVars: {
-                        imgPath: '"http://mycdn.com/path/to/images"',
-                        bgColor: 'red'
-                    }
-                },*//*
-                files: {
-                    "css/custom-bootstrap.css": "less/custom-bootstrap.less"
-                }
-            }*/
-            production: {
-                options: {
-                    paths: ["<%= config.app %>"]
-                },
-                files: {
-                    "css/custom-bootstrap.css": "public/less/custom-bootstrap.less"
-                }
-            }
-        },
-        // Compiles Sass to CSS and generates necessary files if requested
-        /*sass: {
-            options: {
-                includePaths: [
-                    'bower_components'
-                ]
-            },
-            dist: {
-                options: {                       // Target options
-                    style: 'expanded'
-                },
-                files: [{
-                    *//*expand: true,*//*
-                    *//*cwd: '<%= config.app %>/styles',
-                    src: ['*.scss'],
-                    dest: '.tmp/styles',
-                    ext: '.css',*//*
-                    cwd: '<%= config.app %>/css/',
-                    'custom-bootstrap.css': 'main.scss'
-                }]
-            }*/
-            /*,
-            server: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= config.app %>/styles',
-                    src: ['*.scss'],
-                    dest: '.tmp/styles',
-                    ext: '.css'
-                }]
-            }*/
-        /*},*/
-
         // Add vendor prefixed styles
         autoprefixer: {
             options: {
@@ -234,10 +158,11 @@ module.exports = function (grunt) {
             app: {
                 src: ['<%= config.app %>/index.html'],
                 exclude: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']
-            },
-            sass: {
-                src: ['<%= config.app %>/styles/{,*/}*.{scss,sass}']
             }
+            /*,
+            sass: {
+                src: ['<%= config.app %>/styles/{,*//*}*.{scss,sass}']
+            }*/
         },
 
         // Renames files for browser caching purposes
@@ -324,7 +249,7 @@ module.exports = function (grunt) {
         // cssmin: {
         //     dist: {
         //         files: {
-        //             '<%= config.dist %>/styles/main.css': [
+        //             '<%= config.dist %>/styles/itransfer.css': [
         //                 '.tmp/styles/{,*/}*.css',
         //                 '<%= config.app %>/styles/{,*/}*.css'
         //             ]
@@ -408,12 +333,34 @@ module.exports = function (grunt) {
                 'imagemin',
                 'svgmin'
             ]
-        }
-    });
+        },
 
-    // k
-    grunt.loadNpmTasks('grunt-contrib-less');
-    // /k
+        // LESS
+        less: {
+            production: {
+                options: {
+                    // paths: ["public/less/re-bootstrap.less"],
+                    // yuicompress: true
+                },
+                files: {
+                    // "public/css/re-bootstrap.css": "public/less/re-bootstrap/less/re-bootstrap.less",
+                    "public/css/itransfer.css": "public/less/itransfer.less",
+                    "public/css/groups.css": "public/less/groups.less"
+                }
+                /*watch: {
+                    files: "public/less/re-bootstrap.less",
+                    tasks: ["less"]
+                }*/
+            }
+        }
+
+        // BOOTSTRAP
+        /*include_bootstrap: {
+         files: {
+         'css/test.css': 'less/manifest.less',
+         },
+         },*/
+    });
 
     grunt.registerTask('serve', function (target) {
         if (target === 'dist') {
@@ -469,4 +416,10 @@ module.exports = function (grunt) {
         'test',
         'build'
     ]);
+
+    // cg
+    grunt.loadNpmTasks('grunt-include-bootstrap');
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    // /cg
 };
