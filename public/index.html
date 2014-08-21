@@ -21,11 +21,9 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <header>
-
             <div id="banner-header" class="header-gradient">
                 <a id="header-logo" class="clickable"><img alt="Group S Logo" src="css/images/header-logo-groups.png"></a>
             </div>
-
 
             <div class="nav" id="info-header">
 
@@ -61,12 +59,9 @@
                     </li>
                 </ul>
             </div>
-
-
         </header>
 
-        <div class="container">
-
+        <div class="wrapper">
                 <div class="row">
                     <div class="col-md-3 col-xs-12">
 
@@ -89,7 +84,7 @@
                         <!--NAV-PILLS-->
                         <ul class="nav nav-pills" id="dir-name">
                             <!--boucle sur les noms de dossier-->
-                            <li class=""><a data-toggle="tab" role="tab" href="#tab-i">Dir-name</a></li>
+                            <li class="pw-tab-folder"><a data-toggle="tab" role="tab" href="#tab-i">&nbsp;&nbsp;&nbsp;Dir-name</a></li>
                             <!--/ boucle sur les noms de dossier-->
 
                             <li class="pull-right active"><a data-toggle="tab" role="tab" href="#all">Tout</a></li>
@@ -121,6 +116,7 @@
                                         <!--/ boucle-->
                                     </ul>
                                 </div><!--/ SIDEBAR-->
+
                             </div>
 
                             <div class="col-md-9 col-xs-12">
@@ -136,8 +132,8 @@
 
                                             <!-- Date -->
                                             <th>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <div class="pw-btn-group-th">
+                                                    <button type="button" class="pw-btn-th dropdown-toggle" data-toggle="dropdown">
                                                         Date <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu" role="menu">
@@ -148,8 +144,8 @@
 
                                             <!-- Libellé -->
                                             <th class="">
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <div class="pw-btn-group-th">
+                                                    <button type="button" class="pw-btn-th dropdown-toggle" data-toggle="dropdown">
                                                         Libellé
                                                     </button>
                                                 </div>
@@ -157,8 +153,8 @@
 
                                             <!-- Type -->
                                             <th>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <div class="pw-btn-group-th">
+                                                    <button type="button" class="pw-btn-th dropdown-toggle" data-toggle="dropdown">
                                                         Type <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu" role="menu">
@@ -168,8 +164,8 @@
 
                                             <!-- sous-Type -->
                                             <th>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <div class="pw-btn-group-th">
+                                                    <button type="button" class="pw-btn-th dropdown-toggle" data-toggle="dropdown">
                                                         Sous-type <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu" role="menu">
@@ -180,9 +176,9 @@
 
                                             <!-- # employe -->
                                             <th>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                        # Employé <span class="caret"></span>
+                                                <div class="pw-btn-group-th">
+                                                    <button type="button" class="pw-btn-th dropdown-toggle" data-toggle="dropdown">
+                                                        Employeur <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li><a href="#">Action</a></li>
@@ -192,8 +188,8 @@
 
                                             <!-- Extention-->
                                             <th>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <div class="pw-btn-group-th">
+                                                    <button type="button" class="pw-btn-th dropdown-toggle" data-toggle="dropdown">
                                                         *.ext <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu" role="menu">
@@ -235,7 +231,7 @@
                                     <ul>
                                         <!--boucle sur les types-->
                                         <li>
-                                            <h3>Type names</h3>
+                                            <p class="sidenav-head">Type names</p>
                                             <ul>
                                                 <!--boucle sur les sous-types-->
                                                 <li><a href="#">Sub-type names</a></li>
@@ -260,8 +256,8 @@
 
                                         <!-- Date -->
                                         <th>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <div class="pw-btn-group-th">
+                                                <button type="button" class="pw-btn-th dropdown-toggle" data-toggle="dropdown">
                                                     Date <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
@@ -272,8 +268,8 @@
 
                                         <!-- Libellé -->
                                         <th class="">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <div class="pw-btn-group-th">
+                                                <button type="button" class="pw-btn-th dropdown-toggle" data-toggle="dropdown">
                                                     Libellé
                                                 </button>
                                             </div>
@@ -281,8 +277,8 @@
 
                                         <!-- Type -->
                                         <th>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <div class="pw-btn-group-th">
+                                                <button type="button" class="pw-btn-th dropdown-toggle" data-toggle="dropdown">
                                                     Type <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
@@ -292,8 +288,8 @@
 
                                         <!-- sous-Type -->
                                         <th>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <div class="pw-btn-group-th">
+                                                <button type="button" class="pw-btn-th dropdown-toggle" data-toggle="dropdown">
                                                     Sous-type <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
@@ -304,9 +300,9 @@
 
                                         <!-- # employe -->
                                         <th>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                    # Employé <span class="caret"></span>
+                                            <div class="pw-btn-group-th">
+                                                <button type="button" class="pw-btn-th dropdown-toggle" data-toggle="dropdown">
+                                                    Employeur <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li><a href="#">Action</a></li>
@@ -316,8 +312,8 @@
 
                                         <!-- Extention-->
                                         <th>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <div class="pw-btn-group-th">
+                                                <button type="button" class="pw-btn-th dropdown-toggle" data-toggle="dropdown">
                                                     *.ext <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
@@ -347,6 +343,7 @@
                             </div>
 
                         </div>
+
                     </div>
 
                 </div>
