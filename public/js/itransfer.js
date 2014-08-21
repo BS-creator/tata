@@ -6,6 +6,10 @@ $( document ).ready(function() {
         $(this).children("ul").toggle();
     });
 
+    $('div#sidenav ul li ul'){
+
+    }
+
 });
 
 $(function() {
