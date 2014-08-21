@@ -64,7 +64,7 @@ $(function() {
     });
 
     $('#mainTable').delegate('.dl', 'click', function(){
-        $(this).attr('href', 'http://localhost:8009/file/jxaqei45ibgph3bmuup4e345/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
+        $(this).attr('href', 'http://172.20.20.64:8009/file/jxaqei45ibgph3bmuup4e345/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
 
     });
 });
