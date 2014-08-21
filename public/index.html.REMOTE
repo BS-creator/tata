@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="no-js" lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>itransfer</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="stylesheet" href="css/re-bootstrap.css">
+        <link rel="stylesheet" href="css/groups.css">
+        <link rel="stylesheet" href="css/itransfer.css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="js/handlebars-v1.3.0.js"></script>
+        <script scr="js/jquery.tidy.table.js"></script>
+        <script src="js/itransfer.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <header>
+
+            <div id="banner-header" class="header-gradient">
+                <a id="header-logo" class="clickable"><img alt="Group S Logo" src="css/images/header-logo-groups.png"></a>
+            </div>
+
+
+            <div class="nav" id="info-header">
+
+                <ul class="list-inline pull-left">
+                    <li class="univers-name">Test iTransfer 1</li>
+                </ul>
+
+                <ul class="list-inline pull-right">
+                    <li class="user-name">LUDOVIC WAREGNE&nbsp;</li>
+                    <li id="menu-modules">
+                        <a id="link-menu-modules">
+                            <!-- build:[src] ../cdn/prestaweblibrary/@@frameworkVersion@@/css/images/ -->
+                            <img height="17" width="19" alt="Modules" data-placement="bottom" data-toggle="popover" id="logo-menu-modules" src="../cdn/prestaweblibrary/css/images/logo-modules.png">
+                            <!-- /build -->
+                        </a>
+                    </li>
+                    <li id="notifications">
+                        <i class="fa fa-bell-o fa-lg"></i>
+                    </li>
+                    <li>
+                        <div id="menu-options">
+                            <div class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle"><img height="17" width="19" alt="Options" id="logo-menu-options" src="css/images/bouton-options.png"></a>
+                                <ul aria-labelledby="dLabel" role="menu" class="dropdown-menu pull-right">
+                                    <li><a href="../home" tabindex="-1">Page d'accueil PreSta Web</a></li>
+                                    <li><a href="../login/reset-password.html?app=ipickup" tabindex="-1">Changement de mot de passe</a></li>
+                                    <li class="logout"><a class="btn-danger" tabindex="-1">Déconnexion</a></li>
+                                    <li class="divider"></li>
+                                    <li><a class="about" data-toggle="modal" href="#about-ipickup" tabindemonth-navigationx="-1">A propos de PreSta Web</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="notifications">
+                        <i class="fa fa-bell-o fa-lg"></i>
+                    </li>
+                </ul>
+            </div>
+
+
+        </header>
+
+        <div class="container">
+
+                <div class="row">
+                    <div class="col-md-4 col-xs-12">
+
+                        <!--SEARCH-->
+                        <ul class="nav list-inline" >
+                            <li class="wide">
+                                <form class="form-inline " role="form">
+                                    <div class="form-group wide">
+                                        <div class="input-group wide pull-right">
+                                            <input type="text" class="form-control" placeholder="Recherche ...">
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="col-md-8 col-xs-12">
+
+                        <!--NAV-PILLS-->
+                        <ul class="nav nav-pills" id="dir-name">
+                            <!--boucle sur les noms de dossier-->
+                            <li class=""><a data-toggle="tab" role="tab" href="#tab-i">Dir-name</a></li>
+                            <!--/ boucle sur les noms de dossier-->
+
+                            <li class="pull-right active"><a data-toggle="tab" role="tab" href="#all">Tout</a></li>
+                        </ul>
+                    </div>
+                </div><!--/ row-->
+
+                <div class="row">
+
+                    <div class="tab-content">
+
+                        <!--filtre sur les dossier-->
+                        <div id="tab-i" class="tab-pane fade ">
+
+                            <div class="col-md-4 col-xs-12">
+
+                                <!--SIDEBAR-->
+                                <div id="sidenav">
+                                    <ul>
+                                        <!--boucle sur les types-->
+                                        <li>
+                                            <h3>Type names</h3>
+                                            <ul>
+                                                <!--boucle sur les sous-types-->
+                                                <li><a href="#">Sub-type names</a></li>
+                                                <!--/ boucle-->
+                                            </ul>
+                                        </li>
+                                        <!--/ boucle-->
+                                    </ul>
+                                </div><!--/ SIDEBAR-->
+                            </div>
+
+                        </div>
+
+                        <!--TOUT est actif par défaut et liste tous fichiers ordonnés par date-->
+                        <div id="all" class="tab-pane fade active in">
+
+                            <div class="col-md-4 col-xs-12">
+
+                                <!--SIDEBAR-->
+                                <div id="sidenav">
+                                    <ul>
+                                        <!--boucle sur les types-->
+                                        <li>
+                                            <h3>Type names</h3>
+                                            <ul>
+                                                <!--boucle sur les sous-types-->
+                                                <li><a href="#">Sub-type names</a></li>
+                                                <!--/ boucle-->
+                                            </ul>
+                                        </li>
+                                        <!--/ boucle-->
+                                    </ul>
+                                </div><!--/ SIDEBAR-->
+                            </div>
+
+                            <div class="col-md-8 col-xs-12">
+
+                                <!--CONTENT-->
+                                <table id="mainTable" class="table table-bordered">
+
+                                    <!-- NAV_PILLS -->
+                                    <thead>
+                                    <tr>
+                                        <!-- Selection -->
+                                        <th class="icon-cell"><a href="">Tous</a></th>
+
+                                        <!-- Date -->
+                                        <th>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                    Date <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#">Action</a></li>
+                                                </ul>
+                                            </div>
+                                        </th>
+
+                                        <!-- Libellé -->
+                                        <th class="">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                    Libellé
+                                                </button>
+                                            </div>
+                                        </th>
+
+                                        <!-- Type -->
+                                        <th>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                    Type <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#">Action</a></li>
+                                                </ul>
+                                            </div>
+                                        </th>
+
+                                        <!-- sous-Type -->
+                                        <th>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                    Sous-type <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#">Action</a></li>
+                                                </ul>
+                                            </div>
+                                        </th>
+
+                                        <!-- # employe -->
+                                        <th>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                    # Employé <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#">Action</a></li>
+                                                </ul>
+                                            </div>
+                                        </th>
+
+                                        <!-- Extention-->
+                                        <th>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                    *.ext <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#">Action</a></li>
+                                                </ul>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    <!--boucle sur la rangée-->
+                                    <!-- <tr class="bg-new">
+                                         <td><input type="checkbox"/> </td>
+                                         <td>2014-08-14</td>
+                                         <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Bulletin de paie</a></td>
+                                         <td>FOPAI</td>
+                                         <td>910</td>
+                                         <td>20370</td>
+                                         <td>DAT</td>
+                                     </tr>-->
+                                    <!--/ boucle sur la rangée-->
+                                    </tbody>
+
+                                </table><!--/ CONTENT TABLE-->
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-offset-4 col-md-8">
+
+                        <!-- PAGINATION -->
+                        <div class="text-center">
+                            <ul class="pagination pagination-sm">
+                                <li class="disabled"><a href="#">«</a></li>
+                                <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                                <!--<li class=""><a href="#">2 <span class="sr-only">(current)</span></a></li>-->
+                                <li><a href="#">»</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div> <!--/container-->
+
+        <footer>
+            <hr>
+            <p class="text-center">
+                <small>© 2014 Group S   Conditions d'utilisation  -  Vie privée      Contact gestionnaire : CAMUS SANDRINE, tél. 061/23.96.19, sandrine.camus@groups.be</small>
+            </p>
+        </footer>
+
+    </body>
+</html>
