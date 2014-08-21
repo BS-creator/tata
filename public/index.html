@@ -6,21 +6,20 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="shortcut icon" href="/favicon.ico">
-        <link rel="stylesheet" href="css/re-bootstrap.css">
-        <link rel="stylesheet" href="css/groups.css">
-        <link rel="stylesheet" href="css/itransfer.css">
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">-->
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/prestaweb-comp.css">
+        <!--<link rel="stylesheet" href="css/itransfer.css">-->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-        <script src="js/itransfer.js"></script>
+        <script src="js/prestaweb-comp.js"></script>
         <script scr="js/jquery.tidy.table.js"></script>
     </head>
     <body>
         <!--[if lt IE 10]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
         <header>
 
             <div id="banner-header" class="header-gradient">
@@ -60,9 +59,6 @@
                             </div>
                         </div>
                     </li>
-                    <li id="notifications">
-                        <i class="fa fa-bell-o fa-lg"></i>
-                    </li>
                 </ul>
             </div>
 
@@ -72,7 +68,7 @@
         <div class="container">
 
                 <div class="row">
-                    <div class="col-md-4 col-xs-12">
+                    <div class="col-md-3 col-xs-12">
 
                         <!--SEARCH-->
                         <ul class="nav list-inline" >
@@ -88,7 +84,7 @@
                         </ul>
 
                     </div>
-                    <div class="col-md-8 col-xs-12">
+                    <div class="col-md-9 col-xs-12">
 
                         <!--NAV-PILLS-->
                         <ul class="nav nav-pills" id="dir-name">
@@ -108,14 +104,14 @@
                         <!--filtre sur les dossier-->
                         <div id="tab-i" class="tab-pane fade ">
 
-                            <div class="col-md-4 col-xs-12">
+                            <div class="col-md-3 col-xs-12">
 
                                 <!--SIDEBAR-->
                                 <div id="sidenav">
                                     <ul>
                                         <!--boucle sur les types-->
                                         <li>
-                                            <h3>Type names</h3>
+                                            <p class="sidenav-head">Type names</p>
                                             <ul>
                                                 <!--boucle sur les sous-types-->
                                                 <li><a href="#">Sub-type names</a></li>
@@ -127,10 +123,10 @@
                                 </div><!--/ SIDEBAR-->
                             </div>
 
-                            <div class="col-md-8 col-xs-12">
+                            <div class="col-md-9 col-xs-12">
 
                                 <!--CONTENT-->
-                                <table class="table table-bordered">
+                                <table class="table table-bordered table-condensed">
 
                                         <!-- NAV_PILLS -->
                                         <thead>
@@ -232,7 +228,7 @@
                         <!--TOUT est actif par défaut et liste tous fichiers ordonnés par date-->
                         <div id="all" class="tab-pane fade active in">
 
-                            <div class="col-md-4 col-xs-12">
+                            <div class="col-md-3 col-xs-12">
 
                                 <!--SIDEBAR-->
                                 <div id="sidenav">
@@ -251,10 +247,10 @@
                                 </div><!--/ SIDEBAR-->
                             </div>
 
-                            <div class="col-md-8 col-xs-12">
+                            <div class="col-md-9 col-xs-12">
 
                                 <!--CONTENT-->
-                                <table class="table table-bordered">
+                                <table class="table table-bordered table-condensed">
 
                                     <!-- NAV_PILLS -->
                                     <thead>
@@ -346,7 +342,6 @@
                                     </tr>
                                     <!--/ boucle sur la rangée-->
                                     </tbody>
-
                                 </table><!--/ CONTENT TABLE-->
 
                             </div>
@@ -357,7 +352,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-offset-4 col-md-8">
+                    <div class="col-md-offset-3 col-md-9">
 
                         <!-- PAGINATION -->
                         <div class="text-center">
