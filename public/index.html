@@ -68,7 +68,7 @@
                     <div class="col-md-3 col-xs-12">
 
                         <!--SEARCH-->
-                        <ul class="nav list-inline" >
+                        <ul class="nav list-inline" id="search">
                             <li class="wide">
                                 <form class="form-inline " role="form">
                                     <div class="form-group wide">
@@ -99,7 +99,7 @@
                     <div class="tab-content">
 
                         <!--filtre sur les dossier-->
-                        <div id="tab-i" class="tab-pane fade ">
+                        <div id="tab-i" class="tab-pane fade">
 
                             <div class="col-md-3 col-xs-12">
 
@@ -107,8 +107,8 @@
                                 <div id="sidenav">
                                     <ul>
                                         <!--boucle sur les types-->
-                                        <li>
-                                            <p class="sidenav-head">Type names</p>
+                                        <li class="sidenav-head">
+                                            <p>Type names</p>
                                             <ul>
                                                 <!--boucle sur les sous-types-->
                                                 <li><a href="#">Sub-type names</a></li>
@@ -124,7 +124,7 @@
                             <div class="col-md-9 col-xs-12">
 
                                 <!--CONTENT-->
-                                <table class="table table-bordered table-condensed">
+                                <table id="table-dir-name" class="table table-bordered table-condensed">
 
                                         <!-- NAV_PILLS -->
                                         <thead>
@@ -203,18 +203,17 @@
                                         </thead>
 
                                         <tbody>
-
-                                            <!--boucle sur la rangée-->
-                                            <tr class="bg-new">
-                                                <td><input type="checkbox"/> </td>
-                                                <td>2014-08-14</td>
-                                                <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Bulletin de paie</a></td>
-                                                <td>FOPAI</td>
-                                                <td>910</td>
-                                                <td>20370</td>
-                                                <td>DAT</td>
-                                            </tr>
-                                            <!--/ boucle sur la rangée-->
+                                        <!--boucle sur la rangée-->
+                                        <!-- <tr class="bg-new">
+                                             <td><input type="checkbox"/> </td>
+                                             <td>2014-08-14</td>
+                                             <td>Bulletin de paie</td>
+                                             <td>FOPAI</td>
+                                             <td>910</td>
+                                             <td>20370</td>
+                                             <td>DAT</td>
+                                         </tr>-->
+                                        <!--/ boucle sur la rangée-->
                                         </tbody>
 
                                     </table><!--/ CONTENT TABLE-->
@@ -232,11 +231,47 @@
                                 <div id="sidenav">
                                     <ul>
                                         <!--boucle sur les types-->
-                                        <li>
-                                            <p class="sidenav-head">Type names</p>
+                                        <li class="sidenav-head">
+                                            <p>Type names</p>
                                             <ul>
                                                 <!--boucle sur les sous-types-->
                                                 <li><a href="#">Sub-type names</a></li>
+                                                <li><a href="#">Sub-type namesdq</a></li>
+                                                <li><a href="#">Sub-type namesghfg</a></li>
+                                                <li><a href="#">Sub-type namegfhfs</a></li>
+                                                <li><a href="#">Sub-type namesgfhgfh</a></li>
+                                                <li><a href="#">Sub-type names</a></li>
+                                                <li><a href="#">Sub-type namesdq</a></li>
+                                                <li><a href="#">Sub-type namesghfg</a></li>
+                                                <li><a href="#">Sub-type namegfhfs</a></li>
+                                                <li><a href="#">Sub-type namesgfhgfh</a></li>
+                                                <li><a href="#">Sub-type names</a></li>
+                                                <li><a href="#">Sub-type namesdq</a></li>
+                                                <li><a href="#">Sub-type namesghfg</a></li>
+                                                <li><a href="#">Sub-type namegfhfs</a></li>
+                                                <li><a href="#">Sub-type namesgfhgfh</a></li>
+                                                <li><a href="#">Sub-type names</a></li>
+                                                <li><a href="#">Sub-type namesdq</a></li>
+                                                <li><a href="#">Sub-type namesghfg</a></li>
+                                                <li><a href="#">Sub-type namegfhfs</a></li>
+                                                <li><a href="#">Sub-type namesgfhgfh</a></li>
+                                                <li><a href="#">Sub-type names</a></li>
+                                                <li><a href="#">Sub-type namesdq</a></li>
+                                                <li><a href="#">Sub-type namesghfg</a></li>
+                                                <li><a href="#">Sub-type namegfhfs</a></li>
+                                                <li><a href="#">Sub-type namesgfhgfh</a></li>
+                                                <!--/ boucle-->
+                                            </ul>
+                                        </li>
+                                        <li class="sidenav-head">
+                                            <p>Type nadsgfsermes</p>
+                                            <ul>
+                                                <!--boucle sur les sous-types-->
+                                                <li><a href="#">Suaerzfb-type names</a></li>
+                                                <li><a href="#">Sub-tfrype namesdq</a></li>
+                                                <li><a href="#">Sub-type naerferfmesghfg</a></li>
+                                                <li><a href="#">Sub-type namegfhfs</a></li>
+                                                <li><a href="#">Sub-t yfr   azerfe pe namesgfhgfh</a></li>
                                                 <!--/ boucle-->
                                             </ul>
                                         </li>
@@ -331,16 +366,52 @@
                                     <tbody>
 
                                     <!--boucle sur la rangée-->
-                                    <!-- <tr class="bg-new">
-                                         <td><input type="checkbox"/> </td>
-                                         <td>2014-08-14</td>
-                                         <td><a href="" id="" title="Ovrir le lien dans un nouvel onglet">Bulletin de paie</a></td>
-                                         <td>FOPAI</td>
-                                         <td>910</td>
-                                         <td>20370</td>
-                                         <td>DAT</td>
-                                     </tr>-->
+                                    <tr class="bg-new">
+                                        <td><a href=""><i class='fa fa-download'></i> </a> </td>
+                                        <td>2014-08-14</td>
+                                        <td>Bulletin de paie</td>
+                                        <td>FOPAI</td>
+                                        <td>910</td>
+                                        <td>20370</td>
+                                        <td>DAT</td>
+                                    </tr>
                                     <!--/ boucle sur la rangée-->
+                                    <tr class="bg-new">
+                                        <td><a href=""><i class='fa fa-download'></i> </a> </td>
+                                        <td>2014-08-14</td>
+                                        <td>Bulletin de paie</td>
+                                        <td>FOPAI</td>
+                                        <td>910</td>
+                                        <td>20370</td>
+                                        <td>DAT</td>
+                                    </tr>
+                                    <tr class="bg-new">
+                                        <td><a href=""><i class='fa fa-download'></i> </a> </td>
+                                        <td>2014-08-14</td>
+                                        <td>Bulletin de paie</td>
+                                        <td>FOPAI</td>
+                                        <td>910</td>
+                                        <td>20370</td>
+                                        <td>DAT</td>
+                                    </tr>
+                                    <tr class="bg-new">
+                                        <td><a href=""><i class='fa fa-download'></i> </a> </td>
+                                        <td>2014-08-14</td>
+                                        <td>Bulletin de paie</td>
+                                        <td>FOPAI</td>
+                                        <td>910</td>
+                                        <td>20370</td>
+                                        <td>DAT</td>
+                                    </tr>
+                                    <tr class="bg-new">
+                                        <td><a href=""><i class='fa fa-download'></i> </a> </td>
+                                        <td>2014-08-14</td>
+                                        <td>Bulletin de paie</td>
+                                        <td>FOPAI</td>
+                                        <td>910</td>
+                                        <td>20370</td>
+                                        <td>DAT</td>
+                                    </tr>
                                     </tbody>
                                 </table><!--/ CONTENT TABLE-->
 

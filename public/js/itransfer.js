@@ -2,8 +2,8 @@
 $( document ).ready(function() {
 
     // sidenav //////////////////////////////////
-    $("#sidenav h3").click(function(){
-        $(this).next("ul").toggle();
+    $("#sidenav .sidenav-head").click(function(){
+        $(this).children("ul").toggle();
     });
 
 });

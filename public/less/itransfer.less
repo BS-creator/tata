@@ -1,16 +1,67 @@
+#search,
+#dir-name{
+  padding-bottom: 20px;
+}
 
 //////////////////////////////////////////////////////
 //  nav-pills
 
+ul#dir-name li a{
+  font-weight: bold;
+  letter-spacing:.02em;
+}
 
+// icon fa-folder
 ul#dir-name li.pw-tab-folder a:before{
-  content:   "\f114";
+  content: "\f114";
   font-family: FontAwesome;
   font-style: normal;
-  font-weight: normal;
+  font-weight: bold;
   text-decoration: inherit;
 }
 
+// icon fa-folder-open
 ul#dir-name li.pw-tab-folder.active a:before{
-  content:   "\f115";
+  content: "\f115";
+}
+
+//////////////////////////////////////////////////////
+//  list ( sidenav )
+
+ul, li{
+  list-style: none;
+}
+
+//////////////////////////////////////////////////////
+// table - itransfer
+
+table[id^="table-"],
+table#mainTable{
+  // filtres de la table
+  thead tr th{
+    display: table-cell;
+    text-align: center;
+    vertical-align:middle;
+  }
+  // dernière colonne - extensions
+  thead tr th:last-child{
+    width: 40px;
+  }
+  tbody tr td:last-child::before{
+    content:'.';
+  }
+  tbody tr td:last-child{
+    text-transform: lowercase;
+  }
+  tbody tr td{
+    color:#6a6a6a;
+  }
+  // première colonne - icon download
+  tbody tr td:first-child{
+    text-align: center;
+    i.fa{
+      font-style: 16px;
+    }
+  }
+
 }

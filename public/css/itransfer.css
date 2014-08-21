@@ -1,10 +1,52 @@
+#search,
+#dir-name {
+  padding-bottom: 20px;
+}
+ul#dir-name li a {
+  font-weight: bold;
+  letter-spacing: .02em;
+}
 ul#dir-name li.pw-tab-folder a:before {
   content: "\f114";
   font-family: FontAwesome;
   font-style: normal;
-  font-weight: normal;
+  font-weight: bold;
   text-decoration: inherit;
 }
 ul#dir-name li.pw-tab-folder.active a:before {
   content: "\f115";
+}
+ul,
+li {
+  list-style: none;
+}
+table[id^="table-"] thead tr th,
+table#mainTable thead tr th {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+table[id^="table-"] thead tr th:last-child,
+table#mainTable thead tr th:last-child {
+  width: 40px;
+}
+table[id^="table-"] tbody tr td:last-child::before,
+table#mainTable tbody tr td:last-child::before {
+  content: '.';
+}
+table[id^="table-"] tbody tr td:last-child,
+table#mainTable tbody tr td:last-child {
+  text-transform: lowercase;
+}
+table[id^="table-"] tbody tr td,
+table#mainTable tbody tr td {
+  color: #6a6a6a;
+}
+table[id^="table-"] tbody tr td:first-child,
+table#mainTable tbody tr td:first-child {
+  text-align: center;
+}
+table[id^="table-"] tbody tr td:first-child i.fa,
+table#mainTable tbody tr td:first-child i.fa {
+  font-style: 16px;
 }

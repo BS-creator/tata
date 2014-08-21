@@ -2,15 +2,63 @@
 ////////////////////////////////////////////////////////////////
 //  sidenav
 
-#sidenav {
+div#sidenav {
+  padding:1px 0;
+  font-size: 13px;
+
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=180, Color=#ffffff)";/*IE 8*/
+  text-shadow: 0px 1px 1px #ffffff;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=180, Color=#ffffff); /*IE 5.5-7*/
+
+  ul{
+    padding:0;
+  }
+  ul li{
+    padding:0 0 0 20px;
+  }
   ul ul {
     display: none;
+    max-height:500px;
+    overflow-y: auto;
+
   }
   li.active ul {
     display: block;
   }
 
-  .sidenav-head{
+  li.sidenav-head{
+    padding:0;
 
+    ul li:first-child{
+      padding:5px 0 0 20px;
+    }
+    ul li:last-child{
+      padding:0 0 5px 20px;
+    }
+
+    p{
+      background-color: #F2F2F2;
+      color: #656565;
+      margin: 0;
+      padding: 5px 0 5px 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    ul li a,
+    ul li a:hover,
+    ul li a:active,
+    ul li a.active,
+    ul li a:focus{
+      text-decoration: none;
+      outline: 0;
+    }
+    ul li:hover,
+    ul li:active,
+    ul li.active,
+    ul li:focus{
+      // border-right:1px solid #2A6496;
+    }
   }
+
 }
