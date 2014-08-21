@@ -12,9 +12,9 @@ $(function() {
 
     var lineObj = {};
 
-    var template = Handlebars.compile(
+    var template = Handlebars.compile( //<input type='checkbox'/>
             "<tr class='bg-new'>" +
-            "    <td><input type='checkbox'/> </td>" +
+            "    <td><a class='btn dl' data-id='{{id}}' data-file='{{fileName}}' href='#'><i class='fa fa-download'></i> </a></td>" +
             "    <td>{{date}}</td>" +
             "    <td>{{idFile}}</td>" +
             "    <td>{{file}}</td>" +
@@ -46,10 +46,17 @@ $(function() {
                     "bla2"      : filename.substr(25,6),
                     "date"      : filename.substr(32,8),
                     "filedesc"  : filename.substr(41,6),
-                    "ext"       : filename.substr(48,3)
+                    "ext"       : filename.substr(48,3),
+                    "id"        : item.idFile,
+                    "fileName"  : filename
                 }
                 addFile(lineObj);
             })
         }
+    });
+
+    $('#mainTable').delegate('.dl', 'click', function(){
+        $(this).attr('href', 'http://localhost:8009/file/jxaqei45ibgph3bmuup4e345/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
+
     });
 });
