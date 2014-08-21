@@ -1,6 +1,10 @@
-#sidenav ul ul {
-  display: none;
+ul#dir-name li.pw-tab-folder a:before {
+  content: "\f114";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
 }
-#sidenav li.active ul {
-  display: block;
+ul#dir-name li.pw-tab-folder.active a:before {
+  content: "\f115";
 }

@@ -344,8 +344,8 @@ module.exports = function (grunt) {
                 },
                 files: {
                     // "public/css/re-bootstrap.css": "public/less/re-bootstrap/less/re-bootstrap.less",
-                    "public/css/prestaweb-comp.css": "public/less/prestaweb-comp/prestaweb-comp.less"
-                    // "public/css/itransfer.css": "public/less/itransfer.less"
+                    "public/css/prestaweb-comp.css": "public/less/prestaweb-comp/prestaweb-comp.less",
+                    "public/css/itransfer.css": "public/less/itransfer.less"
                 }
                 /*watch: {
                     files: "public/less/re-bootstrap.less",
