@@ -14,8 +14,8 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <script src="js/handlebars-v1.3.0.js"></script>
-        <script src="js/itransfer.js"></script>
         <script scr="js/jquery.tidy.table.js"></script>
+        <script src="js/itransfer.js"></script>
     </head>
     <body>
         <!--[if lt IE 10]>
@@ -152,12 +152,10 @@
                                 </div><!--/ SIDEBAR-->
                             </div>
 
-                            <div id="mycontainerfortemplate" class="col-md-8 col-xs-12">
+                            <div class="col-md-8 col-xs-12">
 
-                            </div>
-                            <script id="datatmpl" type="text/x-handlebars-template">
                                 <!--CONTENT-->
-                                <table class="table table-bordered">
+                                <table id="mainTable" class="table table-bordered">
 
                                     <!-- NAV_PILLS -->
                                     <thead>
@@ -238,17 +236,6 @@
 
                                     <tbody>
 
-                                    {{#each data}}
-                                    <tr class="bg-new">
-                                        <td><input type="checkbox"/> </td>
-                                        <td>{{this.filename}}</td>
-                                        <td>{{this.idFile}}</td>
-                                        <td>{{this.idFile}}</td>
-                                        <td>{{this.idFile}}</td>
-                                        <td>{{this.idFile}}</td>
-                                        <td>{{this.idFile}}</td>
-                                    </tr>
-                                    {{/each}}
                                     <!--boucle sur la rangée-->
                                     <!-- <tr class="bg-new">
                                          <td><input type="checkbox"/> </td>
@@ -263,7 +250,7 @@
                                     </tbody>
 
                                 </table><!--/ CONTENT TABLE-->
-                            </script>
+                            </div>
 
                         </div>
                     </div>
