@@ -10,6 +10,8 @@ $( document ).ready(function() {
 
     }*/
 
+
+
 });
 
 $(function() {
@@ -30,7 +32,7 @@ $(function() {
 
     function addFile(file){
 
-        $('#mainTable > tbody:last').after(template(file));
+        $('#mainBody').append(template(file));
     }
 
     function convertJSONObj(obj){   }
@@ -56,7 +58,8 @@ $(function() {
                     "fileName"  : filename
                 }
                 addFile(lineObj);
-            })
+            });
+            $('#mainTable').tablesorter();
         }
     });
 
