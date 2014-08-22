@@ -19,12 +19,12 @@
 				var c = table.config;
 				if(!c.pagerPositionSet && c.positionFixed) {
 					var c = table.config, o = $(table);
-					if(o.offset) {
+					/*if(o.offset) {
 						c.container.css({
-							top: o.offset().top + o.height() + 'px',
-							position: 'absolute'
+							//top: o.offset().top + o.height() + 'px',
+							//position: 'absolute'
 						});
-					}
+					}*/
 					c.pagerPositionSet = true;
 				}
 			}
@@ -99,7 +99,7 @@
 					}
 				}
 				
-				fixPosition(table,tableBody);
+				//fixPosition(table,tableBody);
 				
 				$(table).trigger("applyWidgets");
 				
