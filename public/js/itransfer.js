@@ -9,6 +9,7 @@ $(function() {
             "<tr class='bg-new'>" +
             "    <td><a class='dl' data-id='{{id}}' data-file='{{fileName}}' href='#'><i class='fa fa-download'></i> </a></td>" +
             "    <td>{{date}}</td>" +
+            /*"    <td>{{notDownloaded}}</td>" +*/
             "    <td>{{idFile}}</td>" +
             "    <td>{{file}}</td>" +
             "    <td>{{typeDoc}}</td>" +
@@ -30,7 +31,7 @@ $(function() {
                 //012345678901234567890123456789012345678901234567890
                 //FOPAI_0031_079983_000003_000181_20131022_000000.PDF
                 var filename = item.filename;
-                var dl = (downloadCount == 0);
+                var dl = (item.downloadCount == 0);
                 lineObj = {
                     "file"              : filename.substr(0,5),
                     "typeDoc"           : filename.substr(6,4),
@@ -43,7 +44,7 @@ $(function() {
                     "id"                : item.idFile,
                     "fileName"          : filename,
                     "ftpNew"            : item.isNew,
-                    "alreadyDownloaded" : dl
+                    "notDownloaded" : dl
                 }
                 addFile(lineObj);
             });

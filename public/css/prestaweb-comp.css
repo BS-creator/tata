@@ -344,8 +344,8 @@ div#sidenav li.sidenav-head p:hover {
 div#sidenav li.sidenav-head p:active,
 div#sidenav li.sidenav-head p.active,
 div#sidenav li.sidenav-head p:focus {
-  color: #2A6496;
-  border-left: 3px solid #2A6496;
+  color: #428BCA;
+  border-left: 3px solid #428BCA;
 }
 div#sidenav li.sidenav-head ul li:first-child {
   padding: 5px 0 0 20px;
@@ -362,13 +362,13 @@ div#sidenav li.sidenav-head ul li a.active,
 div#sidenav li.sidenav-head ul li a:focus {
   text-decoration: none;
   outline: 0;
-  color: #2A6496;
+  color: #428BCA;
 }
 div#sidenav li.sidenav-head ul li:hover,
 div#sidenav li.sidenav-head ul li:active,
 div#sidenav li.sidenav-head ul li.active,
 div#sidenav li.sidenav-head ul li:focus {
-  border-left: 3px solid #2A6496;
+  border-left: 3px solid #428BCA;
 }
 table thead tr th .pw-btn-group-th,
 table tr th .pw-btn-group-th,
