@@ -6,10 +6,9 @@ $(function() {
     var lineObj = {};
 
     var template = Handlebars.compile( //<input type='checkbox'/>
-            "<tr class='bg-new'>" +
-            "    <td><a class='dl' data-id='{{id}}' data-file='{{fileName}}' href='#'><i class='fa fa-download'></i> </a></td>" +
+            "<tr>" +
+            "    <td class='{{notDownloaded}}'><a class='dl' data-id='{{id}}' data-file='{{fileName}}' href='#'><i class='fa fa-download'></i> </a></td>" +
             "    <td>{{date}}</td>" +
-            /*"    <td>{{notDownloaded}}</td>" +*/
             "    <td>{{idFile}}</td>" +
             "    <td>{{file}}</td>" +
             "    <td>{{typeDoc}}</td>" +
@@ -44,7 +43,7 @@ $(function() {
                     "id"                : item.idFile,
                     "fileName"          : filename,
                     "ftpNew"            : item.isNew,
-                    "notDownloaded" : dl
+                    "notDownloaded"     : dl
                 }
                 addFile(lineObj);
             });

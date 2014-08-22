@@ -50,3 +50,15 @@ table[id^="table-"] tbody tr td:first-child i.fa,
 table#mainTable tbody tr td:first-child i.fa {
   font-style: 16px;
 }
+table[id^="table-"] tbody tr td a,
+table#mainTable tbody tr td a {
+  color: #656565;
+}
+table[id^="table-"] tbody tr td.true a,
+table#mainTable tbody tr td.true a {
+  color: #428BCA;
+}
+table[id^="table-"] tbody tr.new td,
+table#mainTable tbody tr.new td {
+  background-color: #d9edf7 !important;
+}
