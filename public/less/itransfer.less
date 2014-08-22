@@ -37,13 +37,24 @@ ul, li{
 
 table[id^="table-"],
 table#mainTable{
+
   // filtres de la table
   thead tr th{
     display: table-cell;
     text-align: center;
     vertical-align:middle;
   }
+
   // dernière colonne - extensions
+  thead tr th:first-child{
+    width: 45px;
+  }
+  thead tr th.th-date{
+    width: 90px;
+  }
+  thead tr th:nth-child(3){
+    text-align: center;
+  }
   thead tr th:last-child{
     width: 40px;
   }
@@ -57,23 +68,26 @@ table#mainTable{
     color:#6a6a6a;
   }
 
-
   // première colonne - icon download
   tbody tr td:first-child{
-    text-align: center;
-    i.fa{
-      font-style: 16px;
+/*    text-align: center;*/
+    padding-left: 2%;
+    a{
+      color:#808080;
+      i.fa{
+        font-style: 18px;
+      }
     }
   }
-  tbody tr td a{
-    color:#656565;
-  }
+
+  // no-download yet
   tbody tr td.true a{
       color:#428BCA;
   }
 
-   tbody tr.new td{
-    background-color: #d9edf7 !important;
+   tbody tr.true td{
+      background-color: #DFF0D8 !important;
+      border-color: #D6E9C6;
   }
 
 }

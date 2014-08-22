@@ -6,12 +6,13 @@ $(function() {
     var lineObj = {};
 
     var template = Handlebars.compile( //<input type='checkbox'/>
-            "<tr>" +
-            "    <td class='{{notDownloaded}}'><a class='dl' data-id='{{id}}' data-file='{{fileName}}' href='#'><i class='fa fa-download'></i> </a></td>" +
-            "    <td>{{date}}</td>" +
+            // "<tr class='{{ftpNew}}'>" +
+            "<tr class=''>" +
+            "    <td class='{{notDownloaded}}'><a class='dl' data-id='{{id}}' data-file='{{fileName}}' href='#'><i class='fa fa-download'></i> <small class='text-muted'>{{countDl}}</small> </a></td>" +
             "    <td>{{idFile}}</td>" +
+            "    <td>{{date}}</td>" +
             "    <td>{{file}}</td>" +
-            "    <td>{{typeDoc}}</td>" +
+            // "    <td>{{typeDoc}}</td>" +
             "    <td>{{noEmp}}</td>" +
             "    <td>{{ext}}</td>" +
             "</tr>");
@@ -31,6 +32,8 @@ $(function() {
                 //FOPAI_0031_079983_000003_000181_20131022_000000.PDF
                 var filename = item.filename;
                 var dl = (item.downloadCount == 0);
+                var countDl = (item.downloadCount == 0) ? '' : item.downloadCount;
+
                 lineObj = {
                     "file"              : filename.substr(0,5),
                     "typeDoc"           : filename.substr(6,4),
@@ -43,7 +46,8 @@ $(function() {
                     "id"                : item.idFile,
                     "fileName"          : filename,
                     "ftpNew"            : item.isNew,
-                    "notDownloaded"     : dl
+                    "notDownloaded"     : dl,
+                    "countDl"           : countDl
                 }
                 addFile(lineObj);
             });
