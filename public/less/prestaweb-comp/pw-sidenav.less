@@ -28,14 +28,6 @@ div#sidenav {
 
   li.sidenav-head{
     padding:0;
-
-    ul li:first-child{
-      padding:5px 0 0 20px;
-    }
-    ul li:last-child{
-      padding:0 0 5px 20px;
-    }
-
     p{
       background-color: #F2F2F2;
       color: #656565;
@@ -44,20 +36,39 @@ div#sidenav {
       font-weight: bold;
       cursor: pointer;
     }
+    p:hover{
+      color:#428BCA;
+    }
+    p:active,
+    p.active,
+    p:focus{
+      color:#2A6496;
+      border-left: 3px solid #2A6496;
+    }
+    ul li:first-child{
+      padding:5px 0 0 20px;
+    }
+    ul li:last-child{
+      padding:0 0 5px 20px;
+    }
 
-    ul li a,
+    ul li a{
+      color: #808080;
+    }
     ul li a:hover,
     ul li a:active,
     ul li a.active,
     ul li a:focus{
       text-decoration: none;
       outline: 0;
+      color: #2A6496;
     }
     ul li:hover,
     ul li:active,
     ul li.active,
     ul li:focus{
       // border-right:1px solid #2A6496;
+      border-left: 3px solid #2A6496;
     }
   }
 

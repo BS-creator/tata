@@ -1,18 +1,4 @@
 'user strict'
-$( document ).ready(function() {
-
-    // sidenav //////////////////////////////////
-    $("#sidenav .sidenav-head").click(function(){
-        $(this).children("ul").toggle();
-    });
-
-/*    $('div#sidenav ul li ul'){
-
-    }*/
-
-
-
-});
 
 $(function() {
     //var $mainTable = $('#mainTable > tbody:last');
@@ -21,7 +7,7 @@ $(function() {
 
     var template = Handlebars.compile( //<input type='checkbox'/>
             "<tr class='bg-new'>" +
-            "    <td><a class='btn dl' data-id='{{id}}' data-file='{{fileName}}' href='#'><i class='fa fa-download'></i> </a></td>" +
+            "    <td><a class='dl' data-id='{{id}}' data-file='{{fileName}}' href='#'><i class='fa fa-download'></i> </a></td>" +
             "    <td>{{date}}</td>" +
             "    <td>{{idFile}}</td>" +
             "    <td>{{file}}</td>" +
@@ -31,7 +17,6 @@ $(function() {
             "</tr>");
 
     function addFile(file){
-
         $('#mainBody').append(template(file));
     }
 
