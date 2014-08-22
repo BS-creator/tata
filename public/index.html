@@ -17,7 +17,8 @@
         <script src="js/prestaweb-comp.js"></script>
         <script src="js/handlebars-v1.3.0.js"></script>
         <script src="js/perfect-scrollbar.js"></script>
-        <script src="js/jquery.tablesorter.min.js"></script>
+        <script src="js/jquery.tablesorter.js"></script>
+        <script src="js/jquery.tablesorter.pager.js"></script>
         <script src="js/itransfer.js"></script>
     </head>
     <body>
@@ -163,6 +164,7 @@
                                                     </button>
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li><a href="#">Action</a></li>
+                                                    </ul>
                                                 </div>
                                             </th>
 
@@ -380,6 +382,7 @@
                                     </tbody>
                                 </table><!--/ CONTENT TABLE-->
 
+
                             </div>
 
                         </div>
@@ -401,6 +404,21 @@
                             </ul>
                         </div>
 
+                        <div style="top: 698px; position: absolute;" id="pager" class="pager">
+                            <form>
+                                <i class="fa fa-caret-square-o-left first"></i>
+                                <i class="fa fa-caret-right prev"></i>
+                                <input class="pagedisplay" type="text">
+                                <i class="fa fa-caret-right next"></i>
+                                <i class="fa fa-caret-square-o-right last"></i>
+                                <select class="pagesize">
+                                    <option selected="selected" value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
+                                </select>
+                            </form>
+                        </div>
                     </div>
                 </div>
 

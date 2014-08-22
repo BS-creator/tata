@@ -59,7 +59,12 @@ $(function() {
                 }
                 addFile(lineObj);
             });
-            $('#mainTable').tablesorter();
+            ///$('#mainTable').tablesorter();
+
+            $("#mainTable")
+                .tablesorter({widthFixed: true, widgets: ['zebra']})
+                .tablesorterPager({container: $("#pager")});
+
         }
     });
 
