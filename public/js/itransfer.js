@@ -11,8 +11,8 @@ $(function() {
             "    <td>{{date}}</td>" +
             "    <td>{{idFile}}</td>" +
             "    <td>{{file}}</td>" +
-            "    <td>{{typedoc}}</td>" +
-            "    <td>{{noemp}}</td>" +
+            "    <td>{{typeDoc}}</td>" +
+            "    <td>{{noEmp}}</td>" +
             "    <td>{{ext}}</td>" +
             "</tr>");
 
@@ -30,17 +30,20 @@ $(function() {
                 //012345678901234567890123456789012345678901234567890
                 //FOPAI_0031_079983_000003_000181_20131022_000000.PDF
                 var filename = item.filename;
+                var dl = (downloadCount == 0);
                 lineObj = {
-                    "file"      : filename.substr(0,5),
-                    "typedoc"   : filename.substr(6,4),
-                    "noemp"     : filename.substr(11,6),
-                    "refcpl"    : filename.substr(18,6),
-                    "bla2"      : filename.substr(25,6),
-                    "date"      : filename.substr(32,8),
-                    "filedesc"  : filename.substr(41,6),
-                    "ext"       : filename.substr(48,3),
-                    "id"        : item.idFile,
-                    "fileName"  : filename
+                    "file"              : filename.substr(0,5),
+                    "typeDoc"           : filename.substr(6,4),
+                    "noEmp"             : filename.substr(11,6),
+                    "refCpl"            : filename.substr(18,6),
+                    "bla2"              : filename.substr(25,6),
+                    "date"              : filename.substr(32,8),
+                    "fileDesc"          : filename.substr(41,6),
+                    "ext"               : filename.substr(48,3),
+                    "id"                : item.idFile,
+                    "fileName"          : filename,
+                    "ftpNew"            : item.isNew,
+                    "alreadyDownloaded" : dl
                 }
                 addFile(lineObj);
             });
