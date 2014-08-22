@@ -315,6 +315,8 @@ div#sidenav {
 }
 div#sidenav ul {
   padding: 0;
+  max-height: 560px;
+  overflow-y: auto;
 }
 div#sidenav ul li {
   border-bottom: 1px solid #FFFFFF;
@@ -322,8 +324,7 @@ div#sidenav ul li {
 }
 div#sidenav ul ul {
   display: none;
-  max-height: 500px;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 div#sidenav li.active ul {
   display: block;
@@ -335,7 +336,7 @@ div#sidenav li.sidenav-head p {
   background-color: #F2F2F2;
   color: #7a7a7a;
   margin: 0;
-  padding: 6px 0 6px 20px;
+  padding: 8px 0 8px 20px;
   font-weight: bold;
   cursor: pointer;
 }
@@ -346,7 +347,7 @@ div#sidenav li.sidenav-head p:hover {
 div#sidenav li.sidenav-head p:active,
 div#sidenav li.sidenav-head p.active,
 div#sidenav li.sidenav-head p:focus {
-  color: #428BCA;
+  color: #3276b1;
   border-left: 3px solid #3276b1;
 }
 div#sidenav li.sidenav-head ul {

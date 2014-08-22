@@ -30,27 +30,30 @@ table#mainTable thead tr th {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
+  padding: 3px 5px;
 }
 table[id^="table-"] thead tr th:first-child,
 table#mainTable thead tr th:first-child {
   width: 52px;
 }
 table[id^="table-"] thead tr th.th-date,
-table#mainTable thead tr th.th-date {
-  width: 85px;
-}
+table#mainTable thead tr th.th-date,
 table[id^="table-"] thead tr th.th-type,
 table#mainTable thead tr th.th-type,
 table[id^="table-"] thead tr th.th-employee,
 table#mainTable thead tr th.th-employee {
-  width: 132px;
+  width: 100px;
 }
 table[id^="table-"] thead tr th:last-child,
 table#mainTable thead tr th:last-child {
   width: 52px;
 }
 table[id^="table-"] tbody tr td:nth-child(3),
-table#mainTable tbody tr td:nth-child(3) {
+table#mainTable tbody tr td:nth-child(3),
+table[id^="table-"] tbody tr td:nth-child(4),
+table#mainTable tbody tr td:nth-child(4),
+table[id^="table-"] tbody tr td:nth-child(5),
+table#mainTable tbody tr td:nth-child(5) {
   text-align: center;
 }
 table[id^="table-"] tbody tr td:last-child::before,
@@ -69,11 +72,12 @@ table#mainTable tbody tr td:last-child button.pw-btn-th {
 table[id^="table-"] tbody tr td,
 table#mainTable tbody tr td {
   color: #6a6a6a;
+  padding: 3px 5px;
 }
 table[id^="table-"] tbody tr td:first-child,
 table#mainTable tbody tr td:first-child {
   /*    text-align: center;*/
-  padding-left: 2.5%;
+  padding-left: 2.2%;
 }
 table[id^="table-"] tbody tr td:first-child a,
 table#mainTable tbody tr td:first-child a {

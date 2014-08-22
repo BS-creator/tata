@@ -12,6 +12,8 @@ div#sidenav {
 
   ul{
     padding:0;
+    max-height:560px;
+    overflow-y: auto;
   }
   ul li{
     border-bottom: 1px solid #FFFFFF;
@@ -19,9 +21,7 @@ div#sidenav {
   }
   ul ul {
     display: none;
-    max-height:500px;
-    overflow-y: auto;
-
+    overflow-y: hidden;
   }
   li.active ul {
     display: block;
@@ -33,7 +33,7 @@ div#sidenav {
       background-color: #F2F2F2;
       color: #7a7a7a;
       margin: 0;
-      padding: 6px 0 6px 20px;
+      padding: 8px 0 8px 20px;
       font-weight: bold;
       cursor: pointer;
     }
@@ -44,7 +44,7 @@ div#sidenav {
     p:active,
     p.active,
     p:focus{
-      color:#428BCA;
+      color:#3276b1;
       border-left: 3px solid #3276b1;
     }
     ul{

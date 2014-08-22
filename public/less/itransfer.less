@@ -49,27 +49,28 @@ table#mainTable{
     display: table-cell;
     text-align: center;
     vertical-align:middle;
+    padding:3px 5px;
   }
 
   // dernière colonne - extensions
   thead tr th:first-child{
     width: 52px;
   }
-  thead tr th.th-date{
-    width: 85px;
-  }
+  thead tr th.th-date,
   thead tr th.th-type,
   thead tr th.th-employee{
-    width: 132px;
+    width: 100px;
   }
   thead tr th:last-child{
     width: 52px;
   }
-  tbody tr td:nth-child(3){
+  tbody tr td:nth-child(3),
+  tbody tr td:nth-child(4),
+  tbody tr td:nth-child(5){
     text-align: center;
   }
-  // td extension
 
+  // td extension
   tbody tr td:last-child::before{
     content:'.';
   }
@@ -84,12 +85,13 @@ table#mainTable{
   // overall
   tbody tr td{
     color:#6a6a6a;
+    padding:3px 5px;
   }
 
   // first column - icon download
   tbody tr td:first-child{
 /*    text-align: center;*/
-    padding-left: 2.5%;
+    padding-left: 2.2%;
     a{
       color:#808080;
       i.fa{
