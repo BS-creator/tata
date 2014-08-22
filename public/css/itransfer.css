@@ -6,6 +6,11 @@ ul#dir-name li a {
   font-weight: bold;
   letter-spacing: .02em;
 }
+ul#dir-name li.pw-tab-folder a,
+.nav-pills > li > a {
+  border-radius: 0px;
+  padding: 9px 15px 8px 15px;
+}
 ul#dir-name li.pw-tab-folder a:before {
   content: "\f114";
   font-family: FontAwesome;
@@ -28,19 +33,25 @@ table#mainTable thead tr th {
 }
 table[id^="table-"] thead tr th:first-child,
 table#mainTable thead tr th:first-child {
-  width: 45px;
+  width: 52px;
 }
 table[id^="table-"] thead tr th.th-date,
 table#mainTable thead tr th.th-date {
-  width: 90px;
+  width: 85px;
 }
-table[id^="table-"] thead tr th:nth-child(3),
-table#mainTable thead tr th:nth-child(3) {
-  text-align: center;
+table[id^="table-"] thead tr th.th-type,
+table#mainTable thead tr th.th-type,
+table[id^="table-"] thead tr th.th-employee,
+table#mainTable thead tr th.th-employee {
+  width: 132px;
 }
 table[id^="table-"] thead tr th:last-child,
 table#mainTable thead tr th:last-child {
-  width: 40px;
+  width: 52px;
+}
+table[id^="table-"] tbody tr td:nth-child(3),
+table#mainTable tbody tr td:nth-child(3) {
+  text-align: center;
 }
 table[id^="table-"] tbody tr td:last-child::before,
 table#mainTable tbody tr td:last-child::before {
@@ -49,6 +60,11 @@ table#mainTable tbody tr td:last-child::before {
 table[id^="table-"] tbody tr td:last-child,
 table#mainTable tbody tr td:last-child {
   text-transform: lowercase;
+  text-align: center;
+}
+table[id^="table-"] tbody tr td:last-child button.pw-btn-th,
+table#mainTable tbody tr td:last-child button.pw-btn-th {
+  padding: 5px !important;
 }
 table[id^="table-"] tbody tr td,
 table#mainTable tbody tr td {
@@ -57,7 +73,7 @@ table#mainTable tbody tr td {
 table[id^="table-"] tbody tr td:first-child,
 table#mainTable tbody tr td:first-child {
   /*    text-align: center;*/
-  padding-left: 2%;
+  padding-left: 2.5%;
 }
 table[id^="table-"] tbody tr td:first-child a,
 table#mainTable tbody tr td:first-child a {
