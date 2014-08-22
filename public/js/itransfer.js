@@ -36,7 +36,7 @@ $(function() {
 
     $.ajax({
         type: 'GET',
-        url: 'http://172.20.20.64:8009/file/jxaqei45ibgph3bmuup4e345/',
+        url: 'http://172.20.20.64:8009/file/ndi1oiyceflacsjv0mngd5nm/',
         success: function (data) {
             $.each(data.data, function (i, item) {
                 //012345678901234567890123456789012345678901234567890
