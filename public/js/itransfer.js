@@ -1,16 +1,4 @@
 'user strict'
-$( document ).ready(function() {
-
-    // sidenav //////////////////////////////////
-    $("#sidenav .sidenav-head").click(function(){
-        $(this).children("ul").toggle();
-    });
-
-/*    $('div#sidenav ul li ul'){
-
-    }*/
-
-});
 
 $(function() {
     //var $mainTable = $('#mainTable > tbody:last');

@@ -368,8 +368,6 @@
                                     </thead>
 
                                     <tbody id="mainBody">
-
-
                                     <!--<tr class="bg-new">
                                         <td><a href=""><i class='fa fa-download'></i> </a> </td>
                                         <td>2014-08-14</td>
@@ -381,6 +379,12 @@
                                     </tr>-->
                                     </tbody>
                                 </table><!--/ CONTENT TABLE-->
+
+                                <p>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <i class="fa fa-download text-primary"></i>&nbsp;&nbsp;&nbsp;Aucun téléchargement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <i class="fa fa-download text-muted"></i>&nbsp;&nbsp;&nbsp;téléchargé&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </p>
 
                             </div>
 
@@ -405,17 +409,21 @@
 
                         <div id="pager" class="pager">
                             <form>
-                                <i class="fa fa-caret-square-o-left first"></i>
-                                <i class="fa fa-caret-right prev"></i>
-                                <input class="pagedisplay" type="text">
-                                <i class="fa fa-caret-right next"></i>
-                                <i class="fa fa-caret-square-o-right last"></i>
-                                <select class="pagesize">
-                                    <option selected="selected" value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                    <option value="40">40</option>
-                                </select>
+                                <ul class="pagination pagination-sm">
+                                    <li> <i class="fa fa-angle-double-left"></i> </li>
+                                    <li> <i class="fa fa-angle-left"></i> </li>
+                                    <li> <input class="form-control" type="text"> </li>
+                                    <li> <i class="fa fa-angle-right"></i> </li>
+                                    <li> <i class="fa fa-angle-double-right"></i> </li>
+                                    <li>
+                                        <select class="pagesize">
+                                            <option selected="selected" value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="30">30</option>
+                                            <option value="40">40</option>
+                                        </select>
+                                    </li>
+                                </ul>
                             </form>
                         </div>
                     </div>
