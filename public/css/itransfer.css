@@ -72,7 +72,6 @@ table#mainTable tbody tr td:last-child button.pw-btn-th {
 table[id^="table-"] tbody tr td,
 table#mainTable tbody tr td {
   color: #6a6a6a;
-  padding: 3px 5px;
 }
 table[id^="table-"] tbody tr td:first-child,
 table#mainTable tbody tr td:first-child {
