@@ -11,6 +11,12 @@ ul#dir-name li a{
   letter-spacing:.02em;
 }
 
+// border nav pills
+ul#dir-name li.pw-tab-folder a,
+.nav-pills > li > a {
+  border-radius: 0px;
+  padding: 9px 15px 8px 15px;
+}
 // icon fa-folder
 ul#dir-name li.pw-tab-folder a:before{
   content: "\f114";
@@ -43,35 +49,48 @@ table#mainTable{
     display: table-cell;
     text-align: center;
     vertical-align:middle;
+    padding:3px 5px;
   }
 
   // dernière colonne - extensions
   thead tr th:first-child{
-    width: 45px;
+    width: 52px;
   }
-  thead tr th.th-date{
-    width: 90px;
-  }
-  thead tr th:nth-child(3){
-    text-align: center;
+  thead tr th.th-date,
+  thead tr th.th-type,
+  thead tr th.th-employee{
+    width: 100px;
   }
   thead tr th:last-child{
-    width: 40px;
+    width: 52px;
   }
+  tbody tr td:nth-child(3),
+  tbody tr td:nth-child(4),
+  tbody tr td:nth-child(5){
+    text-align: center;
+  }
+
+  // td extension
   tbody tr td:last-child::before{
     content:'.';
   }
   tbody tr td:last-child{
     text-transform: lowercase;
+  text-align: center;
+    button.pw-btn-th{
+      padding:5px !important;
+    }
   }
+
+  // overall
   tbody tr td{
     color:#6a6a6a;
   }
 
-  // première colonne - icon download
+  // first column - icon download
   tbody tr td:first-child{
 /*    text-align: center;*/
-    padding-left: 2%;
+    padding-left: 2.2%;
     a{
       color:#808080;
       i.fa{
