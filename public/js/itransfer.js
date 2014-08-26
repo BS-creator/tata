@@ -276,7 +276,7 @@ $(function () {
     // TABLE
     $('#mainTable').bootstrapTable({
         method: 'get',
-        url: 'http://localhost:8018/file/yinnye55e2iqbf55iah3th45/',
+        url: 'http://172.20.20.64:8018/file/yinnye55e2iqbf55iah3th45/',
         height: 400,
         striped: true,
         pagination: true,
