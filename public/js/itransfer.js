@@ -300,28 +300,44 @@ $(function () {
                 title: 'Libelle',
                 align: 'center',
                 valign: 'middle',
-                sortable: true
+                sortable: true,
+                formatter: function (value){
+                    if (!value || value == '') return 'x';
+                    else return value;
+                }
             },
             {
                 field: 'typeDoc',
                 title: 'Document',
                 align: 'center',
                 valign: 'middle',
-                sortable: true
+                sortable: true,
+                formatter: function (value){
+                    if (!value || value == '') return 'x';
+                    else return value;
+                }
             },
             {
                 field: 'noEmployeur',
                 title: 'Employeur',
                 align: 'center',
                 valign: 'middle',
-                sortable: true
+                sortable: true,
+                formatter: function (value){
+                    if (!value || value == '') return 'x';
+                    else return value;
+                }
             },
             {
                 field: 'refClientCompl',
                 title: 'Ref Client',
                 align: 'center',
                 valign: 'middle',
-                sortable: true
+                sortable: true,
+                formatter: function (value){
+                    if (!value || value == '') return 'x';
+                    else return value;
+                }
             },
             {
                 field: 'counter',
@@ -329,28 +345,44 @@ $(function () {
                 align: 'center',
                 valign: 'middle',
                 visible: false,
-                sortable: true
+                sortable: true,
+                formatter: function (value){
+                    if (!value || value == '') return 'x';
+                    else return value;
+                }
             },
             {
                 field: 'date',
                 title: 'Date',
                 align: 'center',
                 valign: 'middle',
-                sortable: true
+                sortable: true,
+                formatter: function (value){
+                    if (!value || value == '') return 'x';
+                    else return value;
+                }
             },
             {
                 field: 'refGroups',
                 title: 'Ref Group S',
                 align: 'center',
                 valign: 'middle',
-                sortable: true
+                sortable: true,
+                formatter: function (value){
+                    if (!value || value == '') return 'x';
+                    else return value;
+                }
             },
             {
                 field: 'extension',
                 title: 'ext',
                 align: 'center',
                 valign: 'middle',
-                sortable: true
+                sortable: true,
+                formatter: function (value){
+                    if (!value || value == '') return 'x';
+                    else return value;
+                }
             }
         ]
     });
