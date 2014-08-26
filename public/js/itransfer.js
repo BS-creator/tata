@@ -268,6 +268,7 @@ $(function () {
                 title: 'File ID',
                 align: 'right',
                 valign: 'bottom',
+                visible: false,
                 sortable: true
             },
             {
@@ -275,6 +276,7 @@ $(function () {
                 title: 'Name',
                 align: 'center',
                 valign: 'middle',
+                visible: false,
                 sortable: true
             },
             {
@@ -282,6 +284,7 @@ $(function () {
                 title: 'Path',
                 align: 'center',
                 valign: 'middle',
+                visible: false,
                 sortable: true
             },
             {
@@ -289,6 +292,7 @@ $(function () {
                 title: 'Size',
                 align: 'center',
                 valign: 'middle',
+                visible: false,
                 sortable: true
             },
             {
@@ -324,6 +328,7 @@ $(function () {
                 title: '#',
                 align: 'center',
                 valign: 'middle',
+                visible: false,
                 sortable: true
             },
             {
