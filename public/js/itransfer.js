@@ -1,68 +1,106 @@
 'user strict'
 
 $(function() {
-    //var $mainTable = $('#mainTable > tbody:last');
-
-    var lineObj = {};
-
-    var template = Handlebars.compile( //<input type='checkbox'/>
-            // "<tr class='{{ftpNew}}'>" +
-            "<tr class=''>" +
-            "    <td class='{{notDownloaded}}'><a class='dl' data-id='{{id}}' data-file='{{fileName}}' href='#'><i class='fa fa-download'></i> <small class='text-muted'>{{countDl}}</small> </a></td>" +
-            "    <td>{{idFile}}</td>" +
-            "    <td>{{date}}</td>" +
-            "    <td>{{file}}</td>" +
-            // "    <td>{{typeDoc}}</td>" +
-            "    <td>{{noEmp}}</td>" +
-            "    <td>{{ext}}</td>" +
-            "</tr>");
-
-    function addFile(file){
-        $('#mainBody').append(template(file));
-    }
-
-    function convertJSONObj(obj){   }
-
-    $.ajax({
-        type: 'GET',
-        url: 'http://deviapps.groups.be/ariane/file/2lclt345dkevwz45v0v32h45/',
-        success: function (data) {
-            $.each(data.data, function (i, item) {
-                //012345678901234567890123456789012345678901234567890
-                //FOPAI_0031_079983_000003_000181_20131022_000000.PDF
-                var filename = item.filename;
-                var dl = (item.downloadCount == 0);
-                var countDl = (item.downloadCount == 0) ? '' : item.downloadCount;
-
-                lineObj = {
-                    "file"              : filename.substr(0,5),
-                    "typeDoc"           : filename.substr(6,4),
-                    "noEmp"             : filename.substr(11,6),
-                    "refCpl"            : filename.substr(18,6),
-                    "bla2"              : filename.substr(25,6),
-                    "date"              : filename.substr(32,8),
-                    "fileDesc"          : filename.substr(41,6),
-                    "ext"               : filename.substr(48,3),
-                    "id"                : item.idFile,
-                    "fileName"          : filename,
-                    "ftpNew"            : item.isNew,
-                    "notDownloaded"     : dl,
-                    "countDl"           : countDl
-                }
-                addFile(lineObj);
-            });
-            ///$('#mainTable').tablesorter();
-
-            $("#mainTable")
-                .tablesorter({widthFixed: true, widgets: ['zebra']})
-                .tablesorterPager({container: $("#pager")});
-
-        }
+    $('#mainTable').bootstrapTable({
+        method: 'get',
+        url: 'http://localhost:8018/file/yinnye55e2iqbf55iah3th45/',
+        height: 400,
+        striped: true,
+        pagination: true,
+        pageSize: 50,
+        pageList: [10, 25, 50, 100, 200],
+        search: true,
+        showColumns: true,
+        showRefresh: true,
+        minimunCountColumns: 2,
+        columns: [{
+            field: 'state',
+            checkbox: true
+        }, {
+            field: 'notDownloaded',
+            title: 'DL',
+            align: 'right',
+            valign: 'bottom',
+            sortable: true
+        }, {
+            field: 'isNew',
+            title: 'New',
+            align: 'right',
+            valign: 'bottom',
+            sortable: true
+        }, {
+            field: 'idFile',
+            title: 'File ID',
+            align: 'right',
+            valign: 'bottom',
+            sortable: true
+        }, {
+            field: 'filename',
+            title: 'Name',
+            align: 'center',
+            valign: 'middle',
+            sortable: true
+        }, {
+            field: 'path',
+            title: 'Path',
+            align: 'center',
+            valign: 'middle',
+            sortable: true
+        }, {
+            field: 'size',
+            title: 'Size',
+            align: 'center',
+            valign: 'middle',
+            sortable: true
+        }, {
+            field: 'libelle',
+            title: 'Libelle',
+            align: 'center',
+            valign: 'middle',
+            sortable: true
+        }, {
+            field: 'typeDoc',
+            title: 'Document',
+            align: 'center',
+            valign: 'middle',
+            sortable: true
+        }, {
+            field: 'noEmployeur',
+            title: 'Employeur',
+            align: 'center',
+            valign: 'middle',
+            sortable: true
+        }, {
+            field: 'refClientCompl',
+            title: 'Ref Client',
+            align: 'center',
+            valign: 'middle',
+            sortable: true
+        }, {
+            field: 'counter',
+            title: '#',
+            align: 'center',
+            valign: 'middle',
+            sortable: true
+        }, {
+            field: 'date',
+            title: 'Date',
+            align: 'center',
+            valign: 'middle',
+            sortable: true
+        }, {
+            field: 'refGroups',
+            title: 'Ref Group S',
+            align: 'center',
+            valign: 'middle',
+            sortable: true
+        }, {
+            field: 'extension',
+            title: 'ext',
+            align: 'center',
+            valign: 'middle',
+            sortable: true
+        }]
     });
 
-    $('#mainTable').delegate('.dl', 'click', function(){
-        $(this).attr('href', 'http://172.20.20.64:8009/file/jxaqei45ibgph3bmuup4e345/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
-
-    });
 });
-
