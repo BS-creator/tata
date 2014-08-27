@@ -65,7 +65,8 @@ table[id^="table-"] tbody tr.new td,
 table#mainTable tbody tr.new td {
   background-color: #d9edf7 !important;
 }
-.fixed-table-container {
+/*
+.fixed-table-container{
   min-height: 600px;
   height: 600px;
-}
+}*/

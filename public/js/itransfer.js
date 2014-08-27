@@ -235,7 +235,7 @@ $(function () {
     $('#mainTable').bootstrapTable({
         method: 'get',
         url: 'http://172.20.20.64:8018/file/yinnye55e2iqbf55iah3th45/',
-        height: 400,
+        //height: 400,
         striped: true,
         pagination: true,
         pageSize: 50,
@@ -243,7 +243,7 @@ $(function () {
         search: true,
         showColumns: true,
         showRefresh: true,
-        minimunCountColumns: 2,
+        minimunCountColumns: 5,
         columns: [
             {
                 field: 'state',
