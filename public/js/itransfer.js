@@ -3,7 +3,9 @@
 $(function () {
     // MENU
 
-    $('#sidenav').jstree({
+    $('#sidenav')
+        .on('select_node.jstree', function (e, data) { data.instance.open_node(data.node); })
+        .jstree({
         'core': {
             'data': {
                 "text"  : "Tous les documents",
@@ -274,7 +276,7 @@ $(function () {
                 field: 'isNew',
                 title: 'New',
                 sortable: true,
-                visible:false,
+                visible: false,
                 formatter: function (value){
                     if (value) return "<i class='fa fa-smile-o'></i>"
                     else return "<i class='fa fa-times'></i>";
