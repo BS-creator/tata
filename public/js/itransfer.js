@@ -231,6 +231,10 @@ $(function () {
     });
 
 
+    function rowStyle(row, index){
+        if(row.isNew) return {"classes" : "isNew" };
+    }
+
     // TABLE
     $('#mainTable').bootstrapTable({
         method: 'get',
@@ -244,6 +248,7 @@ $(function () {
         showColumns: true,
         showRefresh: true,
         minimunCountColumns: 5,
+        rowStyle: rowStyle,
         columns: [
             {
                 field: 'state',
@@ -271,13 +276,6 @@ $(function () {
                 formatter: function (value){
                     if (value) return "<i class='fa fa-smile-o'></i>"
                     else return "<i class='fa fa-times'></i>";
-
-                    /*console.log("index = " + index );
-                    $this = $(this).length
-                    var $tr = $('tr').filter(function () {
-                        return $(this).data("id") == index;
-                    })
-                    if (value) $tr.addClass("isNew");*/
                 }
             },
             {
