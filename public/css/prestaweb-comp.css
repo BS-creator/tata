@@ -303,6 +303,11 @@ body {
   padding: 0;
   line-height: 32px;
 }
+.nav > li > a {
+  padding: 7px 15px;
+  font-size: 14px;
+  margin-right: 6px;
+}
 table thead tr th .pw-btn-group-th,
 table tr th .pw-btn-group-th,
 .pw-btn-group-th {

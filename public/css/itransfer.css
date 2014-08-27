@@ -5,10 +5,6 @@
 #dir-name {
   padding-bottom: 20px;
 }
-ul#dir-name li a {
-  font-weight: bold;
-  letter-spacing: .02em;
-}
 ul#dir-name li.pw-tab-folder a:before {
   content: "\f114";
   font-family: FontAwesome;

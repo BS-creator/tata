@@ -73,19 +73,26 @@
         </header>
 
         <div class="wrapper">
-                <div class="row">
 
+            <!--FILTERS-->
+                <div class="row">
                     <div class=" col-md-offset-3 col-md-9 col-xs-12">
 
-                        <!--NAV-PILLS-->
-                        <ul class="nav nav-pills" id="dir-name">
-                            <li class=" active"><a data-toggle="tab" role="tab" href="#all">Tout</a></li>
-                            <!--boucle sur les noms de dossier-->
-                            <li class="pw-tab-folder"><a data-toggle="tab" role="tab" href="#tab-i">&nbsp;&nbsp;&nbsp;Dir-name</a></li>
-                            <!--/ boucle sur les noms de dossier-->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default"> <i class="fa fa-refresh"></i> Rafra&icirc;chir</button>
+                            <button type="button" class="btn btn-default">Tout afficher</button>
 
-
-                        </ul>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    Trier par <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="active"><a href="#">nouveaux fichiers </a></li>
+                                    <li class=""><a href="#">fichiers non-téléchargés</a></li>
+                                    <li class=""><a href="#">fichiers téléchargés</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div><!--/ row-->
 
@@ -125,7 +132,6 @@
                                 <p>
                                     &nbsp;&nbsp;&nbsp;
                                     <i class="fa fa-download text-primary"></i>&nbsp;&nbsp;&nbsp;Aucun téléchargement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <i class="fa fa-download text-muted"></i>&nbsp;&nbsp;&nbsp;téléchargé&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </p>
 
                             </div>
