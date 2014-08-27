@@ -186,7 +186,7 @@
     BootstrapTable.prototype.initContainer = function () {
         this.$container = $([
             '<div class="bootstrap-table">',
-                '<div class="fixed-table-pagination"></div>',
+
                 '<div class="fixed-table-toolbar"></div>',
                 '<div class="fixed-table-container">',
                     '<div class="fixed-table-header"><table></table></div>',
@@ -195,8 +195,8 @@
                             this.options.formatLoadingMessage(),
                         '</div>',
                     '</div>',
-
                 '</div>',
+            '<div class="fixed-table-pagination"></div>',
             '</div>'].join(''));
 
         this.$container.insertAfter(this.$el);
@@ -380,7 +380,6 @@
             $this_ = this.$header.find('th').eq($this.index());
 
         this.$header.add(this.$header_).find('span.order').remove();
-
         this.options.sortName = $this.data('field');
         this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
         this.trigger('sort', this.options.sortName, this.options.sortOrder);
@@ -566,40 +565,10 @@
             this.pageTo = this.options.totalRows;
         }
 
-        html.push(
-            '<div class="pull-left pagination-detail">',
-                '<span class="pagination-info">',
-                    this.options.formatShowingRows(this.pageFrom, this.pageTo, this.options.totalRows),
-                '</span>');
 
-        html.push('<span class="page-list">');
 
-        var pageNumber = [
-            '<span class="btn-group dropup">',
-            '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
-            '<span class="page-size">',
-            this.options.pageSize,
-            '</span>',
-            ' <span class="caret"></span>',
-            '</button>',
-            '<ul class="dropdown-menu" role="menu">'],
-            pageList = this.options.pageList;
-
-        if (typeof this.options.pageList === 'string') {
-            pageList = eval(this.options.pageList);
-        }
-
-        $.each(pageList, function (i, page) {
-            var active = page === that.options.pageSize ? ' class="active"' : '';
-            pageNumber.push(sprintf('<li%s><a href="javascript:void(0)">%s</a></li>', active, page));
-        });
-        pageNumber.push('</ul></span>');
-
-        html.push(this.options.formatRecordsPerPage(pageNumber.join('')));
-        html.push('</span>');
-
-        html.push('</div>',
-            '<div class="pull-right">',
+        // << < 1 2 3 4 5 > >>
+        html.push('<div class="text-center mt-m">',
                 '<ul class="pagination">',
                     '<li class="page-first"><a href="javascript:void(0)">&lt;&lt;</a></li>',
                     '<li class="page-pre"><a href="javascript:void(0)">&lt;</a></li>');
@@ -630,6 +599,40 @@
                     '<li class="page-last"><a href="javascript:void(0)">&gt;&gt;</a></li>',
                 '</ul>',
             '</div>');
+
+
+        // nombre de fichiers par page
+        html.push(
+            '<div class="clearfix text-center pagination-detail">',
+            '<span class="pagination-info text-muted">',
+            this.options.formatShowingRows(this.pageFrom, this.pageTo, this.options.totalRows),
+            '</span>');
+
+        html.push('<span class="page-list clearfix text-center text-muted">');
+
+        var pageNumber = [
+                '<span class="btn-group dropup">',
+                '<button type="button" class="dropdown-toggle" id="btn-pageResult" data-toggle="dropdown">',
+                '<span class="page-size">',
+                this.options.pageSize,
+                '</span>',
+                ' <span class="caret"></span>',
+                '</button>',
+                '<ul class="dropdown-menu" role="menu">'],
+            pageList = this.options.pageList;
+
+        if (typeof this.options.pageList === 'string') {
+            pageList = eval(this.options.pageList);
+        }
+
+        $.each(pageList, function (i, page) {
+            var active = page === that.options.pageSize ? ' class="active"' : '';
+            pageNumber.push(sprintf('<li%s><a href="javascript:void(0)">%s</a></li>', active, page));
+        });
+        pageNumber.push('</ul></span>');
+
+        html.push(this.options.formatRecordsPerPage(pageNumber.join('')));
+        html.push('</span></div>');
 
         this.$pagination.html(html.join(''));
 

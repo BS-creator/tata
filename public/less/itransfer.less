@@ -27,6 +27,19 @@ ul#dir-name li.pw-tab-folder.active a:before{
 ul, li{
   list-style: none;
 }
+//////////////////////////////////////////////////////
+// filtre / nouveaux fichiers background
+div#row-filter ul:nth-child(2) > li:nth-child(1) > a:nth-child(1){
+  background-color: #dff0d8;
+}
+div#row-filter ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):hover,
+div#row-filter ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):focus,
+div#row-filter ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):active,
+div#row-filter ul:nth-child(2) > li:nth-child(1) > a:nth-child(1).active{
+  background-color: #428bca;
+}
+
+
 
 //////////////////////////////////////////////////////
 // table - itransfer
@@ -52,7 +65,6 @@ table#mainTable{
   tbody tr > td:nth-child(1){
     text-align: left;
   }
-
   tbody tr > td:nth-child(1) a {
     margin-left: 43%;
   }
@@ -66,7 +78,6 @@ table#mainTable{
   tbody tr td{
     color:#6a6a6a;
   }
-
   tbody tr td a{
     color:#656565;
 
@@ -74,15 +85,37 @@ table#mainTable{
   tbody tr td.true a{
       color:#428BCA;
   }
-
-   tbody tr.new td{
+  tbody tr.new td{
     background-color: #d9edf7 !important;
   }
 
+  // pagination
+  .fixed-table-pagination .pagination, .fixed-table-pagination .pagination-detail {
+    margin-top: 20px;
+    font-size: 14px;
+  }
 }
 
-/*
-.fixed-table-container{
-  min-height: 600px;
-  height: 600px;
-}*/
+.pagination-info,
+.page-list{
+  font-size: 14px !important;
+}
+
+
+// btn-pageResult
+
+#btn-pageResult{
+  border: 0 !important;
+  background-color: transparent;
+  color: #428BCA;
+  font-weight: bold;
+  span.caret {
+    border-bottom: 4px solid #428BCA;
+    margin-top: -7px;
+  }
+}
+
+
+
+
+
