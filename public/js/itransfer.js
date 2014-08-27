@@ -231,8 +231,9 @@ $(function () {
     });
 
 
-    function rowStyle(row, index){
+    function rowStylef(row, index){
         if(row.isNew) return {"classes" : "isNew" };
+        else return {};
     }
 
     // TABLE
@@ -248,7 +249,7 @@ $(function () {
         showColumns: true,
         showRefresh: true,
         minimunCountColumns: 5,
-        rowStyle: rowStyle,
+        rowStyle: rowStylef,
         columns: [
             {
                 field: 'state',
