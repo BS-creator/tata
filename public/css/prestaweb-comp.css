@@ -308,6 +308,10 @@ body {
   font-size: 14px;
   margin-right: 6px;
 }
+.nav .caret {
+  border-top-color: #000;
+  border-bottom-color: #000;
+}
 table thead tr th .pw-btn-group-th,
 table tr th .pw-btn-group-th,
 .pw-btn-group-th {
@@ -335,4 +339,8 @@ table tr th .pw-btn-group-th .pw-btn-th,
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
+}
+.green-light,
+.isNew {
+  background-color: #dff0d8;
 }

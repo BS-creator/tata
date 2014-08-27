@@ -262,8 +262,8 @@ $(function () {
         //height: 400,
         striped: true,
         pagination: true,
-        pageSize: 50,
-        pageList: [10, 25, 50, 100, 200],
+        pageSize: 20,
+        pageList: [10, 20, 50, 100],
         search: true,
         showColumns: true,
         showRefresh: true,
@@ -281,11 +281,13 @@ $(function () {
                 sortable: true,
                 formatter: function (value, row) {
                     if (value) {
-                        return "<a class='btn dl' data-id='" + row.idFile + "' " +
-                            "data-file='" + row.fileName + "' href='#'><i class='fa fa-download text-primary'></i>" + row.downloadCount + " </a>";
+                        var dlCount = row.downloadCount ? row.downloadCount : '';
+                        return "<a class='dl' data-id='" + row.idFile + "' " +
+                            "data-file='" + row.fileName + "' href='#'><i class='fa fa-download text-primary'></i><small class='text-muted'>&nbsp;" + dlCount + "</small></a>";
                     } else {
-                        return "<a class='btn dl' data-id='" + row.idFile + "' " +
-                            "data-file='" + row.fileName + "' href='#'><i class='fa fa-download text-muted'></i>" + row.downloadCount + " </a>";
+                        var dlCount = row.downloadCount ? row.downloadCount : '';
+                        return "<a class='dl' data-id='" + row.idFile + "' " +
+                            "data-file='" + row.fileName + "' href='#'><i class='fa fa-download text-muted'></i><small class='text-muted'>&nbsp;" + dlCount + "</small></a>";
                     }
                 }
             },
@@ -333,8 +335,8 @@ $(function () {
             },
             {
                 field: 'libelle',
-                title: 'Libelle',
-                align: 'center',
+                title: 'Libell&eacute;',
+                align: 'left',
                 valign: 'middle',
                 sortable: true,
                 formatter: function (value) {
@@ -343,8 +345,8 @@ $(function () {
                 }
             },
             {
-                field: 'typeDoc',
-                title: 'Document',
+                field: 'refDoc',
+                title: 'Ref Doument',
                 align: 'center',
                 valign: 'middle',
                 sortable: true,
@@ -422,5 +424,4 @@ $(function () {
             }
         ]
     });
-
 });

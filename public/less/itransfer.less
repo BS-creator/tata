@@ -33,6 +33,11 @@ ul, li{
 
 table[id^="table-"],
 table#mainTable{
+
+  // download column
+  thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1) {
+    width: 65px;
+  }
   // filtres de la table
   thead tr th{
     display: table-cell;
@@ -43,6 +48,15 @@ table#mainTable{
   thead tr th:last-child{
     width: 40px;
   }
+  // Download column
+  tbody tr > td:nth-child(1){
+    text-align: left;
+  }
+
+  tbody tr > td:nth-child(1) a {
+    margin-left: 43%;
+  }
+  thead > tr > th:nth-child(7)
   tbody tr td:last-child::before{
     content:'.';
   }
@@ -53,16 +67,9 @@ table#mainTable{
     color:#6a6a6a;
   }
 
-
-  // première colonne - icon download
-  tbody tr td:first-child{
-    text-align: center;
-    i.fa{
-      font-style: 16px;
-    }
-  }
   tbody tr td a{
     color:#656565;
+
   }
   tbody tr td.true a{
       color:#428BCA;

@@ -380,6 +380,7 @@
             $this_ = this.$header.find('th').eq($this.index());
 
         this.$header.add(this.$header_).find('span.order').remove();
+
         this.options.sortName = $this.data('field');
         this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
         this.trigger('sort', this.options.sortName, this.options.sortOrder);
