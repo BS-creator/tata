@@ -253,17 +253,32 @@ $(function () {
             {
                 field: 'notDownloaded',
                 title: 'DL',
-                align: 'right',
-                valign: 'bottom',
-                sortable: true
-
+                sortable: true,
+                formatter: function (value, row) {
+                   if(value) {
+                       return "<a class='btn dl' data-id='"+ row.idFile +"' " +
+                           "data-file='"+ row.fileName +"' href='#'><i class='fa fa-download text-primary'></i> </a>";
+                   }else {
+                       return "<a class='btn dl' data-id='"+ row.idFile +"' " +
+                           "data-file='"+ row.fileName +"' href='#'><i class='fa fa-download text-muted'></i> </a>";
+                   }
+                }
             },
             {
                 field: 'isNew',
                 title: 'New',
-                align: 'right',
-                valign: 'bottom',
-                sortable: true
+                sortable: true,
+                formatter: function (value){
+                    if (value) return "<i class='fa fa-smile-o'></i>"
+                    else return "<i class='fa fa-times'></i>";
+
+                    /*console.log("index = " + index );
+                    $this = $(this).length
+                    var $tr = $('tr').filter(function () {
+                        return $(this).data("id") == index;
+                    })
+                    if (value) $tr.addClass("isNew");*/
+                }
             },
             {
                 field: 'idFile',
