@@ -66,6 +66,6 @@ table#mainTable tbody tr.new td {
   background-color: #d9edf7 !important;
 }
 .fixed-table-container {
-  min-height: 500px;
-  height: 500px;
+  min-height: 600px;
+  height: 600px;
 }

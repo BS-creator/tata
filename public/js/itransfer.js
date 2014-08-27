@@ -247,7 +247,8 @@ $(function () {
         columns: [
             {
                 field: 'state',
-                checkbox: true
+                checkbox: false,
+                visible: false
             },
             {
                 field: 'notDownloaded',
@@ -255,6 +256,7 @@ $(function () {
                 align: 'right',
                 valign: 'bottom',
                 sortable: true
+
             },
             {
                 field: 'isNew',

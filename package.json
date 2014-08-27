@@ -30,8 +30,9 @@
     "node": ">=0.10.0"
   },
   "dependencies": {
+    "grunt-include-bootstrap": "^0.1.1",
+    "jshint-stylish": "^0.4.0",
     "load-grunt-tasks": "^0.6.0",
-    "time-grunt": "^1.0.0",
-    "jshint-stylish": "^0.4.0"
+    "time-grunt": "^1.0.0"
   }
 }
