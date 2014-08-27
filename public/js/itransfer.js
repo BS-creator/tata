@@ -4,237 +4,254 @@ $(function () {
     // MENU
 
     $('#sidenav')
-        .on('select_node.jstree', function (e, data) { data.instance.open_node(data.node); })
+        .on('select_node.jstree', function (e, data) {
+            data.instance.open_node(data.node);
+        })
         .jstree({
-        'core': {
-            'data': {
-                "text"  : "Tous les documents",
-                "state" : {
-                    "opened"    : true,
-                    "disabled"  : false,
-                    "selected"   : true
-                },
-                "children"    : [
-                    {
-                        "text"  : "0 - Documents Divers",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
+            'core': {
+                'data': {
+                    "text": "Tous les documents",
+                    "state": {
+                        "opened": true,
+                        "disabled": false,
+                        "selected": true
+                    },
+                    "children": [
+                        {
+                            "text": "0 - Documents Divers",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
+
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
                         },
-                        "children"    : [
-                            {
+                        {
+                            "text": "1 - Documents de paie",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    },{
-                        "text"  : "1 - Documents de paie",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
                         },
-                        "children"    : [
-                            {
+                        {
+                            "text": "2 - Décomptes",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    },{
-                        "text"  : "2 - Décomptes",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
                         },
-                        "children"    : [
-                            {
+                        {
+                            "text": "3 - Attestations",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    },{
-                        "text"  : "3 - Attestations",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
                         },
-                        "children"    : [
-                            {
+                        {
+                            "text": "4 - Fichiers de données",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    },{
-                        "text"  : "4 - Fichiers de données",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
                         },
-                        "children"    : [
-                            {
+                        {
+                            "text": "5 - Paiements",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    },{
-                        "text"  : "5 - Paiements",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
                         },
-                        "children"    : [
-                            {
+                        {
+                            "text": "6 - Rappels",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    },{
-                        "text"  : "6 - Rappels",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
                         },
-                        "children"    : [
-                            {
+                        {
+                            "text": "7 - Titres repas",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    },{
-                        "text"  : "7 - Titres repas",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
                         },
-                        "children"    : [
-                            {
+                        {
+                            "text": "8 - Documents annuels",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    },{
-                        "text"  : "8 - Documents annuels",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
                         },
-                        "children"    : [
-                            {
+                        {
+                            "text": "9 - Statistiques",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    },{
-                        "text"  : "9 - Statistiques",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
                         },
-                        "children"    : [
-                            {
+                        {
+                            "text": "10 - Comptabilisation",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    },{
-                        "text"  : "10 - Comptabilisation",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
                         },
-                        "children"    : [
-                            {
+                        {
+                            "text": "11 - Documents de chômage",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    },{
-                        "text"  : "11 - Documents de chômage",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
                         },
-                        "children"    : [
-                            {
+                        {
+                            "text": "12 - Documents DMFA",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    },{
-                        "text"  : "12 - Documents DMFA",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
                         },
-                        "children"    : [
-                            {
+                        {
+                            "text": "13 - Fichiers interfaces AFAS",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    },{
-                        "text"  : "13 - Fichiers interfaces AFAS",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
                         },
-                        "children"    : [
-                            {
+                        {
+                            "text": "14 - Documents externes (scan)",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    },{
-                        "text"  : "14 - Documents externes (scan)",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
                         },
-                        "children"    : [
-                            {
+                        {
+                            "text": "15 - Documents électroniques",
+                            "state": {
+                                "opened": false,
+                                "disabled": false
+                            },
+                            "children": [
+                                {
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    },{
-                        "text"  : "15 - Documents électroniques",
-                        "state" : {
-                            "opened"    : false,
-                            "disabled"  : false
-                        },
-                        "children"    : [
-                            {
+                                }
+                            ],
+                            "li_attr": {"class": "sidenav-head"},
+                            "a_attr": {}
+                        }
+                    ],
+                    "li_attr": {"class": "sidenav-head"},
+                    "a_attr": {}
 
-                            }
-                        ],
-                        "li_attr"     : {"class" : "sidenav-head"},
-                        "a_attr"      : {}
-                    }
-                ],
-                "li_attr"     : {"class" : "sidenav-head"},
-                "a_attr"      : {}
-
+                }
             }
-        }
-    });
+        });
 
 
-    function rowStylef(row, index){
-        if(row.isNew) return {"classes" : "isNew" };
+    function rowStylef(row, index) {
+        if (row.isNew) return {"classes": "isNew" };
         else return {};
     }
 
@@ -263,13 +280,13 @@ $(function () {
                 title: 'DL',
                 sortable: true,
                 formatter: function (value, row) {
-                   if(value) {
-                       return "<a class='btn dl' data-id='"+ row.idFile +"' " +
-                           "data-file='"+ row.fileName +"' href='#'><i class='fa fa-download text-primary'></i>"+ row.downloadCount +" </a>";
-                   }else {
-                       return "<a class='btn dl' data-id='"+ row.idFile +"' " +
-                           "data-file='"+ row.fileName +"' href='#'><i class='fa fa-download text-muted'></i>"+ row.downloadCount +" </a>";
-                   }
+                    if (value) {
+                        return "<a class='btn dl' data-id='" + row.idFile + "' " +
+                            "data-file='" + row.fileName + "' href='#'><i class='fa fa-download text-primary'></i>" + row.downloadCount + " </a>";
+                    } else {
+                        return "<a class='btn dl' data-id='" + row.idFile + "' " +
+                            "data-file='" + row.fileName + "' href='#'><i class='fa fa-download text-muted'></i>" + row.downloadCount + " </a>";
+                    }
                 }
             },
             {
@@ -277,7 +294,7 @@ $(function () {
                 title: 'New',
                 sortable: true,
                 visible: false,
-                formatter: function (value){
+                formatter: function (value) {
                     if (value) return "<i class='fa fa-smile-o'></i>"
                     else return "<i class='fa fa-times'></i>";
                 }
@@ -320,7 +337,7 @@ $(function () {
                 align: 'center',
                 valign: 'middle',
                 sortable: true,
-                formatter: function (value){
+                formatter: function (value) {
                     if (!value || value == '') return 'x';
                     else return value;
                 }
@@ -331,7 +348,7 @@ $(function () {
                 align: 'center',
                 valign: 'middle',
                 sortable: true,
-                formatter: function (value){
+                formatter: function (value) {
                     if (!value || value == '') return 'x';
                     else return value;
                 }
@@ -342,7 +359,7 @@ $(function () {
                 align: 'center',
                 valign: 'middle',
                 sortable: true,
-                formatter: function (value){
+                formatter: function (value) {
                     if (!value || value == '') return 'x';
                     else return value;
                 }
@@ -353,7 +370,7 @@ $(function () {
                 align: 'center',
                 valign: 'middle',
                 sortable: true,
-                formatter: function (value){
+                formatter: function (value) {
                     if (!value || value == '') return 'x';
                     else return value;
                 }
@@ -365,7 +382,7 @@ $(function () {
                 valign: 'middle',
                 visible: false,
                 sortable: true,
-                formatter: function (value){
+                formatter: function (value) {
                     if (!value || value == '') return 'x';
                     else return value;
                 }
@@ -376,7 +393,7 @@ $(function () {
                 align: 'center',
                 valign: 'middle',
                 sortable: true,
-                formatter: function (value){
+                formatter: function (value) {
                     if (!value || value == '') return 'x';
                     else return value;
                 }
@@ -387,7 +404,7 @@ $(function () {
                 align: 'center',
                 valign: 'middle',
                 sortable: true,
-                formatter: function (value){
+                formatter: function (value) {
                     if (!value || value == '') return 'x';
                     else return value;
                 }
@@ -398,7 +415,7 @@ $(function () {
                 align: 'center',
                 valign: 'middle',
                 sortable: true,
-                formatter: function (value){
+                formatter: function (value) {
                     if (!value || value == '') return 'x';
                     else return value;
                 }

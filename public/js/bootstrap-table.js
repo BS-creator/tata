@@ -186,6 +186,7 @@
     BootstrapTable.prototype.initContainer = function () {
         this.$container = $([
             '<div class="bootstrap-table">',
+                '<div class="fixed-table-pagination"></div>',
                 '<div class="fixed-table-toolbar"></div>',
                 '<div class="fixed-table-container">',
                     '<div class="fixed-table-header"><table></table></div>',
@@ -194,7 +195,7 @@
                             this.options.formatLoadingMessage(),
                         '</div>',
                     '</div>',
-                    '<div class="fixed-table-pagination"></div>',
+
                 '</div>',
             '</div>'].join(''));
 
