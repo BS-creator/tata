@@ -263,10 +263,10 @@ $(function () {
                 formatter: function (value, row) {
                    if(value) {
                        return "<a class='btn dl' data-id='"+ row.idFile +"' " +
-                           "data-file='"+ row.fileName +"' href='#'><i class='fa fa-download text-primary'></i> </a>";
+                           "data-file='"+ row.fileName +"' href='#'><i class='fa fa-download text-primary'></i>"+ row.downloadCount +" </a>";
                    }else {
                        return "<a class='btn dl' data-id='"+ row.idFile +"' " +
-                           "data-file='"+ row.fileName +"' href='#'><i class='fa fa-download text-muted'></i> </a>";
+                           "data-file='"+ row.fileName +"' href='#'><i class='fa fa-download text-muted'></i>"+ row.downloadCount +" </a>";
                    }
                 }
             },
@@ -274,6 +274,7 @@ $(function () {
                 field: 'isNew',
                 title: 'New',
                 sortable: true,
+                visible:false,
                 formatter: function (value){
                     if (value) return "<i class='fa fa-smile-o'></i>"
                     else return "<i class='fa fa-times'></i>";
