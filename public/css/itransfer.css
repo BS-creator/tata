@@ -19,6 +19,21 @@ ul,
 li {
   list-style: none;
 }
+div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1) {
+  background-color: #dff0d8;
+}
+div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):hover,
+div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):focus,
+div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):active,
+div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1).active {
+  background-color: #428bca;
+}
+#filter div.btn-group {
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  line-height: 34px;
+}
 table[id^="table-"] thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1),
 table#mainTable thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1) {
   width: 65px;
@@ -28,6 +43,16 @@ table#mainTable thead tr th {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
+}
+table[id^="table-"] thead tr th div.th-inner:empty:after,
+table#mainTable thead tr th div.th-inner:empty:after {
+  content: "\f0dc";
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  margin: 0 5px;
 }
 table[id^="table-"] thead tr th:last-child,
 table#mainTable thead tr th:last-child {
@@ -39,7 +64,7 @@ table#mainTable tbody tr > td:nth-child(1) {
 }
 table[id^="table-"] tbody tr > td:nth-child(1) a,
 table#mainTable tbody tr > td:nth-child(1) a {
-  margin-left: 37%;
+  margin-left: 43%;
 }
 table[id^="table-"] tbody tr td:last-child::before,
 table#mainTable tbody tr td:last-child::before {
@@ -65,8 +90,24 @@ table[id^="table-"] tbody tr.new td,
 table#mainTable tbody tr.new td {
   background-color: #d9edf7 !important;
 }
-/*
-.fixed-table-container{
-  min-height: 600px;
-  height: 600px;
-}*/
+table[id^="table-"] .fixed-table-pagination .pagination,
+table#mainTable .fixed-table-pagination .pagination,
+table[id^="table-"] .fixed-table-pagination .pagination-detail,
+table#mainTable .fixed-table-pagination .pagination-detail {
+  margin-top: 20px;
+  font-size: 14px;
+}
+.pagination-info,
+.page-list {
+  font-size: 14px !important;
+}
+#btn-pageResult {
+  border: 0 !important;
+  background-color: transparent;
+  color: #428BCA;
+  font-weight: bold;
+}
+#btn-pageResult span.caret {
+  border-bottom: 4px solid #428BCA;
+  margin-top: -7px;
+}

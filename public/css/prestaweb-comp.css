@@ -329,7 +329,6 @@ table tr th .pw-btn-group-th .pw-btn-th,
   background-color: transparent;
   border: 0;
   color: #505050;
-  border-radius: 0px;
   cursor: pointer;
   display: inline-block;
   font-size: 12px;
@@ -343,4 +342,5 @@ table tr th .pw-btn-group-th .pw-btn-th,
 .green-light,
 .isNew {
   background-color: #dff0d8;
+  color: #dff0d8;
 }
