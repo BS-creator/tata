@@ -415,7 +415,7 @@
 
         if (this.options.showRefresh) {
             html.push('<button class="btn btn-default" type="button" name="refresh">',
-                '<i class="glyphicon glyphicon-refresh icon-refresh"></i>',
+                '<i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Rafra&icirc;chir',
                 '</button>');
         }
 
@@ -429,7 +429,7 @@
             html.push(sprintf('<div class="keep-open %s">',
                 this.options.showRefresh || this.options.showToggle ? 'btn-group' : ''),
                 '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
-                '<i class="glyphicon glyphicon-th icon-th"></i>',
+                '<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;Affichage',
                 ' <span class="caret"></span>',
                 '</button>',
                 '<ul class="dropdown-menu" role="menu">');

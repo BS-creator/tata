@@ -425,3 +425,47 @@ $(function () {
         ]
     });
 });
+
+// add icons UNSORTED to thead tr th div span
+$(function (){
+    var th = $('table#mainTable thead tr th');
+    var span = '<span class="unsorted"></span>';
+
+/*       if($('table#mainTable thead tr th div.th-inner').find('span.order').length == 0){
+            $('table#mainTable thead tr th div.th-inner').append(span);
+       }*/
+        /*
+        $(this).on('click', function(e){
+            if($(this).find('span.order').length != 0){
+                $(this).find('span.unsorted').remove();
+                e.preventDefault;
+            }else{
+                $(this).append(span);
+            }
+        });*/
+
+/*    $(this).onClick(function(){
+        $(this:first-child).remove();
+    })*/
+
+});
+
+
+// add btn-group TRIER PAR
+$(function (){
+    $('.fixed-table-toolbar').prepend(
+        '<div id="filter" class="pull-left">'+
+        '<div class="btn-group">'+
+        '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">'+
+        'Trier par&nbsp;&nbsp;<span class="caret"></span>'+
+        '</button>'+
+        '<ul class="dropdown-menu" role="menu">'+
+        '<li class=""><a href="#"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;nouveaux fichiers </a></li>'+
+        '<li class="divider"></li>'+
+        '<li class=""><a href="#"><i class="fa fa-download text-primary"></i>&nbsp;&nbsp;&nbsp;fichiers non-téléchargés</a></li>'+
+        '<li class=""><a href="#"><i class="fa fa-download text-muted"></i>&nbsp;&nbsp;&nbsp;fichiers téléchargés</a></li>'+
+        '</ul>'+
+        '</div>'+
+        '</div>'
+    );
+});

@@ -29,38 +29,62 @@ ul, li{
 }
 //////////////////////////////////////////////////////
 // filtre / nouveaux fichiers background
-div#row-filter ul:nth-child(2) > li:nth-child(1) > a:nth-child(1){
+
+div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1){
   background-color: #dff0d8;
 }
-div#row-filter ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):hover,
-div#row-filter ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):focus,
-div#row-filter ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):active,
-div#row-filter ul:nth-child(2) > li:nth-child(1) > a:nth-child(1).active{
+div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):hover,
+div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):focus,
+div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):active,
+div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1).active{
   background-color: #428bca;
 }
 
+// Filter Bar
+#filter {
+  div.btn-group {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 34px;
+  }
 
+}
 
 //////////////////////////////////////////////////////
 // table - itransfer
 
 table[id^="table-"],
 table#mainTable{
-
   // download column
   thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1) {
     width: 65px;
   }
+
   // filtres de la table
   thead tr th{
     display: table-cell;
     text-align: center;
     vertical-align:middle;
   }
+
+  // icon unsorted
+  thead tr th div.th-inner:empty:after{
+    content: "\f0dc";
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    margin: 0 5px;
+  }
+
   // dernière colonne - extensions
   thead tr th:last-child{
     width: 40px;
   }
+  // thead > tr > th:nth-child(7){}
+
   // Download column
   tbody tr > td:nth-child(1){
     text-align: left;
@@ -68,7 +92,7 @@ table#mainTable{
   tbody tr > td:nth-child(1) a {
     margin-left: 43%;
   }
-  thead > tr > th:nth-child(7)
+
   tbody tr td:last-child::before{
     content:'.';
   }
