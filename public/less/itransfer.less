@@ -1,3 +1,19 @@
+// bigfoot vs bootstrap
+a,
+a:hover,
+a:focus,
+a:active,
+a.active{
+  text-decoration: none;
+}
+a:focus {
+  outline: none !important;
+  outline-offset: 0 !important;
+}
+ul, li{
+  list-style: none;
+}
+///////////////////////////
 .wrapper{
   min-height: 650px;
 }
@@ -21,12 +37,7 @@ ul#dir-name li.pw-tab-folder.active a:before{
   content: "\f115";
 }
 
-//////////////////////////////////////////////////////
-//  list ( sidenav )
 
-ul, li{
-  list-style: none;
-}
 //////////////////////////////////////////////////////
 // TRIER PAR / nouveaux fichiers background
 
@@ -54,7 +65,7 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nt
 
 // icon dl muted
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1) > i:nth-child(1){
-  color: #808080;
+  color: #999999;
 }
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):active > i:nth-child(1),
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):focus > i:nth-child(1),
@@ -163,5 +174,72 @@ table#mainTable{
 
 
 
+// JSTREE CUSTOM STYLE
 
+// sidenav
 
+div#sidenav{
+  ul.jstree-container-ul,
+  ul.jstree-children{
+    padding:0;
+    margin:0;
+    li a {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+// a lvl 0
+div#sidenav{
+  padding-top: 55px;
+  border-radius: 3px;
+  ul > li > a {
+
+    background-color: #F2F2F2;
+    color: #656565;
+    margin: 0;
+    padding: 8px 0 8px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    border-left:0;
+  }
+  ul > li.jstree-open > a,
+  ul > li > a:hover,
+  ul > li > a:focus,
+  ul > li > a:active,
+  ul > li > a.active {
+    color:#125B9A;
+    border-left: 3px solid #2871B0;
+  }
+
+  // a lvl 1
+  ul > li > ul > li > a{
+    background-color: white;
+    color: #808080;
+    padding: 5px 0 5px 20px;
+  }
+  ul > li.jstree-open > ul > li > a:hover,
+  ul > li.jstree-open > ul > li > a:focus,
+  ul > li.jstree-open > ul > li > a:active,
+  ul > li.jstree-open > ul > li > a.active,
+  ul > li.jstree-open > ul > li.jstree-open > a {
+    background-color: white;
+    color:#3D86C5;
+    border-left: 3px solid #2871B0;
+  }
+
+  // a lvl 2
+  ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a {
+    background-color: white;
+    color: #808080;
+    padding: 5px 0 5px 52px;
+  }
+  ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:hover,
+  ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:focus,
+  ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:active,
+  ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a.active {
+    color:#3D86C5;
+    // border-left: 3px solid #2871B0;
+  }
+}

@@ -282,23 +282,9 @@ $(function (){
     var th = $('table#mainTable thead tr th');
     var span = '<span class="unsorted"></span>';
 
-       if($('table#mainTable thead tr th div.th-inner').find('span.order').length == 0){
-            $('table#mainTable thead tr th div.th-inner').append(span);
-       }
-        /*
-        $(this).on('click', function(e){
-            if($(this).find('span.order').length != 0){
-                $(this).find('span.unsorted').remove();
-                e.preventDefault;
-            }else{
-                $(this).append(span);
-            }
-        });*/
-
-/*    $(this).onClick(function(){
-        $(this:first-child).remove();
-    })*/
-
+   if($('table#mainTable thead tr th div.th-inner').find('span.order').length == 0){
+        $('table#mainTable thead tr th div.th-inner').append(span);
+   }
 });
 
 
@@ -320,3 +306,5 @@ $(function (){
         '</div>'
     );
 });
+
+// jstree class active
