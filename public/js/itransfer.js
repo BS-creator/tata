@@ -282,9 +282,9 @@ $(function (){
     var th = $('table#mainTable thead tr th');
     var span = '<span class="unsorted"></span>';
 
-/*       if($('table#mainTable thead tr th div.th-inner').find('span.order').length == 0){
+       if($('table#mainTable thead tr th div.th-inner').find('span.order').length == 0){
             $('table#mainTable thead tr th div.th-inner').append(span);
-       }*/
+       }
         /*
         $(this).on('click', function(e){
             if($(this).find('span.order').length != 0){
@@ -313,8 +313,8 @@ $(function (){
         '<ul class="dropdown-menu" role="menu">'+
         '<li class=""><a href="#"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;nouveaux fichiers </a></li>'+
         '<li class="divider"></li>'+
-        '<li class=""><a href="#"><i class="fa fa-download text-primary"></i>&nbsp;&nbsp;&nbsp;fichiers non-téléchargés</a></li>'+
-        '<li class=""><a href="#"><i class="fa fa-download text-muted"></i>&nbsp;&nbsp;&nbsp;fichiers téléchargés</a></li>'+
+        '<li class=""><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;fichiers non-téléchargés</a></li>'+
+        '<li class=""><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;fichiers téléchargés</a></li>'+
         '</ul>'+
         '</div>'+
         '</div>'
