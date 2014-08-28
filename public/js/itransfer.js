@@ -1,265 +1,108 @@
-'user strict'
+
 
 $(function () {
-    // MENU
+    'user strict'
 
-    $('#sidenav')
-        .on('select_node.jstree', function (e, data) {
-            data.instance.open_node(data.node);
-        })
-        .jstree({
-            'core': {
-                'data': {
-                    "text": "Tous les documents",
-                    "state": {
-                        "opened": true,
-                        "disabled": false,
-                        "selected": true
-                    },
-                    "children": [
-                        {
-                            "text": "0 - Documents Divers",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
+    /**  GLOBAL VARIABLE **/
+    // array used to store all the existing document reference on the FTP server.
+    $.refDocUsed = [];
 
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        },
-                        {
-                            "text": "1 - Documents de paie",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
+    /****************************************************
+     *
+     * MENU
+     * */
 
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        },
-                        {
-                            "text": "2 - Décomptes",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
+    function menu(data) {
+        var tree = [] ;
+        var cat = [];
+        // BUILD TREE
+        $.each(data, function (i, item) {
 
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        },
-                        {
-                            "text": "3 - Attestations",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
-
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        },
-                        {
-                            "text": "4 - Fichiers de données",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
-
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        },
-                        {
-                            "text": "5 - Paiements",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
-
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        },
-                        {
-                            "text": "6 - Rappels",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
-
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        },
-                        {
-                            "text": "7 - Titres repas",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
-
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        },
-                        {
-                            "text": "8 - Documents annuels",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
-
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        },
-                        {
-                            "text": "9 - Statistiques",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
-
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        },
-                        {
-                            "text": "10 - Comptabilisation",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
-
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        },
-                        {
-                            "text": "11 - Documents de chômage",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
-
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        },
-                        {
-                            "text": "12 - Documents DMFA",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
-
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        },
-                        {
-                            "text": "13 - Fichiers interfaces AFAS",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
-
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        },
-                        {
-                            "text": "14 - Documents externes (scan)",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
-
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        },
-                        {
-                            "text": "15 - Documents électroniques",
-                            "state": {
-                                "opened": false,
-                                "disabled": false
-                            },
-                            "children": [
-                                {
-
-                                }
-                            ],
-                            "li_attr": {"class": "sidenav-head"},
-                            "a_attr": {}
-                        }
-                    ],
-                    "li_attr": {"class": "sidenav-head"},
-                    "a_attr": {}
-
+            if ( $.inArray( item.noCategory, cat ) > -1 ) {
+                //category already exists
+                //add document
+                if( $.inArray( item.refDoc, $.refDocUsed ) > -1 ) {
+                    tree[(tree.length - 1)]
+                        .children[(tree[(tree.length - 1)].children.length)] = {
+                        "text" :  item.refDoc + " - " +item.labelDoc_f,
+                        "li_attr": {"class": "leaf"}
+                    }
                 }
+
+            }else{
+                //create category
+                cat[cat.length] = item.noCategory;
+                if( $.inArray( item.refDoc, $.refDocUsed ) > -1 ) {
+                    tree[tree.length] =
+                    {
+                        "id"    : item.noCategory,
+                        "text"  : item.noCategory + " - " + item.labelCategory_f,
+                        "children": [{ //add document
+                            "text" : item.refDoc + " - " + item.labelDoc_f,
+                            "li_attr": {"class": "leaf"}
+                        }]
+                    };
+                }/*else{
+                 tree[tree.length] =
+                 {
+                 "id"    : item.noCategory,
+                 "text"  : item.noCategory + " - " + item.labelCategory_f,
+                 "children": []
+                 };
+                 }*/
             }
+
         });
 
+        // JSTREE
+        $('#sidenav')
+            .on('select_node.jstree', function (e, data) {
+                data.instance.toggle_node(data.node);
+                //apply filter
+            })
+            .jstree({
+                'core': {
+                    'data': {
+                        "text": "Tous les documents",
+                        "state": {
+                            "opened": true,
+                            "disabled": false,
+                            "selected": true
+                        },
+                        "children": tree
+                    }
+                }
+            }
+        );
+    }
 
-    function rowStylef(row, index) {
+    function loadMenu (){
+        //Sort used reference document
+        $.refDocUsed.sort(function(a, b){return a-b});
+        $.ajax({
+            type: 'GET',
+            url: 'http://172.20.20.64:8018/category/',
+            success: menu
+        });
+    }
+
+    /****************************************************
+     *
+     * TABLE
+     * */
+
+    // Styling the row if the file is new
+    function rowStylef(row) {
         if (row.isNew) return {"classes": "isNew" };
         else return {};
     }
 
-    // TABLE
+
+
+    //TODO replace url with dynamic!!!!
     $('#mainTable').bootstrapTable({
         method: 'get',
         url: 'http://172.20.20.64:8018/file/yinnye55e2iqbf55iah3th45/',
-        //height: 400,
         striped: true,
         pagination: true,
         pageSize: 20,
@@ -269,6 +112,7 @@ $(function () {
         showRefresh: true,
         minimunCountColumns: 5,
         rowStyle: rowStylef,
+        onLoadSuccess: loadMenu,
         columns: [
             {
                 field: 'state',
@@ -346,13 +190,19 @@ $(function () {
             },
             {
                 field: 'refDoc',
-                title: 'Ref Doument',
+                title: 'Ref Document',
                 align: 'center',
                 valign: 'middle',
                 sortable: true,
                 formatter: function (value) {
                     if (!value || value == '') return 'x';
-                    else return value;
+                    else {
+                        var val = parseInt(value);
+                        if ($.inArray( val, $.refDocUsed ) < 0){
+                            $.refDocUsed[$.refDocUsed.length] = val;
+                        }
+                        return val;
+                    }
                 }
             },
             {
@@ -423,5 +273,6 @@ $(function () {
                 }
             }
         ]
-    });
+    })
+
 });
