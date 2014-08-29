@@ -111,6 +111,7 @@ $(function () {
         showColumns: true,
         showRefresh: true,
         minimunCountColumns: 5,
+        sortOrder: '',
         rowStyle: rowStylef,
         onLoadSuccess: loadMenu,
         columns: [
@@ -123,6 +124,7 @@ $(function () {
                 field: 'notDownloaded',
                 title: 'DL',
                 sortable: true,
+
                 formatter: function (value, row) {
                     if (value) {
                         var dlCount = row.downloadCount ? row.downloadCount : '';
@@ -314,9 +316,14 @@ $(function (){
         '<li class=""><a href="#"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;nouveaux fichiers </a></li>'+
         '<li class="divider"></li>'+
         '<li class=""><a href="#"><i class="fa fa-download text-primary"></i>&nbsp;&nbsp;&nbsp;fichiers non-téléchargés</a></li>'+
-        '<li class=""><a href="#"><i class="fa fa-download text-muted"></i>&nbsp;&nbsp;&nbsp;fichiers téléchargés</a></li>'+
+        '<li id="sortDL" class=""><a href="#"><i class="fa fa-download text-muted"></i>&nbsp;&nbsp;&nbsp;fichiers téléchargés</a></li>'+
         '</ul>'+
         '</div>'+
         '</div>'
     );
+    /*
+    var th = $('table#mainTable thead tr th');
+    console.log(th);
+    $('#sortDL').delegate('click', $.proxy( th.click(), th ));*/
+
 });
