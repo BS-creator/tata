@@ -330,8 +330,9 @@
 
             if (that.options.sortable && visibleColumns[i].sortable) {
                 $(this).off('click').on('click', $.proxy(that.onSort, that));
-                //console.log("that", that);
+                //console.log("this", this);
                 $('#sortDL').on('click', $.proxy(that.onSortDownload, that));
+                $(this).find('div').eq(0).append('&nbsp;<i class="fa fa-sort"></i>');
             }
         });
 
@@ -393,7 +394,11 @@
         var $this = $(event.currentTarget),
             $this_ = this.$header.find('th').eq($this.index());
 
+        //console.log($this.find('i.fa'));
+        //TODO: fix bug that delete 'fa-sort' after sort
         this.$header.add(this.$header_).find('span.order').remove();
+        $this.find('i.fa').remove();
+
         if (this.options.sortName === $this.data('field')) {
             this.options.sortOrder = this.options.sortOrder === 'asc' ? 'desc' : 'asc';
         } else {

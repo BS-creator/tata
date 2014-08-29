@@ -87,41 +87,6 @@ $(function () {
         //override();
     }
 
-    function override(){
-        $.fn.bootstrapTable.Constructor.prototype.onSearch = function() {
-            console.log("test");
-        };
-
-        //a decortiquer
-        $.fn.bootstrapTable.Constructor.prototype.onSort2 = function (field, index, order) {
-            var $this = this.$header.find('th'),
-                $this_ = this.$header.find('th').eq(index);
-
-            console.log("$this_ = ", $this_);
-
-            this.$header.add(this.$header_).find('span.order').remove();
-            if (this.options.sortName === field ) {
-                this.options.sortOrder = order === 'asc' ? 'desc' : 'asc';
-            } else {
-                this.options.sortName = field;
-                this.options.sortOrder = order === 'asc' ? 'desc' : 'asc';
-            }
-            this.trigger('sort', this.options.sortName, this.options.sortOrder);
-
-            $this.add($this_).data('order', this.options.sortOrder)
-                .find('.th-inner').append(this.getCaretHtml());
-
-            if (this.options.sidePagination === 'server') {
-                this.initServer();
-                return;
-            }
-            this.initSort();
-            this.initBody();
-        };
-
-        $('#sortDL').on('click', $.fn.bootstrapTable.Constructor.prototype.onSort2('notDownloaded', 0, 'asc'));
-    }
-
     /****************************************************
      *
      * TABLE
@@ -132,8 +97,6 @@ $(function () {
         if (row.isNew) return {"classes": "isNew" };
         else return {};
     }
-
-
 
     //TODO replace url with dynamic!!!!
     $('#mainTable').bootstrapTable({
@@ -146,7 +109,7 @@ $(function () {
         search: true,
         showColumns: true,
         showRefresh: true,
-        minimunCountColumns: 5,
+        minimumCountColumns: 5,
         rowStyle: rowStylef,
         onLoadSuccess: loadMenu,
         columns: [
