@@ -187,7 +187,18 @@
     BootstrapTable.prototype.initContainer = function () {
         this.$container = $([
             '<div class="bootstrap-table">',
-
+                '<div id="filter" class="pull-left">',
+                    '<div class="btn-group">',
+                    '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
+                        'Trier par&nbsp;&nbsp;<span class="caret"></span>',
+                    '</button>',
+                    '<ul class="dropdown-menu" role="menu">',
+                        '<li class=""><a href="#"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;nouveaux fichiers </a></li>',
+                        '<li class="divider"></li>',
+                        '<li class=""><a id="sortDL"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;fichiers non-téléchargés</a></li>',
+                    '</ul>',
+                    '</div>',
+                '</div>',
                 '<div class="fixed-table-toolbar"></div>',
                 '<div class="fixed-table-container">',
                     '<div class="fixed-table-header"><table></table></div>',
@@ -319,6 +330,8 @@
 
             if (that.options.sortable && visibleColumns[i].sortable) {
                 $(this).off('click').on('click', $.proxy(that.onSort, that));
+                //console.log("that", that);
+                $('#sortDL').on('click', $.proxy(that.onSortDownload, that));
             }
         });
 
@@ -384,9 +397,30 @@
         if (this.options.sortName === $this.data('field')) {
             this.options.sortOrder = this.options.sortOrder === 'asc' ? 'desc' : 'asc';
         } else {
-        this.options.sortName = $this.data('field');
-        this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
+            this.options.sortName = $this.data('field');
+            this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
         }
+        this.trigger('sort', this.options.sortName, this.options.sortOrder);
+
+        $this.add($this_).data('order', this.options.sortOrder)
+            .find('.th-inner').append(this.getCaretHtml());
+
+        if (this.options.sidePagination === 'server') {
+            this.initServer();
+            return;
+        }
+        this.initSort();
+        this.initBody();
+    };
+
+    BootstrapTable.prototype.onSortDownload = function (event) {
+        var $this = $(event.currentTarget),
+            $this_ = this.$header.find('th').eq(0);
+
+        this.$header.add(this.$header_).find('span.order').remove();
+        this.options.sortName = "notDownloaded";
+        this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
+
         this.trigger('sort', this.options.sortName, this.options.sortOrder);
 
         $this.add($this_).data('order', this.options.sortOrder)
