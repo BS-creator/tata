@@ -344,3 +344,6 @@ table tr th .pw-btn-group-th .pw-btn-th,
   background-color: #dff0d8;
   color: #dff0d8;
 }
+.noshow {
+  display: none;
+}

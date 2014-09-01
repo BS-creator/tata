@@ -6,6 +6,7 @@ $(function () {
     /**  GLOBAL VARIABLE **/
     // array used to store all the existing document reference on the FTP server.
     $.refDocUsed = [];
+    BaseURL = 'http://172.20.20.64:8018/';
 
     /****************************************************
      *
@@ -70,7 +71,7 @@ $(function () {
                             "selected": true
                         },
                         "children": tree
-                    }
+                    } //TODO: add documents internes...
                 }
             }
         );
@@ -81,9 +82,10 @@ $(function () {
         $.refDocUsed.sort(function(a, b){return a-b});
         $.ajax({
             type: 'GET',
-            url: 'http://172.20.20.64:8018/category/',
+            url: BaseURL + 'category/',
             success: menu
         });
+        //TODO: create the tree THEN add nodes dynamically!!!
         //override();
     }
 
@@ -92,8 +94,125 @@ $(function () {
      * TABLE
      * */
 
+    $.extend(true, $.fn.bootstrapTable.prototype, {initHeader : function () {
+        var that = this,
+            visibleColumns = [],
+            html = [];
+
+        this.header = {
+            fields: [],
+            styles: [],
+            formatters: [],
+            events: [],
+            sorters: []
+        };
+        $.each(this.options.columns, function (i, column) {
+            var text = '',
+                style = sprintf('text-align: %s; ', column.align) +
+                    sprintf('vertical-align: %s; ', column.valign),
+                order = that.options.sortOrder || column.order;
+
+            if (!column.visible) {
+                return;
+            }
+
+            visibleColumns.push(column);
+            that.header.fields.push(column.field);
+            that.header.styles.push(style);
+            that.header.formatters.push(column.formatter);
+            that.header.events.push(column.events);
+            that.header.sorters.push(column.sorter);
+
+            if (column.halign) {
+                style = sprintf('text-align: %s; ', column.halign) +
+                    sprintf('vertical-align: %s; ', column.valign);
+            }
+            style += sprintf('width: %spx; ', column.checkbox || column.radio ? 36 : column.width);
+            style += that.options.sortable && column.sortable ? 'cursor: pointer; ' : '';
+
+            html.push('<th',
+                    column.checkbox || column.radio ? ' class="bs-checkbox"' :
+                    sprintf(' class="%s"', column['class']),
+                sprintf(' style="%s"', style),
+                '>');
+            html.push('<div class="th-inner">');
+
+            text = column.title;
+            if (that.options.sortName === column.field && that.options.sortable && column.sortable) {
+                text += that.getCaretHtml();
+            }
+
+            if (column.checkbox) {
+                if (!that.options.singleSelect && that.options.checkboxHeader) {
+                    text = '<input name="btSelectAll" type="checkbox" />';
+                }
+                that.header.stateField = column.field;
+            }
+            if (column.radio) {
+                text = '';
+                that.header.stateField = column.field;
+                that.options.singleSelect = true;
+            }
+
+            html.push(text);
+            html.push('</div>');
+            html.push('<div class="fht-cell"></div>');
+            html.push('</th>');
+        });
+
+        this.$header.find('tr').html(html.join(''));
+        this.$header.find('th').each(function (i) {
+            $(this).data(visibleColumns[i]);
+
+            if (that.options.sortable && visibleColumns[i].sortable) {
+                $(this).off('click').on('click', $.proxy(that.onSort, that));
+                //console.log("this", this);
+                $('#sortDL').on('click', $.proxy(that.onSortDownload, that));
+                $(this).find('div').eq(0).append('&nbsp;<i class="fa fa-sort"></i>');
+            }
+        });
+
+        if (!this.options.showHeader || this.options.cardView) {
+            this.$header.hide();
+            this.$container.find('.fixed-table-header').hide();
+            this.$loading.css('top', 0);
+        } else {
+            this.$header.show();
+            this.$container.find('.fixed-table-header').show();
+            this.$loading.css('top', '42px');
+        }
+
+        this.$selectAll = this.$header.find('[name="btSelectAll"]');
+        this.$selectAll.off('click').on('click', function () {
+            var checked = $(this).prop('checked');
+            that[checked ? 'checkAll' : 'uncheckAll']();
+        });
+    }});
+
+
+    $.extend(true, $.fn.bootstrapTable.prototype.onSortDownload = function (event) {
+        var $this = $(event.currentTarget),
+            $this_ = this.$header.find('th').eq(0);
+
+        this.$header.add(this.$header_).find('span.order').remove();
+        this.options.sortName = "notDownloaded";
+        this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
+
+        this.trigger('sort', this.options.sortName, this.options.sortOrder);
+
+        $this.add($this_).data('order', this.options.sortOrder)
+            .find('.th-inner').append(this.getCaretHtml());
+
+        if (this.options.sidePagination === 'server') {
+            this.initServer();
+            return;
+        }
+        this.initSort();
+        this.initBody();
+    });
+
     // Styling the row if the file is new
-    function rowStylef(row) {
+    function rowStylef(row, i, filter) {
         if (row.isNew) return {"classes": "isNew" };
         else return {};
     }
@@ -101,7 +220,7 @@ $(function () {
     //TODO replace url with dynamic!!!!
     $('#mainTable').bootstrapTable({
         method: 'get',
-        url: 'http://172.20.20.64:8018/file/yinnye55e2iqbf55iah3th45/',
+        url: BaseURL + 'file/'+ sessionStorage.getItem('token') +'/',
         striped: true,
         pagination: true,
         pageSize: 20,
@@ -272,17 +391,9 @@ $(function () {
                 }
             }
         ]
-    })
+    });
+
 
 });
 
-// add icons UNSORTED to thead tr th div span
-$(function (){
-/*    var th = $('table#mainTable thead tr th');
-    var span = '<span class="unsorted"></span>';
-
-   if($('table#mainTable thead tr th div.th-inner').find('span.order').length == 0){
-        $('table#mainTable thead tr th div.th-inner').append(span);
-   }*/
-});
 

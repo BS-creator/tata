@@ -145,10 +145,12 @@
     BootstrapTable.COLUMN_DEFAULTS = {
         radio: false,
         checkbox: false,
+        checkboxEnabled: true,
         field: undefined,
         title: undefined,
         'class': undefined,
         align: undefined, // left, right, center
+        halign: undefined, // left, right, center
         valign: undefined, // top, middle, bottom
         width: undefined,
         sortable: false,
@@ -291,6 +293,10 @@
             that.header.events.push(column.events);
             that.header.sorters.push(column.sorter);
 
+            if (column.halign) {
+                style = sprintf('text-align: %s; ', column.halign) +
+                    sprintf('vertical-align: %s; ', column.valign);
+            }
             style += sprintf('width: %spx; ', column.checkbox || column.radio ? 36 : column.width);
             style += that.options.sortable && column.sortable ? 'cursor: pointer; ' : '';
 
@@ -330,9 +336,6 @@
 
             if (that.options.sortable && visibleColumns[i].sortable) {
                 $(this).off('click').on('click', $.proxy(that.onSort, that));
-                //console.log("this", this);
-                $('#sortDL').on('click', $.proxy(that.onSortDownload, that));
-                $(this).find('div').eq(0).append('&nbsp;<i class="fa fa-sort"></i>');
             }
         });
 
@@ -418,26 +421,7 @@
         this.initBody();
     };
 
-    BootstrapTable.prototype.onSortDownload = function (event) {
-        var $this = $(event.currentTarget),
-            $this_ = this.$header.find('th').eq(0);
 
-        this.$header.add(this.$header_).find('span.order').remove();
-        this.options.sortName = "notDownloaded";
-        this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
-
-        this.trigger('sort', this.options.sortName, this.options.sortOrder);
-
-        $this.add($this_).data('order', this.options.sortOrder)
-            .find('.th-inner').append(this.getCaretHtml());
-
-        if (this.options.sidePagination === 'server') {
-            this.initServer();
-            return;
-        }
-        this.initSort();
-        this.initBody();
-    };
 
     BootstrapTable.prototype.initToolbar = function () {
         var that = this,
@@ -854,7 +838,9 @@
                             sprintf(' name="%s"', that.options.selectItemName) +
                             sprintf(' type="%s"', type) +
                             sprintf(' value="%s"', item[that.options.idField]) +
-                            sprintf(' checked="%s"', value ? 'checked' : undefined) + ' />',
+                            sprintf(' checked="%s"', value ? 'checked' : undefined) +
+                            sprintf(' %s', that.options.columns[j].checkboxEnabled ? undefined : 'disabled') +
+                            ' />',
                         '</td>'].join('');
                 } else {
                     value = typeof value === 'undefined' ? that.options.undefinedText : value;
