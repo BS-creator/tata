@@ -20,7 +20,7 @@ $(function (){
                     sessionStorage.setItem("token", data.token);
                 }
                 //redirect to itransfert;
-                window.location = 'http://localhost:4000/itransfer';
+                window.location = 'http://localhost:4000/itransfer/file.html';
             },
             dataType: 'json'
         });

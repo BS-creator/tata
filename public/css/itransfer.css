@@ -30,6 +30,9 @@ ul#dir-name li.pw-tab-folder a:before {
 ul#dir-name li.pw-tab-folder.active a:before {
   content: "\f115";
 }
+.fa-download {
+  cursor: hand;
+}
 div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1) {
   background-color: #dff0d8;
 }

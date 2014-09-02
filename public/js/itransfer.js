@@ -5,7 +5,7 @@ $(function () {
 
     /**  GLOBAL VARIABLE **/
     // array used to store all the existing document reference on the FTP server.
-    $.refDocUsed = [];
+    refDocUsed = [];
     BaseURL = 'http://172.20.20.64:8018/';
 
     /****************************************************
@@ -16,13 +16,14 @@ $(function () {
     function menu(data) {
         var tree = [] ;
         var cat = [];
+        console.log("refDocUsed == " + refDocUsed[0]);
         // BUILD TREE
         $.each(data, function (i, item) {
 
             if ( $.inArray( item.noCategory, cat ) > -1 ) {
                 //category already exists
                 //add document
-                if( $.inArray( item.refDoc, $.refDocUsed ) > -1 ) {
+                if( $.inArray( item.refDoc, refDocUsed ) > -1 ) {
                     tree[(tree.length - 1)]
                         .children[(tree[(tree.length - 1)].children.length)] = {
                         "text" :  item.refDoc + " - " +item.labelDoc_f,
@@ -33,7 +34,7 @@ $(function () {
             }else{
                 //create category
                 cat[cat.length] = item.noCategory;
-                if( $.inArray( item.refDoc, $.refDocUsed ) > -1 ) {
+                if( $.inArray( item.refDoc, refDocUsed ) > -1 ) {
                     tree[tree.length] =
                     {
                         "id"    : item.noCategory,
@@ -77,9 +78,21 @@ $(function () {
         );
     }
 
+    function sort_unique(arr) {
+        arr = arr.sort(function (a, b) { return a*1 - b*1; });
+        var ret = [arr[0]];
+        for (var i = 1; i < arr.length; i++) { // start loop at 1 as element 0 can never be a duplicate
+            if (arr[i-1] !== arr[i]) {
+                ret.push(arr[i]);
+            }
+        }
+        return ret;
+    }
+
     function loadMenu (){
         //Sort used reference document
-        $.refDocUsed.sort(function(a, b){return a-b});
+        //refDocUsed.sort(function(a, b){return a-b});
+        refDocUsed = sort_unique(refDocUsed);
         $.ajax({
             type: 'GET',
             url: BaseURL + 'category/',
@@ -94,122 +107,38 @@ $(function () {
      * TABLE
      * */
 
-    $.extend(true, $.fn.bootstrapTable.prototype, {initHeader : function () {
-        var that = this,
-            visibleColumns = [],
-            html = [];
 
-        this.header = {
-            fields: [],
-            styles: [],
-            formatters: [],
-            events: [],
-            sorters: []
-        };
-        $.each(this.options.columns, function (i, column) {
-            var text = '',
-                style = sprintf('text-align: %s; ', column.align) +
-                    sprintf('vertical-align: %s; ', column.valign),
-                order = that.options.sortOrder || column.order;
+    $.fn.bootstrapTable.Constructor.prototype.onSearch2 = function (event, field, value) {
 
-            if (!column.visible) {
-                return;
-            }
-
-            visibleColumns.push(column);
-            that.header.fields.push(column.field);
-            that.header.styles.push(style);
-            that.header.formatters.push(column.formatter);
-            that.header.events.push(column.events);
-            that.header.sorters.push(column.sorter);
-
-            if (column.halign) {
-                style = sprintf('text-align: %s; ', column.halign) +
-                    sprintf('vertical-align: %s; ', column.valign);
-            }
-            style += sprintf('width: %spx; ', column.checkbox || column.radio ? 36 : column.width);
-            style += that.options.sortable && column.sortable ? 'cursor: pointer; ' : '';
-
-            html.push('<th',
-                    column.checkbox || column.radio ? ' class="bs-checkbox"' :
-                    sprintf(' class="%s"', column['class']),
-                sprintf(' style="%s"', style),
-                '>');
-            html.push('<div class="th-inner">');
-
-            text = column.title;
-            if (that.options.sortName === column.field && that.options.sortable && column.sortable) {
-                text += that.getCaretHtml();
-            }
-
-            if (column.checkbox) {
-                if (!that.options.singleSelect && that.options.checkboxHeader) {
-                    text = '<input name="btSelectAll" type="checkbox" />';
-                }
-                that.header.stateField = column.field;
-            }
-            if (column.radio) {
-                text = '';
-                that.header.stateField = column.field;
-                that.options.singleSelect = true;
-            }
-
-            html.push(text);
-            html.push('</div>');
-            html.push('<div class="fht-cell"></div>');
-            html.push('</th>');
-        });
-
-        this.$header.find('tr').html(html.join(''));
-        this.$header.find('th').each(function (i) {
-            $(this).data(visibleColumns[i]);
-
-            if (that.options.sortable && visibleColumns[i].sortable) {
-                $(this).off('click').on('click', $.proxy(that.onSort, that));
-                //console.log("this", this);
-                $('#sortDL').on('click', $.proxy(that.onSortDownload, that));
-                $(this).find('div').eq(0).append('&nbsp;<i class="fa fa-sort"></i>');
-            }
-        });
-
-        if (!this.options.showHeader || this.options.cardView) {
-            this.$header.hide();
-            this.$container.find('.fixed-table-header').hide();
-            this.$loading.css('top', 0);
-        } else {
-            this.$header.show();
-            this.$container.find('.fixed-table-header').show();
-            this.$loading.css('top', '42px');
-        }
-
-        this.$selectAll = this.$header.find('[name="btSelectAll"]');
-        this.$selectAll.off('click').on('click', function () {
-            var checked = $(this).prop('checked');
-            that[checked ? 'checkAll' : 'uncheckAll']();
-        });
-    }});
-
-
-    $.extend(true, $.fn.bootstrapTable.prototype.onSortDownload = function (event) {
-        var $this = $(event.currentTarget),
-            $this_ = this.$header.find('th').eq(0);
-
-        this.$header.add(this.$header_).find('span.order').remove();
-        this.options.sortName = "notDownloaded";
-        this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
-
-        this.trigger('sort', this.options.sortName, this.options.sortOrder);
-
-        $this.add($this_).data('order', this.options.sortOrder)
-            .find('.th-inner').append(this.getCaretHtml());
-
-        if (this.options.sidePagination === 'server') {
-            this.initServer();
-            return;
-        }
-        this.initSort();
+        this.options.pageNumber = 1;
+        this.initFilter(field, value);
+        this.updatePagination(true);
         this.initBody();
-    });
+
+
+    };
+
+    $.fn.bootstrapTable.Constructor.prototype.initFilter = function (field, value) {
+        if (this.options.sidePagination !== 'server') {
+            console.log((this.data.length !== this.options.data.length));
+            this.data = value ? $.grep(this.options.data, function (item) {
+                //console.log( value + " == " + parseInt(item[field]) +'\t test == '+ (value == parseInt(item[field])));
+
+                //filter where the name of the field = field
+                if(field && typeof value === 'number'){
+                    if(value == parseInt(item[field])) {
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+                if(field && typeof value === 'string'){
+
+                }
+                return false;
+            }) : this.options.data;
+        }
+    };
 
     // Styling the row if the file is new
     function rowStylef(row, i, filter) {
@@ -217,14 +146,30 @@ $(function () {
         else return {};
     }
 
+
+
+    function formatDownload(value, row) {
+        var dlCount = row.downloadCount ? row.downloadCount : '';
+        if (value) {
+            return "<a class='dl' data-id='" + row.idFile + "' " +
+                "data-file='" + row.fileName + "' ><i class='fa fa-download text-primary'></i>" +
+                "<small data-dl='"+ row.downloadCount +"' class='text-muted'>&nbsp;" + dlCount + "</small></a>";
+        } else {
+            return "<a class='dl' data-id='" + row.idFile + "' " +
+                "data-file='" + row.fileName + "' ><i class='fa fa-download text-muted'></i>" +
+                "<small data-dl='"+ row.downloadCount +"' class='text-muted'>&nbsp;" + dlCount + "</small></a>";
+        }
+    }
+
+
     //TODO replace url with dynamic!!!!
-    $('#mainTable').bootstrapTable({
+    $table = $('#mainTable').bootstrapTable({
         method: 'get',
         url: BaseURL + 'file/'+ sessionStorage.getItem('token') +'/',
         striped: true,
         pagination: true,
         pageSize: 20,
-        pageList: [10, 20, 50, 100],
+        pageList: [10, 20, 50, 100, 200],
         search: true,
         showColumns: true,
         showRefresh: true,
@@ -233,25 +178,15 @@ $(function () {
         onLoadSuccess: loadMenu,
         columns: [
             {
-                field: 'state',
-                checkbox: false,
-                visible: false
+                field: 'stateField',
+                checkbox: true,
+                visible: true
             },
             {
                 field: 'notDownloaded',
                 title: 'DL',
                 sortable: true,
-                formatter: function (value, row) {
-                    if (value) {
-                        var dlCount = row.downloadCount ? row.downloadCount : '';
-                        return "<a class='dl' data-id='" + row.idFile + "' " +
-                            "data-file='" + row.fileName + "' href='#'><i class='fa fa-download text-primary'></i><small class='text-muted'>&nbsp;" + dlCount + "</small></a>";
-                    } else {
-                        var dlCount = row.downloadCount ? row.downloadCount : '';
-                        return "<a class='dl' data-id='" + row.idFile + "' " +
-                            "data-file='" + row.fileName + "' href='#'><i class='fa fa-download text-muted'></i><small class='text-muted'>&nbsp;" + dlCount + "</small></a>";
-                    }
-                }
+                formatter: formatDownload
             },
             {
                 field: 'isNew',
@@ -264,6 +199,83 @@ $(function () {
                 }
             },
             {
+                field: 'date',
+                title: 'Date',
+                align: 'center',
+                valign: 'middle',
+                sortable: true,
+                formatter: function (value) {
+                    if (!value || value == '') return 'x';
+                    else return value;
+                }
+            },
+            {
+                field: 'noEmployeur',
+                title: 'Employeur',
+                align: 'center',
+                valign: 'middle',
+                sortable: true,
+                formatter: function (value) {
+                    if (!value || value == '') return 'x';
+                    else return value;
+                }
+            },
+            {
+                field: 'libelle',
+                title: 'Libell&eacute;', //TODO: multi-language
+                align: 'center',
+                valign: 'middle',
+                sortable: true,
+                formatter: function (value) {
+                    if (!value || value == '') return '';
+                    else return value;
+                }
+            },
+            {
+                field: 'refDoc',
+                title: 'Ref Document',
+                align: 'center',
+                valign: 'middle',
+                sortable: true,
+                formatter: function (value, row, index) {
+                    console.log(index +' >> value = ' + value );
+                    if (value) {
+                        var v = parseInt(value);
+                        if (value > 0 ){
+                            refDocUsed[refDocUsed.length] = v;
+                            return v ;
+                        }
+                    }
+                    return '';
+                }
+            },
+            {
+                field: 'size',
+                title: 'Size',
+                align: 'center',
+                valign: 'middle',
+                visible: false,
+                sortable: true
+            },
+            {
+                field: 'extension',
+                title: 'ext',
+                align: 'center',
+                valign: 'middle',
+                sortable: true,
+                formatter: function (value) {
+                    if (!value || value == '') return '';
+                    else return value;
+                }
+            },
+            {
+                field:'index',
+                title:'#',
+                sortable: true,
+                visible: false,
+                sort: function(a, b){return a-b}
+            },
+            {
                 field: 'idFile',
                 title: 'File ID',
                 align: 'right',
@@ -272,7 +284,7 @@ $(function () {
                 sortable: true
             },
             {
-                field: 'filename',
+                field: 'fileName',
                 title: 'Name',
                 align: 'center',
                 valign: 'middle',
@@ -288,60 +300,13 @@ $(function () {
                 sortable: true
             },
             {
-                field: 'size',
-                title: 'Size',
-                align: 'center',
-                valign: 'middle',
-                visible: false,
-                sortable: true
-            },
-            {
-                field: 'libelle',
-                title: 'Libell&eacute;',
-                align: 'left',
-                valign: 'middle',
-                sortable: true,
-                formatter: function (value) {
-                    if (!value || value == '') return 'x';
-                    else return value;
-                }
-            },
-            {
-                field: 'refDoc',
-                title: 'Ref Document',
-                align: 'center',
-                valign: 'middle',
-                sortable: true,
-                formatter: function (value) {
-                    if (!value || value == '') return 'x';
-                    else {
-                        var val = parseInt(value);
-                        if ($.inArray( val, $.refDocUsed ) < 0){
-                            $.refDocUsed[$.refDocUsed.length] = val;
-                        }
-                        return val;
-                    }
-                }
-            },
-            {
-                field: 'noEmployeur',
-                title: 'Employeur',
-                align: 'center',
-                valign: 'middle',
-                sortable: true,
-                formatter: function (value) {
-                    if (!value || value == '') return 'x';
-                    else return value;
-                }
-            },
-            {
                 field: 'refClientCompl',
                 title: 'Ref Client',
                 align: 'center',
                 valign: 'middle',
                 sortable: true,
                 formatter: function (value) {
-                    if (!value || value == '') return 'x';
+                    if (!value || value == '') return '';
                     else return value;
                 }
             },
@@ -353,18 +318,7 @@ $(function () {
                 visible: false,
                 sortable: true,
                 formatter: function (value) {
-                    if (!value || value == '') return 'x';
-                    else return value;
-                }
-            },
-            {
-                field: 'date',
-                title: 'Date',
-                align: 'center',
-                valign: 'middle',
-                sortable: true,
-                formatter: function (value) {
-                    if (!value || value == '') return 'x';
+                    if (!value || value == '') return '';
                     else return value;
                 }
             },
@@ -375,23 +329,54 @@ $(function () {
                 valign: 'middle',
                 sortable: true,
                 formatter: function (value) {
-                    if (!value || value == '') return 'x';
-                    else return value;
-                }
-            },
-            {
-                field: 'extension',
-                title: 'ext',
-                align: 'center',
-                valign: 'middle',
-                sortable: true,
-                formatter: function (value) {
-                    if (!value || value == '') return 'x';
+                    if (!value || value == '') return '';
                     else return value;
                 }
             }
         ]
+    }).ddTableFilter();
+
+
+//    $("#mainTable");
+
+    //DOWNLOAD files
+    $('#mainTable').delegate('.dl', 'click', function(){
+        $(this).attr('href', BaseURL + 'file/'+ sessionStorage.getItem('token')+ '/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
+        $(this).find('i').remove();
+        var small = $(this).find('small');     // cache object
+        $(this).prepend("<i class='fa fa-download text-muted'></i>"); //mark as already downloaded
+        var dl = parseInt( small.data('dl') ) +1;
+        small.data('dl', dl ); // increment by one the download count
+        small.html('&nbsp;' + dl );
+
     });
+
+    //Add download all button
+    $('#get-selections').click(function() {
+        alert('Selected values: ' + JSON.stringify($table.bootstrapTable('getSelections')));
+
+        download();
+    });
+
+    /*$('#download').click(function() {
+        download('http://nogin.info/cv.doc','http://nogin.info/cv.doc');
+    });
+
+    var download = function() {
+        for(var i=0; i<arguments.length; i++) {
+            var iframe = $('<iframe style="visibility: collapse;"></iframe>');
+            $('body').append(iframe);
+            var content = iframe[0].contentDocument;
+            var form = '<form action="' + arguments[i] + '" method="GET"></form>';
+            content.write(form);
+            $('form', content).submit();
+            setTimeout((function(iframe) {
+                return function() {
+                    iframe.remove();
+                }
+            })(iframe), 2000);
+        }
+    }*/
 
 
 });

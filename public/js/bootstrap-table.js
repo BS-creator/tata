@@ -336,6 +336,11 @@
 
             if (that.options.sortable && visibleColumns[i].sortable) {
                 $(this).off('click').on('click', $.proxy(that.onSort, that));
+                //console.log("this", this);
+                /*** CUSTOM ***/
+                $('#sortDL').on('click', $.proxy(that.onSortDownload, that));
+                //$(this).find('div').eq(0).append('&nbsp;<i class="fa fa-sort"></i>');
+                /*** CUSTOM ***/
             }
         });
 
@@ -421,7 +426,28 @@
         this.initBody();
     };
 
+    /*** CUSTOM ***/
+    BootstrapTable.prototype.onSortDownload = function (event) {
+        var $this = $(event.currentTarget),
+            $this_ = this.$header.find('th').eq(1);
 
+        this.$header.add(this.$header_).find('span.order').remove();
+        this.options.sortName = "notDownloaded";
+        this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
+
+        this.trigger('sort', this.options.sortName, this.options.sortOrder);
+
+        $this.add($this_).data('order', this.options.sortOrder)
+            .find('.th-inner').append(this.getCaretHtml());
+
+        if (this.options.sidePagination === 'server') {
+            this.initServer();
+            return;
+        }
+        this.initSort();
+        this.initBody();
+    };
+    /*** CUSTOM ***/
 
     BootstrapTable.prototype.initToolbar = function () {
         var that = this,
@@ -518,6 +544,16 @@
 
         if (this.options.search) {
             html = [];
+            /**** CUSTOM ***/
+            html.push(
+                '<div class="pull-right search">',
+                    '<button type="button" class="btn btn-default filter31">31</button>',
+                '</div>');
+            html.push(
+                '<div class="pull-right search">',
+                '<button id="get-selections" type="button" class="btn btn-default ">Selections</button>',
+                '</div>');
+            /**** CUSTOM ***/
             html.push(
                 '<div class="pull-right search">',
                     sprintf('<input class="form-control" type="text" placeholder="%s">',
@@ -525,6 +561,9 @@
                 '</div>');
 
             this.$toolbar.append(html.join(''));
+            $('.filter31').on('click', function(event) {
+                $.proxy(that.onSearch2(event,'refDoc', 31), that);
+            });
             $search = this.$toolbar.find('.search input');
             $search.off('keyup').on('keyup', function (event) {
                 clearTimeout(timeoutId); // doesn't matter if it's 0
@@ -535,7 +574,6 @@
 
     BootstrapTable.prototype.onSearch = function (event) {
         var text = $.trim($(event.currentTarget).val());
-
         if (text === this.searchText) {
             return;
         }
@@ -547,8 +585,8 @@
     };
 
     BootstrapTable.prototype.initSearch = function () {
-        if (this.searchText && this.options.sidePagination !== 'server') {
-            var s = this.searchText.toLowerCase();
+        if (this.options.sidePagination !== 'server') {
+            var s = this.searchText && this.searchText.toLowerCase();
 
             this.data = s ? $.grep(this.options.data, function (item) {
                 for (var key in item) {
@@ -561,10 +599,9 @@
                 return false;
             }) : this.options.data;
         }
-
     };
 
-    BootstrapTable.prototype.initPagination = function () {
+    BootstrapTable.prototype.initPagination = function (updateData) {
         this.$pagination = this.$container.find('.fixed-table-pagination');
 
         if (!this.options.pagination) {
@@ -578,6 +615,10 @@
             $next, $last,
             $number,
             data = this.searchText ? this.data : this.options.data;
+
+        if(updateData) {
+            data = this.data;
+        }
 
         if (this.options.sidePagination !== 'server') {
             this.options.totalRows = data.length;
@@ -725,7 +766,7 @@
 
     BootstrapTable.prototype.updatePagination = function () {
         this.resetRows();
-        this.initPagination();
+        this.initPagination((this.data.length !== this.options.data.length));
         if (this.options.sidePagination === 'server') {
             this.initServer();
         } else {
@@ -739,27 +780,28 @@
         $this.parent().addClass('active').siblings().removeClass('active');
         this.options.pageSize = +$this.text();
         this.$toolbar.find('.page-size').text(this.options.pageSize);
-        this.updatePagination();
+        this.updatePagination((this.data.length !== this.options.data.length));
     };
 
     BootstrapTable.prototype.onPageFirst = function () {
         this.options.pageNumber = 1;
-        this.updatePagination();
+        this.updatePagination((this.data.length !== this.options.data.length));
     };
 
     BootstrapTable.prototype.onPagePre = function () {
         this.options.pageNumber--;
-        this.updatePagination();
+        this.updatePagination((this.data.length !== this.options.data.length));
     };
 
     BootstrapTable.prototype.onPageNext = function () {
         this.options.pageNumber++;
-        this.updatePagination();
+
+        this.updatePagination((this.data.length !== this.options.data.length));
     };
 
     BootstrapTable.prototype.onPageLast = function () {
         this.options.pageNumber = this.totalPages;
-        this.updatePagination();
+        this.updatePagination((this.data.length !== this.options.data.length));
     };
 
     BootstrapTable.prototype.onPageNumber = function (event) {
@@ -767,7 +809,7 @@
             return;
         }
         this.options.pageNumber = +$(event.currentTarget).text();
-        this.updatePagination();
+        this.updatePagination((this.data.length !== this.options.data.length));
     };
 
     BootstrapTable.prototype.initBody = function () {
@@ -775,6 +817,9 @@
             html = [],
             data = this.searchText ? this.data : this.options.data;
 
+        if((this.data.length !== this.options.data.length)) {
+            data = this.data;
+        }
         this.$body = this.$el.find('tbody');
         if (!this.$body.length) {
             this.$body = $('<tbody></tbody>').appendTo(this.$el);
