@@ -5,56 +5,85 @@ $(function () {
 
     /**  GLOBAL VARIABLE **/
     // array used to store all the existing document reference on the FTP server.
-    refDocUsed = [];
-    BaseURL = 'http://172.20.20.64:8018/';
+    var refDocUsed = [];
+    var BaseURL = 'http://172.20.20.64:8018/';
+    var AjaxData = [];
+
 
     /****************************************************
      *
      * MENU
      * */
 
+    // $('.leaf') to access leafs...!!!!
+
     function menu(data) {
         var tree = [] ;
         var cat = [];
-        console.log("refDocUsed == " + refDocUsed[0]);
+
         // BUILD TREE
         $.each(data, function (i, item) {
 
-            if ( $.inArray( item.noCategory, cat ) > -1 ) {
-                //category already exists
-                //add document
-                if( $.inArray( item.refDoc, refDocUsed ) > -1 ) {
+            var refdoc = parseInt(item.refDoc),
+                numcat = parseInt(item.noCategory);
+            if (numcat == 0) numcat = 988;
+
+            if ($.inArray(refdoc, refDocUsed) > -1) { // doc is used
+                if ($.inArray(numcat, cat) > -1) { // category exists --> add children
+                    //add child node
                     tree[(tree.length - 1)]
                         .children[(tree[(tree.length - 1)].children.length)] = {
-                        "text" :  item.refDoc + " - " +item.labelDoc_f,
+                        "text": refdoc + " - " + item.labelDoc_f,
                         "li_attr": {"class": "leaf"}
                     }
-                }
-
-            }else{
-                //create category
-                cat[cat.length] = item.noCategory;
-                if( $.inArray( item.refDoc, refDocUsed ) > -1 ) {
+                } else { // create category
+                    cat[cat.length] = numcat;
                     tree[tree.length] =
                     {
-                        "id"    : item.noCategory,
-                        "text"  : item.noCategory + " - " + item.labelCategory_f,
-                        "children": [{ //add document
-                            "text" : item.refDoc + " - " + item.labelDoc_f,
-                            "li_attr": {"class": "leaf"}
-                        }]
+                        "id": numcat,
+                        "text": numcat + " - " + item.labelCategory_f,
+                        "state": {
+                            "opened": true,
+                            "disabled": false,
+                            "selected": false
+                        },
+                        "children": [
+                            { //add document
+                                "text": refdoc + " - " + item.labelDoc_f,
+                                "li_attr": {"class": "leaf"}
+                            }
+                        ]
                     };
-                }/*else{
-                 tree[tree.length] =
-                 {
-                 "id"    : item.noCategory,
-                 "text"  : item.noCategory + " - " + item.labelCategory_f,
-                 "children": []
-                 };
-                 }*/
+                }
             }
-
         });
+
+        // ---> ADDING OTHER CATEGORY
+        if($.inArray(-1, refDocUsed) > -1){
+            tree[tree.length] =
+            {
+                "id": 98,
+                "text": '98 - Documents Divers',
+                "state": {
+                    "opened": true,
+                    "disabled": false,
+                    "selected": false
+                },
+                "li_attr": {"class": "leaf"}
+            };
+        }
+
+        tree[tree.length] =
+        {
+            "id": 99,
+            "text": '99 - Transferts internes',
+            "state": {
+                "opened": true,
+                "disabled": false,
+                "selected": false
+            },
+            "li_attr": {"class": "leaf"}
+        };
 
         // JSTREE
         $('#sidenav')
@@ -72,34 +101,52 @@ $(function () {
                             "selected": true
                         },
                         "children": tree
-                    } //TODO: add documents internes...
+                    }
                 }
             }
         );
-    }
+    };
 
-    function sort_unique(arr) {
-        arr = arr.sort(function (a, b) { return a*1 - b*1; });
-        var ret = [arr[0]];
-        for (var i = 1; i < arr.length; i++) { // start loop at 1 as element 0 can never be a duplicate
-            if (arr[i-1] !== arr[i]) {
-                ret.push(arr[i]);
+    function sort_unique(array) {
+        array = array.sort(function (a, b) { return a*1 - b*1; });
+        if (array.length > 1) {
+            var ret = [array[0]];
+            for (var i = 1; i < array.length; i++) { // start loop at 1 as element 0 can never be a duplicate
+                if (array[i-1] !== array[i]) {
+                    ret.push(array[i]);
+                }
             }
+            return ret;
         }
-        return ret;
-    }
+        return array; // only 1 or no element in the array.
+    };
 
-    function loadMenu (){
-        //Sort used reference document
-        //refDocUsed.sort(function(a, b){return a-b});
-        refDocUsed = sort_unique(refDocUsed);
+
+    function getUsedDocRef(data){
+        var a = [];
+        $.each(data, function (i, item){
+            var ref = parseInt(item.refDoc);
+            if (!isNaN(ref)) {
+                a[a.length] = ref;
+            }else{
+                a[a.length] = -1;
+            }
+        });
+        return sort_unique(a);
+
+    }
+    function loadMenu (data){
+
+        //AjaxData = data;
+
+        refDocUsed = getUsedDocRef(data);
+
         $.ajax({
             type: 'GET',
             url: BaseURL + 'category/',
             success: menu
         });
-        //TODO: create the tree THEN add nodes dynamically!!!
-        //override();
+
     }
 
     /****************************************************
@@ -115,16 +162,16 @@ $(function () {
         this.updatePagination(true);
         this.initBody();
 
-
     };
 
     $.fn.bootstrapTable.Constructor.prototype.initFilter = function (field, value) {
         if (this.options.sidePagination !== 'server') {
-            console.log((this.data.length !== this.options.data.length));
+            //console.log((this.data.length !== this.options.data.length));
             this.data = value ? $.grep(this.options.data, function (item) {
-                //console.log( value + " == " + parseInt(item[field]) +'\t test == '+ (value == parseInt(item[field])));
+                //console.log( value + " == " + parseInt(item[field]) +
+                //         '\t test == '+ (value == parseInt(item[field])));
 
-                //filter where the name of the field = field
+                //filter on condition about the field
                 if(field && typeof value === 'number'){
                     if(value == parseInt(item[field])) {
                         return true;
@@ -133,7 +180,11 @@ $(function () {
                     }
                 }
                 if(field && typeof value === 'string'){
-
+                    if (item[field].toLowerCase().indexOf(value) !== -1) {
+                        return true;
+                    }else{
+                        return false;
+                    }
                 }
                 return false;
             }) : this.options.data;
@@ -161,9 +212,7 @@ $(function () {
         }
     }
 
-
-    //TODO replace url with dynamic!!!!
-    $table = $('#mainTable').bootstrapTable({
+    var $table = $('#mainTable').bootstrapTable({
         method: 'get',
         url: BaseURL + 'file/'+ sessionStorage.getItem('token') +'/',
         striped: true,
@@ -205,7 +254,7 @@ $(function () {
                 valign: 'middle',
                 sortable: true,
                 formatter: function (value) {
-                    if (!value || value == '') return 'x';
+                    if (!value || value == '') return '';
                     else return value;
                 }
             },
@@ -216,7 +265,7 @@ $(function () {
                 valign: 'middle',
                 sortable: true,
                 formatter: function (value) {
-                    if (!value || value == '') return 'x';
+                    if (!value || value == '') return '';
                     else return value;
                 }
             },
@@ -237,8 +286,8 @@ $(function () {
                 align: 'center',
                 valign: 'middle',
                 sortable: true,
-                formatter: function (value, row, index) {
-                    console.log(index +' >> value = ' + value );
+                formatter: function (value) {
+                    //console.log(index +' >> value = ' + value );
                     if (value) {
                         var v = parseInt(value);
                         if (value > 0 ){
@@ -304,6 +353,7 @@ $(function () {
                 title: 'Ref Client',
                 align: 'center',
                 valign: 'middle',
+                visible: false,
                 sortable: true,
                 formatter: function (value) {
                     if (!value || value == '') return '';
@@ -327,17 +377,21 @@ $(function () {
                 title: 'Ref Group S',
                 align: 'center',
                 valign: 'middle',
+                visible: false,
                 sortable: true,
                 formatter: function (value) {
                     if (!value || value == '') return '';
                     else return value;
                 }
+            },
+            {
+                field: 'dummy',
+                visible: false
             }
+
         ]
-    }).ddTableFilter();
+    });
 
-
-//    $("#mainTable");
 
     //DOWNLOAD files
     $('#mainTable').delegate('.dl', 'click', function(){
@@ -351,11 +405,15 @@ $(function () {
 
     });
 
+
+
+
+
     //Add download all button
     $('#get-selections').click(function() {
         alert('Selected values: ' + JSON.stringify($table.bootstrapTable('getSelections')));
 
-        download();
+        //download();
     });
 
     /*$('#download').click(function() {
@@ -378,6 +436,7 @@ $(function () {
         }
     }*/
 
+    $.('.user-name').html('USERNAME');
 
 });
 

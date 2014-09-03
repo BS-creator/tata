@@ -7,19 +7,19 @@
 
     $.extend($.fn.bootstrapTable.defaults, {
         formatLoadingMessage: function() {
-            return 'Chargement en cours...';
+            return 'Chargement en cours... ';
         },
         formatRecordsPerPage: function(pageNumber) {
-            return pageNumber + ' entrées par page';
+            return pageNumber + ' entrées par page ';
         },
         formatShowingRows: function(pageFrom, pageTo, totalRows) {
-            return 'Affiche de' + pageFrom + ' à ' + pageTo + ' sur ' + totalRows + ' lignes';
+            return 'Affiche de ' + pageFrom + ' à ' + pageTo + ' sur ' + totalRows + ' lignes';
         },
         formatSearch: function() {
-            return 'Recherche'
+            return 'Recherche '
         },
         formatNoMatches: function() {
-            return 'Pas de fichiers trouvés';
+            return 'Pas de fichiers trouvés ';
         }
     });
 })(jQuery);
