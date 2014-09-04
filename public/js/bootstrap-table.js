@@ -436,29 +436,6 @@
         this.initBody();
     };
 
-    /*** CUSTOM ***/
-    BootstrapTable.prototype.onSortDownload = function (event) {
-        var $this = $(event.currentTarget),
-            $this_ = this.$header.find('th').eq(1);
-
-        this.$header.add(this.$header_).find('span.order').remove();
-        this.options.sortName = "notDownloaded";
-        this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
-
-        this.trigger('sort', this.options.sortName, this.options.sortOrder);
-
-        $this.add($this_).data('order', this.options.sortOrder)
-            .find('.th-inner').append(this.getCaretHtml());
-
-        if (this.options.sidePagination === 'server') {
-            this.initServer();
-            return;
-        }
-        this.initSort();
-        this.initBody();
-    };
-    /*** CUSTOM ***/
-
     BootstrapTable.prototype.initToolbar = function () {
         var that = this,
             html = [],
@@ -478,7 +455,7 @@
         html = ['<div class="columns btn-group pull-right">'];
 
         if (this.options.showRefresh) {
-            html.push('<button class="btn btn-default" type="button" name="refresh">',
+            html.push('<button class="btn btn-default reloadme" type="button" name="refresh">',
                 '<i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Rafra&icirc;chir',
                 '</button>');
         }
@@ -521,8 +498,8 @@
         }
 
         if (this.options.showRefresh) {
-            this.$toolbar.find('button[name="refresh"]')
-                .off('click').on('click', $.proxy(this.refresh, this));
+           // this.$toolbar.find('button[name="refresh"]')
+             //   .off('click').on('click', $.proxy(this.refresh, this));
         }
 
         if (this.options.showToggle) {
@@ -1130,6 +1107,11 @@
                 $fixedHeader.scrollLeft($(this).scrollLeft());
             });
         });
+    };
+
+    BootstrapTable.prototype.refreshUrl = function (options) {
+        this.options.url = options.url;
+        this.initServer();
     };
 
     BootstrapTable.prototype.toggleColumn = function (index, checked, needUpdate) {

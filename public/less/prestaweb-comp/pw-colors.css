@@ -1,0 +1,8 @@
+.green-light,
+.isNew {
+  background-color: #dff0d8;
+  color: #dff0d8;
+}
+.noshow {
+  display: none;
+}

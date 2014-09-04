@@ -19,16 +19,29 @@ $(function (){
                 if(data.token){
                     sessionStorage.setItem("token", data.token);
                 }
-                //redirect to itransfert;
+                //redirect to itransfer;
                 window.location = 'http://localhost:4000/itransfer/file.html';
+                window.login = $('#login').val();
             },
-            dataType: 'json'
+            dataType: 'json',
+            error: function (xhr) {
+                console.log(xhr);
+                if(xhr.status >= 500) {
+                    alert ( "ERROR: connection problem");
+                }
+            },
+            statusCode: {
+                403: function() {
+                    alert( "ERROR: login / password incorrect." );
+                },
+                401: function() {
+                    alert ( "ERROR: connection problem");
+                },
+                504: function() {
+                    alert ( "ERROR: connection problem");
+                }
+            }
         });
     }
-
     $('#submit-login').on('click', submitLogin);
-
-
-
-
 });
