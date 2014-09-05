@@ -205,13 +205,15 @@
                 '<div id="filter" class="pull-left">',
                     '<div class="btn-group">',
                     '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
-                        'Trier par&nbsp;&nbsp;<span class="caret"></span>',
+                        'Filtrer par&nbsp;&nbsp;<span class="caret"></span>',
                     '</button>',
                     '<ul class="dropdown-menu" role="menu">',
-                        '<li class=""><a href="#"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;nouveaux fichiers </a></li>',
+                        '<li class=""><a id="filterNew"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;nouveaux fichiers </a></li>',
+                        '<li class="divider"></li>',
+                        '<li class=""><a id="filterDL"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;fichiers non-téléchargés</a></li>',
                         '<li class="divider"></li>',
                         '<li class=""><a id="sortDL"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;fichiers non-téléchargés</a></li>',
-                    '</ul>',
+            '</ul>',
                     '</div>',
                 '</div>',
                 '<div class="fixed-table-toolbar"></div>',
@@ -349,11 +351,7 @@
 
             if (that.options.sortable && visibleColumns[i].sortable) {
                 $(this).off('click').on('click', $.proxy(that.onSort, that));
-
-                /*** CUSTOM ***/
-                $('#sortDL').on('click', $.proxy(that.onSortDownload, that));
-                //$(this).find('div').eq(0).append('&nbsp;<i class="fa fa-sort"></i>');
-                /*** CUSTOM ***/
+                $('#sortDL').off('click').on('click', $.proxy(that.onSortDownload, that));
             }
         });
 
@@ -528,11 +526,7 @@
             /**** CUSTOM ***/
             html.push(
                 '<div class="pull-right search">',
-                    '<button type="button" class="btn btn-default filter31">31</button>',
-                '</div>');
-            html.push(
-                '<div class="pull-right search">',
-                '<button id="get-selections" type="button" class="btn btn-default ">Selections</button>',
+                '<button id="get-selections" type="button" class="btn btn-default ">Multi-Download</button>',
                 '</div>');
             /**** CUSTOM ***/
             html.push(
@@ -543,7 +537,7 @@
 
             this.$toolbar.append(html.join(''));
             $('.filter31').on('click', function(event) {
-                $.proxy(that.onSearch2(event,'refDoc', 31), that);
+                $.proxy(that.onFilter(['refDoc', 31]), that);
             });
             $search = this.$toolbar.find('.search input');
             $search.off('keyup').on('keyup', function (event) {
@@ -581,6 +575,61 @@
             }) : this.options.data;
         }
     };
+
+    /** CUSTOM **/
+    BootstrapTable.prototype.onFilter = function (array) {
+        //console.log(this);
+
+        this.options.pageNumber = 1;
+        this.initFilter(array);
+        this.updatePagination(true);
+        this.initBody();
+
+    };
+
+    BootstrapTable.prototype.initFilter = function (array){
+
+        if (this.options.sidePagination !== 'server') {
+            if(array){
+                var field = array[0] || 'refDoc',
+                    value = array[1] || '';
+
+                console.log('field = ' + field + '\t value = '+ value);
+                this.data = value ? $.grep(this.options.data, function (item) {
+                    //filter on condition about the field
+                    if (field){
+                        if ( typeof value === 'number' ) {
+                            if (value == parseInt(item[field])) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                        if ( typeof value === 'string' ) {
+                            if (item[field] === '' && value === "empty" ){
+                                return true;
+                            }
+                            if (item[field].toLowerCase().indexOf(value) !== -1) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }else {
+                            console.log(array +'\t'+ item);
+                            if (item[field]) return true;
+                            else return false;
+                        }
+                    }
+
+                    return false;
+                }) : this.options.data;
+            }else{
+                this.data = this.options.data;
+            }
+
+        }
+    };
+    /** CUSTOM **/
 
     BootstrapTable.prototype.initPagination = function (updateData) {
         this.$pagination = this.$container.find('.fixed-table-pagination');
@@ -1271,7 +1320,8 @@
                 'destroy', 'resetView',
                 'showLoading', 'hideLoading',
                 'refresh',
-                'showColumn', 'hideColumn'
+                'showColumn', 'hideColumn',
+                'onFilter'
             ],
             value;
 

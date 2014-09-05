@@ -5,8 +5,8 @@ $(function () {
     // array used to store all the existing document reference on the FTP server.
     var serverURL   = 'http://172.20.20.64:8018/',
         baseURL     = 'http://localhost:4000/itransfer/',
+        dc          = {},
         AjaxData    = [],
-        label       = [],
         category    = [],
         refDocUsed  = [];
 
@@ -104,34 +104,21 @@ $(function () {
 
             if ($.inArray(refdoc, refDocUsed) > -1) { // doc is used
                 //adding label
-                label[label.length] = {
-                    'refDoc'    : refdoc,
-                    'labelDoc_f': item.labelDoc_f,
-                    'labelDoc_n': item.labelDoc_n,
-                    'labelDoc_d': item.labelDoc_d,
-                    'labelDoc_x': item.labelDoc_x
-                };
                 if ($.inArray(numcat, cat) > -1) { // category exists --> add children
                     //add child node
                     tree[(tree.length - 1)]
                         .children[(tree[(tree.length - 1)].children.length)] = {
+                        "id" : refdoc,
+                        "data" : refdoc,
                         "text": refdoc + " - " + item.labelDoc_f,
                         "li_attr": {"class": "leaf"}
                     }
                 } else {
                     // create category
                     cat[cat.length] = numcat;
-                    //adding label
-                    label[label.length] = {
-                        'refDoc'    : refdoc,
-                        'labelDoc_f': item.labelDoc_f,
-                        'labelDoc_n': item.labelDoc_n,
-                        'labelDoc_d': item.labelDoc_d,
-                        'labelDoc_x': item.labelDoc_x
-                    };
                     tree[tree.length] =
                     {
-                        "id": numcat,
+                        /*"id": numcat,*/
                         "text": numcat + " - " + item.labelCategory_f,
                         "state": {
                             "opened": true,
@@ -140,6 +127,7 @@ $(function () {
                         },
                         "children": [
                             { //add document
+                                "id": refdoc,
                                 "text": refdoc + " - " + item.labelDoc_f,
                                 "li_attr": {"class": "leaf"}
                             }
@@ -153,7 +141,7 @@ $(function () {
         if ($.inArray(-1, refDocUsed) > -1) {
             tree[tree.length] =
             {
-                "id": 98,
+                "id": "other",
                 "text": '98 - Documents Divers',
                 "state": {
                     "opened": true,
@@ -167,7 +155,7 @@ $(function () {
         // ---> ADDING the "UPLOAD CATEGORY"
         tree[tree.length] =
         {
-            "id": 99,
+            "id": "upload",
             "text": '99 - Documents transmis à Group S', //Overgebrachte documenten naar Group S
             "state": {
                 "opened": true,
@@ -184,11 +172,32 @@ $(function () {
         $('#sidenav')
             .on('select_node.jstree', function (e, data) {
                 data.instance.toggle_node(data.node);
-                //TODO: apply filter on table when click
+                console.log('e',e);
+                var table = $('#mainTable');
+
+                var nodeid = parseInt(data.node.id);
+                if (nodeid > -1 && data.node.li_attr.class === 'leaf'){
+                        table.bootstrapTable('onFilter',['refDoc',nodeid ]);
+                }
+                if ( data.node.id === 'root'){
+                    table.bootstrapTable('onFilter');
+                }
+                //check for upload
+                if ( data.node.id === 'upload' ){
+                    table.bootstrapTable('onFilter',['path','upload']);
+                }
+                //check for other category
+                if ( data.node.id === 'other' ){
+                    console.log("other");
+                    table.bootstrapTable('onFilter',['refDoc','empty']);
+                }
+
+
             })
             .jstree({
                 'core': {
                     'data': {
+                        "id": 'root',
                         "text": "Tous les documents",
                         "state": {
                             "opened": true,
@@ -198,6 +207,7 @@ $(function () {
                         "children": tree
                     }
                 }
+                /*"plugins" : [ "contextmenu" ]*/
             });
     };
 
@@ -206,53 +216,18 @@ $(function () {
      * TABLE
      * */
 
-    $.fn.bootstrapTable.Constructor.prototype.onSearch2 = function (event, field, value) {
 
-        this.options.pageNumber = 1;
-        this.initFilter(field, value);
-        this.updatePagination(true);
-        this.initBody();
-
-    };
-
-    $.fn.bootstrapTable.Constructor.prototype.initFilter = function (field, value) {
-        if (this.options.sidePagination !== 'server') {
-            //console.log((this.data.length !== this.options.data.length));
-            this.data = value ? $.grep(this.options.data, function (item) {
-                //console.log( value + " == " + parseInt(item[field]) +
-                //         '\t test == '+ (value == parseInt(item[field])));
-
-                //filter on condition about the field
-                if (field && typeof value === 'number') {
-                    if (value == parseInt(item[field])) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-                if (field && typeof value === 'string') {
-                    if (item[field].toLowerCase().indexOf(value) !== -1) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-                return false;
-            }) : this.options.data;
-        }
-    };
-
-    $.fn.bootstrapTable.Constructor.prototype.onSortDownload = function (event) {
-        var $this = $(event.currentTarget),
-            $this_ = this.$header.find('th').eq(1);
+    $.fn.bootstrapTable.Constructor.prototype.onSortDownload = function () {
+        var //$this = $(event.currentTarget),
+            $this_ = this.$header.find('th').eq(1); //TODO: get the index of the DL column programatically
 
         this.$header.add(this.$header_).find('span.order').remove();
         this.options.sortName = "notDownloaded";
-        this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
+        this.options.sortOrder = 'desc';
 
         this.trigger('sort', this.options.sortName, this.options.sortOrder);
 
-        $this.add($this_).data('order', this.options.sortOrder)
+        $this_.data('order', this.options.sortOrder)
             .find('.th-inner').append(this.getCaretHtml());
 
         if (this.options.sidePagination === 'server') {
@@ -263,11 +238,6 @@ $(function () {
         this.initBody();
     };
 
-    function refresh(){
-        this.bootstrapTable('destroy');
-        createTable();
-        createMenu();
-    };
     // Styling the row if the file is new
     function rowStylef(row, i, filter) {
         if (row.isNew) return {"classes": "isNew" };
@@ -531,11 +501,15 @@ $(function () {
         //SYNC & WAIT
         $.when(LoadCategory(), LoadData()).done(function (){
 
+            dc = new DataCollection(AjaxData);
+
+            //dc.query().filter({last_name: 'Snow'}).values();
+
             mergeLabelDoc();
             var $table = createTable();
             createMenu();
 
-            console.log($table);
+
             //DOWNLOAD files
             $table.delegate('.dl', 'click', function () {
                 $(this).attr('href', serverURL + 'file/' + sessionStorage.getItem('token') + '/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
@@ -547,11 +521,9 @@ $(function () {
                 small.html('&nbsp;' + dl);
             });
 
-            $table.delegate('button[name="refresh"]', 'click', function(){
-                console.log("test");
-                $table.bootstrapTable('destroy');
-                createTable();
-                createMenu();
+
+            $('body').delegate('.reloadme', 'click', function(){
+                $table.bootstrapTable('onFilter');
             });
             //refresh();
 
@@ -561,6 +533,11 @@ $(function () {
                 sessionStorage.setItem("token", '');
                 window.location = baseURL;
                 $('#login').val(window.login);
+            });
+
+            $('#filterDL').on('click', function (){
+                //console.log('filterDL');
+                $table.bootstrapTable('onFilter',['notDownloaded', false]);
             });
 
             //Add download all button
