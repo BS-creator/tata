@@ -1,0 +1,23 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic);
+@import url(http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css);
+.wide {
+  width: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.header-gradient {
+  background: -moz-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, 90deg, color-stop(0%, #0056a1), color-stop(100%, #0065bd));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);
+  /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0056a1', endColorstr='#0065bd', GradientType='0');
+  /* for IE */
+  background: linear-gradient(0deg, #0056a1 0%, #0065bd 100%);
+  /* W3C */
+}

@@ -1,0 +1,27 @@
+table thead tr th .pw-btn-group-th,
+table tr th .pw-btn-group-th,
+.pw-btn-group-th {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+}
+table thead tr th .pw-btn-group-th .pw-btn-th,
+table tr th .pw-btn-group-th .pw-btn-th,
+.pw-btn-group-th .pw-btn-th {
+  margin: 0;
+  float: left;
+  position: relative;
+  background-color: transparent;
+  border: 0;
+  color: #505050;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.42857;
+  padding: 5px 12px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}

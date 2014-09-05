@@ -77,6 +77,13 @@
                     <div id="row-filter">
                         <div class="col-md-offset-3 col-md-9 col-xs-12">
                             <!--<div id="loader"><i class="fa-li fa fa-spinner fa-spin fa-3x"></i></div>-->
+                            <form id="uploadForm" action="http://172.20.20.64:8018/file/upload" method="post" enctype="multipart/form-data">
+
+                                File : <input type="file" name="upload" size="50" />
+                                <input name="token" type="hidden" size="50" />
+                                <br/>
+                                <input type="submit" value="Upload" />
+                            </form>
                         </div>
                     </div>
                 </div><!--/ row-->
@@ -112,7 +119,7 @@
         <script src="js/bootstrap-table.js"></script>
         <script src="js/locale/bootstrap-table-fr_BE.js"></script>
         <script src="js/pw-jstree.js"></script>
-        <script src="js/data_collection.js"></script>
+        <!--<script src="js/data_collection.js"></script>-->
         <script src="js/itransfer.js"></script>
         <script src="js/perfect-scrollbar.js"></script>
 

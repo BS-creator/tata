@@ -11,7 +11,6 @@ $(function () {
         refDocUsed  = [];
 
     /****************************************************
-     *
      * HELPER
      * */
 
@@ -83,7 +82,6 @@ $(function () {
     };
 
     /****************************************************
-     *
      * MENU
      * */
 
@@ -171,28 +169,29 @@ $(function () {
         // JSTREE
         $('#sidenav')
             .on('select_node.jstree', function (e, data) {
-                data.instance.toggle_node(data.node);
-                console.log('e',e);
-                var table = $('#mainTable');
-
-                var nodeid = parseInt(data.node.id);
-                if (nodeid > -1 && data.node.li_attr.class === 'leaf'){
-                        table.bootstrapTable('onFilter',['refDoc',nodeid ]);
-                }
                 if ( data.node.id === 'root'){
                     table.bootstrapTable('onFilter');
-                }
-                //check for upload
-                if ( data.node.id === 'upload' ){
-                    table.bootstrapTable('onFilter',['path','upload']);
-                }
-                //check for other category
-                if ( data.node.id === 'other' ){
-                    console.log("other");
-                    table.bootstrapTable('onFilter',['refDoc','empty']);
-                }
+                }else{
+                    data.instance.toggle_node(data.node);
 
+                    var table = $('#mainTable');
 
+                    //Filter on refDoc
+                    var nodeid = parseInt(data.node.id);
+                    if (nodeid > -1 && data.node.li_attr.class === 'leaf'){
+                        table.bootstrapTable('onFilter',['refDoc',nodeid ]);
+                    }
+
+                    //Filter for upload
+                    if ( data.node.id === 'upload' ){
+                        table.bootstrapTable('onFilter',['path','upload']);
+                    }
+                    //Filter for other category
+                    if ( data.node.id === 'other' ){
+                        console.log("other");
+                        table.bootstrapTable('onFilter',['refDoc','empty']);
+                    }
+                }
             })
             .jstree({
                 'core': {
@@ -212,7 +211,6 @@ $(function () {
     };
 
     /****************************************************
-     *
      * TABLE
      * */
 
@@ -439,7 +437,6 @@ $(function () {
     };
 
     /****************************************************
-     *
      * LOAD DATA (AJAX)
      * */
 
@@ -471,18 +468,21 @@ $(function () {
     };
 
     /****************************************************
-     *
      * MAIN
      * */
     function main() {
         //$('#loader').html('<i class="fa-li fa fa-spinner fa-spin fa-3x"></i>');
 
+        // set token for upload
+        $('#uploadForm').submit(function ( event ){
+            $("input[name|='token']").val(sessionStorage.getItem('token'));
+        });
+
         //SYNC & WAIT
         $.when(LoadCategory(), LoadData()).done(function (){
-
-            dc = new DataCollection(AjaxData);
-
+            //dc = new DataCollection(AjaxData);
             //dc.query().filter({last_name: 'Snow'}).values();
+
 
             mergeLabelDoc();
             var $table = createTable();
@@ -492,6 +492,7 @@ $(function () {
             //DOWNLOAD files
             $table.delegate('.dl', 'click', function () {
                 $(this).attr('href', serverURL + 'file/' + sessionStorage.getItem('token') + '/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
+                //Update icon
                 $(this).find('i').remove();
                 var small = $(this).find('small');     // cache object
                 $(this).prepend("<i class='fa fa-download text-muted'></i>"); //mark as already downloaded
@@ -532,7 +533,8 @@ $(function () {
         });
     };
 
-    main();
+
+    $('document').ready(main());
 
 });
 

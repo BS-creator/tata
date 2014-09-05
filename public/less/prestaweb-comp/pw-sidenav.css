@@ -1,0 +1,67 @@
+div#sidenav {
+  padding: 1px 0;
+  font-size: 13px;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=180, Color=#ffffff)";
+  /*IE 8*/
+  text-shadow: 0px 1px 1px #ffffff;
+  /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=180, Color=#ffffff);
+  /*IE 5.5-7*/
+}
+div#sidenav ul {
+  padding: 0;
+  max-height: 560px;
+  overflow-y: auto;
+}
+div#sidenav ul li {
+  border-bottom: 1px solid #FFFFFF;
+  padding: 0 0 0 20px;
+}
+div#sidenav ul ul {
+  display: none;
+  overflow-y: hidden;
+}
+div#sidenav li.active ul {
+  display: block;
+}
+div#sidenav li.sidenav-head {
+  padding: 0;
+}
+div#sidenav li.sidenav-head p {
+  background-color: #F2F2F2;
+  color: #7a7a7a;
+  margin: 0;
+  padding: 8px 0 8px 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+div#sidenav li.sidenav-head p:hover {
+  color: #3276b1;
+  border-left: 3px solid #3276b1;
+}
+div#sidenav li.sidenav-head p:active,
+div#sidenav li.sidenav-head p.active,
+div#sidenav li.sidenav-head p:focus {
+  color: #3276b1;
+  border-left: 3px solid #3276b1;
+}
+div#sidenav li.sidenav-head ul {
+  padding: 6px 0;
+}
+div#sidenav li.sidenav-head ul li {
+  line-height: 20px;
+}
+div#sidenav li.sidenav-head ul li {
+  padding: 0 0 0 32px;
+}
+div#sidenav li.sidenav-head ul li a {
+  color: #808080;
+}
+div#sidenav li.sidenav-head ul li a:hover,
+div#sidenav li.sidenav-head ul li a:active,
+div#sidenav li.sidenav-head ul li a.active,
+div#sidenav li.sidenav-head ul li a:focus {
+  text-decoration: none;
+  outline: 0;
+  color: #3276b1;
+}
