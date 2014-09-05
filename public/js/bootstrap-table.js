@@ -1,6 +1,6 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * version: 1.1.5
+ * version: 1.2.2
  * https://github.com/wenzhixin/bootstrap-table/
  */
 
@@ -44,7 +44,20 @@
         return result;
     };
 
-    var getScrollbarWidth = function () {
+    var getFiledIndex = function (columns, field) {
+        var index = -1;
+
+        $.each(columns, function (i, column) {
+            if (column.field === field) {
+                index = i;
+                return false;
+            }
+            return true;
+        });
+        return index;
+    };
+
+    var getScrollBarWidth = function () {
         var inner = $('<p/>').addClass('fixed-table-scroll-inner'),
             outer = $('<div/>').addClass('fixed-table-scroll-outer'),
             w1, w2;
@@ -103,13 +116,14 @@
         showColumns: false,
         showRefresh: false,
         showToggle: false,
-        minimunCountColumns: 1,
+        minimumCountColumns: 1,
         idField: undefined,
         cardView: false,
         clickToSelect: false,
         singleSelect: false,
         toolbar: undefined,
         checkboxHeader: true,
+        sortable: true,
 
         rowStyle: function (row, index) {return {};},
 
@@ -144,10 +158,12 @@
     BootstrapTable.COLUMN_DEFAULTS = {
         radio: false,
         checkbox: false,
+        checkboxEnabled: true,
         field: undefined,
         title: undefined,
         'class': undefined,
         align: undefined, // left, right, center
+        halign: undefined, // left, right, center
         valign: undefined, // top, middle, bottom
         width: undefined,
         sortable: false,
@@ -186,6 +202,20 @@
     BootstrapTable.prototype.initContainer = function () {
         this.$container = $([
             '<div class="bootstrap-table">',
+                '<div id="filter" class="pull-left">',
+                    '<div class="btn-group">',
+                    '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
+                        'Filtrer par&nbsp;&nbsp;<span class="caret"></span>',
+                    '</button>',
+                    '<ul class="dropdown-menu" role="menu">',
+                        '<li class=""><a id="filterNew"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;nouveaux fichiers </a></li>',
+                        '<li class="divider"></li>',
+                        '<li class=""><a id="filterDL"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;fichiers non-téléchargés</a></li>',
+                        '<li class="divider"></li>',
+                        '<li class=""><a id="sortDL"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;fichiers non-téléchargés</a></li>',
+            '</ul>',
+                    '</div>',
+                '</div>',
                 '<div class="fixed-table-toolbar"></div>',
                 '<div class="fixed-table-container">',
                     '<div class="fixed-table-header"><table></table></div>',
@@ -278,8 +308,12 @@
             that.header.events.push(column.events);
             that.header.sorters.push(column.sorter);
 
+            if (column.halign) {
+                style = sprintf('text-align: %s; ', column.halign) +
+                    sprintf('vertical-align: %s; ', column.valign);
+            }
             style += sprintf('width: %spx; ', column.checkbox || column.radio ? 36 : column.width);
-            style += column.sortable ? 'cursor: pointer; ' : '';
+            style += that.options.sortable && column.sortable ? 'cursor: pointer; ' : '';
 
             html.push('<th',
                 column.checkbox || column.radio ? ' class="bs-checkbox"' :
@@ -289,7 +323,7 @@
             html.push('<div class="th-inner">');
 
             text = column.title;
-            if (that.options.sortName === column.field && column.sortable) {
+            if (that.options.sortName === column.field && that.options.sortable && column.sortable) {
                 text += that.getCaretHtml();
             }
 
@@ -315,8 +349,9 @@
         this.$header.find('th').each(function (i) {
             $(this).data(visibleColumns[i]);
 
-            if (visibleColumns[i].sortable) {
+            if (that.options.sortable && visibleColumns[i].sortable) {
                 $(this).off('click').on('click', $.proxy(that.onSort, that));
+                $('#sortDL').off('click').on('click', $.proxy(that.onSortDownload, that));
             }
         });
 
@@ -327,7 +362,7 @@
         } else {
             this.$header.show();
             this.$container.find('.fixed-table-header').show();
-            this.$loading.css('top', '38px');
+            this.$loading.css('top', '42px');
         }
 
         this.$selectAll = this.$header.find('[name="btSelectAll"]');
@@ -379,8 +414,13 @@
             $this_ = this.$header.find('th').eq($this.index());
 
         this.$header.add(this.$header_).find('span.order').remove();
-        this.options.sortName = $this.data('field');
-        this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
+
+        if (this.options.sortName === $this.data('field')) {
+            this.options.sortOrder = this.options.sortOrder === 'asc' ? 'desc' : 'asc';
+        } else {
+            this.options.sortName = $this.data('field');
+            this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
+        }
         this.trigger('sort', this.options.sortName, this.options.sortOrder);
 
         $this.add($this_).data('order', this.options.sortOrder)
@@ -413,8 +453,8 @@
         html = ['<div class="columns btn-group pull-right">'];
 
         if (this.options.showRefresh) {
-            html.push('<button class="btn btn-default" type="button" name="refresh">',
-                '<i class="glyphicon glyphicon-refresh icon-refresh"></i>',
+            html.push('<button class="btn btn-default reloadme" type="button" name="refresh">',
+                '<i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Rafra&icirc;chir',
                 '</button>');
         }
 
@@ -428,7 +468,7 @@
             html.push(sprintf('<div class="keep-open %s">',
                 this.options.showRefresh || this.options.showToggle ? 'btn-group' : ''),
                 '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
-                '<i class="glyphicon glyphicon-th icon-th"></i>',
+                '<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;Affichage',
                 ' <span class="caret"></span>',
                 '</button>',
                 '<ul class="dropdown-menu" role="menu">');
@@ -456,8 +496,8 @@
         }
 
         if (this.options.showRefresh) {
-            this.$toolbar.find('button[name="refresh"]')
-                .off('click').on('click', $.proxy(this.refresh, this));
+           // this.$toolbar.find('button[name="refresh"]')
+             //   .off('click').on('click', $.proxy(this.refresh, this));
         }
 
         if (this.options.showToggle) {
@@ -475,20 +515,20 @@
                 event.stopImmediatePropagation();
             });
             $keepOpen.find('input').off('click').on('click', function () {
-                var $this = $(this),
-                    $items = $keepOpen.find('input').prop('disabled', false);
+                var $this = $(this);
 
-                that.options.columns[$this.val()].visible = $this.prop('checked');
-                that.initHeader();
-                that.initBody();
-                if ($items.filter(':checked').length <= that.options.minimunCountColumns) {
-                    $items.filter(':checked').prop('disabled', true);
-                }
+                that.toggleColumn($this.val(), $this.prop('checked'), false);
             });
         }
 
         if (this.options.search) {
             html = [];
+            /**** CUSTOM ***/
+            html.push(
+                '<div class="pull-right search">',
+                '<button id="get-selections" type="button" class="btn btn-default ">Multi-Download</button>',
+                '</div>');
+            /**** CUSTOM ***/
             html.push(
                 '<div class="pull-right search">',
                     sprintf('<input class="form-control" type="text" placeholder="%s">',
@@ -496,6 +536,9 @@
                 '</div>');
 
             this.$toolbar.append(html.join(''));
+            $('.filter31').on('click', function(event) {
+                $.proxy(that.onFilter(['refDoc', 31]), that);
+            });
             $search = this.$toolbar.find('.search input');
             $search.off('keyup').on('keyup', function (event) {
                 clearTimeout(timeoutId); // doesn't matter if it's 0
@@ -505,18 +548,22 @@
     };
 
     BootstrapTable.prototype.onSearch = function (event) {
-        var that = this,
-            text = $.trim($(event.currentTarget).val());
-
+        var text = $.trim($(event.currentTarget).val());
         if (text === this.searchText) {
             return;
         }
         this.searchText = text;
 
-        if (this.options.sidePagination !== 'server') {
-            var s = that.searchText.toLowerCase();
+        this.options.pageNumber = 1;
+        this.initSearch();
+        this.updatePagination();
+    };
 
-            this.data = $.grep(this.options.data, function (item) {
+    BootstrapTable.prototype.initSearch = function () {
+        if (this.options.sidePagination !== 'server') {
+            var s = this.searchText && this.searchText.toLowerCase();
+
+            this.data = s ? $.grep(this.options.data, function (item) {
                 for (var key in item) {
                     if ((typeof item[key] === 'string' ||
                         typeof item[key] === 'number') &&
@@ -525,13 +572,66 @@
                     }
                 }
                 return false;
-            });
+            }) : this.options.data;
         }
-        this.options.pageNumber = 1;
-        this.updatePagination();
     };
 
-    BootstrapTable.prototype.initPagination = function () {
+    /** CUSTOM **/
+    BootstrapTable.prototype.onFilter = function (array) {
+        //console.log(this);
+
+        this.options.pageNumber = 1;
+        this.initFilter(array);
+        this.updatePagination(true);
+        this.initBody();
+
+    };
+
+    BootstrapTable.prototype.initFilter = function (array){
+
+        if (this.options.sidePagination !== 'server') {
+            if(array){
+                var field = array[0] || 'refDoc',
+                    value = array[1] || '';
+
+                console.log('field = ' + field + '\t value = '+ value);
+                this.data = value ? $.grep(this.options.data, function (item) {
+                    //filter on condition about the field
+                    if (field){
+                        if ( typeof value === 'number' ) {
+                            if (value == parseInt(item[field])) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                        if ( typeof value === 'string' ) {
+                            if (item[field] === '' && value === "empty" ){
+                                return true;
+                            }
+                            if (item[field].toLowerCase().indexOf(value) !== -1) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }else {
+                            console.log(array +'\t'+ item);
+                            if (item[field]) return true;
+                            else return false;
+                        }
+                    }
+
+                    return false;
+                }) : this.options.data;
+            }else{
+                this.data = this.options.data;
+            }
+
+        }
+    };
+    /** CUSTOM **/
+
+    BootstrapTable.prototype.initPagination = function (updateData) {
         this.$pagination = this.$container.find('.fixed-table-pagination');
 
         if (!this.options.pagination) {
@@ -545,6 +645,10 @@
             $next, $last,
             $number,
             data = this.searchText ? this.data : this.options.data;
+
+        if(updateData) {
+            data = this.data;
+        }
 
         if (this.options.sidePagination !== 'server') {
             this.options.totalRows = data.length;
@@ -564,7 +668,7 @@
             this.pageTo = this.options.totalRows;
         }
 
-        html.push(
+        /*html.push(
             '<div class="pull-left pagination-detail">',
                 '<span class="pagination-info">',
                     this.options.formatShowingRows(this.pageFrom, this.pageTo, this.options.totalRows),
@@ -595,9 +699,11 @@
 
         html.push(this.options.formatRecordsPerPage(pageNumber.join('')));
         html.push('</span>');
-
+         */
+        /* << < 1 2 3 4 5 > >>
+        html.push('<div class="text-center mt-m">',*/
         html.push('</div>',
-            '<div class="pull-right">',
+            '<div class="pull-right pagination">',
                 '<ul class="pagination">',
                     '<li class="page-first"><a href="javascript:void(0)">&lt;&lt;</a></li>',
                     '<li class="page-pre"><a href="javascript:void(0)">&lt;</a></li>');
@@ -629,6 +735,40 @@
                 '</ul>',
             '</div>');
 
+
+        // nombre de fichiers par page
+        html.push(
+            '<div class="clearfix text-center pagination-detail">',
+            '<span class="pagination-info text-muted">',
+            this.options.formatShowingRows(this.pageFrom, this.pageTo, this.options.totalRows),
+            '</span>');
+
+        html.push('<span class="page-list clearfix text-center text-muted">');
+
+        var pageNumber = [
+                '<span class="btn-group dropup">',
+                '<button type="button" class="dropdown-toggle" id="btn-pageResult" data-toggle="dropdown">',
+                '<span class="page-size">',
+                this.options.pageSize,
+                '</span>',
+                ' <span class="caret"></span>',
+                '</button>',
+                '<ul class="dropdown-menu" role="menu">'],
+            pageList = this.options.pageList;
+
+        if (typeof this.options.pageList === 'string') {
+            pageList = eval(this.options.pageList);
+        }
+
+        $.each(pageList, function (i, page) {
+            var active = page === that.options.pageSize ? ' class="active"' : '';
+            pageNumber.push(sprintf('<li%s><a href="javascript:void(0)">%s</a></li>', active, page));
+        });
+        pageNumber.push('</ul></span>');
+
+        html.push(this.options.formatRecordsPerPage(pageNumber.join('')));
+        html.push('</span></div>');
+
         this.$pagination.html(html.join(''));
 
         $pageList = this.$pagination.find('.page-list a');
@@ -656,7 +796,7 @@
 
     BootstrapTable.prototype.updatePagination = function () {
         this.resetRows();
-        this.initPagination();
+        this.initPagination((this.data.length !== this.options.data.length));
         if (this.options.sidePagination === 'server') {
             this.initServer();
         } else {
@@ -670,27 +810,27 @@
         $this.parent().addClass('active').siblings().removeClass('active');
         this.options.pageSize = +$this.text();
         this.$toolbar.find('.page-size').text(this.options.pageSize);
-        this.updatePagination();
+        this.updatePagination((this.data.length !== this.options.data.length));
     };
 
     BootstrapTable.prototype.onPageFirst = function () {
         this.options.pageNumber = 1;
-        this.updatePagination();
+        this.updatePagination((this.data.length !== this.options.data.length));
     };
 
     BootstrapTable.prototype.onPagePre = function () {
         this.options.pageNumber--;
-        this.updatePagination();
+        this.updatePagination((this.data.length !== this.options.data.length));
     };
 
     BootstrapTable.prototype.onPageNext = function () {
         this.options.pageNumber++;
-        this.updatePagination();
+        this.updatePagination((this.data.length !== this.options.data.length));
     };
 
     BootstrapTable.prototype.onPageLast = function () {
         this.options.pageNumber = this.totalPages;
-        this.updatePagination();
+        this.updatePagination((this.data.length !== this.options.data.length));
     };
 
     BootstrapTable.prototype.onPageNumber = function (event) {
@@ -698,7 +838,7 @@
             return;
         }
         this.options.pageNumber = +$(event.currentTarget).text();
-        this.updatePagination();
+        this.updatePagination((this.data.length !== this.options.data.length));
     };
 
     BootstrapTable.prototype.initBody = function () {
@@ -706,6 +846,9 @@
             html = [],
             data = this.searchText ? this.data : this.options.data;
 
+        if((this.data.length !== this.options.data.length)) {
+            data = this.data;
+        }
         this.$body = this.$el.find('tbody');
         if (!this.$body.length) {
             this.$body = $('<tbody></tbody>').appendTo(this.$el);
@@ -769,7 +912,9 @@
                             sprintf(' name="%s"', that.options.selectItemName) +
                             sprintf(' type="%s"', type) +
                             sprintf(' value="%s"', item[that.options.idField]) +
-                            sprintf(' checked="%s"', value ? 'checked' : undefined) + ' />',
+                            sprintf(' checked="%s"', value ? 'checked' : undefined) +
+                            sprintf(' %s', that.options.columns[j].checkboxEnabled ? undefined : 'disabled') +
+                            ' />',
                         '</td>'].join('');
                 } else {
                     value = typeof value === 'undefined' ? that.options.undefinedText : value;
@@ -819,8 +964,12 @@
         this.$selectItem = this.$body.find(sprintf('[name="%s"]', this.options.selectItemName));
         this.$selectItem.off('click').on('click', function (event) {
             event.stopImmediatePropagation();
+            // radio trigger click event bug!
+            if ($(this).is(':radio')) {
+                $(this).prop('checked', true);
+            }
             var checkAll = that.$selectItem.length === that.$selectItem.filter(':checked').length,
-                checked = $(this).prop('checked') || $(this).is(':radio'),
+                checked = $(this).prop('checked'),
                 row = that.data[$(this).data('index')];
 
             that.$selectAll.add(that.$selectAll_).prop('checked', checkAll);
@@ -834,7 +983,7 @@
                 that.$selectItem.filter(':checked').not(this).prop('checked', false);
             }
 
-//            $(this).parents('tr')[checked ? 'addClass' : 'removeClass']('selected');
+            that.updateSelected();
         });
 
         $.each(this.header.events, function (i, events) {
@@ -864,6 +1013,7 @@
             }
         });
 
+        this.updateSelected();
         this.resetView();
     };
 
@@ -935,6 +1085,12 @@
             '</span>'].join('');
     };
 
+    BootstrapTable.prototype.updateSelected = function () {
+        this.$selectItem.each(function () {
+            $(this).parents('tr')[$(this).prop('checked') ? 'addClass' : 'removeClass']('selected');
+        });
+    };
+
     BootstrapTable.prototype.updateRows = function (checked) {
         var that = this;
 
@@ -968,7 +1124,7 @@
         var that = this,
             $fixedHeader = this.$container.find('.fixed-table-header'),
             $fixedBody = this.$container.find('.fixed-table-body'),
-            scrollWidth = this.$el.width() > $fixedBody.width() ? getScrollbarWidth() : 0;
+            scrollWidth = this.$el.width() > $fixedBody.width() ? getScrollBarWidth() : 0;
 
         // fix #61: the hidden table reset header bug.
         if (this.$el.is(':hidden')) {
@@ -979,7 +1135,6 @@
 
         this.$header_ = this.$header.clone(true);
         this.$selectAll_ = this.$header_.find('[name="btSelectAll"]');
-        this.$el.css('margin-top', -this.$header.height());
 
         // fix bug: get $el.css('width') error sometime (height = 500)
         setTimeout(function () {
@@ -987,10 +1142,10 @@
                 'height': '37px',
                 'border-bottom': '1px solid #dddddd',
                 'margin-right': scrollWidth
-            })
-                .find('table').css('width', that.$el.css('width'))
+            }).find('table').css('width', that.$el.css('width'))
                 .html('').attr('class', that.$el.attr('class'))
                 .append(that.$header_);
+            that.$el.css('margin-top', -that.$header.height());
 
             that.$body.find('tr:first-child:not(.no-records-found) > *').each(function(i) {
                 that.$header_.find('div.fht-cell').eq(i).width($(this).innerWidth());
@@ -1001,6 +1156,32 @@
                 $fixedHeader.scrollLeft($(this).scrollLeft());
             });
         });
+    };
+
+    BootstrapTable.prototype.refreshUrl = function (options) {
+        this.options.url = options.url;
+        this.initServer();
+    };
+
+    BootstrapTable.prototype.toggleColumn = function (index, checked, needUpdate) {
+        if (index === -1) {
+            return;
+        }
+        this.options.columns[index].visible = checked;
+        this.initHeader();
+        this.initBody();
+
+        if (this.options.showColumns) {
+            var $items = this.$toolbar.find('.keep-open input').prop('disabled', false);
+
+            if (needUpdate) {
+                $items.filter(sprintf('[value="%s"]', index)).prop('checked', checked);
+            }
+
+            if ($items.filter(':checked').length <= this.options.minimumCountColumns) {
+                $items.filter(':checked').prop('disabled', true);
+            }
+        }
     };
 
     // PUBLIC FUNCTION DEFINITION
@@ -1043,6 +1224,7 @@
 
     BootstrapTable.prototype.load = function (data) {
         this.initData(data);
+        this.initSearch();
         this.initPagination();
         this.initBody();
     };
@@ -1086,6 +1268,7 @@
         this.$selectAll.add(this.$selectAll_).prop('checked', true);
         this.$selectItem.prop('checked', true);
         this.updateRows(true);
+        this.updateSelected();
         this.trigger('check-all');
     };
 
@@ -1093,6 +1276,7 @@
         this.$selectAll.add(this.$selectAll_).prop('checked', false);
         this.$selectItem.prop('checked', false);
         this.updateRows(false);
+        this.updateSelected();
         this.trigger('uncheck-all');
     };
 
@@ -1117,6 +1301,13 @@
         this.initServer();
     };
 
+    BootstrapTable.prototype.showColumn = function (field) {
+        this.toggleColumn(getFiledIndex(this.options.columns, field), true, true);
+    };
+
+    BootstrapTable.prototype.hideColumn = function (field) {
+        this.toggleColumn(getFiledIndex(this.options.columns, field), false, true);
+    };
 
     // BOOTSTRAP TABLE PLUGIN DEFINITION
     // =======================
@@ -1128,28 +1319,34 @@
                 'checkAll', 'uncheckAll',
                 'destroy', 'resetView',
                 'showLoading', 'hideLoading',
-                'refresh'
+                'refresh',
+                'showColumn', 'hideColumn',
+                'onFilter'
             ],
             value;
 
         this.each(function () {
             var $this = $(this),
                 data = $this.data('bootstrap.table'),
-                options = $.extend({}, BootstrapTable.DEFAULTS, $this.data(), typeof option === 'object' && option);
-
-            if (!data) {
-                $this.data('bootstrap.table', (data = new BootstrapTable(this, options)));
-            }
+                options = $.extend({}, BootstrapTable.DEFAULTS, $this.data(),
+                    typeof option === 'object' && option);
 
             if (typeof option === 'string') {
                 if ($.inArray(option, allowedMethods) < 0) {
                     throw "Unknown method: " + option;
+                }
+                if (!data) {
+                    return;
                 }
                 value = data[option](_relatedTarget);
 
                 if (option === 'destroy') {
                     $this.removeData('bootstrap.table');
                 }
+            }
+
+            if (!data) {
+                $this.data('bootstrap.table', (data = new BootstrapTable(this, options)));
             }
         });
 
