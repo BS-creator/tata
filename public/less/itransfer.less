@@ -3,35 +3,38 @@ a,
 a:hover,
 a:focus,
 a:active,
-a.active{
+a.active {
   text-decoration: none;
 }
+
 a:focus {
   outline: none !important;
   outline-offset: 0 !important;
 }
-ul, li{
+
+ul, li {
   list-style: none;
 }
+
 ///////////////////////////
-.wrapper{
+.wrapper {
   min-height: 650px;
 }
+
 #search,
-#dir-name{
+#dir-name {
   padding-bottom: 20px;
 }
 
 // ---- CUSTOM
 
-.centered{
+.centered {
   width: 50%;
   margin: 0 auto;
 }
 
-
 // icon fa-folder
-ul#dir-name li.pw-tab-folder a:before{
+ul#dir-name li.pw-tab-folder a:before {
   content: "\f114";
   font-family: FontAwesome;
   font-style: normal;
@@ -40,11 +43,11 @@ ul#dir-name li.pw-tab-folder a:before{
 }
 
 // icon fa-folder-open
-ul#dir-name li.pw-tab-folder.active a:before{
+ul#dir-name li.pw-tab-folder.active a:before {
   content: "\f115";
 }
 
-.fa-download{
+.fa-download {
   cursor: pointer;
 }
 
@@ -52,35 +55,38 @@ ul#dir-name li.pw-tab-folder.active a:before{
 // TRIER PAR / nouveaux fichiers background
 
 // bg green new files
-div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1){
+div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1) {
   background-color: #dff0d8;
 }
+
 div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):hover,
 div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):focus,
 div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):active,
-div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1).active{
+div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1).active {
   background-color: #428bca;
 }
 
 // icon dl blue
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1) > i:nth-child(1){
+div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1) > i:nth-child(1) {
   color: #428bca;
 }
+
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):active > i:nth-child(1),
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):focus > i:nth-child(1),
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):hover > i:nth-child(1),
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1).active > i:nth-child(1){
+div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1).active > i:nth-child(1) {
   color: white !important;
 }
 
 // icon dl muted
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1) > i:nth-child(1){
+div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1) > i:nth-child(1) {
   color: #999999;
 }
+
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):active > i:nth-child(1),
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):focus > i:nth-child(1),
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):hover > i:nth-child(1),
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1).active > i:nth-child(1){
+div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1).active > i:nth-child(1) {
   color: white !important;
 }
 
@@ -99,21 +105,21 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 // table - itransfer
 
 table[id^="table-"],
-table#mainTable{
+table#mainTable {
   // download column
   thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1) {
     width: 65px;
   }
 
   // filtres de la table
-  thead tr th{
+  thead tr th {
     display: table-cell;
     text-align: center;
-    vertical-align:middle;
+    vertical-align: middle;
   }
 
   // icon unsorted
-  thead tr th div.th-inner span.unsorted:after{
+  thead tr th div.th-inner span.unsorted:after {
     content: "\f0dc";
     display: inline-block;
     font-family: FontAwesome;
@@ -124,35 +130,35 @@ table#mainTable{
   }
 
   // dernière colonne - extensions
-  thead tr th:last-child{
+  thead tr th:last-child {
     width: 40px;
   }
 
   // Download column
-  tbody tr > td:nth-child(1){
+  tbody tr > td:nth-child(1) {
     text-align: left;
   }
   tbody tr > td:nth-child(1) a {
     margin-left: 43%;
   }
 
-  tbody tr td:last-child::before{
+  tbody tr td:last-child::before {
     /*content:'.';*/
   }
-  tbody tr td:last-child{
+  tbody tr td:last-child {
     text-transform: lowercase;
   }
-  tbody tr td{
-    color:#6a6a6a;
+  tbody tr td {
+    color: #6a6a6a;
   }
-  tbody tr td a{
-    color:#656565;
+  tbody tr td a {
+    color: #656565;
 
   }
-  tbody tr td.true a{
-      color:#428BCA;
+  tbody tr td.true a {
+    color: #428BCA;
   }
-  tbody tr.new td{
+  tbody tr.new td {
     background-color: #d9edf7 !important;
   }
 
@@ -164,14 +170,13 @@ table#mainTable{
 }
 
 .pagination-info,
-.page-list{
+.page-list {
   font-size: 14px !important;
 }
 
-
 // btn-pageResult
 
-#btn-pageResult{
+#btn-pageResult {
   border: 0 !important;
   background-color: transparent;
   color: #428BCA;
@@ -182,25 +187,24 @@ table#mainTable{
   }
 }
 
-
-
 // JSTREE CUSTOM STYLE
 
 // sidenav
 
-div#sidenav{
+div#sidenav {
   ul.jstree-container-ul,
-  ul.jstree-children{
-    padding:0;
-    margin:0;
+  ul.jstree-children {
+    padding: 0;
+    margin: 0;
     li a {
       display: block;
       width: 100%;
     }
   }
 }
+
 // a lvl 0
-div#sidenav{
+div#sidenav {
   padding-top: 55px;
   border-radius: 3px;
   ul > li > a {
@@ -212,19 +216,19 @@ div#sidenav{
     font-weight: bold;
     cursor: pointer;
     text-decoration: none;
-    border-left:0;
+    border-left: 0;
   }
   ul > li.jstree-open > a,
   ul > li > a:hover,
   ul > li > a:focus,
   ul > li > a:active,
   ul > li > a.active {
-    color:#125B9A;
+    color: #125B9A;
     border-left: 3px solid #2871B0;
   }
 
   // a lvl 1
-  ul > li > ul > li > a{
+  ul > li > ul > li > a {
     background-color: white;
     color: #808080;
     padding: 5px 0 5px 20px;
@@ -235,7 +239,7 @@ div#sidenav{
   ul > li.jstree-open > ul > li > a.active,
   ul > li.jstree-open > ul > li.jstree-open > a {
     background-color: white;
-    color:#3D86C5;
+    color: #3D86C5;
     border-left: 3px solid #2871B0;
   }
 
@@ -245,11 +249,12 @@ div#sidenav{
     color: #808080;
     padding: 5px 0 5px 52px;
   }
+
   ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:hover,
   ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:focus,
   ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:active,
   ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a.active {
-    color:#3D86C5;
+    color: #3D86C5;
     // border-left: 3px solid #2871B0;
   }
 }

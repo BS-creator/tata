@@ -217,27 +217,6 @@ $(function () {
      * */
 
 
-    $.fn.bootstrapTable.Constructor.prototype.onSortDownload = function () {
-        var //$this = $(event.currentTarget),
-            $this_ = this.$header.find('th').eq(1); //TODO: get the index of the DL column programatically
-
-        this.$header.add(this.$header_).find('span.order').remove();
-        this.options.sortName = "notDownloaded";
-        this.options.sortOrder = 'desc';
-
-        this.trigger('sort', this.options.sortName, this.options.sortOrder);
-
-        $this_.data('order', this.options.sortOrder)
-            .find('.th-inner').append(this.getCaretHtml());
-
-        if (this.options.sidePagination === 'server') {
-            this.initServer();
-            return;
-        }
-        this.initSort();
-        this.initBody();
-    };
-
     // Styling the row if the file is new
     function rowStylef(row, i, filter) {
         if (row.isNew) return {"classes": "isNew" };

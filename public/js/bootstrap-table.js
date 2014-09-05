@@ -607,6 +607,7 @@
                         }
                         if ( typeof value === 'string' ) {
                             if (item[field] === '' && value === "empty" ){
+                                // case for 'other' doc category
                                 return true;
                             }
                             if (item[field].toLowerCase().indexOf(value) !== -1) {
@@ -614,7 +615,7 @@
                             } else {
                                 return false;
                             }
-                        }else {
+                        }else { //Boolean
                             console.log(array +'\t'+ item);
                             if (item[field]) return true;
                             else return false;
@@ -628,6 +629,27 @@
             }
 
         }
+    };
+
+    BootstrapTable.prototype.onSortDownload = function () {
+        var //$this = $(event.currentTarget),
+            $this_ = this.$header.find('th').eq(1); //TODO: get the index of the DL column programatically
+
+        this.$header.add(this.$header_).find('span.order').remove();
+        this.options.sortName = "notDownloaded";
+        this.options.sortOrder = 'desc';
+
+        this.trigger('sort', this.options.sortName, this.options.sortOrder);
+
+        $this_.data('order', this.options.sortOrder)
+            .find('.th-inner').append(this.getCaretHtml());
+
+        if (this.options.sidePagination === 'server') {
+            this.initServer();
+            return;
+        }
+        this.initSort();
+        this.initBody();
     };
     /** CUSTOM **/
 
