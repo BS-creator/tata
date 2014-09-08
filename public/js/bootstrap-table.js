@@ -526,17 +526,18 @@
 
         if (this.options.search) {
             html = [];
+
             /**** CUSTOM ***/
             html.push(
-                '<div class="pull-right search">',
-                '<button id="get-selections" type="button" class="btn btn-default ">Multi-Download</button>',
-                '</div>');
-            /**** CUSTOM ***/
-            html.push(
-                '<div class="pull-right search">',
+                '<div class="pull-left search">',
                     sprintf('<input class="form-control" type="text" placeholder="%s">',
                         this.options.formatSearch()),
                 '</div>');
+            /**** CUSTOM ***/
+            html.push(
+              '<div class="cleafix pull-left">',
+              '<button id="get-selections" type="button" class="btn btn-success"><i class="fa fa-upload"></i>&nbsp;&nbsp;Téléchargement multiple</button>',
+              '</div>');
 
             this.$toolbar.append(html.join(''));
             $('.filter31').on('click', function(event) {
