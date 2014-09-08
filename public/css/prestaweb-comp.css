@@ -341,7 +341,7 @@ table tr th .pw-btn-group-th .pw-btn-th,
 }
 .green-light,
 .isNew {
-  background-color: #dff0d8;
+  /* background-color:     @green-light;*/
   color: #dff0d8;
 }
 .noshow {

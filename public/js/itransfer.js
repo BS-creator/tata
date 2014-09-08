@@ -71,7 +71,7 @@ $(function () {
             content.write(form);
             $('form', content).submit();*/
             content.write('<a href="' + array[i] + '"></a>');
-            console.log($('a', content));
+            //console.log($('a', content));
             $('a', content).click(function(){ window.location = array[i];});
             setTimeout((function (iframe) {
                 return function () {
@@ -169,12 +169,11 @@ $(function () {
         // JSTREE
         $('#sidenav')
             .on('select_node.jstree', function (e, data) {
+                var table = $('#mainTable');
                 if ( data.node.id === 'root'){
                     table.bootstrapTable('onFilter');
                 }else{
                     data.instance.toggle_node(data.node);
-
-                    var table = $('#mainTable');
 
                     //Filter on refDoc
                     var nodeid = parseInt(data.node.id);
@@ -217,7 +216,7 @@ $(function () {
 
     // Styling the row if the file is new
     function rowStylef(row, i, filter) {
-        if (row.isNew) return {"classes": "isNew" };
+        if (row.isNew) return {"classes": "success" };
         else return {};
     };
 
@@ -349,10 +348,14 @@ $(function () {
                     sortable: true,
                     formatter: function (value) {
                         if (value || value != '') {
-                            if (value.toLowerCase().indexOf('pdf')) {
+                            var v = value;
+                            v.toLowerCase();
+
+                            if (v.indexOf('pdf')) {
+                                console.log("VALUE = ", v);
                                 return '<i class="fa fa-file-pdf-o fa-lg"></i>';
                             }
-                            if (value.toLowerCase().indexOf('zip')) {
+                            if (v.indexOf('zip')) {
                                 return '<i class="fa fa-file-archive-o fa-lg"></i>';
                             }
                             return value;
@@ -476,6 +479,15 @@ $(function () {
         // set token for upload
         $('#uploadForm').submit(function ( event ){
             $("input[name|='token']").val(sessionStorage.getItem('token'));
+        });
+
+        $('#uploadForm').fileupload({
+            sequentialUploads: true,
+            done: function (e, data) {
+                $.each(data.result.files, function (index, file) {
+                    $('<p/>').text(file.name).appendTo('#uploadForm');
+                });
+            }
         });
 
         //SYNC & WAIT
