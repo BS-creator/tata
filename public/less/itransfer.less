@@ -16,6 +16,60 @@ ul, li {
   list-style: none;
 }
 
+
+// upload
+#uploadCollapse{
+
+  position: relative;
+  min-height: 1px;
+
+  .btn-upload {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 32px;
+    display: inline-block;
+    padding: 10px 0px;
+    width: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.42857;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 3px dashed #d9d9d9;
+    border-radius: 4px;
+    background-image: none;
+    background-color: transparent;
+    color: #cdcdcd;
+  }
+
+  #uploadFiles {
+    width:100%;
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom:1px solid #ddd;
+
+    .btn-group{
+      margin-right: 20px !important;
+    }
+
+    #files{
+      margin:32px 0 32px 0;
+    }
+  }
+
+  .btn-upload:focus,
+  .btn-upload:hover,
+  .btn-upload:active,
+  .btn-upload.active {
+    border: 3px dashed #428bca;
+    color: #428bca;
+  }
+
+}
+
+
 // login
 #loader{
   display: none;
