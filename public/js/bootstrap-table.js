@@ -533,6 +533,13 @@
                     sprintf('<input class="form-control" type="text" placeholder="%s">',
                         this.options.formatSearch()),
                 '</div>');
+            /*****custom date picker*****/
+            html.push(
+              '<div class="input-daterange input-group" id="datepicker">',
+              '<input type="text" class="input-sm form-control" name="start" />',
+              '<span class="input-group-addon">to</span>',
+              '<input type="text" class="input-sm form-control" name="end" />',
+              '</div>');
 
             /**** CUSTOM ***/
             html.push(

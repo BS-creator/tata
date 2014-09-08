@@ -576,10 +576,14 @@ $( document ).ready(function() {
 
   // checked : show btn-download
 
-  $( "[type=checkbox]").bind(function(){
-    console.log($("tr.success").length);
-    $("tr.success").length > 0 ? $("get-selections").show() : $("get-selections").hide();
-  });
 
+  // date picker
+  $('#datepicker .input-daterange').datepicker({
+    format: "yyyy-mm-dd",
+    language: "fr",
+    calendarWeeks: true,
+    autoclose: true,
+    todayHighlight: true
+  });
 
 });
