@@ -71,6 +71,9 @@ li {
 #uploadCollapse #uploadFiles #files {
   margin: 32px 0 32px 0;
 }
+#uploadCollapse #uploadFiles #files #progress {
+  display: none;
+}
 #loader {
   display: none;
   position: fixed;
