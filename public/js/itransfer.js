@@ -20,7 +20,7 @@ $(function () {
         if (bytes == 0) return '0 Byte';
         var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
         return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
-    };
+    }
 
     function sort_unique(array) {
         array = array.sort(function (a, b) {
@@ -36,7 +36,7 @@ $(function () {
             return ret;
         }
         return array; // only 1 or no element in the array.
-    };
+    }
 
     function getUsedDocRef(data) {
         var a = [];
@@ -49,7 +49,7 @@ $(function () {
             }
         });
         return sort_unique(a);
-    };
+    }
 
     function mergeLabelDoc() {
 
@@ -61,7 +61,7 @@ $(function () {
                 }
             });
         });
-    };
+    }
 
     function download(array) {
         //TODO
@@ -81,13 +81,13 @@ $(function () {
                 }
             })(iframe), 1000);
         }
-    };
+    }
 
     // Styling the row if the file is new
     function rowStylef(row, i, filter) {
         if (row.isNew) return {"classes": "success" };
         else return {};
-    };
+    }
 
 
     //Format for the download column
@@ -102,7 +102,7 @@ $(function () {
                 "data-file='" + row.fileName + "' ><i class='fa fa-download fa-lg text-muted'></i>" +
                 "<small data-dl='" + row.downloadCount + "' class='text-muted'>&nbsp;" + dlCount + "</small></a>";
         }
-    };
+    }
 
     function formatIsNew(value) {
         if (value) return "<i class='fa fa-smile-o'></i>"
@@ -119,7 +119,7 @@ $(function () {
             }
         }
         return '';
-    };
+    }
 
     function FormatExtension(value) {
         if (value || value != '') {
@@ -137,19 +137,19 @@ $(function () {
         } else {
             return '';
         }
-    };
+    }
 
     function formatSize(value) {
         var val = parseInt(value);
         if (val > 1024) return Math.round(val / 1024, 2) + ' KB';
         else return val;
         //return bytesToSize(val);
-    };
+    }
 
     function formatDefault (value) {
         if (!value || value == '') return '';
         else return value;
-    };
+    }
 
 
     function menuActionClick (e, data) {
@@ -300,7 +300,7 @@ $(function () {
                 }
                 /*"plugins" : [ "contextmenu" ]*/
             });
-    };
+    }
 
     /****************************************************
      * TABLE
@@ -481,7 +481,7 @@ $(function () {
             success: function(data){ category = data;}
         });
 
-    };
+    }
 
     function LoadData() {
 
@@ -506,7 +506,7 @@ $(function () {
                 }
             }
         });
-    };
+    }
 
     /****************************************************
      * MAIN
@@ -514,11 +514,12 @@ $(function () {
     function main() {
 
         // set token for upload
-        $('#uploadForm').submit(function ( event ){
+        var $uploadform = $('#uploadForm');
+        $uploadform.submit(function ( event ){
             $("input[name|='token']").val(sessionStorage.getItem('token'));
         });
 
-        $('#uploadForm').fileupload({
+        $uploadform.fileupload({
             sequentialUploads: true,
             done: function (e, data) {
                 $.each(data.result.files, function (index, file) {
@@ -531,6 +532,7 @@ $(function () {
         $.when(LoadCategory(), LoadData(), LoadFolder()).done(function (){
             //dc = new DataCollection(AjaxData);
             //dc.query().filter({last_name: 'Snow'}).values();
+
             var listFolder = $('#folder');
             for (key in destFolders){
                 listFolder.append('<li><a href="#" data-folder="'+ destFolders[key] +'">'+ destFolders[key] +'</a></li>');
@@ -581,16 +583,16 @@ $(function () {
 
             //Add download all button
             $('#get-selections').click(function () {
-                alert('Selected values: ' + JSON.stringify($('#mainTable').bootstrapTable('getSelections')));
+                alert('Selected values: ' + JSON.stringify($table.bootstrapTable('getSelections')));
                 var array = [];
-                $.each($('#mainTable').bootstrapTable('getSelections'), function(i, item){
+                $.each($table.bootstrapTable('getSelections'), function(i, item){
                     array[array.length] = serverURL + 'file/' + sessionStorage.getItem('token') + '/' + item.idFile + '/' + item.fileName;
                 });
                 //console.log(array);
                 download(array);
             });
         });
-    };
+    }
 
 
     $('document').ready(main());
