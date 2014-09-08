@@ -522,26 +522,25 @@ $(function () {
         // set token for upload
         var $uploadform = $('#uploadForm');
         $("input[name|='token']").val(sessionStorage.getItem('token'));
-        $uploadform.submit(function ( event ){
-            $('#progress').show();
-        });
 
-
-        /*$uploadform.ajaxForm({
-            success:function(data){
-                alert('Info', data, 'info');
-            }
-        });*/
         $uploadform.fileupload({
             sequentialUploads: true,
-            done: function (e, data) {
-                /*$('#progress').hide();*/
-            },
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
                 $('#progress .progress-bar').css('width', progress + '%' );
+            },
+            add: function (e, data) {
+                var jqXHR = data.submit()
+                    .success(function (result, textStatus, jqXHR) {})
+                    .error(function (jqXHR, textStatus, errorThrown) {alert("KO")})
+                    .complete(function (result, textStatus, jqXHR) {$('#progress').hide();});
+            },
+            start: function () {
+                $('#progress').show();
             }
         });
+
+
 
         //SYNC & WAIT
         $.when(LoadCategory(), LoadData(), LoadFolder()).done(function (){
