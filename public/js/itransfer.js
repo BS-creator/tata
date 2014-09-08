@@ -155,6 +155,12 @@ $(function () {
     function menuActionClick (e, data) {
         var table = $('#mainTable');
         if ( data.node.id === 'root'){
+            table.bootstrapTable('showColumn', 'refDoc');
+            table.bootstrapTable('showColumn', 'libelle');
+            table.bootstrapTable('showColumn', 'noEmployeur');
+            table.bootstrapTable('showColumn', 'extension');
+            table.bootstrapTable('hideColumn','uploadUserName');
+            table.bootstrapTable('hideColumn','fileName');
             table.bootstrapTable('onFilter');
         }else{
             data.instance.toggle_node(data.node);
@@ -519,12 +525,21 @@ $(function () {
             $("input[name|='token']").val(sessionStorage.getItem('token'));
         });
 
+        /*$uploadform.ajaxForm({
+            success:function(data){
+                alert('Info', data, 'info');
+            }
+        });*/
         $uploadform.fileupload({
             sequentialUploads: true,
             done: function (e, data) {
                 $.each(data.result.files, function (index, file) {
                     $('<p/>').text(file.name).appendTo('#uploadForm');
                 });
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .progress-bar').css('width', progress + '%' );
             }
         });
 
@@ -581,6 +596,7 @@ $(function () {
                 $table.bootstrapTable('onFilter',['isNew', true]);
             });
 
+            $('header-logo').attr('href',baseURL)
             //Add download all button
             $('#get-selections').click(function () {
                 alert('Selected values: ' + JSON.stringify($table.bootstrapTable('getSelections')));
@@ -591,40 +607,37 @@ $(function () {
                 //console.log(array);
                 download(array);
             });
+
+            $('.user-name').html(sessionStorage.getItem("username"));
+
+
+            //////////////////// upload
+            // btn bootstrap
+            $('input[type=file]').bootstrapFileInput();
+
+            //////////////////// upload
+            // add cllss active to btn
+
+            $("#uploadCollapse .btn-upload").on('click', function (){
+                $( "#uploadCollapse .btn-upload" ).toggleClass( "active", "active");
+            });
+
+            // checked : show btn-download
+
+
+            // date picker
+            $('#datepicker .input-daterange').datepicker({
+                format: "yyyy-mm-dd",
+                language: "fr",
+                calendarWeeks: true,
+                autoclose: true,
+                todayHighlight: true
+            });
         });
     }
 
 
     $('document').ready(main());
 
-
-
 });
 
-
-$( document ).ready(function() {
-
-  //////////////////// upload
-  // btn bootstrap
-  $('input[type=file]').bootstrapFileInput();
-
-  //////////////////// upload
-  // add cllss active to btn
-
-  $("#uploadCollapse .btn-upload").on('click', function (){
-    $( "#uploadCollapse .btn-upload" ).toggleClass( "active", "active");
-  });
-
-  // checked : show btn-download
-
-
-  // date picker
-  $('#datepicker .input-daterange').datepicker({
-    format: "yyyy-mm-dd",
-    language: "fr",
-    calendarWeeks: true,
-    autoclose: true,
-    todayHighlight: true
-  });
-
-});

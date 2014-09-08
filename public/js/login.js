@@ -28,6 +28,7 @@ $(function (){
             success: function (data){
                 if(data.token){
                     sessionStorage.setItem("token", data.token);
+                    sessionStorage.setItem("username", credentials.login);
                 }
                 //redirect to itransfer;
                 window.location = 'http://localhost:4000/itransfer/file.html';
