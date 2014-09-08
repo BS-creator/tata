@@ -260,7 +260,10 @@
 
             columns.push(column);
         });
-        this.options.columns = $.extend({}, columns, this.options.columns);
+        //ISSUE #102 = https://github.com/wenzhixin/bootstrap-table/issues/102
+        //this.options.columns = $.extend({}, columns, this.options.columns);
+
+        this.options.columns = $.merge(columns, this.options.columns);
         $.each(this.options.columns, function (i, column) {
             that.options.columns[i] = $.extend({}, BootstrapTable.COLUMN_DEFAULTS, column);
         });
@@ -594,17 +597,28 @@
 
     BootstrapTable.prototype.initFilter = function (array){
 
-        if (this.options.sidePagination !== 'server') {
+        if (this.options.sidePagination !== 'server' ) {
             if(array){
-                var field = array[0] || 'refDoc',
-                    value = array[1] || '';
+                var field       = array[0] || 'refDoc',
+                    value       = array[1] || '',
+                    operator    = array[2],
+                    field2      = array[3],
+                    value2      = array[4];
 
-                console.log('field = ' + field + '\t value = '+ value);
                 this.data = value ? $.grep(this.options.data, function (item) {
+                    if(operator && field && field2){
+                        var s = 'item["' + field + '"] === ' + value + ' ' + operator + ' ' +
+                            'item["' +field2 + '"] === ' + value2;
+                        if (eval(s)){
+                            return true;
+                        }else{
+                            return false;
+                        }
+                    }else
                     //filter on condition about the field
                     if (field){
                         if ( typeof value === 'number' ) {
-                            if (value == parseInt(item[field])) {
+                            if (value === parseInt(item[field])) {
                                 return true;
                             } else {
                                 return false;

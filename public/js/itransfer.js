@@ -63,6 +63,7 @@ $(function () {
     };
 
     function download(array) {
+        //TODO
         for (var i = 0; i < array.length; i++) {
             var iframe = $('<iframe style="visibility: collapse;"></iframe>');
             $('body').append(iframe);
@@ -80,6 +81,91 @@ $(function () {
             })(iframe), 1000);
         }
     };
+
+    // Styling the row if the file is new
+    function rowStylef(row, i, filter) {
+        if (row.isNew) return {"classes": "success" };
+        else return {};
+    };
+
+
+    //Format for the download column
+    function formatDownload(value, row) {
+        var dlCount = row.downloadCount ? row.downloadCount : '';
+        if (value) {
+            return "<a class='dl' data-id='" + row.idFile + "' " +
+                "data-file='" + row.fileName + "' ><i class='fa fa-download fa-lg text-primary'></i>" +
+                "<small data-dl='" + row.downloadCount + "' class='text-muted'>&nbsp;" + dlCount + "</small></a>";
+        } else {
+            return "<a class='dl' data-id='" + row.idFile + "' " +
+                "data-file='" + row.fileName + "' ><i class='fa fa-download fa-lg text-muted'></i>" +
+                "<small data-dl='" + row.downloadCount + "' class='text-muted'>&nbsp;" + dlCount + "</small></a>";
+        }
+    };
+
+    function formatIsNew(value) {
+        if (value) return "<i class='fa fa-smile-o'></i>"
+        else return "<i class='fa fa-times'></i>";
+    }
+
+    function formatDate (value) {
+        if (!value || value == '') return '';
+        else return value;
+    };
+
+    function formatEmployeur(value) {
+        if (!value || value == '') return '';
+        else return value;
+    };
+
+    function formatLabel(value) {
+        if (!value || value == '') return '';
+        else return value;
+    };
+
+    function formatRefDoc(value) {
+        //console.log(index +' >> value = ' + value );
+        if (value) {
+            var v = parseInt(value);
+            if (value > 0) {
+                refDocUsed[refDocUsed.length] = v;
+                return v;
+            }
+        }
+        return '';
+    };
+
+    function FormatExtension(value) {
+        if (value || value != '') {
+            var v = value;
+            v.toLowerCase();
+
+            if (v.indexOf('pdf')) {
+                //console.log("VALUE = ", v);
+                return '<i class="fa fa-file-pdf-o fa-lg"></i>';
+            }
+            if (v.indexOf('zip')) {
+                return '<i class="fa fa-file-archive-o fa-lg"></i>';
+            }
+            return value;
+        } else {
+            return '';
+        }
+    };
+
+    function formatSize(value) {
+        var val = parseInt(value);
+        if (val > 1024) return Math.round(val / 1024, 2) + ' KB';
+        else return val;
+        //return bytesToSize(val);
+    };
+
+    function formatDefault (value) {
+        if (!value || value == '') return '';
+        else return value;
+    };
+
+
 
     /****************************************************
      * MENU
@@ -183,11 +269,12 @@ $(function () {
 
                     //Filter for upload
                     if ( data.node.id === 'upload' ){
-                        table.bootstrapTable('onFilter',['path','upload']);
+                        console.log("upload");
+                        table.bootstrapTable('onFilter',['uploadUserName','F00000001']);
                     }
                     //Filter for other category
                     if ( data.node.id === 'other' ){
-                        console.log("other");
+                        //console.log("other");
                         table.bootstrapTable('onFilter',['refDoc','empty']);
                     }
                 }
@@ -213,26 +300,6 @@ $(function () {
      * TABLE
      * */
 
-
-    // Styling the row if the file is new
-    function rowStylef(row, i, filter) {
-        if (row.isNew) return {"classes": "success" };
-        else return {};
-    };
-
-    function formatDownload(value, row) {
-        var dlCount = row.downloadCount ? row.downloadCount : '';
-        if (value) {
-            return "<a class='dl' data-id='" + row.idFile + "' " +
-                "data-file='" + row.fileName + "' ><i class='fa fa-download fa-lg text-primary'></i>" +
-                "<small data-dl='" + row.downloadCount + "' class='text-muted'>&nbsp;" + dlCount + "</small></a>";
-        } else {
-            return "<a class='dl' data-id='" + row.idFile + "' " +
-                "data-file='" + row.fileName + "' ><i class='fa fa-download fa-lg text-muted'></i>" +
-                "<small data-dl='" + row.downloadCount + "' class='text-muted'>&nbsp;" + dlCount + "</small></a>";
-        }
-    };
-
     function createTable() {
         //destroy before reload
         var $table = $('#mainTable');
@@ -249,6 +316,7 @@ $(function () {
             showRefresh: true,
             minimumCountColumns: 5,
             rowStyle: rowStylef,
+            clickToSelect: true,
             columns: [
                 {
                     field: 'stateField',
@@ -268,10 +336,7 @@ $(function () {
                     align: 'center',
                     sortable: true,
                     visible: false,
-                    formatter: function (value) {
-                        if (value) return "<i class='fa fa-smile-o'></i>"
-                        else return "<i class='fa fa-times'></i>";
-                    }
+                    formatter: formatIsNew
                 },
                 {
                     field: 'date',
@@ -279,10 +344,7 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
-                    formatter: function (value) {
-                        if (!value || value == '') return '';
-                        else return value;
-                    }
+                    formatter: formatDate
                 },
                 {
                     field: 'noEmployeur',
@@ -290,10 +352,7 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
-                    formatter: function (value) {
-                        if (!value || value == '') return '';
-                        else return value;
-                    }
+                    formatter: formatEmployeur
                 },
                 {
                     field: 'libelle',
@@ -302,10 +361,7 @@ $(function () {
                     valign: 'middle',
                     class: 'labelDoc',
                     sortable: true,
-                    formatter: function (value) {
-                        if (!value || value == '') return '';
-                        else return value;
-                    }
+                    formatter: formatLabel
                 },
                 {
                     field: 'refDoc',
@@ -314,17 +370,7 @@ $(function () {
                     valign: 'middle',
                     sortable: true,
                     class: 'refDoc',
-                    formatter: function (value) {
-                        //console.log(index +' >> value = ' + value );
-                        if (value) {
-                            var v = parseInt(value);
-                            if (value > 0) {
-                                refDocUsed[refDocUsed.length] = v;
-                                return v;
-                            }
-                        }
-                        return '';
-                    }
+                    formatter: formatRefDoc
                 },
                 {
                     field: 'size',
@@ -333,12 +379,7 @@ $(function () {
                     valign: 'middle',
                     visible: true,
                     sortable: true,
-                    formatter: function (value) {
-                        var val = parseInt(value);
-                        if (val > 1024) return Math.round(val / 1024, 2) + ' KB';
-                        else return val;
-                        //return bytesToSize(val);
-                    }
+                    formatter: formatSize
                 },
                 {
                     field: 'extension',
@@ -346,41 +387,16 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
-                    formatter: function (value) {
-                        if (value || value != '') {
-                            var v = value;
-                            v.toLowerCase();
-
-                            if (v.indexOf('pdf')) {
-                                console.log("VALUE = ", v);
-                                return '<i class="fa fa-file-pdf-o fa-lg"></i>';
-                            }
-                            if (v.indexOf('zip')) {
-                                return '<i class="fa fa-file-archive-o fa-lg"></i>';
-                            }
-                            return value;
-                        } else {
-                            return '';
-                        }
-                    }
+                    formatter:FormatExtension
                 },
                 /*{
                  field: 'index',
                  title: '#',
                  sortable: true,
                  visible: false,
-                 sort: function (a, b) {
-                 return a - b
-                 }
+                 sort: function (a, b) {return a - b;}
                  },
-                 {
-                 field: 'idFile',
-                 title: 'File ID',
-                 align: 'right',
-                 valign: 'bottom',
-                 visible: false,
-                 sortable: true
-                 },*/
+                 */
                 {
                     field: 'fileName',
                     title: 'Name',
@@ -404,10 +420,7 @@ $(function () {
                     valign: 'middle',
                     visible: false,
                     sortable: true,
-                    formatter: function (value) {
-                        if (!value || value == '') return '';
-                        else return value;
-                    }
+                    formatter: formatDefault
                 },
                 {
                     field: 'counter',
@@ -416,10 +429,14 @@ $(function () {
                     valign: 'middle',
                     visible: false,
                     sortable: true,
-                    formatter: function (value) {
-                        if (!value || value == '') return '';
-                        else return value;
-                    }
+                    formatter: formatDefault
+                },{
+                    field: 'uploadUserName',
+                    title: 'username',
+                    align: 'center',
+                    valign: 'middle',
+                    visible: true,
+                    sortable: true
                 },
                 {
                     field: 'refGroups',
@@ -428,10 +445,7 @@ $(function () {
                     valign: 'middle',
                     visible: false,
                     sortable: true,
-                    formatter: function (value) {
-                        if (!value || value == '') return '';
-                        else return value;
-                    }
+                    formatter: formatDefault
                 }
             ]
         });
@@ -445,7 +459,7 @@ $(function () {
 
     function LoadCategory() {
 
-        return  $.ajax({
+        return $.ajax({
             type: 'GET',
             url: serverURL + 'category/',
             success: function(data){ category = data;}
@@ -503,11 +517,13 @@ $(function () {
             //dc = new DataCollection(AjaxData);
             //dc.query().filter({last_name: 'Snow'}).values();
 
-
             mergeLabelDoc();
             var $table = createTable();
             createMenu();
 
+
+            //APPLY FILTERS
+            $table.bootstrapTable('onFilter',['isNew', true, '||', 'notDownloaded', true]);
 
             //DOWNLOAD files
             $table.delegate('.dl', 'click', function () {
@@ -525,7 +541,9 @@ $(function () {
             $('body').delegate('.reloadme', 'click', function(){
                 $table.bootstrapTable('onFilter');
             });
-            //refresh();
+            $('body').delegate('#filterNew', 'click', function(){
+                $table.bootstrapTable('onFilter',['isNew', true]);
+            });
 
             $('.user-name').html(window.login);
 
