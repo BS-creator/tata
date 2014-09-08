@@ -500,7 +500,6 @@ $(function () {
      * MAIN
      * */
     function main() {
-        //$('#loader').html('<i class="fa-li fa fa-spinner fa-spin fa-3x"></i>');
 
         // set token for upload
         $('#uploadForm').submit(function ( event ){
