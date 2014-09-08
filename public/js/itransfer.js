@@ -11,6 +11,7 @@ $(function () {
         refDocUsed  = [],
         destFolders = [];
 
+    window.dc = [];
     /****************************************************
      * HELPER
      * */
@@ -59,6 +60,7 @@ $(function () {
                     //TODO: multilanguage
                     row.libelle = cat.labelDoc_f;
                 }
+                row.noEmployeur = parseInt(row.noEmployeur);
             });
         });
     }
@@ -151,6 +153,13 @@ $(function () {
         else return value;
     }
 
+    function operateFormatter() {
+        return [
+            '<a class="remove" title="Remove">',
+            '<i class="fa fa-times"></i>',
+            '</a>'
+        ].join('');
+    }
 
     function menuActionClick (e, data) {
         var table = $('#mainTable');
@@ -161,7 +170,7 @@ $(function () {
             table.bootstrapTable('showColumn', 'extension');
             table.bootstrapTable('hideColumn','uploadUserName');
             table.bootstrapTable('hideColumn','fileName');
-            table.bootstrapTable('onFilter');
+            table.bootstrapTable('onFilter',['uploadUserName', 'TRF_FICH']);
         }else{
             data.instance.toggle_node(data.node);
 
@@ -402,7 +411,7 @@ $(function () {
                 },
                 {
                     field: 'size',
-                    title: 'Size',
+                    title: 'Taille',
                     align: 'center',
                     valign: 'middle',
                     visible: true,
@@ -459,6 +468,19 @@ $(function () {
                     visible: false,
                     sortable: true,
                     formatter: formatDefault
+                },
+                {
+                    field: 'operate',
+                    title: 'Effacer',
+                    align: 'center',
+                    valign: 'middle',
+                    clickToSelect: false,
+                    formatter: operateFormatter,
+                    events: {
+                        'click .remove': function (e, value, row, index) {
+                            deleteFile(row.path, row);
+                        }
+                    }
                 }
             ]
         });
@@ -467,8 +489,28 @@ $(function () {
     };
 
     /****************************************************
-     * LOAD DATA (AJAX)
+     * AJAX
      * */
+
+    function deleteFile(filePath){
+        var data = {
+            "token"     : sessionStorage.getItem("token"),
+            "filePath"  : filePath
+        };
+        $.ajax({
+            type: 'DELETE',
+            url: serverURL + 'file/',
+            data : data,
+            success: function(data){
+                if(data){
+                    alert("fichier supprimé")
+                }else{
+                    alert("Fichier déja supprimé");
+                }
+            }
+        })
+    }
+
 
     function LoadFolder() {
         //folder
@@ -498,6 +540,7 @@ $(function () {
             url: serverURL + 'file/' + sessionStorage.getItem('token') + '/',
             success: function (data) {
               AjaxData = data;
+                window.dc = new DataCollection(data);
             },
            complete: function () {
              $('#loader').hide();
