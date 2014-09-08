@@ -212,8 +212,6 @@
                         '<li class=""><a id="filterNew"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;nouveaux fichiers </a></li>',
                         '<li class="divider"></li>',
                         '<li class=""><a id="filterDL"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;fichiers non-téléchargés</a></li>',
-                        '<li class="divider"></li>',
-                        '<li class=""><a id="sortDL"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;fichiers non-téléchargés</a></li>',
             '</ul>',
                     '</div>',
                 '</div>',
@@ -542,9 +540,6 @@
                 '</div>');
 
             this.$toolbar.append(html.join(''));
-            $('.filter31').on('click', function(event) {
-                $.proxy(that.onFilter(['refDoc', 31]), that);
-            });
             $search = this.$toolbar.find('.search input');
             $search.off('keyup').on('keyup', function (event) {
                 clearTimeout(timeoutId); // doesn't matter if it's 0
@@ -629,13 +624,12 @@
                                 // case for 'other' doc category
                                 return true;
                             }
-                            if (item[field].toLowerCase().indexOf(value) !== -1) {
+                            if (item[field].toLowerCase().indexOf(value) > -1) {
                                 return true;
                             } else {
                                 return false;
                             }
                         }else { //Boolean
-                            console.log(array +'\t'+ item);
                             if (item[field]) return true;
                             else return false;
                         }

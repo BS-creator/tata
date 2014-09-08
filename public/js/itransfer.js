@@ -166,6 +166,48 @@ $(function () {
     };
 
 
+    function menuActionClick (e, data) {
+        var table = $('#mainTable');
+        if ( data.node.id === 'root'){
+            table.bootstrapTable('onFilter');
+        }else{
+            data.instance.toggle_node(data.node);
+
+            //Filter on refDoc
+            var nodeid = parseInt(data.node.id);
+            if (nodeid > -1 && data.node.li_attr.class === 'leaf'){
+                table.bootstrapTable('showColumn', 'refDoc');
+                table.bootstrapTable('showColumn', 'libelle');
+                table.bootstrapTable('showColumn', 'noEmployeur');
+                table.bootstrapTable('hideColumn','uploadUserName');
+                table.bootstrapTable('onFilter',['refDoc', nodeid ]);
+            }
+
+            //Filter for upload
+            if ( data.node.id === 'upload' ){
+                //console.log("upload");
+                //TODO: make username Dynamic
+                table.bootstrapTable('hideColumn', 'refDoc');
+                table.bootstrapTable('hideColumn', 'libelle');
+                table.bootstrapTable('hideColumn', 'noEmployeur');
+                table.bootstrapTable('hideColumn', 'extension');
+                table.bootstrapTable('showColumn','uploadUserName');
+                table.bootstrapTable('showColumn','fileName');
+                table.bootstrapTable('onFilter',['uploadUserName','f00000001']);
+            }
+            //Filter for other category
+            if ( data.node.id === 'other' ){
+                //console.log("other");
+                table.bootstrapTable('hideColumn', 'refDoc');
+                table.bootstrapTable('hideColumn', 'libelle');
+                table.bootstrapTable('hideColumn', 'noEmployeur');
+                table.bootstrapTable('hideColumn', 'extension');
+                table.bootstrapTable('showColumn', 'uploadUserName');
+                table.bootstrapTable('showColumn','fileName');
+                table.bootstrapTable('onFilter',['refDoc','empty']);
+            }
+        }
+    }
 
     /****************************************************
      * MENU
@@ -254,31 +296,7 @@ $(function () {
 
         // JSTREE
         $('#sidenav')
-            .on('select_node.jstree', function (e, data) {
-                var table = $('#mainTable');
-                if ( data.node.id === 'root'){
-                    table.bootstrapTable('onFilter');
-                }else{
-                    data.instance.toggle_node(data.node);
-
-                    //Filter on refDoc
-                    var nodeid = parseInt(data.node.id);
-                    if (nodeid > -1 && data.node.li_attr.class === 'leaf'){
-                        table.bootstrapTable('onFilter',['refDoc',nodeid ]);
-                    }
-
-                    //Filter for upload
-                    if ( data.node.id === 'upload' ){
-                        console.log("upload");
-                        table.bootstrapTable('onFilter',['uploadUserName','F00000001']);
-                    }
-                    //Filter for other category
-                    if ( data.node.id === 'other' ){
-                        //console.log("other");
-                        table.bootstrapTable('onFilter',['refDoc','empty']);
-                    }
-                }
-            })
+            .on('select_node.jstree', menuActionClick )
             .jstree({
                 'core': {
                     'data': {
@@ -347,6 +365,22 @@ $(function () {
                     formatter: formatDate
                 },
                 {
+                    field: 'fileName',
+                    title: 'Name',
+                    align: 'center',
+                    valign: 'middle',
+                    visible: false,
+                    sortable: true
+                },
+                {
+                    field: 'uploadUserName',
+                    title: 'User',
+                    align: 'center',
+                    valign: 'middle',
+                    visible: false,
+                    sortable: true
+                },
+                {
                     field: 'noEmployeur',
                     title: 'Employeur',
                     align: 'center',
@@ -398,14 +432,6 @@ $(function () {
                  },
                  */
                 {
-                    field: 'fileName',
-                    title: 'Name',
-                    align: 'center',
-                    valign: 'middle',
-                    visible: false,
-                    sortable: true
-                },
-                {
                     field: 'path',
                     title: 'Path',
                     align: 'center',
@@ -430,13 +456,6 @@ $(function () {
                     visible: false,
                     sortable: true,
                     formatter: formatDefault
-                },{
-                    field: 'uploadUserName',
-                    title: 'username',
-                    align: 'center',
-                    valign: 'middle',
-                    visible: true,
-                    sortable: true
                 },
                 {
                     field: 'refGroups',
@@ -541,9 +560,7 @@ $(function () {
             $('body').delegate('.reloadme', 'click', function(){
                 $table.bootstrapTable('onFilter');
             });
-            $('body').delegate('#filterNew', 'click', function(){
-                $table.bootstrapTable('onFilter',['isNew', true]);
-            });
+
 
             $('.user-name').html(window.login);
 
@@ -553,9 +570,13 @@ $(function () {
                 $('#login').val(window.login);
             });
 
+            // Filter
             $('#filterDL').on('click', function (){
                 //console.log('filterDL');
                 $table.bootstrapTable('onFilter',['notDownloaded', false]);
+            });
+            $('#filterNew').on('click', function(){
+                $table.bootstrapTable('onFilter',['isNew', true]);
             });
 
             //Add download all button
