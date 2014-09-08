@@ -5,12 +5,22 @@
 $(function (){
     "use strict";
 
+  /*$('#loader').bind('ajaxStart', function(){
+    console.log('test');
+    $(this).show();
+  }).bind('ajaxStop', function(){
+    $(this).hide();
+  });*/
+
     function submitLogin(){
         var credentials =
         {
             "login"     : $('#login').val(),
             "password"  : $('#password').val()
-        }
+        };
+
+      $('#loader').show();
+
         $.ajax({
             type: "POST",
             url: 'http://172.20.20.64:8018/login',
@@ -24,6 +34,9 @@ $(function (){
                 window.login = $('#login').val();
             },
             dataType: 'json',
+            /*complete: function () {
+              $('#loader').hide();
+            },*/
             error: function (xhr) {
                 console.log(xhr);
                 if(xhr.status >= 500) {

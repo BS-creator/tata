@@ -454,10 +454,18 @@ $(function () {
     };
 
     function LoadData() {
+
+      $('#loader').show();
+
        return $.ajax({
             type: "GET",
             url: serverURL + 'file/' + sessionStorage.getItem('token') + '/',
-            success: function (data) {AjaxData = data; },
+            success: function (data) {
+              AjaxData = data;
+            },
+           complete: function () {
+             $('#loader').hide();
+           },
             dataType: 'json',
             statusCode: {
                 403: function () {

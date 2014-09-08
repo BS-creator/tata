@@ -13,6 +13,29 @@ ul,
 li {
   list-style: none;
 }
+#loader {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+#loader p {
+  position: fixed;
+  z-index: 1000;
+  height: 2em;
+  width: 2em;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
 .wrapper {
   min-height: 650px;
 }
@@ -34,20 +57,13 @@ ul#dir-name li.pw-tab-folder a:before {
 ul#dir-name li.pw-tab-folder.active a:before {
   content: "\f115";
 }
-.fa-download {
+.fa-download,
+i,
+a i {
   cursor: pointer;
 }
 div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1) {
   background-color: #dff0d8;
-}
-div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):hover,
-div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):focus,
-div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):active,
-div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1).active {
-  background-color: #428bca;
-}
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1) > i:nth-child(1) {
-  color: #428bca;
 }
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):active > i:nth-child(1),
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):focus > i:nth-child(1),
