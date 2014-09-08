@@ -56,10 +56,6 @@ li {
   border: 3px dashed #428bca;
   color: #428bca;
 }
-#uploadCollapse #upload-1 {
-  border-bottom: 1px solid #e6e6e6;
-  margin-bottom: 32px;
-}
 #loader {
   display: none;
   position: fixed;
@@ -132,6 +128,10 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
   margin-top: 10px;
   margin-bottom: 10px;
   line-height: 34px;
+}
+#get-selections {
+  display: none;
+  margin-bottom: 10px;
 }
 table[id^="table-"] thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1),
 table#mainTable thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1) {

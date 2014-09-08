@@ -572,7 +572,14 @@ $( document ).ready(function() {
 
   $("#uploadCollapse .btn-upload").on('click', function (){
     $( "#uploadCollapse .btn-upload" ).toggleClass( "active", "active");
-
   });
+
+  // checked : show btn-download
+
+  $( "[type=checkbox]").bind(function(){
+    console.log($("tr.success").length);
+    $("tr.success").length > 0 ? $("get-selections").show() : $("get-selections").hide();
+  });
+
 
 });

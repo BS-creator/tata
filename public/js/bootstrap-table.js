@@ -533,13 +533,15 @@
                     sprintf('<input class="form-control" type="text" placeholder="%s">',
                         this.options.formatSearch()),
                 '</div>');
+
             /**** CUSTOM ***/
             html.push(
-              '<div class="cleafix pull-left">',
-              '<button id="get-selections" type="button" class="btn btn-success"><i class="fa fa-upload"></i>&nbsp;&nbsp;Téléchargement multiple</button>',
-              '</div>');
+            '<div class="row"><div class="col-md-12">',
+            '<button id="get-selections" type="button" class="btn btn-success"><i class="fa fa-upload"></i>&nbsp;&nbsp;Téléchargement multiple</button>',
+            '</div></div>');
 
-            this.$toolbar.append(html.join(''));
+          this.$toolbar.append(html.join(''));
+
             $('.filter31').on('click', function(event) {
                 $.proxy(that.onFilter(['refDoc', 31]), that);
             });
