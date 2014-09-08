@@ -5,7 +5,7 @@ $(function () {
     // array used to store all the existing document reference on the FTP server.
     var serverURL   = 'http://172.20.20.64:8018/',
         baseURL     = 'http://localhost:4000/itransfer/',
-        dc          = {},
+        //dc          = {},
         AjaxData    = [],
         category    = [],
         refDocUsed  = [];
@@ -107,21 +107,6 @@ $(function () {
         if (value) return "<i class='fa fa-smile-o'></i>"
         else return "<i class='fa fa-times'></i>";
     }
-
-    function formatDate (value) {
-        if (!value || value == '') return '';
-        else return value;
-    };
-
-    function formatEmployeur(value) {
-        if (!value || value == '') return '';
-        else return value;
-    };
-
-    function formatLabel(value) {
-        if (!value || value == '') return '';
-        else return value;
-    };
 
     function formatRefDoc(value) {
         //console.log(index +' >> value = ' + value );
@@ -362,7 +347,7 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
-                    formatter: formatDate
+                    formatter: formatDefault
                 },
                 {
                     field: 'fileName',
@@ -386,7 +371,7 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
-                    formatter: formatEmployeur
+                    formatter: formatDefault
                 },
                 {
                     field: 'libelle',
@@ -395,7 +380,7 @@ $(function () {
                     valign: 'middle',
                     class: 'labelDoc',
                     sortable: true,
-                    formatter: formatLabel
+                    formatter: formatDefault
                 },
                 {
                     field: 'refDoc',
