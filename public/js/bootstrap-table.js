@@ -355,7 +355,6 @@
 
             if (that.options.sortable && visibleColumns[i].sortable) {
                 $(this).off('click').on('click', $.proxy(that.onSort, that));
-                //$('#sortDL').off('click').on('click', $.proxy(that.onSortDownload, that));
             }
         });
 
@@ -989,10 +988,13 @@
 
         // click to select by column
         this.$body.find('> tr > td').off('click').on('click', function () {
+            var $tr = $(this).parent();
+            that.trigger('click-row', that.data[$tr.data('index')], $tr);
             // if click to select - then trigger the checkbox/radio click
             if (that.options.clickToSelect) {
-                if (that.header.clickToSelects[$(this).parent().children().index($(this))]){
-                    $(this).parent().find(sprintf('[name="%s"]', that.options.selectItemName)).trigger('click');
+                if (that.header.clickToSelects[$tr.children().index($(this))]) {
+                    $tr.find(sprintf('[name="%s"]',
+                        that.options.selectItemName)).trigger('click');
                 }
             }
         });
