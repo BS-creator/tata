@@ -521,9 +521,11 @@ $(function () {
 
         // set token for upload
         var $uploadform = $('#uploadForm');
+        $("input[name|='token']").val(sessionStorage.getItem('token'));
         $uploadform.submit(function ( event ){
-            $("input[name|='token']").val(sessionStorage.getItem('token'));
+            $('#progress').show();
         });
+
 
         /*$uploadform.ajaxForm({
             success:function(data){
@@ -533,9 +535,7 @@ $(function () {
         $uploadform.fileupload({
             sequentialUploads: true,
             done: function (e, data) {
-                $.each(data.result.files, function (index, file) {
-                    $('<p/>').text(file.name).appendTo('#uploadForm');
-                });
+                /*$('#progress').hide();*/
             },
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
