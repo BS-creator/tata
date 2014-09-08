@@ -8,7 +8,8 @@ $(function () {
         //dc          = {},
         AjaxData    = [],
         category    = [],
-        refDocUsed  = [];
+        refDocUsed  = [],
+        destFolders = [];
 
     /****************************************************
      * HELPER
@@ -164,7 +165,9 @@ $(function () {
                 table.bootstrapTable('showColumn', 'refDoc');
                 table.bootstrapTable('showColumn', 'libelle');
                 table.bootstrapTable('showColumn', 'noEmployeur');
+                table.bootstrapTable('showColumn', 'extension');
                 table.bootstrapTable('hideColumn','uploadUserName');
+                table.bootstrapTable('hideColumn','fileName');
                 table.bootstrapTable('onFilter',['refDoc', nodeid ]);
             }
 
@@ -461,6 +464,15 @@ $(function () {
      * LOAD DATA (AJAX)
      * */
 
+    function LoadFolder() {
+        //folder
+        return $.ajax({
+            type: 'GET',
+            url: serverURL + 'folder/' + sessionStorage.getItem('token') + '/',
+            success: function(data){ destFolders = data;}
+        });
+    };
+
     function LoadCategory() {
 
         return $.ajax({
@@ -516,9 +528,13 @@ $(function () {
         });
 
         //SYNC & WAIT
-        $.when(LoadCategory(), LoadData()).done(function (){
+        $.when(LoadCategory(), LoadData(), LoadFolder()).done(function (){
             //dc = new DataCollection(AjaxData);
             //dc.query().filter({last_name: 'Snow'}).values();
+            var listFolder = $('#folder');
+            for (key in destFolders){
+                listFolder.append('<li><a href="#" data-folder="'+ destFolders[key] +'">'+ destFolders[key] +'</a></li>');
+            }
 
             mergeLabelDoc();
             var $table = createTable();
