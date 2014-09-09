@@ -561,6 +561,7 @@ $(function () {
      * MAIN
      * */
     function main() {
+        //$('#loader').html('<i class="fa-li fa fa-spinner fa-spin fa-3x"></i>');
 
         // set token for upload
         var $uploadform = $('#uploadForm');
@@ -582,8 +583,6 @@ $(function () {
                 $('#progress').show();
             }
         });
-
-
 
         //SYNC & WAIT
         $.when(LoadCategory(), LoadData(), LoadFolder()).done(function (){
@@ -619,7 +618,6 @@ $(function () {
             $('body').delegate('.reloadme', 'click', function(){
                 $table.bootstrapTable('onFilter');
             });
-
 
             $('.user-name').html(window.login);
 
@@ -675,9 +673,15 @@ $(function () {
                 autoclose: true,
                 todayHighlight: true
             });
+
+            $('#sandbox-container .input-daterange').datepicker({
+                language: "fr",
+                calendarWeeks: true,
+                autoclose: true,
+                todayHighlight: true
+            });            
         });
     }
-
 
     $('document').ready(main());
 

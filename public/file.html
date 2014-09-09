@@ -10,7 +10,9 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/perfect-scrollbar.css">
         <link rel="stylesheet" href="css/bootstrap-table.min.css">
-        <link rel="stylesheet" href="css/datepicker3.css">
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/datepicker.css">
+
         <link rel="stylesheet" href="css/prestaweb-comp.css">
         <link rel="stylesheet" href="css/fileupload/jquery.fileupload.css"/>
         <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui.css"/>
@@ -98,13 +100,16 @@
 
                     <div id="uploadCollapse">
 
-                      <div class="btn-upload text-center" data-toggle="collapse" data-target="#uploadFiles">
-                        <span><i class="fa fa-upload"></i>&nbsp;&nbsp;Charger des fichiers</span>
-                      </div>
+                      <div class="row">
+                        <div class="col-md-3 col-xs-12">
+                          <div class="btn-upload text-center" data-toggle="collapse" data-target="#uploadFiles">
+                            <span><i class="fa fa-upload"></i>&nbsp;&nbsp;</span>
+                          </div>
+                        </div>
 
-                      <div id="uploadFiles" class="collapse">
-                        <div class="row">
-                          <div class="col-md-offset-3 col-md-6 col-xs-12">
+
+                        <div class="col-md-9 col-xs-12">
+                          <div id="uploadFiles" class="collapse">
                             <p>
                               <blockquote class="text-muted">
                                 Afin de classer les fichiers, veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.
@@ -129,10 +134,10 @@
                               <input type="submit" value="Upload" style="display: none;"/>
                             </form>
                             <div class="row">
-                              <div class="col-md-12">
+                              <div class="col-gold-l">
                                 <div id="files" class="files">
                                   <div id="progress" class="progress">
-                                    <div  class="progress-bar progress-bar-success"></div>
+                                    <div class="progress-bar progress-bar-success"></div>
                                   </div>
                                 </div>
                               </div>
