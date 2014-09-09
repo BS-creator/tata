@@ -5,7 +5,7 @@ $(function () {
     // array used to store all the existing document reference on the FTP server.
     var serverURL   = 'http://172.20.20.64:8018/',
         baseURL     = 'http://localhost:4000/itransfer/',
-        //dc          = {},
+        dc          = {},
         AjaxData    = [],
         category    = [],
         refDocUsed  = [],
@@ -21,7 +21,7 @@ $(function () {
         if (bytes == 0) return '0 Byte';
         var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
         return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
-    }
+    };
 
     function sort_unique(array) {
         array = array.sort(function (a, b) {
@@ -37,7 +37,7 @@ $(function () {
             return ret;
         }
         return array; // only 1 or no element in the array.
-    }
+    };
 
     function getUsedDocRef(data) {
         var a = [];
@@ -50,7 +50,7 @@ $(function () {
             }
         });
         return sort_unique(a);
-    }
+    };
 
     function mergeLabelDoc() {
 
@@ -63,10 +63,9 @@ $(function () {
                 row.noEmployeur = parseInt(row.noEmployeur);
             });
         });
-    }
+    };
 
     function download(array) {
-        //TODO
         for (var i = 0; i < array.length; i++) {
             var iframe = $('<iframe style="visibility: collapse;"></iframe>');
             $('body').append(iframe);
@@ -83,7 +82,7 @@ $(function () {
                 }
             })(iframe), 1000);
         }
-    }
+    };
 
     // Styling the row if the file is new
     function rowStylef(row, i, filter) {
@@ -341,7 +340,6 @@ $(function () {
             columns: [
                 {
                     field: 'stateField',
-                    align: 'center',
                     checkbox: true,
                     visible: true
                 },
@@ -665,6 +663,7 @@ $(function () {
 
             // checked : show btn-download
 
+$( document ).ready(function() {
 
             // date picker
             $('#datepicker .input-daterange').datepicker({

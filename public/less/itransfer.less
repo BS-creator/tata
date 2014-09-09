@@ -18,7 +18,7 @@ ul, li {
 
 
 // upload
-#upload-modal{
+#uploadCollapse{
 
   position: relative;
   min-height: 1px;
@@ -26,7 +26,7 @@ ul, li {
   .btn-upload {
     position: relative;
     overflow: hidden;
-    margin-bottom: 12px;
+    margin-bottom: 32px;
     display: block;
 /*    padding-top: 6px;
     padding-bottom: 6px;
@@ -49,22 +49,26 @@ ul, li {
   }
 
   .btn-upload:after{
-    /*content: "Chargement des fichiers";*/
+    content: "Chargemenet des fichiers";
   }
   .btn-upload:focus,
   .btn-upload:hover,
   .btn-upload:active,
   .btn-upload.active {
-/*    border: 3px dashed #ddd;
+    border: 3px dashed #ddd;
     background-color: transparent;
-    color: #bbb;*/
+    color: #bbb;
   }
   .btn-upload.active:after{
-/*    content: "\a Faites glisser vos fichiers ici";*/
+    content: "\a Faites glisser vos fichiers ici";
+    white-space: pre;
+    line-height: 3.5em;
+    font-size: 16px;
+    span > i {
+      font-size: 18px !important;
+    }
   }
-  #uploadForm{
-    width: 100%;
-  }
+
   #uploadFiles {
     width:100%;
     margin-bottom: 32px;
@@ -83,6 +87,8 @@ ul, li {
       }
     }
   }
+
+
 
 }
 
@@ -161,11 +167,24 @@ div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-
 div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):active{
 }
 
+div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):active > i:nth-child(1),
+div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):focus > i:nth-child(1),
+div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):hover > i:nth-child(1),
+div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1).active > i:nth-child(1) {
+  // color: white !important;
+}
+
 // icon dl muted
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1) > i:nth-child(1) {
   color: #999999;
 }
 
+div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):active > i:nth-child(1),
+div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):focus > i:nth-child(1),
+div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):hover > i:nth-child(1),
+div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1).active > i:nth-child(1) {
+  // color: white !important;
+}
 
 // Filter Bar
 #filter,  {
@@ -208,7 +227,7 @@ table[id^="table-"],
 table#mainTable {
   // download column
   thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1) {
-    //width: 65px;
+    width: 65px;
   }
 
   // filtres de la table
@@ -231,7 +250,7 @@ table#mainTable {
 
   // dernière colonne - extensions
   thead tr th:last-child {
-    //width: 40px;
+    width: 40px;
   }
 
   // Download column
