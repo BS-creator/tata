@@ -41,24 +41,21 @@ li {
   color: #fff;
 }
 #uploadCollapse .btn-upload:after {
-  content: "Chargemenet des fichiers";
+  /*content: "Chargement des fichiers";*/
 }
 #uploadCollapse .btn-upload:focus,
 #uploadCollapse .btn-upload:hover,
 #uploadCollapse .btn-upload:active,
 #uploadCollapse .btn-upload.active {
-  border: 3px dashed #ddd;
-  background-color: transparent;
-  color: #bbb;
+  /*    border: 3px dashed #ddd;
+    background-color: transparent;
+    color: #bbb;*/
 }
 #uploadCollapse .btn-upload.active:after {
-  content: "\a Faites glisser vos fichiers ici";
-  white-space: pre;
-  line-height: 3.5em;
-  font-size: 16px;
+  /*    content: "\a Faites glisser vos fichiers ici";*/
 }
-#uploadCollapse .btn-upload.active:after span > i {
-  font-size: 18px !important;
+#uploadCollapse #uploadForm {
+  width: 100%;
 }
 #uploadCollapse #uploadFiles {
   width: 100%;

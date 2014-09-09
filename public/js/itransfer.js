@@ -252,6 +252,7 @@ $(function () {
             columns: [
                 {
                     field: 'stateField',
+                    align: 'center',
                     checkbox: true,
                     visible: true
                 },
