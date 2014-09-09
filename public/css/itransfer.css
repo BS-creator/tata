@@ -21,40 +21,55 @@ li {
   position: relative;
   overflow: hidden;
   margin-bottom: 32px;
-  display: inline-block;
-  padding: 10px 0px;
+  display: block;
+  /*    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-right: 0px;
+    padding-left: 0px;*/
   width: 100%;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
-  line-height: 1.42857;
+  line-height: 2em;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
-  border: 3px dashed #d9d9d9;
+  border: 3px solid #428bca;
   border-radius: 4px;
   background-image: none;
+  background-color: #428bca;
+  color: #fff;
+}
+#uploadCollapse .btn-upload:after {
+  content: "Chargemenet des fichiers";
+}
+#uploadCollapse .btn-upload:focus,
+#uploadCollapse .btn-upload:hover,
+#uploadCollapse .btn-upload:active,
+#uploadCollapse .btn-upload.active {
+  border: 3px dashed #ddd;
   background-color: transparent;
-  color: #cdcdcd;
+  color: #bbb;
+}
+#uploadCollapse .btn-upload.active:after {
+  content: "\a Faites glisser vos fichiers ici";
+  white-space: pre;
+  line-height: 3.5em;
+  font-size: 16px;
+}
+#uploadCollapse .btn-upload.active:after span > i {
+  font-size: 18px !important;
 }
 #uploadCollapse #uploadFiles {
   width: 100%;
   margin-bottom: 32px;
   padding-bottom: 32px;
-  border-bottom: 1px solid #ddd;
 }
 #uploadCollapse #uploadFiles .btn-group {
   margin-right: 20px !important;
 }
 #uploadCollapse #uploadFiles #files {
   margin: 32px 0 32px 0;
-}
-#uploadCollapse .btn-upload:focus,
-#uploadCollapse .btn-upload:hover,
-#uploadCollapse .btn-upload:active,
-#uploadCollapse .btn-upload.active {
-  border: 3px dashed #428bca;
-  color: #428bca;
 }
 #loader {
   display: none;

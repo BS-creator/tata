@@ -536,13 +536,13 @@
 
             /**** CUSTOM datepicker ****/
             html.push(
-              '<div class="col-md-4" id="sandbox-container">',
-                '<div class="input-daterange input-group" id="datepicker">',
-                  '<input type="text" class="input-sm form-control" name="start" />',
-                  '<span class="input-group-addon">to</span>',
-                  '<input type="text" class="input-sm form-control" name="end" />',
-                '</div>',
-              '</div>');
+              '<div id="sandbox-container" class="col-md-4">',
+              '<div class="input-daterange input-group" id="datepicker">',
+                '<input type="text" class="input-sm form-control" name="start" />',
+                '<span class="input-group-addon">&agrave;</span>',
+                '<input type="text" class="input-sm form-control" name="end" />',
+              '</div></div>'
+            );
 
             /**** CUSTOM ***/
             html.push(
