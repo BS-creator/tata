@@ -253,7 +253,8 @@
         this.$header.find('th').each(function () {
             var column = $.extend({}, {
                 title: $(this).html(),
-                'class': $(this).attr('class')
+                'class': $(this).attr('class'),
+                'id': $(this).attr('id')
             }, $(this).data());
 
             columns.push(column);
@@ -536,11 +537,11 @@
 
             /**** CUSTOM datepicker ****/
             html.push(
-              '<div id="sandbox-container" class="col-md-4">',
+              '<div id="sandbox-container" class="col-md-5">',
               '<div class="input-daterange input-group" id="datepicker">',
-                '<input type="text" class="input-sm form-control" name="start" />',
+                '<input type="text" class="input-sm form-control" name="start" placeholder="Date de début"/>',
                 '<span class="input-group-addon">&agrave;</span>',
-                '<input type="text" class="input-sm form-control" name="end" />',
+                '<input type="text" class="input-sm form-control" name="end"  placeholder="Date de fin"/>',
               '</div></div>'
             );
 

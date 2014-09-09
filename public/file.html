@@ -82,8 +82,6 @@
             </div>
         </header> <!--/header-->
 
-
-
         <div class="wrapper">
 
           <!--loading gif-->
@@ -94,47 +92,50 @@
               </p>
             </div>
           </div>
-                <!--upload collapse-->
-                <div class="row">
-                  <div class="col-md-12 col-xs-12">
 
-                    <div id="uploadCollapse">
+          <div class="row">
+            <div class="col-md-3 col-xs-12">
+              <!--upload collapse-->
+              <div class="row">
+                <div class="col-md-12 col-xs-12">
+                  <div id="upload-modal">
 
-                      <div class="row">
-                        <div class="col-md-3 col-xs-12">
-                          <div class="btn-upload text-center" data-toggle="collapse" data-target="#uploadFiles">
-                            <span><i class="fa fa-upload"></i>&nbsp;&nbsp;</span>
+                    <!-- Button trigger modal -->
+                    <div class="btn-upload text-center" data-toggle="modal" data-target="#uploadFiles" href="#uploadFiles">
+                      <span><i class="fa fa-upload"></i>&nbsp;&nbsp;Chargement des fichiers</span>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="uploadFiles" tabindex="-1" role="dialog" aria-labelledby="uploadFiles1" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title text-muted text-center"><i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;Chargement de fichiers</h4>
                           </div>
-                        </div>
 
-
-                        <div class="col-md-9 col-xs-12">
-                          <div id="uploadFiles" class="collapse">
+                          <div class="modal-body">
                             <p>
                               <blockquote class="text-muted">
-                                Afin de classer les fichiers, veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.
+                                Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.
                               </blockquote>
                             </p>
-                            <!--dossier de destination des fichiers uploadés-->
-                            <div class="btn-group pull-left">
-                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                Sélectionner le dossier de destination&nbsp;&nbsp;&nbsp;<span class="caret"></span>
-                              </button>
-                              <ul id="folder" class="dropdown-menu pull-right" role="menu">
-                                <li><a href="#" data-folder="Presta">Presta</a></li>
-                                <li class="divider"></li>
-                               <!-- <li><a href="#">liste ...</a></li>-->
-                              </ul>
-                            </div>
 
-                            <form class="pull-left" id="uploadForm" action="http://172.20.20.64:8018/file/upload" method="post" enctype="multipart/form-data">
-                              <input name="upload" type="file"  size="50" /> <!--multiple=""-->
-                              <input name="token" type="hidden" size="50" />
-                              <br/>
-                              <input type="submit" value="Upload" style="display: none;"/>
+                            <form class="" id="uploadForm" action="http://172.20.20.64:8018/file/upload" method="post" enctype="multipart/form-data">
+                              <p class="text-center">
+                                <!--loop-->
+                                <label class="radio control-label"><input type="radio" name="reportory" value="---">dirname</label>
+                                <!--/loop-->
+                              </p>
+                              <p class="text-center">
+                                <input name="upload" type="file" multiple="" size="50" />
+                                <input name="token" type="hidden" size="50" />
+                                <br/>
+                                <input type="submit" value="Upload" style="display: none;"/>
+                              </p>
                             </form>
                             <div class="row">
-                              <div class="col-gold-l">
+                              <div class="col-md-offset-2 col-md-8 col-xs-12">
                                 <div id="files" class="files">
                                   <div id="progress" class="progress">
                                     <div class="progress-bar progress-bar-success"></div>
@@ -143,30 +144,24 @@
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                    </div> <!--/uploadCollapse-->
-                  </div>
-                </div><!--/ row-->
-
-                <div class="row">
-                    <div class="col-md-3 col-xs-12">
-
-                        <!--SIDEBAR-->
-                        <div id="sidenav"> </div><!--/ SIDEBAR-->
-
-                    </div>
-
-                    <div id="contentTable" class="col-md-9 col-xs-12">
-
-                        <!--TABLE CONTENT-->
-                        <table id="mainTable" ></table>
-
-                    </div>
-
+                        </div><!-- /.modal-content -->
+                      </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                  </div> <!--/uploadCollapse-->
                 </div>
+              </div><!--/ row-->
 
-            </div> <!--/container-->
+              <!--SIDEBAR-->
+              <div id="sidenav"> </div><!--/ SIDEBAR-->
+            </div>
+
+            <div id="contentTable" class="col-md-9 col-xs-12">
+                <!--TABLE CONTENT-->
+                <table id="mainTable" ></table>
+            </div>
+        </div>
+
+        </div> <!--/wrapper-->
 
         <footer>
             <hr>
