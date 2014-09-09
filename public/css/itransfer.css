@@ -13,11 +13,11 @@ ul,
 li {
   list-style: none;
 }
-#uploadCollapse {
+#upload-modal {
   position: relative;
   min-height: 1px;
 }
-#uploadCollapse .btn-upload {
+#upload-modal .btn-upload {
   position: relative;
   overflow: hidden;
   margin-bottom: 32px;
@@ -40,32 +40,32 @@ li {
   background-color: #428bca;
   color: #fff;
 }
-#uploadCollapse .btn-upload:after {
+#upload-modal .btn-upload:after {
   /*content: "Chargement des fichiers";*/
 }
-#uploadCollapse .btn-upload:focus,
-#uploadCollapse .btn-upload:hover,
-#uploadCollapse .btn-upload:active,
-#uploadCollapse .btn-upload.active {
+#upload-modal .btn-upload:focus,
+#upload-modal .btn-upload:hover,
+#upload-modal .btn-upload:active,
+#upload-modal .btn-upload.active {
   /*    border: 3px dashed #ddd;
     background-color: transparent;
     color: #bbb;*/
 }
-#uploadCollapse .btn-upload.active:after {
+#upload-modal .btn-upload.active:after {
   /*    content: "\a Faites glisser vos fichiers ici";*/
 }
-#uploadCollapse #uploadForm {
+#upload-modal #uploadForm {
   width: 100%;
 }
-#uploadCollapse #uploadFiles {
+#upload-modal #uploadFiles {
   width: 100%;
   margin-bottom: 32px;
   padding-bottom: 32px;
 }
-#uploadCollapse #uploadFiles .btn-group {
+#upload-modal #uploadFiles .btn-group {
   margin-right: 20px !important;
 }
-#uploadCollapse #uploadFiles #files {
+#upload-modal #uploadFiles #files {
   margin: 32px 0 32px 0;
 }
 #loader {
