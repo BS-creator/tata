@@ -533,12 +533,20 @@
                     sprintf('<input class="form-control" type="text" placeholder="%s">',
                         this.options.formatSearch()),
                 '</div>');
-            /**** CUSTOM ***/
+            /*****custom date picker*****/
             html.push(
-              '<div class="cleafix pull-left">',
-              '<button id="get-selections" type="button" class="btn btn-success"><i class="fa fa-upload"></i>&nbsp;&nbsp;Téléchargement multiple</button>',
+              '<div class="input-daterange input-group" id="datepicker">',
+              '<input type="text" class="input-sm form-control" name="start" />',
+              '<span class="input-group-addon">to</span>',
+              '<input type="text" class="input-sm form-control" name="end" />',
               '</div>');
 
+            /**** CUSTOM ***/
+            html.push(
+            '<div class="row"><div class="col-md-12">',
+            '<button id="get-selections" type="button" class="btn btn-success"><i class="fa fa-upload"></i>&nbsp;&nbsp;Téléchargement multiple</button>',
+            '</div></div>');
+            
             this.$toolbar.append(html.join(''));
             $search = this.$toolbar.find('.search input');
             $search.off('keyup').on('keyup', function (event) {

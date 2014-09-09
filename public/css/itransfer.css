@@ -56,10 +56,6 @@ li {
   border: 3px dashed #428bca;
   color: #428bca;
 }
-#uploadCollapse #upload-1 {
-  border-bottom: 1px solid #e6e6e6;
-  margin-bottom: 32px;
-}
 #loader {
   display: none;
   position: fixed;
@@ -112,26 +108,37 @@ a i {
 div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1) {
   background-color: #dff0d8;
 }
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):active > i:nth-child(1),
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):focus > i:nth-child(1),
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):hover > i:nth-child(1),
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1).active > i:nth-child(1) {
-  color: white !important;
-}
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1) > i:nth-child(1) {
   color: #999999;
 }
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):active > i:nth-child(1),
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):focus > i:nth-child(1),
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):hover > i:nth-child(1),
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1).active > i:nth-child(1) {
-  color: white !important;
-}
 #filter div.btn-group {
   position: relative;
-  margin-top: 10px;
+  margin-top: 0;
   margin-bottom: 10px;
+  margin-right: 10px;
   line-height: 34px;
+}
+.fixed-table-toolbar .search,
+.fixed-table-toolbar #datepicker {
+  position: relative;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  line-height: 34px;
+}
+.fixed-table-toolbar #datepicker {
+  margin-top: 0;
+}
+.fixed-table-toolbar #datepicker input,
+.fixed-table-toolbar #datepicker span {
+  height: 34px;
+}
+.fixed-table-toolbar .columns,
+.fixed-table-toolbar .search {
+  margin-top: 0;
+}
+#get-selections {
+  display: none;
+  margin-bottom: 10px;
 }
 table[id^="table-"] thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1),
 table#mainTable thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1) {
@@ -221,7 +228,7 @@ div#sidenav ul.jstree-children li a {
   width: 100%;
 }
 div#sidenav {
-  padding-top: 55px;
+  padding-top: 1px;
   border-radius: 3px;
 }
 div#sidenav ul > li > a {

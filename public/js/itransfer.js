@@ -612,13 +612,19 @@ $( document ).ready(function() {
   // add cllss active to btn
 
   $("#uploadCollapse .btn-upload").on('click', function (){
+    $( "#uploadCollapse .btn-upload" ).toggleClass( "active", "active");
+  });
 
-    $("#uploadCollapse .btn-upload").addClass("active");
-    if($("#uploadFiles").hasClass("in")){
-      $("#uploadCollapse .btn-upload").addClass("active");
-    }else{
-      $("#uploadCollapse .btn-upload").removeClass("active");
-    }
+  // checked : show btn-download
+
+
+  // date picker
+  $('#datepicker .input-daterange').datepicker({
+    format: "yyyy-mm-dd",
+    language: "fr",
+    calendarWeeks: true,
+    autoclose: true,
+    todayHighlight: true
   });
 
 });

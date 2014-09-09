@@ -148,7 +148,7 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nt
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):focus > i:nth-child(1),
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):hover > i:nth-child(1),
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1).active > i:nth-child(1) {
-  color: white !important;
+  // color: white !important;
 }
 
 // icon dl muted
@@ -160,20 +160,43 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):focus > i:nth-child(1),
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):hover > i:nth-child(1),
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1).active > i:nth-child(1) {
-  color: white !important;
+  // color: white !important;
 }
 
 // Filter Bar
-#filter {
+#filter,  {
   div.btn-group {
     position: relative;
-    margin-top: 10px;
+    margin-top: 0;
     margin-bottom: 10px;
+    margin-right: 10px;
     line-height: 34px;
   }
-
 }
 
+.fixed-table-toolbar{
+  .search,
+  #datepicker {
+    position: relative;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    line-height: 34px;
+  }
+  #datepicker{
+    margin-top: 0;
+    input, span{
+      height: 34px;
+    }
+  }
+}
+.fixed-table-toolbar .columns,
+.fixed-table-toolbar .search{
+  margin-top: 0;
+}
+#get-selections{
+  display: none;
+  margin-bottom: 10px;
+}
 //////////////////////////////////////////////////////
 // table - itransfer
 
@@ -236,7 +259,8 @@ table#mainTable {
   }
 
   // pagination
-  .fixed-table-pagination .pagination, .fixed-table-pagination .pagination-detail {
+  .fixed-table-pagination .pagination,
+  .fixed-table-pagination .pagination-detail {
     margin-top: 20px;
     font-size: 14px;
   }
@@ -278,7 +302,7 @@ div#sidenav {
 
 // a lvl 0
 div#sidenav {
-  padding-top: 55px;
+  padding-top: 1px;
   border-radius: 3px;
   ul > li > a {
 
