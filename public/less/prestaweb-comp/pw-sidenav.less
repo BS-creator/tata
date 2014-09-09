@@ -2,13 +2,13 @@
 ////////////////////////////////////////////////////////////////
 //  sidenav
 
-div#sidenav {
+/*div#sidenav {
   padding:1px 0;
   font-size: 13px;
 
-  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=180, Color=#ffffff)";/*IE 8*/
-  text-shadow: 0px 1px 1px #ffffff;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
-  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=180, Color=#ffffff); /*IE 5.5-7*/
+  -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=180, Color=#ffffff)";*//*IE 8*//*
+  text-shadow: 0px 1px 1px #ffffff;*//* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 *//*
+  filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=180, Color=#ffffff); *//*IE 5.5-7*//*
 
   ul{
     padding:0;
@@ -77,4 +77,78 @@ div#sidenav {
     }
   }
 
+}*/
+
+
+
+// JSTREE CUSTOM STYLE
+
+// sidenav
+
+div#sidenav {
+  ul.jstree-container-ul,
+  ul.jstree-children {
+    padding: 0;
+    margin: 0;
+    li a {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+// a lvl 0
+div#sidenav {
+  padding-top: 1px;
+  border-radius: 3px;
+  ul > li > a {
+
+    background-color: #F2F2F2;
+    color: #656565;
+    margin: 0;
+    padding: 8px 0 8px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    border-left: 0;
+  }
+  ul > li.jstree-open > a,
+  ul > li > a:hover,
+  ul > li > a:focus,
+  ul > li > a:active,
+  ul > li > a.active {
+    color: #125B9A;
+    border-left: 3px solid #2871B0;
+  }
+
+  // a lvl 1
+  ul > li > ul > li > a {
+    background-color: white;
+    color: #808080;
+    padding: 5px 0 5px 20px;
+  }
+  ul > li.jstree-open > ul > li > a:hover,
+  ul > li.jstree-open > ul > li > a:focus,
+  ul > li.jstree-open > ul > li > a:active,
+  ul > li.jstree-open > ul > li > a.active,
+  ul > li.jstree-open > ul > li.jstree-open > a {
+    background-color: white;
+    color: #3D86C5;
+    border-left: 3px solid #2871B0;
+  }
+
+  // a lvl 2
+  ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a {
+    background-color: white;
+    color: #808080;
+    padding: 5px 0 5px 52px;
+  }
+
+  ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:hover,
+  ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:focus,
+  ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:active,
+  ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a.active {
+    color: #3D86C5;
+    // border-left: 3px solid #2871B0;
+  }
 }

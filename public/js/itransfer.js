@@ -577,13 +577,15 @@ $( document ).ready(function() {
   // checked : show btn-download
 
 
-  // date picker
-  $('#datepicker .input-daterange').datepicker({
-    format: "yyyy-mm-dd",
+  $('#sandbox-container .input-daterange').datepicker({
+    //format: "yyyy/mm/dd",
+    todayBtn: "linked",
     language: "fr",
     calendarWeeks: true,
     autoclose: true,
     todayHighlight: true
   });
+
+
 
 });
