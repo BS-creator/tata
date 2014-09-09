@@ -152,10 +152,6 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
   display: none;
   margin-bottom: 10px;
 }
-table[id^="table-"] thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1),
-table#mainTable thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1) {
-  width: 65px;
-}
 table[id^="table-"] thead tr th,
 table#mainTable thead tr th {
   display: table-cell;
@@ -171,10 +167,6 @@ table#mainTable thead tr th div.th-inner span.unsorted:after {
   font-weight: normal;
   line-height: 1;
   margin: 0 5px;
-}
-table[id^="table-"] thead tr th:last-child,
-table#mainTable thead tr th:last-child {
-  width: 40px;
 }
 table[id^="table-"] tbody tr > td:nth-child(1),
 table#mainTable tbody tr > td:nth-child(1) {
