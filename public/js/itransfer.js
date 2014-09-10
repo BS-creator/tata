@@ -134,21 +134,19 @@ $(function () {
     function FormatExtension(value) {
         if (value || value != '') {
             var v = value.toLowerCase();
-            if (v.indexOf('pdf')) {
+            if (v.indexOf('pdf') !== -1 ) {
                 return '<i class="fa fa-file-pdf-o fa-lg" title="pdf"></i>';
             }
-            if (v.indexOf('zip') !== -1 ) {
-                return '<i class="fa fa-file-archive-o fa-lg"></i>';
-            else if (v.indexOf('zip')) {
+            else if (v.indexOf('zip') !== -1 ) {
                 return '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>';
             }
-            else if (v.indexOf('xls') || v.indexOf('csv')) {
+            else if (v.indexOf('xls') !== -1  || v.indexOf('csv') !== -1)  {
               return '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>';
             }
-            else if (v.indexOf('dat')) {
+            else if (v.indexOf('dat') !== -1 ) {
               return '<i class="fa fa-file-text-o fa-lg" title="dat"></i>';
             }
-            else if (v.indexOf('jpg') || v.indexOf('png')) {
+            else if (v.indexOf('jpg') !== -1  || v.indexOf('png') !== -1 ) {
               return '<i class="fa fa-file-picture-o fa-lg" title="image"></i>';
             }
             else
