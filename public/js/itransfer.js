@@ -324,7 +324,7 @@ $(function () {
         tree[tree.length] =
         {
             "id": "upload",
-            "text": '> Documents transmis à Group S', //Overgebrachte documenten naar Group S
+            "text": 'Documents transmis à Group S', //Overgebrachte documenten naar Group S
             "state": {
                 "opened": true,
                 "disabled": false,
