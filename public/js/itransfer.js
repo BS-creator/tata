@@ -134,12 +134,24 @@ $(function () {
     function FormatExtension(value) {
         if (value || value != '') {
             var v = value.toLowerCase();
-
-            if (v.indexOf('pdf') !== -1 ) {
-                return '<i class="fa fa-file-pdf-o fa-lg"></i>';
+            if (v.indexOf('pdf')) {
+                return '<i class="fa fa-file-pdf-o fa-lg" title="pdf"></i>';
             }
-            if (v.indexOf('zip') !== -1 ) {
-                return '<i class="fa fa-file-archive-o fa-lg"></i>';
+            else if (v.indexOf('zip')) {
+                return '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>';
+            }
+            else if (v.indexOf('xls') || v.indexOf('csv')) {
+              return '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>';
+            }
+            else if (v.indexOf('dat')) {
+              return '<i class="fa fa-file-text-o fa-lg" title="dat"></i>';
+            }
+            else if (v.indexOf('jpg') || v.indexOf('png')) {
+              return '<i class="fa fa-file-picture-o fa-lg" title="image"></i>';
+            }
+            else
+            {
+              return '<i class="fa fa-file-o fa-lg" ></i>';
             }
             if (v.indexOf('dat') !== -1 || v.indexOf('csv') !== -1 ){
                 return '<i class="fa fa-bar-chart"></i>';
@@ -179,7 +191,7 @@ $(function () {
     function operateFormatter() {
         return [
             '<a class="remove" title="Remove">',
-            '<i class="fa fa-times"></i>',
+            '<i class="fa fa-trash fa-lg"></i>',
             '</a>'
         ].join('');
     }
@@ -257,8 +269,6 @@ $(function () {
                 numcat = parseInt(item.noCategory);
             //if (numcat == 0) numcat = 98;
 
-
-
             if ($.inArray(refdoc, refDocUsed) > -1) { // doc is used
                 //adding label
                 if ($.inArray(numcat, cat) > -1) { // category exists --> add children
@@ -309,7 +319,6 @@ $(function () {
                 "li_attr": {"class": "leaf"}
             };
         }
-
 
         // ---> ADDING the "UPLOAD CATEGORY"
         tree[tree.length] =

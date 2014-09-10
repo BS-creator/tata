@@ -28,10 +28,6 @@ ul, li {
     overflow: hidden;
     margin-bottom: 12px;
     display: block;
-/*    padding-top: 6px;
-    padding-bottom: 6px;
-    padding-right: 0px;
-    padding-left: 0px;*/
     width: 100%;
     font-size: 14px;
     font-weight: bold;
@@ -44,24 +40,9 @@ ul, li {
     border-radius: 4px;
     background-image: none;
     background-color: #428bca;
-    //color: #cdcdcd;
     color: #fff;
   }
 
-  .btn-upload:after{
-    /*content: "Chargement des fichiers";*/
-  }
-  .btn-upload:focus,
-  .btn-upload:hover,
-  .btn-upload:active,
-  .btn-upload.active {
-/*    border: 3px dashed #ddd;
-    background-color: transparent;
-    color: #bbb;*/
-  }
-  .btn-upload.active:after{
-/*    content: "\a Faites glisser vos fichiers ici";*/
-  }
   #uploadForm{
     width: 100%;
   }
@@ -203,9 +184,17 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 }
 //////////////////////////////////////////////////////
 // table - itransfer
-
+#contentTable{
+  .fixed-table-container{
+    border: 0;
+  }
+  .fixed-table-body{
+    border: 1px solid #ddd;
+  }
+}
 table[id^="table-"],
 table#mainTable {
+
   // download column
   thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1) {
     //width: 65px;
@@ -234,10 +223,6 @@ table#mainTable {
     //width: 40px;
   }
 
-  // Download column
-  tbody tr > td:nth-child(1) {
-    text-align: left;
-  }
   tbody tr > td:nth-child(1) a {
     margin-left: 43%;
   }

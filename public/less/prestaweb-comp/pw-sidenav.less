@@ -102,12 +102,11 @@ div#sidenav {
   padding-top: 1px;
   border-radius: 3px;
   ul > li > a {
-
     background-color: #F2F2F2;
     color: #656565;
     margin: 0;
     padding: 8px 0 8px 12px;
-    font-weight: bold;
+    font-weight: 400;
     cursor: pointer;
     text-decoration: none;
     border-left: 0;
@@ -142,6 +141,7 @@ div#sidenav {
     background-color: white;
     color: #808080;
     padding: 5px 0 5px 52px;
+    letter-spacing: .016em;
   }
 
   ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:hover,
@@ -151,4 +151,28 @@ div#sidenav {
     color: #3D86C5;
     // border-left: 3px solid #2871B0;
   }
+}
+
+// head titles
+
+div#sidenav > ul > li > a,
+div#sidenav > ul > li > ul > li > a{
+  font-size: 13px !important;
+  font-weight: bold;
+}
+
+// border top right Header ul
+div#sidenav > ul > li#root > a {
+
+  /*Firefox*/
+  -moz-border-top-left-radius: 0px;
+  -moz-border-top-right-radius: 4px;
+  -moz-border-bottom-right-radius: 0px;
+  -moz-border-bottom-left-radius: 0px;
+  /*Safari, Chrome*/
+  -webkit-border-top-left-radius: 0px;
+  -webkit-border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+
 }
