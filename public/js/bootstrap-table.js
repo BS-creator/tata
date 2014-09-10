@@ -619,13 +619,19 @@
         if (this.options.sidePagination !== 'server' ) {
             if(array){
                 var field       = array[0] || 'refDoc',
-                    value       = array[1] || '',
+                    value       = array[1] || ''/*,
                     operator    = array[2],
                     field2      = array[3],
-                    value2      = array[4];
-        //TODO: rewrite to parse an expression, not an array!!!
+                    value2      = array[4]*/;
+
                 this.data = value ? $.grep(this.options.data, function (item) {
-                    if(operator && field && field2){
+
+                    if ( typeof array === 'string' ) {
+
+                        return eval(array);
+                    }
+
+                    /*if(operator && field && field2){
                         var s = 'item["' + field + '"] === ' + value + ' ' + operator + ' ' +
                             'item["' +field2 + '"] === ' + value2;
                         if (eval(s)){
@@ -633,7 +639,7 @@
                         }else{
                             return false;
                         }
-                    }else
+                    }else*/
                     //filter on condition about the field
                     if (field){
                         if ( typeof value === 'number' ) {

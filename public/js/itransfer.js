@@ -3,14 +3,14 @@ $(function () {
 
     /***  GLOBAL VARIABLE ***/
     // array used to store all the existing document reference on the FTP server.
-    var serverURL   = 'http://172.20.20.64:8018/',
-        baseURL     = 'http://localhost:4000/itransfer/',
-        //dc          = {},
-        AjaxData    = [],
-        category    = [],
-        refDocUsed  = [],
-        username    = sessionStorage.getItem('username').toLowerCase(),
-        token       = sessionStorage.getItem('token'),
+    var serverURL = 'http://172.20.20.64:8018/',
+        baseURL = 'http://localhost:4000/itransfer/',
+    //dc          = {},
+        AjaxData = [],
+        category = [],
+        refDocUsed = [],
+        username = sessionStorage.getItem('username').toLowerCase(),
+        token = sessionStorage.getItem('token'),
         destFolders = [];
 
     window.dc = [];
@@ -56,9 +56,9 @@ $(function () {
 
     function mergeLabelDoc() {
 
-        $.each(category, function (i, cat){
-            $.each(AjaxData, function (j, row){
-                if(cat.refDoc == parseInt(row.refDoc)){
+        $.each(category, function (i, cat) {
+            $.each(AjaxData, function (j, row) {
+                if (cat.refDoc == parseInt(row.refDoc)) {
                     //TODO: multilanguage
                     row.libelle = cat.labelDoc_f;
                 }
@@ -75,11 +75,13 @@ $(function () {
             $('body').append(iframe);
             var content = iframe[0].contentDocument;
             /*var form = '<form action="' + array[i] + '" method="GET"></form>';
-            content.write(form);
-            $('form', content).submit();*/
+             content.write(form);
+             $('form', content).submit();*/
             content.write('<a href="' + array[i] + '"></a>');
             //console.log($('a', content));
-            $('a', content).click(function(){ window.location = array[i];});
+            $('a', content).click(function () {
+                window.location = array[i];
+            });
             setTimeout((function (iframe) {
                 return function () {
                     iframe.remove();
@@ -100,16 +102,16 @@ $(function () {
         var dlCount = row.downloadCount ? row.downloadCount : '';
         var icon = "fa-download";
         //console.log(row.uploadUserName + "!==" +username);
-        if (row.uploadUserName === username ){
+        if (row.uploadUserName === username) {
             icon = "fa-upload";
         }
         if (value) {
             return '<a class="dlfile" data-id="' + row.idFile + '" ' +
-                'data-file="' + row.fileName + '" ><i class="fa '+ icon +' fa-lg text-primary"></i>' +
+                'data-file="' + row.fileName + '" ><i class="fa ' + icon + ' fa-lg text-primary"></i>' +
                 '<small data-dl="' + row.downloadCount + '" class="text-muted">&nbsp;' + dlCount + '</small></a>';
         } else {
             return '<a class="dlfile" data-id="' + row.idFile + '" ' +
-                'data-file="' + row.fileName + '" ><i class="fa '+ icon +' fa-lg text-muted"></i>' +
+                'data-file="' + row.fileName + '" ><i class="fa ' + icon + ' fa-lg text-muted"></i>' +
                 '<small data-dl="' + row.downloadCount + ' class="text-muted">&nbsp;' + dlCount + '</small></a>';
         }
     }
@@ -138,38 +140,37 @@ $(function () {
             if (v.indexOf('pdf') !== -1) {
                 return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
                     '<i class="fa fa-file-pdf-o fa-lg" title="pdf"></i>' +
-                '</a>';
+                    '</a>';
             }
-            else if (v.indexOf('zip')!== -1) {
+            else if (v.indexOf('zip') !== -1) {
                 return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
-                    '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>'+
-                '</a>';
+                    '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>' +
+                    '</a>';
             }
-            else if (v.indexOf('xls')!== -1 || v.indexOf('csv') !== -1) {
-              return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
-                  '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>'+
-                '</a>';
+            else if (v.indexOf('xls') !== -1 || v.indexOf('csv') !== -1) {
+                return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                    '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>' +
+                    '</a>';
             }
             else if (v.indexOf('dat') !== -1) {
-              return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
-                  '<i class="fa fa-file-text-o fa-lg" title="dat"></i>'+
-                '</a>';
+                return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                    '<i class="fa fa-file-text-o fa-lg" title="dat"></i>' +
+                    '</a>';
             }
             else if (v.indexOf('jpg') !== -1 || v.indexOf('png') !== -1) {
-              return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
-                  '<i class="fa fa-file-picture-o fa-lg" title="image"></i>'+
-                '</a>';
-            }
-            else
-            {
-              return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
-                  '<i class="fa fa-file-o fa-lg" ></i>'+
-                '</a>';
-            }
-            if (v.indexOf('dat') !== -1 || v.indexOf('csv') !== -1 ){
                 return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
-                    '<i class="fa fa-bar-chart"></i>'+
-                '</a>';
+                    '<i class="fa fa-file-picture-o fa-lg" title="image"></i>' +
+                    '</a>';
+            }
+            else {
+                return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                    '<i class="fa fa-file-o fa-lg" ></i>' +
+                    '</a>';
+            }
+            if (v.indexOf('dat') !== -1 || v.indexOf('csv') !== -1) {
+                return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                    '<i class="fa fa-bar-chart"></i>' +
+                    '</a>';
             }
             return value;
         } else {
@@ -184,25 +185,25 @@ $(function () {
         //return bytesToSize(val);
     }
 
-    function formatUserName(value){
+    function formatUserName(value) {
         return value.toUpperCase();
     }
 
-    function formatDate(value, row){
+    function formatDate(value, row) {
         //2014-09-09"
         //if (value.length === )
         //console.log(row.date);
-        var year    = row.date.slice(0,4),
-            month   = row.date.slice(5,7),
-            day     = row.date.slice(8,10);
-        return day+"/"+month+"/"+year;
+        var year = row.date.slice(0, 4),
+            month = row.date.slice(5, 7),
+            day = row.date.slice(8, 10);
+        return day + "/" + month + "/" + year;
     }
 
-    function formatPath(value){
-        return value.replace('/data/'+ username +'/','');
+    function formatPath(value) {
+        return value.replace('/data/' + username + '/', '');
     }
 
-    function formatDefault (value) {
+    function formatDefault(value) {
         if (!value || value == '') return '';
         else return value;
     }
@@ -215,9 +216,9 @@ $(function () {
         ].join('');
     }
 
-    function menuActionClick (e, data) {
+    function menuActionClick(e, data) {
         var table = $('#mainTable');
-        if ( data.node.id === 'root'){
+        if (data.node.id === 'root') {
             table.bootstrapTable('showColumn', 'refDoc');
             table.bootstrapTable('showColumn', 'libelle');
             table.bootstrapTable('showColumn', 'noEmployeur');
@@ -226,54 +227,78 @@ $(function () {
             table.bootstrapTable('hideColumn', 'fileName');
             table.bootstrapTable('hideColumn', 'path');
             table.bootstrapTable('onFilter', ['uploadUserName', 'trf_fich']);
-        }else{
+        } else {
             data.instance.toggle_node(data.node);
 
             //Filter on refDoc
             var nodeid = parseInt(data.node.id);
-            if (nodeid > -1 && data.node.li_attr.class === 'leaf'){
+            if (nodeid > -1 && data.node.li_attr.class === 'leaf') {
                 table.bootstrapTable('showColumn', 'refDoc');
                 table.bootstrapTable('showColumn', 'libelle');
                 table.bootstrapTable('showColumn', 'noEmployeur');
                 table.bootstrapTable('showColumn', 'extension');
-                table.bootstrapTable('hideColumn','uploadUserName');
-                table.bootstrapTable('hideColumn','fileName');
-                table.bootstrapTable('hideColumn','path');
-                table.bootstrapTable('onFilter',['refDoc', nodeid ]);
+                table.bootstrapTable('hideColumn', 'uploadUserName');
+                table.bootstrapTable('hideColumn', 'fileName');
+                table.bootstrapTable('hideColumn', 'path');
+                table.bootstrapTable('onFilter', ['refDoc', nodeid ]);
             }
 
             //Filter for upload
-            if ( data.node.id === 'upload' ){
+            if (data.node.id === 'upload') {
                 //console.log("upload");
                 table.bootstrapTable('hideColumn', 'refDoc');
                 table.bootstrapTable('hideColumn', 'libelle');
                 table.bootstrapTable('hideColumn', 'noEmployeur');
                 table.bootstrapTable('hideColumn', 'extension');
-                table.bootstrapTable('showColumn','uploadUserName');
-                table.bootstrapTable('showColumn','fileName');
-                table.bootstrapTable('showColumn','path');
-                table.bootstrapTable('onFilter',['uploadUserName', username]);
+                table.bootstrapTable('showColumn', 'uploadUserName');
+                table.bootstrapTable('showColumn', 'fileName');
+                table.bootstrapTable('showColumn', 'path');
+                table.bootstrapTable('onFilter', ['uploadUserName', username]);
             }
             //Filter for other category
-            if ( data.node.id === 'other' ){
+            if (data.node.id === 'other') {
                 //console.log("other");
                 table.bootstrapTable('hideColumn', 'refDoc');
                 table.bootstrapTable('hideColumn', 'libelle');
                 table.bootstrapTable('hideColumn', 'noEmployeur');
                 table.bootstrapTable('hideColumn', 'extension');
                 table.bootstrapTable('showColumn', 'uploadUserName');
-                table.bootstrapTable('showColumn','fileName');
-                table.bootstrapTable('showColumn','path');
-                table.bootstrapTable('onFilter',['refDoc','empty']);
+                table.bootstrapTable('showColumn', 'fileName');
+                table.bootstrapTable('showColumn', 'path');
+                table.bootstrapTable('onFilter', ['refDoc', 'empty']);
             }
         }
+    }
+
+    function filterDate(e) {
+
+        //console.log("date begin = " + $( this ).val() + "\t time = " + $.now());
+        var date = $(this).val();
+        //console.log(e.currentTarget.name, $(this));
+        var day = date.slice(0, 2),
+            month = date.slice(3, 5),
+            year = date.slice(6, 11);
+        var dateF = year + "-" + month + "-" + day;
+        console.log("dateF", dateF);
+        var expr = "item['date'] ";
+        if (e.currentTarget.name === 'start') {
+            // get end
+            // $('input[name=end]').
+        } else if (e.currentTarget.name === 'end') {
+            // get start
+        } else {
+            // ?
+        }
+
+        $table.bootstrapTable('onFilter', "item['date'] > '" + dateF + "'");
+
     }
 
     /****************************************************
      * MENU
      * */
 
-     // $('.leaf') to access leafs...!!!!
+        // $('.leaf') to access leafs...!!!!
     function createMenu() {
         var tree = [];
         var cat = [];
@@ -294,8 +319,8 @@ $(function () {
                     //add child node
                     tree[(tree.length - 1)]
                         .children[(tree[(tree.length - 1)].children.length)] = {
-                        "id" : refdoc,
-                        "data" : refdoc,
+                        "id": refdoc,
+                        "data": refdoc,
                         "text": refdoc + " - " + item.labelDoc_f,
                         "li_attr": {"class": "leaf"}
                     }
@@ -353,14 +378,14 @@ $(function () {
         };
 
 
-        var $sidenave = $('#sidenav')
+        var $sidenave = $('#sidenav');
 
         //destroy before reload
         $sidenave.html('');
 
         // JSTREE
         $sidenave
-            .on('select_node.jstree', menuActionClick )
+            .on('select_node.jstree', menuActionClick)
             .jstree({
                 'core': {
                     'data': {
@@ -503,7 +528,7 @@ $(function () {
                     valign: 'middle',
                     sortable: true,
                     class: 'ext',
-                    formatter:FormatExtension
+                    formatter: FormatExtension
                 },
                 /*{
                  field: 'index',
@@ -555,7 +580,7 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     clickToSelect: false,
-                    class:  'del',
+                    class: 'del',
                     formatter: operateFormatter,
                     events: {
                         'click .remove': function (e, value, row, index) {
@@ -573,20 +598,20 @@ $(function () {
      * AJAX
      * */
 
-    function deleteFile(filePath){
+    function deleteFile(filePath) {
         var data = {
-            "token"     : token,
-            "filePath"  : filePath
+            "token": token,
+            "filePath": filePath
         };
         $.ajax({
             type: 'DELETE',
             url: serverURL + 'file/',
-            data : data,
-            success: function(data){
-                if(data){
+            data: data,
+            success: function (data) {
+                if (data) {
                     alert("Fichier supprimé");
                     location.reload();
-                }else{
+                } else {
                     alert("Fichier déja supprimé");
                 }
             }
@@ -599,7 +624,9 @@ $(function () {
         return $.ajax({
             type: 'GET',
             url: serverURL + 'folder/' + token + '/',
-            success: function(data){ destFolders = data;}
+            success: function (data) {
+                destFolders = data;
+            }
         });
     }
 
@@ -608,32 +635,34 @@ $(function () {
         return $.ajax({
             type: 'GET',
             url: serverURL + 'category/',
-            success: function(data){ category = data;}
+            success: function (data) {
+                category = data;
+            }
         });
 
     }
 
     function LoadData() {
 
-      $('#loader').show();
+        $('#loader').show();
 
-       return $.ajax({
+        return $.ajax({
             type: "GET",
             url: serverURL + 'file/' + token + '/',
             success: function (data) {
-              AjaxData = data;
-               /* window.dc = new DataCollection(data);*/
+                AjaxData = data;
+                /* window.dc = new DataCollection(data);*/
             },
-           complete: function () {
-             $('#loader').hide();
-           },
+            complete: function () {
+                $('#loader').hide();
+            },
             dataType: 'json',
             statusCode: {
                 403: function () {
-                    alert("ERROR: Forbidden.");
+                    alert("ERREUR: Authentification.");
                 },
                 401: function () {
-                    alert("ERROR: connection problem.");
+                    alert("ERROR: probleme de connection.");
                 }
             }
         });
@@ -646,20 +675,23 @@ $(function () {
 
         // set token for upload
         var $uploadform = $('#uploadForm');
-        $("input[name|='token']").val(token);
+        $("input[name='token']").val(token);
 
         $uploadform.fileupload({
             sequentialUploads: true,
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('#progress').css('width', progress + '%' );
+                $('#progress .progress-bar').css('width', progress + '%');
             },
             add: function (e, data) {
                 var jqXHR = data.submit()
-                    .success(function (result, textStatus, jqXHR) {})
-                    .error(function (jqXHR, textStatus, errorThrown) {alert("Error " + textStatus)})
+                    .success(function (result, textStatus, jqXHR) {
+                    })
+                    .error(function (jqXHR, textStatus, errorThrown) {
+                        alert("Error " + textStatus)
+                    })
                     .complete(function (result, textStatus, jqXHR) {
-                        console.log("result file upload: ", result);
+                        //console.log("result file upload: ", result);
                         $('#progress').hide();
                         $('.close').click();
                         location.reload();
@@ -671,21 +703,21 @@ $(function () {
         });
 
         //SYNC & WAIT
-        $.when(LoadCategory(), LoadData(), LoadFolder()).done(function (){
+        $.when(LoadCategory(), LoadData(), LoadFolder()).done(function () {
             //dc = new DataCollection(AjaxData);
             //dc.query().filter({last_name: 'Snow'}).values();
 
             var listFolder = $('#uploadForm p:first');
-            for (key in destFolders){
-                if(destFolders[key] === 'Presta'){
+            for (key in destFolders) {
+                if (destFolders[key] === 'Presta') {
                     listFolder.append(
-                            '<label class="radio control-label"><input name="destFolder" value="'+
-                            destFolders[key] +'" type="radio" checked />'+ destFolders[key] +'/</label>'
+                            '<label class="radio control-label"><input name="destFolder" value="' +
+                            destFolders[key] + '" type="radio" checked />' + destFolders[key] + '/</label>'
                     );
-                }else{
+                } else {
                     listFolder.append(
-                            '<label class="radio control-label"><input name="destFolder" value="'+
-                            destFolders[key] +'" type="radio" />'+ destFolders[key] +'/</label>'
+                            '<label class="radio control-label"><input name="destFolder" value="' +
+                            destFolders[key] + '" type="radio" />' + destFolders[key] + '/</label>'
                     );
                 }
 
@@ -697,8 +729,7 @@ $(function () {
 
 
             //APPLY FILTERS
-            //TODO: change
-            $table.bootstrapTable('onFilter',['isNew', true, '||', 'notDownloaded', true]);
+            $table.bootstrapTable('onFilter', "(item['isNew'] || item['notDownloaded'])");
 
             //DOWNLOAD files
             $table.delegate('.dlfile', 'click', function () {
@@ -713,8 +744,7 @@ $(function () {
             });
 
 
-            //TODO: RELOAD!!!!
-            $('body').delegate('.reloadme', 'click', function(){
+            $('body').delegate('.reloadme', 'click', function () {
                 //$table.bootstrapTable('onFilter');
                 location.reload();
             });
@@ -726,27 +756,28 @@ $(function () {
             });
 
             // Filter
-            $('#filterDL').on('click', function (){
+            $('#filterDL').on('click', function () {
                 //console.log('filterDL');
-                $table.bootstrapTable('onFilter',['notDownloaded', false]);
+                //$table.bootstrapTable('onFilter',['notDownloaded', false]);
+                $table.bootstrapTable('onFilter', "item['notDownloaded']");
             });
-            $('#filterNew').on('click', function(){
-                $table.bootstrapTable('onFilter',['isNew', true]);
+            $('#filterNew').on('click', function () {
+                $table.bootstrapTable('onFilter', "item['isNew']");
             });
 
             //TODO
-            $('header-logo').attr('href',baseURL);
+            $('header-logo').attr('href', baseURL);
 
             /*//Add download all button
-            $('#get-selections').click(function () {
-                alert('Selected values: ' + JSON.stringify($table.bootstrapTable('getSelections')));
-                var array = [];
-                $.each($table.bootstrapTable('getSelections'), function(i, item){
-                    array[array.length] = serverURL + 'file/' + token + '/' + item.idFile + '/' + item.fileName;
-                });
-                //console.log(array);
-                download(array);
-            });*/
+             $('#get-selections').click(function () {
+             alert('Selected values: ' + JSON.stringify($table.bootstrapTable('getSelections')));
+             var array = [];
+             $.each($table.bootstrapTable('getSelections'), function(i, item){
+             array[array.length] = serverURL + 'file/' + token + '/' + item.idFile + '/' + item.fileName;
+             });
+             //console.log(array);
+             download(array);
+             });*/
 
             $('.user-name').html(username.toUpperCase());
 
@@ -758,23 +789,20 @@ $(function () {
             //////////////////// upload
             // add cllss active to btn
 
-            $("#uploadCollapse .btn-upload").on('click', function (){
-                $( "#uploadCollapse .btn-upload" ).toggleClass( "active", "active");
+            $("#uploadCollapse .btn-upload").on('click', function () {
+                $("#uploadCollapse .btn-upload").toggleClass("active", "active");
             });
 
             // checked : show btn-download
 
 
             // date picker
-            $('input[name=start]').datepicker({
+            $('#datepicker input').datepicker({
                 format: "dd/mm/yyyy",
                 language: "fr",
                 autoclose: true,
                 todayHighlight: true
-            }).on('changeDate', function(e){
-                console.log("date begin = " + $( this ).val() + "\t time = " + $.now());
-                $table.bootstrapTable('onFilter', ['date', '2014-09-10']);
-            });
+            }).on('changeDate', filterDate);
 
         });
     }
