@@ -197,17 +197,34 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 table[id^="table-"],
 table#mainTable {
 
-  // download column
-  thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1) {
-    //width: 65px;
-  }
-
   // filtres de la table
   thead tr th {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
   }
+  thead tr th.dl {
+    width: 55px;
+  }
+  thead tr th.formattedDate {
+     width: 110px;
+  }
+/*  thead tr th.empl {
+    width: 88px;
+  }
+  thead tr th.refDoc {
+    width: 65px;
+  }
+  thead tr th.size {
+    width: 80px;
+  }
+  thead tr th.ext {
+    width: 45px;
+  }*/
+  thead tr th.del{
+    width: 60px;
+  }
+
 
   // icon unsorted
   thead tr th div.th-inner span.unsorted:after {

@@ -146,11 +146,38 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 #contentTable .fixed-table-body {
   border: 1px solid #ddd;
 }
+table[id^="table-"],
+table#mainTable {
+  /*  thead tr th.empl {
+    width: 88px;
+  }
+  thead tr th.refDoc {
+    width: 65px;
+  }
+  thead tr th.size {
+    width: 80px;
+  }
+  thead tr th.ext {
+    width: 45px;
+  }*/
+}
 table[id^="table-"] thead tr th,
 table#mainTable thead tr th {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
+}
+table[id^="table-"] thead tr th.dl,
+table#mainTable thead tr th.dl {
+  width: 55px;
+}
+table[id^="table-"] thead tr th.formattedDate,
+table#mainTable thead tr th.formattedDate {
+  width: 110px;
+}
+table[id^="table-"] thead tr th.del,
+table#mainTable thead tr th.del {
+  width: 60px;
 }
 table[id^="table-"] thead tr th div.th-inner span.unsorted:after,
 table#mainTable thead tr th div.th-inner span.unsorted:after {
