@@ -342,7 +342,7 @@ $(function () {
         tree[tree.length] =
         {
             "id": "upload",
-            "text": '> Documents transmis à Group S', //Overgebrachte documenten naar Group S
+            "text": 'Documents transmis à Group S', //Overgebrachte documenten naar Group S
             "state": {
                 "opened": true,
                 "disabled": false,
@@ -407,6 +407,7 @@ $(function () {
                     title: '<i class="fa fa-download fa-lg"></i>',
                     align: 'center',
                     sortable: true,
+                    class: 'dl',
                     formatter: formatDownload
                 },
                 {
@@ -460,6 +461,7 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
+                    class: 'empl',
                     formatter: formatDefault
                 },
                 {
@@ -473,7 +475,7 @@ $(function () {
                 },
                 {
                     field: 'refDoc',
-                    title: 'Ref Document',
+                    title: 'Ref Doc',
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
@@ -487,6 +489,7 @@ $(function () {
                     valign: 'middle',
                     visible: true,
                     sortable: true,
+                    class: 'size',
                     formatter: formatSize
                 },
                 {
@@ -495,6 +498,7 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
+                    class: 'ext',
                     formatter:FormatExtension
                 },
                 /*{
@@ -546,6 +550,7 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     clickToSelect: false,
+                    class:  'del',
                     formatter: operateFormatter,
                     events: {
                         'click .remove': function (e, value, row, index) {
@@ -665,7 +670,7 @@ $(function () {
             //dc = new DataCollection(AjaxData);
             //dc.query().filter({last_name: 'Snow'}).values();
 
-            var listFolder = $('#uploadForm p:first ');
+            var listFolder = $('#uploadForm p:first');
             for (key in destFolders){
                 listFolder.append(
                     '<label class="radio control-label"><input name="destFolder" value="'+ destFolders[key] +'" type="radio" />'+
