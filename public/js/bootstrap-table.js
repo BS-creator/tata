@@ -417,6 +417,7 @@
         var $this = $(event.currentTarget),
             $this_ = this.$header.find('th').eq($this.index());
 
+        console.log($this);
         this.$header.add(this.$header_).find('span.order').remove();
 
         if (this.options.sortName === $this.data('field')) {
@@ -656,7 +657,7 @@
         }
     };
 
-    BootstrapTable.prototype.onSortDownload = function () {
+   /* BootstrapTable.prototype.onSortDownload = function () {
         var //$this = $(event.currentTarget),
             $this_ = this.$header.find('th').eq(1); //TODO: get the index of the DL column programatically
 
@@ -675,7 +676,7 @@
         }
         this.initSort();
         this.initBody();
-    };
+    };*/
     /** CUSTOM **/
 
     BootstrapTable.prototype.initPagination = function (updateData) {
