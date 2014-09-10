@@ -9,6 +9,8 @@ $(function () {
         AjaxData    = [],
         category    = [],
         refDocUsed  = [],
+        username    = sessionStorage.getItem('username').toLowerCase(),
+        token       = sessionStorage.getItem('token'),
         destFolders = [];
 
     window.dc = [];
@@ -61,6 +63,7 @@ $(function () {
                     row.libelle = cat.labelDoc_f;
                 }
                 row.noEmployeur = parseInt(row.noEmployeur);
+                row.uploadUserName.toUpperCase();
             });
         });
     };
@@ -94,13 +97,18 @@ $(function () {
     //Format for the download column
     function formatDownload(value, row) {
         var dlCount = row.downloadCount ? row.downloadCount : '';
+        var icon = "fa-download";
+        //console.log(row.uploadUserName + "!==" +username);
+        if (row.uploadUserName === username ){
+            icon = "fa-upload";
+        }
         if (value) {
             return "<a class='dl' data-id='" + row.idFile + "' " +
-                "data-file='" + row.fileName + "' ><i class='fa fa-download fa-lg text-primary'></i>" +
+                "data-file='" + row.fileName + "' ><i class='fa "+ icon +" fa-lg text-primary'></i>" +
                 "<small data-dl='" + row.downloadCount + "' class='text-muted'>&nbsp;" + dlCount + "</small></a>";
         } else {
             return "<a class='dl' data-id='" + row.idFile + "' " +
-                "data-file='" + row.fileName + "' ><i class='fa fa-download fa-lg text-muted'></i>" +
+                "data-file='" + row.fileName + "' ><i class='fa "+ icon +" fa-lg text-muted'></i>" +
                 "<small data-dl='" + row.downloadCount + "' class='text-muted'>&nbsp;" + dlCount + "</small></a>";
         }
     }
@@ -124,15 +132,16 @@ $(function () {
 
     function FormatExtension(value) {
         if (value || value != '') {
-            var v = value;
-            v.toLowerCase();
+            var v = value.toLowerCase();
 
-            if (v.indexOf('pdf')) {
-                //console.log("VALUE = ", v);
+            if (v.indexOf('pdf') !== -1 ) {
                 return '<i class="fa fa-file-pdf-o fa-lg"></i>';
             }
-            if (v.indexOf('zip')) {
+            if (v.indexOf('zip') !== -1 ) {
                 return '<i class="fa fa-file-archive-o fa-lg"></i>';
+            }
+            if (v.indexOf('dat') !== -1 || v.indexOf('csv') !== -1 ){
+                return '<i class="fa fa-bar-chart"></i>';
             }
             return value;
         } else {
@@ -145,6 +154,20 @@ $(function () {
         if (val > 1024) return Math.round(val / 1024, 2) + ' KB';
         else return val;
         //return bytesToSize(val);
+    }
+
+    function formatUserName(value){
+        return value.toUpperCase();
+    }
+
+    function formatDate(value, row){
+        //2014-09-09"
+        //if (value.length === )
+        //console.log(row.date);
+        var year    = row.date.slice(0,4),
+            month   = row.date.slice(5,7),
+            day     = row.date.slice(8,10);
+        return day+"-"+month+"-"+year;
     }
 
     function formatDefault (value) {
@@ -167,9 +190,10 @@ $(function () {
             table.bootstrapTable('showColumn', 'libelle');
             table.bootstrapTable('showColumn', 'noEmployeur');
             table.bootstrapTable('showColumn', 'extension');
-            table.bootstrapTable('hideColumn','uploadUserName');
-            table.bootstrapTable('hideColumn','fileName');
-            table.bootstrapTable('onFilter',['uploadUserName', 'TRF_FICH']);
+            table.bootstrapTable('hideColumn', 'uploadUserName');
+            table.bootstrapTable('hideColumn', 'fileName');
+            table.bootstrapTable('hideColumn', 'path');
+            table.bootstrapTable('onFilter', ['uploadUserName', 'trf_fich']);
         }else{
             data.instance.toggle_node(data.node);
 
@@ -182,20 +206,21 @@ $(function () {
                 table.bootstrapTable('showColumn', 'extension');
                 table.bootstrapTable('hideColumn','uploadUserName');
                 table.bootstrapTable('hideColumn','fileName');
+                table.bootstrapTable('hideColumn','path');
                 table.bootstrapTable('onFilter',['refDoc', nodeid ]);
             }
 
             //Filter for upload
             if ( data.node.id === 'upload' ){
                 //console.log("upload");
-                //TODO: make username Dynamic
                 table.bootstrapTable('hideColumn', 'refDoc');
                 table.bootstrapTable('hideColumn', 'libelle');
                 table.bootstrapTable('hideColumn', 'noEmployeur');
                 table.bootstrapTable('hideColumn', 'extension');
                 table.bootstrapTable('showColumn','uploadUserName');
                 table.bootstrapTable('showColumn','fileName');
-                table.bootstrapTable('onFilter',['uploadUserName','f00000001']);
+                table.bootstrapTable('showColumn','path');
+                table.bootstrapTable('onFilter',['uploadUserName', username]);
             }
             //Filter for other category
             if ( data.node.id === 'other' ){
@@ -206,6 +231,7 @@ $(function () {
                 table.bootstrapTable('hideColumn', 'extension');
                 table.bootstrapTable('showColumn', 'uploadUserName');
                 table.bootstrapTable('showColumn','fileName');
+                table.bootstrapTable('showColumn','path');
                 table.bootstrapTable('onFilter',['refDoc','empty']);
             }
         }
@@ -228,7 +254,9 @@ $(function () {
 
             var refdoc = parseInt(item.refDoc),
                 numcat = parseInt(item.noCategory);
-            if (numcat == 0) numcat = 98;
+            //if (numcat == 0) numcat = 98;
+
+
 
             if ($.inArray(refdoc, refDocUsed) > -1) { // doc is used
                 //adding label
@@ -270,21 +298,23 @@ $(function () {
             tree[tree.length] =
             {
                 "id": "other",
-                "text": '98 - Documents Divers',
+                "text": '98 - Autres Documents',
                 "state": {
                     "opened": true,
                     "disabled": false,
                     "selected": false
                 },
+                "children": [],
                 "li_attr": {"class": "leaf"}
             };
         }
+
 
         // ---> ADDING the "UPLOAD CATEGORY"
         tree[tree.length] =
         {
             "id": "upload",
-            "text": '99 - Documents transmis à Group S', //Overgebrachte documenten naar Group S
+            "text": '> Documents transmis à Group S', //Overgebrachte documenten naar Group S
             "state": {
                 "opened": true,
                 "disabled": false,
@@ -303,7 +333,7 @@ $(function () {
                 'core': {
                     'data': {
                         "id": 'root',
-                        "text": "Tous les documents",
+                        "text": "  Tous les documents",
                         "state": {
                             "opened": true,
                             "disabled": false,
@@ -359,11 +389,23 @@ $(function () {
                     formatter: formatIsNew
                 },
                 {
+                    field: 'formattedDate',
+                    title: 'Date',
+                    align: 'center',
+                    valign: 'middle',
+                    class: "formattedDate",
+                    sortable: true,
+                    visible: true,
+                    formatter: formatDate
+                },
+                {
                     field: 'date',
                     title: 'Date',
                     align: 'center',
                     valign: 'middle',
+                    class: 'sortableDate',
                     sortable: true,
+                    visible: false,
                     formatter: formatDefault
                 },
                 {
@@ -380,7 +422,8 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     visible: false,
-                    sortable: true
+                    sortable: true,
+                    formatter: formatUserName
                 },
                 {
                     field: 'noEmployeur',
@@ -493,7 +536,7 @@ $(function () {
 
     function deleteFile(filePath){
         var data = {
-            "token"     : sessionStorage.getItem("token"),
+            "token"     : token,
             "filePath"  : filePath
         };
         $.ajax({
@@ -515,7 +558,7 @@ $(function () {
         //folder
         return $.ajax({
             type: 'GET',
-            url: serverURL + 'folder/' + sessionStorage.getItem('token') + '/',
+            url: serverURL + 'folder/' + token + '/',
             success: function(data){ destFolders = data;}
         });
     };
@@ -536,7 +579,7 @@ $(function () {
 
        return $.ajax({
             type: "GET",
-            url: serverURL + 'file/' + sessionStorage.getItem('token') + '/',
+            url: serverURL + 'file/' + token + '/',
             success: function (data) {
               AjaxData = data;
                 window.dc = new DataCollection(data);
@@ -564,7 +607,7 @@ $(function () {
 
         // set token for upload
         var $uploadform = $('#uploadForm');
-        $("input[name|='token']").val(sessionStorage.getItem('token'));
+        $("input[name|='token']").val(token);
 
         $uploadform.fileupload({
             sequentialUploads: true,
@@ -588,9 +631,12 @@ $(function () {
             //dc = new DataCollection(AjaxData);
             //dc.query().filter({last_name: 'Snow'}).values();
 
-            var listFolder = $('#folder');
+            var listFolder = $('#uploadForm p:first ');
             for (key in destFolders){
-                listFolder.append('<li><a href="#" data-folder="'+ destFolders[key] +'">'+ destFolders[key] +'</a></li>');
+                listFolder.append(
+                    '<label class="radio control-label"><input name="destFolder" value="'+ destFolders[key] +'" type="radio" />'+
+                        destFolders[key] +'/</label>'
+                );
             }
 
             mergeLabelDoc();
@@ -603,7 +649,7 @@ $(function () {
 
             //DOWNLOAD files
             $table.delegate('.dl', 'click', function () {
-                $(this).attr('href', serverURL + 'file/' + sessionStorage.getItem('token') + '/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
+                $(this).attr('href', serverURL + 'file/' + token + '/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
                 //Update icon
                 $(this).find('i').remove();
                 var small = $(this).find('small');     // cache object
@@ -623,7 +669,6 @@ $(function () {
             $('#signout').on('click', function () {
                 sessionStorage.setItem("token", '');
                 window.location = baseURL;
-                $('#login').val(window.login);
             });
 
             // Filter
@@ -635,19 +680,19 @@ $(function () {
                 $table.bootstrapTable('onFilter',['isNew', true]);
             });
 
-            $('header-logo').attr('href',baseURL)
+            $('header-logo').attr('href',baseURL);
             //Add download all button
             $('#get-selections').click(function () {
                 alert('Selected values: ' + JSON.stringify($table.bootstrapTable('getSelections')));
                 var array = [];
                 $.each($table.bootstrapTable('getSelections'), function(i, item){
-                    array[array.length] = serverURL + 'file/' + sessionStorage.getItem('token') + '/' + item.idFile + '/' + item.fileName;
+                    array[array.length] = serverURL + 'file/' + token + '/' + item.idFile + '/' + item.fileName;
                 });
                 //console.log(array);
                 download(array);
             });
 
-            $('.user-name').html(sessionStorage.getItem("username"));
+            $('.user-name').html(username.toUpperCase());
 
 
             //////////////////// upload

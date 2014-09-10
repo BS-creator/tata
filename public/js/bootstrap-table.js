@@ -390,7 +390,11 @@
         var name = this.options.sortName,
             order = this.options.sortOrder === 'desc' ? -1 : 1,
             index = $.inArray(this.options.sortName, this.header.fields);
-
+        /*CUSTOM: search on date (invisible)*/
+        if(name === 'date'){
+            index = 1;
+        }
+        /*CUSTOM: search on date (invisible)*/
         if (index !== -1) {
             var sorter = this.header.sorters[index];
             this.data.sort(function (a, b) {
@@ -417,13 +421,21 @@
             $this_ = this.$header.find('th').eq($this.index());
 
         this.$header.add(this.$header_).find('span.order').remove();
-
-        if (this.options.sortName === $this.data('field')) {
-            this.options.sortOrder = this.options.sortOrder === 'asc' ? 'desc' : 'asc';
-        } else {
-            this.options.sortName = $this.data('field');
+        /*CUSTOM: search on date (invisible)*/
+        if($this.data('field') === 'formattedDate'){
+            this.options.sortName = 'date';
             this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
+        }else{
+        /*CUSTOM: search on date (invisible)*/
+            if (this.options.sortName === $this.data('field')) {
+                this.options.sortOrder = this.options.sortOrder === 'asc' ? 'desc' : 'asc';
+            } else {
+                this.options.sortName = $this.data('field');
+                this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
+            }
         }
+
+
         this.trigger('sort', this.options.sortName, this.options.sortOrder);
 
         $this.add($this_).data('order', this.options.sortOrder)
@@ -655,7 +667,7 @@
         }
     };
 
-    BootstrapTable.prototype.onSortDownload = function () {
+   /* BootstrapTable.prototype.onSortDownload = function () {
         var //$this = $(event.currentTarget),
             $this_ = this.$header.find('th').eq(1); //TODO: get the index of the DL column programatically
 
@@ -674,7 +686,7 @@
         }
         this.initSort();
         this.initBody();
-    };
+    };*/
     /** CUSTOM **/
 
     BootstrapTable.prototype.initPagination = function (updateData) {
