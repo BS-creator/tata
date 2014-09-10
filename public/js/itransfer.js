@@ -385,11 +385,11 @@ $(function () {
                     formatter: formatIsNew
                 },
                 {
-                    field: 'dateFormatted',
+                    field: 'formattedDate',
                     title: 'Date',
                     align: 'center',
                     valign: 'middle',
-                    class: "testclass",
+                    class: "formattedDate",
                     sortable: true,
                     visible: true,
                     formatter: formatDate
@@ -399,6 +399,7 @@ $(function () {
                     title: 'Date',
                     align: 'center',
                     valign: 'middle',
+                    class: 'sortableDate',
                     sortable: true,
                     visible: false,
                     formatter: formatDefault

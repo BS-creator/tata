@@ -391,7 +391,11 @@
         var name = this.options.sortName,
             order = this.options.sortOrder === 'desc' ? -1 : 1,
             index = $.inArray(this.options.sortName, this.header.fields);
-
+        /*CUSTOM: search on date (invisible)*/
+        if(name === 'date'){
+            index = 1;
+        }
+        /*CUSTOM: search on date (invisible)*/
         if (index !== -1) {
             var sorter = this.header.sorters[index];
             this.data.sort(function (a, b) {
@@ -419,13 +423,22 @@
 
         console.log($this);
         this.$header.add(this.$header_).find('span.order').remove();
-
-        if (this.options.sortName === $this.data('field')) {
-            this.options.sortOrder = this.options.sortOrder === 'asc' ? 'desc' : 'asc';
-        } else {
-            this.options.sortName = $this.data('field');
+        /*CUSTOM: search on date (invisible)*/
+        if($this.data('field') === 'formattedDate'){
+            console.log($this.data('order'));
+            this.options.sortName = 'date';
             this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
+        }else{
+        /*CUSTOM: search on date (invisible)*/
+            if (this.options.sortName === $this.data('field')) {
+                this.options.sortOrder = this.options.sortOrder === 'asc' ? 'desc' : 'asc';
+            } else {
+                this.options.sortName = $this.data('field');
+                this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
+            }
         }
+
+
         this.trigger('sort', this.options.sortName, this.options.sortOrder);
 
         $this.add($this_).data('order', this.options.sortOrder)
