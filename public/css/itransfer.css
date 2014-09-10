@@ -41,6 +41,7 @@ li {
 }
 #upload-modal form#uploadForm p:first-child {
   padding: 0 47%;
+  margin-bottom: 20px;
 }
 #upload-modal #uploadFiles {
   width: 100%;
