@@ -584,7 +584,7 @@ $(function () {
             url: serverURL + 'file/' + token + '/',
             success: function (data) {
               AjaxData = data;
-                window.dc = new DataCollection(data);
+               /* window.dc = new DataCollection(data);*/
             },
            complete: function () {
              $('#loader').hide();
@@ -647,6 +647,7 @@ $(function () {
 
 
             //APPLY FILTERS
+            //TODO: change
             $table.bootstrapTable('onFilter',['isNew', true, '||', 'notDownloaded', true]);
 
             //DOWNLOAD files
@@ -662,12 +663,12 @@ $(function () {
             });
 
 
+            //TODO: RELOAD!!!!
             $('body').delegate('.reloadme', 'click', function(){
                 $table.bootstrapTable('onFilter');
             });
 
-            $('.user-name').html(window.login);
-
+            // LOGOUT
             $('#signout').on('click', function () {
                 sessionStorage.setItem("token", '');
                 window.location = baseURL;
@@ -682,8 +683,10 @@ $(function () {
                 $table.bootstrapTable('onFilter',['isNew', true]);
             });
 
+            //TODO
             $('header-logo').attr('href',baseURL);
-            //Add download all button
+
+            /*//Add download all button
             $('#get-selections').click(function () {
                 alert('Selected values: ' + JSON.stringify($table.bootstrapTable('getSelections')));
                 var array = [];
@@ -692,7 +695,7 @@ $(function () {
                 });
                 //console.log(array);
                 download(array);
-            });
+            });*/
 
             $('.user-name').html(username.toUpperCase());
 

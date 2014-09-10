@@ -623,7 +623,7 @@
                     operator    = array[2],
                     field2      = array[3],
                     value2      = array[4];
-
+        //TODO: rewrite to parse an expression, not an array!!!
                 this.data = value ? $.grep(this.options.data, function (item) {
                     if(operator && field && field2){
                         var s = 'item["' + field + '"] === ' + value + ' ' + operator + ' ' +
