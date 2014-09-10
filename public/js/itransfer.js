@@ -132,7 +132,7 @@ $(function () {
             else if (v.indexOf('zip')) {
                 return '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>';
             }
-            else if (v.indexOf('xls')) {
+            else if (v.indexOf('xls') || v.indexOf('csv')) {
               return '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>';
             }
             else if (v.indexOf('dat')) {

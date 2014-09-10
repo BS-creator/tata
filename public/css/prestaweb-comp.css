@@ -402,7 +402,7 @@ div#sidenav ul > li > a {
   color: #656565;
   margin: 0;
   padding: 8px 0 8px 12px;
-  font-weight: bold;
+  font-weight: 400;
   cursor: pointer;
   text-decoration: none;
   border-left: 0;
@@ -433,12 +433,30 @@ div#sidenav ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a 
   background-color: white;
   color: #808080;
   padding: 5px 0 5px 52px;
+  letter-spacing: .016em;
 }
 div#sidenav ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:hover,
 div#sidenav ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:focus,
 div#sidenav ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:active,
 div#sidenav ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a.active {
   color: #3D86C5;
+}
+div#sidenav > ul > li > a,
+div#sidenav > ul > li > ul > li > a {
+  font-size: 13px !important;
+  font-weight: bold;
+}
+div#sidenav > ul > li#root > a {
+  /*Firefox*/
+  -moz-border-top-left-radius: 0px;
+  -moz-border-top-right-radius: 4px;
+  -moz-border-bottom-right-radius: 0px;
+  -moz-border-bottom-left-radius: 0px;
+  /*Safari, Chrome*/
+  -webkit-border-top-left-radius: 0px;
+  -webkit-border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
 }
 .nav > li > a {
   padding: 7px 15px;
