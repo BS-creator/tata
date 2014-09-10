@@ -127,10 +127,12 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 }
 .fixed-table-toolbar #datepicker {
   margin-top: 0;
+  max-width: 280px;
 }
 .fixed-table-toolbar #datepicker input,
 .fixed-table-toolbar #datepicker span {
   height: 34px;
+  font-size: 14px;
 }
 .fixed-table-toolbar .columns,
 .fixed-table-toolbar .search {
