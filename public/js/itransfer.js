@@ -133,15 +133,16 @@ $(function () {
 
     function FormatExtension(value) {
         if (value || value != '') {
-            var v = value;
-            v.toLowerCase();
+            var v = value.toLowerCase();
 
-            if (v.indexOf('pdf')) {
-                //console.log("VALUE = ", v);
+            if (v.indexOf('pdf') !== -1 ) {
                 return '<i class="fa fa-file-pdf-o fa-lg"></i>';
             }
-            if (v.indexOf('zip')) {
+            if (v.indexOf('zip') !== -1 ) {
                 return '<i class="fa fa-file-archive-o fa-lg"></i>';
+            }
+            if (v.indexOf('dat') !== -1 || v.indexOf('csv') !== -1 ){
+                return '<i class="fa fa-bar-chart"></i>';
             }
             return value;
         } else {
@@ -190,9 +191,10 @@ $(function () {
             table.bootstrapTable('showColumn', 'libelle');
             table.bootstrapTable('showColumn', 'noEmployeur');
             table.bootstrapTable('showColumn', 'extension');
-            table.bootstrapTable('hideColumn','uploadUserName');
-            table.bootstrapTable('hideColumn','fileName');
-            table.bootstrapTable('onFilter',['uploadUserName', 'trf_fich']);
+            table.bootstrapTable('hideColumn', 'uploadUserName');
+            table.bootstrapTable('hideColumn', 'fileName');
+            table.bootstrapTable('hideColumn', 'path');
+            table.bootstrapTable('onFilter', ['uploadUserName', 'trf_fich']);
         }else{
             data.instance.toggle_node(data.node);
 
@@ -219,7 +221,7 @@ $(function () {
                 table.bootstrapTable('showColumn','uploadUserName');
                 table.bootstrapTable('showColumn','fileName');
                 table.bootstrapTable('showColumn','path');
-                table.bootstrapTable('onFilter',['uploadUserName',username]);
+                table.bootstrapTable('onFilter',['uploadUserName', username]);
             }
             //Filter for other category
             if ( data.node.id === 'other' ){
@@ -253,7 +255,9 @@ $(function () {
 
             var refdoc = parseInt(item.refDoc),
                 numcat = parseInt(item.noCategory);
-            if (numcat == 0) numcat = 98;
+            //if (numcat == 0) numcat = 98;
+
+
 
             if ($.inArray(refdoc, refDocUsed) > -1) { // doc is used
                 //adding label
@@ -295,15 +299,17 @@ $(function () {
             tree[tree.length] =
             {
                 "id": "other",
-                "text": '98 - Documents Divers',
+                "text": '98 - Autres Documents',
                 "state": {
                     "opened": true,
                     "disabled": false,
                     "selected": false
                 },
+                "children": [],
                 "li_attr": {"class": "leaf"}
             };
         }
+
 
         // ---> ADDING the "UPLOAD CATEGORY"
         tree[tree.length] =
@@ -627,9 +633,12 @@ $(function () {
             //dc = new DataCollection(AjaxData);
             //dc.query().filter({last_name: 'Snow'}).values();
 
-            var listFolder = $('#folder');
+            var listFolder = $('#uploadForm p:first ');
             for (key in destFolders){
-                listFolder.append('<li><a href="#" data-folder="'+ destFolders[key] +'">'+ destFolders[key] +'</a></li>');
+                listFolder.append(
+                    '<label class="radio control-label"><input name="destFolder" value="'+ destFolders[key] +'" type="radio" />'+
+                        destFolders[key] +'/</label>'
+                );
             }
 
             mergeLabelDoc();
