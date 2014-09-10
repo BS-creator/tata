@@ -104,11 +104,11 @@ $(function () {
             icon = "fa-upload";
         }
         if (value) {
-            return '<a class="dl" data-id="' + row.idFile + '" ' +
+            return '<a class="dlfile" data-id="' + row.idFile + '" ' +
                 'data-file="' + row.fileName + '" ><i class="fa '+ icon +' fa-lg text-primary"></i>' +
                 '<small data-dl="' + row.downloadCount + '" class="text-muted">&nbsp;' + dlCount + '</small></a>';
         } else {
-            return '<a class="dl" data-id="' + row.idFile + '" ' +
+            return '<a class="dlfile" data-id="' + row.idFile + '" ' +
                 'data-file="' + row.fileName + '" ><i class="fa '+ icon +' fa-lg text-muted"></i>' +
                 '<small data-dl="' + row.downloadCount + ' class="text-muted">&nbsp;' + dlCount + '</small></a>';
         }
@@ -135,42 +135,39 @@ $(function () {
         if (value || value != '') {
             var v = value.toLowerCase();
 
-            '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
-            '</a>';
-
             if (v.indexOf('pdf') !== -1) {
-                return '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
                     '<i class="fa fa-file-pdf-o fa-lg" title="pdf"></i>'
                 '</a>';
             }
             else if (v.indexOf('zip')!== -1) {
-                return '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
                     '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>'
                 '</a>';
             }
             else if (v.indexOf('xls')!== -1 || v.indexOf('csv') !== -1) {
-              return '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+              return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
                   '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>'
                 '</a>';
             }
             else if (v.indexOf('dat') !== -1) {
-              return '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+              return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
                   '<i class="fa fa-file-text-o fa-lg" title="dat"></i>'
                 '</a>';
             }
             else if (v.indexOf('jpg') !== -1 || v.indexOf('png') !== -1) {
-              return '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+              return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
                   '<i class="fa fa-file-picture-o fa-lg" title="image"></i>'
                 '</a>';
             }
             else
             {
-              return '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+              return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
                   '<i class="fa fa-file-o fa-lg" ></i>'
                 '</a>';
             }
             if (v.indexOf('dat') !== -1 || v.indexOf('csv') !== -1 ){
-                return '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
                     '<i class="fa fa-bar-chart"></i>'
                 '</a>';
             }
@@ -672,10 +669,18 @@ $(function () {
 
             var listFolder = $('#uploadForm p:first');
             for (key in destFolders){
-                listFolder.append(
-                    '<label class="radio control-label"><input name="destFolder" value="'+ destFolders[key] +'" type="radio" />'+
-                        destFolders[key] +'/</label>'
-                );
+                if(destFolders[key] === 'Presta'){
+                    listFolder.append(
+                            '<label class="radio control-label"><input name="destFolder" value="'+ destFolders[key] +'" type="radio" checked />'+
+                            destFolders[key] +'/</label>'
+                    );
+                }else{
+                    listFolder.append(
+                            '<label class="radio control-label"><input name="destFolder" value="'+ destFolders[key] +'" type="radio" />'+
+                            destFolders[key] +'/</label>'
+                    );
+                }
+
             }
 
             mergeLabelDoc();
@@ -688,7 +693,7 @@ $(function () {
             $table.bootstrapTable('onFilter',['isNew', true, '||', 'notDownloaded', true]);
 
             //DOWNLOAD files
-            $table.delegate('.dl', 'click', function () {
+            $table.delegate('.dlfile', 'click', function () {
                 $(this).attr('href', serverURL + 'file/' + token + '/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
                 //Update icon
                 $(this).find('i').remove();
