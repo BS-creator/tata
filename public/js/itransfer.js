@@ -104,13 +104,13 @@ $(function () {
             icon = "fa-upload";
         }
         if (value) {
-            return "<a class='dl' data-id='" + row.idFile + "' " +
-                "data-file='" + row.fileName + "' ><i class='fa "+ icon +" fa-lg text-primary'></i>" +
-                "<small data-dl='" + row.downloadCount + "' class='text-muted'>&nbsp;" + dlCount + "</small></a>";
+            return '<a class="dl" data-id="' + row.idFile + '" ' +
+                'data-file="' + row.fileName + '" ><i class="fa '+ icon +' fa-lg text-primary"></i>' +
+                '<small data-dl="' + row.downloadCount + '" class="text-muted">&nbsp;' + dlCount + '</small></a>';
         } else {
-            return "<a class='dl' data-id='" + row.idFile + "' " +
-                "data-file='" + row.fileName + "' ><i class='fa "+ icon +" fa-lg text-muted'></i>" +
-                "<small data-dl='" + row.downloadCount + "' class='text-muted'>&nbsp;" + dlCount + "</small></a>";
+            return '<a class="dl" data-id="' + row.idFile + '" ' +
+                'data-file="' + row.fileName + '" ><i class="fa '+ icon +' fa-lg text-muted"></i>' +
+                '<small data-dl="' + row.downloadCount + ' class="text-muted">&nbsp;' + dlCount + '</small></a>';
         }
     }
 
@@ -131,30 +131,48 @@ $(function () {
         return '';
     }
 
-    function FormatExtension(value) {
+    function FormatExtension(value, row) {
         if (value || value != '') {
             var v = value.toLowerCase();
-            if (v.indexOf('pdf')) {
-                return '<i class="fa fa-file-pdf-o fa-lg" title="pdf"></i>';
+
+            '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+            '</a>';
+
+            if (v.indexOf('pdf') !== -1) {
+                return '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                    '<i class="fa fa-file-pdf-o fa-lg" title="pdf"></i>'
+                '</a>';
             }
-            else if (v.indexOf('zip')) {
-                return '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>';
+            else if (v.indexOf('zip')!== -1) {
+                return '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                    '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>'
+                '</a>';
             }
-            else if (v.indexOf('xls') || v.indexOf('csv')) {
-              return '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>';
+            else if (v.indexOf('xls')!== -1 || v.indexOf('csv') !== -1) {
+              return '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                  '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>'
+                '</a>';
             }
-            else if (v.indexOf('dat')) {
-              return '<i class="fa fa-file-text-o fa-lg" title="dat"></i>';
+            else if (v.indexOf('dat') !== -1) {
+              return '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                  '<i class="fa fa-file-text-o fa-lg" title="dat"></i>'
+                '</a>';
             }
-            else if (v.indexOf('jpg') || v.indexOf('png')) {
-              return '<i class="fa fa-file-picture-o fa-lg" title="image"></i>';
+            else if (v.indexOf('jpg') !== -1 || v.indexOf('png') !== -1) {
+              return '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                  '<i class="fa fa-file-picture-o fa-lg" title="image"></i>'
+                '</a>';
             }
             else
             {
-              return '<i class="fa fa-file-o fa-lg" ></i>';
+              return '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                  '<i class="fa fa-file-o fa-lg" ></i>'
+                '</a>';
             }
             if (v.indexOf('dat') !== -1 || v.indexOf('csv') !== -1 ){
-                return '<i class="fa fa-bar-chart"></i>';
+                return '<a class="dl" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                    '<i class="fa fa-bar-chart"></i>'
+                '</a>';
             }
             return value;
         } else {
@@ -421,7 +439,7 @@ $(function () {
                 },
                 {
                     field: 'fileName',
-                    title: 'Name',
+                    title: 'Nom',
                     align: 'center',
                     valign: 'middle',
                     visible: false,
@@ -429,7 +447,7 @@ $(function () {
                 },
                 {
                     field: 'uploadUserName',
-                    title: 'User',
+                    title: 'Utilisateur',
                     align: 'center',
                     valign: 'middle',
                     visible: false,
@@ -473,7 +491,7 @@ $(function () {
                 },
                 {
                     field: 'extension',
-                    title: 'ext',
+                    title: 'Type',
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
@@ -489,7 +507,7 @@ $(function () {
                  */
                 {
                     field: 'path',
-                    title: 'Path',
+                    title: 'Chemin',
                     align: 'center',
                     valign: 'middle',
                     visible: false,
@@ -556,7 +574,8 @@ $(function () {
             data : data,
             success: function(data){
                 if(data){
-                    alert("fichier supprimé")
+                    alert("Fichier supprimé");
+                    location.reload();
                 }else{
                     alert("Fichier déja supprimé");
                 }
@@ -630,7 +649,11 @@ $(function () {
                 var jqXHR = data.submit()
                     .success(function (result, textStatus, jqXHR) {})
                     .error(function (jqXHR, textStatus, errorThrown) {alert("KO")})
-                    .complete(function (result, textStatus, jqXHR) {$('#progress').hide();});
+                    .complete(function (result, textStatus, jqXHR) {
+                        $('#progress').hide();
+                        $('.close').click();
+                        location.reload();
+                    });
             },
             start: function () {
                 $('#progress').show();
@@ -674,7 +697,8 @@ $(function () {
 
             //TODO: RELOAD!!!!
             $('body').delegate('.reloadme', 'click', function(){
-                $table.bootstrapTable('onFilter');
+                //$table.bootstrapTable('onFilter');
+                location.reload();
             });
 
             // LOGOUT
