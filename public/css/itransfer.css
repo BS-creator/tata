@@ -36,8 +36,11 @@ li {
   background-color: #428bca;
   color: #fff;
 }
-#upload-modal #uploadForm {
+#upload-modal form#uploadForm {
   width: 100%;
+}
+#upload-modal form#uploadForm p:first-child {
+  padding: 0 47%;
 }
 #upload-modal #uploadFiles {
   width: 100%;

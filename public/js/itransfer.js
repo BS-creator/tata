@@ -642,7 +642,7 @@ $(function () {
             //dc = new DataCollection(AjaxData);
             //dc.query().filter({last_name: 'Snow'}).values();
 
-            var listFolder = $('#uploadForm p:first ');
+            var listFolder = $('#uploadForm p:first');
             for (key in destFolders){
                 listFolder.append(
                     '<label class="radio control-label"><input name="destFolder" value="'+ destFolders[key] +'" type="radio" />'+
