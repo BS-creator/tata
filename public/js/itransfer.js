@@ -125,15 +125,25 @@ $(function () {
 
     function FormatExtension(value) {
         if (value || value != '') {
-            var v = value;
-            v.toLowerCase();
-
+            var v = value.toLowerCase();
             if (v.indexOf('pdf')) {
-                //console.log("VALUE = ", v);
-                return '<i class="fa fa-file-pdf-o fa-lg"></i>';
+                return '<i class="fa fa-file-pdf-o fa-lg" title="pdf"></i>';
             }
-            if (v.indexOf('zip')) {
-                return '<i class="fa fa-file-archive-o fa-lg"></i>';
+            else if (v.indexOf('zip')) {
+                return '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>';
+            }
+            else if (v.indexOf('xls')) {
+              return '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>';
+            }
+            else if (v.indexOf('dat')) {
+              return '<i class="fa fa-file-text-o fa-lg" title="dat"></i>';
+            }
+            else if (v.indexOf('jpg') || v.indexOf('png')) {
+              return '<i class="fa fa-file-picture-o fa-lg" title="image"></i>';
+            }
+            else
+            {
+              return '<i class="fa fa-file-o fa-lg" ></i>';
             }
             return value;
         } else {
@@ -156,7 +166,7 @@ $(function () {
     function operateFormatter() {
         return [
             '<a class="remove" title="Remove">',
-            '<i class="fa fa-times"></i>',
+            '<i class="fa fa-trash fa-lg"></i>',
             '</a>'
         ].join('');
     }

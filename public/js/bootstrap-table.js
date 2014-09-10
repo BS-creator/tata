@@ -750,7 +750,7 @@
         /* << < 1 2 3 4 5 > >>
         html.push('<div class="text-center mt-m">',*/
         html.push('</div>',
-            '<div class="pull-right pagination">',
+            '<div class="text-center wide pagination">',
                 '<ul class="pagination">',
                     '<li class="page-first"><a href="javascript:void(0)">&lt;&lt;</a></li>',
                     '<li class="page-pre"><a href="javascript:void(0)">&lt;</a></li>');

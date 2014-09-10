@@ -22,10 +22,6 @@ li {
   overflow: hidden;
   margin-bottom: 12px;
   display: block;
-  /*    padding-top: 6px;
-    padding-bottom: 6px;
-    padding-right: 0px;
-    padding-left: 0px;*/
   width: 100%;
   font-size: 14px;
   font-weight: bold;
@@ -39,20 +35,6 @@ li {
   background-image: none;
   background-color: #428bca;
   color: #fff;
-}
-#upload-modal .btn-upload:after {
-  /*content: "Chargement des fichiers";*/
-}
-#upload-modal .btn-upload:focus,
-#upload-modal .btn-upload:hover,
-#upload-modal .btn-upload:active,
-#upload-modal .btn-upload.active {
-  /*    border: 3px dashed #ddd;
-    background-color: transparent;
-    color: #bbb;*/
-}
-#upload-modal .btn-upload.active:after {
-  /*    content: "\a Faites glisser vos fichiers ici";*/
 }
 #upload-modal #uploadForm {
   width: 100%;
@@ -68,7 +50,7 @@ li {
 #upload-modal #uploadFiles #files {
   margin: 32px 0 32px 0;
 }
-#uploadCollapse #uploadFiles #files #progress {
+#upload-modal #uploadFiles #files #progress {
   display: none;
 }
 #loader {
@@ -155,6 +137,12 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
   display: none;
   margin-bottom: 10px;
 }
+#contentTable .fixed-table-container {
+  border: 0;
+}
+#contentTable .fixed-table-body {
+  border: 1px solid #ddd;
+}
 table[id^="table-"] thead tr th,
 table#mainTable thead tr th {
   display: table-cell;
@@ -170,10 +158,6 @@ table#mainTable thead tr th div.th-inner span.unsorted:after {
   font-weight: normal;
   line-height: 1;
   margin: 0 5px;
-}
-table[id^="table-"] tbody tr > td:nth-child(1),
-table#mainTable tbody tr > td:nth-child(1) {
-  text-align: left;
 }
 table[id^="table-"] tbody tr > td:nth-child(1) a,
 table#mainTable tbody tr > td:nth-child(1) a {
