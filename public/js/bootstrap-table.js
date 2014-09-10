@@ -421,11 +421,9 @@
         var $this = $(event.currentTarget),
             $this_ = this.$header.find('th').eq($this.index());
 
-        console.log($this);
         this.$header.add(this.$header_).find('span.order').remove();
         /*CUSTOM: search on date (invisible)*/
         if($this.data('field') === 'formattedDate'){
-            console.log($this.data('order'));
             this.options.sortName = 'date';
             this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
         }else{
