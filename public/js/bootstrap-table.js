@@ -618,13 +618,19 @@
         if (this.options.sidePagination !== 'server' ) {
             if(array){
                 var field       = array[0] || 'refDoc',
-                    value       = array[1] || '',
+                    value       = array[1] || ''/*,
                     operator    = array[2],
                     field2      = array[3],
-                    value2      = array[4];
+                    value2      = array[4]*/;
 
                 this.data = value ? $.grep(this.options.data, function (item) {
-                    if(operator && field && field2){
+
+                    if ( typeof array === 'string' ) {
+
+                        return eval(array);
+                    }
+
+                    /*if(operator && field && field2){
                         var s = 'item["' + field + '"] === ' + value + ' ' + operator + ' ' +
                             'item["' +field2 + '"] === ' + value2;
                         if (eval(s)){
@@ -632,7 +638,7 @@
                         }else{
                             return false;
                         }
-                    }else
+                    }else*/
                     //filter on condition about the field
                     if (field){
                         if ( typeof value === 'number' ) {
@@ -761,7 +767,7 @@
         /* << < 1 2 3 4 5 > >>
         html.push('<div class="text-center mt-m">',*/
         html.push('</div>',
-            '<div class="pull-right pagination">',
+            '<div class="text-center wide pagination">',
                 '<ul class="pagination">',
                     '<li class="page-first"><a href="javascript:void(0)">&lt;&lt;</a></li>',
                     '<li class="page-pre"><a href="javascript:void(0)">&lt;</a></li>');

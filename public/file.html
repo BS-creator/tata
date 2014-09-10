@@ -26,8 +26,9 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/bootstrap.file-input.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>
+        <script src="js/bootstrap-datepicker.fr.js"></script>
         <script src="js/prestaweb-comp.js"></script>
-        <script src="js/data_collection.js"></script>
+        <!--<script src="js/data_collection.js"></script>-->
         <script src="js/fileupload/vendor/jquery.ui.widget.js"></script>
         <script src="js/fileupload/jquery.iframe-transport.js"></script>
         <script src="js/fileupload/jquery.fileupload.js"></script>
@@ -46,7 +47,7 @@
             <div class="nav" id="info-header">
 
                 <ul class="list-inline pull-left">
-                    <li class="univers-name"></li>
+                    <li class="univers-name"> <i class="glyphicon-transfer"></i>&nbsp;&nbsp;iTransfer </li>
                 </ul>
 
                 <ul class="list-inline pull-right">
@@ -115,14 +116,13 @@
                           </div>
 
                           <div class="modal-body">
-                            <p>
-                              <blockquote class="text-muted">
-                                Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.
-                              </blockquote>
-                            </p>
+
+                            <blockquote class="text-muted">
+                              Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.
+                            </blockquote>
 
                             <form class="" id="uploadForm" action="http://172.20.20.64:8018/file/upload" method="post" enctype="multipart/form-data">
-                              <p class="text-center">
+                              <p class="text-left">
                                 <!--loop-->
                                 <label class="radio control-label"><input type="radio" name="reportory" value="---">dirname</label>
                                 <!--/loop-->
@@ -138,7 +138,7 @@
                               <div class="col-md-offset-2 col-md-8 col-xs-12">
                                 <div id="files" class="files">
                                   <div id="progress" class="progress">
-                                    <div class="progress-bar progress-bar-success"></div>
+                                    <div class="progress-bar progress-bar-striped active"></div>
                                   </div>
                                 </div>
                               </div>
