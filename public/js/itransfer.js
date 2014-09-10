@@ -27,7 +27,7 @@ $(function () {
 
     function sort_unique(array) {
         array = array.sort(function (a, b) {
-            return a * 1 - b * 1;
+            return a - b;
         });
         if (array.length > 1) {
             var ret = [array[0]];
@@ -89,7 +89,7 @@ $(function () {
     }
 
     // Styling the row if the file is new
-    function rowStylef(row, i, filter) {
+    function rowStylef(row) {
         if (row.isNew) return {"classes": "success" };
         else return {};
     }
@@ -115,7 +115,7 @@ $(function () {
     }
 
     function formatIsNew(value) {
-        if (value) return "<i class='fa fa-smile-o'></i>"
+        if (value) return "<i class='fa fa-smile-o'></i>";
         else return "<i class='fa fa-times'></i>";
     }
 
@@ -137,38 +137,38 @@ $(function () {
 
             if (v.indexOf('pdf') !== -1) {
                 return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
-                    '<i class="fa fa-file-pdf-o fa-lg" title="pdf"></i>'
+                    '<i class="fa fa-file-pdf-o fa-lg" title="pdf"></i>' +
                 '</a>';
             }
             else if (v.indexOf('zip')!== -1) {
                 return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
-                    '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>'
+                    '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>'+
                 '</a>';
             }
             else if (v.indexOf('xls')!== -1 || v.indexOf('csv') !== -1) {
               return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
-                  '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>'
+                  '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>'+
                 '</a>';
             }
             else if (v.indexOf('dat') !== -1) {
               return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
-                  '<i class="fa fa-file-text-o fa-lg" title="dat"></i>'
+                  '<i class="fa fa-file-text-o fa-lg" title="dat"></i>'+
                 '</a>';
             }
             else if (v.indexOf('jpg') !== -1 || v.indexOf('png') !== -1) {
               return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
-                  '<i class="fa fa-file-picture-o fa-lg" title="image"></i>'
+                  '<i class="fa fa-file-picture-o fa-lg" title="image"></i>'+
                 '</a>';
             }
             else
             {
               return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
-                  '<i class="fa fa-file-o fa-lg" ></i>'
+                  '<i class="fa fa-file-o fa-lg" ></i>'+
                 '</a>';
             }
             if (v.indexOf('dat') !== -1 || v.indexOf('csv') !== -1 ){
                 return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
-                    '<i class="fa fa-bar-chart"></i>'
+                    '<i class="fa fa-bar-chart"></i>'+
                 '</a>';
             }
             return value;
@@ -195,7 +195,11 @@ $(function () {
         var year    = row.date.slice(0,4),
             month   = row.date.slice(5,7),
             day     = row.date.slice(8,10);
-        return day+"-"+month+"-"+year;
+        return day+"/"+month+"/"+year;
+    }
+
+    function formatPath(value){
+        return value.replace('/data/'+ username +'/','');
     }
 
     function formatDefault (value) {
@@ -348,11 +352,14 @@ $(function () {
             "li_attr": {"class": "leaf"}
         };
 
+
+        var $sidenave = $('#sidenav')
+
         //destroy before reload
-        $('#sidenav').html('');
+        $sidenave.html('');
 
         // JSTREE
-        $('#sidenav')
+        $sidenave
             .on('select_node.jstree', menuActionClick )
             .jstree({
                 'core': {
@@ -512,7 +519,8 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     visible: false,
-                    sortable: true
+                    sortable: true,
+                    formatter: formatPath
                 },
                 {
                     field: 'refClientCompl',
@@ -559,7 +567,7 @@ $(function () {
         });
 
         return $table;
-    };
+    }
 
     /****************************************************
      * AJAX
@@ -593,7 +601,7 @@ $(function () {
             url: serverURL + 'folder/' + token + '/',
             success: function(data){ destFolders = data;}
         });
-    };
+    }
 
     function LoadCategory() {
 
@@ -635,7 +643,6 @@ $(function () {
      * MAIN
      * */
     function main() {
-        //$('#loader').html('<i class="fa-li fa fa-spinner fa-spin fa-3x"></i>');
 
         // set token for upload
         var $uploadform = $('#uploadForm');
@@ -645,13 +652,14 @@ $(function () {
             sequentialUploads: true,
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('#progress .progress-bar').css('width', progress + '%' );
+                $('#progress').css('width', progress + '%' );
             },
             add: function (e, data) {
                 var jqXHR = data.submit()
                     .success(function (result, textStatus, jqXHR) {})
-                    .error(function (jqXHR, textStatus, errorThrown) {alert("KO")})
+                    .error(function (jqXHR, textStatus, errorThrown) {alert("Error " + textStatus)})
                     .complete(function (result, textStatus, jqXHR) {
+                        console.log("result file upload: ", result);
                         $('#progress').hide();
                         $('.close').click();
                         location.reload();
@@ -671,13 +679,13 @@ $(function () {
             for (key in destFolders){
                 if(destFolders[key] === 'Presta'){
                     listFolder.append(
-                            '<label class="radio control-label"><input name="destFolder" value="'+ destFolders[key] +'" type="radio" checked />'+
-                            destFolders[key] +'/</label>'
+                            '<label class="radio control-label"><input name="destFolder" value="'+
+                            destFolders[key] +'" type="radio" checked />'+ destFolders[key] +'/</label>'
                     );
                 }else{
                     listFolder.append(
-                            '<label class="radio control-label"><input name="destFolder" value="'+ destFolders[key] +'" type="radio" />'+
-                            destFolders[key] +'/</label>'
+                            '<label class="radio control-label"><input name="destFolder" value="'+
+                            destFolders[key] +'" type="radio" />'+ destFolders[key] +'/</label>'
                     );
                 }
 
@@ -758,20 +766,16 @@ $(function () {
 
 
             // date picker
-            $('#datepicker .input-daterange').datepicker({
-                format: "yyyy-mm-dd",
+            $('input[name=start]').datepicker({
+                format: "dd/mm/yyyy",
                 language: "fr",
-                calendarWeeks: true,
                 autoclose: true,
                 todayHighlight: true
+            }).on('changeDate', function(e){
+                console.log("date begin = " + $( this ).val() + "\t time = " + $.now());
+                $table.bootstrapTable('onFilter', ['date', '2014-09-10']);
             });
 
-            $('#sandbox-container .input-daterange').datepicker({
-                language: "fr",
-                calendarWeeks: true,
-                autoclose: true,
-                todayHighlight: true
-            });            
         });
     }
 
