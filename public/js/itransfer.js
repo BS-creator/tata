@@ -97,22 +97,23 @@ $(function () {
 
         //TODO: case delete date
         var $table = $('#mainTable');
-        var dateEnd = $('input[name=end]').val();
-        var dateStart = $('input[name=start]').val();
+        var dateEnd = yearFirst($('input[name=end]').val());
+        var dateStart = yearFirst($('input[name=start]').val());
         var expr = '';
 
-        if (dateStart !== "--" && dateEnd === "--") {
+        console.log(dateStart, dateEnd);
+        if (dateStart !== "--" && dateEnd === "--" ) {
             //FROM
-            expr = 'item["date"] > "' + yearFirst(dateStart) + '" ';
+            expr = 'item["date"] > "' + dateStart + '" ';
         }
         if (dateStart === "--" && dateEnd !== "--") {
             //UP TO
-            expr = 'item["date"] < "' + yearFirst(dateEnd) + '"';
+            expr = 'item["date"] < "' + dateEnd + '"';
         }
-        if (dateStart !== '--' && dateEnd !== "--") {
+        if (dateStart !== '--' && dateEnd !== "--" && dateEnd !== '') {
             //FROM TO
-            expr += 'item["date"] > "' + yearFirst(dateStart) +
-                '" && item["date"] < "' + yearFirst(dateEnd) + '"';
+            expr += 'item["date"] > "' + dateStart +
+                '" && item["date"] < "' + dateEnd + '"';
         }
         if (dateStart === "--" && dateEnd === "--") {
             //ALL DATE
@@ -509,7 +510,7 @@ $(function () {
                 {
                     field: 'notDownloaded',
                     title: '<i class="fa fa-download fa-lg"></i>',
-                  /*  align: 'center',*/
+                    align: 'center',
                     sortable: true,
                     class: 'dl',
                     formatter: formatDownload

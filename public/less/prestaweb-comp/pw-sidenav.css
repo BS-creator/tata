@@ -1,3 +1,6 @@
+div#sidenav {
+  padding-top: 1px;
+}
 div#sidenav ul.jstree-container-ul,
 div#sidenav ul.jstree-children {
   padding: 0;
@@ -7,56 +10,51 @@ div#sidenav ul.jstree-container-ul li a,
 div#sidenav ul.jstree-children li a {
   display: block;
   width: 100%;
+  text-decoration: none;
 }
-div#sidenav {
-  padding-top: 1px;
-  border-radius: 3px;
-  /*  ul > li.jstree-open > a {
-    border-top-right-radius: 4px;
-  }
-  ul > li#upload > a {
-    border-bottom-right-radius: 4px;
-  }*/
-}
-div#sidenav ul > li > a {
-  background-color: #F2F2F2;
-  color: #656565;
+div#sidenav > ul > li#root > a {
   margin: 0;
   padding: 8px 0 8px 12px;
-  font-weight: 400;
   cursor: pointer;
-  text-decoration: none;
   border-left: 0;
+  border: 0;
+  font-size: 13px;
+  font-weight: bold;
+  color: #808080;
+  background-color: #F2F2F2;
 }
-div#sidenav ul > li > ul > li > a {
-  background-color: white;
+div#sidenav > ul > li#root > a.jstree-clicked {
+  border-left: 3px solid #2871B0;
+  color: #125B9A;
+}
+div#sidenav ul li ul li a {
+  font-weight: bold;
   color: #808080;
   padding: 5px 0 5px 20px;
 }
-div#sidenav ul > li.jstree-open > ul > li > a:hover,
-div#sidenav ul > li.jstree-open > ul > li > a:focus,
-div#sidenav ul > li.jstree-open > ul > li > a:active,
-div#sidenav ul > li.jstree-open > ul > li > a.active,
-div#sidenav ul > li.jstree-open > ul > li.jstree-open > a {
-  background-color: white;
-  color: #3D86C5;
+div#sidenav ul li ul li ul li a {
+  font-weight: normal;
+  padding: 5px 0 5px 52px;
 }
-div#sidenav ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a {
+div#sidenav > ul > li > ul > li#other > a:hover,
+div#sidenav > ul > li > ul > li#other > a:focus,
+div#sidenav > ul > li > ul > li#other > a:active,
+div#sidenav > ul > li > ul > li#other > a.active,
+div#sidenav > ul > li > ul > li > ul > li > a:hover,
+div#sidenav > ul > li > ul > li > ul > li > a:focus,
+div#sidenav > ul > li > ul > li > ul > li > a:active,
+div#sidenav > ul > li > ul > li > ul > li > a.active {
+  letter-spacing: .016em;
+  color: #3D86C5;
+  border-left: 3px solid #2871B0;
   background-color: white;
   color: #808080;
-  padding: 5px 0 5px 52px;
-  letter-spacing: .016em;
 }
-div#sidenav ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:hover,
-div#sidenav ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:focus,
-div#sidenav ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:active,
-div#sidenav ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a.active {
+div#sidenav > ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:hover,
+div#sidenav > ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:focus,
+div#sidenav > ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:active,
+div#sidenav > ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a.active {
   color: #3D86C5;
-}
-div#sidenav > ul > li > a,
-div#sidenav > ul > li > ul > li > a {
-  font-size: 13px !important;
-  font-weight: bold;
 }
 div#sidenav ul li ul li#upload a {
   display: block;
@@ -68,22 +66,11 @@ div#sidenav ul li ul li#upload a {
   padding: 8px 0px 8px 12px;
   cursor: pointer;
   text-decoration: none;
-  color: #125B9A;
-  border-left: 3px solid #2871B0;
 }
-div#sidenav > ul > li.jstree-open > a {
-  color: #125B9A;
+div#sidenav ul li ul li#upload a:hover,
+div#sidenav ul li ul li#upload a:focus,
+div#sidenav ul li ul li#upload a:active,
+div#sidenav ul li ul li#upload a.active {
   border-left: 3px solid #2871B0;
-}
-div#sidenav > ul > li > ul > li#other > a:hover,
-div#sidenav > ul > li > ul > li#other > a:focus,
-div#sidenav > ul > li > ul > li#other > a:active,
-div#sidenav > ul > li > ul > li#other > a.active,
-div#sidenav > ul > li > ul > li > ul > li > a:hover,
-div#sidenav > ul > li > ul > li > ul > li > a:focus,
-div#sidenav > ul > li > ul > li > ul > li > a:active,
-div#sidenav > ul > li > ul > li > ul > li > a.active {
   color: #125B9A;
-  color: #3D86C5;
-  border-left: 3px solid #2871B0;
 }
