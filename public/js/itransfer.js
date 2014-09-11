@@ -328,9 +328,11 @@ $(function () {
             table.bootstrapTable('hideColumn', 'fileName');
             table.bootstrapTable('hideColumn', 'path');
             table.bootstrapTable('onFilter', ['uploadUserName', 'trf_fich']);
+            $('.breadcrumb').html('<li class="active">Tous les documents</li><li><a href="#"></a></li>');
         } else {
             data.instance.toggle_node(data.node);
-
+            //console.log(data.node);
+            $('.breadcrumb').html('<li class="active">'+ data.node.text+'</li><li><a href="#"></a></li>');
             //Filter on refDoc
             var nodeid = parseInt(data.node.id);
             if (nodeid > -1 && data.node.li_attr.class === 'leaf') {
