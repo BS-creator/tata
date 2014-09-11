@@ -548,7 +548,7 @@
 
             /**** CUSTOM datepicker ****/
             html.push(
-              '<div id="sandbox-container" class="col-md-5">',
+              '<div id="sandbox-container">',
               '<div class="input-daterange input-group" id="datepicker">',
                 '<input type="text" class="input-sm form-control" name="start" placeholder="Date de début"/>',
                 '<span class="input-group-addon">&agrave;</span>',
@@ -561,6 +561,17 @@
             '<div class="row"><div class="col-md-12">',
             '<button id="get-selections" type="button" class="btn btn-success"><i class="fa fa-upload"></i>&nbsp;&nbsp;Téléchargement multiple</button>',
             '</div></div>');
+
+            /**** CUSTOM ***/
+            html.push(
+              '<div class="row"><div class="col-md-12">',
+                '<ol class="breadcrumb">',
+                  '<li class="active">Nouveaux fichiers non-téléchargés</li>',
+
+                  '<li><a href="#"></a></li>',
+
+                '</ol>',
+              '</div></div>');
             
             this.$toolbar.append(html.join(''));
             $search = this.$toolbar.find('.search input');
