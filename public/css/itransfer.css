@@ -13,19 +13,15 @@ ul,
 li {
   list-style: none;
 }
-#uploadCollapse {
+#upload-modal {
   position: relative;
   min-height: 1px;
 }
-#uploadCollapse .btn-upload {
+#upload-modal .btn-upload {
   position: relative;
   overflow: hidden;
-  margin-bottom: 32px;
+  margin-bottom: 12px;
   display: block;
-  /*    padding-top: 6px;
-    padding-bottom: 6px;
-    padding-right: 0px;
-    padding-left: 0px;*/
   width: 100%;
   font-size: 14px;
   font-weight: bold;
@@ -40,38 +36,25 @@ li {
   background-color: #428bca;
   color: #fff;
 }
-#uploadCollapse .btn-upload:after {
-  content: "Chargemenet des fichiers";
+#upload-modal form#uploadForm {
+  width: 100%;
 }
-#uploadCollapse .btn-upload:focus,
-#uploadCollapse .btn-upload:hover,
-#uploadCollapse .btn-upload:active,
-#uploadCollapse .btn-upload.active {
-  border: 3px dashed #ddd;
-  background-color: transparent;
-  color: #bbb;
+#upload-modal form#uploadForm p:first-child {
+  padding: 0 47%;
+  margin-bottom: 20px;
 }
-#uploadCollapse .btn-upload.active:after {
-  content: "\a Faites glisser vos fichiers ici";
-  white-space: pre;
-  line-height: 3.5em;
-  font-size: 16px;
-}
-#uploadCollapse .btn-upload.active:after span > i {
-  font-size: 18px !important;
-}
-#uploadCollapse #uploadFiles {
+#upload-modal #uploadFiles {
   width: 100%;
   margin-bottom: 32px;
   padding-bottom: 32px;
 }
-#uploadCollapse #uploadFiles .btn-group {
+#upload-modal #uploadFiles .btn-group {
   margin-right: 20px !important;
 }
-#uploadCollapse #uploadFiles #files {
+#upload-modal #uploadFiles #files {
   margin: 32px 0 32px 0;
 }
-#uploadCollapse #uploadFiles #files #progress {
+#upload-modal #uploadFiles #files #progress {
   display: none;
 }
 #loader {
@@ -84,7 +67,6 @@ li {
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
 }
 #loader p {
   position: fixed;
@@ -145,10 +127,12 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 }
 .fixed-table-toolbar #datepicker {
   margin-top: 0;
+  max-width: 280px;
 }
 .fixed-table-toolbar #datepicker input,
 .fixed-table-toolbar #datepicker span {
   height: 34px;
+  font-size: 14px;
 }
 .fixed-table-toolbar .columns,
 .fixed-table-toolbar .search {
@@ -158,15 +142,44 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
   display: none;
   margin-bottom: 10px;
 }
-table[id^="table-"] thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1),
-table#mainTable thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1) {
-  width: 65px;
+#contentTable .fixed-table-container {
+  border: 0;
+}
+#contentTable .fixed-table-body {
+  border: 1px solid #ddd;
+}
+table[id^="table-"],
+table#mainTable {
+  /*  thead tr th.empl {
+    width: 88px;
+  }
+  thead tr th.refDoc {
+    width: 65px;
+  }
+  thead tr th.size {
+    width: 80px;
+  }
+  thead tr th.ext {
+    width: 45px;
+  }*/
 }
 table[id^="table-"] thead tr th,
 table#mainTable thead tr th {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
+}
+table[id^="table-"] thead tr th.dl,
+table#mainTable thead tr th.dl {
+  width: 55px;
+}
+table[id^="table-"] thead tr th.formattedDate,
+table#mainTable thead tr th.formattedDate {
+  width: 110px;
+}
+table[id^="table-"] thead tr th.del,
+table#mainTable thead tr th.del {
+  width: 60px;
 }
 table[id^="table-"] thead tr th div.th-inner span.unsorted:after,
 table#mainTable thead tr th div.th-inner span.unsorted:after {
@@ -177,14 +190,6 @@ table#mainTable thead tr th div.th-inner span.unsorted:after {
   font-weight: normal;
   line-height: 1;
   margin: 0 5px;
-}
-table[id^="table-"] thead tr th:last-child,
-table#mainTable thead tr th:last-child {
-  width: 40px;
-}
-table[id^="table-"] tbody tr > td:nth-child(1),
-table#mainTable tbody tr > td:nth-child(1) {
-  text-align: left;
 }
 table[id^="table-"] tbody tr > td:nth-child(1) a,
 table#mainTable tbody tr > td:nth-child(1) a {

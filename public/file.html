@@ -26,7 +26,8 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/bootstrap.file-input.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>
-        <script src="js/locale/bootstrap-datepicker.fr.js"></script>
+        <script src="js/bootstrap-datepicker.fr.js"></script>
+        <script src="js/bootstrap-datepicker.nl.js"></script>
         <script src="js/prestaweb-comp.js"></script>
         <!--<script src="js/data_collection.js"></script>-->
         <script src="js/fileupload/vendor/jquery.ui.widget.js"></script>
@@ -89,7 +90,7 @@
           <div class="row">
             <div id="loader">
               <p class="text-center">
-                <i class="fa fa-refresh fa-5x fa-spin"></i>
+                <img src="css/images/loading-blue.gif" alt="loading ...">
               </p>
             </div>
           </div>
@@ -124,7 +125,7 @@
                             <form class="" id="uploadForm" action="http://172.20.20.64:8018/file/upload" method="post" enctype="multipart/form-data">
                               <p class="text-left">
                                 <!--loop-->
-                                <label class="radio control-label"><input type="radio" name="reportory" value="---">dirname</label>
+                                <!--<label class="radio control-label"><input type="radio" name="reportory" value="---">dirname</label>-->
                                 <!--/loop-->
                               </p>
                               <p class="text-center">
@@ -153,13 +154,14 @@
 
               <!--SIDEBAR-->
               <div id="sidenav"> </div><!--/ SIDEBAR-->
+
             </div>
 
             <div id="contentTable" class="col-md-9 col-xs-12">
                 <!--TABLE CONTENT-->
                 <table id="mainTable" ></table>
             </div>
-        </div>
+          </div>
 
         </div> <!--/wrapper-->
 
@@ -175,7 +177,6 @@
         <script src="js/pw-jstree.js"></script>
         <!--<script src="js/data_collection.js"></script>-->
         <script src="js/itransfer.js"></script>
-        <script src="js/perfect-scrollbar.js"></script>
 
     </body>
 </html>

@@ -18,7 +18,7 @@ ul, li {
 
 
 // upload
-#uploadCollapse{
+#upload-modal{
 
   position: relative;
   min-height: 1px;
@@ -26,12 +26,8 @@ ul, li {
   .btn-upload {
     position: relative;
     overflow: hidden;
-    margin-bottom: 32px;
+    margin-bottom: 12px;
     display: block;
-/*    padding-top: 6px;
-    padding-bottom: 6px;
-    padding-right: 0px;
-    padding-left: 0px;*/
     width: 100%;
     font-size: 14px;
     font-weight: bold;
@@ -44,36 +40,20 @@ ul, li {
     border-radius: 4px;
     background-image: none;
     background-color: #428bca;
-    //color: #cdcdcd;
     color: #fff;
   }
 
-  .btn-upload:after{
-    content: "Chargemenet des fichiers";
-  }
-  .btn-upload:focus,
-  .btn-upload:hover,
-  .btn-upload:active,
-  .btn-upload.active {
-    border: 3px dashed #ddd;
-    background-color: transparent;
-    color: #bbb;
-  }
-  .btn-upload.active:after{
-    content: "\a Faites glisser vos fichiers ici";
-    white-space: pre;
-    line-height: 3.5em;
-    font-size: 16px;
-    span > i {
-      font-size: 18px !important;
+  form#uploadForm{
+    width: 100%;
+    p:first-child {
+      padding: 0 47%;
+      margin-bottom: 20px;
     }
   }
-
   #uploadFiles {
     width:100%;
     margin-bottom: 32px;
     padding-bottom: 32px;
-    // border-bottom:1px solid #ddd;
 
     .btn-group{
       margin-right: 20px !important;
@@ -87,8 +67,6 @@ ul, li {
       }
     }
   }
-
-
 
 }
 
@@ -104,7 +82,7 @@ ul, li {
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0,0,0,.3);
+  //background-color: rgba(0,0,0,.3);
   p{
     position: fixed;
     z-index: 1000;
@@ -167,24 +145,11 @@ div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-
 div#filter div.btn-group:nth-child(1) ul:nth-child(2) > li:nth-child(1) > a:nth-child(1):active{
 }
 
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):active > i:nth-child(1),
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):focus > i:nth-child(1),
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1):hover > i:nth-child(1),
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(3) > a:nth-child(1).active > i:nth-child(1) {
-  // color: white !important;
-}
-
 // icon dl muted
 div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1) > i:nth-child(1) {
   color: #999999;
 }
 
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):active > i:nth-child(1),
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):focus > i:nth-child(1),
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1):hover > i:nth-child(1),
-div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nth-child(1).active > i:nth-child(1) {
-  // color: white !important;
-}
 
 // Filter Bar
 #filter,  {
@@ -204,11 +169,14 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
     margin-bottom: 10px;
     margin-right: 10px;
     line-height: 34px;
+
   }
   #datepicker{
     margin-top: 0;
+    max-width: 280px;
     input, span{
       height: 34px;
+      font-size: 14px;
     }
   }
 }
@@ -222,13 +190,16 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 }
 //////////////////////////////////////////////////////
 // table - itransfer
-
+#contentTable{
+  .fixed-table-container{
+    border: 0;
+  }
+  .fixed-table-body{
+    border: 1px solid #ddd;
+  }
+}
 table[id^="table-"],
 table#mainTable {
-  // download column
-  thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1) {
-    width: 65px;
-  }
 
   // filtres de la table
   thead tr th {
@@ -236,6 +207,28 @@ table#mainTable {
     text-align: center;
     vertical-align: middle;
   }
+  thead tr th.dl {
+    width: 55px;
+  }
+  thead tr th.formattedDate {
+     width: 110px;
+  }
+/*  thead tr th.empl {
+    width: 88px;
+  }
+  thead tr th.refDoc {
+    width: 65px;
+  }
+  thead tr th.size {
+    width: 80px;
+  }
+  thead tr th.ext {
+    width: 45px;
+  }*/
+  thead tr th.del{
+    width: 60px;
+  }
+
 
   // icon unsorted
   thead tr th div.th-inner span.unsorted:after {
@@ -250,13 +243,9 @@ table#mainTable {
 
   // dernière colonne - extensions
   thead tr th:last-child {
-    width: 40px;
+    //width: 40px;
   }
 
-  // Download column
-  tbody tr > td:nth-child(1) {
-    text-align: left;
-  }
   tbody tr > td:nth-child(1) a {
     margin-left: 43%;
   }
