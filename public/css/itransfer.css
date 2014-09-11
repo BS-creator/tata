@@ -200,10 +200,6 @@ table[id^="table-"] tbody tr > td:nth-child(1) a,
 table#mainTable tbody tr > td:nth-child(1) a {
   margin-left: 43%;
 }
-table[id^="table-"] tbody tr td:last-child::before,
-table#mainTable tbody tr td:last-child::before {
-  /*content:'.';*/
-}
 table[id^="table-"] tbody tr td:last-child,
 table#mainTable tbody tr td:last-child {
   text-transform: lowercase;
