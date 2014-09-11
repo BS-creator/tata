@@ -87,12 +87,42 @@ $(function () {
         }
     }
 
-    // Styling the row if the file is new
+    function filterDate(e) {
+
+        var $table = $('mainTable');
+        //console.log("date begin = " + $( this ).val() + "\t time = " + $.now());
+        var date = $(this).val();
+        // console.log(e.currentTarget.name, $(this));
+        var day = date.slice(0, 2),
+            month = date.slice(3, 5),
+            year = date.slice(6, 11);
+        var dateF = year + "-" + month + "-" + day;
+        console.log("dateF", dateF);
+        var expr = "item['date'] ";
+        if (e.currentTarget.name === 'start') {
+            // get end
+            // $('input[name=end]').
+        } else if (e.currentTarget.name === 'end') {
+            // get start
+        } else {
+            // ?
+        }
+
+        $table.bootstrapTable('onFilter', "item['date'] > '" + dateF + "'");
+
+    }
+
+
+    /****************************************************
+     * FORMAT COLUMNS
+     * */
+
+
+        // Styling the row if the file is new
     function rowStylef(row) {
         if (row.isNew) return {"classes": "success" };
         else return {};
     }
-
 
     //Format for the download column
     function formatDownload(value, row) {
@@ -213,30 +243,6 @@ $(function () {
         ].join('');
     }
 
-    function filterDate(e) {
-
-        var $table = $('mainTable');
-        //console.log("date begin = " + $( this ).val() + "\t time = " + $.now());
-        var date = $(this).val();
-        // console.log(e.currentTarget.name, $(this));
-        var day = date.slice(0, 2),
-            month = date.slice(3, 5),
-            year = date.slice(6, 11);
-        var dateF = year + "-" + month + "-" + day;
-        console.log("dateF", dateF);
-        var expr = "item['date'] ";
-        if (e.currentTarget.name === 'start') {
-            // get end
-            // $('input[name=end]').
-        } else if (e.currentTarget.name === 'end') {
-            // get start
-        } else {
-            // ?
-        }
-
-        $table.bootstrapTable('onFilter', "item['date'] > '" + dateF + "'");
-
-    }
 
     /****************************************************
      * UPLOAD
@@ -352,7 +358,7 @@ $(function () {
     }
 
     // TIP: $('.leaf') to access leaf nodes...!!!!
-    function buildTree(){
+    function buildTree() {
 
         var tree = [];
         var cat = [];
