@@ -13,15 +13,19 @@ ul,
 li {
   list-style: none;
 }
-#upload-modal {
+#uploadCollapse {
   position: relative;
   min-height: 1px;
 }
-#upload-modal .btn-upload {
+#uploadCollapse .btn-upload {
   position: relative;
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: 32px;
   display: block;
+  /*    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-right: 0px;
+    padding-left: 0px;*/
   width: 100%;
   font-size: 14px;
   font-weight: bold;
@@ -36,21 +40,38 @@ li {
   background-color: #428bca;
   color: #fff;
 }
-#upload-modal #uploadForm {
-  width: 100%;
+#uploadCollapse .btn-upload:after {
+  content: "Chargemenet des fichiers";
 }
-#upload-modal #uploadFiles {
+#uploadCollapse .btn-upload:focus,
+#uploadCollapse .btn-upload:hover,
+#uploadCollapse .btn-upload:active,
+#uploadCollapse .btn-upload.active {
+  border: 3px dashed #ddd;
+  background-color: transparent;
+  color: #bbb;
+}
+#uploadCollapse .btn-upload.active:after {
+  content: "\a Faites glisser vos fichiers ici";
+  white-space: pre;
+  line-height: 3.5em;
+  font-size: 16px;
+}
+#uploadCollapse .btn-upload.active:after span > i {
+  font-size: 18px !important;
+}
+#uploadCollapse #uploadFiles {
   width: 100%;
   margin-bottom: 32px;
   padding-bottom: 32px;
 }
-#upload-modal #uploadFiles .btn-group {
+#uploadCollapse #uploadFiles .btn-group {
   margin-right: 20px !important;
 }
-#upload-modal #uploadFiles #files {
+#uploadCollapse #uploadFiles #files {
   margin: 32px 0 32px 0;
 }
-#upload-modal #uploadFiles #files #progress {
+#uploadCollapse #uploadFiles #files #progress {
   display: none;
 }
 #loader {
@@ -137,11 +158,9 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
   display: none;
   margin-bottom: 10px;
 }
-#contentTable .fixed-table-container {
-  border: 0;
-}
-#contentTable .fixed-table-body {
-  border: 1px solid #ddd;
+table[id^="table-"] thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1),
+table#mainTable thead:nth-child(1) > tr:nth-child(1) > th:nth-child(1) {
+  width: 65px;
 }
 table[id^="table-"] thead tr th,
 table#mainTable thead tr th {
@@ -158,6 +177,14 @@ table#mainTable thead tr th div.th-inner span.unsorted:after {
   font-weight: normal;
   line-height: 1;
   margin: 0 5px;
+}
+table[id^="table-"] thead tr th:last-child,
+table#mainTable thead tr th:last-child {
+  width: 40px;
+}
+table[id^="table-"] tbody tr > td:nth-child(1),
+table#mainTable tbody tr > td:nth-child(1) {
+  text-align: left;
 }
 table[id^="table-"] tbody tr > td:nth-child(1) a,
 table#mainTable tbody tr > td:nth-child(1) a {

@@ -5,15 +5,12 @@ $(function () {
     // array used to store all the existing document reference on the FTP server.
     var serverURL = 'http://172.20.20.64:8018/',
         baseURL = 'http://localhost:4000/itransfer/',
-    //dc          = {},
         AjaxData = [],
         category = [],
         refDocUsed = [],
         username = sessionStorage.getItem('username').toLowerCase(),
-        token = sessionStorage.getItem('token'),
-        destFolders = [];
+        token = sessionStorage.getItem('token');
 
-    window.dc = [];
     /****************************************************
      * HELPER
      * */
@@ -216,6 +213,90 @@ $(function () {
         ].join('');
     }
 
+    function filterDate(e) {
+
+        var $table = $('mainTable');
+        //console.log("date begin = " + $( this ).val() + "\t time = " + $.now());
+        var date = $(this).val();
+        // console.log(e.currentTarget.name, $(this));
+        var day = date.slice(0, 2),
+            month = date.slice(3, 5),
+            year = date.slice(6, 11);
+        var dateF = year + "-" + month + "-" + day;
+        console.log("dateF", dateF);
+        var expr = "item['date'] ";
+        if (e.currentTarget.name === 'start') {
+            // get end
+            // $('input[name=end]').
+        } else if (e.currentTarget.name === 'end') {
+            // get start
+        } else {
+            // ?
+        }
+
+        $table.bootstrapTable('onFilter', "item['date'] > '" + dateF + "'");
+
+    }
+
+    /****************************************************
+     * UPLOAD
+     * */
+
+
+    function uploadForm() {
+        // set token for upload
+        var $uploadform = $('#uploadForm');
+        $("input[name='token']").val(token);
+
+        $uploadform.fileupload({
+            sequentialUploads: true,
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .progress-bar').css('width', progress + '%');
+            },
+            add: function (e, data) {
+                var jqXHR = data.submit()
+                    .success(function (result, textStatus, jqXHR) {
+                    })
+                    .error(function (jqXHR, textStatus, errorThrown) {
+                        alert("Error " + textStatus)
+                    })
+                    .complete(function (result, textStatus, jqXHR) {
+                        //console.log("result file upload: ", result);
+                        $('#progress').hide();
+                        $('.close').click();
+                        location.reload();
+                    });
+            },
+            start: function () {
+                $('#progress').show();
+            }
+        });
+    }
+
+    function ListFolderUpload(destFolders) {
+        var listFolder = $('#uploadForm p:first');
+        for (key in destFolders) {
+            if (destFolders[key] === 'Presta') {
+                listFolder.append(
+                        '<label class="radio control-label"><input name="destFolder" value="' +
+                        destFolders[key] + '" type="radio" checked />' + destFolders[key] + '/</label>'
+                );
+            } else {
+                listFolder.append(
+                        '<label class="radio control-label"><input name="destFolder" value="' +
+                        destFolders[key] + '" type="radio" />' + destFolders[key] + '/</label>'
+                );
+            }
+
+        }
+    }
+
+
+    /****************************************************
+     * MENU
+     * */
+
     function menuActionClick(e, data) {
         var table = $('#mainTable');
         if (data.node.id === 'root') {
@@ -270,36 +351,9 @@ $(function () {
         }
     }
 
-    function filterDate(e) {
+    // TIP: $('.leaf') to access leaf nodes...!!!!
+    function buildTree(){
 
-        //console.log("date begin = " + $( this ).val() + "\t time = " + $.now());
-        var date = $(this).val();
-        //console.log(e.currentTarget.name, $(this));
-        var day = date.slice(0, 2),
-            month = date.slice(3, 5),
-            year = date.slice(6, 11);
-        var dateF = year + "-" + month + "-" + day;
-        console.log("dateF", dateF);
-        var expr = "item['date'] ";
-        if (e.currentTarget.name === 'start') {
-            // get end
-            // $('input[name=end]').
-        } else if (e.currentTarget.name === 'end') {
-            // get start
-        } else {
-            // ?
-        }
-
-        $table.bootstrapTable('onFilter', "item['date'] > '" + dateF + "'");
-
-    }
-
-    /****************************************************
-     * MENU
-     * */
-
-        // $('.leaf') to access leafs...!!!!
-    function createMenu() {
         var tree = [];
         var cat = [];
 
@@ -377,11 +431,13 @@ $(function () {
             "li_attr": {"class": "leaf"}
         };
 
+        return tree;
+    }
+
+
+    function createMenu() {
 
         var $sidenave = $('#sidenav');
-
-        //destroy before reload
-        $sidenave.html('');
 
         // JSTREE
         $sidenave
@@ -396,7 +452,7 @@ $(function () {
                             "disabled": false,
                             "selected": true
                         },
-                        "children": tree
+                        "children": buildTree()
                     }
                 }
                 /*"plugins" : [ "contextmenu" ]*/
@@ -625,7 +681,7 @@ $(function () {
             type: 'GET',
             url: serverURL + 'folder/' + token + '/',
             success: function (data) {
-                destFolders = data;
+                ListFolderUpload(data);
             }
         });
     }
@@ -662,7 +718,7 @@ $(function () {
                     alert("ERREUR: Authentification.");
                 },
                 401: function () {
-                    alert("ERROR: probleme de connection.");
+                    alert("ERREUR: probleme de connection.");
                 }
             }
         });
@@ -673,55 +729,12 @@ $(function () {
      * */
     function main() {
 
-        // set token for upload
-        var $uploadform = $('#uploadForm');
-        $("input[name='token']").val(token);
 
-        $uploadform.fileupload({
-            sequentialUploads: true,
-            progressall: function (e, data) {
-                var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('#progress .progress-bar').css('width', progress + '%');
-            },
-            add: function (e, data) {
-                var jqXHR = data.submit()
-                    .success(function (result, textStatus, jqXHR) {
-                    })
-                    .error(function (jqXHR, textStatus, errorThrown) {
-                        alert("Error " + textStatus)
-                    })
-                    .complete(function (result, textStatus, jqXHR) {
-                        //console.log("result file upload: ", result);
-                        $('#progress').hide();
-                        $('.close').click();
-                        location.reload();
-                    });
-            },
-            start: function () {
-                $('#progress').show();
-            }
-        });
+        uploadForm();
+        LoadFolder();
 
         //SYNC & WAIT
-        $.when(LoadCategory(), LoadData(), LoadFolder()).done(function () {
-            //dc = new DataCollection(AjaxData);
-            //dc.query().filter({last_name: 'Snow'}).values();
-
-            var listFolder = $('#uploadForm p:first');
-            for (key in destFolders) {
-                if (destFolders[key] === 'Presta') {
-                    listFolder.append(
-                            '<label class="radio control-label"><input name="destFolder" value="' +
-                            destFolders[key] + '" type="radio" checked />' + destFolders[key] + '/</label>'
-                    );
-                } else {
-                    listFolder.append(
-                            '<label class="radio control-label"><input name="destFolder" value="' +
-                            destFolders[key] + '" type="radio" />' + destFolders[key] + '/</label>'
-                    );
-                }
-
-            }
+        $.when(LoadCategory(), LoadData()).done(function () {
 
             mergeLabelDoc();
             var $table = createTable();
