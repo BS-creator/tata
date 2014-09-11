@@ -335,10 +335,6 @@ div#sidenav ul li ul li a {
   color: #808080;
   padding: 5px 0 5px 20px;
 }
-div#sidenav ul li ul li[id^="j1_"] ~ i:after {
-  float: right;
-  content: "\f0d7";
-}
 div#sidenav ul li ul li ul li a {
   font-weight: normal;
   padding: 5px 0 5px 52px;
