@@ -824,7 +824,9 @@ $(function () {
                 format: "dd/mm/yyyy",
                 language: "fr",
                 autoclose: true,
-                todayHighlight: true
+                todayHighlight: true,
+                startView: 1
+                // minViewMode:1
             }).on('changeDate', filterDate);
 
         });
