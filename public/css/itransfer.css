@@ -196,9 +196,11 @@ table#mainTable thead tr th div.th-inner span.unsorted:after {
   line-height: 1;
   margin: 0 5px;
 }
-table[id^="table-"] tbody tr > td:nth-child(1) a,
-table#mainTable tbody tr > td:nth-child(1) a {
-  margin-left: 43%;
+table[id^="table-"] tbody tr > td:first-child,
+table#mainTable tbody tr > td:first-child {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
 }
 table[id^="table-"] tbody tr td:last-child,
 table#mainTable tbody tr td:last-child {
