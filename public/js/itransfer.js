@@ -103,7 +103,7 @@ $(function () {
 
         if (dateStart !== "--" && dateEnd === "--") {
             //FROM
-            expr = 'item["date"] > "' + yearFirst(dateStart) + '"';
+            expr = 'item["date"] > "' + yearFirst(dateStart) + '" ';
         }
         if (dateStart === "--" && dateEnd !== "--") {
             //UP TO
@@ -111,7 +111,8 @@ $(function () {
         }
         if (dateStart !== '--' && dateEnd !== "--") {
             //FROM TO
-            expr += ' && item["date"] < "' + yearFirst(dateEnd) + '"';
+            expr += 'item["date"] > "' + yearFirst(dateStart) +
+                '" && item["date"] < "' + yearFirst(dateEnd) + '"';
         }
         if (dateStart === "--" && dateEnd === "--") {
             //ALL DATE
@@ -499,16 +500,16 @@ $(function () {
             rowStyle: rowStylef,
             clickToSelect: true,
             columns: [
-                {
+                /*{
                     field: 'stateField',
                     align: 'center',
                     checkbox: true,
                     visible: true
-                },
+                },*/
                 {
                     field: 'notDownloaded',
                     title: '<i class="fa fa-download fa-lg"></i>',
-                    align: 'center',
+                  /*  align: 'center',*/
                     sortable: true,
                     class: 'dl',
                     formatter: formatDownload
