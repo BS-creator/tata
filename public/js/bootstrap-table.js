@@ -603,31 +603,31 @@
     };
 
     /** CUSTOM **/
-    BootstrapTable.prototype.onFilter = function (array) {
-        //console.log(this);
+    BootstrapTable.prototype.onFilter = function (filter) {
 
+        //console.log(this);
         this.options.pageNumber = 1;
-        this.initFilter(array);
+        this.initFilter(filter);
         this.updatePagination(true);
         this.initBody();
 
     };
 
-    BootstrapTable.prototype.initFilter = function (array){
-
+    BootstrapTable.prototype.initFilter = function (filter){
+        console.log("array", filter);
         if (this.options.sidePagination !== 'server' ) {
             if(array){
-                var field       = array[0] || 'refDoc',
-                    value       = array[1] || ''/*,
+                var field       = filter[0] || 'refDoc',
+                    value       = filter[1] || ''/*,
                     operator    = array[2],
                     field2      = array[3],
                     value2      = array[4]*/;
 
                 this.data = value ? $.grep(this.options.data, function (item) {
 
-                    if ( typeof array === 'string' ) {
-
-                        return eval(array);
+                    if ( typeof filter === 'string' ) {
+                        //console.log("array", array);
+                        return eval(filter);
                     }
 
                     /*if(operator && field && field2){

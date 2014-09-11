@@ -87,17 +87,21 @@ $(function () {
         }
     }
 
+    function yearFirst(date){
+
+        return date.slice(6, 11) + "-" +
+            date.slice(3, 5) + "-" +
+            date.slice(0, 2);
+    }
+
     function filterDate(e) {
 
         var $table = $('mainTable');
         //console.log("date begin = " + $( this ).val() + "\t time = " + $.now());
-        var date = $(this).val();
+        var date = yearFirst($(this).val());
         // console.log(e.currentTarget.name, $(this));
-        var day = date.slice(0, 2),
-            month = date.slice(3, 5),
-            year = date.slice(6, 11);
-        var dateF = year + "-" + month + "-" + day;
-        console.log("dateF", dateF);
+
+        console.log("date", date);
         var expr = "item['date'] ";
         if (e.currentTarget.name === 'start') {
             // get end
@@ -108,7 +112,7 @@ $(function () {
             // ?
         }
 
-        $table.bootstrapTable('onFilter', "item['date'] > '" + dateF + "'");
+        $table.bootstrapTable('onFilter', "item['date'] > '" + date + "'");
 
     }
 
