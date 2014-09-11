@@ -20,7 +20,7 @@ li {
 #upload-modal .btn-upload {
   position: relative;
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: 35px;
   display: block;
   width: 100%;
   font-size: 14px;
@@ -137,6 +137,11 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 .fixed-table-toolbar .columns,
 .fixed-table-toolbar .search {
   margin-top: 0;
+}
+.fixed-table-toolbar ol.breadcrumb {
+  margin: 0 0 9px 0;
+  padding: 0;
+  background-color: transparent;
 }
 #get-selections {
   display: none;
