@@ -314,6 +314,12 @@ div#sidenav ul.jstree-children li a {
 div#sidenav {
   padding-top: 1px;
   border-radius: 3px;
+  /*  ul > li.jstree-open > a {
+    border-top-right-radius: 4px;
+  }
+  ul > li#upload > a {
+    border-bottom-right-radius: 4px;
+  }*/
 }
 div#sidenav ul > li > a {
   background-color: #F2F2F2;
@@ -324,12 +330,6 @@ div#sidenav ul > li > a {
   cursor: pointer;
   text-decoration: none;
   border-left: 0;
-}
-div#sidenav ul > li.jstree-open > a {
-  border-top-right-radius: 4px;
-}
-div#sidenav ul > li#upload > a {
-  border-bottom-right-radius: 4px;
 }
 div#sidenav ul > li > ul > li > a {
   background-color: white;

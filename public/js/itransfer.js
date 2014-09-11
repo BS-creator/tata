@@ -87,8 +87,7 @@ $(function () {
         }
     }
 
-    function yearFirst(date){
-
+    function yearFirst(date) {
         return date.slice(6, 11) + "-" +
             date.slice(3, 5) + "-" +
             date.slice(0, 2);
@@ -96,23 +95,32 @@ $(function () {
 
     function filterDate(e) {
 
-        var $table = $('mainTable');
-        //console.log("date begin = " + $( this ).val() + "\t time = " + $.now());
-        var date = yearFirst($(this).val());
-        // console.log(e.currentTarget.name, $(this));
+        //TODO: case delete date
+        var $table = $('#mainTable');
+        var dateEnd = $('input[name=end]').val();
+        var dateStart = $('input[name=start]').val();
+        var expr = '';
 
-        console.log("date", date);
-        var expr = "item['date'] ";
-        if (e.currentTarget.name === 'start') {
-            // get end
-            // $('input[name=end]').
-        } else if (e.currentTarget.name === 'end') {
-            // get start
-        } else {
-            // ?
+        if (dateStart !== "--" && dateEnd === "--") {
+            //FROM
+            expr = 'item["date"] > "' + yearFirst(dateStart) + '"';
+        }
+        if (dateStart === "--" && dateEnd !== "--") {
+            //UP TO
+            expr = 'item["date"] < "' + yearFirst(dateEnd) + '"';
+        }
+        if (dateStart !== '--' && dateEnd !== "--") {
+            //FROM TO
+            expr += ' && item["date"] < "' + yearFirst(dateEnd) + '"';
+        }
+        if (dateStart === "--" && dateEnd === "--") {
+            //ALL DATE
+            $table.bootstrapTable('onFilter');
+            return;
         }
 
-        $table.bootstrapTable('onFilter', "item['date'] > '" + date + "'");
+        console.log("start: expr", expr);
+        $table.bootstrapTable('onFilter', expr);
 
     }
 
@@ -725,10 +733,11 @@ $(function () {
             dataType: 'json',
             statusCode: {
                 403: function () {
-                    alert("ERREUR: Authentification.");
+                    alert("ERREUR: Session expirée.");
+                    window.location = baseURL;
                 },
                 401: function () {
-                    alert("ERREUR: probleme de connection.");
+                    alert("ERREUR: Problème de connexion.");
                 }
             }
         });
@@ -824,7 +833,10 @@ $(function () {
                 format: "dd/mm/yyyy",
                 language: "fr",
                 autoclose: true,
-                todayHighlight: true
+                todayHighlight: true,
+                startView: 1
+                //minViewMode: 1 //month view
+
             }).on('changeDate', filterDate);
 
         });

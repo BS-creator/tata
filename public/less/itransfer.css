@@ -20,7 +20,7 @@ li {
 #upload-modal .btn-upload {
   position: relative;
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: 25px;
   display: block;
   width: 100%;
   font-size: 14px;
@@ -138,6 +138,11 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 .fixed-table-toolbar .search {
   margin-top: 0;
 }
+.fixed-table-toolbar ol.breadcrumb {
+  margin: -5px 0px 3px;
+  padding: 0;
+  background-color: transparent;
+}
 #get-selections {
   display: none;
   margin-bottom: 10px;
@@ -194,10 +199,6 @@ table#mainTable thead tr th div.th-inner span.unsorted:after {
 table[id^="table-"] tbody tr > td:nth-child(1) a,
 table#mainTable tbody tr > td:nth-child(1) a {
   margin-left: 43%;
-}
-table[id^="table-"] tbody tr td:last-child::before,
-table#mainTable tbody tr td:last-child::before {
-  /*content:'.';*/
 }
 table[id^="table-"] tbody tr td:last-child,
 table#mainTable tbody tr td:last-child {

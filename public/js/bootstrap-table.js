@@ -625,31 +625,17 @@
     };
 
     BootstrapTable.prototype.initFilter = function (filter){
-        console.log("array", filter);
+
         if (this.options.sidePagination !== 'server' ) {
-            if(array){
+            if(filter){
                 var field       = filter[0] || 'refDoc',
-                    value       = filter[1] || ''/*,
-                    operator    = array[2],
-                    field2      = array[3],
-                    value2      = array[4]*/;
+                    value       = filter[1] || '';
 
                 this.data = value ? $.grep(this.options.data, function (item) {
 
                     if ( typeof filter === 'string' ) {
-                        //console.log("array", array);
                         return eval(filter);
                     }
-
-                    /*if(operator && field && field2){
-                        var s = 'item["' + field + '"] === ' + value + ' ' + operator + ' ' +
-                            'item["' +field2 + '"] === ' + value2;
-                        if (eval(s)){
-                            return true;
-                        }else{
-                            return false;
-                        }
-                    }else*/
                     //filter on condition about the field
                     if (field){
                         if ( typeof value === 'number' ) {
@@ -674,7 +660,6 @@
                             else return false;
                         }
                     }
-
                     return false;
                 }) : this.options.data;
             }else{
