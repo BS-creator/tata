@@ -885,35 +885,36 @@ $(function () {
             $table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "') && (item['isNew'] || item['notDownloaded'])");
 
 
+            // sort icons
+            $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
 
+            $('th.sortable > .th-inner').on('click', function () {
 
+                var $this = $(this);
 
-          // sort icons
-          $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
+                function initSort(){
+                    $this.parents().siblings().find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort');
+                    $this.parents().siblings().find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort');
+                }
 
-          $('th.sortable > .th-inner').on('click', function () {
+                if($this.find('i.fa-sort').length > 0){
+                    initSort();
+                    $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
+                } else if($this.find('i.fa-sort-down').length > 0){
+                    initSort();
+                    $this.find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort-up');
+                } else if($this.find('i.fa-sort-up').length > 0){
+                     initSort();
+                    $this.find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort-down');
+                }
 
-            var $this = $(this);
+            });
 
-            function initSort(){
-              $this.parents().siblings().find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort');
-              $this.parents().siblings().find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort');
-            }
+            // btn download
+            $('input[type="checkbox"]').on('change', function (){
+                $('tr.selected').length > 0 ? $('.downloadall').show() : $('.downloadall').hide();
+            })
 
-            if($this.find('i.fa-sort').length > 0){
-              initSort();
-              $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
-
-            } else if($this.find('i.fa-sort-down').length > 0){
-              initSort();
-              $this.find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort-up');
-
-            } else if($this.find('i.fa-sort-up').length > 0){
-              initSort();
-              $this.find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort-down');
-            }
-
-          });
 
         });
     }
