@@ -7,7 +7,8 @@
     "jquery": "~1.11.0",
     "bootstrap-table": "~1.2.1",
     "bootstrap": "~3.2.0",
-    "fontawesome": "~4.2.0"
+    "fontawesome": "~4.2.0",
+    "underscore": "~1.7.0"
   },
   "devDependencies": {}
 }
