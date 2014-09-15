@@ -198,7 +198,7 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 #get-selections, .downloadall{
   display: block;
   margin-bottom: 10px;
-  margin-top: 10px;
+  margin-top: 16px;
 }
 
 //////////////////////////////////////////////////////
@@ -213,13 +213,18 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 }
 table[id^="table-"],
 table#mainTable {
-
+/*
+fa fa-sort"\f0dc"
+fa fa-sort-down"\f0dd"
+fa fa-sort-up"\f0de"
+*/
   // filtres de la table
   thead tr th {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
   }
+
   thead tr th.dl {
     width: 55px;
   }
@@ -240,18 +245,6 @@ table#mainTable {
   }*/
   thead tr th.del{
     width: 60px;
-  }
-
-
-  // icon unsorted
-  thead tr th div.th-inner span.unsorted:after {
-    content: "\f0dc";
-    display: inline-block;
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-    margin: 0 5px;
   }
 
   // dernière colonne - extensions
@@ -302,9 +295,14 @@ table#mainTable {
   background-color: transparent;
   color: #428BCA;
   font-weight: bold;
-  span.caret {
+/*  span.caret {
     border-bottom: 4px solid #428BCA;
     margin-top: -7px;
-  }
+  }*/
 }
+
+.fa {
+  margin-left: 5px;
+}
+
 

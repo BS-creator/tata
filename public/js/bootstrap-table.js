@@ -420,6 +420,7 @@
             $this_ = this.$header.find('th').eq($this.index());
 
         this.$header.add(this.$header_).find('span.order').remove();
+
         /*CUSTOM: search on date (invisible)*/
         if($this.data('field') === 'formattedDate'){
             this.options.sortName = 'date';
@@ -438,7 +439,7 @@
         this.trigger('sort', this.options.sortName, this.options.sortOrder);
 
         $this.add($this_).data('order', this.options.sortOrder)
-            .find('.th-inner').append(this.getCaretHtml());
+            // .find('.th-inner').append(this.getCaretHtml()); // CUSTOM stop sort icons
 
         if (this.options.sidePagination === 'server') {
             this.initServer();
