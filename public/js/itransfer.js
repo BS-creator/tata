@@ -65,28 +65,6 @@ $(function () {
         });
     }
 
-    function download(array) {
-        //TODO
-        for (var i = 0; i < array.length; i++) {
-            var iframe = $('<iframe style="visibility: collapse;"></iframe>');
-            $('body').append(iframe);
-            var content = iframe[0].contentDocument;
-            /*var form = '<form action="' + array[i] + '" method="GET"></form>';
-             content.write(form);
-             $('form', content).submit();*/
-            content.write('<a href="' + array[i] + '"></a>');
-            //console.log($('a', content));
-            $('a', content).click(function () {
-                window.location = array[i];
-            });
-            setTimeout((function (iframe) {
-                return function () {
-                    iframe.remove();
-                }
-            })(iframe), 1000);
-        }
-    }
-
     function yearFirst(date) {
         return date.slice(6, 11) + "-" +
             date.slice(3, 5) + "-" +
@@ -257,6 +235,20 @@ $(function () {
         ].join('');
     }
 
+    /****************************************************
+     * DOWNLOAD (ZIP)
+     * */
+
+    function download() {
+        $.ajax({
+            type: "POST",
+            url: serverURL + 'file/list/',
+            data : {
+                "token" : token,
+                "fileID": "128496992"
+            }
+        });
+    }
 
     /****************************************************
      * UPLOAD
@@ -268,6 +260,9 @@ $(function () {
         var $uploadform = $('#uploadForm');
         $("input[name='token']").val(token);
 
+        $uploadform.attr("action", serverURL + "file/upload");
+
+        //console.log(" $uploadform.attr('action')",  $uploadform.attr("action"));
         $uploadform.fileupload({
             sequentialUploads: true,
             progressall: function (e, data) {
@@ -292,6 +287,8 @@ $(function () {
                 $('#progress').show();
             }
         });
+
+
     }
 
     function ListFolderUpload(destFolders) {
@@ -319,6 +316,7 @@ $(function () {
 
     function menuActionClick(e, data) {
         var table = $('#mainTable');
+        $('.breadcrumb').html('<li class="active">'+ data.node.text+'</li><li><a href="#"></a></li>');
         if (data.node.id === 'root') {
             table.bootstrapTable('showColumn', 'refDoc');
             table.bootstrapTable('showColumn', 'libelle');
@@ -328,11 +326,11 @@ $(function () {
             table.bootstrapTable('hideColumn', 'fileName');
             table.bootstrapTable('hideColumn', 'path');
             table.bootstrapTable('onFilter', ['uploadUserName', 'trf_fich']);
-            $('.breadcrumb').html('<li class="active">Tous les documents</li><li><a href="#"></a></li>');
+            //$('.breadcrumb').html('<li class="active">Tous les documents</li><li><a href="#"></a></li>');
         } else {
             data.instance.toggle_node(data.node);
             //console.log(data.node);
-            $('.breadcrumb').html('<li class="active">'+ data.node.text+'</li><li><a href="#"></a></li>');
+
             //Filter on refDoc
             var nodeid = parseInt(data.node.id);
             if (nodeid > -1 && data.node.li_attr.class === 'leaf') {
@@ -501,14 +499,14 @@ $(function () {
             showRefresh: true,
             minimumCountColumns: 5,
             rowStyle: rowStylef,
-            clickToSelect: true,
+            clickToSelect: false,
             columns: [
-                /*{
+                {
                     field: 'stateField',
                     align: 'center',
-                    checkbox: true,
-                    visible: true
-                },*/
+                    checkbox: true
+
+                },
                 {
                     field: 'notDownloaded',
                     title: '<i class="fa fa-download fa-lg"></i>',
@@ -535,7 +533,7 @@ $(function () {
                     visible: true,
                     formatter: formatDate
                 },
-                {
+                /*{
                     field: 'date',
                     title: 'Date',
                     align: 'center',
@@ -544,7 +542,7 @@ $(function () {
                     sortable: true,
                     visible: false,
                     formatter: formatDefault
-                },
+                },*/
                 {
                     field: 'fileName',
                     title: 'Nom',
@@ -667,7 +665,16 @@ $(function () {
                     }
                 }
             ]
-        });
+        })/*.on('check.bs.table', function (e, row) {
+            $('.downloadall').show();
+            //$result.text('Event: check.bs.table, data: ' + JSON.stringify(row));
+        }).on('uncheck.bs.table', function (e, row) {
+            $('.downloadall').hide();
+        }).on('check-all.bs.table', function (e) {
+            $('.downloadall').show();
+        }).on('uncheck-all.bs.table', function (e) {
+            $('.downloadall').hide();
+        })*/;
 
         return $table;
     }
@@ -725,8 +732,9 @@ $(function () {
         $('#loader').show();
 
         return $.ajax({
-            type: "GET",
-            url: serverURL + 'file/' + token + '/',
+            type: "POST",
+            url: serverURL + 'file/list/' /*+ token + '/'*/,
+            data: { "token" : token },
             success: function (data) {
                 AjaxData = data;
                 /* window.dc = new DataCollection(data);*/
@@ -748,105 +756,145 @@ $(function () {
     }
 
     /****************************************************
+     * EVENTS
+     * */
+
+    function setEventsHTML(){
+
+        var $table = $('#mainTable');
+
+        //DOWNLOAD files
+        $('.dlfile').on('click', function () {
+            $(this).attr('href', serverURL + 'file/' + token + '/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
+            //Update icon
+            $(this).find('i').remove();
+            var small = $(this).find('small');     // cache object
+            $(this).prepend("<i class='fa fa-download text-muted'></i>"); //mark as already downloaded
+            var dl = parseInt(small.data('dl')) + 1;
+            small.data('dl', dl); // increment by one the download count
+            small.html('&nbsp;' + dl);
+        });
+
+
+        // RELOAD
+        $('.reloadme').on('click', function () {
+            //$table.bootstrapTable('onFilter');
+            location.reload();
+        });
+
+        // LOGOUT
+        $('#signout').on('click', function () {
+            sessionStorage.setItem("token", '');
+            window.location = baseURL;
+        });
+
+        // Filter
+        $('#filterDL').on('click', function () {
+            $table.bootstrapTable('onFilter', "item['notDownloaded']");
+        });
+        $('#filterNew').on('click', function () {
+            $table.bootstrapTable('onFilter', "item['isNew']");
+        });
+
+        //TODO
+        //$('header-logo').attr('href', baseURL);
+
+        $('.downloadall').on('click', function(){
+            $('#loader').show();
+            var array = $table.bootstrapTable('getSelections');
+            //console.log("getSelections",array);
+            var listID='';
+            $.each(array, function(i,item){
+                listID += item.idFile +'@!';
+            });
+            console.log(listID);
+            //post download
+            //TODO!!!!
+
+            var params = {
+                "token": token,
+                "fileID": listID
+            }
+            $.ajax({
+                type: "POST",
+                url: serverURL + "/file/zip",
+                data: params,
+                success: function(response, status, request) {
+                    $('#loader').hide();
+                    var disp = request.getResponseHeader('Content-Disposition');
+                    if (disp && disp.search('attachment') != -1) {
+                        var form = $('<form method="POST"  action="' + serverURL + '/file/zip">');
+                        $.each(params, function(k, v) {
+                            form.append($('<input type="hidden" name="' + k +
+                                '" value="' + v + '">'));
+                        });
+                        $('body').append(form);
+                        console.log("form", form);
+                        form.submit();
+                    }
+                }
+            });
+        });
+
+
+        // Upload
+        // btn bootstrap
+        $('input[type=file]').bootstrapFileInput();
+
+        // add css active to btn
+        $("#uploadCollapse .btn-upload").on('click', function () {
+            $("#uploadCollapse .btn-upload").toggleClass("active", "active");
+        });
+
+        // checked : show btn-download
+        //TODO css?
+
+        // date picker
+        $('#datepicker input').datepicker({
+            format: "dd/mm/yyyy",
+            language: "fr",
+            autoclose: true,
+            todayHighlight: true,
+            startView: 1
+            //minViewMode: 1 //month view
+
+        }).on('changeDate', filterDate)
+            .off('keyup').on('keyup', function (event) {
+                setTimeout(filterDate, 500, event); // 500ms
+        });
+    }
+
+
+
+    /****************************************************
      * MAIN
      * */
     function main() {
 
-
-        uploadForm();
-        LoadFolder();
-
+        $('.user-name').html(username.toUpperCase());
         //SYNC & WAIT
-        $.when(LoadCategory(), LoadData()).done(function () {
+        $.when(LoadCategory(), LoadData(), LoadFolder()).done(function () {
 
+            //Add label for reference of Document
             mergeLabelDoc();
+
             var $table = createTable();
+
             createMenu();
 
+            //set upload form events
+            uploadForm();
 
-            //APPLY FILTERS
-            $table.bootstrapTable('onFilter', "(item['isNew'] || item['notDownloaded'])");
-
-            //DOWNLOAD files
-            $table.delegate('.dlfile', 'click', function () {
-                $(this).attr('href', serverURL + 'file/' + token + '/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
-                //Update icon
-                $(this).find('i').remove();
-                var small = $(this).find('small');     // cache object
-                $(this).prepend("<i class='fa fa-download text-muted'></i>"); //mark as already downloaded
-                var dl = parseInt(small.data('dl')) + 1;
-                small.data('dl', dl); // increment by one the download count
-                small.html('&nbsp;' + dl);
-            });
+            //set all other events
+            setEventsHTML();
 
 
-            $('body').delegate('.reloadme', 'click', function () {
-                //$table.bootstrapTable('onFilter');
-                location.reload();
-            });
-
-            // LOGOUT
-            $('#signout').on('click', function () {
-                sessionStorage.setItem("token", '');
-                window.location = baseURL;
-            });
-
-            // Filter
-            $('#filterDL').on('click', function () {
-                //console.log('filterDL');
-                //$table.bootstrapTable('onFilter',['notDownloaded', false]);
-                $table.bootstrapTable('onFilter', "item['notDownloaded']");
-            });
-            $('#filterNew').on('click', function () {
-                $table.bootstrapTable('onFilter', "item['isNew']");
-            });
-
-            //TODO
-            $('header-logo').attr('href', baseURL);
-
-            /*//Add download all button
-             $('#get-selections').click(function () {
-             alert('Selected values: ' + JSON.stringify($table.bootstrapTable('getSelections')));
-             var array = [];
-             $.each($table.bootstrapTable('getSelections'), function(i, item){
-             array[array.length] = serverURL + 'file/' + token + '/' + item.idFile + '/' + item.fileName;
-             });
-             //console.log(array);
-             download(array);
-             });*/
-
-            $('.user-name').html(username.toUpperCase());
-
-
-            //////////////////// upload
-            // btn bootstrap
-            $('input[type=file]').bootstrapFileInput();
-
-            //////////////////// upload
-            // add cllss active to btn
-
-            $("#uploadCollapse .btn-upload").on('click', function () {
-                $("#uploadCollapse .btn-upload").toggleClass("active", "active");
-            });
-
-            // checked : show btn-download
-
-
-            // date picker
-            $('#datepicker input').datepicker({
-                format: "dd/mm/yyyy",
-                language: "fr",
-                autoclose: true,
-                todayHighlight: true,
-                startView: 1
-                //minViewMode: 1 //month view
-
-            }).on('changeDate', filterDate);
+            //APPLY DEFAULT FILTERS
+            $table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '"+username+"') && (item['isNew'] || item['notDownloaded'])");
 
         });
     }
 
     $('document').ready(main());
-
 });
 
