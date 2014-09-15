@@ -733,16 +733,12 @@ $(function () {
 
         return $.ajax({
             type: "POST",
-            url: serverURL + 'file/list/' /*+ token + '/'*/,
+            url: serverURL + 'file/list/',
             data: { "token" : token },
-            success: function (data) {
-                AjaxData = data;
-                /* window.dc = new DataCollection(data);*/
-            },
+            success: function (data) { AjaxData = data; },
             complete: function () {
                 $('#loader').hide();
             },
-            dataType: 'json',
             statusCode: {
                 403: function () {
                     alert("ERREUR: Session expirée.");
@@ -764,7 +760,7 @@ $(function () {
         var $table = $('#mainTable');
 
         //DOWNLOAD files
-        $('.dlfile').on('click', function () {
+        $table.on('click','.dlfile', function () {
             $(this).attr('href', serverURL + 'file/' + token + '/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
             //Update icon
             $(this).find('i').remove();
