@@ -1,6 +1,6 @@
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * version: 1.2.2
+ * version: 1.2.3
  * https://github.com/wenzhixin/bootstrap-table/
  */
 
@@ -100,6 +100,7 @@
         data: [],
         method: 'get',
         url: undefined,
+        cache: true,
         contentType: 'application/json',
         queryParams: function (params) {return {};},
         queryParamsType: undefined,
@@ -258,12 +259,10 @@
 
             columns.push(column);
         });
-        //ISSUE #102 = https://github.com/wenzhixin/bootstrap-table/issues/102
-        //this.options.columns = $.extend({}, columns, this.options.columns);
-
-        this.options.columns = $.merge(columns, this.options.columns);
+        this.options.columns = $.extend({}, columns, this.options.columns);
         $.each(this.options.columns, function (i, column) {
-            that.options.columns[i] = $.extend({}, BootstrapTable.COLUMN_DEFAULTS, column);
+            that.options.columns[i] = $.extend({}, BootstrapTable.COLUMN_DEFAULTS,
+                {field: i}, column); // when field is undefined, use index instead
         });
 
         // if options.data is setting, do not process tbody data
@@ -556,13 +555,13 @@
               '</div></div>'
             );
 
-            /**** CUSTOM ***/
+
             html.push(
             '<div class="row"><div class="col-md-12">',
-            '<button id="get-selections" type="button" class="btn btn-success"><i class="fa fa-upload"></i>&nbsp;&nbsp;Téléchargement multiple</button>',
+            '<button type="button" class="downloadall btn btn-success"><i class="fa fa-upload"></i>&nbsp;&nbsp;Téléchargement multiple</button>',
             '</div></div>');
 
-            /**** CUSTOM ***/
+
             html.push(
               '<div class="row"><div class="col-md-12">',
                 '<ol class="breadcrumb">',
@@ -572,7 +571,7 @@
 
                 '</ol>',
               '</div></div>');
-            
+            /**** CUSTOM ***/
             this.$toolbar.append(html.join(''));
             $search = this.$toolbar.find('.search input');
             $search.off('keyup').on('keyup', function (event) {
@@ -634,6 +633,7 @@
                 this.data = value ? $.grep(this.options.data, function (item) {
 
                     if ( typeof filter === 'string' ) {
+                        //console.log("filter", filter);
                         return eval(filter);
                     }
                     //filter on condition about the field
@@ -668,27 +668,6 @@
 
         }
     };
-
-   /* BootstrapTable.prototype.onSortDownload = function () {
-        var //$this = $(event.currentTarget),
-            $this_ = this.$header.find('th').eq(1); //TODO: get the index of the DL column programatically
-
-        this.$header.add(this.$header_).find('span.order').remove();
-        this.options.sortName = "notDownloaded";
-        this.options.sortOrder = 'desc';
-
-        this.trigger('sort', this.options.sortName, this.options.sortOrder);
-
-        $this_.data('order', this.options.sortOrder)
-            .find('.th-inner').append(this.getCaretHtml());
-
-        if (this.options.sidePagination === 'server') {
-            this.initServer();
-            return;
-        }
-        this.initSort();
-        this.initBody();
-    };*/
     /** CUSTOM **/
 
     BootstrapTable.prototype.initPagination = function (updateData) {
@@ -762,6 +741,10 @@
          */
         /* << < 1 2 3 4 5 > >>
         html.push('<div class="text-center mt-m">',*/
+        html.push('<div class="row"><div class="col-md-12">',
+            '<button type="button" class="downloadall btn btn-success">' +
+                '<i class="fa fa-upload"></i>&nbsp;&nbsp;Téléchargement multiple</button>',
+            '</div></div>');
         html.push('</div>',
             '<div class="text-center wide pagination">',
                 '<ul class="pagination">',
@@ -901,7 +884,7 @@
         this.updatePagination((this.data.length !== this.options.data.length));
     };
 
-    BootstrapTable.prototype.initBody = function () {
+    BootstrapTable.prototype.initBody = function (fixedScroll) {
         var that = this,
             html = [],
             data = this.searchText ? this.data : this.options.data;
@@ -1009,7 +992,9 @@
 
         this.$body.html(html.join(''));
 
-        this.$container.find('.fixed-table-body').scrollTop(0);
+        if (!fixedScroll) {
+            this.$container.find('.fixed-table-body').scrollTop(0);
+        }
 
         // click to select by column
         this.$body.find('> tr > td').off('click').on('click', function () {
@@ -1118,6 +1103,7 @@
             type: this.options.method,
             url: this.options.url,
             data: data,
+            cache: this.options.cache,
             contentType: this.options.contentType,
             dataType: 'json',
             success: function (res) {
@@ -1290,6 +1276,9 @@
         }
     };
 
+    BootstrapTable.prototype.getData = function () {
+        return this.searchText ? this.data : this.options.data;
+    };
     BootstrapTable.prototype.load = function (data) {
         this.initData(data);
         this.initSearch();
@@ -1299,7 +1288,37 @@
 
     BootstrapTable.prototype.append = function (data) {
         this.initData(data, true);
-        this.initBody();
+        this.initSearch();
+        this.initPagination();
+        this.initBody(true);
+    };
+
+    BootstrapTable.prototype.remove = function (params) {
+        var len = this.options.data.length,
+            i, row;
+
+        if (!params.hasOwnProperty('field') || !params.hasOwnProperty('values')) {
+            return;
+        }
+
+        for (i = len - 1; i >= 0; i--) {
+            row = this.options.data[i];
+
+            if (!row.hasOwnProperty(params.field)) {
+                return;
+            }
+            if (params.values.indexOf(row[params.field]) !== -1) {
+                this.options.data.splice(i, 1);
+            }
+        }
+
+        if (len === this.options.data.length) {
+            return;
+        }
+
+        this.initSearch();
+        this.initPagination();
+        this.initBody(true);
     };
 
     BootstrapTable.prototype.mergeCells = function (options) {
@@ -1331,6 +1350,14 @@
             return row[that.header.stateField];
         });
     };
+
+    /*BootstrapTable.prototype.getNSelection = function () {
+        var that = this;
+
+        return $.grep(this.data, function (row) {
+            return row[that.header.stateField] ? 1 : 0;
+        });
+    };*/
 
     BootstrapTable.prototype.checkAll = function () {
         this.$selectAll.add(this.$selectAll_).prop('checked', true);
@@ -1382,12 +1409,14 @@
 
     $.fn.bootstrapTable = function (option, _relatedTarget) {
         var allowedMethods = [
-                'getSelections',
-                'load', 'append', 'mergeCells',
+                'getSelections', 'getData',
+                'load', 'append', 'remove',
+                'mergeCells',
                 'checkAll', 'uncheckAll',
-                'destroy', 'resetView',
-                'showLoading', 'hideLoading',
                 'refresh',
+                'resetView',
+                'destroy',
+                'showLoading', 'hideLoading',
                 'showColumn', 'hideColumn',
                 'onFilter'
             ],

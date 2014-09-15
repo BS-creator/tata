@@ -98,7 +98,7 @@
                               Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.
                             </blockquote>
 
-                            <form class="" id="uploadForm" action="http://172.20.20.64:8018/file/upload" method="post" enctype="multipart/form-data">
+                            <form class="" id="uploadForm" action="/" method="post" enctype="multipart/form-data">
                               <p class="text-left">
                                 <!--loop-->
                                 <!--<label class="radio control-label"><input type="radio" name="reportory" value="---">dirname</label>-->
@@ -137,6 +137,14 @@
                 <!--TABLE CONTENT-->
                 <table id="mainTable" ></table>
             </div>
+              <div class="downloadForm">
+                  <form action="/" class="fileDownloadForm" style="display:none" method="post">
+                      <input type="text" name="foo" value="42"/> Setting foo to an odd number will cause the file download to fail <br/>
+                      <input type="text" name="bar" value="Some text"/><br/>
+                      <input type="submit"/>
+                  </form><br/>
+                  <iframe id="myiframe" src="" frameborder="0"></iframe>
+              </div>
           </div>
 
         </div> <!--/wrapper-->
