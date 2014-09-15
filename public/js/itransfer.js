@@ -825,6 +825,37 @@ $(function () {
                 // minViewMode:1
             }).on('changeDate', filterDate);
 
+
+
+
+
+          // sort icons
+          $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
+
+          $('th.sortable > .th-inner').on('click', function () {
+
+            var $this = $(this);
+
+            function initSort(){
+              $this.parents().siblings().find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort');
+              $this.parents().siblings().find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort');
+            }
+
+            if($this.find('i.fa-sort').length > 0){
+              initSort();
+              $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
+
+            } else if($this.find('i.fa-sort-down').length > 0){
+              initSort();
+              $this.find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort-up');
+
+            } else if($this.find('i.fa-sort-up').length > 0){
+              initSort();
+              $this.find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort-down');
+            }
+
+          });
+
         });
     }
 
