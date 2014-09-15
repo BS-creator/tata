@@ -80,7 +80,7 @@ $(function () {
         var expr = '';
 
         console.log(dateStart, dateEnd);
-        if (dateStart !== "--" && dateEnd === "--" ) {
+        if (dateStart !== "--" && dateEnd === "--") {
             //FROM
             expr = 'item["date"] > "' + dateStart + '" ';
         }
@@ -239,15 +239,33 @@ $(function () {
      * DOWNLOAD (ZIP)
      * */
 
-    function download() {
-        $.ajax({
-            type: "POST",
-            url: serverURL + 'file/list/',
-            data : {
-                "token" : token,
-                "fileID": "128496992"
-            }
-        });
+    function downloadAll() {
+
+            //$('#loader').show().delay(2000).fadeOut(400).hide();
+
+            var array = $('mainTable').bootstrapTable('getSelections');
+            var listID = '';
+
+            $.each(array, function (i, item) {
+                listID += item.idFile + '@!';
+            });
+
+            var params = {
+                "token": token,
+                "fileID": listID
+            };
+
+            var form = $('<form method="POST" action="' + serverURL + 'file/zip">');
+
+            $.each(params, function (k, v) {
+                form.append($('<input type="hidden" name="' + k +
+                    '" value="' + v + '">'));
+            });
+
+            $('body').append(form);
+
+            form.submit();
+
     }
 
     /****************************************************
@@ -316,7 +334,7 @@ $(function () {
 
     function menuActionClick(e, data) {
         var table = $('#mainTable');
-        $('.breadcrumb').html('<li class="active">'+ data.node.text+'</li><li><a href="#"></a></li>');
+        $('.breadcrumb').html('<li class="active">' + data.node.text + '</li><li><a href="#"></a></li>');
         if (data.node.id === 'root') {
             table.bootstrapTable('showColumn', 'refDoc');
             table.bootstrapTable('showColumn', 'libelle');
@@ -535,15 +553,15 @@ $(function () {
                     formatter: formatDate
                 },
                 /*{
-                    field: 'date',
-                    title: 'Date',
-                    align: 'center',
-                    valign: 'middle',
-                    class: 'sortableDate',
-                    sortable: true,
-                    visible: false,
-                    formatter: formatDefault
-                },*/
+                 field: 'date',
+                 title: 'Date',
+                 align: 'center',
+                 valign: 'middle',
+                 class: 'sortableDate',
+                 sortable: true,
+                 visible: false,
+                 formatter: formatDefault
+                 },*/
                 {
                     field: 'fileName',
                     title: 'Nom',
@@ -673,15 +691,15 @@ $(function () {
                 }
             ]
         })/*.on('check.bs.table', function (e, row) {
-            $('.downloadall').show();
-            //$result.text('Event: check.bs.table, data: ' + JSON.stringify(row));
-        }).on('uncheck.bs.table', function (e, row) {
-            $('.downloadall').hide();
-        }).on('check-all.bs.table', function (e) {
-            $('.downloadall').show();
-        }).on('uncheck-all.bs.table', function (e) {
-            $('.downloadall').hide();
-        })*/;
+         $('.downloadall').show();
+         //$result.text('Event: check.bs.table, data: ' + JSON.stringify(row));
+         }).on('uncheck.bs.table', function (e, row) {
+         $('.downloadall').hide();
+         }).on('check-all.bs.table', function (e) {
+         $('.downloadall').show();
+         }).on('uncheck-all.bs.table', function (e) {
+         $('.downloadall').hide();
+         })*/;
 
         return $table;
     }
@@ -740,8 +758,8 @@ $(function () {
 
         return $.ajax({
             type: "POST",
-            url: serverURL + 'file/list/' /*+ token + '/'*/,
-            data: { "token" : token },
+            url: serverURL + 'file/list/',
+            data: { "token": token },
             success: function (data) {
                 AjaxData = data;
                 /* window.dc = new DataCollection(data);*/
@@ -766,12 +784,12 @@ $(function () {
      * EVENTS
      * */
 
-    function setEventsHTML(){
+    function setEventsHTML() {
 
         var $table = $('#mainTable');
 
         //DOWNLOAD files
-        $('.dlfile').on('click', function () {
+        $table.on('click', '.dlfile', function () {
             $(this).attr('href', serverURL + 'file/' + token + '/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
             //Update icon
             $(this).find('i').remove();
@@ -806,42 +824,9 @@ $(function () {
         //TODO
         //$('header-logo').attr('href', baseURL);
 
-        $('.downloadall').on('click', function(){
-            $('#loader').show();
-            var array = $table.bootstrapTable('getSelections');
-            //console.log("getSelections",array);
-            var listID='';
-            $.each(array, function(i,item){
-                listID += item.idFile +'@!';
-            });
-            console.log(listID);
-            //post download
-            //TODO!!!!
+        //multidownload
+        $('.downloadall').on('click', downloadAll);
 
-            var params = {
-                "token": token,
-                "fileID": listID
-            }
-            $.ajax({
-                type: "POST",
-                url: serverURL + "/file/zip",
-                data: params,
-                success: function(response, status, request) {
-                    $('#loader').hide();
-                    var disp = request.getResponseHeader('Content-Disposition');
-                    if (disp && disp.search('attachment') != -1) {
-                        var form = $('<form method="POST"  action="' + serverURL + '/file/zip">');
-                        $.each(params, function(k, v) {
-                            form.append($('<input type="hidden" name="' + k +
-                                '" value="' + v + '">'));
-                        });
-                        $('body').append(form);
-                        console.log("form", form);
-                        form.submit();
-                    }
-                }
-            });
-        });
 
 
         // Upload
@@ -869,35 +854,6 @@ $(function () {
             .off('keyup').on('keyup', function (event) {
                 setTimeout(filterDate, 500, event); // 500ms
         });
-
-
-      // sort icons
-      $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
-
-      $('th.sortable > .th-inner').on('click', function () {
-
-        var $this = $(this);
-
-        function initSort(){
-          $this.parents().siblings().find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort');
-          $this.parents().siblings().find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort');
-        }
-
-        if($this.find('i.fa-sort').length > 0){
-          initSort();
-          $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
-
-        } else if($this.find('i.fa-sort-down').length > 0){
-          initSort();
-          $this.find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort-up');
-
-        } else if($this.find('i.fa-sort-up').length > 0){
-          initSort();
-          $this.find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort-down');
-        }
-
-      });
-
     }
 
 
@@ -926,7 +882,7 @@ $(function () {
 
 
             //APPLY DEFAULT FILTERS
-            $table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '"+username+"') && (item['isNew'] || item['notDownloaded'])");
+            $table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "') && (item['isNew'] || item['notDownloaded'])");
 
         });
     }
