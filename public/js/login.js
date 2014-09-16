@@ -5,12 +5,9 @@
 $(function (){
     "use strict";
 
-  /*$('#loader').bind('ajaxStart', function(){
-    console.log('test');
-    $(this).show();
-  }).bind('ajaxStop', function(){
-    $(this).hide();
-  });*/
+    var serverURL = 'http://172.20.20.64:8018/',
+    //var serverURL = 'http://qaiapps.groups.be/ariane/',
+        baseURL = 'http://localhost:4000/itransfer/';
 
     function submitLogin(){
         var credentials =
@@ -23,7 +20,7 @@ $(function (){
 
         $.ajax({
             type: "POST",
-            url: 'http://172.20.20.64:8018/login',
+            url: serverURL + 'login',
             data: credentials,
             success: function (data){
                 if(data.token){
@@ -31,7 +28,7 @@ $(function (){
                     sessionStorage.setItem("username", credentials.login);
                 }
                 //redirect to itransfer;
-                window.location = 'http://localhost:4000/itransfer/file.html';
+                window.location = baseURL + 'file.html';
                 window.login = $('#login').val();
             },
             dataType: 'json',

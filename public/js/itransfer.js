@@ -1,3 +1,5 @@
+sessionStorage.setItem("lang","nl");
+
 $(function () {
     'user strict'
 
@@ -6,11 +8,14 @@ $(function () {
     var serverURL = 'http://172.20.20.64:8018/',
     //var serverURL = 'http://qaiapps.groups.be/ariane/',
         baseURL = 'http://localhost:4000/itransfer/',
+        lang = sessionStorage.getItem("lang"),
+        i18n = {},
         AjaxData = [],
         category = [],
         refDocUsed = [],
         username = sessionStorage.getItem('username').toLowerCase(),
         token = sessionStorage.getItem('token');
+
 
     /****************************************************
      * HELPER
@@ -54,11 +59,12 @@ $(function () {
 
     function mergeLabelDoc() {
 
+
         $.each(category, function (i, cat) {
             $.each(AjaxData, function (j, row) {
                 if (cat.refDoc == parseInt(row.refDoc)) {
-                    //TODO: multilanguage
-                    row.libelle = cat.labelDoc_f;
+                    row.libelle = labelDoc_i18n(row);
+                    //TODO fix bug
                 }
                 row.noEmployeur = parseInt(row.noEmployeur);
                 row.uploadUserName.toUpperCase();
@@ -103,7 +109,34 @@ $(function () {
         $table.bootstrapTable('onFilter', expr);
 
     }
+    /****************************************************
+     * INTERNATIONALIZATION i18n
+     * */
 
+    function labelDoc_i18n(item){
+        console.log("item", item);
+        if(lang === "fr"){
+            return item.labelDoc_f;
+        }else if (lang === "nl"){
+            //console.log(item.labelDoc_n);
+            return item.labelDoc_n;
+        }else if (lang === "de"){
+            return item.labelDoc_d;
+        }else {
+            return item.labelDoc_x;
+        }
+    }
+    function labelCat_i18n(item){
+        if(lang === "fr"){
+            return item.labelCategory_f;
+        }else if (lang === "nl"){
+            return item.labelCategory_n;
+        }else if (lang === "de"){
+            return item.labelCategory_d;
+        }else {
+            return item.labelCategory_x;
+        }
+    }
 
     /****************************************************
      * FORMAT COLUMNS
@@ -209,9 +242,6 @@ $(function () {
     }
 
     function formatDate(value, row) {
-        //2014-09-09"
-        //if (value.length === )
-        //console.log(row.date);
         var year = row.date.slice(0, 4),
             month = row.date.slice(5, 7),
             day = row.date.slice(8, 10);
@@ -413,7 +443,7 @@ $(function () {
                         .children[(tree[(tree.length - 1)].children.length)] = {
                         "id": refdoc,
                         "data": refdoc,
-                        "text": refdoc + " - " + item.labelDoc_f,
+                        "text": refdoc + " - " + labelDoc_i18n(item), //item.labelDoc_f,
                         "li_attr": {"class": "leaf"}
                     }
                 } else {
@@ -422,7 +452,7 @@ $(function () {
                     tree[tree.length] =
                     {
                         /*"id": numcat,*/
-                        "text": numcat + " - " + item.labelCategory_f,
+                        "text": numcat + " - " + labelCat_i18n(item),//item.labelCategory_f,
                         "state": {
                             "opened": true,
                             "disabled": false,
@@ -431,7 +461,7 @@ $(function () {
                         "children": [
                             { //add document
                                 "id": refdoc,
-                                "text": refdoc + " - " + item.labelDoc_f,
+                                "text": refdoc + " - " + labelDoc_i18n(item), //item.labelDoc_f,
                                 "li_attr": {"class": "leaf"}
                             }
                         ]
@@ -460,7 +490,7 @@ $(function () {
         tree[tree.length] =
         {
             "id": "upload",
-            "text": 'Documents transmis à Group S', //Overgebrachte documenten naar Group S
+            "text": 'Documents transmis à Group S',
             "state": {
                 "opened": true,
                 "disabled": false,
@@ -484,7 +514,7 @@ $(function () {
                 'core': {
                     'data': {
                         "id": 'root',
-                        "text": "  Tous les documents",
+                        "text": "Tous les documents",
                         "state": {
                             "opened": true,
                             "disabled": false,
@@ -701,6 +731,14 @@ $(function () {
      * AJAX
      * */
 
+
+    function Loadi18n(){
+        $.getJSON( "data/tree.json", function( data ) {
+            i18n = data;
+        })
+
+    }
+
     function deleteFile(filePath) {
         var data = {
             "token": token,
@@ -853,6 +891,10 @@ $(function () {
     function main() {
 
         $('.user-name').html(username.toUpperCase());
+
+        //Language
+        Loadi18n();
+
         //SYNC & WAIT
         $.when(LoadCategory(), LoadData(), LoadFolder()).done(function () {
 
@@ -868,7 +910,6 @@ $(function () {
 
             //set all other events
             setEventsHTML();
-
 
             //APPLY DEFAULT FILTERS
             $table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "') && (item['isNew'] || item['notDownloaded'])");
