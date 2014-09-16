@@ -5,9 +5,25 @@
 $(function (){
     "use strict";
 
+
     var serverURL = 'http://172.20.20.64:8018/',
     //var serverURL = 'http://qaiapps.groups.be/ariane/',
         baseURL = 'http://localhost:4000/itransfer/';
+
+
+
+    /**
+     * Returns one of supported language, default if not.
+     * Supported languages: 'nl', 'fr', 'en' (default).
+     * @returns {string}
+     */
+    function getNavigatorLanguage () {
+        var locale = (window.navigator.userLanguage || window.navigator.language);
+        locale = /..-../.test(locale) ? locale.split('-')[0] : locale.split('_')[0];
+        if ((locale !== "en") && (locale !== "fr") && (locale !== "nl") ) locale = 'en';
+        return locale;
+    }
+
 
     function enterPressed (e) {
         if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
@@ -62,6 +78,9 @@ $(function (){
             }
         });
     }
+
+    //set language
+    sessionStorage.setItem("lang", getNavigatorLanguage() );
 
     //set event
     $('#submit-login').on('click', submitLogin);
