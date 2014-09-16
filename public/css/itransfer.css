@@ -145,9 +145,9 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 }
 #get-selections,
 .downloadall {
-  display: block;
+  display: none;
   margin-bottom: 10px;
-  margin-top: 10px;
+  margin-top: 16px;
 }
 #contentTable .fixed-table-container {
   border: 0;
@@ -157,6 +157,11 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 }
 table[id^="table-"],
 table#mainTable {
+  /*
+fa fa-sort"\f0dc"
+fa fa-sort-down"\f0dd"
+fa fa-sort-up"\f0de"
+*/
   /*  thead tr th.empl {
     width: 88px;
   }
@@ -187,16 +192,6 @@ table#mainTable thead tr th.formattedDate {
 table[id^="table-"] thead tr th.del,
 table#mainTable thead tr th.del {
   width: 60px;
-}
-table[id^="table-"] thead tr th div.th-inner span.unsorted:after,
-table#mainTable thead tr th div.th-inner span.unsorted:after {
-  content: "\f0dc";
-  display: inline-block;
-  font-family: FontAwesome;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;
-  margin: 0 5px;
 }
 table[id^="table-"] tbody tr > td:first-child,
 table#mainTable tbody tr > td:first-child {
@@ -240,8 +235,11 @@ table#mainTable .fixed-table-pagination .pagination-detail {
   background-color: transparent;
   color: #428BCA;
   font-weight: bold;
+  /*  span.caret {
+    border-bottom: 4px solid #428BCA;
+    margin-top: -7px;
+  }*/
 }
-#btn-pageResult span.caret {
-  border-bottom: 4px solid #428BCA;
-  margin-top: -7px;
+.fa {
+  margin-left: 5px;
 }

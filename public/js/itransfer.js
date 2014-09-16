@@ -6,7 +6,6 @@ $(function () {
     /***  GLOBAL VARIABLE ***/
     // array used to store all the existing document reference on the FTP server.
     var serverURL = 'http://172.20.20.64:8018/',
-    //var serverURL = 'http://qaiapps.groups.be/ariane/',
         baseURL = 'http://localhost:4000/itransfer/',
         lang = sessionStorage.getItem("lang"),
         i18n = {},
@@ -80,6 +79,7 @@ $(function () {
 
     function filterDate(e) {
 
+        //TODO: case delete date
         var $table = $('#mainTable');
         var dateEnd = yearFirst($('input[name=end]').val());
         var dateStart = yearFirst($('input[name=start]').val());
@@ -568,6 +568,7 @@ $(function () {
                     title: 'New',
                     align: 'center',
                     sortable: true,
+                    class: "isNew sortable",
                     visible: false,
                     formatter: formatIsNew
                 },
@@ -576,7 +577,7 @@ $(function () {
                     title: 'Date',
                     align: 'center',
                     valign: 'middle',
-                    class: "formattedDate",
+                    class: "formattedDate sortable",
                     sortable: true,
                     visible: true,
                     formatter: formatDate
@@ -597,7 +598,8 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     visible: false,
-                    sortable: true
+                    sortable: true,
+                    class: "fileName sortable"
                 },
                 {
                     field: 'uploadUserName',
@@ -606,7 +608,8 @@ $(function () {
                     valign: 'middle',
                     visible: false,
                     sortable: true,
-                    formatter: formatUserName
+                    formatter: formatUserName,
+                    class: "uploadUserName sortable"
                 },
                 {
                     field: 'noEmployeur',
@@ -614,7 +617,7 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
-                    class: 'empl',
+                    class: 'empl sortable',
                     formatter: formatDefault
                 },
                 {
@@ -622,7 +625,7 @@ $(function () {
                     title: 'Libell&eacute;', //TODO: multi-language
                     align: 'left',
                     valign: 'middle',
-                    class: 'labelDoc',
+                    class: 'labelDoc sortable',
                     sortable: true,
                     formatter: formatDefault
                 },
@@ -632,7 +635,7 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
-                    class: 'refDoc',
+                    class: 'refDoc sortable',
                     formatter: formatRefDoc
                 },
                 {
@@ -642,7 +645,7 @@ $(function () {
                     valign: 'middle',
                     visible: true,
                     sortable: true,
-                    class: 'size',
+                    class: 'size sortable',
                     formatter: formatSize
                 },
                 {
@@ -651,7 +654,7 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
-                    class: 'ext',
+                    class: 'ext sortable',
                     formatter: FormatExtension
                 },
                 /*{
@@ -669,7 +672,8 @@ $(function () {
                     valign: 'middle',
                     visible: false,
                     sortable: true,
-                    formatter: formatPath
+                    formatter: formatPath,
+                  class: 'path sortable'
                 },
                 {
                     field: 'refClientCompl',
@@ -678,7 +682,8 @@ $(function () {
                     valign: 'middle',
                     visible: false,
                     sortable: true,
-                    formatter: formatDefault
+                    formatter: formatDefault,
+                  class: 'refClientCompl sortable'
                 },
                 {
                     field: 'counter',
@@ -687,7 +692,8 @@ $(function () {
                     valign: 'middle',
                     visible: false,
                     sortable: true,
-                    formatter: formatDefault
+                    formatter: formatDefault,
+                  class: 'counter sortable'
                 },
                 {
                     field: 'refGroups',
@@ -696,7 +702,8 @@ $(function () {
                     valign: 'middle',
                     visible: false,
                     sortable: true,
-                    formatter: formatDefault
+                    formatter: formatDefault,
+                  class: 'refGroups sortable'
                 },
                 {
                     field: 'operate',
@@ -704,7 +711,7 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     clickToSelect: false,
-                    class: 'del',
+                    class: 'operate',
                     formatter: operateFormatter,
                     events: {
                         'click .remove': function (e, value, row, index) {
@@ -793,10 +800,12 @@ $(function () {
             data: { "token": token },
             success: function (data) {
                 AjaxData = data;
+                /* window.dc = new DataCollection(data);*/
             },
             complete: function () {
                 $('#loader').hide();
             },
+            dataType: 'json',
             statusCode: {
                 403: function () {
                     alert("ERREUR: Session expirée.");
@@ -857,6 +866,7 @@ $(function () {
         $('.downloadall').on('click', downloadAll);
 
 
+
         // Upload
         // btn bootstrap
         $('input[type=file]').bootstrapFileInput();
@@ -881,8 +891,9 @@ $(function () {
         }).on('changeDate', filterDate)
             .off('keyup').on('keyup', function (event) {
                 setTimeout(filterDate, 500, event); // 500ms
-            });
+        });
     }
+
 
 
     /****************************************************
@@ -913,6 +924,38 @@ $(function () {
 
             //APPLY DEFAULT FILTERS
             $table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "') && (item['isNew'] || item['notDownloaded'])");
+
+
+            // sort icons
+            $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
+
+            $('th.sortable > .th-inner').on('click', function () {
+
+                var $this = $(this);
+
+                function initSort(){
+                    $this.parents().siblings().find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort');
+                    $this.parents().siblings().find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort');
+                }
+
+                if($this.find('i.fa-sort').length > 0){
+                    initSort();
+                    $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
+                } else if($this.find('i.fa-sort-down').length > 0){
+                    initSort();
+                    $this.find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort-up');
+                } else if($this.find('i.fa-sort-up').length > 0){
+                     initSort();
+                    $this.find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort-down');
+                }
+
+            });
+
+            // btn download
+            $('input[type="checkbox"]').on('change', function (){
+                $('tr.selected').length > 0 ? $('.downloadall').show() : $('.downloadall').hide();
+            })
+
 
         });
     }
