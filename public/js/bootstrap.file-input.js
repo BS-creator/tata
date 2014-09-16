@@ -12,7 +12,7 @@
  */
 (function($) {
 
-  $.fn.bootstrapFileInput = function() {
+  $.fn.bootstrapFileInput = function(buttonText) {
 
     this.each(function(i,elem){
 
@@ -24,7 +24,7 @@
       }
 
       // Set the word to be displayed on the button
-      var buttonWord = 'Sélectionner les fichiers à ajouter';
+      var buttonWord = buttonText; //'Sélectionner les fichiers à ajouter';
 
       if (typeof $elem.attr('title') != 'undefined') {
         buttonWord = $elem.attr('title');

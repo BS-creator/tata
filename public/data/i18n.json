@@ -1,0 +1,104 @@
+{
+    "fr": {
+        "col":{
+            "new"   : "Nouveau",
+            "date"  : "Date",
+            "name"  : "Nom",
+            "user"  : "Utilisateur",
+            "empl"  : "Employeur",
+            "label" : "Libell&eacute;",
+            "refdoc": "Ref Doc",
+            "size"  : "Taille",
+            "ext"   : "Type",
+            "path"  : "Chemin",
+            "refCl" : "Ref Client",
+            "count" : "#",
+            "refGS" : "Ref Group S",
+            "del"   : "Effacer"
+        },
+        "tree" : {
+            "root": "Tous les documents",
+            "upload": "Documents transmis à Group S",
+            "other" : "98 - Autres Documents"
+        },
+        "file" : {
+            "add": "Document ajouté",
+            "del": "Document supprimé"
+        },
+        "upload" : "Déposer des fichiers sur le serveur",
+        "modalupload" : "Déposer des fichiers",
+        "modalbq":  "Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.",
+        "modalbtn" :  "Sélectionner les fichiers à ajouter",
+        "error0": "Erreur de connexion.",
+        "error5xx": "Service temporairement indisponible, veuillez réessayer plus tard.",
+        "errorSession": "Session expirée"
+    },
+    "nl":{
+        "col":{
+            "new"   : "Nieuw",
+            "date"  : "Datum",
+            "name"  : "Naam",
+            "user"  : "Gebruiker",
+            "empl"  : "Werkgever",
+            "label" : "Label",
+            "refdoc": "Ref Doc",
+            "size"  : "Omvang",
+            "ext"   : "Type",
+            "path"  : "Weg",
+            "refCl" : "Ref Client",
+            "count" : "#",
+            "refGS" : "Ref Group S",
+            "del"   : "geschrapt"
+        },
+        "tree" : {
+            "root": "Alle documenten",
+            "upload": "Overgebrachte documenten naar Group S",
+            "other" : "98 - Andere Documenten"
+        },
+        "file" : {
+            "add": "Document toegevoegd",
+            "del": "Document geschrapt"
+        },
+        "upload" : "Documenten op de serveur uploaden",
+        "modalupload" : "Document uploaden",
+        "modalbq":  "Gelieve de doelmap te selecteren alvorens uw bestanden toe te voegen.",
+        "modalbtn" :  "Selectionneer documenten om toe te voegen",
+        "error0": "Verbindingsfout.",
+        "error5xx": "Dienst tijdelijk onbeschikbaar. Probeer het later opnieuw.",
+        "errorSession" : "Sessie verlopen"
+    },
+    "en":{
+        "col":{
+            "new"   : "New",
+            "date"  : "Date",
+            "name"  : "Name",
+            "user"  : "User",
+            "empl"  : "Employer",
+            "label" : "Label",
+            "refdoc": "Ref Doc",
+            "size"  : "Size",
+            "ext"   : "Type",
+            "path"  : "Path",
+            "refCl" : "Ref Client",
+            "count" : "#",
+            "refGS" : "Ref Group S",
+            "del"   : "Delete"
+        },
+        "tree" : {
+            "root": "All documents",
+            "upload": "Uploaded documents to Group S",
+            "other" : "98 - Other Documents"
+        },
+        "file" : {
+            "add": "Document added",
+            "del": "Document deleted"
+        },
+        "upload" : "Upload Documents on the server",
+        "modalupload" : "Upload Document",
+        "modalbq":  "Please, select the folder of upload before uploading document.",
+        "modalbtn" : "Please select files to upload",
+        "error0": "Connection error.",
+        "error5xx": "Service temporally unavailable, please try later.",
+        "errorSession": "Session expired"
+    }
+}

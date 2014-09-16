@@ -20,6 +20,33 @@
         },
         formatNoMatches: function() {
             return 'Pas de fichiers trouvés ';
+        },
+        formatDownloadAll: function(){
+            return 'Télécharger Sélection';
+        },
+        formatBreadCrumb: function(){
+            return 'Nouveaux fichiers non-téléchargés';
+        },
+        formatDateStart: function(){
+            return 'Date de début';
+        },
+        formatDateEnd: function(){
+            return 'Date de fin';
+        },
+        formatReload: function(){
+            return 'Rafra&icirc;chir';
+        },
+        formatShowColumn: function(){
+            return 'Affichage';
+        },
+        formatFilter: function(){
+            return 'Filtrer par';
+        },
+        formatNewFile: function(){
+            return 'Nouveau Fichiers';
+        },
+        formatNotDl: function(){
+            return 'Fichiers Non-Téléchargés'
         }
     });
 })(jQuery);

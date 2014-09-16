@@ -5,7 +5,6 @@
  */
 
 !function ($) {
-
     'use strict';
 
     // TOOLS DEFINITION
@@ -207,12 +206,12 @@
                 '<div id="filter" class="pull-left">',
                     '<div class="btn-group">',
                     '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
-                        'Filtrer par&nbsp;&nbsp;<span class="caret"></span>',
+                        sprintf('%s&nbsp;&nbsp;<span class="caret"></span>',this.options.formatFilter()),
                     '</button>',
                     '<ul class="dropdown-menu" role="menu">',
-                        '<li class=""><a id="filterNew"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;nouveaux fichiers </a></li>',
+                    sprintf('<li class=""><a id="filterNew"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;%s</a></li>',this.options.formatNewFile()),
                         '<li class="divider"></li>',
-                        '<li class=""><a id="filterDL"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;fichiers non-téléchargés</a></li>',
+                    sprintf('<li class=""><a id="filterDL"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;%s</a></li>',this.options.formatNotDl()),
             '</ul>',
                     '</div>',
                 '</div>',
@@ -469,7 +468,7 @@
 
         if (this.options.showRefresh) {
             html.push('<button class="btn btn-default reloadme" type="button" name="refresh">',
-                '<i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Rafra&icirc;chir',
+                sprintf('<i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;%s',this.options.formatReload()),
                 '</button>');
         }
 
@@ -483,7 +482,7 @@
             html.push(sprintf('<div class="keep-open %s">',
                 this.options.showRefresh || this.options.showToggle ? 'btn-group' : ''),
                 '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
-                '<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;Affichage',
+                sprintf('<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;%s',this.options.formatShowColumn()),
                 ' <span class="caret"></span>',
                 '</button>',
                 '<ul class="dropdown-menu" role="menu">');
@@ -550,26 +549,24 @@
             html.push(
               '<div id="sandbox-container">',
               '<div class="input-daterange input-group" id="datepicker">',
-                '<input type="text" class="input-sm form-control" name="start" placeholder="Date de début"/>',
+                sprintf('<input type="text" class="input-sm form-control" name="start" placeholder="%s"/>', this.options.formatDateStart()),
                 '<span class="input-group-addon">&agrave;</span>',
-                '<input type="text" class="input-sm form-control" name="end"  placeholder="Date de fin"/>',
+                sprintf('<input type="text" class="input-sm form-control" name="end"  placeholder="%s"/>', this.options.formatDateEnd()),
               '</div></div>'
             );
 
 
             html.push(
             '<div class="row"><div class="col-md-12">',
-            '<button type="button" class="downloadall btn btn-success"><i class="fa fa-upload"></i>&nbsp;&nbsp;Téléchargement multiple</button>',
+                sprintf('<button type="button" class="downloadall btn btn-success"><i class="fa fa-upload"></i>&nbsp;&nbsp;%s</button>', this.options.formatDownloadAll()),
             '</div></div>');
 
 
             html.push(
               '<div class="row"><div class="col-md-12">',
                 '<ol class="breadcrumb">',
-                  '<li class="active">Nouveaux fichiers non-téléchargés</li>',
-
+                sprintf('<li class="active">%s</li>', this.options.formatBreadCrumb()),
                   '<li><a href="#"></a></li>',
-
                 '</ol>',
               '</div></div>');
             /**** CUSTOM ***/
@@ -613,7 +610,7 @@
         }
     };
 
-    /** CUSTOM **/
+    /**** BEGIN CUSTOM ****/
     BootstrapTable.prototype.onFilter = function (filter) {
 
         //console.log(this);
@@ -635,6 +632,7 @@
 
                     if ( typeof filter === 'string' ) {
                         //console.log("filter", filter);
+                        console.log("test = '" + item['refDoc'] + "'");
                         return eval(filter);
                     }
                     //filter on condition about the field
@@ -669,7 +667,7 @@
 
         }
     };
-    /** CUSTOM **/
+    /**** END CUSTOM ****/
 
     BootstrapTable.prototype.initPagination = function (updateData) {
         this.$pagination = this.$container.find('.fixed-table-pagination');
@@ -708,40 +706,6 @@
             this.pageTo = this.options.totalRows;
         }
 
-        /*html.push(
-            '<div class="pull-left pagination-detail">',
-                '<span class="pagination-info">',
-                    this.options.formatShowingRows(this.pageFrom, this.pageTo, this.options.totalRows),
-                '</span>');
-
-        html.push('<span class="page-list">');
-
-        var pageNumber = [
-            '<span class="btn-group dropup">',
-            '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
-            '<span class="page-size">',
-            this.options.pageSize,
-            '</span>',
-            ' <span class="caret"></span>',
-            '</button>',
-            '<ul class="dropdown-menu" role="menu">'],
-            pageList = this.options.pageList;
-
-        if (typeof this.options.pageList === 'string') {
-            pageList = eval(this.options.pageList);
-        }
-
-        $.each(pageList, function (i, page) {
-            var active = page === that.options.pageSize ? ' class="active"' : '';
-            pageNumber.push(sprintf('<li%s><a href="javascript:void(0)">%s</a></li>', active, page));
-        });
-        pageNumber.push('</ul></span>');
-
-        html.push(this.options.formatRecordsPerPage(pageNumber.join('')));
-        html.push('</span>');
-         */
-        /* << < 1 2 3 4 5 > >>
-        html.push('<div class="text-center mt-m">',*/
         html.push('<div class="row"><div class="col-md-12">',
             '<button type="button" class="downloadall btn btn-success">' +
                 '<i class="fa fa-upload"></i>&nbsp;&nbsp;Téléchargement multiple</button>',

@@ -45,7 +45,6 @@ $(function (){
               $('#loader').hide();
             },*/
             error: function (xhr) {
-                console.log(xhr);
                 if(xhr.status >= 500) {
                     alert ( "ERROR: connection problem");
                 }
@@ -67,4 +66,7 @@ $(function (){
     //set event
     $('#submit-login').on('click', submitLogin);
     $('input').keypress(enterPressed);
+    $('.login-lang').on('click', function (){
+       sessionStorage.setItem("lang", $(this).html().toLowerCase());
+    });
 });

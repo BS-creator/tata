@@ -1,9 +1,7 @@
-sessionStorage.setItem("lang","nl");
-
 $(function () {
     'user strict'
 
-    /***  GLOBAL VARIABLE ***/
+    /***  GLOBAL VARIABLES ***/
     // array used to store all the existing document reference on the FTP server.
     var serverURL = 'http://172.20.20.64:8018/',
         baseURL = 'http://localhost:4000/itransfer/',
@@ -62,8 +60,7 @@ $(function () {
         $.each(category, function (i, cat) {
             $.each(AjaxData, function (j, row) {
                 if (cat.refDoc == parseInt(row.refDoc)) {
-                    row.libelle = labelDoc_i18n(row);
-                    //TODO fix bug
+                    row.libelle = labelDoc_i18n(cat);
                 }
                 row.noEmployeur = parseInt(row.noEmployeur);
                 row.uploadUserName.toUpperCase();
@@ -79,7 +76,6 @@ $(function () {
 
     function filterDate(e) {
 
-        //TODO: case delete date
         var $table = $('#mainTable');
         var dateEnd = yearFirst($('input[name=end]').val());
         var dateStart = yearFirst($('input[name=start]').val());
@@ -109,16 +105,26 @@ $(function () {
         $table.bootstrapTable('onFilter', expr);
 
     }
+
+
     /****************************************************
      * INTERNATIONALIZATION i18n
      * */
 
+    function loadTable_i18n(){
+        if(lang === "fr"){
+            $.getScript("js/locale/bootstrap-table-fr_BE.js");
+        } else if (lang === "nl"){
+            $.getScript("js/locale/bootstrap-table-nl_BE.js");
+        } else {
+            $.getScript("js/locale/bootstrap-table-en.js");
+        }
+    }
+
     function labelDoc_i18n(item){
-        console.log("item", item);
         if(lang === "fr"){
             return item.labelDoc_f;
         }else if (lang === "nl"){
-            //console.log(item.labelDoc_n);
             return item.labelDoc_n;
         }else if (lang === "de"){
             return item.labelDoc_d;
@@ -142,7 +148,31 @@ $(function () {
      * FORMAT COLUMNS
      * */
 
+    function sortIcons(){
+        $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
 
+        $('th.sortable > .th-inner').on('click', function () {
+
+            var $this = $(this);
+
+            function initSort(){
+                $this.parents().siblings().find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort');
+                $this.parents().siblings().find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort');
+            }
+
+            if($this.find('i.fa-sort').length > 0){
+                initSort();
+                $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
+            } else if($this.find('i.fa-sort-down').length > 0){
+                initSort();
+                $this.find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort-up');
+            } else if($this.find('i.fa-sort-up').length > 0){
+                initSort();
+                $this.find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort-down');
+            }
+
+        });
+    }
         // Styling the row if the file is new
     function rowStylef(row) {
         if (row.isNew) return {"classes": "success" };
@@ -153,7 +183,7 @@ $(function () {
     function formatDownload(value, row) {
         var dlCount = row.downloadCount ? row.downloadCount : '';
         var icon = "fa-download";
-        //console.log(row.uploadUserName + "!==" +username);
+
         if (row.uploadUserName === username) {
             icon = "fa-upload";
         }
@@ -310,7 +340,6 @@ $(function () {
 
         $uploadform.attr("action", serverURL + "file/upload");
 
-        //console.log(" $uploadform.attr('action')",  $uploadform.attr("action"));
         $uploadform.fileupload({
             sequentialUploads: true,
             progressall: function (e, data) {
@@ -414,7 +443,8 @@ $(function () {
                 table.bootstrapTable('showColumn', 'uploadUserName');
                 table.bootstrapTable('showColumn', 'fileName');
                 table.bootstrapTable('showColumn', 'path');
-                table.bootstrapTable('onFilter', ['refDoc', 'empty']);
+                //table.bootstrapTable('onFilter', ['refDoc', 'empty']);
+                table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "' && item['refDoc'] == '' )");
             }
         }
     }
@@ -475,7 +505,7 @@ $(function () {
             tree[tree.length] =
             {
                 "id": "other",
-                "text": '98 - Autres Documents',
+                "text": i18n[lang].tree.other,
                 "state": {
                     "opened": true,
                     "disabled": false,
@@ -490,7 +520,7 @@ $(function () {
         tree[tree.length] =
         {
             "id": "upload",
-            "text": 'Documents transmis à Group S',
+            "text": i18n[lang].tree.upload, //'Documents transmis à Group S',
             "state": {
                 "opened": true,
                 "disabled": false,
@@ -505,16 +535,13 @@ $(function () {
 
     function createMenu() {
 
-        var $sidenave = $('#sidenav');
-
-        // JSTREE
-        $sidenave
+        $('#sidenav')
             .on('select_node.jstree', menuActionClick)
             .jstree({
                 'core': {
                     'data': {
                         "id": 'root',
-                        "text": "Tous les documents",
+                        "text": i18n[lang].tree.root,//"Tous les documents",
                         "state": {
                             "opened": true,
                             "disabled": false,
@@ -532,11 +559,8 @@ $(function () {
      * */
 
     function createTable() {
-        //destroy before reload
-        var $table = $('#mainTable');
-        $table.html('');
 
-        $table.bootstrapTable({
+        return $('#mainTable').bootstrapTable({
             data: AjaxData,
             striped: true,
             pagination: true,
@@ -565,7 +589,7 @@ $(function () {
                 },
                 {
                     field: 'isNew',
-                    title: 'New',
+                    title: i18n[lang].col.new,
                     align: 'center',
                     sortable: true,
                     class: "isNew sortable",
@@ -574,7 +598,7 @@ $(function () {
                 },
                 {
                     field: 'formattedDate',
-                    title: 'Date',
+                    title: i18n[lang].col.date,
                     align: 'center',
                     valign: 'middle',
                     class: "formattedDate sortable",
@@ -594,7 +618,7 @@ $(function () {
                  },*/
                 {
                     field: 'fileName',
-                    title: 'Nom',
+                    title: i18n[lang].col.name,
                     align: 'center',
                     valign: 'middle',
                     visible: false,
@@ -603,7 +627,7 @@ $(function () {
                 },
                 {
                     field: 'uploadUserName',
-                    title: 'Utilisateur',
+                    title: i18n[lang].col.user,
                     align: 'center',
                     valign: 'middle',
                     visible: false,
@@ -613,7 +637,7 @@ $(function () {
                 },
                 {
                     field: 'noEmployeur',
-                    title: 'Employeur',
+                    title: i18n[lang].col.empl,
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
@@ -622,7 +646,7 @@ $(function () {
                 },
                 {
                     field: 'libelle',
-                    title: 'Libell&eacute;', //TODO: multi-language
+                    title: i18n[lang].col.label,
                     align: 'left',
                     valign: 'middle',
                     class: 'labelDoc sortable',
@@ -631,7 +655,7 @@ $(function () {
                 },
                 {
                     field: 'refDoc',
-                    title: 'Ref Doc',
+                    title: i18n[lang].col.refdoc,
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
@@ -640,7 +664,7 @@ $(function () {
                 },
                 {
                     field: 'size',
-                    title: 'Taille',
+                    title: i18n[lang].col.size,
                     align: 'center',
                     valign: 'middle',
                     visible: true,
@@ -650,7 +674,7 @@ $(function () {
                 },
                 {
                     field: 'extension',
-                    title: 'Type',
+                    title: i18n[lang].col.ext,
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
@@ -667,7 +691,7 @@ $(function () {
                  */
                 {
                     field: 'path',
-                    title: 'Chemin',
+                    title: i18n[lang].col.path,
                     align: 'center',
                     valign: 'middle',
                     visible: false,
@@ -677,7 +701,7 @@ $(function () {
                 },
                 {
                     field: 'refClientCompl',
-                    title: 'Ref Client',
+                    title: i18n[lang].col.refCl,
                     align: 'center',
                     valign: 'middle',
                     visible: false,
@@ -687,7 +711,7 @@ $(function () {
                 },
                 {
                     field: 'counter',
-                    title: '#',
+                    title: i18n[lang].col.count,
                     align: 'center',
                     valign: 'middle',
                     visible: false,
@@ -697,7 +721,7 @@ $(function () {
                 },
                 {
                     field: 'refGroups',
-                    title: 'Ref Group S',
+                    title: i18n[lang].col.refGS,
                     align: 'center',
                     valign: 'middle',
                     visible: false,
@@ -707,7 +731,7 @@ $(function () {
                 },
                 {
                     field: 'operate',
-                    title: 'Effacer',
+                    title: i18n[lang].col.del,
                     align: 'center',
                     valign: 'middle',
                     clickToSelect: false,
@@ -731,7 +755,7 @@ $(function () {
          $('.downloadall').hide();
          })*/;
 
-        return $table;
+
     }
 
     /****************************************************
@@ -740,10 +764,9 @@ $(function () {
 
 
     function Loadi18n(){
-        $.getJSON( "data/tree.json", function( data ) {
+        $.getJSON( "data/i18n.json", function( data ) {
             i18n = data;
-        })
-
+        });
     }
 
     function deleteFile(filePath) {
@@ -757,10 +780,10 @@ $(function () {
             data: data,
             success: function (data) {
                 if (data) {
-                    alert("Fichier supprimé");
+                    alert(i18n[lang].file.del);
                     location.reload();
                 } else {
-                    alert("Fichier déja supprimé");
+                    alert("ERROR");
                 }
             }
         })
@@ -808,11 +831,11 @@ $(function () {
             dataType: 'json',
             statusCode: {
                 403: function () {
-                    alert("ERREUR: Session expirée.");
+                    alert(i18n[lang].errorSession);
                     window.location = baseURL;
                 },
                 401: function () {
-                    alert("ERREUR: Problème de connexion.");
+                    alert(i18n[lang].error0);
                 }
             }
         });
@@ -823,6 +846,10 @@ $(function () {
      * */
 
     function setEventsHTML() {
+
+        $('#btn-upload-div span').html('<i class="fa fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].upload);
+        $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].modalupload );
+        $('#modalbq').html(i18n[lang].modalbq);
 
         var $table = $('#mainTable');
 
@@ -859,17 +886,13 @@ $(function () {
             $table.bootstrapTable('onFilter', "item['isNew']");
         });
 
-        //TODO
-        //$('header-logo').attr('href', baseURL);
-
         //multidownload
         $('.downloadall').on('click', downloadAll);
 
 
-
         // Upload
         // btn bootstrap
-        $('input[type=file]').bootstrapFileInput();
+        $('input[type=file]').bootstrapFileInput(i18n[lang].modalbtn);
 
         // add css active to btn
         $("#uploadCollapse .btn-upload").on('click', function () {
@@ -877,11 +900,19 @@ $(function () {
         });
 
         // checked : show btn-download
-        $('.th-inner').on('click', function () {
+       /* $('.th-inner').on('click', function () {
+            var $this = $(this);
             $this.find('span.order').length ? console.log('yes') : console.log('no');
-
             $this.children().length ? console.log('c yes') : console.log('c no');
-        });
+        });*/
+
+        // sort icons
+        sortIcons();
+
+        // btn download
+        $('input[type="checkbox"]').on('change', function (){
+            $('tr.selected').length > 0 ? $('.downloadall').show() : $('.downloadall').hide();
+        })
 
         // date picker
         $('#datepicker input').datepicker({
@@ -898,7 +929,6 @@ $(function () {
     }
 
 
-
     /****************************************************
      * MAIN
      * */
@@ -906,8 +936,9 @@ $(function () {
 
         $('.user-name').html(username.toUpperCase());
 
-        //Language
+        //i18n
         Loadi18n();
+        loadTable_i18n();
 
         //SYNC & WAIT
         $.when(LoadCategory(), LoadData(), LoadFolder()).done(function () {
@@ -927,37 +958,6 @@ $(function () {
 
             //APPLY DEFAULT FILTERS
             $table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "') && (item['isNew'] || item['notDownloaded'])");
-
-
-            // sort icons
-            $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
-
-            $('th.sortable > .th-inner').on('click', function () {
-
-                var $this = $(this);
-
-                function initSort(){
-                    $this.parents().siblings().find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort');
-                    $this.parents().siblings().find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort');
-                }
-
-                if($this.find('i.fa-sort').length > 0){
-                    initSort();
-                    $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
-                } else if($this.find('i.fa-sort-down').length > 0){
-                    initSort();
-                    $this.find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort-up');
-                } else if($this.find('i.fa-sort-up').length > 0){
-                     initSort();
-                    $this.find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort-down');
-                }
-
-            });
-
-            // btn download
-            $('input[type="checkbox"]').on('change', function (){
-                $('tr.selected').length > 0 ? $('.downloadall').show() : $('.downloadall').hide();
-            })
 
 
         });

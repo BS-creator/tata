@@ -79,8 +79,8 @@
                   <div id="upload-modal">
 
                     <!-- Button trigger modal -->
-                    <div class="btn-upload text-center" data-toggle="modal" data-target="#uploadFiles" href="#uploadFiles">
-                      <span><i class="fa fa-upload"></i>&nbsp;&nbsp;Déposer des fichiers sur le serveur</span>
+                    <div id="btn-upload-div" class="btn-upload text-center" data-toggle="modal" data-target="#uploadFiles" href="#uploadFiles">
+                      <span></span>
                     </div>
 
                     <!-- Modal -->
@@ -89,13 +89,13 @@
                         <div class="modal-content">
                           <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title text-muted text-center"><i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;Déposer des fichiers</h4>
+                            <h4 id="modalh4" class="modal-title text-muted text-center"></h4>
                           </div>
 
                           <div class="modal-body">
 
-                            <blockquote class="text-muted">
-                              Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.
+                            <blockquote id="modalbq" class="text-muted">
+
                             </blockquote>
 
                             <form class="" id="uploadForm" action="/" method="post" enctype="multipart/form-data">
@@ -149,7 +149,7 @@
         </footer>
 
         <script src="js/bootstrap-table.js"></script>
-        <script src="js/locale/bootstrap-table-fr_BE.js"></script>
+        <!--<script src="js/locale/bootstrap-table-fr_BE.js"></script>-->
         <script src="js/pw-jstree.js"></script>
         <!--<script src="js/data_collection.js"></script>-->
         <script src="js/itransfer.js"></script>

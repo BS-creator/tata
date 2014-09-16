@@ -1,52 +1,52 @@
 /**
- * Bootstrap Table English translation
- * Author: Zhixin Wen<wenzhixin2010@gmail.com>
+ * Bootstrap Table Dutch translation
+ * Author: Julien Bisconti<julien.bisconti@gmail.com>
  */
 (function ($) {
     'use strict';
 
     $.extend($.fn.bootstrapTable.defaults, {
         formatLoadingMessage: function() {
-            return 'Loading, please wait…';
+            return 'Loading, wacht a.u.b…';
         },
         formatRecordsPerPage: function(pageNumber) {
-            return pageNumber + ' records per page';
+            return pageNumber + ' documenten per pagina';
         },
         formatShowingRows: function(pageFrom, pageTo, totalRows) {
-            return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' rows';
+            return 'Tonen ' + pageFrom + ' tot ' + pageTo + ' van ' + totalRows + ' documenten';
         },
         formatSearch: function() {
-            return 'Search'
+            return 'Zoeken'
         },
         formatNoMatches: function() {
-            return 'No matching records found';
+            return 'Geen documenten gevonden';
         },
         formatDownloadAll: function(){
-            return 'Download Selected';
+            return 'Download Selectie';
         },
         formatBreadCrumb: function(){
-            return 'New file not yet downloaded';
+            return 'Nieuwe documenten ';
         },
         formatDateStart: function(){
-            return 'Start Date';
+            return 'Beginnen Datum';
         },
         formatDateEnd: function(){
-            return 'End Date';
+            return 'Einde Datum';
         },
         formatReload: function(){
-            return 'Reload';
+            return 'Opnieuw laden';
         },
         formatShowColumn: function(){
-            return 'Show';
+            return 'Tonen';
         },
         formatFilter: function(){
-            return 'Filter by';
+            return 'Filtrer door';
         },
         formatNewFile: function(){
-            return 'New Documents';
+            return 'Nieuw Documenten';
         },
         formatNotDl: function(){
-            return 'Documents not yet downloaded'
+            return 'Document nog niet gedownload'
         }
     });
 })(jQuery);
