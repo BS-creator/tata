@@ -2,9 +2,9 @@ $(function () {
     'user strict'
 
     /***  GLOBAL VARIABLES ***/
-    // array used to store all the existing document reference on the FTP server.
-    var serverURL = 'http://172.20.20.64:8018/',
-        baseURL = 'http://localhost:4000/itransfer/',
+    var serverURL = '//qaiapps.groups.be/ariane/',
+    //var serverURL = 'http://172.20.20.64:8018/',
+        baseURL = '//qaiapps.groups.be/itransfer/',
         lang = sessionStorage.getItem("lang"),
         i18n = {},
         AjaxData = [],
@@ -81,7 +81,7 @@ $(function () {
         var dateStart = yearFirst($('input[name=start]').val());
         var expr = '';
 
-        console.log(dateStart, dateEnd);
+        //console.log(dateStart, dateEnd);
         if (dateStart !== "--" && dateEnd === "--") {
             //FROM
             expr = 'item["date"] > "' + dateStart + '" ';
@@ -101,7 +101,7 @@ $(function () {
             return;
         }
 
-        console.log("start: expr", expr);
+        //console.log("start: expr", expr);
         $table.bootstrapTable('onFilter', expr);
 
     }

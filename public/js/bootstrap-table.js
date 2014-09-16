@@ -632,7 +632,6 @@
 
                     if ( typeof filter === 'string' ) {
                         //console.log("filter", filter);
-                        console.log("test = '" + item['refDoc'] + "'");
                         return eval(filter);
                     }
                     //filter on condition about the field
