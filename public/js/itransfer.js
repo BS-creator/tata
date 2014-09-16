@@ -2,10 +2,12 @@ $(function () {
     'user strict'
 
     /***  GLOBAL VARIABLES ***/
-    var serverURL = '//qaiapps.groups.be/ariane/',
-    //var serverURL = 'http://172.20.20.64:8018/',
-        baseURL = '//qaiapps.groups.be/itransfer/',
+   // var serverURL = '//qaiapps.groups.be/ariane/',
+    //baseURL = '//qaiapps.groups.be/itransfer/',
+    var serverURL = 'http://172.20.20.64:8018/',
+        baseURL = '//localhost:4000/itransfer/',
         lang = sessionStorage.getItem("lang"),
+    /*lang = sessionStorage.setItem("lang",'fr'),*/
         i18n = {},
         AjaxData = [],
         category = [],
@@ -198,7 +200,7 @@ $(function () {
     }
 
     function formatIsNew(value) {
-        if (value) return "<i class='fa fa-smile-o'></i>";
+        if (value) return "<i class='fa fa-check text-success'></i>";
         else return "<i class='fa fa-times'></i>";
     }
 
@@ -647,7 +649,7 @@ $(function () {
                     title: i18n[lang].col.new,
                     align: 'center',
                     sortable: true,
-                    class: "isNew sortable",
+                    class: "new sortable",
                     visible: false,
                     formatter: formatIsNew
                 },
