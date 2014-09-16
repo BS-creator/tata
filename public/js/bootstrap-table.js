@@ -5,6 +5,7 @@
  */
 
 !function ($) {
+
     'use strict';
 
     // TOOLS DEFINITION
@@ -708,7 +709,7 @@
 
         html.push('<div class="row"><div class="col-md-12">',
             '<button type="button" class="downloadall btn btn-success">' +
-                '<i class="fa fa-upload"></i>&nbsp;&nbsp;Téléchargement multiple</button>',
+                '<i class="fa fa-download"></i>&nbsp;&nbsp;Télécharger</button>',
             '</div></div>');
         html.push('</div>',
             '<div class="text-center wide pagination">',
