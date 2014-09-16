@@ -331,7 +331,6 @@ $(function () {
      * UPLOAD
      * */
 
-
     function uploadForm() {
         // set token for upload
         var $uploadform = $('#uploadForm');
