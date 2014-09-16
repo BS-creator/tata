@@ -9,6 +9,15 @@ $(function (){
     //var serverURL = 'http://qaiapps.groups.be/ariane/',
         baseURL = 'http://localhost:4000/itransfer/';
 
+    function enterPressed (e) {
+        if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+            submitLogin();
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     function submitLogin(){
         var credentials =
         {
@@ -54,5 +63,8 @@ $(function (){
             }
         });
     }
+
+    //set event
     $('#submit-login').on('click', submitLogin);
+    $('input').keypress(enterPressed);
 });

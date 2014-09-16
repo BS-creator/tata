@@ -877,7 +877,11 @@ $(function () {
         });
 
         // checked : show btn-download
-        //TODO css?
+        $('.th-inner').on('click', function () {
+            $this.find('span.order').length ? console.log('yes') : console.log('no');
+
+            $this.children().length ? console.log('c yes') : console.log('c no');
+        });
 
         // date picker
         $('#datepicker input').datepicker({
@@ -887,7 +891,6 @@ $(function () {
             todayHighlight: true,
             startView: 1
             //minViewMode: 1 //month view
-
         }).on('changeDate', filterDate)
             .off('keyup').on('keyup', function (event) {
                 setTimeout(filterDate, 500, event); // 500ms

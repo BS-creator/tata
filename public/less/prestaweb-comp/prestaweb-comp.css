@@ -303,6 +303,7 @@ body {
 }
 div#sidenav {
   padding-top: 1px;
+  margin-bottom: 35px;
 }
 div#sidenav ul.jstree-container-ul,
 div#sidenav ul.jstree-children {
