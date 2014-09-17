@@ -621,9 +621,6 @@
         this.initBody();
         // custom
         addCtrl();
-        var j = 0;
-        console.log('onFilter');
-        console.log(j++);
     };
 
     BootstrapTable.prototype.initFilter = function (filter){
@@ -1207,9 +1204,8 @@
             }
         }
         //custom
-        // addCtrl();
-        initSort();
-        addCarets();
+        addCtrl();
+
     };
 
     // PUBLIC FUNCTION DEFINITION
@@ -1407,36 +1403,28 @@
             $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
         }
     };
-var i = 0;
+
     function switchCarets(){
         $('th.sortable > .th-inner').on('click', function (event) {
 
             var $this = $(this);
 
             function initOncles(){
-                console.log('clean parents');
                 $this.parents().siblings().find('i.fa-sort-up').toggleClass('fa-sort-up fa-sort');
                 $this.parents().siblings().find('i.fa-sort-down').toggleClass('fa-sort-down fa-sort');
             }
-console.log(i++);
+
             if($this.find('i.fa-sort-up').length > 0){
                 initOncles();
                 $this.find('i.fa-sort-up').toggleClass('fa-sort-up fa-sort-down');
                 console.log('up 2 down');
-                return false;
-
             } else if($this.find('i.fa-sort-down').length > 0){
                 initOncles();
                 $this.find('i.fa-sort-down').toggleClass('fa-sort-down fa-sort-up');
                 console.log('down 2 up');
-                return false;
-
             } else if($this.find('i.fa-sort').length > 0) {
                 initOncles();
                 $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
-                console.log('sort 2 down');
-                return false;
-
             }
         });
     };
