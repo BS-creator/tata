@@ -571,6 +571,7 @@
                 '</ol>',
               '</div></div>');
             /**** CUSTOM ***/
+
             this.$toolbar.append(html.join(''));
             $search = this.$toolbar.find('.search input');
             $search.off('keyup').on('keyup', function (event) {

@@ -26,7 +26,7 @@
             "del": "Document supprimé"
         },
         "upload" : "Déposer des fichiers sur le serveur",
-        "modalupload" : "Transmettre des fichiers sur le serveur de Group S",
+        "modalupload" : "Transmettre des documents sur le serveur de Group S",
         "modalbq":  "Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.",
         "modalbtn" :  "Sélectionner les fichiers à ajouter",
         "error0": "Erreur de connexion.",
@@ -59,8 +59,8 @@
             "add": "Document toegevoegd",
             "del": "Document geschrapt"
         },
-        "upload" : "Documenten op de serveur uploaden",
-        "modalupload" : "Document uploaden",
+        "upload" : "Documenten op de server uploaden",
+        "modalupload" : "Document uploaden op Group S server",
         "modalbq":  "Gelieve de doelmap te selecteren alvorens uw bestanden toe te voegen.",
         "modalbtn" :  "Selectionneer documenten om toe te voegen",
         "error0": "Verbindingsfout.",
@@ -94,7 +94,7 @@
             "del": "Document deleted"
         },
         "upload" : "Upload Documents on the server",
-        "modalupload" : "Upload Document",
+        "modalupload" : "Upload Document to Group S server",
         "modalbq":  "Please, select the folder of upload before uploading document.",
         "modalbtn" : "Please select files to upload",
         "error0": "Connection error.",
