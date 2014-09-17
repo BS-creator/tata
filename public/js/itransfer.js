@@ -201,7 +201,7 @@ $(function () {
     }
 
     function formatIsNew(value) {
-        if (value) return "<i class='fa fa-smile-o'></i>";
+        if (value) return "<i class='fa fa-check text-success'></i>";
         else return "<i class='fa fa-times'></i>";
     }
 
@@ -650,7 +650,7 @@ $(function () {
                     title: i18n[lang].col.new,
                     align: 'center',
                     sortable: true,
-                    class: "isNew sortable",
+                    class: "new sortable",
                     visible: false,
                     formatter: formatIsNew
                 },
