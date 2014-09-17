@@ -665,8 +665,8 @@
             }else{
                 this.data = this.options.data;
             }
-
         }
+
     };
     /**** END CUSTOM ****/
 
@@ -1032,6 +1032,7 @@
 
         this.updateSelected();
         this.resetView();
+
     };
 
     BootstrapTable.prototype.initServer = function () {
@@ -1401,25 +1402,36 @@
             $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
         }
     };
-
+var i = 0;
     function switchCarets(){
-        $('th.sortable > .th-inner').on('click', function () {
+        $('th.sortable > .th-inner').on('click', function (event) {
 
             var $this = $(this);
 
-            function prepare(){
+            function initOncles(){
+                console.log('clean parents');
                 $this.parents().siblings().find('i.fa-sort-up').toggleClass('fa-sort-up fa-sort');
                 $this.parents().siblings().find('i.fa-sort-down').toggleClass('fa-sort-down fa-sort');
             }
+console.log(i++);
+            if($this.find('i.fa-sort-up').length > 0){
+                initOncles();
+                $this.find('i.fa-sort-up').toggleClass('fa-sort-up fa-sort-down');
+                console.log('up 2 down');
+                return false;
 
-            if($this.find('i.fa-sort').length > 0){
-                $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
             } else if($this.find('i.fa-sort-down').length > 0){
-                prepare();
-                $this.find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort-up');
-            } else if($this.find('i.fa-sort-up').length > 0){
-                prepare();
-                $this.find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort-down');
+                initOncles();
+                $this.find('i.fa-sort-down').toggleClass('fa-sort-down fa-sort-up');
+                console.log('down 2 up');
+                return false;
+
+            } else if($this.find('i.fa-sort').length > 0) {
+                initOncles();
+                $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
+                console.log('sort 2 down');
+                return false;
+
             }
         });
     };
