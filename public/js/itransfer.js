@@ -151,32 +151,7 @@ $(function () {
      * FORMAT COLUMNS
      * */
 
-    function sortIcons(){
-        $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
-
-        $('th.sortable > .th-inner').on('click', function () {
-
-            var $this = $(this);
-
-            function initSort(){
-                $this.parents().siblings().find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort');
-                $this.parents().siblings().find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort');
-            }
-
-            if($this.find('i.fa-sort').length > 0){
-                initSort();
-                $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
-            } else if($this.find('i.fa-sort-down').length > 0){
-                initSort();
-                $this.find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort-up');
-            } else if($this.find('i.fa-sort-up').length > 0){
-                initSort();
-                $this.find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort-down');
-            }
-
-        });
-    }
-        // Styling the row if the file is new
+    // Styling the row if the file is new
     function rowStylef(row) {
         if (row.isNew) return {"classes": "success" };
         else return {};
@@ -406,6 +381,7 @@ $(function () {
             table.bootstrapTable('hideColumn', 'path');
             table.bootstrapTable('onFilter', ['uploadUserName', 'trf_fich']);
             //$('.breadcrumb').html('<li class="active">Tous les documents</li><li><a href="#"></a></li>');
+
         } else {
             data.instance.toggle_node(data.node);
             //console.log(data.node);
@@ -421,7 +397,7 @@ $(function () {
                 table.bootstrapTable('hideColumn', 'fileName');
                 table.bootstrapTable('hideColumn', 'path');
                 table.bootstrapTable('onFilter', ['refDoc', nodeid ]);
-                addCtrl();
+
             }
 
             //Filter for upload
@@ -435,7 +411,7 @@ $(function () {
                 table.bootstrapTable('showColumn', 'fileName');
                 table.bootstrapTable('showColumn', 'path');
                 table.bootstrapTable('onFilter', ['uploadUserName', username]);
-                addCtrl();
+
             }
             //Filter for other category
             if (data.node.id === 'other') {
@@ -450,7 +426,6 @@ $(function () {
                 //table.bootstrapTable('onFilter', ['refDoc', 'empty']);
                 table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "' && item['refDoc'] == '' )");
                 table.bootstrapTable('onFilter', ['refDoc', 'empty']);
-                addCtrl();
             }
         }
     }
@@ -538,7 +513,6 @@ $(function () {
         return tree;
     }
 
-
     function createMenu() {
 
         $('#sidenav')
@@ -559,59 +533,6 @@ $(function () {
                 /*"plugins" : [ "contextmenu" ]*/
             });
     }
-
-
-    // show btn download
-    function showDL(){
-        console.log($('.downloadall'));
-        if ($('tr.selected').length == 0) {
-            $('.downloadall').hide();
-        }
-
-        $('input[type="checkbox"]').on('change', function () {
-            if($('tr.selected').length > 0){
-                $('.downloadall').show();
-            }else{
-                $('.downloadall').toggle();
-            }
-        });
-
-    };
-
-    // show btn download
-    function addCarets(){
-        $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
-    };
-
-    function switchCarets(){
-        $('th.sortable > .th-inner').on('click', function () {
-
-            var $this = $(this);
-
-            function initSort(){
-                $this.parents().siblings().find('i.fa-sort-up').toggleClass('fa-sort-up fa-sort');
-                $this.parents().siblings().find('i.fa-sort-down').toggleClass('fa-sort-down fa-sort');
-            }
-
-            if($this.find('i.fa-sort').length > 0){
-                initSort();
-                $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
-            } else if($this.find('i.fa-sort-down').length > 0){
-                initSort();
-                $this.find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort-up');
-            } else if($this.find('i.fa-sort-up').length > 0){
-                initSort();
-                $this.find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort-down');
-            }
-
-        });
-    };
-
-    function addCtrl(){
-        addCarets();
-        switchCarets();
-        showDL();
-    };
 
     /****************************************************
      * TABLE
@@ -821,7 +742,6 @@ $(function () {
      * AJAX
      * */
 
-
     function Loadi18n(){
         $.getJSON( "data/i18n.json", function( data ) {
             i18n = data;
@@ -847,7 +767,6 @@ $(function () {
             }
         })
     }
-
 
     function LoadFolder() {
         //folder
@@ -934,11 +853,9 @@ $(function () {
         // Filter
         $('#filterDL').on('click', function () {
             $table.bootstrapTable('onFilter', "item['notDownloaded']");
-            addCtrl();
         });
         $('#filterNew').on('click', function () {
             $table.bootstrapTable('onFilter', "item['isNew']");
-            addCtrl();
         });
 
         //multidownload
@@ -950,24 +867,9 @@ $(function () {
         $('input[type=file]').bootstrapFileInput(i18n[lang].modalbtn);
 
         // add css active to btn
-        $("#uploadCollapse .btn-upload").on('click', function () {
-            $("#uploadCollapse .btn-upload").toggleClass("active", "active");
+        $("#upload-modal .btn-upload").on('click', function () {
+            $("#upload-modal .btn-upload").toggleClass("active", "active");
         });
-
-        // checked : show btn-download
-       /* $('.th-inner').on('click', function () {
-            var $this = $(this);
-            $this.find('span.order').length ? console.log('yes') : console.log('no');
-            $this.children().length ? console.log('c yes') : console.log('c no');
-        });*/
-
-        // sort icons
-        sortIcons();
-
-        // btn download
-        $('input[type="checkbox"]').on('change', function (){
-            $('tr.selected').length > 0 ? $('.downloadall').show() : $('.downloadall').hide();
-        })
 
         // date picker
         $('#datepicker input').datepicker({
@@ -988,7 +890,8 @@ $(function () {
     /****************************************************
      * MAIN
      * */
-    function main() {
+
+     function main() {
 
         $('.user-name').html(username.toUpperCase());
 
@@ -1021,7 +924,6 @@ $(function () {
             //APPLY DEFAULT FILTERS
             $table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "') && (item['isNew'] || item['notDownloaded'])");
 
-            addCtrl();
         });
 
 
@@ -1029,11 +931,6 @@ $(function () {
     }
 
     $('document').ready(main());
-
-
-    /*
-    $(group de selector).on click appelle de switchBtnDownload()
-    * */
 
 });
 
