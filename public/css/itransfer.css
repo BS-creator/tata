@@ -152,11 +152,6 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 }
 table[id^="table-"],
 table#mainTable {
-  /*
-fa fa-sort"\f0dc"
-fa fa-sort-down"\f0dd"
-fa fa-sort-up"\f0de"
-*/
   /*  thead tr th.empl {
     width: 88px;
   }
