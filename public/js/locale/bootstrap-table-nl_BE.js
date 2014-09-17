@@ -47,6 +47,9 @@
         },
         formatNotDl: function(){
             return 'Document nog niet gedownload'
+        },
+        formatDL: function(){
+            return 'Downloaden';
         }
     });
 })(jQuery);

@@ -47,6 +47,9 @@
         },
         formatNotDl: function(){
             return 'Fichiers Non-Téléchargés'
+        },
+        formatDL: function(){
+            return 'Télécharger';
         }
     });
 })(jQuery);

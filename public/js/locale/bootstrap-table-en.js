@@ -47,6 +47,9 @@
         },
         formatNotDl: function(){
             return 'Documents not yet downloaded'
+        },
+        formatDL: function(){
+            return 'Download';
         }
     });
 })(jQuery);

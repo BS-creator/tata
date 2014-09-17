@@ -26,7 +26,7 @@
             "del": "Document supprimé"
         },
         "upload" : "Déposer des fichiers sur le serveur",
-        "modalupload" : "Déposer des fichiers",
+        "modalupload" : "Transmettre des fichiers sur le serveur de Group S",
         "modalbq":  "Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.",
         "modalbtn" :  "Sélectionner les fichiers à ajouter",
         "error0": "Erreur de connexion.",

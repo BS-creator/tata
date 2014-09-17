@@ -2,9 +2,10 @@ $(function () {
     'user strict'
 
     /***  GLOBAL VARIABLES ***/
-    var serverURL = '//qaiapps.groups.be/ariane/',
-    //var serverURL = 'http://172.20.20.64:8018/',
-        baseURL = '//qaiapps.groups.be/itransfer/',
+/*    var serverURL = '//qaiapps.groups.be/ariane/',
+        baseURL = '//qaiapps.groups.be/itransfer/',*/
+    var serverURL = '//172.20.20.64:8018/',
+        baseURL = '//localhost:4000/itransfer/',
         lang = sessionStorage.getItem("lang"),
         i18n = {},
         AjaxData = [],
@@ -113,8 +114,10 @@ $(function () {
     function loadTable_i18n(){
         if(lang === "fr"){
             $.getScript("js/locale/bootstrap-table-fr_BE.js");
+            $.getScript("js/locale/bootstrap-datepicker.fr.js");
         } else if (lang === "nl"){
             $.getScript("js/locale/bootstrap-table-nl_BE.js");
+            $.getScript("js/locale/bootstrap-datepicker.nl_BE.js");
         } else {
             $.getScript("js/locale/bootstrap-table-en.js");
         }
@@ -927,12 +930,6 @@ $(function () {
             location.reload();
         });
 
-        // LOGOUT
-        $('#signout').on('click', function () {
-            sessionStorage.setItem("token", '');
-            window.location = baseURL;
-        });
-
         // Filter
         $('#filterDL').on('click', function () {
             $table.bootstrapTable('onFilter', "item['notDownloaded']");
@@ -993,6 +990,12 @@ $(function () {
     function main() {
 
         $('.user-name').html(username.toUpperCase());
+
+        // LOGOUT
+        $('#signout').on('click', function () {
+            sessionStorage.setItem("token", '');
+            window.location = baseURL;
+        });
 
         //i18n
         Loadi18n();
