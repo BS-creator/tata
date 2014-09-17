@@ -3,9 +3,9 @@ $(function () {
 
     /***  GLOBAL VARIABLES ***/
 /*    var serverURL = '//qaiapps.groups.be/ariane/',
-        baseURL = '//qaiapps.groups.be/itransfer/',*/
-    //var serverURL = '//172.20.20.64:8018/',
-    var serverURL = '//deviapps.groups.be/ariane/',
+    /*    baseURL = '//qaiapps.groups.be/itransfer/',*/
+    var serverURL = '//172.20.20.64:8018/',
+   // var serverURL = '//deviapps.groups.be/ariane/',
         baseURL = '//localhost:4000/itransfer/',
         lang = sessionStorage.getItem("lang"),
         i18n = {},

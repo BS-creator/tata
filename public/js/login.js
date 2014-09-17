@@ -8,8 +8,8 @@ $(function (){
 
     /*var serverURL = '//qaiapps.groups.be/ariane/',
         baseURL = '//qaiapps.groups.be/itransfer/';*/
-    /*var serverURL = '//172.20.20.64:8018/',*/
-    var serverURL = '//deviapps.groups.be/ariane/',
+    var serverURL = '//172.20.20.64:8018/',
+    // var serverURL = '//deviapps.groups.be/ariane/',
         baseURL = '//localhost:4000/itransfer/';
 
 
@@ -88,7 +88,6 @@ $(function (){
     $('#submit-login').on('click', submitLogin);
     $('input').keypress(enterPressed);
     $('.login-lang').on('click', function (){
-        //console.log($(this).html().toLowerCase());
        sessionStorage.setItem("lang", $(this).html().toLowerCase());
     });
 });
