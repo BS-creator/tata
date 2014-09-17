@@ -870,11 +870,6 @@ $(function () {
             $("#upload-modal .btn-upload").toggleClass("active", "active");
         });
 
-        // btn download
-        $('input[type="checkbox"]').on('change', function (){
-            $('tr.selected').length > 0 ? $('.downloadall').show() : $('.downloadall').hide();
-        })
-
         // date picker
         $('#datepicker input').datepicker({
             format: "dd/mm/yyyy",

@@ -1376,11 +1376,12 @@
     // Enrich that badAss
     // show btn download
     function showDL(){
-        if ($('tr.selected').length == 0) {
+        if ($('tr.selected').length <= 0) {
             $('.downloadall').hide();
         }
 
-        $('tr td.bs-checkbox input[type="checkbox"]').on('change', function () {
+        $('tr th.bs-checkbox input[type="checkbox"], tr td.bs-checkbox input[type="checkbox"]').on('change', function () {
+            console.log(this);
             if($('tr.selected').length > 0){
                 $('.downloadall').show();
             }else{
