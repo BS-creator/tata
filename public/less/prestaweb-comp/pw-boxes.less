@@ -1,16 +1,7 @@
-body{
-  font-size: @m-font-size;
-}
-
-
-// TEXT SHADOW
-.text-shadow (@string: 0 1px 1px rgba(255,255,255,1)) {
-    text-shadow: @string;
-}
-.box-shadow (@string) {
-    -webkit-box-shadow: @string;
-    -moz-box-shadow:    @string;
-    box-shadow:         @string;
+.box-shadow (@box-shadow) {
+    -webkit-box-shadow: @box-shadow;
+    -moz-box-shadow:    @box-shadow;
+    box-shadow:         @box-shadow;
 }
 .drop-shadow (@x: 0, @y: 1px, @blur: 2px, @spread: 0, @alpha: 0.25) {
     -webkit-box-shadow:	@x @y @blur @spread rgba(0, 0, 0, @alpha);

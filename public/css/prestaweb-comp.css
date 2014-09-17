@@ -29,6 +29,11 @@ body {
   padding: 0 !important;
   margin: 0 !important;
 }
+.col-centered,
+.col-center {
+  float: none;
+  margin: 0 auto;
+}
 .col-gold-s {
   float: left;
   position: relative;
@@ -301,6 +306,7 @@ body {
   padding: 0;
   line-height: 32px;
 }
+/* sidenav JSTREE CUSTOM STYLE */
 div#sidenav {
   padding-top: 1px;
   margin-bottom: 35px;
