@@ -176,6 +176,18 @@ table#mainTable thead tr th {
   text-align: center;
   vertical-align: middle;
 }
+table[id^="table-"] thead tr th div,
+table#mainTable thead tr th div {
+  -webkit-user-select: none;
+  /* Chrome/Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+ */
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+}
 table[id^="table-"] thead tr th.dl,
 table#mainTable thead tr th.dl {
   width: 55px;

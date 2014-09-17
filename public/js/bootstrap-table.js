@@ -559,7 +559,7 @@
 
             html.push(
             '<div class="row"><div class="col-md-12">',
-                sprintf('<button type="button" class="downloadall btn btn-success"><i class="fa fa-upload"></i>&nbsp;&nbsp;%s</button>', this.options.formatDownloadAll()),
+                sprintf('<button type="button" class="downloadall btn btn-success"><i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>', this.options.formatDownloadAll()),
             '</div></div>');
 
 
@@ -620,7 +620,8 @@
         this.initFilter(filter);
         this.updatePagination(true);
         this.initBody();
-
+        // custom
+        addCtrl();
     };
 
     BootstrapTable.prototype.initFilter = function (filter){
@@ -665,8 +666,8 @@
             }else{
                 this.data = this.options.data;
             }
-
         }
+
     };
     /**** END CUSTOM ****/
 
@@ -707,7 +708,7 @@
             this.pageTo = this.options.totalRows;
         }
 
-        html.push('<div class="row"><div class="col-md-12">',
+        html.push('<div class="row"><div class="col-md-12 mt-s">',
             '<button type="button" class="downloadall btn btn-success">' +
                 sprintf('<i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>',this.options.formatDownloadAll()),
             '</div></div>');
@@ -1032,6 +1033,7 @@
 
         this.updateSelected();
         this.resetView();
+
     };
 
     BootstrapTable.prototype.initServer = function () {
@@ -1099,7 +1101,7 @@
 
     BootstrapTable.prototype.getCaretHtml = function () {
         return ['<span class="order' + (this.options.sortOrder === 'desc' ? '' : ' dropup') + '">',
-                '<span class="caret" style="margin: 10px 5px;"></span>',
+                /*'<span class="caret" style="margin: 10px 5px;"></span>',*/ // CUSTOM
             '</span>'].join('');
     };
 
@@ -1202,6 +1204,8 @@
                 $items.filter(':checked').prop('disabled', true);
             }
         }
+        //custom
+        addCtrl();
     };
 
     // PUBLIC FUNCTION DEFINITION
@@ -1369,6 +1373,77 @@
     BootstrapTable.prototype.hideColumn = function (field) {
         this.toggleColumn(getFiledIndex(this.options.columns, field), false, true);
     };
+
+
+    // Enrich that badAss
+    // show btn download
+    function showDL(){
+        if ($('tr.selected').length <= 0) {
+            $('.downloadall').hide();
+        }
+
+        $('tr th.bs-checkbox input[type="checkbox"], tr td.bs-checkbox input[type="checkbox"]').on('change', function () {
+            console.log(this);
+            if($('tr.selected').length > 0){
+                $('.downloadall').show();
+            }else{
+                $('.downloadall').toggle();
+            }
+        });
+
+    };
+
+    // CARETS
+    function initSort(){
+        $('th.sortable > div.th-inner').find('[class^="fa-sort"]').remove();
+    }
+
+    function addCarets(){
+        if(( $('th.sortable > div.th-inner i.fa-sort').length<=0)){
+            $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
+        }
+    };
+var i = 0;
+    function switchCarets(){
+        $('th.sortable > .th-inner').on('click', function (event) {
+
+            var $this = $(this);
+
+            function initOncles(){
+                console.log('clean parents');
+                $this.parents().siblings().find('i.fa-sort-up').toggleClass('fa-sort-up fa-sort');
+                $this.parents().siblings().find('i.fa-sort-down').toggleClass('fa-sort-down fa-sort');
+            }
+console.log(i++);
+            if($this.find('i.fa-sort-up').length > 0){
+                initOncles();
+                $this.find('i.fa-sort-up').toggleClass('fa-sort-up fa-sort-down');
+                console.log('up 2 down');
+                return false;
+
+            } else if($this.find('i.fa-sort-down').length > 0){
+                initOncles();
+                $this.find('i.fa-sort-down').toggleClass('fa-sort-down fa-sort-up');
+                console.log('down 2 up');
+                return false;
+
+            } else if($this.find('i.fa-sort').length > 0) {
+                initOncles();
+                $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
+                console.log('sort 2 down');
+                return false;
+
+            }
+        });
+    };
+
+    function addCtrl(){
+        initSort();
+        addCarets();
+        switchCarets();
+        showDL();
+    };
+
 
     // BOOTSTRAP TABLE PLUGIN DEFINITION
     // =======================
