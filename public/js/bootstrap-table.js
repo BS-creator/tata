@@ -1412,7 +1412,6 @@
             }
 
             if($this.find('i.fa-sort').length > 0){
-                prepare();
                 $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
             } else if($this.find('i.fa-sort-down').length > 0){
                 prepare();
