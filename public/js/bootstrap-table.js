@@ -621,6 +621,9 @@
         this.initBody();
         // custom
         addCtrl();
+        var j = 0;
+        console.log('onFilter');
+        console.log(j++);
     };
 
     BootstrapTable.prototype.initFilter = function (filter){
@@ -1204,7 +1207,9 @@
             }
         }
         //custom
-        addCtrl();
+        // addCtrl();
+        initSort();
+        addCarets();
     };
 
     // PUBLIC FUNCTION DEFINITION
