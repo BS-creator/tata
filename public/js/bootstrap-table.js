@@ -619,7 +619,8 @@
         this.initFilter(filter);
         this.updatePagination(true);
         this.initBody();
-
+        // custom
+        addCtrl();
     };
 
     BootstrapTable.prototype.initFilter = function (filter){
@@ -1201,6 +1202,8 @@
                 $items.filter(':checked').prop('disabled', true);
             }
         }
+        //custom
+        addCtrl();
     };
 
     // PUBLIC FUNCTION DEFINITION
@@ -1368,6 +1371,66 @@
     BootstrapTable.prototype.hideColumn = function (field) {
         this.toggleColumn(getFiledIndex(this.options.columns, field), false, true);
     };
+
+
+    // Enrich that badAss
+    // show btn download
+    function showDL(){
+        if ($('tr.selected').length == 0) {
+            $('.downloadall').hide();
+        }
+
+        $('tr td.bs-checkbox input[type="checkbox"]').on('change', function () {
+            if($('tr.selected').length > 0){
+                $('.downloadall').show();
+            }else{
+                $('.downloadall').toggle();
+            }
+        });
+
+    };
+
+    // CARETS
+    function initSort(){
+        $('th.sortable > div.th-inner').find('[class^="fa-sort"]').remove();
+    }
+
+    function addCarets(){
+        if(( $('th.sortable > div.th-inner i.fa-sort').length<=0)){
+            $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
+        }
+    };
+
+    function switchCarets(){
+        $('th.sortable > .th-inner').on('click', function () {
+
+            var $this = $(this);
+
+            function prepare(){
+                $this.parents().siblings().find('i.fa-sort-up').toggleClass('fa-sort-up fa-sort');
+                $this.parents().siblings().find('i.fa-sort-down').toggleClass('fa-sort-down fa-sort');
+            }
+
+            if($this.find('i.fa-sort').length > 0){
+                prepare();
+                $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
+            } else if($this.find('i.fa-sort-down').length > 0){
+                prepare();
+                $this.find('i.fa-sort-down').removeClass('fa-sort-down').addClass('fa-sort-up');
+            } else if($this.find('i.fa-sort-up').length > 0){
+                prepare();
+                $this.find('i.fa-sort-up').removeClass('fa-sort-up').addClass('fa-sort-down');
+            }
+        });
+    };
+
+    function addCtrl(){
+        initSort();
+        addCarets();
+        switchCarets();
+        showDL();
+    };
+
 
     // BOOTSTRAP TABLE PLUGIN DEFINITION
     // =======================
