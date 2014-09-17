@@ -118,7 +118,7 @@ $(function () {
             $.getScript("js/locale/bootstrap-datepicker.fr.js");
         } else if (lang === "nl"){
             $.getScript("js/locale/bootstrap-table-nl_BE.js");
-            $.getScript("js/locale/bootstrap-datepicker.nl_BE.js");
+            $.getScript("js/locale/bootstrap-datepicker.nl-BE.js");
         } else {
             $.getScript("js/locale/bootstrap-table-en.js");
         }
@@ -370,7 +370,14 @@ $(function () {
 
     function menuActionClick(e, data) {
         var table = $('#mainTable');
-        $('.breadcrumb').html('<li class="active">' + data.node.text + '</li><li><a href="#"></a></li>');
+        //console.log(data);
+        if(data.node.parent && data.node.id !== 'upload' && data.node.id !== 'root'){
+            $('.breadcrumb').html('<li class="active">' + $("#"+data.node.parent + " a:first").html().substring(7) + '</li><li class="active">'+ data.node.text + '</li><li><a href="#"></a></li>' );
+        }else{
+            $('.breadcrumb').html('<li class="active">'+ data.node.text + '</li><li><a href="#"></a></li>' );
+        }
+
+
         if (data.node.id === 'root') {
             table.bootstrapTable('showColumn', 'refDoc');
             table.bootstrapTable('showColumn', 'libelle');
@@ -809,10 +816,12 @@ $(function () {
             dataType: 'json',
             statusCode: {
                 403: function () {
+                    $('#loader').hide();
                     alert(i18n[lang].errorSession);
                     window.location = baseURL;
                 },
                 401: function () {
+                    $('#loader').hide();
                     alert(i18n[lang].error0);
                 }
             }
@@ -828,6 +837,13 @@ $(function () {
         $('#btn-upload-div span').html('<i class="fa fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].upload);
         $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].modalupload );
         $('#modalbq').html(i18n[lang].modalbq);
+
+        //Language settings
+        $('.login-lang').on('click', function (){
+            //console.log($(this).html().toLowerCase());
+            sessionStorage.setItem("lang", $(this).html().toLowerCase());
+            location.reload();
+        });
 
         var $table = $('#mainTable');
 
@@ -874,7 +890,7 @@ $(function () {
         // date picker
         $('#datepicker input').datepicker({
             format: "dd/mm/yyyy",
-            language: "fr",
+            language: lang === 'nl' ? "nl-BE": lang ,
             autoclose: true,
             todayHighlight: true,
             startView: 1

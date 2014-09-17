@@ -571,6 +571,7 @@
                 '</ol>',
               '</div></div>');
             /**** CUSTOM ***/
+
             this.$toolbar.append(html.join(''));
             $search = this.$toolbar.find('.search input');
             $search.off('keyup').on('keyup', function (event) {
@@ -709,7 +710,7 @@
 
         html.push('<div class="row"><div class="col-md-12 mt-s">',
             '<button type="button" class="downloadall btn btn-success">' +
-                sprintf('<i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>',this.options.formatDL()),
+                sprintf('<i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>',this.options.formatDownloadAll()),
             '</div></div>');
         html.push('</div>',
             '<div class="text-center wide pagination">',
