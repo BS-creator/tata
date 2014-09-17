@@ -559,7 +559,7 @@
 
             html.push(
             '<div class="row"><div class="col-md-12">',
-                sprintf('<button type="button" class="downloadall btn btn-success"><i class="fa fa-upload"></i>&nbsp;&nbsp;%s</button>', this.options.formatDownloadAll()),
+                sprintf('<button type="button" class="downloadall btn btn-success"><i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>', this.options.formatDownloadAll()),
             '</div></div>');
 
 
@@ -706,7 +706,7 @@
             this.pageTo = this.options.totalRows;
         }
 
-        html.push('<div class="row"><div class="col-md-12">',
+        html.push('<div class="row"><div class="col-md-12 mt-s">',
             '<button type="button" class="downloadall btn btn-success">' +
                 sprintf('<i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>',this.options.formatDL()),
             '</div></div>');
@@ -1098,7 +1098,7 @@
 
     BootstrapTable.prototype.getCaretHtml = function () {
         return ['<span class="order' + (this.options.sortOrder === 'desc' ? '' : ' dropup') + '">',
-                '<span class="caret" style="margin: 10px 5px;"></span>',
+                /*'<span class="caret" style="margin: 10px 5px;"></span>',*/ // CUSTOM
             '</span>'].join('');
     };
 
