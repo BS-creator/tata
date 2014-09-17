@@ -709,7 +709,7 @@
 
         html.push('<div class="row"><div class="col-md-12">',
             '<button type="button" class="downloadall btn btn-success">' +
-                sprintf('<i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>',this.options.formatDL()),
+                sprintf('<i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>',this.options.formatDownloadAll()),
             '</div></div>');
         html.push('</div>',
             '<div class="text-center wide pagination">',
