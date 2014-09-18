@@ -538,13 +538,6 @@ $(function () {
             });
     }
 
-    function addSortCarets(){
-        $(this).on('click', function () {
-            $(this).find('[class="fa-sort"]').remove();
-        });
-        //$this.parents().siblings().find('div.th-inner').toggleClass('fa-sort-up fa-sort');
-    }
-    // addSortCarets();
     /****************************************************
      * TABLE
      * */
@@ -884,21 +877,7 @@ $(function () {
      * MAIN
      * */
 
-     function main() {
-
-        $('.user-name').html(username.toUpperCase());
-
-        // LOGOUT
-        $('#signout').on('click', function () {
-            sessionStorage.setItem("token", '');
-            window.location = baseURL;
-        });
-
-        //i18n
-        Loadi18n();
-        loadTable_i18n();
-
-        //SYNC & WAIT
+    function render() {
         $.when(LoadCategory(), LoadData(), LoadFolder()).done(function () {
 
             //Add label for reference of Document
@@ -918,9 +897,29 @@ $(function () {
             $table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "') && (item['isNew'] || item['notDownloaded'])");
 
         });
+    }
 
+    function main() {
 
+        $('.user-name').html(username.toUpperCase());
 
+        // LOGOUT
+        $('#signout').on('click', function () {
+            sessionStorage.setItem("token", '');
+            window.location = baseURL;
+        });
+
+        //i18n
+        $.getJSON("data/i18n.json", function (data) {
+            i18n = data;
+            loadTable_i18n();
+            if (i18n[lang]) {   // if language is set,
+                render();       // load data and create table
+            } else {
+                alert("ERROR loading data");
+                window.location = baseURL;
+            }
+        });
     }
 
     $('document').ready(main());

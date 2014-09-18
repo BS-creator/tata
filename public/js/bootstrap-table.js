@@ -393,9 +393,10 @@
         /*CUSTOM: search on date (invisible)*/
         if(name === 'date'){
             index = 2;
+
         }/*CUSTOM: sort on downloadCount (invisible)*/
         if(name === 'downloadCount'){
-            index = 1;
+            index = getFiledIndex(this.options.columns, 'notDownloaded');
         }
 
         if (index !== -1) {
@@ -622,7 +623,6 @@
     /**** BEGIN CUSTOM ****/
     BootstrapTable.prototype.onFilter = function (filter) {
 
-        //console.log(this);
         this.options.pageNumber = 1;
         this.initFilter(filter);
         this.updatePagination(true);
