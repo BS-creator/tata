@@ -3,9 +3,9 @@ $(function () {
 
     /***  GLOBAL VARIABLES ***/
 /*    var serverURL = '//qaiapps.groups.be/ariane/',
-    /*    baseURL = '//qaiapps.groups.be/itransfer/',*/
+        baseURL = '//qaiapps.groups.be/itransfer/',*/
     var serverURL = '//172.20.20.64:8018/',
-   // var serverURL = '//deviapps.groups.be/ariane/',
+    //var serverURL = '//deviapps.groups.be/ariane/',
         baseURL = '//localhost:4000/itransfer/',
         lang = sessionStorage.getItem("lang"),
         i18n = {},
@@ -377,7 +377,6 @@ $(function () {
             $('.breadcrumb').html('<li class="active">'+ data.node.text + '</li><li><a href="#"></a></li>' );
         }
 
-
         if (data.node.id === 'root') {
             table.bootstrapTable('showColumn', 'refDoc');
             table.bootstrapTable('showColumn', 'libelle');
@@ -432,7 +431,7 @@ $(function () {
                 table.bootstrapTable('showColumn', 'path');
                 //table.bootstrapTable('onFilter', ['refDoc', 'empty']);
                 table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "' && item['refDoc'] == '' )");
-                table.bootstrapTable('onFilter', ['refDoc', 'empty']);
+                //table.bootstrapTable('onFilter', ['refDoc', 'empty']);
             }
         }
     }
