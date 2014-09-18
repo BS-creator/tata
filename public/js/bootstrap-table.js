@@ -445,8 +445,8 @@
 
         this.trigger('sort', this.options.sortName, this.options.sortOrder);
 
-        $this.add($this_).data('order', this.options.sortOrder);
-            // .find('.th-inner').append(this.getCaretHtml()); // CUSTOM stop sort icons
+        $this.add($this_).data('order', this.options.sortOrder)
+            .find('.th-inner').append(this.getCaretHtml()); // CUSTOM stop sort icons
 
         if (this.options.sidePagination === 'server') {
             this.initServer();
@@ -628,7 +628,9 @@
         this.updatePagination(true);
         this.initBody();
         // custom
-        this.addCtrl();
+        //this.addCtrl();
+        this.addCarets();
+        console.log('onFlter : menu, filtrer par, ');
     };
 
     BootstrapTable.prototype.initFilter = function (filter){
@@ -1108,8 +1110,11 @@
 
     BootstrapTable.prototype.getCaretHtml = function () {
         return ['<span class="order' + (this.options.sortOrder === 'desc' ? '' : ' dropup') + '">',
-                /*'<span class="caret" style="margin: 10px 5px;"></span>',*/ // CUSTOM
-            '</span>'].join('');
+                    this.options.sortOrder === 'desc' ? '<i class="fa fa-sort-down"></i>' : '<i class="fa fa-sort-up"></i>',
+                '</span>'].join('');
+
+                //'<span class="caret" style="margin: 10px 5px;"></span>', // CUSTOM
+                //'</span>'].join('');
     };
 
     BootstrapTable.prototype.updateSelected = function () {
@@ -1212,7 +1217,8 @@
             }
         }
         //custom
-        this.addCtrl();
+        //this.addCtrl();
+        /*this.addCarets();*/
 
     };
 
@@ -1407,18 +1413,23 @@
     };
 
     // CARETS
-    BootstrapTable.prototype.initSort = function(){
+/*    BootstrapTable.prototype.initSort = function(){
+*//*        $('th.sortable > div.th-inner').on('click', function () {
+            $(this).find('[class^="fa-sort"]').remove();
+        });*//*
         // $('th.sortable > div.th-inner').find('[class^="fa-sort"]').remove();
-    }
+    }*/
+
+
 
     BootstrapTable.prototype.addCarets = function(){
-        if(( $('th.sortable > div.th-inner i.fa-sort').length<=0)){
+        if(( $('th.sortable > div.th-inner i.fa-sort').length<=0)) {
             $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
         }
     };
 
-    BootstrapTable.prototype.switchCarets = function(){
-        $('th.sortable > .th-inner').on('click', function (event) {
+/*    BootstrapTable.prototype.switchCarets = function(){
+        $('th.sortable > .th-inner').on('click', function () {
 
             var $this = $(this);
 
@@ -1430,22 +1441,23 @@
             if($this.find('i.fa-sort-up').length > 0){
                 initOncles();
                 $this.find('i.fa-sort-up').toggleClass('fa-sort-up fa-sort-down');
-                //console.log('up 2 down');
+                console.log('up 2 down');
             } else if($this.find('i.fa-sort-down').length > 0){
                 initOncles();
                 $this.find('i.fa-sort-down').toggleClass('fa-sort-down fa-sort-up');
-                //console.log('down 2 up');
+                console.log('down 2 up');
             } else if($this.find('i.fa-sort').length > 0) {
                 initOncles();
                 $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
+                console.log('sort 2 down');
             }
         });
-    };
+    };*/
 
     BootstrapTable.prototype.addCtrl = function(){
-        this.initSort();
-        this.addCarets();
-        this.switchCarets();
+        //this.initSort();
+        //this.addCarets();
+        //this.switchCarets();
         this.showDL();
     };
 
