@@ -389,13 +389,14 @@
         var name = this.options.sortName,
             order = this.options.sortOrder === 'desc' ? -1 : 1,
             index = $.inArray(this.options.sortName, this.header.fields);
+
         /*CUSTOM: search on date (invisible)*/
         if(name === 'date'){
-            index = 1;
-        }/*CUSTOM: search on date (invisible)*/
+            index = 2;
+        }/*CUSTOM: sort on downloadCount (invisible)*/
         if(name === 'downloadCount'){
             index = 1;
-        }/*CUSTOM: sort on downloadCount (invisible)*/
+        }
 
         if (index !== -1) {
             var sorter = this.header.sorters[index];
@@ -428,8 +429,8 @@
         if($this.data('field') === 'formattedDate'){
             this.options.sortName = 'date';
             this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
-            /*CUSTOM: search on date (invisible)*/
-        }if ($this.data('field') === 'notDownloaded') {
+            /*CUSTOM: search on downloadCount (invisible)*/
+        }else if ($this.data('field') === 'notDownloaded') {
             this.options.sortName = 'downloadCount';
             this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
         }else{

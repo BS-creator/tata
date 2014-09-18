@@ -429,7 +429,6 @@ $(function () {
                 table.bootstrapTable('showColumn', 'uploadUserName');
                 table.bootstrapTable('showColumn', 'fileName');
                 table.bootstrapTable('showColumn', 'path');
-                //table.bootstrapTable('onFilter', ['refDoc', 'empty']);
                 table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "' && item['refDoc'] == '' )");
                 //table.bootstrapTable('onFilter', ['refDoc', 'empty']);
             }
@@ -445,7 +444,6 @@ $(function () {
         refDocUsed = getUsedDocRef(AjaxData);
 
         // BUILD TREE
-        //TODO: multi language
         $.each(category, function (i, item) {
 
             var refdoc = parseInt(item.refDoc),
@@ -564,16 +562,14 @@ $(function () {
                     align: 'center',
                     checkbox: true
 
-                },
-                {
+                },{
                     field: 'notDownloaded',
                     title: '<i class="fa fa-download fa-lg"></i>',
                     align: 'center',
                     sortable: true,
                     class: 'dl sortable',
                     formatter: formatDownload
-                },
-                {
+                },{
                     field: 'isNew',
                     title: i18n[lang].col.new,
                     align: 'center',
@@ -581,8 +577,7 @@ $(function () {
                     class: "new sortable",
                     visible: false,
                     formatter: formatIsNew
-                },
-                {
+                },{
                     field: 'formattedDate',
                     title: i18n[lang].col.date,
                     align: 'center',
@@ -591,18 +586,7 @@ $(function () {
                     sortable: true,
                     visible: true,
                     formatter: formatDate
-                },
-                /*{
-                 field: 'date',
-                 title: 'Date',
-                 align: 'center',
-                 valign: 'middle',
-                 class: 'sortableDate',
-                 sortable: true,
-                 visible: false,
-                 formatter: formatDefault
-                 },*/
-                {
+                },{
                     field: 'fileName',
                     title: i18n[lang].col.name,
                     align: 'center',
@@ -610,8 +594,7 @@ $(function () {
                     visible: false,
                     sortable: true,
                     class: "fileName sortable"
-                },
-                {
+                },{
                     field: 'uploadUserName',
                     title: i18n[lang].col.user,
                     align: 'center',
@@ -620,8 +603,7 @@ $(function () {
                     sortable: true,
                     formatter: formatUserName,
                     class: "uploadUserName sortable"
-                },
-                {
+                },{
                     field: 'noEmployeur',
                     title: i18n[lang].col.empl,
                     align: 'center',
@@ -629,8 +611,7 @@ $(function () {
                     sortable: true,
                     class: 'empl sortable',
                     formatter: formatDefault
-                },
-                {
+                },{
                     field: 'libelle',
                     title: i18n[lang].col.label,
                     align: 'left',
@@ -638,8 +619,7 @@ $(function () {
                     class: 'labelDoc sortable',
                     sortable: true,
                     formatter: formatDefault
-                },
-                {
+                },{
                     field: 'refDoc',
                     title: i18n[lang].col.refdoc,
                     align: 'center',
@@ -647,8 +627,7 @@ $(function () {
                     sortable: true,
                     class: 'refDoc sortable',
                     formatter: formatRefDoc
-                },
-                {
+                },{
                     field: 'size',
                     title: i18n[lang].col.size,
                     align: 'center',
@@ -657,8 +636,7 @@ $(function () {
                     sortable: true,
                     class: 'size sortable',
                     formatter: formatSize
-                },
-                {
+                },{
                     field: 'extension',
                     title: i18n[lang].col.ext,
                     align: 'center',
@@ -666,16 +644,7 @@ $(function () {
                     sortable: true,
                     class: 'ext sortable',
                     formatter: FormatExtension
-                },
-                /*{
-                 field: 'index',
-                 title: '#',
-                 sortable: true,
-                 visible: false,
-                 sort: function (a, b) {return a - b;}
-                 },
-                 */
-                {
+                },{
                     field: 'path',
                     title: i18n[lang].col.path,
                     align: 'center',
@@ -683,9 +652,8 @@ $(function () {
                     visible: false,
                     sortable: true,
                     formatter: formatPath,
-                  class: 'path sortable'
-                },
-                {
+                    class: 'path sortable'
+                },{
                     field: 'refClientCompl',
                     title: i18n[lang].col.refCl,
                     align: 'center',
@@ -693,9 +661,8 @@ $(function () {
                     visible: false,
                     sortable: true,
                     formatter: formatDefault,
-                  class: 'refClientCompl sortable'
-                },
-                {
+                    class: 'refClientCompl sortable'
+                },{
                     field: 'counter',
                     title: i18n[lang].col.count,
                     align: 'center',
@@ -703,9 +670,8 @@ $(function () {
                     visible: false,
                     sortable: true,
                     formatter: formatDefault,
-                  class: 'counter sortable'
-                },
-                {
+                    class: 'counter sortable'
+                },{
                     field: 'refGroups',
                     title: i18n[lang].col.refGS,
                     align: 'center',
@@ -713,9 +679,8 @@ $(function () {
                     visible: false,
                     sortable: true,
                     formatter: formatDefault,
-                  class: 'refGroups sortable'
-                },
-                {
+                    class: 'refGroups sortable'
+                },{
                     field: 'operate',
                     title: i18n[lang].col.del,
                     align: 'center',
@@ -807,10 +772,13 @@ $(function () {
             data: { "token": token },
             success: function (data) {
                 AjaxData = data;
-                /* window.dc = new DataCollection(data);*/
             },
             complete: function () {
                 $('#loader').hide();
+            },
+            error: function(xhr, status){
+                $('#loader').hide();
+                alert(i18n[lang].error0);
             },
             dataType: 'json',
             statusCode: {
