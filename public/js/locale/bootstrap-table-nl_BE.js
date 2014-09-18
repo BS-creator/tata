@@ -50,6 +50,9 @@
         },
         formatDL: function(){
             return 'Downloaden';
+        },
+        formatBtnDl: function(total){
+            return total > 1 ? 'Downloaden '+total+' bestanden' : 'Downloaden '+total+' bestand';
         }
     });
 })(jQuery);

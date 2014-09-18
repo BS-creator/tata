@@ -18,15 +18,15 @@
         },
         "tree" : {
             "root": "Tous les documents",
-            "upload": "Documents transmis à Group S",
+            "upload": "Fichiers transmis à Group S",
             "other" : "98 - Autres Documents"
         },
         "file" : {
             "add": "Document ajouté",
             "del": "Document supprimé"
         },
-        "upload" : "Déposer des fichiers sur le serveur",
-        "modalupload" : "Transmettre des documents sur le serveur de Group S",
+        "upload" : "Transmettre des fichiers à Group S",
+        "modalupload" : "Transmettre des fichiers sur le serveur de Group S",
         "modalbq":  "Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.",
         "modalbtn" :  "Sélectionner les fichiers à ajouter",
         "error0": "Erreur de connexion.",

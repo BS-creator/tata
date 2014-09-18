@@ -621,7 +621,7 @@
         this.updatePagination(true);
         this.initBody();
         // custom
-        addCtrl();
+        this.addCtrl();
     };
 
     BootstrapTable.prototype.initFilter = function (filter){
@@ -1205,7 +1205,7 @@
             }
         }
         //custom
-        addCtrl();
+        this.addCtrl();
 
     };
 
@@ -1378,14 +1378,19 @@
 
     // Enrich that badAss
     // show btn download
-    function showDL(){
+    BootstrapTable.prototype.showDL = function(){
+
         if ($('tr.selected').length <= 0) {
             $('.downloadall').hide();
         }
 
+        var $this = this;
         $('tr th.bs-checkbox input[type="checkbox"], tr td.bs-checkbox input[type="checkbox"]').on('change', function () {
-            console.log(this);
             if($('tr.selected').length > 0){
+                $('.downloadall').html(
+                        sprintf('<i class="fa fa-download"></i>&nbsp;&nbsp;%s',
+                        $this.options.formatBtnDl($(' tr td.bs-checkbox input[type="checkbox"]:checked').length)) // total download btn
+                );
                 $('.downloadall').show();
             }else{
                 $('.downloadall').toggle();
@@ -1395,17 +1400,17 @@
     };
 
     // CARETS
-    function initSort(){
-        $('th.sortable > div.th-inner').find('[class^="fa-sort"]').remove();
+    BootstrapTable.prototype.initSort = function(){
+        // $('th.sortable > div.th-inner').find('[class^="fa-sort"]').remove();
     }
 
-    function addCarets(){
+    BootstrapTable.prototype.addCarets = function(){
         if(( $('th.sortable > div.th-inner i.fa-sort').length<=0)){
             $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
         }
     };
 
-    function switchCarets(){
+    BootstrapTable.prototype.switchCarets = function(){
         $('th.sortable > .th-inner').on('click', function (event) {
 
             var $this = $(this);
@@ -1430,11 +1435,11 @@
         });
     };
 
-    function addCtrl(){
-        initSort();
-        addCarets();
-        switchCarets();
-        showDL();
+    BootstrapTable.prototype.addCtrl = function(){
+        this.initSort();
+        this.addCarets();
+        this.switchCarets();
+        this.showDL();
     };
 
 

@@ -1,12 +1,17 @@
 #logindiv {
   min-height: 700px;
 }
-header ul.lang {
+header #banner-header ul.lang {
   margin-top: 36px;
   margin-right: 17px;
 }
-header ul.lang li a.login-lang {
+header #banner-header ul.lang li a.login-lang {
   color: #bce8f1;
+}
+header #info-header li.univers-name {
+  color: darkgray;
+  font-weight: bold;
+  font-size: 13px;
 }
 #upload-modal {
   position: relative;

@@ -22,7 +22,7 @@
             return 'Pas de fichiers trouvés ';
         },
         formatDownloadAll: function(){
-            return 'Télécharger Sélection';
+            return 'Télécharger';
         },
         formatBreadCrumb: function(){
             return 'Nouveaux fichiers non-téléchargés';
@@ -50,6 +50,9 @@
         },
         formatDL: function(){
             return 'Télécharger';
+        },
+        formatBtnDl: function(total){
+            return total > 1 ? 'Télécharger '+total+' fichiers' : 'Télécharger '+total+' fichier';
         }
     });
 })(jQuery);
