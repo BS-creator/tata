@@ -425,6 +425,10 @@
             $this_ = this.$header.find('th').eq($this.index());
 
         this.$header.add(this.$header_).find('span.order').remove();
+        // custom
+        if($('th.sortable div.th-inner:not(:has(i.fa-sort))')){
+            $('th.sortable div.th-inner:not(:has(i.fa-sort))').append('<i class="fa fa-sort"></i>');
+        }// /custom
 
         /*CUSTOM: search on date (invisible)*/
         if($this.data('field') === 'formattedDate'){
@@ -447,7 +451,7 @@
         this.trigger('sort', this.options.sortName, this.options.sortOrder);
 
         $this.add($this_).data('order', this.options.sortOrder)
-            .find('.th-inner').append(this.getCaretHtml()); // CUSTOM stop sort icons
+            .find('.th-inner').append(this.getCaretHtml());
 
         if (this.options.sidePagination === 'server') {
             this.initServer();
@@ -455,6 +459,11 @@
         }
         this.initSort();
         this.initBody();
+
+
+        // custom
+        // console.log('458 onSort : remove this > i.fa-sort');
+        $this.find('i.fa-sort').remove(); // custom onSort : remove fa-sort (i.fa-sort-down displays)
     };
 
     BootstrapTable.prototype.initToolbar = function () {
@@ -488,11 +497,12 @@
         }
 
         if (this.options.showColumns) {
+
             html.push(sprintf('<div class="keep-open %s">',
                 this.options.showRefresh || this.options.showToggle ? 'btn-group' : ''),
                 '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
                 sprintf('<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;%s',this.options.formatShowColumn()),
-                ' <span class="caret"></span>',
+                ' <i class="fa fa-sort-down"></i>',
                 '</button>',
                 '<ul class="dropdown-menu" role="menu">');
 
@@ -628,9 +638,8 @@
         this.updatePagination(true);
         this.initBody();
         // custom
-        //this.addCtrl();
-        this.addCarets();
-        console.log('onFlter : menu, filtrer par, ');
+        this.addCtrl();
+        // console.log('onFlter : menu, filtrer par, ');
     };
 
     BootstrapTable.prototype.initFilter = function (filter){
@@ -1110,7 +1119,7 @@
 
     BootstrapTable.prototype.getCaretHtml = function () {
         return ['<span class="order' + (this.options.sortOrder === 'desc' ? '' : ' dropup') + '">',
-                    this.options.sortOrder === 'desc' ? '<i class="fa fa-sort-down"></i>' : '<i class="fa fa-sort-up"></i>',
+                    this.options.sortOrder === 'desc' ? '<i class="fa fa-sort-down"></i>' : '<i class="fa fa-sort-up"></i>', //custom
                 '</span>'].join('');
 
                 //'<span class="caret" style="margin: 10px 5px;"></span>', // CUSTOM
@@ -1216,9 +1225,11 @@
                 $items.filter(':checked').prop('disabled', true);
             }
         }
-        //custom
-        //this.addCtrl();
-        /*this.addCarets();*/
+
+        // custom
+        // console.log('toggleColumn : initialize carets @ toggleColumn');
+        $('th.sortable div.th-inner').find('i[class*="fa-sort-"]').remove();
+        $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
 
     };
 
@@ -1413,51 +1424,14 @@
     };
 
     // CARETS
-/*    BootstrapTable.prototype.initSort = function(){
-*//*        $('th.sortable > div.th-inner').on('click', function () {
-            $(this).find('[class^="fa-sort"]').remove();
-        });*//*
-        // $('th.sortable > div.th-inner').find('[class^="fa-sort"]').remove();
-    }*/
-
-
-
     BootstrapTable.prototype.addCarets = function(){
         if(( $('th.sortable > div.th-inner i.fa-sort').length<=0)) {
             $('th.sortable > div.th-inner').append('<i class="fa fa-sort"></i>');
         }
     };
 
-/*    BootstrapTable.prototype.switchCarets = function(){
-        $('th.sortable > .th-inner').on('click', function () {
-
-            var $this = $(this);
-
-            function initOncles(){
-                $this.parents().siblings().find('i.fa-sort-up').toggleClass('fa-sort-up fa-sort');
-                $this.parents().siblings().find('i.fa-sort-down').toggleClass('fa-sort-down fa-sort');
-            }
-
-            if($this.find('i.fa-sort-up').length > 0){
-                initOncles();
-                $this.find('i.fa-sort-up').toggleClass('fa-sort-up fa-sort-down');
-                console.log('up 2 down');
-            } else if($this.find('i.fa-sort-down').length > 0){
-                initOncles();
-                $this.find('i.fa-sort-down').toggleClass('fa-sort-down fa-sort-up');
-                console.log('down 2 up');
-            } else if($this.find('i.fa-sort').length > 0) {
-                initOncles();
-                $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');
-                console.log('sort 2 down');
-            }
-        });
-    };*/
-
     BootstrapTable.prototype.addCtrl = function(){
-        //this.initSort();
-        //this.addCarets();
-        //this.switchCarets();
+        this.addCarets();
         this.showDL();
     };
 
