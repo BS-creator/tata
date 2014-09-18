@@ -389,11 +389,15 @@
         var name = this.options.sortName,
             order = this.options.sortOrder === 'desc' ? -1 : 1,
             index = $.inArray(this.options.sortName, this.header.fields);
+
         /*CUSTOM: search on date (invisible)*/
         if(name === 'date'){
+            index = 2;
+        }/*CUSTOM: sort on downloadCount (invisible)*/
+        if(name === 'downloadCount'){
             index = 1;
         }
-        /*CUSTOM: search on date (invisible)*/
+
         if (index !== -1) {
             var sorter = this.header.sorters[index];
             this.data.sort(function (a, b) {
@@ -425,8 +429,11 @@
         if($this.data('field') === 'formattedDate'){
             this.options.sortName = 'date';
             this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
+            /*CUSTOM: search on downloadCount (invisible)*/
+        }else if ($this.data('field') === 'notDownloaded') {
+            this.options.sortName = 'downloadCount';
+            this.options.sortOrder = $this.data('order') === 'asc' ? 'desc' : 'asc';
         }else{
-        /*CUSTOM: search on date (invisible)*/
             if (this.options.sortName === $this.data('field')) {
                 this.options.sortOrder = this.options.sortOrder === 'asc' ? 'desc' : 'asc';
             } else {
@@ -438,7 +445,7 @@
 
         this.trigger('sort', this.options.sortName, this.options.sortOrder);
 
-        $this.add($this_).data('order', this.options.sortOrder)
+        $this.add($this_).data('order', this.options.sortOrder);
             // .find('.th-inner').append(this.getCaretHtml()); // CUSTOM stop sort icons
 
         if (this.options.sidePagination === 'server') {
@@ -1423,11 +1430,11 @@
             if($this.find('i.fa-sort-up').length > 0){
                 initOncles();
                 $this.find('i.fa-sort-up').toggleClass('fa-sort-up fa-sort-down');
-                console.log('up 2 down');
+                //console.log('up 2 down');
             } else if($this.find('i.fa-sort-down').length > 0){
                 initOncles();
                 $this.find('i.fa-sort-down').toggleClass('fa-sort-down fa-sort-up');
-                console.log('down 2 up');
+                //console.log('down 2 up');
             } else if($this.find('i.fa-sort').length > 0) {
                 initOncles();
                 $this.find('i.fa-sort').removeClass('fa-sort').addClass('fa-sort-down');

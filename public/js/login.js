@@ -8,8 +8,8 @@ $(function (){
 
     /*var serverURL = '//qaiapps.groups.be/ariane/',
         baseURL = '//qaiapps.groups.be/itransfer/';*/
+    //var serverURL = '//deviapps.groups.be/ariane/',
     var serverURL = '//172.20.20.64:8018/',
-    // var serverURL = '//deviapps.groups.be/ariane/',
         baseURL = '//localhost:4000/itransfer/';
 
 
@@ -63,18 +63,22 @@ $(function (){
               $('#loader').hide();
             },*/
             error: function (xhr) {
+                $('#loader').hide();
                 if(xhr.status >= 500) {
                     alert ( "ERROR: connection problem");
                 }
             },
             statusCode: {
                 403: function() {
+                    $('#loader').hide();
                     alert( "ERROR: login / password incorrect." );
                 },
                 401: function() {
+                    $('#loader').hide();
                     alert ( "ERROR: connection problem");
                 },
                 504: function() {
+                    $('#loader').hide();
                     alert ( "ERROR: connection problem");
                 }
             }
