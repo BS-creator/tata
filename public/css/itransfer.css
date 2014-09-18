@@ -17,24 +17,8 @@ header #info-header li.univers-name {
   position: relative;
   min-height: 1px;
 }
-#upload-modal .btn-upload {
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 9px;
-  display: block;
+#upload-modal #btn-upload-div {
   width: 100%;
-  font-size: 14px;
-  font-weight: normal;
-  line-height: 34px;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  /* border: 3px solid #428bca;*/
-  /*border-radius: 4px;*/
-  background-image: none;
-  background-color: #428bca;
-  color: #fff;
 }
 #upload-modal form#uploadForm {
   width: 100%;

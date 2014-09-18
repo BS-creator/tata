@@ -50,8 +50,8 @@ module.exports = function(grunt) {
               options: {
               },
               files: {
-                  "public/css/prestaweb-comp.css": "public/less/prestaweb-comp/prestaweb-comp.less",
-                  "public/css/itransfer.css": "public/less/itransfer.less"
+                  "public/css/portal-components.css": "public/less/portal-components/portal-components.less",
+                  "public/css/gstransfer.css": "public/less/gstransfer.less"
               }
           }
       },
