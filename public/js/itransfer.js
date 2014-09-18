@@ -538,12 +538,12 @@ $(function () {
             });
     }
 
-    function addSortCarets(){
+/*    function addSortCarets(){
         $(this).on('click', function () {
             $(this).find('[class="fa-sort"]').remove();
         });
         //$this.parents().siblings().find('div.th-inner').toggleClass('fa-sort-up fa-sort');
-    }
+    }*/
     // addSortCarets();
     /****************************************************
      * TABLE
