@@ -172,7 +172,7 @@ module.exports = function(grunt) {
           'less',
           'cssmin',
         'uglify',
-        'processhtml',
+        //'processhtml',
         'htmlmin',  // minifie les fichiers html
         'compress'  // crée le fichier zip
       ]);
