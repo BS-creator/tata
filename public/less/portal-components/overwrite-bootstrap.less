@@ -1,0 +1,55 @@
+///////////////////////////////////////////////////
+// OVERWRITE BOOTSTRAP
+
+// LINKS
+a,
+a:hover,
+a:focus,
+a:active,
+a.active {
+    text-decoration: none;
+}
+
+a:focus {
+    outline: none !important;
+    outline-offset: 0 !important;
+}
+
+// LIST
+ul, li {
+    list-style: none;
+}
+
+// BUTTONS
+.btn,
+.btn-group,
+.form-control,
+.btn-upload {
+    border-radius: 0 !important;
+}
+.btn-success {
+    border-color: #5CB85C;
+}
+
+// TABLES
+.table > thead > tr > td.success,
+.table > tbody > tr > td.success,
+.table > tfoot > tr > td.success,
+.table > thead > tr > th.success,
+.table > tbody > tr > th.success,
+.table > tfoot > tr > th.success,
+.table > thead > tr.success > td,
+.table > tbody > tr.success > td,
+.table > tfoot > tr.success > td,
+.table > thead > tr.success > th,
+.table > tbody > tr.success > th,
+.table > tfoot > tr.success > th {
+    background-color: #F8FFF1;
+}
+.table-hover > tbody > tr > td.success:hover,
+.table-hover > tbody > tr > th.success:hover,
+.table-hover > tbody > tr.success:hover > td,
+.table-hover > tbody > tr:hover > .success,
+.table-hover > tbody > tr.success:hover > th {
+    background-color: #E4FDDA;
+}
