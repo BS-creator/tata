@@ -56,7 +56,7 @@ module.exports = function (grunt) {
                     livereload: '<%= connect.options.livereload %>'
                 },
                 files: [
-                    '<%= config.app %>/{,*/}*.*',
+                    '<%= config.app %>/{,*/}*.*'
                 ]
             }
         },
@@ -118,21 +118,6 @@ module.exports = function (grunt) {
             server: '.tmp'
         },
 
-        // Renames files for browser caching purposes
-        rev: {
-            dist: {
-                files: {
-                    src: [
-                        '<%= config.dist %>/js/{,*/}*.js',
-                        '<%= config.dist %>/css/{,*/}*.css',
-                        '<%= config.dist %>/images/{,*/}*.*',
-                        '<%= config.dist %>/css/fonts/{,*/}*.*',
-                        '<%= config.dist %>/*.{ico,png}'
-                    ]
-                }
-            }
-        },
-
         // Reads HTML for usemin blocks to enable smart builds that automatically
         // concat, minify and revision files. Creates configurations in memory so
         // additional tasks can operate on them
@@ -140,7 +125,11 @@ module.exports = function (grunt) {
             options: {
                 dest: '<%= config.dist %>'
             },
-            html: '<%= config.app %>/index.html'
+            html: [
+                '<%= config.app %>/index.html',
+                '<%= config.app %>/file.html'
+            ]
+
         },
 
         // Performs rewrites based on rev and the useminPrepare configuration
@@ -153,22 +142,12 @@ module.exports = function (grunt) {
         },
 
         // The following *-min tasks produce minified files in the dist folder
-        imagemin: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= config.app %>/images',
-                    src: '{,*/}*.{gif,jpeg,jpg,png}',
-                    dest: '<%= config.dist %>/images'
-                }]
-            }
-        },
         replace: {
             example: {
                 src: ['public/js/login.js'],             // source files array (supports minimatch)
                 dest: '<%= config.dist %>/js/',             // destination directory or file
                 replacements: [{
-                    from: "$(input#login').val('F00000001');",
+                    from: "$('input#login').val('F00000001');",
                     to: '//'
                 }, {
                     from: "$('input#password').val('P@$$w0rd');",
@@ -208,8 +187,7 @@ module.exports = function (grunt) {
              dist: {
                  files: {
                      '<%= config.dist %>/styles/itransfer.css': [
-                         '{,*/}*.css',
-                         '<%= config.app %>/css/{,*/}*.css'
+                         '<%= config.app %>/{,*/}*.css'
                      ]
                  }
              }
@@ -218,7 +196,7 @@ module.exports = function (grunt) {
              dist: {
                  files: {
                      '<%= config.dist %>/js/scripts.js': [
-                         '<%= config.dist %>/js/scripts.js'
+                         '<%= config.dist %>/js/*.js'
                      ]
                  }
              }
@@ -234,35 +212,22 @@ module.exports = function (grunt) {
                     cwd: '<%= config.app %>',
                     dest: '<%= config.dist %>',
                     src: [
-                        '*.{ico,png,txt}',
-                        '.htaccess',
-                        '/{,*/}*.json',
-                        'images/{,*/}*.webp',
-                        '{,*/}*.html',
-                        'css/fonts/{,*/}*.*'
+                        '*.*'
                     ]
-                }, {
-                    expand: true,
-                    dot: true,
-                    cwd: '.',
-                    src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*.*'],
-                    dest: '<%= config.dist %>'
                 }]
             },
             styles: {
                 expand: true,
                 dot: true,
-                cwd: '<%= config.app %>/styles',
+                cwd: '<%= config.app %>/css',
                 dest: '.tmp/styles/',
                 src: '{,*/}*.css'
             }
         },
 
-
         // Run some tasks in parallel to speed up build process
         concurrent: {
             server: [
-                //'sass:server',
                 'less',
                 'copy:styles'
             ],
@@ -270,11 +235,8 @@ module.exports = function (grunt) {
                 'copy:styles'
             ],
             dist: [
-                //'sass',
                 'less',
-                'copy:styles',
-                'imagemin',
-                'svgmin'
+                'copy:styles'
             ]
         },
         // LESS
@@ -335,15 +297,14 @@ module.exports = function (grunt) {
         'cssmin',
         'uglify',
         'copy:dist',
-        'modernizr',
-        'rev',
+        //'modernizr',
+        //'rev',
         'usemin',
         'htmlmin'
     ]);
 
     grunt.registerTask('default', [
         'clean:dist',
-        'less',
         'replace',
         'build'
     ]);

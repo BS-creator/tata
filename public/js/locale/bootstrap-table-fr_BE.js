@@ -13,7 +13,7 @@
             return pageNumber + ' entrées par page ';
         },
         formatShowingRows: function(pageFrom, pageTo, totalRows) {
-            return 'Affiche de ' + pageFrom + ' à ' + pageTo + ' sur ' + totalRows + ' lignes';
+            return 'Affiche de ' + pageFrom + ' à ' + pageTo + ' sur ' + totalRows + ' fichiers';
         },
         formatSearch: function() {
             return 'Recherche '
@@ -52,7 +52,7 @@
             return 'Télécharger';
         },
         formatBtnDl: function(total){
-            return total > 1 ? 'Télécharger '+total+' fichiers' : 'Télécharger '+total+' fichier';
+            return total > 1 ? 'Télécharger '+total+' fichiers' : 'Télécharger '+total+' fichiers';
         }
     });
 })(jQuery);

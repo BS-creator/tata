@@ -772,7 +772,7 @@
             this.options.formatShowingRows(this.pageFrom, this.pageTo, this.options.totalRows),
             '</span>');
 
-        html.push('<span class="page-list clearfix text-center text-muted">');
+        /*html.push('<span class="page-list clearfix text-center text-muted">');
 
         var pageNumber = [
                 '<span class="btn-group dropup">',
@@ -796,7 +796,7 @@
         pageNumber.push('</ul></span>');
 
         html.push(this.options.formatRecordsPerPage(pageNumber.join('')));
-        html.push('</span></div>');
+        html.push('</span></div>');*/
 
         this.$pagination.html(html.join(''));
 
@@ -833,6 +833,7 @@
         } else {
             this.initBody();
         }
+        this.showDL();
     };
 
     BootstrapTable.prototype.onPageListChange = function (event) {

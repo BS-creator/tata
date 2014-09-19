@@ -13,7 +13,7 @@
             return pageNumber + ' records per page';
         },
         formatShowingRows: function(pageFrom, pageTo, totalRows) {
-            return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' rows';
+            return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' files';
         },
         formatSearch: function() {
             return 'Search'

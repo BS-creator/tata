@@ -13,7 +13,7 @@
             return pageNumber + ' documenten per pagina';
         },
         formatShowingRows: function(pageFrom, pageTo, totalRows) {
-            return 'Tonen ' + pageFrom + ' tot ' + pageTo + ' van ' + totalRows + ' documenten';
+            return 'Tonen ' + pageFrom + ' tot ' + pageTo + ' van ' + totalRows + ' bestanden';
         },
         formatSearch: function() {
             return 'Zoeken'
@@ -52,7 +52,7 @@
             return 'Downloaden';
         },
         formatBtnDl: function(total){
-            return total > 1 ? 'Downloaden '+total+' bestanden' : 'Downloaden '+total+' bestand';
+            return total > 1 ? 'Downloaden '+total+' bestanden' : 'Downloaden '+total+' bestanden';
         }
     });
 })(jQuery);

@@ -586,13 +586,15 @@ $(function () {
             striped: true,
             pagination: true,
             pageSize: 20,
-            pageList: [10, 20, 50, 100, 200],
+            pageList: [10, 20],
+            selectItemName: 'btSelectItem',
             search: true,
             showColumns: true,
             showRefresh: true,
             minimumCountColumns: 5,
             rowStyle: rowStylef,
             clickToSelect: false,
+            //maintainSelected: true,
             columns: [
                 {
                     field: 'stateField',
