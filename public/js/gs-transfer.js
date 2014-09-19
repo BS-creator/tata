@@ -6,7 +6,7 @@ $(function () {
         baseURL = '//qaiapps.groups.be/itransfer/',*/
     //var serverURL = '//deviapps.groups.be/ariane/',
     var serverURL = '//172.20.20.64:8018/',
-        baseURL = '//localhost:4000/',
+        baseURL = '//localhost:4000/itransfer/',
         lang = sessionStorage.getItem("lang"),
         i18n = {},
         AjaxData = [],
@@ -870,10 +870,7 @@ $(function () {
         });
 
         //multidownload
-        $('.downloadall, .mt-s > button:nth-child(1)').on('click', downloadAll);
-
-        //$('.mt-s > button:nth-child(1)').on('click', alert('test'));
-        //div.row:nth-child(4) > div:nth-child(1) > button:nth-child(1)
+        $('.downloadall').on('click', downloadAll);
 
         // Upload
         // btn bootstrap
@@ -897,8 +894,6 @@ $(function () {
                 setTimeout(filterDate, 500, event); // 500ms
         });
     }
-
-
 
     /****************************************************
      * MAIN

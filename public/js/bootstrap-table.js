@@ -574,12 +574,10 @@
               '</div></div>'
             );
 
-
             html.push(
             '<div class="row"><div class="col-md-12">',
-                sprintf('<button type="button" class="downloadall btn btn-success"><i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>', this.options.formatDownloadAll()),
+             sprintf('<a class="downloadall btn btn-success"><i class="fa fa-download"></i>&nbsp;&nbsp;%s</a>', this.options.formatDownloadAll()),
             '</div></div>');
-
 
             html.push(
               '<div class="row"><div class="col-md-12">',
@@ -726,10 +724,13 @@
             this.pageTo = this.options.totalRows;
         }
 
-        html.push(
-            '<div class="row"><div class="col-md-12 mt-s">',
-             sprintf('<button type="button" class="downloadall btn btn-success"><i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>',this.options.formatDownloadAll()),
-            '</div></div>');
+        // TODO debug that ghost button
+        /*html.push(
+         '<div class="row"><div class="col-md-12">',
+         sprintf('<a class="downloadall btn btn-success"><i class="fa fa-download"></i>&nbsp;&nbsp;%s</a>', this.options.formatDownloadAll()),
+         '</div></div>');
+         */
+
         html.push('</div>',
             '<div class="text-center wide pagination">',
                 '<ul class="pagination">',

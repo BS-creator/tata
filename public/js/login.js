@@ -10,7 +10,7 @@ $(function (){
         baseURL = '//qaiapps.groups.be/itransfer/';*/
     //var serverURL = '//deviapps.groups.be/ariane/',
     var serverURL = '//172.20.20.64:8018/',
-        baseURL = '//localhost:4000/';
+        baseURL = '//localhost:4000/itransfer/';
 
 
 
