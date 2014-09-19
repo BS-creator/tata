@@ -206,14 +206,14 @@
             '<div class="bootstrap-table">',
                 '<div id="filter" class="pull-left">',
                     '<div class="btn-group">',
-                    '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
-                        sprintf('%s&nbsp;&nbsp;<span class="caret"></span>',this.options.formatFilter()),
-                    '</button>',
-                    '<ul class="dropdown-menu" role="menu">',
-                    sprintf('<li class=""><a id="filterNew"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;%s</a></li>',this.options.formatNewFile()),
-                        '<li class="divider"></li>',
-                    sprintf('<li class=""><a id="filterDL"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;%s</a></li>',this.options.formatNotDl()),
-            '</ul>',
+                        '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
+                            sprintf('%s&nbsp;&nbsp;<span class="caret"></span>',this.options.formatFilter()),
+                        '</button>',
+                        '<ul class="dropdown-menu" role="menu">',
+                            sprintf('<li class=""><a id="filterNew"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;%s</a></li>',this.options.formatNewFile()),
+                            '<li class="divider"></li>',
+                            sprintf('<li class=""><a id="filterDL"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;%s</a></li>',this.options.formatNotDl()),
+                        '</ul>',
                     '</div>',
                 '</div>',
                 '<div class="fixed-table-toolbar"></div>',
@@ -574,7 +574,7 @@
               '</div></div>'
             );
 
-
+            // btn download table top
             html.push(
             '<div class="row"><div class="col-md-12">',
                 sprintf('<button type="button" class="downloadall btn btn-success"><i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>', this.options.formatDownloadAll()),
@@ -726,10 +726,11 @@
             this.pageTo = this.options.totalRows;
         }
 
-        html.push('<div class="row"><div class="col-md-12 mt-s">',
-            '<button type="button" class="downloadall btn btn-success">' +
-                sprintf('<i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>',this.options.formatDownloadAll()),
-            '</div></div>');
+        // btn download table bottom
+        /*html.push('<div class="row"><div class="col-md-12 mt-s">',
+                sprintf('<button type="button" class="downloadall btn btn-success"><i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>', this.options.formatDownloadAll()),
+            '</div></div>');*/
+
         html.push('</div>',
             '<div class="text-center wide pagination">',
                 '<ul class="pagination">',
@@ -830,6 +831,8 @@
         } else {
             this.initBody();
         }
+
+        this.addCtrl();
     };
 
     BootstrapTable.prototype.onPageListChange = function (event) {
