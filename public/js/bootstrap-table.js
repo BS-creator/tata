@@ -125,7 +125,6 @@
         toolbar: undefined,
         checkboxHeader: true,
         sortable: true,
-        maintainSelected: false,
 
         rowStyle: function (row, index) {return {};},
 
@@ -207,14 +206,14 @@
             '<div class="bootstrap-table">',
                 '<div id="filter" class="pull-left">',
                     '<div class="btn-group">',
-                    '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
-                        sprintf('%s&nbsp;&nbsp;<span class="caret"></span>',this.options.formatFilter()),
-                    '</button>',
-                    '<ul class="dropdown-menu" role="menu">',
-                    sprintf('<li class=""><a id="filterNew"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;%s</a></li>',this.options.formatNewFile()),
-                        '<li class="divider"></li>',
-                    sprintf('<li class=""><a id="filterDL"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;%s</a></li>',this.options.formatNotDl()),
-            '</ul>',
+                        '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
+                            sprintf('%s&nbsp;&nbsp;<span class="caret"></span>',this.options.formatFilter()),
+                        '</button>',
+                        '<ul class="dropdown-menu" role="menu">',
+                            sprintf('<li class=""><a id="filterNew"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;&nbsp;%s</a></li>',this.options.formatNewFile()),
+                            '<li class="divider"></li>',
+                            sprintf('<li class=""><a id="filterDL"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;%s</a></li>',this.options.formatNotDl()),
+                        '</ul>',
                     '</div>',
                 '</div>',
                 '<div class="fixed-table-toolbar"></div>',
@@ -394,6 +393,7 @@
         /*CUSTOM: search on date (invisible)*/
         if(name === 'date'){
             index = 2;
+
         }/*CUSTOM: sort on downloadCount (invisible)*/
         if(name === 'downloadCount'){
             index = getFiledIndex(this.options.columns, 'notDownloaded');
@@ -574,10 +574,12 @@
               '</div></div>'
             );
 
+            // btn download table top
             html.push(
             '<div class="row"><div class="col-md-12">',
-             sprintf('<a class="downloadall btn btn-success"><i class="fa fa-download"></i>&nbsp;&nbsp;%s</a>', this.options.formatDownloadAll()),
+                sprintf('<button type="button" class="downloadall btn btn-success"><i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>', this.options.formatDownloadAll()),
             '</div></div>');
+
 
             html.push(
               '<div class="row"><div class="col-md-12">',
@@ -724,12 +726,10 @@
             this.pageTo = this.options.totalRows;
         }
 
-        // TODO debug that ghost button
-        /*html.push(
-         '<div class="row"><div class="col-md-12">',
-         sprintf('<a class="downloadall btn btn-success"><i class="fa fa-download"></i>&nbsp;&nbsp;%s</a>', this.options.formatDownloadAll()),
-         '</div></div>');
-         */
+        // btn download table bottom
+        /*html.push('<div class="row"><div class="col-md-12 mt-s">',
+                sprintf('<button type="button" class="downloadall btn btn-success"><i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>', this.options.formatDownloadAll()),
+            '</div></div>');*/
 
         html.push('</div>',
             '<div class="text-center wide pagination">',
@@ -824,15 +824,15 @@
     };
 
     BootstrapTable.prototype.updatePagination = function () {
-        if (!this.options.maintainSelected) {
-            this.resetRows();
-        }
+        this.resetRows();
         this.initPagination((this.data.length !== this.options.data.length));
         if (this.options.sidePagination === 'server') {
             this.initServer();
         } else {
             this.initBody();
         }
+
+        this.addCtrl();
     };
 
     BootstrapTable.prototype.onPageListChange = function (event) {
@@ -875,7 +875,7 @@
     BootstrapTable.prototype.initBody = function (fixedScroll) {
         var that = this,
             html = [],
-            data = this.getData();
+            data = this.searchText ? this.data : this.options.data;
 
         if((this.data.length !== this.options.data.length)) {
             data = this.data;
@@ -1202,6 +1202,11 @@
         });
     };
 
+    BootstrapTable.prototype.refreshUrl = function (options) {
+        this.options.url = options.url;
+        this.initServer();
+    };
+
     BootstrapTable.prototype.toggleColumn = function (index, checked, needUpdate) {
         if (index === -1) {
             return;
@@ -1211,7 +1216,6 @@
         this.initSearch();
         this.initPagination();
         this.initBody();
-        this.showDL();
 
         if (this.options.showColumns) {
             var $items = this.$toolbar.find('.keep-open input').prop('disabled', false);
@@ -1334,8 +1338,7 @@
             }
         }
 
-        $td.attr('rowspan', rowspan).attr('colspan', colspan)
-            .show(10, $.proxy(this.resetView, this));
+        $td.attr('rowspan', rowspan).attr('colspan', colspan).show();
     };
 
     BootstrapTable.prototype.getSelections = function () {
@@ -1346,6 +1349,13 @@
         });
     };
 
+    /*BootstrapTable.prototype.getNSelection = function () {
+        var that = this;
+
+        return $.grep(this.data, function (row) {
+            return row[that.header.stateField] ? 1 : 0;
+        });
+    };*/
 
     BootstrapTable.prototype.checkAll = function () {
         this.$selectAll.add(this.$selectAll_).prop('checked', true);
@@ -1443,7 +1453,7 @@
                 'destroy',
                 'showLoading', 'hideLoading',
                 'showColumn', 'hideColumn',
-                'onFilter', 'showDL'
+                'onFilter'
             ],
             value;
 
