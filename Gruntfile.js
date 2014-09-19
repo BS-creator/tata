@@ -51,7 +51,7 @@ module.exports = function(grunt) {
               },
               files: {
                   "public/css/portal-components.css": "public/less/portal-components/portal-components.less",
-                  "public/css/gstransfer.css": "public/less/gstransfer.less"
+                  "public/css/gs-transfer.css": "public/less/gs-transfer.less"
               }
           }
       },
