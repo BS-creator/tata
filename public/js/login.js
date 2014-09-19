@@ -2,17 +2,55 @@
  * Created by bisconti on 29/08/14.
  */
 
-$(function (){
+$(function () {
     "use strict";
 
+    /***  GLOBAL VARIABLES ***/
+    setURL();
 
-    /*var serverURL = '//qaiapps.groups.be/ariane/',
-        baseURL = '//qaiapps.groups.be/itransfer/';*/
-    //var serverURL = '//deviapps.groups.be/ariane/',
-    var serverURL = '//172.20.20.64:8018/',
-        baseURL = '//localhost:4000/itransfer/';
+    var serverURL = sessionStorage.getItem('serverURL'),
+        baseURL = sessionStorage.getItem('baseURL');
 
 
+
+    function setURL() {
+        if (window.location.hostname.indexOf('localhost') > -1) {
+            sessionStorage.setItem('baseURL', '//localhost:4000/');
+            sessionStorage.setItem('serverURL', '//172.20.20.64:8018/'); // deviapps??
+            //will be remove at build time
+            $('input#login').val("F00000001");
+            $('input#password').val("P@$$w0rd");
+        } else if (window.location.hostname.indexOf('qaiapps') > -1) { //QA
+            sessionStorage.setItem('baseURL', '//qaiapps.groups.be/itransfer/');
+            sessionStorage.setItem('serverURL', '//qaiapps.groups.be/ariane/');
+        } else if (window.location.hostname.indexOf('prestaweb') > -1) {
+            sessionStorage.setItem('baseURL', '//prestaweb.groups.be/itransfer/');
+            sessionStorage.setItem('serverURL', '//prestaweb.groups.be/ariane/');
+        } else {
+            //??
+        }
+    }
+
+
+    function reportError(error, message) {
+        message = message || '';
+        console.error(
+                'ERROR: ' + message + ' [' + error.toString() + ']\n' +
+                '\nName:\t\t' + (error.name || '-') +
+                '\nMessage:\t' + (error.message || '-') +
+                '\nFile:\t\t\t' + (error.fileName || '-') +
+                '\nSource:\t\t' + ((error.toSource && error.toSource()) || '-') +
+                '\nLine #:\t\t' + (error.lineNumber || '-') +
+                '\nColumn #:\t' + (error.columnNumber || '-') +
+                '\n\nStack:\n\n' + (error.stack || '-'));
+    }
+
+    window.onerror = function (message, filename, lineno, colno, error) {
+        error.fileName = error.fileName || filename || null;
+        error.lineNumber = error.lineNumber || lineno || null;
+        error.columnNumber = error.columnNumber || colno || null;
+        reportError(error, 'Uncatched Exception');
+    };
 
     /**
      * Returns one of supported language, default if not.

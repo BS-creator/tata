@@ -1443,7 +1443,7 @@
                 'destroy',
                 'showLoading', 'hideLoading',
                 'showColumn', 'hideColumn',
-                'onFilter'
+                'onFilter', 'showDL'
             ],
             value;
 

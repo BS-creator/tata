@@ -2,11 +2,9 @@ $(function () {
     'user strict'
 
     /***  GLOBAL VARIABLES ***/
-    /*var serverURL = '//qaiapps.groups.be/ariane/',
-        baseURL = '//qaiapps.groups.be/itransfer/',*/
-    //var serverURL = '//deviapps.groups.be/ariane/',
-    var serverURL = '//172.20.20.64:8018/',
-        baseURL = '//localhost:4000/itransfer/',
+
+    var serverURL = sessionStorage.getItem('serverURL'),
+        baseURL = sessionStorage.getItem('baseURL'),
         lang = sessionStorage.getItem("lang"),
         i18n = {},
         AjaxData = [],
@@ -19,6 +17,23 @@ $(function () {
     /****************************************************
      * HELPER
      * */
+
+
+    function setURL() {
+        if (window.location.hostname.indexOf('localhost') > -1) {
+            sessionStorage.setItem('baseURL', '//localhost:4000/');
+            sessionStorage.setItem('serverURL', '//172.20.20.64:8018/'); // deviapps??
+        } else if (window.location.hostname.indexOf('qaiapps') > -1) { //QA
+            sessionStorage.setItem('baseURL', '//qaiapps.groups.be/itransfer/');
+            sessionStorage.setItem('serverURL', '//qaiapps.groups.be/ariane');
+        } else if (window.location.hostname.indexOf('prestaweb') > -1) {
+            sessionStorage.setItem('baseURL', '//prestaweb.groups.be/itransfer/');
+            sessionStorage.setItem('serverURL', '//prestaweb.groups.be/ariane');
+        } else {
+            //??
+        }
+    }
+
 
     function reportError(error, message) {
         message = message || '';
@@ -39,6 +54,7 @@ $(function () {
         error.columnNumber = error.columnNumber || colno || null;
         reportError(error, 'Uncatched Exception');
     };
+
     function bytesToSize(bytes) {
         var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
         if (bytes == 0) return '0 Byte';
@@ -559,13 +575,6 @@ $(function () {
             });
     }
 
-/*    function addSortCarets(){
-        $(this).on('click', function () {
-            $(this).find('[class="fa-sort"]').remove();
-        });
-        //$this.parents().siblings().find('div.th-inner').toggleClass('fa-sort-up fa-sort');
-    }*/
-    // addSortCarets();
     /****************************************************
      * TABLE
      * */
@@ -814,10 +823,6 @@ $(function () {
                     $('#loader').hide();
                     alert(i18n[lang].errorSession);
                     window.location = baseURL;
-                },
-                401: function () {
-                    $('#loader').hide();
-                    alert(i18n[lang].error0);
                 }
             }
         });
@@ -863,7 +868,7 @@ $(function () {
 
         // Filter
         $('#filterDL').on('click', function () {
-            $table.bootstrapTable('onFilter', "item['notDownloaded']");
+            $table.bootstrapTable('onFilter', "(item['notDownloaded'] && item['uploadUserName'] !== '" + username + "')");
         });
         $('#filterNew').on('click', function () {
             $table.bootstrapTable('onFilter', "item['isNew']");
@@ -917,6 +922,8 @@ $(function () {
 
             //APPLY DEFAULT FILTERS
             $table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "') && (item['isNew'] || item['notDownloaded'])");
+
+            $("input[name='btSelectAll']").trigger('click');
 
         });
     }

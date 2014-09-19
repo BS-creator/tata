@@ -34,7 +34,7 @@ module.exports = function (grunt) {
                 tasks: ['bowerInstall']
             },
             js: {
-                files: ['<%= config.app %>/scripts/{,*/}*.js'],
+                files: ['<%= config.app %>/js/{,*/}*.js'],
                 tasks: ['jshint'],
                 options: {
                     livereload: true
@@ -47,10 +47,6 @@ module.exports = function (grunt) {
             gruntfile: {
                 files: ['Gruntfile.js']
             },
-/*            sass: {
-                files: ['<%= config.app %>/css/{,*//*}*.{scss,sass}'],
-                tasks: ['sass:server', 'autoprefixer']
-            },*/
             styles: {
                 files: ['<%= config.app %>/styles/{,*/}*.css'],
                 tasks: ['newer:copy:styles', 'autoprefixer']
@@ -60,9 +56,7 @@ module.exports = function (grunt) {
                     livereload: '<%= connect.options.livereload %>'
                 },
                 files: [
-                    '<%= config.app %>/{,*/}*.html',
-                    '.tmp/styles/{,*/}*.css',
-                    '<%= config.app %>/images/{,*/}*'
+                    '<%= config.app %>/{,*/}*.*',
                 ]
             }
         },
@@ -124,58 +118,15 @@ module.exports = function (grunt) {
             server: '.tmp'
         },
 
-        // Make sure code styles are up to par and there are no obvious mistakes
-        /*jshint: {
-            options: {
-                jshintrc: '.jshintrc',
-                reporter: require('jshint-stylish')
-            },
-            all: [
-                'Gruntfile.js',
-                '<%= config.app %>/{,*//*}*.js',
-                '!<%= config.app %>/vendor*//*',
-                'test/spec/{,*//*}*.js'
-            ]
-        },*/
-
-        // Add vendor prefixed styles
-        /*autoprefixer: {
-            options: {
-                browsers: ['last 1 version']
-            },
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '.tmp/styles/',
-                    src: '{,*//*}*.css',
-                    dest: '.tmp/styles/'
-                }]
-            }
-        },*/
-
-        // Automatically inject Bower components into the HTML file
-/*
-        bowerInstall: {
-            app: {
-                src: ['<%= config.app %>/index.html'],
-                exclude: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']
-            }
-            ,
-            sass: {
-                src: ['<%= config.app %>/styles/{,}*.{scss,sass}']
-            }
-        },
-*/
-
         // Renames files for browser caching purposes
         rev: {
             dist: {
                 files: {
                     src: [
-                        '<%= config.dist %>/scripts/{,*/}*.js',
-                        '<%= config.dist %>/styles/{,*/}*.css',
+                        '<%= config.dist %>/js/{,*/}*.js',
+                        '<%= config.dist %>/css/{,*/}*.css',
                         '<%= config.dist %>/images/{,*/}*.*',
-                        '<%= config.dist %>/styles/fonts/{,*/}*.*',
+                        '<%= config.dist %>/css/fonts/{,*/}*.*',
                         '<%= config.dist %>/*.{ico,png}'
                     ]
                 }
@@ -212,14 +163,16 @@ module.exports = function (grunt) {
                 }]
             }
         },
-
-        svgmin: {
-            dist: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= config.app %>/images',
-                    src: '{,*/}*.svg',
-                    dest: '<%= config.dist %>/images'
+        replace: {
+            example: {
+                src: ['public/js/login.js'],             // source files array (supports minimatch)
+                dest: '<%= config.dist %>/js/',             // destination directory or file
+                replacements: [{
+                    from: "$(input#login').val('F00000001');",
+                    to: '//'
+                }, {
+                    from: "$('input#password').val('P@$$w0rd');",
+                    to: '//'
                 }]
             }
         },
@@ -248,28 +201,29 @@ module.exports = function (grunt) {
         // By default, your `index.html`'s <!-- Usemin block --> will take care of
         // minification. These next options are pre-configured if you do not wish
         // to use the Usemin blocks.
-        // cssmin: {
-        //     dist: {
-        //         files: {
-        //             '<%= config.dist %>/styles/itransfer.css': [
-        //                 '.tmp/styles/{,*/}*.css',
-        //                 '<%= config.app %>/styles/{,*/}*.css'
-        //             ]
-        //         }
-        //     }
-        // },
-        // uglify: {
-        //     dist: {
-        //         files: {
-        //             '<%= config.dist %>/scripts/scripts.js': [
-        //                 '<%= config.dist %>/scripts/scripts.js'
-        //             ]
-        //         }
-        //     }
-        // },
-        // concat: {
-        //     dist: {}
-        // },
+        concat: {
+            dist: {}
+        },
+         cssmin: {
+             dist: {
+                 files: {
+                     '<%= config.dist %>/styles/itransfer.css': [
+                         '{,*/}*.css',
+                         '<%= config.app %>/css/{,*/}*.css'
+                     ]
+                 }
+             }
+         },
+         uglify: {
+             dist: {
+                 files: {
+                     '<%= config.dist %>/js/scripts.js': [
+                         '<%= config.dist %>/js/scripts.js'
+                     ]
+                 }
+             }
+         },
+
 
         // Copies remaining files to places other tasks can use
         copy: {
@@ -282,9 +236,10 @@ module.exports = function (grunt) {
                     src: [
                         '*.{ico,png,txt}',
                         '.htaccess',
+                        '/{,*/}*.json',
                         'images/{,*/}*.webp',
                         '{,*/}*.html',
-                        'styles/fonts/{,*/}*.*'
+                        'css/fonts/{,*/}*.*'
                     ]
                 }, {
                     expand: true,
@@ -303,22 +258,6 @@ module.exports = function (grunt) {
             }
         },
 
-        // Generates a custom Modernizr build that includes only the tests you
-        // reference in your app
-        modernizr: {
-            dist: {
-                devFile: 'bower_components/modernizr/modernizr.js',
-                outputFile: '<%= config.dist %>/scripts/vendor/modernizr.js',
-                files: {
-                    src: [
-                        '<%= config.dist %>/scripts/{,*/}*.js',
-                        '<%= config.dist %>/styles/{,*/}*.css',
-                        '!<%= config.dist %>/scripts/vendor/*'
-                    ]
-                },
-                uglify: true
-            }
-        },
 
         // Run some tasks in parallel to speed up build process
         concurrent: {
@@ -390,6 +329,7 @@ module.exports = function (grunt) {
         'useminPrepare',
         'concurrent:dist',
         //'autoprefixer',
+        'replace',
         'less',
         'concat',
         'cssmin',
@@ -402,14 +342,18 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('default', [
-        'newer:jshint',
-        'test',
+        'clean:dist',
+        'less',
+        'replace',
         'build'
     ]);
 
     // cg
-    grunt.loadNpmTasks('grunt-include-bootstrap');
+
+    // Load plugins
+    require('matchdep').filterAll('grunt-*').forEach(grunt.loadNpmTasks);
+    /*grunt.loadNpmTasks('grunt-include-bootstrap');
     grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-watch');*/
     // /cg
 };
