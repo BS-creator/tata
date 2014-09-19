@@ -1,3 +1,7 @@
+/* @author  :   Group S */
+/* @date    :   2014-09 */
+/* @version :   BETA 0.1 */
+/* @todo    :   optimiser les sélecteurs */
 #logindiv {
   min-height: 700px;
 }
@@ -19,6 +23,7 @@ header #info-header li.univers-name {
 }
 #upload-modal #btn-upload-div {
   width: 100%;
+  margin-bottom: 9px;
 }
 #upload-modal form#uploadForm {
   width: 100%;
@@ -148,21 +153,6 @@ div#filter div.btn-group:nth-child(1) > ul:nth-child(2) > li:nth-child(4) > a:nt
 }
 #contentTable .fixed-table-body {
   border: 1px solid #ddd;
-}
-table[id^="table-"],
-table#mainTable {
-  /*  thead tr th.empl {
-    width: 88px;
-  }
-  thead tr th.refDoc {
-    width: 65px;
-  }
-  thead tr th.size {
-    width: 80px;
-  }
-  thead tr th.ext {
-    width: 45px;
-  }*/
 }
 table[id^="table-"] thead tr th,
 table#mainTable thead tr th {

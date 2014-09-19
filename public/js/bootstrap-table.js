@@ -125,6 +125,7 @@
         toolbar: undefined,
         checkboxHeader: true,
         sortable: true,
+        maintainSelected: false,
 
         rowStyle: function (row, index) {return {};},
 
@@ -823,7 +824,9 @@
     };
 
     BootstrapTable.prototype.updatePagination = function () {
-        this.resetRows();
+        if (!this.options.maintainSelected) {
+            this.resetRows();
+        }
         this.initPagination((this.data.length !== this.options.data.length));
         if (this.options.sidePagination === 'server') {
             this.initServer();
@@ -872,7 +875,7 @@
     BootstrapTable.prototype.initBody = function (fixedScroll) {
         var that = this,
             html = [],
-            data = this.searchText ? this.data : this.options.data;
+            data = this.getData();
 
         if((this.data.length !== this.options.data.length)) {
             data = this.data;
@@ -1199,11 +1202,6 @@
         });
     };
 
-    BootstrapTable.prototype.refreshUrl = function (options) {
-        this.options.url = options.url;
-        this.initServer();
-    };
-
     BootstrapTable.prototype.toggleColumn = function (index, checked, needUpdate) {
         if (index === -1) {
             return;
@@ -1335,7 +1333,8 @@
             }
         }
 
-        $td.attr('rowspan', rowspan).attr('colspan', colspan).show();
+        $td.attr('rowspan', rowspan).attr('colspan', colspan)
+            .show(10, $.proxy(this.resetView, this));
     };
 
     BootstrapTable.prototype.getSelections = function () {
@@ -1346,13 +1345,6 @@
         });
     };
 
-    /*BootstrapTable.prototype.getNSelection = function () {
-        var that = this;
-
-        return $.grep(this.data, function (row) {
-            return row[that.header.stateField] ? 1 : 0;
-        });
-    };*/
 
     BootstrapTable.prototype.checkAll = function () {
         this.$selectAll.add(this.$selectAll_).prop('checked', true);

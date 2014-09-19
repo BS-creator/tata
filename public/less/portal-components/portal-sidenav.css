@@ -1,0 +1,85 @@
+/* sidenav JSTREE CUSTOM STYLE */
+div#sidenav {
+  padding-top: 1px;
+  margin-bottom: 35px;
+}
+div#sidenav ul.jstree-container-ul,
+div#sidenav ul.jstree-children {
+  padding: 0;
+  margin: 0;
+}
+div#sidenav ul.jstree-container-ul li a,
+div#sidenav ul.jstree-children li a {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+}
+div#sidenav > ul > li#root > a {
+  margin: 0;
+  padding: 8px 0 8px 12px;
+  cursor: pointer;
+  border-left: 0;
+  border: 0;
+  font-size: 13px;
+  font-weight: bold;
+  color: #808080;
+  background-color: #F2F2F2;
+}
+div#sidenav > ul > li#root > a:hover,
+div#sidenav > ul > li#root > a:focus,
+div#sidenav > ul > li#root > a:active,
+div#sidenav > ul > li#root > a.active,
+div#sidenav > ul > li#root > a.jstree-clicked {
+  border-left: 3px solid #2871B0;
+  color: #125B9A;
+}
+div#sidenav ul li ul li a {
+  font-weight: bold;
+  color: #808080;
+  padding: 5px 0 5px 20px;
+}
+div#sidenav ul li ul li ul li a {
+  font-weight: normal;
+  padding: 5px 0 5px 52px;
+}
+div#sidenav > ul > li > ul > li#other > a:hover,
+div#sidenav > ul > li > ul > li#other > a:focus,
+div#sidenav > ul > li > ul > li#other > a:active,
+div#sidenav > ul > li > ul > li#other > a.active,
+div#sidenav > ul > li > ul > li > ul > li > a:hover,
+div#sidenav > ul > li > ul > li > ul > li > a:focus,
+div#sidenav > ul > li > ul > li > ul > li > a:active,
+div#sidenav > ul > li > ul > li > ul > li > a.active {
+  letter-spacing: .016em;
+  border-left: 3px solid #2871B0;
+  background-color: white;
+  color: #808080;
+}
+div#sidenav > ul > li > ul > li#other > a:hover,
+div#sidenav > ul > li > ul > li#other > a:focus,
+div#sidenav > ul > li > ul > li#other > a:active,
+div#sidenav > ul > li > ul > li#other > a.active,
+div#sidenav > ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:hover,
+div#sidenav > ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:focus,
+div#sidenav > ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:active,
+div#sidenav > ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a.active {
+  color: #3D86C5;
+}
+div#sidenav ul li ul li#upload a {
+  display: block;
+  width: 100%;
+  font-size: 13px !important;
+  font-weight: bold;
+  background-color: #F2F2F2;
+  margin: 0px;
+  padding: 8px 0px 8px 12px;
+  cursor: pointer;
+  text-decoration: none;
+}
+div#sidenav ul li ul li#upload a:hover,
+div#sidenav ul li ul li#upload a:focus,
+div#sidenav ul li ul li#upload a:active,
+div#sidenav ul li ul li#upload a.active {
+  border-left: 3px solid #2871B0;
+  color: #125B9A;
+}
