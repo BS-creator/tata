@@ -18,8 +18,8 @@ $(function () {
             sessionStorage.setItem('baseURL', '//localhost:4000/');
             sessionStorage.setItem('serverURL', '//172.20.20.64:8018/'); // deviapps??
             //will be remove at build time
-            $('input#login').val("F00000001");
-            $('input#password').val("P@$$w0rd");
+            $('input#login').val('F00000001');
+            $('input#password').val('P@$$w0rd');
         } else if (window.location.hostname.indexOf('qaiapps') > -1) { //QA
             sessionStorage.setItem('baseURL', '//qaiapps.groups.be/itransfer/');
             sessionStorage.setItem('serverURL', '//qaiapps.groups.be/ariane/');
