@@ -1,182 +1,415 @@
-var _ = require('underscore');
-var UglifyJS = require("uglify-js");
+// Generated on 2014-08-05 using generator-webapp 0.4.9
+'use strict';
 
-var environments = {
-  dev: {
-    serveur : '//172.20.20.64:8018/',
-    client  : '//localhost:4000/itransfer/'
-  },
-  stable: {
-      serveur : '//deviapps.groups.be/ariane/',
-      client  : '//localhost:4000/itransfer/'
-  },
-  qa: {
-      serveur : '//qaiapps.groups.be/ariane/',
-      client  : '//qaiapps.groups.be/itransfer/'
-  },
-  prod: {
-      serveur : '//prestaweb.groups.be/ariane/',
-      client  : '//prestaweb.groups.be/itransfer/'
-  }
-};
+// # Globbing
+// for performance reasons we're only matching one level down:
+// 'test/spec/{,*/}*.js'
+// use this if you want to recursively match all subfolders:
+// 'test/spec/**/*.js'
 
-var endpoint;
+module.exports = function (grunt) {
 
-module.exports = function(grunt) {
+    // Load grunt tasks automatically
+    require('load-grunt-tasks')(grunt);
 
-  var env = grunt.option("env");
-  // Project configuration.
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    clean: {
-      dist: ["dist"]
-    },
-    copy: {
-      dist: {
-        files: [
-          {
-            // copier ce qui est dans /public dans /dist
-            expand: true,
-            src: ['**', '!**/*.orig'],
-            dest: 'dist/',
-            cwd: 'public/'
-          }
-        ]
-      }
-    },
-      // LESS
-      less: {
-          production: {
-              options: {
-              },
-              files: {
-                  "public/css/portal-components.css": "public/less/portal-components/portal-components.less",
-                  "public/css/gs-transfer.css": "public/less/gs-transfer.less"
-              }
-          }
-      },
-      cssmin: {
-          minify: {
-              expand: true,
-              cwd: 'dist/css',
-              src: ['*.css', '!*.min.css'],
-              dest: 'dist/css/',
-              ext: '.min.css'
-          }
-      },
-    uglify: {
-      options: {
-       // banner: "/*! Group S <%= pkg.name %> - v<%= pkg.version %> -  <%= grunt.template.today(\"yyyy-mm-dd\") %> */\n"
-      },
-      my_target: {
-        files: [{
-          expand: true,
-          src: ['**/*.js'],
-          dest: 'dist/js/',
-          cwd: 'dist/js/'
-        }]
-      }
-    },
-    replace: {
-      endpoint: {
-        src: ['dist/js/*.js'],             // source files array (supports minimatch)
-        dest: 'dist/js/',             // destination directory or file
-        replacements: [{
-          from: /serverURL = '\/\/.*'/,      // regex replacement
-          to: 'serverURL = "' + (environments[env] && environments[env].server) + "'"
-        },{
-            from: /baseURL = '\/\/.*'/,      // regex replacement
-            to: 'baseURL = "'+ (environments[env] && environments[env].client) + "'"
-        }]
-      }
-    },
-    htmlmin: {                                     // Task
-      dist: {                                      // Target
-        options: {                                 // Target options
-          removeComments: true,
-          collapseWhitespace: true
+    // Time how long tasks take. Can help when optimizing build times
+    require('time-grunt')(grunt);
+
+    // Configurable paths
+    var config = {
+        app: 'public',
+        dist: 'dist'
+    };
+
+    // Define the configuration for all the tasks
+    grunt.initConfig({
+
+        // Project settings
+        config: config,
+
+        // Watches files for changes and runs tasks based on the changed files
+        watch: {
+            bower: {
+                files: ['bower.json'],
+                tasks: ['bowerInstall']
+            },
+            js: {
+                files: ['<%= config.app %>/scripts/{,*/}*.js'],
+                tasks: ['jshint'],
+                options: {
+                    livereload: true
+                }
+            },
+            jstest: {
+                files: ['test/spec/{,*/}*.js'],
+                tasks: ['test:watch']
+            },
+            gruntfile: {
+                files: ['Gruntfile.js']
+            },
+/*            sass: {
+                files: ['<%= config.app %>/css/{,*//*}*.{scss,sass}'],
+                tasks: ['sass:server', 'autoprefixer']
+            },*/
+            styles: {
+                files: ['<%= config.app %>/styles/{,*/}*.css'],
+                tasks: ['newer:copy:styles', 'autoprefixer']
+            },
+            livereload: {
+                options: {
+                    livereload: '<%= connect.options.livereload %>'
+                },
+                files: [
+                    '<%= config.app %>/{,*/}*.html',
+                    '.tmp/styles/{,*/}*.css',
+                    '<%= config.app %>/images/{,*/}*'
+                ]
+            }
         },
-        files: [{
-          expand: true,
-          src: ['**/*.html'],
-          dest: 'dist/',
-          cwd: 'dist/'
-        }]
-      }
-    },
-    // make a zipfile
-    compress: {
-      main: {
-        options: {
-          archive: 'itransfer-' + grunt.option("tag") + '.zip'
+
+        // The actual grunt server settings
+        connect: {
+            options: {
+                port: 4000,
+                open: true,
+                livereload: 35729,
+                // Change this to '0.0.0.0' to access the server from outside
+                hostname: 'localhost'
+            },
+            livereload: {
+                options: {
+                    middleware: function(connect) {
+                        return [
+                            connect.static('.tmp'),
+                            connect().use('/bower_components', connect.static('./bower_components')),
+                            connect.static(config.app)
+                        ];
+                    }
+                }
+            },
+            test: {
+                options: {
+                    open: false,
+                    port: 9001,
+                    middleware: function(connect) {
+                        return [
+                            connect.static('.tmp'),
+                            connect.static('test'),
+                            connect().use('/bower_components', connect.static('./bower_components')),
+                            connect.static(config.app)
+                        ];
+                    }
+                }
+            },
+            dist: {
+                options: {
+                    base: '<%= config.dist %>',
+                    livereload: false
+                }
+            }
         },
-        files: [
-          {
-            expand: true,
-            cwd: 'dist/',
-            src: ['**'],
-            dest: '.'
-          }
-        ]
-      }
-    },
-    imagemin: {                          // Task
-      dist: {                            // Target
-        options: {                       // Target options
-          optimizationLevel: 7
+
+        // Empties folders to start fresh
+        clean: {
+            dist: {
+                files: [{
+                    dot: true,
+                    src: [
+                        '.tmp',
+                        '<%= config.dist %>/*',
+                        '!<%= config.dist %>/.git*'
+                    ]
+                }]
+            },
+            server: '.tmp'
         },
-        files: [
-          {
-            expand: true,
-            src: ['**/*.jpg'],
-            dest: 'dist/',
-            cwd: 'dist/'
-          },{
-            expand: true,
-            src: ['**/*.png'],
-            dest: 'dist/',
-            cwd: 'dist/'
-          }
-        ]
-      }
-    },
-    processhtml: {
-      dist: {
-        files: {
-          'dist/index.html': ['dist/index.html'],
-          'dist/file.html': ['dist/file.html']
+
+        // Make sure code styles are up to par and there are no obvious mistakes
+        /*jshint: {
+            options: {
+                jshintrc: '.jshintrc',
+                reporter: require('jshint-stylish')
+            },
+            all: [
+                'Gruntfile.js',
+                '<%= config.app %>/{,*//*}*.js',
+                '!<%= config.app %>/vendor*//*',
+                'test/spec/{,*//*}*.js'
+            ]
+        },*/
+
+        // Add vendor prefixed styles
+        /*autoprefixer: {
+            options: {
+                browsers: ['last 1 version']
+            },
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '.tmp/styles/',
+                    src: '{,*//*}*.css',
+                    dest: '.tmp/styles/'
+                }]
+            }
+        },*/
+
+        // Automatically inject Bower components into the HTML file
+/*
+        bowerInstall: {
+            app: {
+                src: ['<%= config.app %>/index.html'],
+                exclude: ['bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js']
+            }
+            ,
+            sass: {
+                src: ['<%= config.app %>/styles/{,}*.{scss,sass}']
+            }
+        },
+*/
+
+        // Renames files for browser caching purposes
+        rev: {
+            dist: {
+                files: {
+                    src: [
+                        '<%= config.dist %>/scripts/{,*/}*.js',
+                        '<%= config.dist %>/styles/{,*/}*.css',
+                        '<%= config.dist %>/images/{,*/}*.*',
+                        '<%= config.dist %>/styles/fonts/{,*/}*.*',
+                        '<%= config.dist %>/*.{ico,png}'
+                    ]
+                }
+            }
+        },
+
+        // Reads HTML for usemin blocks to enable smart builds that automatically
+        // concat, minify and revision files. Creates configurations in memory so
+        // additional tasks can operate on them
+        useminPrepare: {
+            options: {
+                dest: '<%= config.dist %>'
+            },
+            html: '<%= config.app %>/index.html'
+        },
+
+        // Performs rewrites based on rev and the useminPrepare configuration
+        usemin: {
+            options: {
+                assetsDirs: ['<%= config.dist %>', '<%= config.dist %>/images']
+            },
+            html: ['<%= config.dist %>/{,*/}*.html'],
+            css: ['<%= config.dist %>/styles/{,*/}*.css']
+        },
+
+        // The following *-min tasks produce minified files in the dist folder
+        imagemin: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= config.app %>/images',
+                    src: '{,*/}*.{gif,jpeg,jpg,png}',
+                    dest: '<%= config.dist %>/images'
+                }]
+            }
+        },
+
+        svgmin: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= config.app %>/images',
+                    src: '{,*/}*.svg',
+                    dest: '<%= config.dist %>/images'
+                }]
+            }
+        },
+
+        htmlmin: {
+            dist: {
+                options: {
+                    collapseBooleanAttributes: true,
+                    collapseWhitespace: true,
+                    removeAttributeQuotes: true,
+                    removeCommentsFromCDATA: true,
+                    removeEmptyAttributes: true,
+                    removeOptionalTags: true,
+                    removeRedundantAttributes: true,
+                    useShortDoctype: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: '{,*/}*.html',
+                    dest: '<%= config.dist %>'
+                }]
+            }
+        },
+
+        // By default, your `index.html`'s <!-- Usemin block --> will take care of
+        // minification. These next options are pre-configured if you do not wish
+        // to use the Usemin blocks.
+        // cssmin: {
+        //     dist: {
+        //         files: {
+        //             '<%= config.dist %>/styles/itransfer.css': [
+        //                 '.tmp/styles/{,*/}*.css',
+        //                 '<%= config.app %>/styles/{,*/}*.css'
+        //             ]
+        //         }
+        //     }
+        // },
+        // uglify: {
+        //     dist: {
+        //         files: {
+        //             '<%= config.dist %>/scripts/scripts.js': [
+        //                 '<%= config.dist %>/scripts/scripts.js'
+        //             ]
+        //         }
+        //     }
+        // },
+        // concat: {
+        //     dist: {}
+        // },
+
+        // Copies remaining files to places other tasks can use
+        copy: {
+            dist: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: '<%= config.app %>',
+                    dest: '<%= config.dist %>',
+                    src: [
+                        '*.{ico,png,txt}',
+                        '.htaccess',
+                        'images/{,*/}*.webp',
+                        '{,*/}*.html',
+                        'styles/fonts/{,*/}*.*'
+                    ]
+                }, {
+                    expand: true,
+                    dot: true,
+                    cwd: '.',
+                    src: ['bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*.*'],
+                    dest: '<%= config.dist %>'
+                }]
+            },
+            styles: {
+                expand: true,
+                dot: true,
+                cwd: '<%= config.app %>/styles',
+                dest: '.tmp/styles/',
+                src: '{,*/}*.css'
+            }
+        },
+
+        // Generates a custom Modernizr build that includes only the tests you
+        // reference in your app
+        modernizr: {
+            dist: {
+                devFile: 'bower_components/modernizr/modernizr.js',
+                outputFile: '<%= config.dist %>/scripts/vendor/modernizr.js',
+                files: {
+                    src: [
+                        '<%= config.dist %>/scripts/{,*/}*.js',
+                        '<%= config.dist %>/styles/{,*/}*.css',
+                        '!<%= config.dist %>/scripts/vendor/*'
+                    ]
+                },
+                uglify: true
+            }
+        },
+
+        // Run some tasks in parallel to speed up build process
+        concurrent: {
+            server: [
+                //'sass:server',
+                'less',
+                'copy:styles'
+            ],
+            test: [
+                'copy:styles'
+            ],
+            dist: [
+                //'sass',
+                'less',
+                'copy:styles',
+                'imagemin',
+                'svgmin'
+            ]
+        },
+        // LESS
+        less: {
+            production: {
+                options: {
+                },
+                files: {
+                    "public/css/portal-components.css": "public/less/portal-components/portal-components.less",
+                    "public/css/gs-transfer.css": "public/less/gs-transfer.less"
+                }
+            }
         }
-      }
-    }
-  });
+    });
 
-  // Load plugins
-  require('matchdep').filterAll('grunt-*').forEach(grunt.loadNpmTasks);
+    grunt.registerTask('serve', function (target) {
+        if (target === 'dist') {
+            return grunt.task.run(['build', 'connect:dist:keepalive']);
+        }
 
-  // Tasks.
+        grunt.task.run([
+            'clean:server',
+            'concurrent:server',
+            //'autoprefixer',
+            'connect:livereload',
+            'watch'
+        ]);
+    });
 
-  grunt.registerTask('check', 'Verifie si les options sont presentes', function() {
-    if (!(grunt.option("tag") && grunt.option("env"))) {
-      grunt.fail.warn("Spécifiez un numéro de version avec --tag et un environnement avec --env [dev|stable|qa|prod]");
-    }
-  });
+    grunt.registerTask('server', function (target) {
+        grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
+        grunt.task.run([target ? ('serve:' + target) : 'serve']);
+    });
 
+    grunt.registerTask('test', function (target) {
+        if (target !== 'watch') {
+            grunt.task.run([
+                'clean:server',
+                'concurrent:test',
+                'autoprefixer'
+            ]);
+        }
 
+        grunt.task.run([
+            'connect:test'//,
+            //'mocha'
+        ]);
+    });
 
-
-  // Default task(s).
-  grunt.registerTask('default',
-      [ 'clean',    // vide le dossier dist
-        'check',    // vérifie que l'option --tag a été indiquée
-        'copy',     // copie ce qui est dans /public dans /dist
-          'less',
-          'cssmin',
+    grunt.registerTask('build', [
+        'clean:dist',
+        'useminPrepare',
+        'concurrent:dist',
+        //'autoprefixer',
+        'less',
+        'concat',
+        'cssmin',
         'uglify',
-        //'processhtml',
-        'htmlmin',  // minifie les fichiers html
-        'compress'  // crée le fichier zip
-      ]);
-//  grunt.registerTask('full', ['clean', 'check', 'copy', 'processhtml', 'traduction', 'version', 'jsmin', 'htmlmin', 'imagemin', 'compress']);
-//  grunt.registerTask('light', ['clean', 'check', 'copy', 'processhtml', 'traduction', 'version', 'compress']);
-  grunt.registerTask('test', ['clean', 'check', 'copy', 'processhtml', 'traduction']);
+        'copy:dist',
+        'modernizr',
+        'rev',
+        'usemin',
+        'htmlmin'
+    ]);
+
+    grunt.registerTask('default', [
+        'newer:jshint',
+        'test',
+        'build'
+    ]);
+
+    // cg
+    grunt.loadNpmTasks('grunt-include-bootstrap');
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    // /cg
 };

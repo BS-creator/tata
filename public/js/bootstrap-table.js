@@ -394,7 +394,6 @@
         /*CUSTOM: search on date (invisible)*/
         if(name === 'date'){
             index = 2;
-
         }/*CUSTOM: sort on downloadCount (invisible)*/
         if(name === 'downloadCount'){
             index = getFiledIndex(this.options.columns, 'notDownloaded');
@@ -727,9 +726,9 @@
             this.pageTo = this.options.totalRows;
         }
 
-        html.push('<div class="row"><div class="col-md-12 mt-s">',
-            '<button type="button" class="downloadall bottomDL btn btn-success">' +
-                sprintf('<i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>',this.options.formatDownloadAll()),
+        html.push(
+            '<div class="row"><div class="col-md-12 mt-s">',
+             sprintf('<button type="button" class="downloadall btn btn-success"><i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>',this.options.formatDownloadAll()),
             '</div></div>');
         html.push('</div>',
             '<div class="text-center wide pagination">',
@@ -1211,6 +1210,7 @@
         this.initSearch();
         this.initPagination();
         this.initBody();
+        this.showDL();
 
         if (this.options.showColumns) {
             var $items = this.$toolbar.find('.keep-open input').prop('disabled', false);

@@ -870,9 +870,10 @@ $(function () {
         });
 
         //multidownload
-        $('.downloadall').on('click', downloadAll);
-        $('.bottomDL').on('click', downloadAll);
+        $('.downloadall, .mt-s > button:nth-child(1)').on('click', downloadAll);
 
+        //$('.mt-s > button:nth-child(1)').on('click', alert('test'));
+        //div.row:nth-child(4) > div:nth-child(1) > button:nth-child(1)
 
         // Upload
         // btn bootstrap
@@ -895,9 +896,6 @@ $(function () {
             .off('keyup').on('keyup', function (event) {
                 setTimeout(filterDate, 500, event); // 500ms
         });
-
-
-
     }
 
 
