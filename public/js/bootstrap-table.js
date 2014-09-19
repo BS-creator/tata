@@ -224,7 +224,12 @@
                             this.options.formatLoadingMessage(),
                         '</div>',
                     '</div>',
+                    // custom
+                    '<div class="col-md-12 mt-s"><div class="row">',
+                        sprintf('<button type="button" class="downloadall btn btn-success"><i class="fa fa-download"></i>&nbsp;&nbsp;%s</button>', this.options.formatDownloadAll()),
+                    '</div></div>',
                     '<div class="fixed-table-pagination"></div>',
+                    // /custom
                 '</div>',
             '</div>'].join(''));
 
