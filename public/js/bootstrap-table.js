@@ -769,7 +769,6 @@
                 '</ul>',
             '</div>');
 
-
         // nombre de fichiers par page
         html.push(
             '<div class="clearfix text-center pagination-detail">',
