@@ -186,7 +186,7 @@ module.exports = function (grunt) {
          cssmin: {
              dist: {
                  files: {
-                     '<%= config.dist %>/styles/itransfer.css': [
+                     '<%= config.dist %>/css/itransfer.css': [
                          '<%= config.app %>/{,*/}*.css'
                      ]
                  }
@@ -211,9 +211,7 @@ module.exports = function (grunt) {
                     dot: true,
                     cwd: '<%= config.app %>',
                     dest: '<%= config.dist %>',
-                    src: [
-                        '*.*'
-                    ]
+                    src: ['data/i18n.json']
                 }]
             },
             styles: {
@@ -293,7 +291,7 @@ module.exports = function (grunt) {
         //'autoprefixer',
         'replace',
         'less',
-        'concat',
+        //'concat',
         'cssmin',
         'uglify',
         'copy:dist',

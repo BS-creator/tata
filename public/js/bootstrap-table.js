@@ -125,6 +125,7 @@
         toolbar: undefined,
         checkboxHeader: true,
         sortable: true,
+        maintainSelected: false,
 
         rowStyle: function (row, index) {return {};},
 
@@ -828,7 +829,9 @@
     };
 
     BootstrapTable.prototype.updatePagination = function () {
-        this.resetRows();
+        if (!this.options.maintainSelected) {
+            this.resetRows();
+        }
         this.initPagination((this.data.length !== this.options.data.length));
         if (this.options.sidePagination === 'server') {
             this.initServer();
@@ -1206,10 +1209,6 @@
         });
     };
 
-    BootstrapTable.prototype.refreshUrl = function (options) {
-        this.options.url = options.url;
-        this.initServer();
-    };
 
     BootstrapTable.prototype.toggleColumn = function (index, checked, needUpdate) {
         if (index === -1) {
@@ -1353,13 +1352,6 @@
         });
     };
 
-    /*BootstrapTable.prototype.getNSelection = function () {
-        var that = this;
-
-        return $.grep(this.data, function (row) {
-            return row[that.header.stateField] ? 1 : 0;
-        });
-    };*/
 
     BootstrapTable.prototype.checkAll = function () {
         this.$selectAll.add(this.$selectAll_).prop('checked', true);
