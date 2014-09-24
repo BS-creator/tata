@@ -632,7 +632,7 @@ $(function () {
                     valign: 'middle',
                     visible: false,
                     sortable: true,
-                    class: "fileName sortable"
+                    class: "fileName sortable "
                 },{
                     field: 'uploadUserName',
                     title: i18n[lang].col.user,
@@ -664,7 +664,7 @@ $(function () {
                     align: 'center',
                     valign: 'middle',
                     sortable: true,
-                    class: 'refDoc sortable',
+                    class: 'refDoc sortable ',
                     formatter: formatRefDoc
                 },{
                     field: 'size',
