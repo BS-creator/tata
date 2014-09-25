@@ -771,7 +771,7 @@ $(function (_) {
             "paging" : true,
             "ordering": true,
             "info" : true,
-            "dom": '<"top"i>rt<"bottom"flp><"clear">'
+            "dom": '<"top"ifT>rt<"bottom"flp><"clear">'
             /*"dom" : '<"top"fT>rt<"clear">',
             "language" : {
                 "url": "DataTables/resources/language/French.json"
