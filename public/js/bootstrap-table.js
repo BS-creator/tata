@@ -918,6 +918,7 @@
                 }
             }
 
+            //Define row class attribute
             html.push('<tr',
                 sprintf(' class="%s"', style.classes),
                 sprintf(' data-index="%s"', i),

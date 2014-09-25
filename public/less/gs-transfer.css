@@ -15,6 +15,9 @@
 #logindiv {
   min-height: 700px;
 }
+.template {
+  display: none;
+}
 header #banner-header ul.lang {
   margin-top: 36px;
   margin-right: 17px;

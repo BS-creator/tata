@@ -12,6 +12,8 @@
         <link rel="stylesheet" href="css/bootstrap-table.min.css">
         <link rel="stylesheet" href="css/datepicker.css">
 
+        <link rel="stylesheet" href="js/DataTables/media/css/jquery.dataTables.css"/>
+
         <link rel="stylesheet" href="css/portal-components.css">
         <link rel="stylesheet" href="css/fileupload/jquery.fileupload.css"/>
         <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui.css"/>
@@ -131,6 +133,45 @@
             <div id="contentTable" class="col-md-9 col-xs-12">
                 <!--TABLE CONTENT-->
                 <table id="mainTable" ></table>
+
+                <table id="myTable" class="display table table-striped">
+                    <thead>
+                        <!-- BEGIN: Underscore Template Definition. -->
+                        <script id="headertpl" type="text/template" class="template">
+                            <tr>
+                                <th><input name="btSelectAll" type="checkbox" /></th>
+                                <th><i class="fa fa-download fa-lg"></i></th>
+                                <th>[[date]]</th>
+                                <th>[[empl]]</th>
+                                <th>[[label]]</th>
+                                <th>[[refdoc]]</th>
+                                <th>[[size]]</th>
+                                <th>[[ext]]</th>
+                                <th>[[del]]</th>
+                            </tr>
+                        </script>
+                        <!-- END: Underscore Template Definition. -->
+                    </thead>
+                    <tbody>
+                    <!-- BEGIN: Underscore Template Definition. -->
+                    <script id="bodytpl" type="text/template">
+
+                        <tr>
+                            <td><input name="cb[[index]]" type="checkbox" /></td>
+                            <td>[[notDownloaded]]</td>
+                            <td>[[date]]</td>
+                            <td>[[noEmployeur]]</td>
+                            <td>[[libelle]]</td>
+                            <td>[[refDoc]]</td>
+                            <td>[[size]]</td>
+                            <td>[[extension]]</td>
+                            <td><a class="remove" title="Remove" data-file-id="[[idFile]]"><i class="fa fa-trash fa-lg"></i></a></td>
+                        </tr>
+
+                    </script>
+                    <!-- END: Underscore Template Definition. -->
+                    </tbody>
+                </table>
             </div>
           </div>
         </div> <!--/wrapper-->
@@ -145,6 +186,9 @@
         <script src="js/jquery.js"></script>
 
         <script src="bootstrap-3.2.0/js/bootstrap.min.js"></script>
+
+        <script src="js/DataTables/media/js/jquery.dataTables.js"></script>
+        <script src="js/underscore.js/underscore-1.6.0.js"></script>
 
         <script src="js/bootstrap.file-input.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>

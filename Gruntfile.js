@@ -29,10 +29,10 @@ module.exports = function (grunt) {
 
         // Watches files for changes and runs tasks based on the changed files
         watch: {
-            bower: {
+            /*bower: {
                 files: ['bower.json'],
                 tasks: ['bowerInstall']
-            },
+            },*/
             js: {
                 files: ['<%= config.app %>/js/{,*/}*.js'],
                // tasks: ['jshint'],
@@ -48,7 +48,7 @@ module.exports = function (grunt) {
                 files: ['Gruntfile.js']
             },
             styles: {
-                files: ['<%= config.app %>/styles/{,*/}*.css'],
+                files: ['<%= config.app %>/css/{,*/}*.css'],
                 tasks: ['newer:copy:styles', 'autoprefixer']
             },
             livereload: {

@@ -1,4 +1,4 @@
-$(function () {
+$(function (_) {
     'user strict'
 
     /***  GLOBAL VARIABLES ***/
@@ -6,6 +6,7 @@ $(function () {
     var serverURL = sessionStorage.getItem('serverURL'),
         baseURL = sessionStorage.getItem('baseURL'),
         lang = sessionStorage.getItem("lang"),
+        tableId = '#mainTable',
         i18n = {},
         AjaxData = [],
         category = [],
@@ -116,7 +117,7 @@ $(function () {
 
     function filterDate(e) {
 
-        var $table = $('#mainTable');
+        var $table = $(tableId);
         var dateEnd = yearFirst($('input[name=end]').val());
         var dateStart = yearFirst($('input[name=start]').val());
         var expr = '';
@@ -318,7 +319,7 @@ $(function () {
 
     function downloadAll() {
 
-        var array   = $('#mainTable').bootstrapTable('getSelections'),
+        var array   = $(tableId).bootstrapTable('getSelections'),
             listID  = '';
 
             $.each(array, function (i, item) {
@@ -406,7 +407,7 @@ $(function () {
      * */
 
     function menuActionClick(e, data) {
-        var table = $('#mainTable');
+        var table = $(tableId);
         //console.log(data);
         if(data.node.parent && data.node.id !== 'upload' && data.node.id !== 'root'){
             $('.breadcrumb').html('<li class="active">' + $("#"+data.node.parent + " a:first").html().substring(7) + '</li><li class="active">'+ data.node.text + '</li><li><a href="#"></a></li>' );
@@ -581,7 +582,7 @@ $(function () {
 
     function createTable() {
 
-        return $('#mainTable').bootstrapTable({
+        return $(tableId).bootstrapTable({
             data: AjaxData,
             striped: true,
             pagination: true,
@@ -734,31 +735,55 @@ $(function () {
                     }
                 }
             ]
-        })/*.on('check.bs.table', function (e, row) {
-         $('.downloadall').show();
-         //$result.text('Event: check.bs.table, data: ' + JSON.stringify(row));
-         }).on('uncheck.bs.table', function (e, row) {
-         $('.downloadall').hide();
-         }).on('check-all.bs.table', function (e) {
-         $('.downloadall').show();
-         }).on('uncheck-all.bs.table', function (e) {
-         $('.downloadall').hide();
-         })*/;
+        });
 
 
+    }
+
+    function createDataTable(){
+
+        _.templateSettings = {
+            interpolate: /\[\[(.+?)\]\]/g ,
+            escape: /\[\[-(.+?)\]\]/g ,
+            evaluate: /\[\[=(.+?)\]\]/g
+            //Define an *interpolate* regex to match expressions
+            // that should be interpolated verbatim, an *escape* regex
+            // to match expressions that should be inserted after being
+            // HTML escaped, and an *evaluate* regex to match expressions
+            // that should be evaluated without insertion into
+            // the resulting string.
+        };
+
+        var tpl = _.template($('#headertpl').html());
+
+        $('#myTable thead').html(tpl(i18n[lang].col));
+
+        tpl = _.template($('#bodytpl').html());
+        var html = {};
+
+        _.each(AjaxData, function(item){
+            html += tpl(item);
+        });
+
+        $('#myTable tbody').html(html);
+
+        $('#myTable').dataTable({
+            "paging" : true,
+            "ordering": true,
+            "info" : true,
+            "dom": '<"top"i>rt<"bottom"flp><"clear">'
+            /*"dom" : '<"top"fT>rt<"clear">',
+            "language" : {
+                "url": "DataTables/resources/language/French.json"
+            }*/
+        });
     }
 
     /****************************************************
      * AJAX
      * */
 
-    function Loadi18n(){
-        $.getJSON( "data/i18n.json", function( data ) {
-            i18n = data;
-        });
-    }
-
-    function deleteFile(filePath) {
+     function deleteFile(filePath) {
         var data = {
             "token": token,
             "filePath": filePath
@@ -847,7 +872,7 @@ $(function () {
             location.reload();
         });
 
-        var $table = $('#mainTable');
+        var $table = $(tableId);
 
         //DOWNLOAD files
         $table.on('click', '.dlfile', function () {
@@ -912,7 +937,8 @@ $(function () {
             //Add label for reference of Document
             mergeLabelDoc();
 
-            var $table = createTable();
+            //var $table = createTable();
+        createDataTable();
 
             createMenu();
 
@@ -923,9 +949,9 @@ $(function () {
             setEventsHTML();
 
             //APPLY DEFAULT FILTERS
-            $table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "') && (item['isNew'] || item['notDownloaded'])");
+            //$table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "') && (item['isNew'] || item['notDownloaded'])");
 
-            $("input[name='btSelectAll']").trigger('click');
+            //$("input[name='btSelectAll']").trigger('click');
 
         });
     }
@@ -955,5 +981,5 @@ $(function () {
 
     $('document').ready(main());
 
-});
+}(_));
 
