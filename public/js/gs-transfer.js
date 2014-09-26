@@ -63,7 +63,7 @@ $(function (_) {
         return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
     }
 
-    function sort_unique(array) {
+    function sortUnique(array) {
         array = array.sort(function (a, b) {
             return a - b;
         });
@@ -82,24 +82,24 @@ $(function (_) {
     function getUsedDocRef(data) {
         var a = [];
         $.each(data, function (i, item) {
-            var ref = parseInt(item.refDoc);
+            var ref = parseInt(item.referenceDocument);
             if (!isNaN(ref)) {
                 a[a.length] = ref;
             } else {
                 a[a.length] = -1;
             }
         });
-        return sort_unique(a);
+        return sortUnique(a);
     }
 
     function mergeLabelDoc() {
 
         $.each(category, function (i, cat) {
             $.each(AjaxData, function (j, row) {
-                if (cat.refDoc == parseInt(row.refDoc)) {
+                if (cat.referenceDocument == parseInt(row.referenceDocument)) {
                     row.libelle = labelDoc_i18n(cat);
                 } else {
-                    if(!row.refDoc){
+                    if(!row.referenceDocument){
                         row.libelle = row.fileName;
                     }
                 }
@@ -484,8 +484,8 @@ $(function (_) {
         // BUILD TREE
         $.each(category, function (i, item) {
 
-            var refdoc = parseInt(item.refDoc),
-                numcat = parseInt(item.noCategory);
+            var refdoc = parseInt(item.referenceDocument),
+                numcat = parseInt(item.categoryNumber);
             //if (numcat == 0) numcat = 98;
 
             if ($.inArray(refdoc, refDocUsed) > -1) { // doc is used
@@ -761,6 +761,12 @@ $(function (_) {
 
         _.each(AjaxData, function(row){
             //TODO: format data (ex:reverse date)
+            if(row.notDownloaded){
+                row.dlClass = 'fa-download';
+            }else{
+                row.dlClass = 'fa-upload';
+            }
+
             html += tpl(row);
         });
 
@@ -774,13 +780,29 @@ $(function (_) {
             "dom": '<"top"ifT>rt<"bottom"flp><"clear">',
             "columnDefs": [
                 {
-                    "targets": [ 2 ],
+                    "targets": [ 3 ],
                     "visible": false,
                     "searchable": false
-                },
-                {
-                    "targets": [ 3 ],
-                    "visible": false
+                }, {
+                    "targets": [ 4 ],
+                    "visible": false,
+                    "searchable": false
+                }, {
+                    "targets": [ 10 ],
+                    "visible": false,
+                    "searchable": false
+                }, {
+                    "targets": [ 11 ],
+                    "visible": false,
+                    "searchable": false
+                }, {
+                    "targets": [ 12 ],
+                    "visible": false,
+                    "searchable": false
+                }, {
+                    "targets": [ 13 ],
+                    "visible": false,
+                    "searchable": false
                 }
             ]
             /*"dom" : '<"top"fT>rt<"clear">',

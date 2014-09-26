@@ -165,7 +165,10 @@
                         <tr class="[[isNew]]"
                                 data-file-id="[[fileId]]" data-filename="[[fileName]]">
                             <td><input name="cb[[index]]" type="checkbox" /></td>
-                            <td>[[notDownloaded]] [[downloadCount]]</td>
+                            <a class="dlfile" data-id="[[fileId]]" data-file="[[fileName]]" >
+                                <i class="fa [[dlClass]] fa-lg text-primary"></i>
+                                <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]</small>
+                            </a>
                             <td data-order="[[date]]">[[date]]</td> <!--TODO: reverse date-->
                             <td>[[fileName]]</td>
                             <td>[[uploadUserName]]</td>
@@ -178,7 +181,7 @@
                             <td>[[referenceClient]]</td>
                             <td>[[counter]]</td>
                             <td>[[referenceGroupS]]</td>
-                            <td><a class="remove" title="Remove" data-file-id="[[idFile]]"><i class="fa fa-trash fa-lg"></i></a></td>
+                            <td><a class="remove" title="Remove" data-file-id="[[fileId]]"><i class="fa fa-trash fa-lg"></i></a></td>
                         </tr>
 
                     </script>
