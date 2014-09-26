@@ -1,0 +1,50 @@
+body {
+  font-family: "Roboto";
+  font-weight: 300;
+  font-size: 14px;
+}
+
+
+/*    sidebar    */
+/* ul */
+#nav {
+  margin: 0 !important;
+  padding: 0 !important;
+
+
+}
+
+
+
+#upload,
+li {
+  padding: 12px 8px 12px 14px;
+  margin-bottom: 5px;
+  line-height: 40px;
+  color: #FFF;
+  background-color: #0620B8;
+  -webkit-transition: all 0.3s ease;/* Safari 3.2+, Chrome */
+  -moz-transition: all 0.3s ease;/* Firefox 4-15 */
+  -o-transition: all 0.3s ease;/* Opera 10.5-12.00 */
+  transition: all 0.3s ease;/* Firefox 16+, Opera 12.50+ */
+
+}
+
+#upload:hover,
+#upload:focus,
+#upload:active,
+#upload.active,
+li:hover,
+li:focus,
+li:active,
+li.active {
+  background-color: #3003A1;
+}
+
+/*    COLOR SCHEME    */
+.bg-gs        { background-color: #0b68a1; }
+.bg-king      { background-color: #0620B8; }
+.bg-indigo    { background-color: #3003A1; }
+.bg-viola     { background-color: #8806B8; }
+.bg-darkpink  { background-color: #AE0179; }
+
