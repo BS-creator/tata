@@ -743,9 +743,7 @@ $(function (_) {
     function createDataTable(){
 
         _.templateSettings = {
-            interpolate: /\[\[(.+?)\]\]/g ,
-            escape: /\[\[-(.+?)\]\]/g ,
-            evaluate: /\[\[=(.+?)\]\]/g
+            interpolate: /\[\[(.+?)\]\]/g
             //Define an *interpolate* regex to match expressions
             // that should be interpolated verbatim, an *escape* regex
             // to match expressions that should be inserted after being
@@ -761,22 +759,46 @@ $(function (_) {
         tpl = _.template($('#bodytpl').html());
         var html = {};
 
-        _.each(AjaxData, function(item){
-            html += tpl(item);
+        _.each(AjaxData, function(row){
+            //TODO: format data (ex:reverse date)
+            html += tpl(row);
         });
 
         $('#myTable tbody').html(html);
 
-        $('#myTable').dataTable({
+        var table = $('#myTable').dataTable({
             "paging" : true,
             "ordering": true,
             "info" : true,
-            "dom": '<"top"ifT>rt<"bottom"flp><"clear">'
+            //"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "dom": '<"top"ifT>rt<"bottom"flp><"clear">',
+            "columnDefs": [
+                {
+                    "targets": [ 2 ],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [ 3 ],
+                    "visible": false
+                }
+            ]
             /*"dom" : '<"top"fT>rt<"clear">',
             "language" : {
                 "url": "DataTables/resources/language/French.json"
             }*/
         });
+
+
+        /*
+        * var table = $('#example').DataTable();
+
+         for ( var i=0 ; i<4 ; i++ ) {
+            table.column( i ).visible( false, false );
+         }
+         table.columns.adjust().draw( false );
+         // adjust column sizing and redraw
+        * */
     }
 
     /****************************************************

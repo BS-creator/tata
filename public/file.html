@@ -12,8 +12,8 @@
         <link rel="stylesheet" href="css/bootstrap-table.min.css">
         <link rel="stylesheet" href="css/datepicker.css">
 
-        <link rel="stylesheet" href="js/DataTables/media/css/jquery.dataTables.css"/>
-
+        <link rel="stylesheet" href="DataTables/media/css/jquery.dataTables.css"/>
+        <link rel="stylesheet" href="DataTables/resources/bootstrap/3/dataTables.bootstrap.css"/>
         <link rel="stylesheet" href="css/portal-components.css">
         <link rel="stylesheet" href="css/fileupload/jquery.fileupload.css"/>
         <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui.css"/>
@@ -142,11 +142,17 @@
                                 <th><input name="btSelectAll" type="checkbox" /></th>
                                 <th><i class="fa fa-download fa-lg"></i></th>
                                 <th>[[date]]</th>
+                                <th>[[name]]</th>
+                                <th>[[user]]</th>
                                 <th>[[empl]]</th>
                                 <th>[[label]]</th>
                                 <th>[[refdoc]]</th>
                                 <th>[[size]]</th>
                                 <th>[[ext]]</th>
+                                <th>[[path]]</th>
+                                <th>[[refCl]]</th>
+                                <th>[[count]]</th>
+                                <th>[[refGS]]</th>
                                 <th>[[del]]</th>
                             </tr>
                         </script>
@@ -156,15 +162,22 @@
                     <!-- BEGIN: Underscore Template Definition. -->
                     <script id="bodytpl" type="text/template">
 
-                        <tr>
+                        <tr class="[[isNew]]"
+                                data-file-id="[[fileId]]" data-filename="[[fileName]]">
                             <td><input name="cb[[index]]" type="checkbox" /></td>
-                            <td class="hidden-xs hidden-sm">[[notDownloaded]]</td>
-                            <td>[[date]]</td>
-                            <td>[[noEmployeur]]</td>
-                            <td>[[libelle]]</td>
-                            <td>[[refDoc]]</td>
+                            <td>[[notDownloaded]] [[downloadCount]]</td>
+                            <td data-order="[[date]]">[[date]]</td> <!--TODO: reverse date-->
+                            <td>[[fileName]]</td>
+                            <td>[[uploadUserName]]</td>
+                            <td>[[employerNumber]]</td>
+                            <td>[[label]]</td>
+                            <td>[[referenceDocument]]</td>
                             <td>[[size]]</td>
                             <td>[[extension]]</td>
+                            <td>[[path]]</td>
+                            <td>[[referenceClient]]</td>
+                            <td>[[counter]]</td>
+                            <td>[[referenceGroupS]]</td>
                             <td><a class="remove" title="Remove" data-file-id="[[idFile]]"><i class="fa fa-trash fa-lg"></i></a></td>
                         </tr>
 
@@ -187,7 +200,8 @@
 
         <script src="bootstrap-3.2.0/js/bootstrap.min.js"></script>
 
-        <script src="js/DataTables/media/js/jquery.dataTables.js"></script>
+        <script src="DataTables/media/js/jquery.dataTables.js"></script>
+        <script src="DataTables/resources/bootstrap/3/dataTables.bootstrap.js"></script>
         <script src="js/underscore.js/underscore-1.6.0.js"></script>
 
         <script src="js/bootstrap.file-input.js"></script>
