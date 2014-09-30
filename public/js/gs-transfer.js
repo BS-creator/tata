@@ -969,6 +969,8 @@ $(function (_) {
             .off('keyup').on('keyup', function (event) {
                 setTimeout(filterDate, 500, event); // 500ms
         });
+
+
     }
 
     /****************************************************
@@ -998,6 +1000,8 @@ $(function (_) {
             //$("input[name='btSelectAll']").trigger('click');
 
         });
+
+
     }
 
     function main() {
@@ -1021,6 +1025,8 @@ $(function (_) {
                 window.location = baseURL;
             }
         });
+
+
     }
 
     $('document').ready(main());

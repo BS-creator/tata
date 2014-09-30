@@ -1,0 +1,199 @@
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  overflow-x: hidden;
+}
+header {
+  height: 85px;
+  background-color: #0b68a1;
+}
+
+/* toggler btn */
+#toggler {
+  font-size: 36px;
+  padding: 16px;
+  color: white;
+  opacity: .5;
+}
+#toggler,
+#toggler i {
+  -webkit-transition: all 0.5s ease;/* Safari 3.2+, Chrome */
+  -moz-transition: all 0.5s ease;/* Firefox 4-15 */
+  -o-transition: all 0.5s ease;/* Opera 10.5-12.00 */
+  transition: all 0.5s ease;/* Firefox 16+, Opera 12.50+ */
+}
+#toggler:hover,
+#toggler:focus,
+#toggler:active,
+#toggler.active {
+  opacity: 1;
+}
+#toggler.active i{
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+  transform: rotate(180deg);
+}
+
+
+
+/**************/
+/*  sidebar  */
+/************/
+/* ul */
+#nav {
+  margin: 20px 0 0 0;
+  /*padding: 0 0 0 12px;*/
+  padding: 0;
+}
+
+#nav > li {
+  margin-bottom: 1px;
+  padding: 12px 0 12px 20px;
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 30px;
+  color: #FFF;
+  background-color: #3f9ad0;
+  cursor: pointer;
+  /* add ... on resize instead of break line */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* transition */
+  -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
+     -moz-transition: all 0.4s ease;/* Firefox 4-15 */
+       -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
+          transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
+}
+#nav > li.nav-head-0:hover,
+#nav > li.nav-head-0:focus,
+#nav > li.nav-head-0:active,
+#nav > li.nav-head-0.active {
+  background-color: #0b68a1;
+}
+#nav > li.nav-head-1:hover,
+#nav > li.nav-head-1:focus,
+#nav > li.nav-head-1:active,
+#nav > li.nav-head-1.active {
+  background-color: #0620B8;
+}
+#nav > li.nav-head-2:hover,
+#nav > li.nav-head-2:focus,
+#nav > li.nav-head-2:active,
+#nav > li.nav-head-2.active {
+  background-color: #3003A1;
+}
+#nav > li.nav-head-3:hover,
+#nav > li.nav-head-3:focus,
+#nav > li.nav-head-3:active,
+#nav > li.nav-head-3.active {
+  background-color: #8806B8;
+}
+#nav > li.nav-head-4:hover,
+#nav > li.nav-head-4:focus,
+#nav > li.nav-head-4:active,
+#nav > li.nav-head-4.active {
+  background-color: #AE0179;
+}
+
+#nav > li.nav-head-5:hover,
+#nav > li.nav-head-5:focus,
+#nav > li.nav-head-5:active,
+#nav > li.nav-head-5.active {
+  background-color: #0b68a1;
+}
+/*    COLOR SCHEME    */
+.bg-green     { background-color: #02b158; }
+.bg-darkgreen { background-color: #238553; }
+.bg-gs-clear  { background-color: #3f9ad0; }
+.bg-gs        { background-color: #0b68a1; }
+.bg-king      { background-color: #0620B8; }
+.bg-indigo    { background-color: #3003A1; }
+.bg-viola     { background-color: #8806B8; }
+.bg-darkpink  { background-color: #AE0179; }
+
+
+/**************/
+/* side-menu */
+/************/
+
+/* position for animate */
+#side-menu {
+  width: 300px;
+  height:800px;
+  top: 85px; /* depends on the header height */
+  background-color: #0b68a1;
+  color: white;
+}
+.side-menu-hide {
+  position: absolute;
+  right:-300px; /* equals side-menu width */
+}
+.side-menu-show {
+  position: absolute;
+  right:0px;
+}
+.main-show {
+  position: relative;
+}
+.main-hide {
+  position: absolute;
+  left: -300px; /* equals side-menu width */
+  top: 0px;
+  width: 100%;
+}
+
+
+/* style */
+.side-menu-head {
+  margin: 0;
+  padding: 25px;
+  font-size: 16px;
+  text-transform: uppercase;
+  background-color: #3f9ad0;
+  opacity: .68;
+}
+.side-menu-head > span {
+  padding: 0 12px;
+}
+.side-menu-list {
+  margin: 1px 0 0 0;
+  padding: 0;
+}
+.side-menu-list > li.active:before {
+  font-family: 'FontAwesome';
+  content: "\f00c";
+}
+.side-menu-list > li {
+  margin-bottom: 1px;
+  padding: 12px 0 12px 32px;
+  line-height: 30px;
+  color: #FFF;
+  background-color: #0b68a1;
+  cursor: pointer;
+  /* add ... on resize instead of break line */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* transition */
+  -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
+  -moz-transition: all 0.4s ease;/* Firefox 4-15 */
+  -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
+  transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
+}
+.side-menu-list > li:hover,
+.side-menu-list > li:focus,
+.side-menu-list > li:active,
+.side-menu-list > li.active {
+  background-color: #3f9ad0;
+}
+
