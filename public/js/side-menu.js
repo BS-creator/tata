@@ -2,14 +2,14 @@ $('document').ready(function(){
 
     // resize side-menu height
     $(window).resize(function() {
-        $('#side-menu').height($(window).height() - 85); // - 85 depends on the header height
+        $('#side-menu').height($(window).height()- 89); //.height() - 85 depends on the header height
     });
     $(window).trigger('resize');
 
     // slide-menu in/out
-    $('#toggler').on('click', function(){
+    $('#toggle-side-menu').on('click', function(){
 
-        $('#toggler').toggleClass('active');
+        $('#toggle-side-menu').toggleClass('active');
 
         if($('#side-menu').hasClass('side-menu-show')){
 

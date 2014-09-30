@@ -2,6 +2,30 @@
 /* @author  :   Group S */
 /* @date    :   2014-09 */
 /* @version :   BETA 0.1 */
+.bg-green {
+  background-color: #02b158;
+}
+.bg-darkgreen {
+  background-color: #238553;
+}
+.bg-gs-clear {
+  background-color: #3f9ad0;
+}
+.bg-gs {
+  background-color: #0b68a1;
+}
+.bg-king {
+  background-color: #0620B8;
+}
+.bg-indigo {
+  background-color: #3003A1;
+}
+.bg-viola {
+  background-color: #8806B8;
+}
+.bg-darkpink {
+  background-color: #AE0179;
+}
 .header-gradient {
   background: -moz-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);
   /* FF3.6+ */
@@ -88,79 +112,79 @@ body {
   margin-top: 8px !important;
 }
 .mt-s {
-  margin-top: 12px !important;
+  margin-top: 13px !important;
 }
 .mr-s {
-  margin-right: 12px !important;
+  margin-right: 13px !important;
 }
 .mb-s {
-  margin-bottom: 12px !important;
+  margin-bottom: 13px !important;
 }
 .ml-s {
-  margin-left: 12px !important;
+  margin-left: 13px !important;
 }
 .mt-m {
-  margin-top: 20px !important;
+  margin-top: 21px !important;
 }
 .mr-m {
-  margin-right: 20px !important;
+  margin-right: 21px !important;
 }
 .mb-m {
-  margin-bottom: 20px !important;
+  margin-bottom: 21px !important;
 }
 .ml-m {
-  margin-left: 20px !important;
+  margin-left: 21px !important;
 }
 .mt-l {
-  margin-top: 32px !important;
+  margin-top: 34px !important;
 }
 .mr-l {
-  margin-right: 32px !important;
+  margin-right: 34px !important;
 }
 .mb-l {
-  margin-bottom: 32px !important;
+  margin-bottom: 34px !important;
 }
 .ml-l {
-  margin-left: 32px !important;
+  margin-left: 34px !important;
 }
 .mt-xl {
-  margin-top: 52px !important;
+  margin-top: 55px !important;
 }
 .mr-xl {
-  margin-right: 52px !important;
+  margin-right: 55px !important;
 }
 .mb-xl {
-  margin-bottom: 52px !important;
+  margin-bottom: 55px !important;
 }
 .ml-xl {
-  margin-left: 52px !important;
+  margin-left: 55px !important;
 }
 .mt-xxl {
-  margin-top: 85px !important;
+  margin-top: 89px !important;
 }
 .mr-xxl {
-  margin-right: 85px !important;
+  margin-right: 89px !important;
 }
 .mb-xxl {
-  margin-bottom: 85px !important;
+  margin-bottom: 89px !important;
 }
 .ml-xxl {
-  margin-left: 85px !important;
+  margin-left: 89px !important;
 }
 .m-s {
-  margin: 12px !important;
+  margin: 13px !important;
 }
 .m-m {
-  margin: 20px !important;
+  margin: 21px !important;
 }
 .m-l {
-  margin: 32px !important;
+  margin: 34px !important;
 }
 .m-xl {
-  margin: 52px !important;
+  margin: 55px !important;
 }
 .m-xxl {
-  margin: 85px !important;
+  margin: 89px !important;
 }
 .p-0 {
   padding: 0 !important;
@@ -178,137 +202,137 @@ body {
   padding-left: 0 !important;
 }
 .pt-s {
-  padding-top: 12px !important;
+  padding-top: 13px !important;
 }
 .pr-s {
-  padding-right: 12px !important;
+  padding-right: 13px !important;
 }
 .pb-s {
-  padding-bottom: 12px !important;
+  padding-bottom: 13px !important;
 }
 .pl-s {
-  padding-left: 12px !important;
+  padding-left: 13px !important;
 }
 .pt-m {
-  padding-top: 20px !important;
+  padding-top: 21px !important;
 }
 .pr-m {
-  padding-right: 20px !important;
+  padding-right: 21px !important;
 }
 .pb-m {
-  padding-bottom: 20px !important;
+  padding-bottom: 21px !important;
 }
 .pl-m {
-  padding-left: 20px !important;
+  padding-left: 21px !important;
 }
 .pt-l {
-  padding-top: 32px !important;
+  padding-top: 34px !important;
 }
 .pr-l {
-  padding-right: 32px !important;
+  padding-right: 34px !important;
 }
 .pb-l {
-  padding-bottom: 32px !important;
+  padding-bottom: 34px !important;
 }
 .pl-l {
-  padding-left: 32px !important;
+  padding-left: 34px !important;
 }
 .pt-xl {
-  padding-top: 52px !important;
+  padding-top: 55px !important;
 }
 .pr-xl {
-  padding-right: 52px !important;
+  padding-right: 55px !important;
 }
 .pb-xl {
-  padding-bottom: 52px !important;
+  padding-bottom: 55px !important;
 }
 .pl-xl {
-  padding-left: 52px !important;
+  padding-left: 55px !important;
 }
 .pt-xxl {
-  padding-top: 85px !important;
+  padding-top: 89px !important;
 }
 .pr-xxl {
-  padding-right: 85px !important;
+  padding-right: 89px !important;
 }
 .pb-xxl {
-  padding-bottom: 85px !important;
+  padding-bottom: 89px !important;
 }
 .pl-xxl {
-  padding-left: 85px !important;
+  padding-left: 89px !important;
 }
 .p-s {
-  padding: 12px !important;
+  padding: 13px !important;
 }
 .p-m {
-  padding: 20px !important;
+  padding: 21px !important;
 }
 .p-l {
-  padding: 32px !important;
+  padding: 34px !important;
 }
 .p-xl {
-  padding: 52px !important;
+  padding: 55px !important;
 }
 .p-xxl {
-  padding: 85px !important;
+  padding: 89px !important;
 }
 .ptb-0 {
   padding-bottom: 0 !important;
   padding-top: 0 !important;
 }
 .ptb-s {
-  padding-bottom: 12px !important;
-  padding-top: 12px !important;
+  padding-bottom: 13px !important;
+  padding-top: 13px !important;
 }
 .ptb-m {
-  padding-bottom: 20px !important;
-  padding-top: 20px !important;
+  padding-bottom: 21px !important;
+  padding-top: 21px !important;
 }
 .ptb-l {
-  padding-bottom: 32px !important;
-  padding-top: 32px !important;
+  padding-bottom: 34px !important;
+  padding-top: 34px !important;
 }
 .ptb-xl {
-  padding-bottom: 52px !important;
-  padding-top: 52px !important;
+  padding-bottom: 55px !important;
+  padding-top: 55px !important;
 }
 .ptb-xxl {
-  padding-bottom: 85px !important;
-  padding-top: 85px !important;
+  padding-bottom: 89px !important;
+  padding-top: 89px !important;
 }
 .prl-0 {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
 .prl-s {
-  padding-left: 12px !important;
-  padding-right: 12px !important;
+  padding-left: 13px !important;
+  padding-right: 13px !important;
 }
 .prl-m {
-  padding-left: 20px !important;
-  padding-right: 20px !important;
+  padding-left: 21px !important;
+  padding-right: 21px !important;
 }
 .prl-l {
-  padding-left: 32px !important;
-  padding-right: 32px !important;
+  padding-left: 34px !important;
+  padding-right: 34px !important;
 }
 .prl-xl {
-  padding-left: 52px !important;
-  padding-right: 52px !important;
+  padding-left: 55px !important;
+  padding-right: 55px !important;
 }
 .prl-xxl {
-  padding-left: 85px !important;
-  padding-right: 85px !important;
+  padding-left: 89px !important;
+  padding-right: 89px !important;
 }
-#info-header {
-  height: 32px;
-  border-bottom: 1px solid #dddddd;
-  margin-bottom: 32px;
+header {
+  height: 89px;
+  /* border-bottom: 1px solid #dddddd; */
+  /*margin-bottom: @l;*/
 }
-#info-header ul {
+header ul {
   margin: 0;
   padding: 0;
-  line-height: 32px;
+  line-height: 89px;
 }
 /* sidenav JSTREE CUSTOM STYLE */
 div#sidenav {

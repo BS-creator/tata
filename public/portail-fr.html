@@ -2,7 +2,7 @@
 <html class="no-js" lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Group S Ttransfer</title>
+    <title>Group S Portail</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/portal-components.css">
     <link rel="stylesheet" href="css/fileupload/jquery.fileupload.css"/>
     <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui.css"/>
-    <link rel="stylesheet" href="css/gs-transfer.css">
+    <!--<link rel="stylesheet" href="css/gs-transfer.css">-->
     <link rel="stylesheet" href="css/portail-fr.css">
     <noscript><link rel="stylesheet" href="css/fileupload/jquery.fileupload-noscript.css"></noscript>
     <noscript><link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui-noscript.css"></noscript>
@@ -22,41 +22,33 @@
 </head>
 <body>
 
-    <div class="container-fuild">
-        <header> <!--header-->
-            <a id="header-logo" class=""> <img alt="Group S Logo" src="css/images/header-logo-groups.png"> </a>
-<!--
-            <div id="toggler" class="pull-right"> <i class="fa fa-cog" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Gérez l'affichage des colonnes du tableau"></i> </div>
--->
-            <div id="toggler" class="pull-right"> <i class="fa fa-cog"></i> </div>
-        </header>
+    <div id="header"> <!--header-->
+        <a id="logo" class=""> <img alt="Group S Logo" src="css/images/header-logo-groups.png"> </a>
+        <span>Group S Portail France</span>
     </div>
 
     <div id="main" class="main-show">
 
-        <nav class="nav" id="info-header">
-            <ul class="list-inline pull-left">
-                <li class="univers-name"> <i class="glyphicon glyphicon-transfer"></i>&nbsp;&nbsp;Group S Transfer </li>
-            </ul>
-
-            <ul class="list-inline pull-right">
-                <li class="user-name"></li>
-                <li id="signout">
-                    &nbsp;&nbsp;<i class="fa fa-sign-out fa-lg"></i>
+        <div class="clearfix" id="top-nav">
+            <ul>
+                <li class="user-name pull-left">Bienvenue&nbsp;<b></b></li>
+                <li id="signout" class="pull-right">
+                    &nbsp;&nbsp;<i class="fa fa-sign-out"></i>
                 </li>
+                <li id="toggle-side-menu"> <i class="fa fa-cog"></i> </li>
             </ul>
-        </nav>
+        </div>
 
         <div class="container-fuild">
             <div class="row"> <!--raw sidebar + table-->
                 <div class="col-xs-12 col-md-3">
-                    <ul id="nav">
-                        <li class="nav-head-0"><i class="fa fa-upload"></i>&nbsp;&nbsp;&nbsp;Transmettre des fichiers à Group S</li>
-                        <li class="nav-head-1">Paie &amp; Post paie</li>
-                        <li class="nav-head-2">Gestion des entrées &amp; sorties</li>
-                        <li class="nav-head-3">Gestion des arr&ecirc;ts</li>
-                        <li class="nav-head-4">Gestion administrative</li>
-                        <li class="nav-head-5"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;&nbsp;Nous contacter</li>
+                    <ul class="sidebar-left">
+                        <li class="sidebar-h-0"><i class="fa fa-upload"></i>&nbsp;&nbsp;&nbsp;Transmettre des fichiers à Group S</li>
+                        <li class="sidebar-h-1">Paie &amp; Post paie</li>
+                        <li class="sidebar-h-2">Gestion des entrées &amp; sorties</li>
+                        <li class="sidebar-h-3">Gestion des arr&ecirc;ts</li>
+                        <li class="sidebar-h-4">Gestion administrative</li>
+                        <li class="sidebar-h-5"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;&nbsp;Nous contacter</li>
                     </ul>
                 </div>
                 <div class="col-xs-12 col-md-9">
@@ -69,7 +61,7 @@
     </div>
 
     <div id="side-menu" class="side-menu-hide">
-        <p class="side-menu-head">&nbsp;<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;Affichage des colonnes</p>
+        <p class="side-menu-head">&nbsp;&nbsp;&nbsp;Affichage des colonnes</p>
         <ul class="side-menu-list">
             <li>&nbsp;&nbsp;&nbsp;Framboise</li>
             <li>&nbsp;&nbsp;&nbsp;Cranburry</li>
@@ -80,7 +72,6 @@
             <li>&nbsp;&nbsp;&nbsp;Pavlova</li>
         </ul>
     </div>
-
 
     <script src="js/jquery.js"></script>
     <script src="bootstrap-3.2.0/js/bootstrap.min.js"></script>
