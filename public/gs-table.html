@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="no-js" lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Group S Ttransfer</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- build:css dist/file.min.css -->
+        <link rel="stylesheet" href="bootstrap-3.2.0/css/bootstrap.css"/>
+        <link rel="stylesheet" href="font-awesome-4.2.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="css/bootstrap-table.min.css">
+        <link rel="stylesheet" href="css/datepicker.css">
+
+        <link rel="stylesheet" href="css/portal-components.css">
+        <link rel="stylesheet" href="css/fileupload/jquery.fileupload.css"/>
+        <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui.css"/>
+
+        <noscript><link rel="stylesheet" href="css/fileupload/jquery.fileupload-noscript.css"></noscript>
+        <noscript><link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui-noscript.css"></noscript>
+
+        <link rel="stylesheet" href="css/gs-transfer.css">
+
+        <!-- endbuild -->
+
+        <!-- build:js dist/file.min.js-->
+        <script src="js/jquery.js"></script>
+        <script src="bootstrap-3.2.0/js/bootstrap.min.js"></script>
+        <script src="js/bootstrap.file-input.js"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        <script src="js/fileupload/vendor/jquery.ui.widget.js"></script>
+        <script src="js/fileupload/jquery.iframe-transport.js"></script>
+        <script src="js/fileupload/jquery.fileupload.js"></script>
+        <!-- endbuild -->
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <header>
+            <div id="banner-header" class="header-gradient">
+                <a id="header-logo" class="clickable"><img alt="Group S Logo" src="css/images/header-logo-groups.png"></a>
+                <ul class="list-inline pull-right lang">
+                    <li><a class="login-lang" href="#">FR</a></li>
+                    <li><a class="login-lang" href="#">EN</a></li>
+                    <li><a class="login-lang" href="#">NL</a></li>
+                </ul>
+            </div>
+
+            <div class="nav" id="info-header">
+                <div class="container-fluid">
+
+                    <ul class="list-inline pull-left">
+                        <li class="univers-name"> <i class="glyphicon glyphicon-transfer"></i>&nbsp;&nbsp;Group S Transfer </li>
+                    </ul>
+
+                    <ul class="list-inline pull-right">
+                        <li class="user-name"></li>
+                        <li id="signout">
+                            &nbsp;&nbsp;<i class="fa fa-sign-out fa-lg"></i>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </header> <!--/header-->
+
+        <div class="container-fluid">
+
+          <!--loading gif-->
+          <div class="row">
+            <div id="loader">
+              <p class="text-center">
+                <img src="css/images/loading-blue.gif" alt="loading ...">
+              </p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3 col-xs-12">
+              <!--upload collapse-->
+              <div class="row">
+                <div class="col-md-12 col-xs-12">
+                  <div id="upload-modal">
+
+                    <!-- Button trigger modal -->
+                    <div id="btn-upload-div" class="btn btn-primary text-center" data-toggle="modal" data-target="#uploadFiles" href="#uploadFiles">
+                      <span></span>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="uploadFiles" tabindex="-1" role="dialog" aria-labelledby="uploadFiles1" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 id="modalh4" class="modal-title text-muted text-center"></h4>
+                          </div>
+
+                          <div class="modal-body">
+
+                            <blockquote id="modalbq" class="text-muted">
+
+                            </blockquote>
+
+                            <form class="" id="uploadForm" action="/" method="post" enctype="multipart/form-data">
+                              <p class="text-left">
+                                <!--loop-->
+                                <!--<label class="radio control-label"><input type="radio" name="reportory" value="---">dirname</label>-->
+                                <!--/loop-->
+                              </p>
+                              <p class="text-center">
+                                <input name="upload" type="file" multiple="" size="50" />
+                                <input name="token" type="hidden" size="50" />
+                                <br/>
+                                <input type="submit" value="Upload" style="display: none;"/>
+                              </p>
+                            </form>
+                            <div class="row">
+                              <div class="col-md-offset-2 col-md-8 col-xs-12">
+                                <div id="files" class="files">
+                                  <div id="progress" class="progress">
+                                    <div class="progress-bar progress-bar-striped active"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div><!-- /.modal-content -->
+                      </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                  </div> <!--/upload-modal-->
+                </div>
+              </div><!--/ row-->
+
+              <!--SIDEBAR-->
+              <div id="sidenav"> </div><!--/ SIDEBAR-->
+
+            </div>
+
+            <div class="col-md-9 col-xs-12">
+                <!--TABLE CONTENT-->
+                <table class="table table-hover table-striped" id="mainTable">
+                    <thead>
+                        <th class="bs-checkbox" name="bs-checkbox" data-view="">
+                            <div class="th-inner">
+                                <input name="btSelectAll" type="checkbox"></div>
+                            <div class="fht-cell"></div>
+                        </th>
+                        <th class="dl sortable" name="dl" data-view="">
+                            <div class="th-inner"><i class="fa fa-download fa-lg"></i><i class="fa fa-sort"></i></div>
+                            <div class="fht-cell"></div>
+                        </th>
+                        <th class="new sortable" name="new" data-view="">
+                            <div class="th-inner">Nouveau<i class="fa fa-sort"></i></div>
+                            <div class="fht-cell"></div>
+                        </th>
+                        <th class="formattedDate sortable" name="formattedDate" data-view="">
+                            <div class="th-inner">Date<i class="fa fa-sort"></i></div>
+                            <div class="fht-cell"></div>
+                        </th>
+                        <th class="empl sortable" name="empl" data-view="">
+                            <div class="th-inner">Employeur<i class="fa fa-sort"></i></div>
+                            <div class="fht-cell"></div>
+                        </th>
+                        <th class="labelDoc sortable" name="labelDoc" data-view="">
+                            <div class="th-inner">Libellé<i class="fa fa-sort"></i></div>
+                            <div class="fht-cell"></div>
+                        </th>
+                        <th class="refDoc sortable hidden-xs hidden-sm" name="refDoc" data-view="">
+                            <div class="th-inner">Ref Doc<i class="fa fa-sort"></i></div>
+                            <div class="fht-cell"></div>
+                        </th>
+                        <th class="size sortable hidden-xs hidden-sm" name="size" data-view="">
+                            <div class="th-inner">Taille<i class="fa fa-sort"></i></div>
+                            <div class="fht-cell"></div>
+                        </th>
+                        <th class="ext sortable hidden-xs hidden-sm" name="ext" data-view="">
+                            <div class="th-inner">Type<i class="fa fa-sort"></i></div>
+                            <div class="fht-cell"></div>
+                        </th>
+                        <th class="refClientCompl sortable hidden-xs hidden-sm" name="refClientCompl" data-view="">
+                            <div class="th-inner">Ref Client<i class="fa fa-sort"></i></div>
+                            <div class="fht-cell"></div>
+                        </th>
+                        <th class="counter sortable hidden-xs hidden-sm" name="counter" data-view="">
+                            <div class="th-inner">#<i class="fa fa-sort"></i></div>
+                            <div class="fht-cell"></div>
+                        </th>
+                        <th class="refGroups sortable hidden-xs hidden-sm" name="refGroups" data-view="">
+                            <div class="th-inner">Ref Group S<i class="fa fa-sort"></i></div>
+                            <div class="fht-cell"></div>
+                        </th>
+                        <th class="operate hidden-xs hidden-sm" name="operate" data-view="">
+                            <div class="th-inner">Effacer</div>
+                            <div class="fht-cell"></div>
+                        </th>
+                    </thead>
+                    <tbody>
+                    <tr data-index="0">
+                        <td class="bs-checkbox hidden-xs hidden-sm" data-th-name="" data-view="">
+                            <input data-index="0" name="btSelectItem" type="checkbox">
+                        </td>
+                        <td>
+                            <a class="dlfile" data-id="" data-file="">
+                                <i class="fa fa-upload fa-lg text-primary"></i><small data-dl="" class="text-muted">&nbsp;</small>
+                            </a>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="hidden-xs hiddein-sm"><a class="remove" title="Remove"><i class="fa fa-trash fa-lg"></i></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+        </div> <!--/wrapper-->
+
+        <footer>
+            <hr>
+            <p class="text-center">
+                <small>© 2014 Group S </small>
+            </p>
+        </footer>
+
+        <!-- build:js dist/file2.min.js-->
+        <script src="js/bootstrap-table.js"></script>
+        <script src="js/pw-jstree.js"></script>
+        <script src="js/gs-transfer.js"></script>
+        <!-- endbuild -->
+    <script>
+
+
+
+
+    </script>
+
+    </body>
+</html>
