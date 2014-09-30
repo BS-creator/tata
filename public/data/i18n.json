@@ -25,6 +25,8 @@
             "add": "Document ajouté",
             "del": "Document supprimé"
         },
+        "listAll" : "Tous",
+        "showHide": "Afficher les colonnes",
         "upload" : "Transmettre des fichiers à Group S",
         "modalupload" : "Transmettre des fichiers sur le serveur de Group S",
         "modalbq":  "Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.",
@@ -59,6 +61,8 @@
             "add": "Document toegevoegd",
             "del": "Document geschrapt"
         },
+        "listAll" : "Alle",
+        "showHide": "Tonen colonnen",
         "upload" : "Documenten op de server uploaden",
         "modalupload" : "Document uploaden op Group S server",
         "modalbq":  "Gelieve de doelmap te selecteren alvorens uw bestanden toe te voegen.",
@@ -93,6 +97,8 @@
             "add": "Document added",
             "del": "Document deleted"
         },
+        "listAll" : "all",
+        "showHide": "Show / hide columns",
         "upload" : "Upload Documents on the server",
         "modalupload" : "Upload Document to Group S server",
         "modalbq":  "Please, select the folder of upload before uploading document.",

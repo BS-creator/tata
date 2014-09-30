@@ -97,14 +97,12 @@ $(function (_, moment) {
         $.each(category, function (i, cat) {
             $.each(AjaxData, function (j, row) {
                 if (cat.referenceDocument == parseInt(row.referenceDocument)) {
-                    row.libelle = labelDoc_i18n(cat);
+                    row.label = labelDoc_i18n(cat);
                 } else {
                     if(!row.referenceDocument){
-                        row.libelle = row.fileName;
+                        row.label = row.fileName;
                     }
                 }
-                row.noEmployeur = parseInt(row.noEmployeur);
-                row.uploadUserName.toUpperCase();
             });
         });
     }
@@ -115,7 +113,7 @@ $(function (_, moment) {
             date.slice(0, 2);
     }
 
-    function filterDate(e) {
+    function filterDate() { //TODO: filterDate(inputStart, inputEnd)
 
         var $table = $(tableId);
         var dateEnd = yearFirst($('input[name=end]').val());
@@ -191,8 +189,8 @@ $(function (_, moment) {
      * FORMAT COLUMNS
      * */
 
-    // Styling the row if the file is new
-    function rowStylef(row) {
+
+ /*   function rowStylef(row) {
         if (row.isNew) return {"classes": "success" };
         else return {};
     }
@@ -232,7 +230,7 @@ $(function (_, moment) {
         }
         return '';
     }
-
+*/
     function FormatExtension(value, row) {
         if (value || value != '') {
             var v = value.toLowerCase();
@@ -285,7 +283,7 @@ $(function (_, moment) {
         //return bytesToSize(val);
     }
 
-    function formatUserName(value) {
+/*    function formatUserName(value) {
         return value.toUpperCase();
     }
 
@@ -311,7 +309,7 @@ $(function (_, moment) {
             '<i class="fa fa-trash fa-lg"></i>',
             '</a>'
         ].join('');
-    }
+    }*/
 
     /****************************************************
      * DOWNLOAD (ZIP)
@@ -580,7 +578,7 @@ $(function (_, moment) {
      * TABLE
      * */
 
-    function createTable() {
+ /*   function createTable() {
 
         return $(tableId).bootstrapTable({
             data: AjaxData,
@@ -738,7 +736,7 @@ $(function (_, moment) {
         });
 
 
-    }
+    }*/
 
     function createDataTable(){
 
@@ -761,9 +759,11 @@ $(function (_, moment) {
 
         _.each(AjaxData, function(row){
 
+            //row.noEmployeur = parseInt(row.noEmployeur);
             if(parseInt(row.downloadCount) > 0) row.alreadyDL = 'text-muted';
             else row.alreadyDL = 'text-primary';
             row.downloadCount = parseInt(row.downloadCount);
+            if(isNaN(row.downloadCount)) row.downloadCount = -1;
 
             //TODO: how to improve this code? ==> ugly
             row.employerNumber = parseInt(row.employerNumber);
@@ -775,21 +775,26 @@ $(function (_, moment) {
             if(row.uploadUserName === username) row.dlClass = 'fa-upload';
             else row.dlClass = 'fa-download';
 
-            row.dateFormatted = moment(row.date,"YYYY-MM-DD").format("DD-MM-YYYY");
+            row.dateFormatted = moment(row.date,"YYYY-MM-DD").format("DD/MM/YYYY");
             row.sizeFormatted = formatSize(row.size);
             row.extensionFormatted = FormatExtension(row.extension, row);
+            row.uploadUserName.toUpperCase();
 
             html += tpl(row);
         });
 
         $('#myTable tbody').html(html);
 
-        var table = $('#myTable').dataTable({
+        var table = $('#myTable').DataTable({
             "paging" : true,
             "ordering": true,
             "info" : true,
-            "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]], //TODO: i18n for all
-            "dom": '<"top"ifT>rt<"bottom"flp><"clear">',
+            "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, i18n[lang].listAll]],
+            "dom": '<"top"iCfT>rt<"bottom"flp><"clear">',
+            "language" : {
+                "url" : "DataTables/resources/language/French.json" //TODO: i18n make a function i18n
+            },
+            "order": [[ 1, 'asc' ]],
             "columnDefs": [
                 {//checkbox
                     "targets":  0,
@@ -838,23 +843,42 @@ $(function (_, moment) {
                     "targets": 14,
                     "orderable" : false
                 }
-            ]
-            /*"dom" : '<"top"fT>rt<"clear">',
-            "language" : {
-                "url": "DataTables/resources/language/French.json"
-            }*/
+            ],
+            "colVis": {
+                "activate": "mouseover",
+                "buttonText": i18n[lang].showHide,
+                "exclude": [ 0, 1, 14 ]
+            }
         });
 
 
+/*        var resultFilter = table.columns()
+            .data()
+            .filter( function ( value, index ) {
+                //console.log(index, AjaxData[index].downloadCount);
+                return AjaxData[index].downloadCount == 0 ? true : false;
+            })
+            console.log(resultFilter);
+            resultFilter.draw();*/
+
+        // Apply the search
+        /*table.columns().eq( 0 ).each( function ( colIdx ) {
+            $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
+                table
+                    .column( colIdx )
+                    .search( this.value )
+                    .draw();
+            } );
+        } );*/
         /*
-        * var table = $('#example').DataTable();
+        var table = $('#example').DataTable();
 
          for ( var i=0 ; i<4 ; i++ ) {
             table.column( i ).visible( false, false );
          }
          table.columns.adjust().draw( false );
          // adjust column sizing and redraw
-        * */
+        */
     }
 
     /****************************************************
