@@ -61,6 +61,14 @@ body {
 }
 
 /* menu right icons top-nav */
+/*#toggle-side-menu:after {
+  font-family: "FontAwesome";
+  content: "\f053";
+}
+#toggle-side-menu.active:after {
+  font-family: "FontAwesome";
+  content: "\f054";
+}*/
 #signout,
 #toggle-side-menu {
   line-height: 55px;
@@ -81,12 +89,6 @@ body {
 #toggle-side-menu.active {
   color: #505050;
 }
-#toggle-side-menu.active i{
-  -ms-transform: rotate(180deg); /* IE 9 */
-  -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
-  transform: rotate(180deg);
-}
-
 
 
 /**************/
