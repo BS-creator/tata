@@ -162,26 +162,28 @@
                     <!-- BEGIN: Underscore Template Definition. -->
                     <script id="bodytpl" type="text/template">
 
-                        <tr class="[[isNew]]"
-                                data-file-id="[[fileId]]" data-filename="[[fileName]]">
+                        <tr class="[[isNew]]" data-file-id="[[fileId]]" data-filename="[[fileName]]">
                             <td><input name="cb[[index]]" type="checkbox" /></td>
-                            <a class="dlfile" data-id="[[fileId]]" data-file="[[fileName]]" >
-                                <i class="fa [[dlClass]] fa-lg text-primary"></i>
-                                <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]</small>
-                            </a>
-                            <td data-order="[[date]]">[[date]]</td> <!--TODO: reverse date-->
+                            <td data-order="[[downloadCount]]">
+                                <a class="dlfile" data-id="[[fileId]]" data-file="[[fileName]]" >
+                                    <i class="fa [[dlClass]] fa-lg [[alreadyDL]]"></i>
+                                    <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]</small>
+                                </a></td>
+                            <td data-order="[[date]]">[[dateFormatted]]</td> <!--TODO: reverse date-->
                             <td>[[fileName]]</td>
                             <td>[[uploadUserName]]</td>
                             <td>[[employerNumber]]</td>
                             <td>[[label]]</td>
                             <td>[[referenceDocument]]</td>
-                            <td>[[size]]</td>
-                            <td>[[extension]]</td>
+                            <td data-order="[[size]]">[[sizeFormatted]]</td>
+                            <td data-order="[[extension]]">[[extensionFormatted]]</td>
                             <td>[[path]]</td>
                             <td>[[referenceClient]]</td>
                             <td>[[counter]]</td>
                             <td>[[referenceGroupS]]</td>
-                            <td><a class="remove" title="Remove" data-file-id="[[fileId]]"><i class="fa fa-trash fa-lg"></i></a></td>
+                            <td>
+                                <a class="remove" title="Remove" data-file-id="[[fileId]]">
+                                    <i class="fa fa-trash fa-lg"></i></a></td>
                         </tr>
 
                     </script>
@@ -206,6 +208,8 @@
         <script src="DataTables/media/js/jquery.dataTables.js"></script>
         <script src="DataTables/resources/bootstrap/3/dataTables.bootstrap.js"></script>
         <script src="js/underscore.js/underscore-1.6.0.js"></script>
+
+        <script src="js/moment/moment-with-langs.min-2.5.0.js"></script>
 
         <script src="js/bootstrap.file-input.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>

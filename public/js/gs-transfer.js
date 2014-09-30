@@ -1,4 +1,4 @@
-$(function (_) {
+$(function (_, moment) {
     'user strict'
 
     /***  GLOBAL VARIABLES ***/
@@ -760,12 +760,24 @@ $(function (_) {
         var html = {};
 
         _.each(AjaxData, function(row){
-            //TODO: format data (ex:reverse date)
-            if(row.notDownloaded){
-                row.dlClass = 'fa-download';
-            }else{
-                row.dlClass = 'fa-upload';
-            }
+
+            if(parseInt(row.downloadCount) > 0) row.alreadyDL = 'text-muted';
+            else row.alreadyDL = 'text-primary';
+            row.downloadCount = parseInt(row.downloadCount);
+
+            //TODO: how to improve this code? ==> ugly
+            row.employerNumber = parseInt(row.employerNumber);
+            if(isNaN(row.employerNumber)) row.employerNumber = "";
+
+            row.referenceDocument = parseInt(row.referenceDocument);
+            if(isNaN(row.referenceDocument)) row.referenceDocument = "";
+
+            if(row.uploadUserName === username) row.dlClass = 'fa-upload';
+            else row.dlClass = 'fa-download';
+
+            row.dateFormatted = moment(row.date,"YYYY-MM-DD").format("DD-MM-YYYY");
+            row.sizeFormatted = formatSize(row.size);
+            row.extensionFormatted = FormatExtension(row.extension, row);
 
             html += tpl(row);
         });
@@ -776,33 +788,55 @@ $(function (_) {
             "paging" : true,
             "ordering": true,
             "info" : true,
-            //"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]], //TODO: i18n for all
             "dom": '<"top"ifT>rt<"bottom"flp><"clear">',
             "columnDefs": [
-                {
-                    "targets": [ 3 ],
+                {//checkbox
+                    "targets":  0,
+                    "visible": true,
+                    "orderable": false,
+                    "searchable": false
+                },{ //DownloadCount
+                    "targets": 1
+                },{ // Date
+                    "targets": 2
+                },{ // fileName
+                    "targets": 3 ,
                     "visible": false,
                     "searchable": false
-                }, {
-                    "targets": [ 4 ],
+                }, { // uploadUserName
+                    "targets": 4 ,
                     "visible": false,
                     "searchable": false
-                }, {
+                },{ //employerNumber
+                    "targets": 5
+                },{ // label
+                    "targets": 6
+                },{ //referenceDocument
+                    "targets": 7
+                },{ // size
+                    "targets": 8
+                },{ //extension
+                    "targets": 9
+                },{ //path
                     "targets": [ 10 ],
                     "visible": false,
                     "searchable": false
-                }, {
+                }, { //referenceClient
                     "targets": [ 11 ],
                     "visible": false,
                     "searchable": false
-                }, {
+                }, { //counter
                     "targets": [ 12 ],
                     "visible": false,
                     "searchable": false
-                }, {
+                }, { //referenceGroupS
                     "targets": [ 13 ],
                     "visible": false,
                     "searchable": false
+                },{// remove
+                    "targets": 14,
+                    "orderable" : false
                 }
             ]
             /*"dom" : '<"top"fT>rt<"clear">',
@@ -1025,5 +1059,5 @@ $(function (_) {
 
     $('document').ready(main());
 
-}(_));
+}(_, moment));
 
