@@ -6,7 +6,7 @@ $(function (_, moment) {
     var serverURL = sessionStorage.getItem('serverURL'),
         baseURL = sessionStorage.getItem('baseURL'),
         lang = sessionStorage.getItem("lang"),
-        tableId = '#mainTable',
+        tableId = '#tableID',
         i18n = {},
         AjaxData = [],
         category = [],
@@ -405,7 +405,8 @@ $(function (_, moment) {
      * */
 
     function menuActionClick(e, data) {
-        var table = $(tableId);
+        var table = $(tableId).DataTable();
+        var oTable = $(tableId).dataTable();
         //console.log(data);
         if(data.node.parent && data.node.id !== 'upload' && data.node.id !== 'root'){
             $('.breadcrumb').html('<li class="active">' + $("#"+data.node.parent + " a:first").html().substring(7) + '</li><li class="active">'+ data.node.text + '</li><li><a href="#"></a></li>' );
@@ -414,59 +415,58 @@ $(function (_, moment) {
         }
 
         if (data.node.id === 'root') {
-            table.bootstrapTable('showColumn', 'refDoc');
-            table.bootstrapTable('showColumn', 'libelle');
-            table.bootstrapTable('showColumn', 'noEmployeur');
-            table.bootstrapTable('showColumn', 'extension');
-            table.bootstrapTable('hideColumn', 'uploadUserName');
-            table.bootstrapTable('hideColumn', 'fileName');
-            table.bootstrapTable('hideColumn', 'path');
-            table.bootstrapTable('onFilter', ['uploadUserName', 'trf_fich']);
+
+            oTable.fnFilterClear();
+            table.columns('.detailsLayer').visible( false, false );
+            table.columns('.fileLayer').visible( true, false );
+            table.columns.adjust().draw( false ); // adjust column sizing and redraw
+
+            table.column(4).search( 'trf_fich' ).draw(); //filter on uploadUserName
+
             //$('.breadcrumb').html('<li class="active">Tous les documents</li><li><a href="#"></a></li>');
 
         } else {
             data.instance.toggle_node(data.node);
-            //console.log(data.node);
 
-            //Filter on refDoc
             var nodeid = parseInt(data.node.id);
             if (nodeid > -1 && data.node.li_attr.class === 'leaf') {
-                table.bootstrapTable('showColumn', 'refDoc');
-                table.bootstrapTable('showColumn', 'libelle');
-                table.bootstrapTable('showColumn', 'noEmployeur');
-                table.bootstrapTable('showColumn', 'extension');
-                table.bootstrapTable('hideColumn', 'uploadUserName');
-                table.bootstrapTable('hideColumn', 'fileName');
-                table.bootstrapTable('hideColumn', 'path');
-                table.bootstrapTable('onFilter', ['refDoc', nodeid ]);
+
+                oTable.fnFilterClear();
+                table.columns('.detailsLayer').visible( false, false );
+                table.columns('.fileLayer').visible( true, false );
+                table.columns.adjust().draw( false ); // adjust column sizing and redraw
+
+                table.column(7).search( nodeid ).draw(); //filter on referenceDocument
 
             }
 
             //Filter for upload
             if (data.node.id === 'upload') {
                 //console.log("upload");
-                table.bootstrapTable('hideColumn', 'refDoc');
-                table.bootstrapTable('hideColumn', 'libelle');
-                table.bootstrapTable('hideColumn', 'noEmployeur');
-                table.bootstrapTable('hideColumn', 'extension');
-                table.bootstrapTable('showColumn', 'uploadUserName');
-                table.bootstrapTable('showColumn', 'fileName');
-                table.bootstrapTable('showColumn', 'path');
-                table.bootstrapTable('onFilter', ['uploadUserName', username]);
+
+                oTable.fnFilterClear();
+                table.columns('.detailsLayer').visible( true, false );
+                table.columns('.fileLayer').visible( false, false );
+                table.columns.adjust().draw( false ); // adjust column sizing and redraw
+
+                table.column(4).search( username ).draw(); //filter on uploadUserName
+
 
             }
             //Filter for other category
             if (data.node.id === 'other') {
                 //console.log("other");
-                table.bootstrapTable('hideColumn', 'refDoc');
-                table.bootstrapTable('hideColumn', 'libelle');
-                table.bootstrapTable('hideColumn', 'noEmployeur');
-                table.bootstrapTable('hideColumn', 'extension');
-                table.bootstrapTable('showColumn', 'uploadUserName');
-                table.bootstrapTable('showColumn', 'fileName');
-                table.bootstrapTable('showColumn', 'path');
-                table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "' && item['refDoc'] == '' )");
-                //table.bootstrapTable('onFilter', ['refDoc', 'empty']);
+
+                //table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "' && item['refDoc'] == '' )");
+
+                oTable.fnFilterClear();
+                table.columns('.detailsLayer').visible( true, false );
+                table.columns('.fileLayer').visible( false, false );
+                table.columns.adjust().draw( false ); // adjust column sizing and redraw
+
+                table.column(4).search('[^'+ username +']' ).draw(); //filter on uploadUserName != username
+
+
             }
         }
     }
@@ -578,168 +578,7 @@ $(function (_, moment) {
      * TABLE
      * */
 
- /*   function createTable() {
-
-        return $(tableId).bootstrapTable({
-            data: AjaxData,
-            striped: true,
-            pagination: true,
-            pageSize: 20,
-            pageList: [10, 20],
-            selectItemName: 'btSelectItem',
-            search: true,
-            showColumns: true,
-            showRefresh: true,
-            minimumCountColumns: 5,
-            rowStyle: rowStylef,
-            clickToSelect: false,
-            //maintainSelected: true,
-            columns: [
-                {
-                    field: 'stateField',
-                    align: 'center',
-                    checkbox: true
-
-                },{
-                    field: 'notDownloaded',
-                    title: '<i class="fa fa-download fa-lg"></i>',
-                    align: 'center',
-                    sortable: true,
-                    class: 'dl sortable',
-                    formatter: formatDownload
-                },{
-                    field: 'isNew',
-                    title: i18n[lang].col.new,
-                    align: 'center',
-                    sortable: true,
-                    class: "new sortable",
-                    visible: false,
-                    formatter: formatIsNew
-                },{
-                    field: 'formattedDate',
-                    title: i18n[lang].col.date,
-                    align: 'center',
-                    valign: 'middle',
-                    class: "formattedDate sortable",
-                    sortable: true,
-                    visible: true,
-                    formatter: formatDate
-                },{
-                    field: 'fileName',
-                    title: i18n[lang].col.name,
-                    align: 'center',
-                    valign: 'middle',
-                    visible: false,
-                    sortable: true,
-                    class: "fileName sortable "
-                },{
-                    field: 'uploadUserName',
-                    title: i18n[lang].col.user,
-                    align: 'center',
-                    valign: 'middle',
-                    visible: false,
-                    sortable: true,
-                    formatter: formatUserName,
-                    class: "uploadUserName sortable"
-                },{
-                    field: 'noEmployeur',
-                    title: i18n[lang].col.empl,
-                    align: 'center',
-                    valign: 'middle',
-                    sortable: true,
-                    class: 'empl sortable',
-                    formatter: formatDefault
-                },{
-                    field: 'libelle',
-                    title: i18n[lang].col.label,
-                    align: 'left',
-                    valign: 'middle',
-                    class: 'labelDoc sortable',
-                    sortable: true,
-                    formatter: formatDefault
-                },{
-                    field: 'refDoc',
-                    title: i18n[lang].col.refdoc,
-                    align: 'center',
-                    valign: 'middle',
-                    sortable: true,
-                    class: 'refDoc sortable ',
-                    formatter: formatRefDoc
-                },{
-                    field: 'size',
-                    title: i18n[lang].col.size,
-                    align: 'center',
-                    valign: 'middle',
-                    visible: true,
-                    sortable: true,
-                    class: 'size sortable',
-                    formatter: formatSize
-                },{
-                    field: 'extension',
-                    title: i18n[lang].col.ext,
-                    align: 'center',
-                    valign: 'middle',
-                    sortable: true,
-                    class: 'ext sortable',
-                    formatter: FormatExtension
-                },{
-                    field: 'path',
-                    title: i18n[lang].col.path,
-                    align: 'center',
-                    valign: 'middle',
-                    visible: false,
-                    sortable: true,
-                    formatter: formatPath,
-                    class: 'path sortable'
-                },{
-                    field: 'refClientCompl',
-                    title: i18n[lang].col.refCl,
-                    align: 'center',
-                    valign: 'middle',
-                    visible: false,
-                    sortable: true,
-                    formatter: formatDefault,
-                    class: 'refClientCompl sortable'
-                },{
-                    field: 'counter',
-                    title: i18n[lang].col.count,
-                    align: 'center',
-                    valign: 'middle',
-                    visible: false,
-                    sortable: true,
-                    formatter: formatDefault,
-                    class: 'counter sortable'
-                },{
-                    field: 'refGroups',
-                    title: i18n[lang].col.refGS,
-                    align: 'center',
-                    valign: 'middle',
-                    visible: false,
-                    sortable: true,
-                    formatter: formatDefault,
-                    class: 'refGroups sortable'
-                },{
-                    field: 'operate',
-                    title: i18n[lang].col.del,
-                    align: 'center',
-                    valign: 'middle',
-                    clickToSelect: false,
-                    class: 'operate',
-                    formatter: operateFormatter,
-                    events: {
-                        'click .remove': function (e, value, row, index) {
-                            deleteFile(row.path, row);
-                        }
-                    }
-                }
-            ]
-        });
-
-
-    }*/
-
-    function createDataTable(){
-
+    function templateTable(){
         _.templateSettings = {
             interpolate: /\[\[(.+?)\]\]/g
             //Define an *interpolate* regex to match expressions
@@ -752,7 +591,8 @@ $(function (_, moment) {
 
         var tpl = _.template($('#headertpl').html());
 
-        $('#myTable thead').html(tpl(i18n[lang].col));
+        var table = $(tableId);
+        table.find('thead').html(tpl(i18n[lang].col));
 
         tpl = _.template($('#bodytpl').html());
         var html = {};
@@ -783,9 +623,14 @@ $(function (_, moment) {
             html += tpl(row);
         });
 
-        $('#myTable tbody').html(html);
+        table.find('tbody').html(html);
+    }
 
-        var table = $('#myTable').DataTable({
+    function createDataTable(){
+
+        templateTable();
+
+        var table = $(tableId).DataTable({
             "paging" : true,
             "ordering": true,
             "info" : true,
@@ -796,70 +641,95 @@ $(function (_, moment) {
             },
             "order": [[ 1, 'asc' ]],
             "columnDefs": [
-                {//checkbox
-                    "targets":  0,
+                {
+                    "targets":  0,  //checkbox
                     "visible": true,
                     "orderable": false,
-                    "searchable": false
-                },{ //DownloadCount
-                    "targets": 1
-                },{ // Date
-                    "targets": 2
-                },{ // fileName
-                    "targets": 3 ,
+                    "searchable": true
+                },{
+                    "targets": 1    //DownloadCount HTML
+                },{
+                    "targets": 2    // Date
+                },{
+                    "className": 'detailsLayer',
+                    "targets": 3 ,  // fileName
+                    "visible": false,
+                    "searchable": true
+                }, {
+                    "className": 'detailsLayer',
+                    "targets": 4 ,  // uploadUserName
+                    "visible": false,
+                    "searchable": true
+                },{
+                    "className": 'fileLayer',
+                    "targets": 5    //employerNumber
+                },{
+                    "className": 'fileLayer',
+                    "targets": 6    // label
+                },{
+                    "className": 'fileLayer',
+                    "targets": 7    //referenceDocument
+                },{
+                    "className": 'fileLayer',
+                    "targets": 8    // size
+                },{
+                    "className": 'fileLayer',
+                    "targets": 9    //extension
+                },{
+                    "className": 'detailsLayer',
+                    "targets": [ 10 ],  //path
+                    "visible": false,
+                    "searchable": true
+                }, {
+                    "targets": [ 11 ],  //referenceClient
                     "visible": false,
                     "searchable": false
-                }, { // uploadUserName
-                    "targets": 4 ,
+                }, {
+                    "targets": [ 12 ],  //counter
                     "visible": false,
                     "searchable": false
-                },{ //employerNumber
-                    "targets": 5
-                },{ // label
-                    "targets": 6
-                },{ //referenceDocument
-                    "targets": 7
-                },{ // size
-                    "targets": 8
-                },{ //extension
-                    "targets": 9
-                },{ //path
-                    "targets": [ 10 ],
+                }, {
+                    "targets": [ 13 ],  //referenceGroupS
                     "visible": false,
                     "searchable": false
-                }, { //referenceClient
-                    "targets": [ 11 ],
-                    "visible": false,
-                    "searchable": false
-                }, { //counter
-                    "targets": [ 12 ],
-                    "visible": false,
-                    "searchable": false
-                }, { //referenceGroupS
-                    "targets": [ 13 ],
-                    "visible": false,
-                    "searchable": false
-                },{// remove
-                    "targets": 14,
+                },{
+                    "targets": 14,      // remove
                     "orderable" : false
+                },{
+                    "targets": 15,      // downloadCount
+                    "visible": false,
+                    "searchable": true
                 }
             ],
             "colVis": {
                 "activate": "mouseover",
                 "buttonText": i18n[lang].showHide,
-                "exclude": [ 0, 1, 14 ]
+                "exclude": [ 0, 1, 14, 15 ]
+            },
+            "initComplete": function( settings, json ) {
+                table.column(15).search( '0' ).draw();
+
             }
         });
 
 
-/*        var resultFilter = table.columns()
-            .data()
-            .filter( function ( value, index ) {
-                //console.log(index, AjaxData[index].downloadCount);
-                return AjaxData[index].downloadCount == 0 ? true : false;
-            })
-            console.log(resultFilter);
-            resultFilter.draw();*/
+
+//listner event on menu link.
+        $(".leaf").on('click', function () {
+            var $that = $(this);
+            var filteredData = table
+                .column( 1 )
+                .data()
+                .filter( function ( value, index ) {
+                    console.log($that);
+
+                    var dlCount = $(value).find('small').data('dl');
+
+                    return dlCount === 0 ? true : false;
+                } );
+
+        })
+
 
         // Apply the search
         /*table.columns().eq( 0 ).each( function ( colIdx ) {
@@ -870,15 +740,7 @@ $(function (_, moment) {
                     .draw();
             } );
         } );*/
-        /*
-        var table = $('#example').DataTable();
 
-         for ( var i=0 ; i<4 ; i++ ) {
-            table.column( i ).visible( false, false );
-         }
-         table.columns.adjust().draw( false );
-         // adjust column sizing and redraw
-        */
     }
 
     /****************************************************
