@@ -7,6 +7,8 @@ $(function (_, moment) {
         baseURL = sessionStorage.getItem('baseURL'),
         lang = sessionStorage.getItem("lang"),
         tableId = '#tableID',
+        table = {},
+        oTable = {},
         i18n = {},
         AjaxData = [],
         category = [],
@@ -189,48 +191,6 @@ $(function (_, moment) {
      * FORMAT COLUMNS
      * */
 
-
- /*   function rowStylef(row) {
-        if (row.isNew) return {"classes": "success" };
-        else return {};
-    }
-
-    //Format for the download column
-    function formatDownload(value, row) {
-        var dlCount = row.downloadCount ? row.downloadCount : '';
-        var icon = "fa-download";
-
-        if (row.uploadUserName === username) {
-            icon = "fa-upload";
-        }
-        if (value) {
-            return '<a class="dlfile" data-id="' + row.idFile + '" ' +
-                'data-file="' + row.fileName + '" ><i class="fa ' + icon + ' fa-lg text-primary"></i>' +
-                '<small data-dl="' + row.downloadCount + '" class="text-muted">&nbsp;' + dlCount + '</small></a>';
-        } else {
-            return '<a class="dlfile" data-id="' + row.idFile + '" ' +
-                'data-file="' + row.fileName + '" ><i class="fa ' + icon + ' fa-lg text-muted"></i>' +
-                '<small data-dl="' + row.downloadCount + ' class="text-muted">&nbsp;' + dlCount + '</small></a>';
-        }
-    }
-
-    function formatIsNew(value) {
-        if (value) return "<i class='fa fa-check text-success'></i>";
-        else return "<i class='fa fa-times'></i>";
-    }
-
-    function formatRefDoc(value) {
-        //console.log(index +' >> value = ' + value );
-        if (value) {
-            var v = parseInt(value);
-            if (value > 0) {
-                refDocUsed[refDocUsed.length] = v;
-                return v;
-            }
-        }
-        return '';
-    }
-*/
     function FormatExtension(value, row) {
         if (value || value != '') {
             var v = value.toLowerCase();
@@ -405,8 +365,7 @@ $(function (_, moment) {
      * */
 
     function menuActionClick(e, data) {
-        var table = $(tableId).DataTable();
-        var oTable = $(tableId).dataTable();
+
         //console.log(data);
         if(data.node.parent && data.node.id !== 'upload' && data.node.id !== 'root'){
             $('.breadcrumb').html('<li class="active">' + $("#"+data.node.parent + " a:first").html().substring(7) + '</li><li class="active">'+ data.node.text + '</li><li><a href="#"></a></li>' );
@@ -464,7 +423,10 @@ $(function (_, moment) {
                 table.columns('.fileLayer').visible( false, false );
                 table.columns.adjust().draw( false ); // adjust column sizing and redraw
 
-                table.column(4).search('[^'+ username +']' ).draw(); //filter on uploadUserName != username
+                table
+                    .column(4).search('[^'+ username +']', true, false )
+                    .column(7).search('^\\s*$', true, false)
+                    .draw(); //filter on uploadUserName != username
 
 
             }
@@ -591,15 +553,20 @@ $(function (_, moment) {
 
         var tpl = _.template($('#headertpl').html());
 
-        var table = $(tableId);
-        table.find('thead').html(tpl(i18n[lang].col));
+        var $table = $(tableId);
+        $table.find('thead').html(tpl(i18n[lang].col));
 
         tpl = _.template($('#bodytpl').html());
         var html = {};
 
         _.each(AjaxData, function(row){
 
-            //row.noEmployeur = parseInt(row.noEmployeur);
+           /* if (row.isNew) return "<i class='fa fa-check text-success'></i>";
+            else return "<i class='fa fa-times'></i>";*/
+
+            if (row.isNew) row.classNew = 'isNew';
+            else row.classNew = 'notNew';
+
             if(parseInt(row.downloadCount) > 0) row.alreadyDL = 'text-muted';
             else row.alreadyDL = 'text-primary';
             row.downloadCount = parseInt(row.downloadCount);
@@ -618,19 +585,20 @@ $(function (_, moment) {
             row.dateFormatted = moment(row.date,"YYYY-MM-DD").format("DD/MM/YYYY");
             row.sizeFormatted = formatSize(row.size);
             row.extensionFormatted = FormatExtension(row.extension, row);
-            row.uploadUserName.toUpperCase();
+            //row.uploadUserName.toUpperCase();
 
             html += tpl(row);
         });
 
-        table.find('tbody').html(html);
+        $table.find('tbody').html(html);
     }
 
     function createDataTable(){
 
         templateTable();
 
-        var table = $(tableId).DataTable({
+        //DataTable object
+        table = $(tableId).DataTable({
             "paging" : true,
             "ordering": true,
             "info" : true,
@@ -677,19 +645,19 @@ $(function (_, moment) {
                     "targets": 9    //extension
                 },{
                     "className": 'detailsLayer',
-                    "targets": [ 10 ],  //path
+                    "targets": 10 ,  //path
                     "visible": false,
                     "searchable": true
                 }, {
-                    "targets": [ 11 ],  //referenceClient
+                    "targets": 11 ,  //referenceClient
                     "visible": false,
                     "searchable": false
                 }, {
-                    "targets": [ 12 ],  //counter
+                    "targets": 12 ,  //counter
                     "visible": false,
                     "searchable": false
                 }, {
-                    "targets": [ 13 ],  //referenceGroupS
+                    "targets": 13,  //referenceGroupS
                     "visible": false,
                     "searchable": false
                 },{
@@ -699,55 +667,37 @@ $(function (_, moment) {
                     "targets": 15,      // downloadCount
                     "visible": false,
                     "searchable": true
+                },{
+                    "targets": 16,
+                    "visible": false,
+                    "searchable": true
                 }
             ],
             "colVis": {
                 "activate": "mouseover",
                 "buttonText": i18n[lang].showHide,
-                "exclude": [ 0, 1, 14, 15 ]
+                "exclude": [ 0, 1, 14, 15, 16 ]
             },
             "initComplete": function( settings, json ) {
-                table.column(15).search( '0' ).draw();
+                table
+                    .column(4).search('[^'+username+']', true, false)
+                    .column(15).search( '0' )   // not downloaded yet
+                    .draw();
+
 
             }
         });
 
-
-
-//listner event on menu link.
-        $(".leaf").on('click', function () {
-            var $that = $(this);
-            var filteredData = table
-                .column( 1 )
-                .data()
-                .filter( function ( value, index ) {
-                    console.log($that);
-
-                    var dlCount = $(value).find('small').data('dl');
-
-                    return dlCount === 0 ? true : false;
-                } );
-
-        })
-
-
-        // Apply the search
-        /*table.columns().eq( 0 ).each( function ( colIdx ) {
-            $( 'input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
-                table
-                    .column( colIdx )
-                    .search( this.value )
-                    .draw();
-            } );
-        } );*/
-
+        //jQuery object
+        oTable = $(tableId).dataTable();
     }
 
     /****************************************************
      * AJAX
      * */
-
-     function deleteFile(filePath) {
+    function deleteFile(filePath, $this) {
+        //The FTP can delete a file by its path or by its ID (same method on backend)
+        //So it works if the fileID is in the filePath
         var data = {
             "token": token,
             "filePath": filePath
@@ -759,7 +709,11 @@ $(function (_, moment) {
             success: function (data) {
                 if (data) {
                     alert(i18n[lang].file.del);
-                    location.reload();
+                    table
+                        .row( $this.closest('tr') )
+                        .remove()
+                        .draw();
+                    //location.reload();
                 } else {
                     alert("ERROR");
                 }
@@ -840,12 +794,14 @@ $(function (_, moment) {
 
         //DOWNLOAD files
         $table.on('click', '.dlfile', function () {
-            $(this).attr('href', serverURL + 'file/' + token + '/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
+            var $this = $(this);
+            $this.attr('href', serverURL + 'file/' + token + '/' + $this.data('file-id') + '/' + $this.data('filename'));
             //Update icon
-            $(this).find('i').remove();
-            var small = $(this).find('small');     // cache object
-            $(this).prepend("<i class='fa fa-download text-muted'></i>"); //mark as already downloaded
+            $this.find('i').remove();
+            var small = $this.find('small');     // cache object
+            $this.prepend("<i class='fa fa-download fa-lg text-muted'></i>"); //mark as already downloaded
             var dl = parseInt(small.data('dl')) + 1;
+            $this.parent().data('order', dl);
             small.data('dl', dl); // increment by one the download count
             small.html('&nbsp;' + dl);
         });
@@ -859,10 +815,16 @@ $(function (_, moment) {
 
         // Filter
         $('#filterDL').on('click', function () {
-            $table.bootstrapTable('onFilter', "(item['notDownloaded'] && item['uploadUserName'] !== '" + username + "')");
+            //$table.bootstrapTable('onFilter', "(item['notDownloaded'] && item['uploadUserName'] !== '" + username + "')");
+            table.column(4).search('[^'+ username +']', true, false).draw();
         });
         $('#filterNew').on('click', function () {
-            $table.bootstrapTable('onFilter', "item['isNew']");
+            table.column(16).search('true').draw();
+        });
+
+        //Delete file
+        $('.remove').on('click', function(){
+            deleteFile($(this).data('file-id'), $(this));
         });
 
         //multidownload
@@ -902,7 +864,7 @@ $(function (_, moment) {
             mergeLabelDoc();
 
             //var $table = createTable();
-        createDataTable();
+            createDataTable();
 
             createMenu();
 
@@ -926,6 +888,7 @@ $(function (_, moment) {
 
         // LOGOUT
         $('#signout').on('click', function () {
+            //TODO: put confirmation
             sessionStorage.setItem("token", '');
             window.location = baseURL;
         });
