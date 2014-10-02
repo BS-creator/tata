@@ -4,35 +4,42 @@ $('document').ready(function(){
     //                  SIDE-MENU
     ///////////////////////////////////////////////////////
 
+    var $main   = $('#main');
+    var $sbleft = $('.sidebar-left');
+    var $smenu  = $('#side-menu');
+
     // initialize size & display /default
     (function() {
+
+        var sbWidth = $sbleft.width();
         $('#side-menu').css({
-            top: $('#main').offset().top, // get top height to align
-            right: -$('.sidebar-left').width(),
-            width: $('.sidebar-left').width(),
-            height: $(window).height()- $('#main').offset().top
+            top: $main.offset().top, // get top height to align
+            right: -sbWidth,
+            width: sbWidth,
+            height: $(window).height()- $main.offset().top
         }).removeClass();
     })();
 
     // set position
     var sideMenuToggle = function(displayed){
-        var MSAbsc = (displayed === true) ? 0 : -$('.sidebar-left').width();
-        var mainAbsc = (displayed === false) ? 0 : -$('.sidebar-left').width();
-        $('#main').animate({
+        var sbWidth = $sbleft.width();
+        var MSAbsc = (displayed === true) ? 0 : -sbWidth;
+        var mainAbsc = (displayed === false) ? 0 : -sbWidth;
+        $main.animate({
             right: -mainAbsc
         });
-        $('#side-menu').animate({
+        $smenu.animate({
             right: MSAbsc,
-            width: $('.sidebar-left').width()
+            width: sbWidth
         }).toggleClass('active');
     }
 
     // resize side-menu width x height
     $(window).resize(function() {
-        $('#side-menu').height($(window).height()- $('#header').height());
-        if($('#side-menu').hasClass('active')) {
+        $smenu.height($(window).height() - $('#header').height());
+        if($smenu.hasClass('active')) {
             sideMenuToggle(false);
-            $(this).width($('.sidebar-left').width());
+            $(this).width($sbleft.width());
         }
     });
     $(window).trigger('resize');
