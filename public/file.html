@@ -18,12 +18,9 @@
         <link rel="stylesheet" href="css/portal-components.css">
         <link rel="stylesheet" href="css/fileupload/jquery.fileupload.css"/>
         <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui.css"/>
-
+        <link rel="stylesheet" href="css/gs-transfer.css">
         <noscript><link rel="stylesheet" href="css/fileupload/jquery.fileupload-noscript.css"></noscript>
         <noscript><link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui-noscript.css"></noscript>
-
-        <link rel="stylesheet" href="css/gs-transfer.css">
-
         <!-- endbuild -->
     </head>
     <body>
@@ -133,7 +130,28 @@
 
             <div id="contentTable" class="col-md-9 col-xs-12">
                 <!--TABLE CONTENT-->
-                <table id="mainTable" ></table>
+                <div class="col-xs-12">
+                    <div class="filter"><!-- FILTERS -->
+                        <!--filtrer par-->
+                        <div class="btn-group pull-left">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                Filtrer par <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;Nouveaux fichiers</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Fichiers non-téléchargés</a></li>
+                            </ul>
+                        </div>
+                        <input class="pull-left ml-s" type="text" name="search" placeholder="Recherche ..."/>
+
+                        <!--refresh & toggle config table-->
+                        <div class="btn-group pull-right ml-s mr-m">
+                            <button type="button" class="btn btn-default"> <i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Rafraîchir</button>
+                            <button id="toggle-side-menu" type="button" class="btn btn-default"> <i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;Affichage</button>
+                        </div>
+                    </div>
+                </div>
 
                 <table id="tableID" class="display table table-striped">
                     <thead>
