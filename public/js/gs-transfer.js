@@ -552,7 +552,7 @@ $(function (_, moment) {
             "paging": true,
             "ordering": true,
             "info": true,
-            "stateSave": true,
+            //"stateSave": true,
             "lengthMenu": [
                 [10, 20, 50, -1],
                 [10, 20, 50, i18n[lang].listAll]

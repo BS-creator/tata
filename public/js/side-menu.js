@@ -4,7 +4,7 @@ $('document').ready(function () {
     //                  SIDE-MENU
     ///////////////////////////////////////////////////////
 
-console.log($('#main').offset().top);
+//console.log($('#main').offset().top);
     var $main = $('#main');
     var $sbleft = $('.sidebar-left');
     var $smenu = $('#side-menu');
@@ -31,7 +31,7 @@ console.log($('#main').offset().top);
         });
         $smenu.animate({
             right: MSAbsc,
-            width: sbWidth
+            width: $sbleft.width()
         }).toggleClass('active');
     }
 
