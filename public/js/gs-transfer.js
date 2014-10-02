@@ -390,7 +390,7 @@ $(function (_, moment) {
 
         refDocUsed = getUsedDocRef(AjaxData);
 
-        console.log(refDocUsed);
+        //console.log(refDocUsed);
         // BUILD TREE
         $.each(category, function (i, item) {
 
@@ -752,11 +752,19 @@ $(function (_, moment) {
 
     function setEventsHTML() {
 
+        /***** UPLOAD *****/
+        //TODO: put it in CSS, just use it to translate!!!
         $('#btn-upload-div span').html('<i class="fa fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].upload);
         $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].modalupload);
         $('#modalbq').html(i18n[lang].modalbq);
 
-        //Language settings
+        $('input[type=file]').bootstrapFileInput(i18n[lang].modalbtn);
+
+        $("#upload-modal .btn-upload").on('click', function () {
+            $("#upload-modal .btn-upload").toggleClass("active", "active");
+        });
+
+        /***** LANGUAGE SETTINGS *****/
         $('.login-lang').on('click', function () {
             //console.log($(this).html().toLowerCase());
             sessionStorage.setItem("lang", $(this).html().toLowerCase());
@@ -765,7 +773,7 @@ $(function (_, moment) {
 
         var $table = $(tableId);
 
-        //DOWNLOAD files
+        /***** DOWNLOAD *****/
         $table.on('click', '.dlfile', function () {
             var $this = $(this);
             $this.attr('href', serverURL + 'file/' + token + '/' + $this.data('file-id') + '/' + $this.data('filename'));
@@ -780,18 +788,18 @@ $(function (_, moment) {
         });
 
 
-        //select all
+        /***** CHECKBOX SELECT ALL *****/
         $('input[name=btSelectAll]').on('change', function(){
             $('input[name|=cb]').toggle(); //TODO
         })
 
-        // RELOAD
+        /***** RELOAD *****/
         $('.reloadme').on('click', function () {
             //$table.bootstrapTable('onFilter');
             location.reload();
         });
 
-        // Search
+        /***** SEARCH *****/
         var searchInput = $('input[name=search]');
         searchInput.on( 'keyup', function () {
             table.search( this.value ).draw();
@@ -799,44 +807,43 @@ $(function (_, moment) {
 
         searchInput.attr('placeholder',i18n[lang].button.search);
 
-        // Filter
-        $('#filterNew').on('click', function () {
+        /***** FILTER *****/
+        var filterNew = $('#filterNew');
+        filterNew.on('click', function () {
             table
                 .column(16).search('true')
                 //.column(4).search('[^' + username + ']', true, false)
                 .draw();
         });
+        filterNew.text(i18n[lang].button.filter.new);
 
-        $('#filterDL').on('click', function () {
+        var filterDL = $('#filterDL');
+        filterDL.on('click', function () {
             table
                 .column(15).search('0')
                 .column(4).search('[^' + username + ']', true, false)
                 .draw();
         });
+        filterDL.text(i18n[lang].button.filter.notDL);
 
-        $('#filterClear').on('click', function (){
+        var filterClear = $('#filterClear');
+        filterClear.on('click', function (){
+            searchInput.text(''); // TODO: BUG?
             oTable.fnFilterClear();
-        })
+        });
+        filterClear.text(i18n[lang].button.filter.clear);
 
-
-        //Delete file
+        /***** DELETE *****/
         $('.remove').on('click', function () {
             deleteFile($(this).data('file-id'), $(this));
         });
 
-        //multidownload
+        /***** MULTIDOWNLOAD *****/
         $('.downloadall').on('click', downloadAll);
 
-        // Upload
-        // btn bootstrap
-        $('input[type=file]').bootstrapFileInput(i18n[lang].modalbtn);
 
-        // add css active to btn
-        $("#upload-modal .btn-upload").on('click', function () {
-            $("#upload-modal .btn-upload").toggleClass("active", "active");
-        });
 
-        // date picker
+        /***** DATE PICKER *****/
         $('#datepicker input').datepicker({
             format: "dd/mm/yyyy",
             language: lang === 'nl' ? "nl-BE" : lang,
