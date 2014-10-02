@@ -27,6 +27,25 @@ ul, li {
 .btn-upload {
     border-radius: 0 !important;
 }
+.btn,
+.btn-upload {
+    padding: 14px 12px;
+    font-weight: normal;
+    color: #999;
+    /* transition */
+    -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
+       -moz-transition: all 0.4s ease;/* Firefox 4-15 */
+         -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
+            transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
+}
+.btn:hover,
+.btn:focus,
+.btn:active,
+.btn.active {
+    color: #222;
+    border: 1px solid #adadad;
+    background-color: transparent;
+}
 .btn-success {
     border-color: #5CB85C;
 }

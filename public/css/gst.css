@@ -1,5 +1,5 @@
 /*
-3  5  8  13  21  34  55  89  144  233  377
+2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
 div#header
 div#top-nav
 ul.sidebar-left
@@ -21,13 +21,13 @@ body {
 /*                        HEADER                            */
 /************************************************************/
 #header {
-  height: 89px;
+  height: 80.9px;
   background-color: #0b68a1;
 }
-#header span {
-  display: block;
+#header ul {
+  margin: 0;
+  padding: 0;
   color: white;
-  padding-top: 42px;
   letter-spacing: .1em;
   font-size: 16px;
   font-style: italic;
@@ -36,7 +36,7 @@ body {
 #logo {
   float: left;
   display:block;
-  height: 83px;
+  height: 73px;
   width: 73px;
   overflow: hidden;
   padding:10px;
@@ -54,9 +54,9 @@ body {
 }
 #top-nav li,
 #top-nav i {
-  height: 55px;
+  height: 50px;
   font-size: 24px;
-  line-height: 55px;
+  line-height: 50px;
   float: left;
 }
 
@@ -71,8 +71,6 @@ body {
 }*/
 #signout,
 #toggle-side-menu {
-  line-height: 55px;
-  font-size: 24px;
   -webkit-transition: all 0.5s ease;/* Safari 3.2+, Chrome */
   -moz-transition: all 0.5s ease;/* Firefox 4-15 */
   -o-transition: all 0.5s ease;/* Opera 10.5-12.00 */
@@ -91,9 +89,9 @@ body {
 }
 
 
-/**************/
-/*  .sidebar-left  */
-/************/
+/**************************************************/
+/*                .sidebar-left                  */
+/************************************************/
 /* ul */
 .sidebar-left {
   margin: 0;
@@ -102,11 +100,10 @@ body {
 
 .sidebar-left > li {
   margin-bottom: 1px;
-  padding: 12px 0 12px 20px;
+  padding: 15px 0 15px 21px;
   font-family: 'Roboto';
   font-weight: 300;
   font-size: 14px;
-  line-height: 30px;
   color: #FFF;
   background-color: #3f9ad0;
   cursor: pointer;
@@ -120,6 +117,7 @@ body {
        -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
           transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
 }
+
 li.sidebar-h-0:hover,
 li.sidebar-h-0:focus,
 li.sidebar-h-0:active,
@@ -159,68 +157,78 @@ li.sidebar-h-5.active {
 }
 
 
-/**************/
-/* side-menu */
-/************/
-
-/* position for animate */
+/**************************************/
+/*          SLIDE #side-menu         */
+/************************************/
 #side-menu {
-  width: 300px;
-  height: 800px;
-  top: 89px; /* depends on the header height */
+
+  position: absolute;
   background-color: #0b68a1;
   color: white;
 }
-.side-menu-hide {
-  position: absolute;
-  right: -300px; /* equals side-menu width */
+#side-menu.active {
+
 }
-.side-menu-show {
+#main {
   position: absolute;
-  right: 0px;
-}
-.main-show {
-  position: relative;
-}
-.main-hide {
-  position: absolute;
-  left: -300px; /* equals side-menu width */
-  top: 0px;
   width: 100%;
 }
 
 
 /* style */
-.side-menu-head {
+.side-menu-head,
+.side-menu-head-icon {
   margin: 0;
-  padding: 17px 0px 17px 25px;
+  padding: 10px 0px 11px 25px;
   font-size: 16px;
   text-transform: uppercase;
   background-color: #3f9ad0;
-  opacity: .68;
+  /* border-bottom: 1px solid #3f9ad0; */
+  color: #ABD3E1;
+
 }
-.side-menu-head > span {
-  padding: 0 13px;
+.side-menu-head-icon {
+  font-size: 24px;
 }
+.side-menu-head i {
+  color: white;
+  opacity: .8;
+    /* transition */
+  -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
+  -moz-transition: all 0.4s ease;/* Firefox 4-15 */
+  -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
+  transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
+}
+.side-menu-head i:hover,
+.side-menu-head i:focus,
+.side-menu-head i:active,
+.side-menu-head i.active { 
+  
+  opacity: 1;
+}
+
 .side-menu-list {
   margin: 1px 0 0 0;
   padding: 0;
 }
 .side-menu-list > li.active:before {
+  font-size: 14px;
   font-family: 'FontAwesome';
   content: "\f00c";
 }
 .side-menu-list > li {
+  height: 50px;
   margin-bottom: 1px;
-  padding: 13px 0 13px 34px;
-  line-height: 30px;
-  color: #FFF;
-  background-color: #0b68a1;
-  cursor: pointer;
+  padding: 15px 0px 15px 34px;
   /* add ... on resize instead of break line */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 14px;
+  color: #FFF;
+  background-color: #0b68a1;
+  cursor: pointer;
+  
   /* transition */
   -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
   -moz-transition: all 0.4s ease;/* Firefox 4-15 */
@@ -239,6 +247,10 @@ li.sidebar-h-5.active {
 i, li {
   cursor: pointer;
 }
+
+
+
+
 /*
-3  5  8  13  21  34  55  89  144  233  377
+2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
 */

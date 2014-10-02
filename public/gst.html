@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class="no-js" lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Group S Portail</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- build:css css/file.min.css -->
+    <link rel="stylesheet" href="bootstrap-3.2.0/css/bootstrap.css"/>
+    <link rel="stylesheet" href="font-awesome-4.2.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="DataTables/media/css/jquery.dataTables.css"/>
+    <link rel="stylesheet" href="DataTables/resources/bootstrap/3/dataTables.bootstrap.css"/>
+    <link rel="stylesheet" href="css/portal-components.css">
+    <link rel="stylesheet" href="css/fileupload/jquery.fileupload.css"/>
+    <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui.css"/>
+    <!--<link rel="stylesheet" href="css/gs-transfer.css">-->
+    <link rel="stylesheet" href="css/gst.css">
+    <noscript><link rel="stylesheet" href="css/fileupload/jquery.fileupload-noscript.css"></noscript>
+    <noscript><link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui-noscript.css"></noscript>
+    <!-- endbuild -->
+</head>
+<body>
+
+
+    <div id="header"> <!--header-->
+        <div class="container-fuild">
+            <div class="row"> <!--raw sidebar + table-->
+                <div class="col-xs-12">
+                    <ul>
+                        <li>
+                            <a id="logo" href="" >
+                                <img alt="Group S Logo" src="css/images/header-logo-groups.png">
+                            </a>
+                        </li>
+                        <li class="brand">Group S Portail France</li>
+<!--                        <li id="toapps" class="pull-right">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                    &nbsp;&nbsp;<i class="fa fa-cog"></i>&nbsp;&nbsp;
+                                    <i class="fa fa-sort-down"></i>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+
+                        </li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main">
+
+        <div class="clearfix" id="top-nav">
+            <ul>
+                <li class="user-name pull-left">Username</li>
+                <!--<li id="toggle-side-menu" class="pull-right">&nbsp;&nbsp;<i class="fa fa-reorder"></i></li>-->
+                <li id="signout" class="pull-right" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Se déconnecter">&nbsp;&nbsp;<i class="fa fa-sign-out"></i></li>
+            </ul>
+        </div>
+
+        <div class="container-fuild">
+            <div class="row"> <!--raw sidebar + table-->
+                <div class="col-xs-12 col-md-3"> <!--sidebar-->
+                    <ul class="sidebar-left">
+                        <li class="sidebar-h-0"><i class="fa fa-upload"></i>&nbsp;&nbsp;&nbsp;Transmettre des fichiers à Group S</li>
+                        <li class="sidebar-h-1">Paie &amp; Post paie
+<!--                            <ul>
+                                <li>32 - Fiche de paie</li>
+                                <li>32 - Fiche de paie</li>
+                            </ul>-->
+                        </li>
+                        <li class="sidebar-h-2">Gestion des entrées &amp; sorties</li>
+                        <li class="sidebar-h-3">Gestion des arr&ecirc;ts</li>
+                        <li class="sidebar-h-4">Gestion administrative</li>
+                        <li class="sidebar-h-5"><i class="fa fa-envelope-o"></i>&nbsp;&nbsp;&nbsp;Nous contacter</li>
+                    </ul>
+                </div><!--/sidebar-->
+                <div class="col-xs-12 col-md-9">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="filter"><!-- FILTERS -->
+                                <!--filtrer par-->
+                                <div class="btn-group pull-left">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        Filtrer par <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;Nouveaux fichiers</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Fichiers non-téléchargés</a></li>
+                                    </ul>
+                                </div>
+                                <input class="pull-left ml-s" type="text" name="search" placeholder="Recherche ..."/>
+
+                                <!--refresh & toggle config table-->
+                                <div class="btn-group pull-right ml-s mr-m">
+                                    <button type="button" class="btn btn-default"> <i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Rafraîchir</button>
+                                    <button id="toggle-side-menu" type="button" class="btn btn-default"> <i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;Affichage</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /row FILTERS -->
+                </div>
+            </div> <!--/raw sidebar + table-->
+        </div>
+    </div>
+
+    <div id="side-menu">
+        <p class="side-menu-head-icon text-center pr-m"> <i class="fa fa-chevron-right"></i> </p>
+        <p class="side-menu-head text-center">Configuration du tableau</p>
+        <ul class="side-menu-list">
+            <li>&nbsp;&nbsp;&nbsp;Framboise</li>
+            <li>&nbsp;&nbsp;&nbsp;Cranburry</li>
+            <li>&nbsp;&nbsp;&nbsp;Cassis</li>
+            <li>&nbsp;&nbsp;&nbsp;Fraise</li>
+            <li>&nbsp;&nbsp;&nbsp;Dans</li>
+            <li>&nbsp;&nbsp;&nbsp;La</li>
+            <li>&nbsp;&nbsp;&nbsp;Pavlova</li>
+        </ul>
+    </div>
+
+    <script src="js/jquery.js"></script>
+    <script src="bootstrap-3.2.0/js/bootstrap.min.js"></script>
+    <script src="js/gst.js"></script>
+    <script src="js/side-menu.js"></script>
+
+</body>
+</html>
