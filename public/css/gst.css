@@ -20,11 +20,11 @@ body {
 /************************************************************/
 /*                        HEADER                            */
 /************************************************************/
-#header {
+header {
   height: 80.9px;
   background-color: #0b68a1;
 }
-#header ul {
+header ul {
   margin: 0;
   padding: 0;
   color: white;
