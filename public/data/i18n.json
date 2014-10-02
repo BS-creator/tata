@@ -1,5 +1,8 @@
 {
     "fr": {
+        "url":{
+            "table": "DataTables/resources/language/FR.json"
+        },
         "col":{
             "new"   : "Nouveau",
             "date"  : "Date",
@@ -36,6 +39,9 @@
         "errorSession": "Session expirée"
     },
     "nl":{
+        "url":{
+            "table": "DataTables/resources/language/NL.json"
+        },
         "col":{
             "new"   : "Nieuw",
             "date"  : "Datum",
@@ -72,6 +78,9 @@
         "errorSession" : "Sessie verlopen"
     },
     "en":{
+        "url":{
+            "table": "DataTables/resources/language/EN.json"
+        },
         "col":{
             "new"   : "New",
             "date"  : "Date",

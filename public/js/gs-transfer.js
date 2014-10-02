@@ -605,7 +605,7 @@ $(function (_, moment) {
             "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, i18n[lang].listAll]],
             "dom": '<"top"iCfT>rt<"bottom"flp><"clear">',
             "language" : {
-                "url" : "DataTables/resources/language/French.json" //TODO: i18n make a function i18n
+                "url" : i18n[lang].url.table
             },
             "order": [[ 1, 'asc' ]],
             "columnDefs": [
@@ -676,7 +676,8 @@ $(function (_, moment) {
             "colVis": {
                 "activate": "mouseover",
                 "buttonText": i18n[lang].showHide,
-                "exclude": [ 0, 1, 14, 15, 16 ]
+                "exclude": [ 0, 1, 14, 15, 16 ],
+                "restore": "restore"
             },
             "initComplete": function( settings, json ) {
                 table
@@ -851,8 +852,6 @@ $(function (_, moment) {
             .off('keyup').on('keyup', function (event) {
                 setTimeout(filterDate, 500, event); // 500ms
         });
-
-
     }
 
     /****************************************************
@@ -882,8 +881,6 @@ $(function (_, moment) {
             //$("input[name='btSelectAll']").trigger('click');
 
         });
-
-
     }
 
     function main() {
@@ -908,8 +905,6 @@ $(function (_, moment) {
                 window.location = baseURL;
             }
         });
-
-
     }
 
     $('document').ready(main());
