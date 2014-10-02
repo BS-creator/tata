@@ -101,7 +101,7 @@ $(function (_, moment) {
                 if (cat.referenceDocument == parseInt(row.referenceDocument)) {
                     row.label = labelDoc_i18n(cat);
                 } else {
-                    if(!row.referenceDocument){
+                    if (!row.referenceDocument) {
                         row.label = row.fileName;
                     }
                 }
@@ -152,11 +152,11 @@ $(function (_, moment) {
      * INTERNATIONALIZATION i18n
      * */
 
-    function loadTable_i18n(){
-        if(lang === "fr"){
+    function loadTable_i18n() {
+        if (lang === "fr") {
             $.getScript("js/locale/bootstrap-table-fr_BE.js");
             $.getScript("js/locale/bootstrap-datepicker.fr.js");
-        } else if (lang === "nl"){
+        } else if (lang === "nl") {
             $.getScript("js/locale/bootstrap-table-nl_BE.js");
             $.getScript("js/locale/bootstrap-datepicker.nl-BE.js");
         } else {
@@ -164,25 +164,26 @@ $(function (_, moment) {
         }
     }
 
-    function labelDoc_i18n(item){
-        if(lang === "fr"){
+    function labelDoc_i18n(item) {
+        if (lang === "fr") {
             return item.labelDoc_f;
-        }else if (lang === "nl"){
+        } else if (lang === "nl") {
             return item.labelDoc_n;
-        }else if (lang === "de"){
+        } else if (lang === "de") {
             return item.labelDoc_d;
-        }else {
+        } else {
             return item.labelDoc_x;
         }
     }
-    function labelCat_i18n(item){
-        if(lang === "fr"){
+
+    function labelCat_i18n(item) {
+        if (lang === "fr") {
             return item.labelCategory_f;
-        }else if (lang === "nl"){
+        } else if (lang === "nl") {
             return item.labelCategory_n;
-        }else if (lang === "de"){
+        } else if (lang === "de") {
             return item.labelCategory_d;
-        }else {
+        } else {
             return item.labelCategory_x;
         }
     }
@@ -243,33 +244,33 @@ $(function (_, moment) {
         //return bytesToSize(val);
     }
 
-/*    function formatUserName(value) {
-        return value.toUpperCase();
-    }
+    /*    function formatUserName(value) {
+     return value.toUpperCase();
+     }
 
-    function formatDate(value, row) {
-        var year = row.date.slice(0, 4),
-            month = row.date.slice(5, 7),
-            day = row.date.slice(8, 10);
-        return day + "/" + month + "/" + year;
-    }
+     function formatDate(value, row) {
+     var year = row.date.slice(0, 4),
+     month = row.date.slice(5, 7),
+     day = row.date.slice(8, 10);
+     return day + "/" + month + "/" + year;
+     }
 
-    function formatPath(value) {
-        return value.replace('/data/' + username + '/', '');
-    }
+     function formatPath(value) {
+     return value.replace('/data/' + username + '/', '');
+     }
 
-    function formatDefault(value) {
-        if (!value || value == '') return '';
-        else return value;
-    }
+     function formatDefault(value) {
+     if (!value || value == '') return '';
+     else return value;
+     }
 
-    function operateFormatter() {
-        return [
-            '<a class="remove" title="Remove">',
-            '<i class="fa fa-trash fa-lg"></i>',
-            '</a>'
-        ].join('');
-    }*/
+     function operateFormatter() {
+     return [
+     '<a class="remove" title="Remove">',
+     '<i class="fa fa-trash fa-lg"></i>',
+     '</a>'
+     ].join('');
+     }*/
 
     /****************************************************
      * DOWNLOAD (ZIP)
@@ -277,28 +278,28 @@ $(function (_, moment) {
 
     function downloadAll() {
 
-        var array   = $(tableId).bootstrapTable('getSelections'),
-            listID  = '';
+        var array = $(tableId).bootstrapTable('getSelections'),
+            listID = '';
 
-            $.each(array, function (i, item) {
-                listID += item.idFile + '@!';
-            });
+        $.each(array, function (i, item) {
+            listID += item.idFile + '@!';
+        });
 
-            var params = {
-                "token": token,
-                "fileID": listID
-            };
+        var params = {
+            "token": token,
+            "fileID": listID
+        };
 
-            var form = $('<form method="POST" action="' + serverURL + 'file/zip">');
+        var form = $('<form method="POST" action="' + serverURL + 'file/zip">');
 
-            $.each(params, function (k, v) {
-                form.append($('<input type="hidden" name="' + k +
-                    '" value="' + v + '">'));
-            });
+        $.each(params, function (k, v) {
+            form.append($('<input type="hidden" name="' + k +
+                '" value="' + v + '">'));
+        });
 
-            $('body').append(form);
+        $('body').append(form);
 
-            form.submit();
+        form.submit();
 
     }
 
@@ -367,20 +368,20 @@ $(function (_, moment) {
     function menuActionClick(e, data) {
 
         //console.log(data);
-        if(data.node.parent && data.node.id !== 'upload' && data.node.id !== 'root'){
-            $('.breadcrumb').html('<li class="active">' + $("#"+data.node.parent + " a:first").html().substring(7) + '</li><li class="active">'+ data.node.text + '</li><li><a href="#"></a></li>' );
-        }else{
-            $('.breadcrumb').html('<li class="active">'+ data.node.text + '</li><li><a href="#"></a></li>' );
+        if (data.node.parent && data.node.id !== 'upload' && data.node.id !== 'root') {
+            $('.breadcrumb').html('<li class="active">' + $("#" + data.node.parent + " a:first").html().substring(7) + '</li><li class="active">' + data.node.text + '</li><li><a href="#"></a></li>');
+        } else {
+            $('.breadcrumb').html('<li class="active">' + data.node.text + '</li><li><a href="#"></a></li>');
         }
 
         if (data.node.id === 'root') {
 
             oTable.fnFilterClear();
-            table.columns('.detailsLayer').visible( false, false );
-            table.columns('.fileLayer').visible( true, false );
-            table.columns.adjust().draw( false ); // adjust column sizing and redraw
+            table.columns('.detailsLayer').visible(false, false);
+            table.columns('.fileLayer').visible(true, false);
+            table.columns.adjust().draw(false); // adjust column sizing and redraw
 
-            table.column(4).search( 'trf_fich' ).draw(); //filter on uploadUserName
+            table.column(4).search('trf_fich').draw(); //filter on uploadUserName
 
             //$('.breadcrumb').html('<li class="active">Tous les documents</li><li><a href="#"></a></li>');
 
@@ -391,11 +392,11 @@ $(function (_, moment) {
             if (nodeid > -1 && data.node.li_attr.class === 'leaf') {
 
                 oTable.fnFilterClear();
-                table.columns('.detailsLayer').visible( false, false );
-                table.columns('.fileLayer').visible( true, false );
-                table.columns.adjust().draw( false ); // adjust column sizing and redraw
+                table.columns('.detailsLayer').visible(false, false);
+                table.columns('.fileLayer').visible(true, false);
+                table.columns.adjust().draw(false); // adjust column sizing and redraw
 
-                table.column(7).search( nodeid ).draw(); //filter on referenceDocument
+                table.column(7).search(nodeid).draw(); //filter on referenceDocument
 
             }
 
@@ -404,11 +405,11 @@ $(function (_, moment) {
                 //console.log("upload");
 
                 oTable.fnFilterClear();
-                table.columns('.detailsLayer').visible( true, false );
-                table.columns('.fileLayer').visible( false, false );
-                table.columns.adjust().draw( false ); // adjust column sizing and redraw
+                table.columns('.detailsLayer').visible(true, false);
+                table.columns('.fileLayer').visible(false, false);
+                table.columns.adjust().draw(false); // adjust column sizing and redraw
 
-                table.column(4).search( username ).draw(); //filter on uploadUserName
+                table.column(4).search(username).draw(); //filter on uploadUserName
 
 
             }
@@ -419,12 +420,12 @@ $(function (_, moment) {
                 //table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "' && item['refDoc'] == '' )");
 
                 oTable.fnFilterClear();
-                table.columns('.detailsLayer').visible( true, false );
-                table.columns('.fileLayer').visible( false, false );
-                table.columns.adjust().draw( false ); // adjust column sizing and redraw
+                table.columns('.detailsLayer').visible(true, false);
+                table.columns('.fileLayer').visible(false, false);
+                table.columns.adjust().draw(false); // adjust column sizing and redraw
 
                 table
-                    .column(4).search('[^'+ username +']', true, false )
+                    .column(4).search('[^' + username + ']', true, false)
                     .column(7).search('^\\s*$', true, false)
                     .draw(); //filter on uploadUserName != username
 
@@ -540,7 +541,7 @@ $(function (_, moment) {
      * TABLE
      * */
 
-    function templateTable(){
+    function templateTable() {
         _.templateSettings = {
             interpolate: /\[\[(.+?)\]\]/g
             //Define an *interpolate* regex to match expressions
@@ -559,30 +560,30 @@ $(function (_, moment) {
         tpl = _.template($('#bodytpl').html());
         var html = {};
 
-        _.each(AjaxData, function(row){
+        _.each(AjaxData, function (row) {
 
-           /* if (row.isNew) return "<i class='fa fa-check text-success'></i>";
-            else return "<i class='fa fa-times'></i>";*/
+            /* if (row.isNew) return "<i class='fa fa-check text-success'></i>";
+             else return "<i class='fa fa-times'></i>";*/
 
             if (row.isNew) row.classNew = 'isNew';
             else row.classNew = 'notNew';
 
-            if(parseInt(row.downloadCount) > 0) row.alreadyDL = 'text-muted';
+            if (parseInt(row.downloadCount) > 0) row.alreadyDL = 'text-muted';
             else row.alreadyDL = 'text-primary';
             row.downloadCount = parseInt(row.downloadCount);
-            if(isNaN(row.downloadCount)) row.downloadCount = -1;
+            if (isNaN(row.downloadCount)) row.downloadCount = -1;
 
             //TODO: how to improve this code? ==> ugly
             row.employerNumber = parseInt(row.employerNumber);
-            if(isNaN(row.employerNumber)) row.employerNumber = "";
+            if (isNaN(row.employerNumber)) row.employerNumber = "";
 
             row.referenceDocument = parseInt(row.referenceDocument);
-            if(isNaN(row.referenceDocument)) row.referenceDocument = "";
+            if (isNaN(row.referenceDocument)) row.referenceDocument = "";
 
-            if(row.uploadUserName === username) row.dlClass = 'fa-upload';
+            if (row.uploadUserName === username) row.dlClass = 'fa-upload';
             else row.dlClass = 'fa-download';
 
-            row.dateFormatted = moment(row.date,"YYYY-MM-DD").format("DD/MM/YYYY");
+            row.dateFormatted = moment(row.date, "YYYY-MM-DD").format("DD/MM/YYYY");
             row.sizeFormatted = formatSize(row.size);
             row.extensionFormatted = FormatExtension(row.extension, row);
             //row.uploadUserName.toUpperCase();
@@ -593,81 +594,103 @@ $(function (_, moment) {
         $table.find('tbody').html(html);
     }
 
-    function createDataTable(){
+    function createDataTable() {
 
         templateTable();
 
         //DataTable object
         table = $(tableId).DataTable({
-            "paging" : true,
+            "paging": true,
             "ordering": true,
-            "info" : true,
-            "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, i18n[lang].listAll]],
+            "info": true,
+            "stateSave": true,
+            "lengthMenu": [
+                [10, 20, 50, -1],
+                [10, 20, 50, i18n[lang].listAll]
+            ],
             "dom": '<"top"iCfT>rt<"bottom"flp><"clear">',
-            "language" : {
-                "url" : "DataTables/resources/language/French.json" //TODO: i18n make a function i18n
+            "language": {
+                "url": i18n[lang].url.table
             },
-            "order": [[ 1, 'asc' ]],
+            "order": [
+                [ 1, 'asc' ]
+            ],
             "columnDefs": [
                 {
-                    "targets":  0,  //checkbox
+                    "targets": 0,  //checkbox
                     "visible": true,
                     "orderable": false,
                     "searchable": true
-                },{
+                },
+                {
                     "targets": 1    //DownloadCount HTML
-                },{
+                },
+                {
                     "targets": 2    // Date
-                },{
+                },
+                {
                     "className": 'detailsLayer',
-                    "targets": 3 ,  // fileName
+                    "targets": 3,  // fileName
                     "visible": false,
                     "searchable": true
-                }, {
+                },
+                {
                     "className": 'detailsLayer',
-                    "targets": 4 ,  // uploadUserName
+                    "targets": 4,  // uploadUserName
                     "visible": false,
                     "searchable": true
-                },{
+                },
+                {
                     "className": 'fileLayer',
                     "targets": 5    //employerNumber
-                },{
+                },
+                {
                     "className": 'fileLayer',
                     "targets": 6    // label
-                },{
+                },
+                {
                     "className": 'fileLayer',
                     "targets": 7    //referenceDocument
-                },{
+                },
+                {
                     "className": 'fileLayer',
                     "targets": 8    // size
-                },{
+                },
+                {
                     "className": 'fileLayer',
                     "targets": 9    //extension
-                },{
+                },
+                {
                     "className": 'detailsLayer',
-                    "targets": 10 ,  //path
+                    "targets": 10,  //path
                     "visible": false,
                     "searchable": true
-                }, {
-                    "targets": 11 ,  //referenceClient
+                },
+                {
+                    "targets": 11,  //referenceClient
                     "visible": false,
                     "searchable": false
-                }, {
-                    "targets": 12 ,  //counter
+                },
+                {
+                    "targets": 12,  //counter
                     "visible": false,
                     "searchable": false
-                }, {
+                },
+                {
                     "targets": 13,  //referenceGroupS
                     "visible": false,
                     "searchable": false
-                },{
+                },
+                {
                     "targets": 14,      // remove
-                    "orderable" : false
-                },{
+                    "orderable": false
+                },
+                {
                     "targets": 15,      // downloadCount
                     "visible": false,
                     "searchable": true
-                },{
+                },
+                {
                     "targets": 16,
                     "visible": false,
                     "searchable": true
@@ -676,12 +699,13 @@ $(function (_, moment) {
             "colVis": {
                 "activate": "mouseover",
                 "buttonText": i18n[lang].showHide,
-                "exclude": [ 0, 1, 14, 15, 16 ]
+                "exclude": [ 0, 1, 14, 15, 16 ],
+                "restore": "restore"
             },
-            "initComplete": function( settings, json ) {
+            "initComplete": function (settings, json) {
                 table
-                    .column(4).search('[^'+username+']', true, false)
-                    .column(15).search( '0' )   // not downloaded yet
+                    .column(4).search('[^' + username + ']', true, false)
+                    .column(15).search('0')   // not downloaded yet
                     .draw();
 
 
@@ -710,7 +734,7 @@ $(function (_, moment) {
                 if (data) {
                     alert(i18n[lang].file.del);
                     table
-                        .row( $this.closest('tr') )
+                        .row($this.closest('tr'))
                         .remove()
                         .draw();
                     //location.reload();
@@ -758,7 +782,7 @@ $(function (_, moment) {
             complete: function () {
                 $('#loader').hide();
             },
-            error: function(xhr, status){
+            error: function (xhr, status) {
                 $('#loader').hide();
                 alert(i18n[lang].error0);
             },
@@ -780,11 +804,11 @@ $(function (_, moment) {
     function setEventsHTML() {
 
         $('#btn-upload-div span').html('<i class="fa fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].upload);
-        $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].modalupload );
+        $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].modalupload);
         $('#modalbq').html(i18n[lang].modalbq);
 
         //Language settings
-        $('.login-lang').on('click', function (){
+        $('.login-lang').on('click', function () {
             //console.log($(this).html().toLowerCase());
             sessionStorage.setItem("lang", $(this).html().toLowerCase());
             location.reload();
@@ -814,16 +838,21 @@ $(function (_, moment) {
         });
 
         // Filter
-        $('#filterDL').on('click', function () {
-            //$table.bootstrapTable('onFilter', "(item['notDownloaded'] && item['uploadUserName'] !== '" + username + "')");
-            table.column(4).search('[^'+ username +']', true, false).draw();
-        });
         $('#filterNew').on('click', function () {
             table.column(16).search('true').draw();
         });
 
+        $('#filterDL').on('click', function () {
+            //TODO: filter on refDoc = ''
+            table
+                .column(15).search('0')
+                .column(4).search('[^' + username + ']', true, false)
+                .draw();
+        });
+
+
         //Delete file
-        $('.remove').on('click', function(){
+        $('.remove').on('click', function () {
             deleteFile($(this).data('file-id'), $(this));
         });
 
@@ -842,7 +871,7 @@ $(function (_, moment) {
         // date picker
         $('#datepicker input').datepicker({
             format: "dd/mm/yyyy",
-            language: lang === 'nl' ? "nl-BE": lang ,
+            language: lang === 'nl' ? "nl-BE" : lang,
             autoclose: true,
             todayHighlight: true,
             startView: 1
@@ -850,9 +879,7 @@ $(function (_, moment) {
         }).on('changeDate', filterDate)
             .off('keyup').on('keyup', function (event) {
                 setTimeout(filterDate, 500, event); // 500ms
-        });
-
-
+            });
     }
 
     /****************************************************
@@ -876,14 +903,7 @@ $(function (_, moment) {
             //set all other events
             setEventsHTML();
 
-            //APPLY DEFAULT FILTERS
-            //$table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "') && (item['isNew'] || item['notDownloaded'])");
-
-            //$("input[name='btSelectAll']").trigger('click');
-
         });
-
-
     }
 
     function main() {
@@ -892,7 +912,6 @@ $(function (_, moment) {
 
         // LOGOUT
         $('#signout').on('click', function () {
-            //TODO: put confirmation
             sessionStorage.setItem("token", '');
             window.location = baseURL;
         });
@@ -908,8 +927,6 @@ $(function (_, moment) {
                 window.location = baseURL;
             }
         });
-
-
     }
 
     $('document').ready(main());

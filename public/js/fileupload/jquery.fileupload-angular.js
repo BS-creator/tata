@@ -38,7 +38,7 @@
         .provider('fileUpload', function () {
             var scopeEvalAsync = function (expression) {
                     var scope = angular.element(this)
-                            .fileupload('option', 'scope');
+                        .fileupload('option', 'scope');
                     // Schedule a new $digest cycle if not already inside of one
                     // and evaluate the given expression:
                     scope.$evalAsync(expression);
@@ -77,7 +77,7 @@
                     if (files) {
                         data.scope.replace(data.files, files);
                     } else if (data.errorThrown ||
-                            data.textStatus === 'error') {
+                        data.textStatus === 'error') {
                         data.files[0].error = data.errorThrown ||
                             data.textStatus;
                     }
@@ -94,7 +94,7 @@
                     scope.$apply(function () {
                         addFileMethods(scope, data);
                         var method = scope.option('prependFiles') ?
-                                'unshift' : 'push';
+                            'unshift' : 'push';
                         Array.prototype[method].apply(scope.queue, data.files);
                     });
                     data.process(function () {
@@ -106,8 +106,8 @@
                         });
                     }).then(function () {
                         if ((scope.option('autoUpload') ||
-                                data.autoUpload) &&
-                                data.autoUpload !== false) {
+                            data.autoUpload) &&
+                            data.autoUpload !== false) {
                             data.submit();
                         }
                     });
@@ -289,10 +289,11 @@
                         return;
                     }
                     if (data.dataType &&
-                            data.dataType.indexOf('json') === data.dataType.length - 4) {
+                        data.dataType.indexOf('json') === data.dataType.length - 4) {
                         try {
                             data.result = angular.fromJson(data.jqXHR.responseText);
-                        } catch (ignore) {}
+                        } catch (ignore) {
+                        }
                     }
                 }).on([
                     'fileuploadadd',
@@ -356,12 +357,12 @@
                             return;
                         }
                         $scope.num = Math.floor(
-                            progress.loaded / progress.total * 100
+                                progress.loaded / progress.total * 100
                         );
                     };
                 update();
                 $scope.$watch(
-                    $attrs.fileUploadProgress + '.loaded',
+                        $attrs.fileUploadProgress + '.loaded',
                     function (newValue, oldValue) {
                         if (newValue !== oldValue) {
                             update();
@@ -376,7 +377,7 @@
             '$scope', '$element', '$attrs',
             function ($scope, $element, $attrs) {
                 $scope.$watch(
-                    $attrs.fileUploadPreview + '.preview',
+                        $attrs.fileUploadPreview + '.preview',
                     function (preview) {
                         $element.empty();
                         if (preview) {
@@ -421,7 +422,8 @@
                                 elm.prop('href')
                             ].join(':')
                         );
-                    } catch (ignore) {}
+                    } catch (ignore) {
+                    }
                 });
             };
         });

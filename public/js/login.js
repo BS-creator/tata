@@ -12,11 +12,11 @@ $(function () {
         baseURL = sessionStorage.getItem('baseURL');
 
 
-
     function setURL() {
         if (window.location.hostname.indexOf('localhost') > -1) {
-            sessionStorage.setItem('baseURL', '//localhost:4000/itransfer/');
-            sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/'); // deviapps??
+            sessionStorage.setItem('baseURL', '//localhost:4000/');
+            //sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
+            sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
         } else if (window.location.hostname.indexOf('qaiapps') > -1) { //QA
             sessionStorage.setItem('baseURL', '//qaiapps.groups.be/itransfer/');
             sessionStorage.setItem('serverURL', '//qaiapps.groups.be/ariane/');
