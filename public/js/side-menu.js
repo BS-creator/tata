@@ -4,27 +4,28 @@ $('document').ready(function () {
     //                  SIDE-MENU
     ///////////////////////////////////////////////////////
 
+console.log($('#main').offset().top);
     var $main = $('#main');
     var $sbleft = $('.sidebar-left');
     var $smenu = $('#side-menu');
 
+
     // initialize size & display /default
     (function () {
-
-        var sbWidth = $sbleft.width();
+        var sbWidth = $('#sidebar-left').width();
         $('#side-menu').css({
-            top: $main.offset().top, // get top height to align
+            top: $('#main').offset().top, // get top height to align
             right: -sbWidth,
             width: sbWidth,
-            height: $(window).height() - $main.offset().top
+            height: $(window).height() - $('#main').offset().top
         }).removeClass();
     })();
 
     // set position
     var sideMenuToggle = function (displayed) {
-        var sbWidth = $sbleft.width();
-        var MSAbsc = (displayed === true) ? 0 : -sbWidth;
-        var mainAbsc = (displayed === false) ? 0 : -sbWidth;
+        var MSWidth = $('#sidenav').width();
+        var MSAbsc = (displayed === true) ? 0 : -MSWidth;
+        var mainAbsc = (displayed === false) ? 0 : -MSWidth;
         $main.animate({
             right: -mainAbsc
         });
@@ -39,7 +40,7 @@ $('document').ready(function () {
         $smenu.height($(window).height() - $('#header').height());
         if ($smenu.hasClass('active')) {
             sideMenuToggle(false);
-            $(this).width($sbleft.width());
+            $(this).width($('#sidenav').width());
         }
     });
     $(window).trigger('resize');
