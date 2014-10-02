@@ -605,7 +605,7 @@ $(function (_, moment) {
             "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, i18n[lang].listAll]],
             "dom": '<"top"iCfT>rt<"bottom"flp><"clear">',
             "language" : {
-                "url" : "DataTables/resources/language/French.json" //TODO: i18n make a function i18n
+                "url" : i18n[lang].url.table
             },
             "order": [[ 1, 'asc' ]],
             "columnDefs": [
