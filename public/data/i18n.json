@@ -2,7 +2,12 @@
     "fr": {
         "button": {
             "search": "Recherche...",
-            "reload": "Rafraîchir"
+            "reload": "Rafraîchir",
+            "filter":{
+                "new": "Nouveaux fichiers",
+                "notDL": "Fichiers non-téléchargés",
+                "clear": "Retirer tous les filtres"
+            }
         },
         "url": {
             "table": "DataTables/resources/language/FR.json"
@@ -45,7 +50,12 @@
     "nl": {
         "button": {
             "search": "Zoeken...",
-            "reload": "Opnieuw laden"
+            "reload": "Opnieuw laden",
+            "filter":{
+                "new": "Nieuwe bestanden",
+                "notDL": "Bestanden niet gedownloaden",
+                "clear": "schrapen filters"
+            }
         },
         "url": {
             "table": "DataTables/resources/language/NL.json"
@@ -88,7 +98,12 @@
     "en": {
         "button": {
             "search": "Searching...",
-            "reload": "Reload"
+            "reload": "Reload",
+            "filter":{
+                "new": "New Files",
+                "notDL": "Files not downloaded",
+                "clear": "Clear all filters"
+            }
         },
         "url": {
             "table": "DataTables/resources/language/EN.json"
