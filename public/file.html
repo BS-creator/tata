@@ -2,18 +2,19 @@
 <html class="no-js" lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Group S Ttransfer</title>
+        <title>Group S Transfer</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
         <!-- build:css css/file.min.css -->
         <link rel="stylesheet" href="bootstrap-3.2.0/css/bootstrap.css"/>
         <link rel="stylesheet" href="font-awesome-4.2.0/css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="css/bootstrap-table.min.css">
+        <!--<link rel="stylesheet" href="css/bootstrap-table.min.css">-->
         <link rel="stylesheet" href="css/datepicker.css">
 
         <link rel="stylesheet" href="DataTables/media/css/jquery.dataTables.css"/>
         <link rel="stylesheet" href="DataTables/resources/bootstrap/3/dataTables.bootstrap.css"/>
+        <link rel="stylesheet" href="DataTables/extensions/ColVis/css/dataTables.colVis.css"/>
         <link rel="stylesheet" href="css/portal-components.css">
         <link rel="stylesheet" href="css/fileupload/jquery.fileupload.css"/>
         <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui.css"/>
@@ -22,7 +23,6 @@
         <noscript><link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui-noscript.css"></noscript>
 
         <link rel="stylesheet" href="css/gs-transfer.css">
-
 
         <!-- endbuild -->
     </head>
@@ -135,7 +135,7 @@
                 <!--TABLE CONTENT-->
                 <table id="mainTable" ></table>
 
-                <table id="myTable" class="display table table-striped">
+                <table id="tableID" class="display table table-striped">
                     <thead>
                         <!-- BEGIN: Underscore Template Definition. -->
                         <script id="headertpl" type="text/template" class="template">
@@ -155,38 +155,44 @@
                                 <th>[[count]]</th>
                                 <th>[[refGS]]</th>
                                 <th>[[del]]</th>
+                                <th>download Count</th>
+                                <th>isNew</th>
                             </tr>
                         </script>
                         <!-- END: Underscore Template Definition. -->
                     </thead>
                     <tbody>
-                    <!-- BEGIN: Underscore Template Definition. -->
-                    <script id="bodytpl" type="text/template">
+                        <!-- BEGIN: Underscore Template Definition. -->
+                        <script id="bodytpl" type="text/template">
 
-                        <tr class="[[isNew]]"
-                                data-file-id="[[fileId]]" data-filename="[[fileName]]">
-                            <td><input name="cb[[index]]" type="checkbox" /></td>
-                            <a class="dlfile" data-id="[[fileId]]" data-file="[[fileName]]" >
-                                <i class="fa [[dlClass]] fa-lg text-primary"></i>
-                                <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]</small>
-                            </a>
-                            <td data-order="[[date]]">[[date]]</td> <!--TODO: reverse date-->
-                            <td>[[fileName]]</td>
-                            <td>[[uploadUserName]]</td>
-                            <td>[[employerNumber]]</td>
-                            <td>[[label]]</td>
-                            <td>[[referenceDocument]]</td>
-                            <td>[[size]]</td>
-                            <td>[[extension]]</td>
-                            <td>[[path]]</td>
-                            <td>[[referenceClient]]</td>
-                            <td>[[counter]]</td>
-                            <td>[[referenceGroupS]]</td>
-                            <td><a class="remove" title="Remove" data-file-id="[[fileId]]"><i class="fa fa-trash fa-lg"></i></a></td>
-                        </tr>
+                            <tr class="[[classNew]]">
+                                <td><input name="cb[[index]]" type="checkbox" /></td>
+                                <td data-order="[[downloadCount]]">
+                                    <a class="dlfile" data-file-id="[[fileId]]" data-filename="[[fileName]]" >
+                                        <i class="fa [[dlClass]] fa-lg [[alreadyDL]]"></i>
+                                        <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]</small>
+                                    </a></td>
+                                <td data-order="[[date]]">[[dateFormatted]]</td> <!--TODO: reverse date-->
+                                <td>[[fileName]]</td>
+                                <td>[[uploadUserName]]</td>
+                                <td>[[employerNumber]]</td>
+                                <td>[[label]]</td>
+                                <td>[[referenceDocument]]</td>
+                                <td data-order="[[size]]">[[sizeFormatted]]</td>
+                                <td data-order="[[extension]]">[[extensionFormatted]]</td>
+                                <td>[[path]]</td>
+                                <td>[[referenceClient]]</td>
+                                <td>[[counter]]</td>
+                                <td>[[referenceGroupS]]</td>
+                                <td>
+                                    <a class="remove" title="Remove" data-file-id="[[fileId]]">
+                                        <i class="fa fa-trash fa-lg"></i></a></td>
+                                <td>[[downloadCount]]</td>
+                                <td>[[isNew]]</td>
+                            </tr>
 
-                    </script>
-                    <!-- END: Underscore Template Definition. -->
+                        </script>
+                        <!-- END: Underscore Template Definition. -->
                     </tbody>
                 </table>
             </div>
@@ -206,7 +212,10 @@
 
         <script src="DataTables/media/js/jquery.dataTables.js"></script>
         <script src="DataTables/resources/bootstrap/3/dataTables.bootstrap.js"></script>
+        <script src="DataTables/extensions/ColVis/js/dataTables.colVis.js"></script>
+        <script src="DataTables/plugins/fnFilterClear.js"></script>
         <script src="js/underscore.js/underscore-1.6.0.js"></script>
+        <script src="js/moment/moment-with-langs.min-2.5.0.js"></script>
 
         <script src="js/bootstrap.file-input.js"></script>
         <script src="js/bootstrap-datepicker.js"></script>
@@ -215,12 +224,10 @@
         <script src="js/fileupload/jquery.iframe-transport.js"></script>
         <script src="js/fileupload/jquery.fileupload.js"></script>
 
-        <script src="js/bootstrap-table.js"></script>
+        <!--<script src="js/bootstrap-table.js"></script>-->
 
         <script src="js/pw-jstree.js"></script>
         <script src="js/gs-transfer.js"></script>
         <!-- endbuild -->
-
-
     </body>
 </html>

@@ -1,4 +1,4 @@
-$(function (_) {
+$(function (_, moment) {
     'user strict'
 
     /***  GLOBAL VARIABLES ***/
@@ -6,7 +6,9 @@ $(function (_) {
     var serverURL = sessionStorage.getItem('serverURL'),
         baseURL = sessionStorage.getItem('baseURL'),
         lang = sessionStorage.getItem("lang"),
-        tableId = '#mainTable',
+        tableId = '#tableID',
+        table = {},
+        oTable = {},
         i18n = {},
         AjaxData = [],
         category = [],
@@ -97,14 +99,12 @@ $(function (_) {
         $.each(category, function (i, cat) {
             $.each(AjaxData, function (j, row) {
                 if (cat.referenceDocument == parseInt(row.referenceDocument)) {
-                    row.libelle = labelDoc_i18n(cat);
+                    row.label = labelDoc_i18n(cat);
                 } else {
                     if(!row.referenceDocument){
-                        row.libelle = row.fileName;
+                        row.label = row.fileName;
                     }
                 }
-                row.noEmployeur = parseInt(row.noEmployeur);
-                row.uploadUserName.toUpperCase();
             });
         });
     }
@@ -115,7 +115,7 @@ $(function (_) {
             date.slice(0, 2);
     }
 
-    function filterDate(e) {
+    function filterDate() { //TODO: filterDate(inputStart, inputEnd)
 
         var $table = $(tableId);
         var dateEnd = yearFirst($('input[name=end]').val());
@@ -191,48 +191,6 @@ $(function (_) {
      * FORMAT COLUMNS
      * */
 
-    // Styling the row if the file is new
-    function rowStylef(row) {
-        if (row.isNew) return {"classes": "success" };
-        else return {};
-    }
-
-    //Format for the download column
-    function formatDownload(value, row) {
-        var dlCount = row.downloadCount ? row.downloadCount : '';
-        var icon = "fa-download";
-
-        if (row.uploadUserName === username) {
-            icon = "fa-upload";
-        }
-        if (value) {
-            return '<a class="dlfile" data-id="' + row.idFile + '" ' +
-                'data-file="' + row.fileName + '" ><i class="fa ' + icon + ' fa-lg text-primary"></i>' +
-                '<small data-dl="' + row.downloadCount + '" class="text-muted">&nbsp;' + dlCount + '</small></a>';
-        } else {
-            return '<a class="dlfile" data-id="' + row.idFile + '" ' +
-                'data-file="' + row.fileName + '" ><i class="fa ' + icon + ' fa-lg text-muted"></i>' +
-                '<small data-dl="' + row.downloadCount + ' class="text-muted">&nbsp;' + dlCount + '</small></a>';
-        }
-    }
-
-    function formatIsNew(value) {
-        if (value) return "<i class='fa fa-check text-success'></i>";
-        else return "<i class='fa fa-times'></i>";
-    }
-
-    function formatRefDoc(value) {
-        //console.log(index +' >> value = ' + value );
-        if (value) {
-            var v = parseInt(value);
-            if (value > 0) {
-                refDocUsed[refDocUsed.length] = v;
-                return v;
-            }
-        }
-        return '';
-    }
-
     function FormatExtension(value, row) {
         if (value || value != '') {
             var v = value.toLowerCase();
@@ -285,7 +243,7 @@ $(function (_) {
         //return bytesToSize(val);
     }
 
-    function formatUserName(value) {
+/*    function formatUserName(value) {
         return value.toUpperCase();
     }
 
@@ -311,7 +269,7 @@ $(function (_) {
             '<i class="fa fa-trash fa-lg"></i>',
             '</a>'
         ].join('');
-    }
+    }*/
 
     /****************************************************
      * DOWNLOAD (ZIP)
@@ -407,7 +365,7 @@ $(function (_) {
      * */
 
     function menuActionClick(e, data) {
-        var table = $(tableId);
+
         //console.log(data);
         if(data.node.parent && data.node.id !== 'upload' && data.node.id !== 'root'){
             $('.breadcrumb').html('<li class="active">' + $("#"+data.node.parent + " a:first").html().substring(7) + '</li><li class="active">'+ data.node.text + '</li><li><a href="#"></a></li>' );
@@ -416,59 +374,61 @@ $(function (_) {
         }
 
         if (data.node.id === 'root') {
-            table.bootstrapTable('showColumn', 'refDoc');
-            table.bootstrapTable('showColumn', 'libelle');
-            table.bootstrapTable('showColumn', 'noEmployeur');
-            table.bootstrapTable('showColumn', 'extension');
-            table.bootstrapTable('hideColumn', 'uploadUserName');
-            table.bootstrapTable('hideColumn', 'fileName');
-            table.bootstrapTable('hideColumn', 'path');
-            table.bootstrapTable('onFilter', ['uploadUserName', 'trf_fich']);
+
+            oTable.fnFilterClear();
+            table.columns('.detailsLayer').visible( false, false );
+            table.columns('.fileLayer').visible( true, false );
+            table.columns.adjust().draw( false ); // adjust column sizing and redraw
+
+            table.column(4).search( 'trf_fich' ).draw(); //filter on uploadUserName
+
             //$('.breadcrumb').html('<li class="active">Tous les documents</li><li><a href="#"></a></li>');
 
         } else {
             data.instance.toggle_node(data.node);
-            //console.log(data.node);
 
-            //Filter on refDoc
             var nodeid = parseInt(data.node.id);
             if (nodeid > -1 && data.node.li_attr.class === 'leaf') {
-                table.bootstrapTable('showColumn', 'refDoc');
-                table.bootstrapTable('showColumn', 'libelle');
-                table.bootstrapTable('showColumn', 'noEmployeur');
-                table.bootstrapTable('showColumn', 'extension');
-                table.bootstrapTable('hideColumn', 'uploadUserName');
-                table.bootstrapTable('hideColumn', 'fileName');
-                table.bootstrapTable('hideColumn', 'path');
-                table.bootstrapTable('onFilter', ['refDoc', nodeid ]);
+
+                oTable.fnFilterClear();
+                table.columns('.detailsLayer').visible( false, false );
+                table.columns('.fileLayer').visible( true, false );
+                table.columns.adjust().draw( false ); // adjust column sizing and redraw
+
+                table.column(7).search( nodeid ).draw(); //filter on referenceDocument
 
             }
 
             //Filter for upload
             if (data.node.id === 'upload') {
                 //console.log("upload");
-                table.bootstrapTable('hideColumn', 'refDoc');
-                table.bootstrapTable('hideColumn', 'libelle');
-                table.bootstrapTable('hideColumn', 'noEmployeur');
-                table.bootstrapTable('hideColumn', 'extension');
-                table.bootstrapTable('showColumn', 'uploadUserName');
-                table.bootstrapTable('showColumn', 'fileName');
-                table.bootstrapTable('showColumn', 'path');
-                table.bootstrapTable('onFilter', ['uploadUserName', username]);
+
+                oTable.fnFilterClear();
+                table.columns('.detailsLayer').visible( true, false );
+                table.columns('.fileLayer').visible( false, false );
+                table.columns.adjust().draw( false ); // adjust column sizing and redraw
+
+                table.column(4).search( username ).draw(); //filter on uploadUserName
+
 
             }
             //Filter for other category
             if (data.node.id === 'other') {
                 //console.log("other");
-                table.bootstrapTable('hideColumn', 'refDoc');
-                table.bootstrapTable('hideColumn', 'libelle');
-                table.bootstrapTable('hideColumn', 'noEmployeur');
-                table.bootstrapTable('hideColumn', 'extension');
-                table.bootstrapTable('showColumn', 'uploadUserName');
-                table.bootstrapTable('showColumn', 'fileName');
-                table.bootstrapTable('showColumn', 'path');
-                table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "' && item['refDoc'] == '' )");
-                //table.bootstrapTable('onFilter', ['refDoc', 'empty']);
+
+                //table.bootstrapTable('onFilter', "(item['uploadUserName'] !== '" + username + "' && item['refDoc'] == '' )");
+
+                oTable.fnFilterClear();
+                table.columns('.detailsLayer').visible( true, false );
+                table.columns('.fileLayer').visible( false, false );
+                table.columns.adjust().draw( false ); // adjust column sizing and redraw
+
+                table
+                    .column(4).search('[^'+ username +']', true, false )
+                    .column(7).search('^\\s*$', true, false)
+                    .draw(); //filter on uploadUserName != username
+
+
             }
         }
     }
@@ -580,168 +540,7 @@ $(function (_) {
      * TABLE
      * */
 
-    function createTable() {
-
-        return $(tableId).bootstrapTable({
-            data: AjaxData,
-            striped: true,
-            pagination: true,
-            pageSize: 20,
-            pageList: [10, 20],
-            selectItemName: 'btSelectItem',
-            search: true,
-            showColumns: true,
-            showRefresh: true,
-            minimumCountColumns: 5,
-            rowStyle: rowStylef,
-            clickToSelect: false,
-            //maintainSelected: true,
-            columns: [
-                {
-                    field: 'stateField',
-                    align: 'center',
-                    checkbox: true
-
-                },{
-                    field: 'notDownloaded',
-                    title: '<i class="fa fa-download fa-lg"></i>',
-                    align: 'center',
-                    sortable: true,
-                    class: 'dl sortable',
-                    formatter: formatDownload
-                },{
-                    field: 'isNew',
-                    title: i18n[lang].col.new,
-                    align: 'center',
-                    sortable: true,
-                    class: "new sortable",
-                    visible: false,
-                    formatter: formatIsNew
-                },{
-                    field: 'formattedDate',
-                    title: i18n[lang].col.date,
-                    align: 'center',
-                    valign: 'middle',
-                    class: "formattedDate sortable",
-                    sortable: true,
-                    visible: true,
-                    formatter: formatDate
-                },{
-                    field: 'fileName',
-                    title: i18n[lang].col.name,
-                    align: 'center',
-                    valign: 'middle',
-                    visible: false,
-                    sortable: true,
-                    class: "fileName sortable "
-                },{
-                    field: 'uploadUserName',
-                    title: i18n[lang].col.user,
-                    align: 'center',
-                    valign: 'middle',
-                    visible: false,
-                    sortable: true,
-                    formatter: formatUserName,
-                    class: "uploadUserName sortable"
-                },{
-                    field: 'noEmployeur',
-                    title: i18n[lang].col.empl,
-                    align: 'center',
-                    valign: 'middle',
-                    sortable: true,
-                    class: 'empl sortable',
-                    formatter: formatDefault
-                },{
-                    field: 'libelle',
-                    title: i18n[lang].col.label,
-                    align: 'left',
-                    valign: 'middle',
-                    class: 'labelDoc sortable',
-                    sortable: true,
-                    formatter: formatDefault
-                },{
-                    field: 'refDoc',
-                    title: i18n[lang].col.refdoc,
-                    align: 'center',
-                    valign: 'middle',
-                    sortable: true,
-                    class: 'refDoc sortable ',
-                    formatter: formatRefDoc
-                },{
-                    field: 'size',
-                    title: i18n[lang].col.size,
-                    align: 'center',
-                    valign: 'middle',
-                    visible: true,
-                    sortable: true,
-                    class: 'size sortable',
-                    formatter: formatSize
-                },{
-                    field: 'extension',
-                    title: i18n[lang].col.ext,
-                    align: 'center',
-                    valign: 'middle',
-                    sortable: true,
-                    class: 'ext sortable',
-                    formatter: FormatExtension
-                },{
-                    field: 'path',
-                    title: i18n[lang].col.path,
-                    align: 'center',
-                    valign: 'middle',
-                    visible: false,
-                    sortable: true,
-                    formatter: formatPath,
-                    class: 'path sortable'
-                },{
-                    field: 'refClientCompl',
-                    title: i18n[lang].col.refCl,
-                    align: 'center',
-                    valign: 'middle',
-                    visible: false,
-                    sortable: true,
-                    formatter: formatDefault,
-                    class: 'refClientCompl sortable'
-                },{
-                    field: 'counter',
-                    title: i18n[lang].col.count,
-                    align: 'center',
-                    valign: 'middle',
-                    visible: false,
-                    sortable: true,
-                    formatter: formatDefault,
-                    class: 'counter sortable'
-                },{
-                    field: 'refGroups',
-                    title: i18n[lang].col.refGS,
-                    align: 'center',
-                    valign: 'middle',
-                    visible: false,
-                    sortable: true,
-                    formatter: formatDefault,
-                    class: 'refGroups sortable'
-                },{
-                    field: 'operate',
-                    title: i18n[lang].col.del,
-                    align: 'center',
-                    valign: 'middle',
-                    clickToSelect: false,
-                    class: 'operate',
-                    formatter: operateFormatter,
-                    events: {
-                        'click .remove': function (e, value, row, index) {
-                            deleteFile(row.path, row);
-                        }
-                    }
-                }
-            ]
-        });
-
-
-    }
-
-    function createDataTable(){
-
+    function templateTable(){
         _.templateSettings = {
             interpolate: /\[\[(.+?)\]\]/g
             //Define an *interpolate* regex to match expressions
@@ -754,80 +553,151 @@ $(function (_) {
 
         var tpl = _.template($('#headertpl').html());
 
-        $('#myTable thead').html(tpl(i18n[lang].col));
+        var $table = $(tableId);
+        $table.find('thead').html(tpl(i18n[lang].col));
 
         tpl = _.template($('#bodytpl').html());
         var html = {};
 
         _.each(AjaxData, function(row){
-            //TODO: format data (ex:reverse date)
-            if(row.notDownloaded){
-                row.dlClass = 'fa-download';
-            }else{
-                row.dlClass = 'fa-upload';
-            }
+
+           /* if (row.isNew) return "<i class='fa fa-check text-success'></i>";
+            else return "<i class='fa fa-times'></i>";*/
+
+            if (row.isNew) row.classNew = 'isNew';
+            else row.classNew = 'notNew';
+
+            if(parseInt(row.downloadCount) > 0) row.alreadyDL = 'text-muted';
+            else row.alreadyDL = 'text-primary';
+            row.downloadCount = parseInt(row.downloadCount);
+            if(isNaN(row.downloadCount)) row.downloadCount = -1;
+
+            //TODO: how to improve this code? ==> ugly
+            row.employerNumber = parseInt(row.employerNumber);
+            if(isNaN(row.employerNumber)) row.employerNumber = "";
+
+            row.referenceDocument = parseInt(row.referenceDocument);
+            if(isNaN(row.referenceDocument)) row.referenceDocument = "";
+
+            if(row.uploadUserName === username) row.dlClass = 'fa-upload';
+            else row.dlClass = 'fa-download';
+
+            row.dateFormatted = moment(row.date,"YYYY-MM-DD").format("DD/MM/YYYY");
+            row.sizeFormatted = formatSize(row.size);
+            row.extensionFormatted = FormatExtension(row.extension, row);
+            //row.uploadUserName.toUpperCase();
 
             html += tpl(row);
         });
 
-        $('#myTable tbody').html(html);
+        $table.find('tbody').html(html);
+    }
 
-        var table = $('#myTable').dataTable({
+    function createDataTable(){
+
+        templateTable();
+
+        //DataTable object
+        table = $(tableId).DataTable({
             "paging" : true,
             "ordering": true,
             "info" : true,
-            //"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            "dom": '<"top"ifT>rt<"bottom"flp><"clear">',
+            "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, i18n[lang].listAll]],
+            "dom": '<"top"iCfT>rt<"bottom"flp><"clear">',
+            "language" : {
+                "url" : "DataTables/resources/language/French.json" //TODO: i18n make a function i18n
+            },
+            "order": [[ 1, 'asc' ]],
             "columnDefs": [
                 {
-                    "targets": [ 3 ],
+                    "targets":  0,  //checkbox
+                    "visible": true,
+                    "orderable": false,
+                    "searchable": true
+                },{
+                    "targets": 1    //DownloadCount HTML
+                },{
+                    "targets": 2    // Date
+                },{
+                    "className": 'detailsLayer',
+                    "targets": 3 ,  // fileName
+                    "visible": false,
+                    "searchable": true
+                }, {
+                    "className": 'detailsLayer',
+                    "targets": 4 ,  // uploadUserName
+                    "visible": false,
+                    "searchable": true
+                },{
+                    "className": 'fileLayer',
+                    "targets": 5    //employerNumber
+                },{
+                    "className": 'fileLayer',
+                    "targets": 6    // label
+                },{
+                    "className": 'fileLayer',
+                    "targets": 7    //referenceDocument
+                },{
+                    "className": 'fileLayer',
+                    "targets": 8    // size
+                },{
+                    "className": 'fileLayer',
+                    "targets": 9    //extension
+                },{
+                    "className": 'detailsLayer',
+                    "targets": 10 ,  //path
+                    "visible": false,
+                    "searchable": true
+                }, {
+                    "targets": 11 ,  //referenceClient
                     "visible": false,
                     "searchable": false
                 }, {
-                    "targets": [ 4 ],
+                    "targets": 12 ,  //counter
                     "visible": false,
                     "searchable": false
                 }, {
-                    "targets": [ 10 ],
+                    "targets": 13,  //referenceGroupS
                     "visible": false,
                     "searchable": false
-                }, {
-                    "targets": [ 11 ],
+                },{
+                    "targets": 14,      // remove
+                    "orderable" : false
+                },{
+                    "targets": 15,      // downloadCount
                     "visible": false,
-                    "searchable": false
-                }, {
-                    "targets": [ 12 ],
+                    "searchable": true
+                },{
+                    "targets": 16,
                     "visible": false,
-                    "searchable": false
-                }, {
-                    "targets": [ 13 ],
-                    "visible": false,
-                    "searchable": false
+                    "searchable": true
                 }
-            ]
-            /*"dom" : '<"top"fT>rt<"clear">',
-            "language" : {
-                "url": "DataTables/resources/language/French.json"
-            }*/
+            ],
+            "colVis": {
+                "activate": "mouseover",
+                "buttonText": i18n[lang].showHide,
+                "exclude": [ 0, 1, 14, 15, 16 ]
+            },
+            "initComplete": function( settings, json ) {
+                table
+                    .column(4).search('[^'+username+']', true, false)
+                    .column(15).search( '0' )   // not downloaded yet
+                    .draw();
+
+
+            }
         });
 
-
-        /*
-        * var table = $('#example').DataTable();
-
-         for ( var i=0 ; i<4 ; i++ ) {
-            table.column( i ).visible( false, false );
-         }
-         table.columns.adjust().draw( false );
-         // adjust column sizing and redraw
-        * */
+        //jQuery object
+        oTable = $(tableId).dataTable();
     }
 
     /****************************************************
      * AJAX
      * */
-
-     function deleteFile(filePath) {
+    function deleteFile(filePath, $this) {
+        //The FTP can delete a file by its path or by its ID (same method on backend)
+        //So it works if the fileID is in the filePath
         var data = {
             "token": token,
             "filePath": filePath
@@ -839,7 +709,11 @@ $(function (_) {
             success: function (data) {
                 if (data) {
                     alert(i18n[lang].file.del);
-                    location.reload();
+                    table
+                        .row( $this.closest('tr') )
+                        .remove()
+                        .draw();
+                    //location.reload();
                 } else {
                     alert("ERROR");
                 }
@@ -920,12 +794,14 @@ $(function (_) {
 
         //DOWNLOAD files
         $table.on('click', '.dlfile', function () {
-            $(this).attr('href', serverURL + 'file/' + token + '/' + $(this).attr('data-id') + '/' + $(this).attr('data-file'));
+            var $this = $(this);
+            $this.attr('href', serverURL + 'file/' + token + '/' + $this.data('file-id') + '/' + $this.data('filename'));
             //Update icon
-            $(this).find('i').remove();
-            var small = $(this).find('small');     // cache object
-            $(this).prepend("<i class='fa fa-download text-muted'></i>"); //mark as already downloaded
+            $this.find('i').remove();
+            var small = $this.find('small');     // cache object
+            $this.prepend("<i class='fa fa-download fa-lg text-muted'></i>"); //mark as already downloaded
             var dl = parseInt(small.data('dl')) + 1;
+            $this.parent().data('order', dl);
             small.data('dl', dl); // increment by one the download count
             small.html('&nbsp;' + dl);
         });
@@ -939,10 +815,16 @@ $(function (_) {
 
         // Filter
         $('#filterDL').on('click', function () {
-            $table.bootstrapTable('onFilter', "(item['notDownloaded'] && item['uploadUserName'] !== '" + username + "')");
+            //$table.bootstrapTable('onFilter', "(item['notDownloaded'] && item['uploadUserName'] !== '" + username + "')");
+            table.column(4).search('[^'+ username +']', true, false).draw();
         });
         $('#filterNew').on('click', function () {
-            $table.bootstrapTable('onFilter', "item['isNew']");
+            table.column(16).search('true').draw();
+        });
+
+        //Delete file
+        $('.remove').on('click', function(){
+            deleteFile($(this).data('file-id'), $(this));
         });
 
         //multidownload
@@ -984,7 +866,7 @@ $(function (_) {
             mergeLabelDoc();
 
             //var $table = createTable();
-        createDataTable();
+            createDataTable();
 
             createMenu();
 
@@ -1010,6 +892,7 @@ $(function (_) {
 
         // LOGOUT
         $('#signout').on('click', function () {
+            //TODO: put confirmation
             sessionStorage.setItem("token", '');
             window.location = baseURL;
         });
@@ -1031,5 +914,5 @@ $(function (_) {
 
     $('document').ready(main());
 
-}(_));
+}(_, moment));
 
