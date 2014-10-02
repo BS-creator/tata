@@ -12,7 +12,6 @@ $(function () {
         baseURL = sessionStorage.getItem('baseURL');
 
 
-
     function setURL() {
         if (window.location.hostname.indexOf('localhost') > -1) {
             sessionStorage.setItem('baseURL', '//localhost:4000/');
@@ -55,15 +54,15 @@ $(function () {
      * Supported languages: 'nl', 'fr', 'en' (default).
      * @returns {string}
      */
-    function getNavigatorLanguage () {
+    function getNavigatorLanguage() {
         var locale = (window.navigator.userLanguage || window.navigator.language);
         locale = /..-../.test(locale) ? locale.split('-')[0] : locale.split('_')[0];
-        if ((locale !== "en") && (locale !== "fr") && (locale !== "nl") ) locale = 'en';
+        if ((locale !== "en") && (locale !== "fr") && (locale !== "nl")) locale = 'en';
         return locale;
     }
 
 
-    function enterPressed (e) {
+    function enterPressed(e) {
         if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
             submitLogin();
             return false;
@@ -72,21 +71,21 @@ $(function () {
         }
     }
 
-    function submitLogin(){
+    function submitLogin() {
         var credentials =
         {
-            "login"     : $('#login').val(),
-            "password"  : $('#password').val()
+            "login": $('#login').val(),
+            "password": $('#password').val()
         };
 
-      $('#loader').show();
+        $('#loader').show();
 
         $.ajax({
             type: "POST",
             url: serverURL + 'login',
             data: credentials,
-            success: function (data){
-                if(data.token){
+            success: function (data) {
+                if (data.token) {
                     sessionStorage.setItem("token", data.token);
                     sessionStorage.setItem("username", credentials.login);
                 }
@@ -96,25 +95,25 @@ $(function () {
             },
             dataType: 'json',
             /*complete: function () {
-              $('#loader').hide();
-            },*/
+             $('#loader').hide();
+             },*/
             error: function (xhr) {
                 $('#loader').hide();
-                if(xhr.status === 403) alert( "ERROR: login / password incorrect." );
-                else{
-                    alert ( "ERROR: connection problem");
+                if (xhr.status === 403) alert("ERROR: login / password incorrect.");
+                else {
+                    alert("ERROR: connection problem");
                 }
             }
         });
     }
 
     //set language
-    sessionStorage.setItem("lang", getNavigatorLanguage() );
+    sessionStorage.setItem("lang", getNavigatorLanguage());
 
     //set event
     $('#submit-login').on('click', submitLogin);
     $('input').keypress(enterPressed);
-    $('.login-lang').on('click', function (){
-       sessionStorage.setItem("lang", $(this).html().toLowerCase());
+    $('.login-lang').on('click', function () {
+        sessionStorage.setItem("lang", $(this).html().toLowerCase());
     });
 });

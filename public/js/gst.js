@@ -1,7 +1,4 @@
-
-
-
-$('document').ready(function(){
+$('document').ready(function () {
 
     // tooltip - add rel='tooltip' to the tooltip element
     $(function () {

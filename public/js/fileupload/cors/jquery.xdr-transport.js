@@ -36,11 +36,13 @@
                 return {
                     send: function (headers, completeCallback) {
                         var addParamChar = /\?/.test(s.url) ? '&' : '?';
+
                         function callback(status, statusText, responses, responseHeaders) {
                             xdr.onload = xdr.onerror = xdr.ontimeout = $.noop;
                             xdr = null;
                             completeCallback(status, statusText, responses, responseHeaders);
                         }
+
                         xdr = new XDomainRequest();
                         // XDomainRequest only supports GET and POST:
                         if (s.type === 'DELETE') {
@@ -59,7 +61,7 @@
                                 200,
                                 'OK',
                                 {text: xdr.responseText},
-                                'Content-Type: ' + xdr.contentType
+                                    'Content-Type: ' + xdr.contentType
                             );
                         };
                         xdr.onerror = function () {
