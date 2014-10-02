@@ -13,7 +13,6 @@ ul.sidebar-left
 body {
   font-family: "Roboto", sans-serif;
   font-weight: 300;
-  font-size: 14px;
   overflow-x: hidden;
 }
 
@@ -245,3 +244,24 @@ i.fa, li {
 /*
 2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
 */
+
+
+#btn-upload-div {
+  margin-bottom: 1px;
+  padding: 15px 0 15px 21px;
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 14px;
+  color: #FFF;
+  background-color: #3f9ad0;
+  cursor: pointer;
+  /* add ... on resize instead of break line */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* transition */
+  -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
+  -moz-transition: all 0.4s ease;/* Firefox 4-15 */
+  -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
+  transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
+}
