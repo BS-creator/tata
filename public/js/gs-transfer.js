@@ -21,23 +21,6 @@ $(function (_, moment) {
      * HELPER
      * */
 
-
-    function setURL() {
-        if (window.location.hostname.indexOf('localhost') > -1) {
-            sessionStorage.setItem('baseURL', '//localhost:4000/itransfer/');
-            sessionStorage.setItem('serverURL', '//172.20.20.64:8018/'); // deviapps??
-        } else if (window.location.hostname.indexOf('qaiapps') > -1) { //QA
-            sessionStorage.setItem('baseURL', '//qaiapps.groups.be/itransfer/');
-            sessionStorage.setItem('serverURL', '//qaiapps.groups.be/ariane');
-        } else if (window.location.hostname.indexOf('prestaweb') > -1) {
-            sessionStorage.setItem('baseURL', '//prestaweb.groups.be/itransfer/');
-            sessionStorage.setItem('serverURL', '//prestaweb.groups.be/ariane');
-        } else {
-            //??
-        }
-    }
-
-
     function reportError(error, message) {
         message = message || '';
         console.error(
@@ -109,13 +92,15 @@ $(function (_, moment) {
         });
     }
 
-    function yearFirst(date) {
+    function yearFirst(date) { //TODO: use moment!
         return date.slice(6, 11) + "-" +
             date.slice(3, 5) + "-" +
             date.slice(0, 2);
     }
 
-    function filterDate() { //TODO: filterDate(inputStart, inputEnd)
+    function filterDate() {
+    //TODO: use DATATABLE date filter!!!
+    //TODO: filterDate(inputStart, inputEnd)
 
         var $table = $(tableId);
         var dateEnd = yearFirst($('input[name=end]').val());
@@ -151,18 +136,6 @@ $(function (_, moment) {
     /****************************************************
      * INTERNATIONALIZATION i18n
      * */
-
-    function loadTable_i18n() {
-        if (lang === "fr") {
-            $.getScript("js/locale/bootstrap-table-fr_BE.js");
-            $.getScript("js/locale/bootstrap-datepicker.fr.js");
-        } else if (lang === "nl") {
-            $.getScript("js/locale/bootstrap-table-nl_BE.js");
-            $.getScript("js/locale/bootstrap-datepicker.nl-BE.js");
-        } else {
-            $.getScript("js/locale/bootstrap-table-en.js");
-        }
-    }
 
     function labelDoc_i18n(item) {
         if (lang === "fr") {
@@ -243,34 +216,9 @@ $(function (_, moment) {
         else return val;
         //return bytesToSize(val);
     }
+    //TODO: function formatPath(value) {return value.replace('/data/' + username + '/', '');}
 
-    /*    function formatUserName(value) {
-     return value.toUpperCase();
-     }
-
-     function formatDate(value, row) {
-     var year = row.date.slice(0, 4),
-     month = row.date.slice(5, 7),
-     day = row.date.slice(8, 10);
-     return day + "/" + month + "/" + year;
-     }
-
-     function formatPath(value) {
-     return value.replace('/data/' + username + '/', '');
-     }
-
-     function formatDefault(value) {
-     if (!value || value == '') return '';
-     else return value;
-     }
-
-     function operateFormatter() {
-     return [
-     '<a class="remove" title="Remove">',
-     '<i class="fa fa-trash fa-lg"></i>',
-     '</a>'
-     ].join('');
-     }*/
+    //TODO: function formatUserName(value) { return value.toUpperCase(); }
 
     /****************************************************
      * DOWNLOAD (ZIP)
@@ -442,6 +390,7 @@ $(function (_, moment) {
 
         refDocUsed = getUsedDocRef(AjaxData);
 
+        console.log(refDocUsed);
         // BUILD TREE
         $.each(category, function (i, item) {
 
@@ -608,12 +557,12 @@ $(function (_, moment) {
                 [10, 20, 50, -1],
                 [10, 20, 50, i18n[lang].listAll]
             ],
-            "dom": '<"top"iCfT>rt<"bottom"flp><"clear">',
+            "dom": '<"top"iCT>rt<"bottom"lp>',
             "language": {
                 "url": i18n[lang].url.table
             },
             "order": [
-                [ 1, 'asc' ]
+                [ 2, 'desc' ]
             ],
             "columnDefs": [
                 {
@@ -712,7 +661,7 @@ $(function (_, moment) {
             }
         });
 
-        //jQuery object
+        //jQuery TABLE object
         oTable = $(tableId).dataTable();
     }
 
@@ -831,24 +780,43 @@ $(function (_, moment) {
         });
 
 
+        //select all
+        $('input[name=btSelectAll]').on('change', function(){
+            $('input[name|=cb]').toggle(); //TODO
+        })
+
         // RELOAD
         $('.reloadme').on('click', function () {
             //$table.bootstrapTable('onFilter');
             location.reload();
         });
 
+        // Search
+        var searchInput = $('input[name=search]');
+        searchInput.on( 'keyup', function () {
+            table.search( this.value ).draw();
+        } );
+
+        searchInput.attr('placeholder',i18n[lang].button.search);
+
         // Filter
         $('#filterNew').on('click', function () {
-            table.column(16).search('true').draw();
+            table
+                .column(16).search('true')
+                //.column(4).search('[^' + username + ']', true, false)
+                .draw();
         });
 
         $('#filterDL').on('click', function () {
-            //TODO: filter on refDoc = ''
             table
                 .column(15).search('0')
                 .column(4).search('[^' + username + ']', true, false)
                 .draw();
         });
+
+        $('#filterClear').on('click', function (){
+            oTable.fnFilterClear();
+        })
 
 
         //Delete file
@@ -919,7 +887,6 @@ $(function (_, moment) {
         //i18n
         $.getJSON("data/i18n.json", function (data) {
             i18n = data;
-            loadTable_i18n();
             if (i18n[lang]) {   // if language is set,
                 render();       // load data and create table
             } else {
