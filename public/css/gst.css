@@ -48,27 +48,12 @@ body {
 /************************************************************/
 #top-nav ul {
   margin: 0;
-  padding: 0 13px 0 13px;
+  height: 50px;
+  line-height: 50px;
   font-weight: 500;
   color: #a0a0a0;
 }
-#top-nav li,
-#top-nav i {
-  height: 50px;
-  font-size: 24px;
-  line-height: 50px;
-  float: left;
-}
 
-/* menu right icons top-nav */
-/*#toggle-side-menu:after {
-  font-family: "FontAwesome";
-  content: "\f053";
-}
-#toggle-side-menu.active:after {
-  font-family: "FontAwesome";
-  content: "\f054";
-}*/
 #signout,
 #toggle-side-menu {
   -webkit-transition: all 0.5s ease;/* Safari 3.2+, Chrome */
@@ -98,7 +83,11 @@ body {
   padding: 0;
 }
 
-.sidebar-left > li {
+.sidebar-left ul {
+  padding: 0;
+}
+
+.sidebar-left li {
   margin-bottom: 1px;
   padding: 15px 0 15px 21px;
   font-family: 'Roboto';
@@ -160,8 +149,9 @@ li.sidebar-h-5.active {
 /**************************************/
 /*          SLIDE #side-menu         */
 /************************************/
-#side-menu {
 
+/* position for sliding effect */
+#side-menu {
   position: absolute;
   background-color: #0b68a1;
   color: white;
@@ -178,32 +168,30 @@ li.sidebar-h-5.active {
 /* style */
 .side-menu-head,
 .side-menu-head-icon {
-  margin: 0;
-  padding: 10px 0px 11px 0;
+  height: 50px;
+  line-height: 50px;
+  margin: 0px;
   font-size: 16px;
   text-transform: uppercase;
-  background-color: #3f9ad0;
-  /* border-bottom: 1px solid #3f9ad0; */
+  background-color: #3F9AD0;
   color: #ABD3E1;
 }
-
 .side-menu-head-icon {
-  font-size: 24px;
-}
-.side-menu-head i {
+  cursor: pointer;
   color: white;
-  opacity: .8;
     /* transition */
   -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
   -moz-transition: all 0.4s ease;/* Firefox 4-15 */
   -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
   transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
 }
-.side-menu-head i:hover,
-.side-menu-head i:focus,
-.side-menu-head i:active,
-.side-menu-head i.active { 
-  
+.side-menu-head-icon i {
+  opacity: .6;
+}
+.side-menu-head-icon:hover i,
+.side-menu-head-icon:focus i,
+.side-menu-head-icon:active i,
+.side-menu-head-icon.active i {
   opacity: 1;
 }
 
@@ -244,12 +232,15 @@ li.sidebar-h-5.active {
   background-color: #3f9ad0;
 }
 
-i, li {
+i.fa, li {
   cursor: pointer;
 }
 
 
-
+.fa,
+.glyphicon {
+  font-size: 18px !important;
+}
 
 /*
 2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
