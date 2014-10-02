@@ -179,14 +179,14 @@ li.sidebar-h-5.active {
 .side-menu-head,
 .side-menu-head-icon {
   margin: 0;
-  padding: 10px 0px 11px 25px;
+  padding: 10px 0px 11px 0;
   font-size: 16px;
   text-transform: uppercase;
   background-color: #3f9ad0;
   /* border-bottom: 1px solid #3f9ad0; */
   color: #ABD3E1;
-
 }
+
 .side-menu-head-icon {
   font-size: 24px;
 }
@@ -219,7 +219,7 @@ li.sidebar-h-5.active {
 .side-menu-list > li {
   height: 50px;
   margin-bottom: 1px;
-  padding: 15px 0px 15px 34px;
+  padding: 15px 0px 15px 30px;
   /* add ... on resize instead of break line */
   white-space: nowrap;
   overflow: hidden;
