@@ -524,6 +524,10 @@ i.fa, li {
 }
 
 
+#upload a,
+[class^="level"] > a {
+  /* tous ce qui est commun au li de sidenav */
+}
 
 #upload a,
 li.level1 > a {
