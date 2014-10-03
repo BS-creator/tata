@@ -616,7 +616,7 @@ $(function (_, moment) {
                 [10, 20, 50, -1],
                 [10, 20, 50, i18n[lang].listAll]
             ],
-            "dom": '<"top"CT>rt<"page"p><"bottom"il>',
+            "dom": '<"top"CT>rt<"page"p><"bottom"li>',
             "language": {
                 "url": i18n[lang].url.table
             },
