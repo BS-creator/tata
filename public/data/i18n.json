@@ -32,7 +32,7 @@
         "tree": {
             "root": "Tous les documents",
             "upload": "Fichiers transmis à Group S",
-            "other": "98 - Autres Documents"
+            "other": "Autres Documents"
         },
         "file": {
             "add": "Document ajouté",
@@ -81,7 +81,7 @@
         "tree": {
             "root": "Alle documenten",
             "upload": "Overgebrachte documenten naar Group S",
-            "other": "98 - Andere Documenten"
+            "other": "Andere Documenten"
         },
         "file": {
             "add": "Document toegevoegd",
@@ -130,7 +130,7 @@
         "tree": {
             "root": "All documents",
             "upload": "Uploaded documents to Group S",
-            "other": "98 - Other Documents"
+            "other": "Other Documents"
         },
         "file": {
             "add": "Document added",

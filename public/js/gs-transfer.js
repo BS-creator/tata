@@ -246,10 +246,13 @@ $(function (_, moment) {
     function downloadAll() {
 
         //TODO: replace getSelections
-        var array = $(tableId).bootstrapTable('getSelections'),
+        var array = getSelectedRows(),
             listID = '';
 
+        console.log(array);
+
         $.each(array, function (i, item) {
+            console.log(item);
             listID += item.idFile + '@!';
         });
 
@@ -267,7 +270,7 @@ $(function (_, moment) {
 
         $('body').append(form);
 
-        form.submit();
+        //form.submit();
 
     }
 
@@ -306,8 +309,6 @@ $(function (_, moment) {
                 $('#progress').show();
             }
         });
-
-
     }
 
     function ListFolderUpload(destFolders) {
@@ -324,7 +325,6 @@ $(function (_, moment) {
                         destFolders[key] + '" type="radio" />' + destFolders[key] + '/</label>'
                 );
             }
-
         }
     }
 
@@ -333,6 +333,7 @@ $(function (_, moment) {
      * MENU
      * */
 
+    //TODO
     function menuActionClick(e, data) {
 
         //console.log(data);
@@ -403,88 +404,6 @@ $(function (_, moment) {
             }
         }
     }
-
-
-    /*function buildTree() {
-
-        var tree = [];
-        var cat = [];
-
-        refDocUsed = getUsedDocRef(AjaxData);
-
-        // BUILD TREE
-        $.each(category, function (i, item) {
-
-            var refdoc = parseInt(item.referenceDocument),
-                numcat = parseInt(item.categoryNumber);
-            //if (numcat == 0) numcat = 98;
-
-            if ($.inArray(refdoc, refDocUsed) > -1) { // doc is used
-                //adding label
-                if ($.inArray(numcat, cat) > -1) { // category exists --> add children
-                    //add child node
-                    tree[(tree.length - 1)]
-                        .children[(tree[(tree.length - 1)].children.length)] = {
-                        "id": refdoc,
-                        "data": refdoc,
-                        "text": refdoc + " - " + labelDoc_i18n(item),
-                        "li_attr": {"class": "leaf"}
-                    }
-                } else {
-                    // create category
-                    cat[cat.length] = numcat;
-                    tree[tree.length] =
-                    {
-
-                        "text": numcat + " - " + labelCat_i18n(item),
-                        "state": {
-                            "opened": true,
-                            "disabled": false,
-                            "selected": false
-                        },
-                        "children": [
-                            { //add document
-                                "id": refdoc,
-                                "text": refdoc + " - " + labelDoc_i18n(item),
-                                "li_attr": {"class": "leaf"}
-                            }
-                        ]
-                    };
-                }
-            }
-        });
-
-        // ---> ADDING the "OTHER CATEGORY"
-        if ($.inArray(-1, refDocUsed) > -1) {
-            tree[tree.length] =
-            {
-                "id": "other",
-                "text": i18n[lang].tree.other,
-                "state": {
-                    "opened": true,
-                    "disabled": false,
-                    "selected": false
-                },
-                "children": [],
-                "li_attr": {"class": "leaf"}
-            };
-        }
-
-        // ---> ADDING the "UPLOAD CATEGORY"
-        tree[tree.length] =
-        {
-            "id": "upload",
-            "text": i18n[lang].tree.upload, //'Documents transmis à Group S',
-            "state": {
-                "opened": true,
-                "disabled": false,
-                "selected": false
-            },
-            "li_attr": {"class": "leaf"}
-        };
-
-        return tree;
-    }*/
 
     function templateMenu(){
 
@@ -616,6 +535,7 @@ $(function (_, moment) {
                 [10, 20, 50, -1],
                 [10, 20, 50, i18n[lang].listAll]
             ],
+            "dom": '<"top"C>rt<"page"p><"bottom"il>',
             "dom": '<"top"CT>rt<"page"p><"bottom"li>',
             "language": {
                 "url": i18n[lang].url.table
@@ -710,7 +630,9 @@ $(function (_, moment) {
                 "buttonText": i18n[lang].showHide,
                 "exclude": [ 0, 1, 14, 15, 16 ],
                 "restore": "restore"
-            },
+            },/* tableTools: {
+                "sRowSelect": "multi"
+            },*/
             "initComplete": function (settings, json) {
                 table
                     .column(4).search('[^' + username + ']', true, false)
@@ -810,18 +732,18 @@ $(function (_, moment) {
      * EVENTS
      * */
 
-    function getSelected() {
+    function getSelectedRows() {
         return table.rows('.active').data() ;
     }
 
     function setEventsHTML() {
 
         /***** TOOLTIP *****/
-        //$("[rel=tooltip]").tooltip();
+        $("[rel=tooltip]").tooltip();
 
         /***** SIGN OUT *****/
-        var signoutBtn = $('#signout');
-        signoutBtn.tooltip();
+        //var signoutBtn = $('#signout');
+        //signoutBtn.tooltip();
         //signoutBtn.attr('title', i18n[lang].button.signout);
 
 
@@ -860,16 +782,19 @@ $(function (_, moment) {
             small.html('&nbsp;' + dl);
         });
 
+        /***** MULTIDOWNLOAD *****/
+        $('.downloadall').on('click', downloadAll);
 
         /***** CHECKBOX SELECT ALL *****/
-        $('input[name=btSelectAll]').on('change', function(){
-            $('input[name|=cb]').toggle(); //TODO
-            //$('input[name|=cb]').prop('checked',
-        })
+        /*$('input[name=btSelectAll]').on('change', function(){
+            $('input[name|=cb]').prop( "checked", function( i, val ) {
+                return !val;
+            });
+        })*/
 
         $table.find('tbody').on( 'click', 'tr', function () {
             $(this).toggleClass('active');
-            $(this).find(input);
+
         } );
 
         /***** RELOAD *****/
@@ -917,10 +842,6 @@ $(function (_, moment) {
         $('.remove').on('click', function () {
             deleteFile($(this).data('file-id'), $(this));
         });
-
-        /***** MULTIDOWNLOAD *****/
-        $('.downloadall').on('click', downloadAll);
-
 
 
         /***** DATE PICKER *****/
