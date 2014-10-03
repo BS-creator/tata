@@ -150,41 +150,40 @@
             </div><!--/col-md-3 col-xs-12-->
 
             <div class="col-md-9 col-xs-12">
-
                 <div id="contentTable">
+
                     <!--TABLE CONTENT-->
-                    <div class="col-xs-12">
-                        <div class="filter"><!-- FILTERS -->
-                            <!--filtrer par-->
-                            <div class="btn-group pull-left">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    Filtrer par <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a id="filterNew" href="#"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;Nouveaux
-                                        fichiers</a></li>
-                                    <li class="divider"></li>
-                                    <li><a id="filterDL" href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Fichiers
-                                        non-téléchargés</a></li>
-                                    <li class="divider"></li>
-                                    <li><a id="filterClear" href="#"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;Clear
-                                        all
-                                        filters</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <input class="pull-left ml-s" type="text" name="search" placeholder="Recherche ..."/>
-
-                        <!--refresh & toggle config table-->
-                        <div class="btn-group pull-right ml-s mr-m">
-                            <button type="button" class="btn btn-default reloadme"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Rafraîchir
+                    <div class="filter"><!-- FILTERS -->
+                        <!--filtrer par-->
+                        <div class="btn-group pull-left">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                Filtrer par <span class="caret"></span>
                             </button>
-                            <button id="toggle-side-menu" type="button" class="btn btn-default"><i
-                                    class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;Affichage
-                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a id="filterNew" href="#"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;Nouveaux
+                                    fichiers</a></li>
+                                <li class="divider"></li>
+                                <li><a id="filterDL" href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Fichiers
+                                    non-téléchargés</a></li>
+                                <li class="divider"></li>
+                                <li><a id="filterClear" href="#"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;Clear
+                                    all
+                                    filters</a></li>
+                            </ul>
                         </div>
                     </div>
+
+                    <input class="pull-left ml-s" type="text" name="search" placeholder="Recherche ..."/>
+
+                    <!--refresh & toggle config table-->
+                    <div class="btn-group pull-right ml-s">
+                        <button type="button" class="btn btn-default reloadme"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Rafraîchir
+                        </button>
+                        <button id="toggle-side-menu" type="button" class="btn btn-default"><i
+                                class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;Affichage
+                        </button>
+                    </div>
+
                 </div><!--/contentTable-->
 
                 <table id="tableID" class="display table table-striped">
