@@ -12,9 +12,6 @@
 /* table */
 /* pagination */
 /* misc */
-body {
-  min-height: 650px;
-}
 #logindiv {
   min-height: 700px;
 }
@@ -35,28 +32,28 @@ header #info-header li.univers-name {
   font-style: italic;
   font-weight: bold;
 }
-#loader {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  overflow: show;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-#loader p {
-  position: fixed;
-  z-index: 1000;
-  height: 2em;
-  width: 2em;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
+/*#loader{
+    display: none;
+    position: fixed;
+    z-index: 999;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    p{
+        position: fixed;
+        z-index: 1000;
+        height: 2em;
+        width: 2em;
+        margin: auto;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+}*/
 #upload-modal {
   position: relative;
   min-height: 1px;
