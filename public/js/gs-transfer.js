@@ -18,15 +18,22 @@ $(function (_, moment) {
 
 
     _.templateSettings = {
-        interpolate: /\[\[(.+?)\]\]/g,
-        escape: /\[\[=(.+?)\]\]/g,
-        evaluate:/\[\[-(.+?)\]\]/g
+        interpolate: /\[\[([\s\S]+?)\]\]/g,
+        //evaluate:/\[\[-([\s\S]+?)\]\]/g,
+        escape: /\[\[=([\s\S]+?)\]\]/g
         //Define an *interpolate* regex to match expressions
         // that should be interpolated verbatim, an *escape* regex
         // to match expressions that should be inserted after being
         // HTML escaped, and an *evaluate* regex to match expressions
         // that should be evaluated without insertion into
         // the resulting string.
+        /*
+        // DEFAULT SETTINGS
+        _.templateSettings = {
+            interpolate : /<%=([\s\S]+?)%>/g,
+            evaluate : /<%([\s\S]+?)%>/g,
+            escape : /<%-([\s\S]+?)%>/g
+        };*/
     };
 
     /****************************************************
@@ -345,7 +352,9 @@ $(function (_, moment) {
 
             //$('.breadcrumb').html('<li class="active">Tous les documents</li><li><a href="#"></a></li>');
 
-        } else {
+        }
+        else
+        {
             data.instance.toggle_node(data.node);
 
             var nodeid = parseInt(data.node.id);
@@ -394,15 +403,14 @@ $(function (_, moment) {
         }
     }
 
-    // TIP: $('.leaf') to access leaf nodes...!!!!
-    function buildTree() {
+
+    /*function buildTree() {
 
         var tree = [];
         var cat = [];
 
         refDocUsed = getUsedDocRef(AjaxData);
 
-        //console.log(refDocUsed);
         // BUILD TREE
         $.each(category, function (i, item) {
 
@@ -418,7 +426,7 @@ $(function (_, moment) {
                         .children[(tree[(tree.length - 1)].children.length)] = {
                         "id": refdoc,
                         "data": refdoc,
-                        "text": refdoc + " - " + labelDoc_i18n(item), //item.labelDoc_f,
+                        "text": refdoc + " - " + labelDoc_i18n(item),
                         "li_attr": {"class": "leaf"}
                     }
                 } else {
@@ -426,8 +434,8 @@ $(function (_, moment) {
                     cat[cat.length] = numcat;
                     tree[tree.length] =
                     {
-                        /*"id": numcat,*/
-                        "text": numcat + " - " + labelCat_i18n(item),//item.labelCategory_f,
+
+                        "text": numcat + " - " + labelCat_i18n(item),
                         "state": {
                             "opened": true,
                             "disabled": false,
@@ -436,7 +444,7 @@ $(function (_, moment) {
                         "children": [
                             { //add document
                                 "id": refdoc,
-                                "text": refdoc + " - " + labelDoc_i18n(item), //item.labelDoc_f,
+                                "text": refdoc + " - " + labelDoc_i18n(item),
                                 "li_attr": {"class": "leaf"}
                             }
                         ]
@@ -475,30 +483,71 @@ $(function (_, moment) {
         };
 
         return tree;
+    }*/
+
+    function templateMenu(){
+
+        var prevCat = -100 ;
+        var htmlLeafNode = '';
+        var htmlCategoryNode = '';
+
+        var createLeafNode = _.template($('#menuL3').html()),
+            createCategoryNode = _.template($('#menuL2').html());
+
+
+        refDocUsed = getUsedDocRef(AjaxData);
+
+        // BUILD leaf and category node
+        $.each(category, function (i, item) {
+
+            var refdoc = parseInt(item.referenceDocument),
+                numcat = parseInt(item.categoryNumber);
+
+            if ($.inArray(refdoc, refDocUsed) > -1) { // doc is used
+
+                htmlLeafNode += createLeafNode(
+                    {
+                        referenceDocument:refdoc,
+                        typeDocument:labelDoc_i18n(item)
+                    });
+
+                if (prevCat !== numcat){//new category
+
+                    htmlCategoryNode += createCategoryNode(
+                        {
+                            categoryNumber: numcat,
+                            categoryName: labelCat_i18n(item),
+                            leafNode: htmlLeafNode
+                        });
+                    htmlLeafNode = '';
+                    prevCat = numcat;
+                }
+            }
+        });
+
+        //other category
+        if ($.inArray(-1, refDocUsed) > -1) {
+            htmlCategoryNode += createCategoryNode(
+                {
+                    categoryNumber: 98,
+                    categoryName: i18n[lang].tree.other,
+                    leafNode: ''
+                });
+        };
+
+        var htmlMenu =  _.template($('#menuL1').html())(
+            {
+                allDocs: i18n[lang].tree.root,
+                uploadText: i18n[lang].tree.upload,
+                categoryNode: htmlCategoryNode
+            }
+        );
+        return htmlMenu;
     }
 
     function createMenu() {
 
-        $('#sidenav')
-            .on('select_node.jstree', menuActionClick)
-            .jstree({
-                'core': {
-                    'data': {
-                        "id": 'root',
-                        "text": i18n[lang].tree.root,//"Tous les documents",
-                        "state": {
-                            "opened": true,
-                            "disabled": false,
-                            "selected": true
-                        },
-                        "children": buildTree()
-                    }
-                }
-                /*"plugins" : [ "contextmenu" ]*/
-            });
-    }
-
-    function menuLI() {
+        $('#sidenav').html(templateMenu());
 
     }
 
@@ -506,20 +555,8 @@ $(function (_, moment) {
      * TABLE
      * */
 
-    function templateMenu(){
-        var tmenu3 = _.template($('#menuL3').html()),
-            tmenu2 = _.template($('#menuL2').html());
-        console.log(tmenu2({
-            categoryNumber:1,
-            categoryName:2,
-            referenceDocument:3,
-            typeDocument:4,
-            level3:tmenu3
-        }));
 
-    }
-
-    function templateTable() {
+    function templateTable() { //TODO: make it REUSABLE --> parameter for tbody, theader and tableID
 
         var tpl = _.template($('#headertpl').html());
 
@@ -537,10 +574,10 @@ $(function (_, moment) {
             if (row.isNew) row.classNew = 'isNew';
             else row.classNew = 'notNew';
 
-            if (parseInt(row.downloadCount) > 0) row.alreadyDL = 'text-muted';
-            else row.alreadyDL = 'text-primary';
             row.downloadCount = parseInt(row.downloadCount);
             if (isNaN(row.downloadCount)) row.downloadCount = -1;
+            if (row.downloadCount > 0) row.alreadyDL = 'text-muted';
+            else row.alreadyDL = 'text-primary';
 
             //TODO: how to improve this code? ==> ugly
             row.employerNumber = parseInt(row.employerNumber);
@@ -905,7 +942,6 @@ $(function (_, moment) {
     }
 
     function main() {
-        templateMenu();
 
         $('.user-name').html(username.toUpperCase());
 
