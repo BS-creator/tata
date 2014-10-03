@@ -46,10 +46,12 @@ header ul {
 /**********************************************
                     TOP NAV
 ***********************************************/
-#top-nav ul {
+#top-nav ul,
+td#top-nav ul:not(i)  {
   margin: 0;
   height: 50px;
   line-height: 50px;
+  font-size: 16px;
   font-weight: 500;
   color: #a0a0a0;
 }
@@ -73,6 +75,13 @@ header ul {
   color: #505050;
 }
 
+/**********************************************
+                    BREADCRUMP
+**********************************************/
+#breadcrumb{
+  display: table-cell;
+  line-height: 20px;
+}
 
 /**********************************************
                     SIDEBAR LEFT      #sidenav
