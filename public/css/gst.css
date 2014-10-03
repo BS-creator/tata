@@ -532,9 +532,9 @@ i.fa, li {
 #upload a,
 li.level1 > a {
   display: block;
-  height: 50px;
   margin-bottom: 1px;
-  padding: 15px 0px 15px 30px;
+  height: 50px;
+  padding: 15px 0px 15px 19px;
   /* add ... on resize instead of break line */
   white-space: nowrap;
   overflow: hidden;
@@ -565,9 +565,9 @@ li.level1 > a.active {
 
 li.level2 > a {
   display: block;
-  height: 30px;
   margin-bottom: 1px;
-  padding: 5px 0px 5px 30px;
+  height: 50px;
+  padding: 15px 0px 15px 30px;
   /* add ... on resize instead of break line */
   white-space: nowrap;
   overflow: hidden;
@@ -586,8 +586,8 @@ li.level2 > a {
 li.level3 > a {
   display: block;
   margin-bottom: 1px;
-  height: 30px;
-  padding: 5px 0px 5px 50px;
+  height: 50px;
+  padding: 15px 0px 15px 50px;
   /* add ... on resize instead of break line */
   white-space: nowrap;
   overflow: hidden;
