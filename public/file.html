@@ -67,7 +67,7 @@
             </ul>
             <ul class="list-inline pull-right pr-m">
                 <li class="user-name mr-s">Username</li>
-                <li id="signout" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Se déconnecter">&nbsp;&nbsp;<i
+                <li id="signout" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Log Off">&nbsp;&nbsp;<i
                         class="fa fa-sign-out"></i></li>
             </ul>
         </div>
@@ -136,7 +136,6 @@
                                     </div>
 
                                 </div>
-
 
                             </div>
 
@@ -215,7 +214,7 @@
                                 </div>
                             </div>
 
-                            <input class="pull-left ml-s" type="text" name="search" placeholder="Recherche ..."/>
+                            <input class="pull-left ml-s" type="text" name="search" placeholder=""/>
 
                             <!--refresh & toggle config table-->
                             <div class="btn-group pull-right ml-s">
@@ -234,7 +233,7 @@
                     </div>
                     <div class="container-fluid">
                         <div class="row">
-                            <button class="btn-portal-green">
+                            <button class="btn-portal-green downloadall">
                                 <i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Télécharger les fichiers
                             </button>
                         </div>
@@ -278,7 +277,6 @@
                                         </small>
                                     </a></td>
                                 <td class="center" data-order="[[date]]">[[dateFormatted]]</td>
-                                <!--TODO: reverse date-->
                                 <td>[[fileName]]</td>
                                 <td>[[uploadUserName]]</td>
                                 <td>[[employerNumber]]</td>
@@ -306,7 +304,7 @@
 
                     <div class="container-fluid mt-m">
                         <div class="row">
-                            <button class="btn-portal-green">
+                            <button class="btn-portal-green downloadall">
                                 <i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Télécharger les fichiers
                             </button>
                         </div>
@@ -346,6 +344,7 @@
 <script src="DataTables/resources/bootstrap/3/dataTables.bootstrap.js"></script>
 <script src="DataTables/extensions/ColVis/js/dataTables.colVis.js"></script>
 <script src="DataTables/plugins/fnFilterClear.js"></script>
+<script src="DataTables/plugins/dom-checkbox.js"></script>
 <script src="js/underscore.js/underscore-1.6.0.js"></script>
 <script src="js/moment/moment-with-langs.min-2.5.0.js"></script>
 <script src="js/bootstrap.file-input.js"></script>
@@ -353,10 +352,7 @@
 <script src="js/fileupload/vendor/jquery.ui.widget.js"></script>
 <script src="js/fileupload/jquery.iframe-transport.js"></script>
 <script src="js/fileupload/jquery.fileupload.js"></script>
-
-<script src="js/pw-jstree.js"></script>
 <script src="js/gs-transfer.js"></script>
-<script src="js/gst.js"></script>
 <script src="js/side-menu.js"></script>
 <!-- endbuild -->
 
