@@ -87,7 +87,7 @@
                     <div id="upload-modal">
 
                         <!-- Button trigger modal -->
-                        <div id="btn-upload-div" class="btn-portal text-center" data-toggle="modal" data-target="#uploadFiles"
+                        <div id="btn-upload-div" class="btn-portal-blue wide text-center" data-toggle="modal" data-target="#uploadFiles"
                              href="#uploadFiles">
                             <span></span>
                         </div>
@@ -196,37 +196,47 @@
                 <div id="contentTable">
 
                     <!--TABLE CONTENT-->
-                    <div class="filter"><!-- FILTERS -->
-                        <!--filtrer par-->
-                        <div class="btn-group pull-left">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                Filtrer par <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a id="filterNew" href="#"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;Nouveaux
-                                    fichiers</a></li>
-                                <li class="divider"></li>
-                                <li><a id="filterDL" href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Fichiers
-                                    non-téléchargés</a></li>
-                                <li class="divider"></li>
-                                <li><a id="filterClear" href="#"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;Clear
-                                    all
-                                    filters</a></li>
-                            </ul>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="filter"><!-- FILTERS -->
+                                <!--filtrer par-->
+                                <div class="btn-group pull-left">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        Filtrer par <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a id="filterNew" href="#"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;Nouveaux
+                                            fichiers</a></li>
+                                        <li class="divider"></li>
+                                        <li><a id="filterDL" href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Fichiers
+                                            non-téléchargés</a></li>
+                                        <li class="divider"></li>
+                                        <li><a id="filterClear" href="#"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;Clear
+                                            all
+                                            filters</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <input class="pull-left ml-s" type="text" name="search" placeholder="Recherche ..."/>
+
+                            <!--refresh & toggle config table-->
+                            <div class="btn-group pull-right ml-s">
+                                <button type="button" class="btn btn-default reloadme"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Rafraîchir
+                                </button>
+                                <button id="toggle-side-menu" type="button" class="btn btn-default"><i
+                                        class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;Affichage
+                                </button>
+                            </div>
                         </div>
                     </div>
-
-                    <input class="pull-left ml-s" type="text" name="search" placeholder="Recherche ..."/>
-
-                    <!--refresh & toggle config table-->
-                    <div class="btn-group pull-right ml-s">
-                        <button type="button" class="btn btn-default reloadme"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Rafraîchir
-                        </button>
-                        <button id="toggle-side-menu" type="button" class="btn btn-default"><i
-                                class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;Affichage
-                        </button>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <button class="btn-portal-green">
+                                <i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Télécharger les fichiers
+                            </button>
+                        </div>
                     </div>
-
                     <table id="tableID" class="display table table-striped">
                         <thead>
                         <!-- BEGIN: Underscore Template Definition. -->
@@ -307,7 +317,7 @@
     <ul class="side-menu-list">
         <li>&nbsp;&nbsp;&nbsp;Pavlova</li>
     </ul>
-    <button class="btn side-menu-head">Réinitialiser la vue</button>
+    <button class="btn-portal-blue">Réinitialiser la vue</button>
 </div>
 
 

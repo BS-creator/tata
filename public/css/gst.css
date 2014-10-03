@@ -245,9 +245,10 @@ i.fa, li {
 /*
 2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
 */
-/*
-  COLORS
-*/
+
+/**********************************************
+                    COLORS
+***********************************************/
 .bg-green     { background-color: #02b158; }
 .bg-darkgreen { background-color: #238553; }
 .bg-gs-clear  { background-color: #3f9ad0; }
@@ -265,57 +266,96 @@ input[type="text"] {
   font-size: 14px;
 }
 
-.btn-portal {
-  margin-bottom: 1px;
-  padding: 15px 0;
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 14px;
-  color: #FFF;
-  background-color: #3f9ad0;
-  cursor: pointer;
-  /* add ... on resize instead of break line */
+
+/**********************************************
+                    BUTTONS
+***********************************************/
+.btn-portal-blue,
+.btn-portal-default,
+.btn-portal-green {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+/*  padding-top: 14px;
+  padding-bottom: 14px;*/
+  padding:  14px 30px;
+
+  /* add ... */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  /* type */
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 14px;
+
+  /* style */
+  background-image: none;
+  border-radius: 0;
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer;
+
+  /* unselectable text */
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+      -ms-user-select: none;      /* IE 10+ */
+       -o-user-select: none;
+          user-select: none;
+
   /* transition */
   -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
-  -moz-transition: all 0.4s ease;/* Firefox 4-15 */
-  -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
-  transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
+     -moz-transition: all 0.4s ease;/* Firefox 4-15 */
+       -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
+          transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
 }
-.btn-portal:hover,
-.btn-portal:focus,
-.btn-portal:active,
-.btn-portal.active {
-  background-color: #0b68a1;
-}
-
 
 .btn-portal-default {
-  display: inline-block;
-  padding: 14px 13px;
-  margin-bottom: 0px;
-  font-size: 14px;
-  font-weight: normal;
-
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  -moz-user-select: none;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
+  background-color: transparent;
+  color: #999;
+  border-color: #ccc;
+}
+.btn-portal-default:hover,
+.btn-portal-default:focus,
+.btn-portal-default:active,
+.btn-portal-default.active {
+  color: #222;
+  border-color: #adadad;
 }
 
 
+.btn-portal-blue {
+  margin-bottom: 1px;
+  color: #FFF;
+  background-color: #3f9ad0;
+  border-color: #3f9ad0;
+}
+.btn-portal-blue:hover,
+.btn-portal-blue:focus,
+.btn-portal-blue:active,
+.btn-portal-blue.active {
+  background-color: #0b68a1;
+  border-color: #0b68a1;
+}
+
+.btn-portal-green {
+  background-color: #02b158;
+  border-color: #02b158;
+  color: #FFF;
+}
+.btn-portal-green:hover,
+.btn-portal-green:focus,
+.btn-portal-green:active,
+.btn-portal-green.active {
+  background-color: #238553;
+  border-color: #238553;
+}
 
 
-/*
-/////////////////////////////
-// LOADER
-*/
+/**********************************************
+                    LOADER
+***********************************************/
 #loader {
   display: none;
   position: fixed;
