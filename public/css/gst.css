@@ -11,14 +11,15 @@ ul.sidebar-left
   font-style: normal;
 }
 body {
+  position: relative;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
   overflow-x: hidden;
 }
 
-/************************************************************/
-/*                        HEADER                            */
-/************************************************************/
+/***************************************************
+                       HEADER
+****************************************************/
 header {
   height: 80.9px;
   background-color: #0b68a1;
@@ -42,9 +43,9 @@ header ul {
 }
 
 
-/************************************************************/
-/*                        TOPNAV                            */
-/************************************************************/
+/**********************************************
+                    TOP NAV
+***********************************************/
 #top-nav ul {
   margin: 0;
   height: 50px;
@@ -73,9 +74,9 @@ header ul {
 }
 
 
-/**************************************************/
-/*                .sidebar-left                  */
-/************************************************/
+/**********************************************
+                    SIDEBAR LEFT      #sidenav
+***********************************************/
 /* ul */
 .sidebar-left {
   margin: 0;
@@ -144,10 +145,9 @@ li.sidebar-h-5.active {
   background-color: #0b68a1;
 }
 
-
-/**************************************/
-/*          SLIDE #side-menu         */
-/************************************/
+/**********************************************
+                    SIDE MENU       #side-menu
+***********************************************/
 
 /* position for sliding effect */
 #side-menu {
@@ -155,15 +155,10 @@ li.sidebar-h-5.active {
   background-color: #0b68a1;
   color: white;
 }
-
-body {
-  position: relative;
-}
 #main {
   position: relative;
   width: 100%;
 }
-
 
 /* style */
 .side-menu-head,
@@ -232,19 +227,17 @@ body {
   background-color: #3f9ad0;
 }
 
-i.fa, li {
-  cursor: pointer;
+#init-conf {
+  opacity: .7;
 }
-
-
-.fa,
-.glyphicon {
-  font-size: 18px !important;
+#init-conf:hover,
+#init-conf:focus,
+#init-conf:active,
+#init-conf.active {
+  background-color: #3f9ad0;
+  border-color: #3f9ad0;
+  opacity: 1;
 }
-
-/*
-2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
-*/
 
 /**********************************************
                     COLORS
@@ -378,4 +371,24 @@ input[type="text"] {
   bottom: 0;
   right: 0;
 }
+
+/*********************************************
+                    MISC
+**********************************************/
+
+i.fa, li {
+  cursor: pointer;
+}
+
+
+.fa,
+.glyphicon {
+  font-size: 18px !important;
+}
+
+
+/*
+2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
+*/
+
 

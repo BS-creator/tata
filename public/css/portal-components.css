@@ -48,6 +48,12 @@
 body {
   font-size: 12px;
 }
+/*
+@font-face {
+    font-family: Roboto;
+    src: url(../fonts/Roboto/Roboto-Regular.ttf);
+    font-weight: 300;
+}*/
 .wrapper {
   width: 100%;
   margin-left: auto;
@@ -509,12 +515,13 @@ li {
 .btn-group,
 .form-control,
 .btn-upload {
+  font-family: "Roboto";
+  font-weight: 300;
   border-radius: 0 !important;
 }
 .btn,
 .btn-upload {
   padding: 14px 12px;
-  font-weight: normal;
   color: #999;
   /* transition */
   -webkit-transition: all 0.4s ease;
