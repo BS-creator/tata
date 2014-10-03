@@ -246,10 +246,13 @@ $(function (_, moment) {
     function downloadAll() {
 
         //TODO: replace getSelections
-        var array = getSelection(),
+        var array = getSelectedRows(),
             listID = '';
 
+        console.log(array);
+
         $.each(array, function (i, item) {
+            console.log(item);
             listID += item.idFile + '@!';
         });
 
@@ -267,7 +270,7 @@ $(function (_, moment) {
 
         $('body').append(form);
 
-        form.submit();
+        //form.submit();
 
     }
 
@@ -532,7 +535,7 @@ $(function (_, moment) {
                 [10, 20, 50, -1],
                 [10, 20, 50, i18n[lang].listAll]
             ],
-            "dom": '<"top"CT>rt<"page"p><"bottom"il>',
+            "dom": '<"top"C>rt<"page"p><"bottom"il>',
             "language": {
                 "url": i18n[lang].url.table
             },
@@ -626,7 +629,9 @@ $(function (_, moment) {
                 "buttonText": i18n[lang].showHide,
                 "exclude": [ 0, 1, 14, 15, 16 ],
                 "restore": "restore"
-            },
+            },/* tableTools: {
+                "sRowSelect": "multi"
+            },*/
             "initComplete": function (settings, json) {
                 table
                     .column(4).search('[^' + username + ']', true, false)
@@ -726,18 +731,18 @@ $(function (_, moment) {
      * EVENTS
      * */
 
-    function getSelected() {
+    function getSelectedRows() {
         return table.rows('.active').data() ;
     }
 
     function setEventsHTML() {
 
         /***** TOOLTIP *****/
-        //$("[rel=tooltip]").tooltip();
+        $("[rel=tooltip]").tooltip();
 
         /***** SIGN OUT *****/
-        var signoutBtn = $('#signout');
-        signoutBtn.tooltip();
+        //var signoutBtn = $('#signout');
+        //signoutBtn.tooltip();
         //signoutBtn.attr('title', i18n[lang].button.signout);
 
 
@@ -776,16 +781,19 @@ $(function (_, moment) {
             small.html('&nbsp;' + dl);
         });
 
+        /***** MULTIDOWNLOAD *****/
+        $('.downloadall').on('click', downloadAll);
 
         /***** CHECKBOX SELECT ALL *****/
-        $('input[name=btSelectAll]').on('change', function(){
-            $('input[name|=cb]').toggle(); //TODO
-            //$('input[name|=cb]').prop('checked',
-        })
+        /*$('input[name=btSelectAll]').on('change', function(){
+            $('input[name|=cb]').prop( "checked", function( i, val ) {
+                return !val;
+            });
+        })*/
 
         $table.find('tbody').on( 'click', 'tr', function () {
             $(this).toggleClass('active');
-            $(this).find(input);
+
         } );
 
         /***** RELOAD *****/
@@ -833,10 +841,6 @@ $(function (_, moment) {
         $('.remove').on('click', function () {
             deleteFile($(this).data('file-id'), $(this));
         });
-
-        /***** MULTIDOWNLOAD *****/
-        $('.downloadall').on('click', downloadAll);
-
 
 
         /***** DATE PICKER *****/
