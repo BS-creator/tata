@@ -132,9 +132,14 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
+
                                 </div>
+
+
                             </div>
+
                         </div>
                         <!--/Modal-->
                     </div>
@@ -142,9 +147,47 @@
 
                     <!--sidenav-->
 
-                    <div id="sidenav"></div>
+                <div id="sidenav">
+                    <!-- BEGIN: Underscore Template Definition. -->
+                    <script id="menuL1" type="text/template" class="template">
+                       <ul class="level1">
+                           <li class="level1">
+                               <a href="#">[[allDocs]]</a>
+                               <%= level2 %>
+                           </li>
+                           <li id="upload">
+                               <a href="#">[[uploadText]]</a>
+                           </li>
+                       </ul>
+                    </script>
+                    <!-- END: Underscore Template Definition. -->
 
-                    <!--/sidenav-->
+                    <!-- BEGIN: Underscore Template Definition. -->
+                    <script id="menuL2" type="text/template" class="template">
+                        <ul class="level2">
+                            <li class="level2">
+                                <a href="#">[[categoryNumber]] - [[categoryName]]</a>
+                                [[level3({
+                                    referenceDocument:referenceDocument,
+                                    typeDocument:typeDocument
+                                })]]
+                            </li>
+                        </ul>
+                    </script>
+                    <!-- END: Underscore Template Definition. -->
+
+                    <!-- BEGIN: Underscore Template Definition. -->
+                    <script id="menuL3" type="text/template" class="template">
+                        <ul class="level3">
+                            <li id="[[referenceDocument]]" class="level3">
+                                <a href="#">[[referenceDocument]] - [[typeDocument]]</a>
+                            </li>
+                        </ul>
+                    </script>
+                    <!-- END: Underscore Template Definition. -->
+                </div>
+
+                <!--/sidenav-->
 
                 </div>
             </div><!--/col-md-3 col-xs-12-->
@@ -183,80 +226,77 @@
                                 class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;Affichage
                         </button>
                     </div>
-
-                </div><!--/contentTable-->
+                </div>
+            </div><!--/contentTable-->
 
                 <table id="tableID" class="display table table-striped">
-                        <thead>
-                        <!-- BEGIN: Underscore Template Definition. -->
-                        <script id="headertpl" type="text/template" class="template">
-                            <tr>
-                                <th><input name="btSelectAll" type="checkbox"/></th>
-                                <th><i class="fa fa-download fa-lg"></i></th>
-                                <th>[[date]]</th>
-                                <th>[[name]]</th>
-                                <th>[[user]]</th>
-                                <th>[[empl]]</th>
-                                <th>[[label]]</th>
-                                <th>[[refdoc]]</th>
-                                <th>[[size]]</th>
-                                <th>[[ext]]</th>
-                                <th>[[path]]</th>
-                                <th>[[refCl]]</th>
-                                <th>[[count]]</th>
-                                <th>[[refGS]]</th>
-                                <th>[[del]]</th>
-                                <th>download Count</th>
-                                <th>isNew</th>
-                            </tr>
-                        </script>
-                        <!-- END: Underscore Template Definition. -->
-                        </thead>
-                        <tbody>
-                        <!-- BEGIN: Underscore Template Definition. -->
-                        <script id="bodytpl" type="text/template">
+                    <thead>
+                    <!-- BEGIN: Underscore Template Definition. -->
+                    <script id="headertpl" type="text/template" class="template">
+                        <tr>
+                            <th><input name="btSelectAll" type="checkbox"/></th>
+                            <th><i class="fa fa-download fa-lg"></i></th>
+                            <th>[[date]]</th>
+                            <th>[[name]]</th>
+                            <th>[[user]]</th>
+                            <th>[[empl]]</th>
+                            <th>[[label]]</th>
+                            <th>[[refdoc]]</th>
+                            <th>[[size]]</th>
+                            <th>[[ext]]</th>
+                            <th>[[path]]</th>
+                            <th>[[refCl]]</th>
+                            <th>[[count]]</th>
+                            <th>[[refGS]]</th>
+                            <th>[[del]]</th>
+                            <th>download Count</th>
+                            <th>isNew</th>
+                        </tr>
+                    </script>
+                    <!-- END: Underscore Template Definition. -->
+                    </thead>
+                    <tbody>
+                    <!-- BEGIN: Underscore Template Definition. -->
+                    <script id="bodytpl" type="text/template">
 
-                            <tr class="[[classNew]]">
-                                <td><input name="cb[[index]]" type="checkbox"/></td>
-                                <td data-order="[[downloadCount]]">
-                                    <a class="dlfile" data-file-id="[[fileId]]" data-filename="[[fileName]]">
-                                        <i class="fa [[dlClass]] fa-lg [[alreadyDL]]"></i>
-                                        <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]
-                                        </small>
-                                    </a></td>
-                                <td data-order="[[date]]">[[dateFormatted]]</td>
-                                <!--TODO: reverse date-->
-                                <td>[[fileName]]</td>
-                                <td>[[uploadUserName]]</td>
-                                <td>[[employerNumber]]</td>
-                                <td>[[label]]</td>
-                                <td>[[referenceDocument]]</td>
-                                <td data-order="[[size]]">[[sizeFormatted]]</td>
-                                <td data-order="[[extension]]">[[extensionFormatted]]</td>
-                                <td>[[path]]</td>
-                                <td>[[referenceClient]]</td>
-                                <td>[[counter]]</td>
-                                <td>[[referenceGroupS]]</td>
-                                <td>
-                                    <a class="remove" title="Remove" data-file-id="[[fileId]]">
-                                        <i class="fa fa-trash fa-lg"></i></a></td>
-                                <td>[[downloadCount]]</td>
-                                <td>[[isNew]]</td>
-                            </tr>
+                        <tr class="[[classNew]]">
+                            <td><input name="cb[[index]]" type="checkbox"/></td>
+                            <td data-order="[[downloadCount]]">
+                                <a class="dlfile" data-file-id="[[fileId]]" data-filename="[[fileName]]">
+                                    <i class="fa [[dlClass]] fa-lg [[alreadyDL]]"></i>
+                                    <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]
+                                    </small>
+                                </a></td>
+                            <td data-order="[[date]]">[[dateFormatted]]</td>
+                            <!--TODO: reverse date-->
+                            <td>[[fileName]]</td>
+                            <td>[[uploadUserName]]</td>
+                            <td>[[employerNumber]]</td>
+                            <td>[[label]]</td>
+                            <td>[[referenceDocument]]</td>
+                            <td data-order="[[size]]">[[sizeFormatted]]</td>
+                            <td data-order="[[extension]]">[[extensionFormatted]]</td>
+                            <td>[[path]]</td>
+                            <td>[[referenceClient]]</td>
+                            <td>[[counter]]</td>
+                            <td>[[referenceGroupS]]</td>
+                            <td>
+                                <a class="remove" title="Remove" data-file-id="[[fileId]]">
+                                    <i class="fa fa-trash fa-lg"></i></a></td>
+                            <td>[[downloadCount]]</td>
+                            <td>[[isNew]]</td>
+                        </tr>
 
-                        </script>
-                        <!-- END: Underscore Template Definition. -->
-                        </tbody>
-                    </table>
-                <!--/table-->
-
+                    </script>
+                    <!-- END: Underscore Template Definition. -->
+                    </tbody>
+                </table>
             </div>
         </div>
         <!--/row main content-->
 
     </div>
     <!--/container-fluid-->
-
 </div>
 <!--/main-->
 
@@ -296,8 +336,7 @@
 <script src="js/gs-transfer.js"></script>
 <script src="js/gst.js"></script>
 <script src="js/side-menu.js"></script>
-<!--<script src="js/side-menu.js"></script>-->
-<!-- endbuild --></div>
+<!-- endbuild -->
 
 </body>
 </html>

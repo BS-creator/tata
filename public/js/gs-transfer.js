@@ -17,6 +17,18 @@ $(function (_, moment) {
         token = sessionStorage.getItem('token');
 
 
+    _.templateSettings = {
+        interpolate: /\[\[(.+?)\]\]/g,
+        escape: /\[\[=(.+?)\]\]/g,
+        evaluate:/\[\[-(.+?)\]\]/g
+        //Define an *interpolate* regex to match expressions
+        // that should be interpolated verbatim, an *escape* regex
+        // to match expressions that should be inserted after being
+        // HTML escaped, and an *evaluate* regex to match expressions
+        // that should be evaluated without insertion into
+        // the resulting string.
+    };
+
     /****************************************************
      * HELPER
      * */
@@ -486,20 +498,28 @@ $(function (_, moment) {
             });
     }
 
+    function menuLI() {
+
+    }
+
     /****************************************************
      * TABLE
      * */
 
+    function templateMenu(){
+        var tmenu3 = _.template($('#menuL3').html()),
+            tmenu2 = _.template($('#menuL2').html());
+        console.log(tmenu2({
+            categoryNumber:1,
+            categoryName:2,
+            referenceDocument:3,
+            typeDocument:4,
+            level3:tmenu3
+        }));
+
+    }
+
     function templateTable() {
-        _.templateSettings = {
-            interpolate: /\[\[(.+?)\]\]/g
-            //Define an *interpolate* regex to match expressions
-            // that should be interpolated verbatim, an *escape* regex
-            // to match expressions that should be inserted after being
-            // HTML escaped, and an *evaluate* regex to match expressions
-            // that should be evaluated without insertion into
-            // the resulting string.
-        };
 
         var tpl = _.template($('#headertpl').html());
 
@@ -557,7 +577,7 @@ $(function (_, moment) {
                 [10, 20, 50, -1],
                 [10, 20, 50, i18n[lang].listAll]
             ],
-            "dom": '<"top"iCT>rt<"bottom"lp>',
+            "dom": '<"top"CT>rt<"bottom"ilp>',
             "language": {
                 "url": i18n[lang].url.table
             },
@@ -752,9 +772,12 @@ $(function (_, moment) {
 
     function setEventsHTML() {
 
+        /***** SIGN OUT *****/
+        $('#signout').attr('title', i18n[lang].button.signout);
+
         /***** UPLOAD *****/
         //TODO: put it in CSS, just use it to translate!!!
-        $('#btn-upload-div span').html('<i class="fa fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].upload);
+        $('#btn-upload-div').find('span').html('<i class="fa fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].upload);
         $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].modalupload);
         $('#modalbq').html(i18n[lang].modalbq);
 
@@ -882,6 +905,7 @@ $(function (_, moment) {
     }
 
     function main() {
+        templateMenu();
 
         $('.user-name').html(username.toUpperCase());
 

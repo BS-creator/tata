@@ -4,40 +4,42 @@ $('document').ready(function () {
     //                  SIDE-MENU
     ///////////////////////////////////////////////////////
 
-    var main = $('#main');
-    var sidenav = $('#sidenav');
-    var sidemenu = $('#side-menu');
+    var $main = $('#main');
+    //var $snav = $('.sidenav');
+    var $smenu = $('#side-menu');
 
 
     // initialize size & display /default
     (function () {
+        var sbWidth = $('#sidenav').width();
         $('#side-menu').css({
-            top: main.offset().top, // get top height to align
-            right: -sidenav.width(),
-            width: sidenav.width(),
-            height: $(window).height() - main.offset().top
+            top: $main.offset().top, // get top height to align
+            right: -sbWidth,
+            width: sbWidth,
+            height: $(window).height() - $main.offset().top
         }).removeClass();
     })();
 
     // set position
     var sideMenuToggle = function (displayed) {
-        var MSAbsc = (displayed === true) ? 0 : -sidenav.width();
-        var mainAbsc = (displayed === false) ? 0 : -sidenav.width();
-        main.animate({
+        var MSWidth = $('#sidenav').width();
+        var MSAbsc = (displayed === true) ? 0 : -MSWidth;
+        var mainAbsc = (displayed === false) ? 0 : -MSWidth;
+        $main.animate({
             right: -mainAbsc
         });
-        sidemenu.animate({
+        $smenu.animate({
             right: MSAbsc,
-            width: sidenav.width()
+            width: sbWidth
         }).toggleClass('active');
-    }
+    };
 
     // resize side-menu width x height
     $(window).resize(function () {
-        sidemenu.height($(window).height() - $('#header').height());
-        if (sidemenu.hasClass('active')) {
+        $smenu.height($(window).height() - $('#header').height());
+        if ($smenu.hasClass('active')) {
             sideMenuToggle(false);
-            $(this).width(sidenav.width());
+            $(this).width($('#sidenav').width());
         }
     });
     $(window).trigger('resize');

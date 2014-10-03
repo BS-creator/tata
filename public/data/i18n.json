@@ -7,7 +7,8 @@
                 "new": "Nouveaux fichiers",
                 "notDL": "Fichiers non-téléchargés",
                 "clear": "Retirer tous les filtres"
-            }
+            },
+            "signout" : "Se Déconnecter"
         },
         "url": {
             "table": "DataTables/resources/language/FR.json"
@@ -54,8 +55,9 @@
             "filter":{
                 "new": "Nieuwe bestanden",
                 "notDL": "Bestanden niet gedownloaden",
-                "clear": "schrapen filters"
-            }
+                "clear": "Schrapen filters"
+            },
+            "signout" : "Uit Loggen"
         },
         "url": {
             "table": "DataTables/resources/language/NL.json"
@@ -103,7 +105,8 @@
                 "new": "New Files",
                 "notDL": "Files not downloaded",
                 "clear": "Clear all filters"
-            }
+            },
+            "signout" : "Sign Out"
         },
         "url": {
             "table": "DataTables/resources/language/EN.json"
