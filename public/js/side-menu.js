@@ -45,11 +45,7 @@ $('document').ready(function () {
 
     // side-menu active
     $('#toggle-side-menu').on('click', function () {
-        sideMenuToggle(true);
-
-            if($('#side-menu').hasClass('active')){
-
-            }
+        sideMenuToggle(!$('#side-menu').hasClass('active'));
     });
 
     // side-menu desactive
@@ -62,10 +58,5 @@ $('document').ready(function () {
     $('.side-menu-list > li').on('click', function () {
         $(this).toggleClass('active');
     });
-
-
-
-
-
 
 });
