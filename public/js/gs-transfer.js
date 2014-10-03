@@ -245,6 +245,7 @@ $(function (_, moment) {
 
     function downloadAll() {
 
+        //TODO: replace getSelections
         var array = $(tableId).bootstrapTable('getSelections'),
             listID = '';
 
@@ -609,6 +610,7 @@ $(function (_, moment) {
             "paging": true,
             "ordering": true,
             "info": true,
+            "scrollX": true,
             //"stateSave": true,
             "lengthMenu": [
                 [10, 20, 50, -1],
@@ -625,11 +627,12 @@ $(function (_, moment) {
                 {
                     "targets": 0,  //checkbox
                     "visible": true,
-                    "orderable": false,
+                    "orderDataType": "dom-checkbox",
+                    //"orderable": false,
                     "searchable": true
                 },
                 {
-                    "targets": 1    //DownloadCount HTML
+                    "targets": 1    //Download
                 },
                 {
                     "targets": 2    // Date
@@ -807,6 +810,10 @@ $(function (_, moment) {
      * EVENTS
      * */
 
+    function getSelected() {
+        return table.rows('.active').data() ;
+    }
+
     function setEventsHTML() {
 
         /***** TOOLTIP *****/
@@ -857,11 +864,18 @@ $(function (_, moment) {
         /***** CHECKBOX SELECT ALL *****/
         $('input[name=btSelectAll]').on('change', function(){
             $('input[name|=cb]').toggle(); //TODO
+            //$('input[name|=cb]').prop('checked',
         })
+
+        $table.find('tbody').on( 'click', 'tr', function () {
+            $(this).toggleClass('active');
+            $(this).find(input);
+        } );
 
         /***** RELOAD *****/
         $('.reloadme').on('click', function () {
             //$table.bootstrapTable('onFilter');
+            //TODO: clear filter?
             location.reload();
         });
 
