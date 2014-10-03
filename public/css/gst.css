@@ -308,3 +308,34 @@ input[type="text"] {
   border: 1px solid transparent;
   border-radius: 4px;
 }
+
+
+
+
+/*
+/////////////////////////////
+// LOADER
+*/
+#loader {
+  display: none;
+  position: fixed;
+  z-index: 999;
+/*  overflow: show;*/
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+#loader p{
+  position: fixed;
+  z-index: 1000;
+  height: 2em;
+  width: 2em;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+

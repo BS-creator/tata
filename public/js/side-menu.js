@@ -8,7 +8,6 @@ $('document').ready(function () {
     //var $snav = $('.sidenav');
     var $smenu = $('#side-menu');
 
-
     // initialize size & display /default
     (function () {
         var sbWidth = $('#sidenav').width();
@@ -22,9 +21,9 @@ $('document').ready(function () {
 
     // set position
     var sideMenuToggle = function (displayed) {
-        var MSWidth = $('#sidenav').width();
-        var MSAbsc = (displayed === true) ? 0 : -MSWidth;
-        var mainAbsc = (displayed === false) ? 0 : -MSWidth;
+        var sbWidth = $('#sidenav').width();
+        var MSAbsc = (displayed === true) ? 0 : -sbWidth;
+        var mainAbsc = (displayed === false) ? 0 : -sbWidth;
         $main.animate({
             right: -mainAbsc
         });
@@ -36,7 +35,7 @@ $('document').ready(function () {
 
     // resize side-menu width x height
     $(window).resize(function () {
-        $smenu.height($(window).height() - $('#header').height());
+        $smenu.height($(window).height() - $('header').height());
         if ($smenu.hasClass('active')) {
             sideMenuToggle(false);
             $(this).width($('#sidenav').width());
@@ -47,6 +46,10 @@ $('document').ready(function () {
     // side-menu active
     $('#toggle-side-menu').on('click', function () {
         sideMenuToggle(true);
+
+            if($('#side-menu').hasClass('active')){
+
+            }
     });
 
     // side-menu desactive
@@ -59,6 +62,10 @@ $('document').ready(function () {
     $('.side-menu-list > li').on('click', function () {
         $(this).toggleClass('active');
     });
+
+
+
+
 
 
 });
