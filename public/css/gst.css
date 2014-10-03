@@ -391,18 +391,18 @@ input[type="text"] {
 /*********************************************
                     TABLE
 *********************************************/
-#tableID_wrapper {
-  margin: 0;
-  overflow: hidden;
-  overflow-x: auto;
-}
-#tableID {
-  max-width: 100%;
-  overflow-x: auto;
+.dataTables_scroll {
   border: 1px solid #ccc;
 }
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+  border-bottom: 1px solid #ccc;
+}
+table.table,
+#tableID {
+  margin: 0 !important;
+}
 th {
-  border-right: 1px solid #ccc;
+  border-right: 1px solid #f2f2f2;
 }
 th:last-child {
   border-right: none;
@@ -413,7 +413,7 @@ table.dataTable thead td {
   border-bottom: 1px solid #ccc;
 }
 td {
-  border-right: 1px solid #eee;
+  max-width: 8%;
 
   /* add ... */
   white-space: nowrap;
