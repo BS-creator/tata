@@ -151,15 +151,16 @@ li.sidebar-h-5.active {
 
 /* position for sliding effect */
 #side-menu {
-  position: absolute;
+  position: fixed;
   background-color: #0b68a1;
   color: white;
 }
-#side-menu.active {
 
+body {
+  position: relative;
 }
 #main {
-  position: absolute;
+  position: relative;
   width: 100%;
 }
 
@@ -246,9 +247,9 @@ i.fa, li {
 */
 
 
-#btn-upload-div {
+.btn-portal {
   margin-bottom: 1px;
-  padding: 15px 0 15px 21px;
+  padding: 15px 0;
   font-family: 'Roboto';
   font-weight: 300;
   font-size: 14px;

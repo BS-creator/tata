@@ -432,8 +432,8 @@ div#sidenav ul li ul li#upload a.active {
   border-bottom-color: #000;
 }
 input[type=text] {
-  float: left;
-  padding: 14px 12px;
+  /*    float: left;
+    padding: 14px 12px;*/
   margin: 0;
   font-weight: normal;
   color: #999;

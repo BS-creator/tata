@@ -4,42 +4,40 @@ $('document').ready(function () {
     //                  SIDE-MENU
     ///////////////////////////////////////////////////////
 
-    var $main = $('#main');
-    var $snav = $('.sidenav');
-    var $smenu = $('#side-menu');
+    var main = $('#main');
+    var sidenav = $('#sidenav');
+    var sidemenu = $('#side-menu');
 
 
     // initialize size & display /default
     (function () {
-        var sbWidth = $('#sidenav').width();
         $('#side-menu').css({
-            top: $main.offset().top, // get top height to align
-            right: -sbWidth,
-            width: sbWidth,
-            height: $(window).height() - $main.offset().top
+            top: main.offset().top, // get top height to align
+            right: -sidenav.width(),
+            width: sidenav.width(),
+            height: $(window).height() - main.offset().top
         }).removeClass();
     })();
 
     // set position
     var sideMenuToggle = function (displayed) {
-        var MSWidth = $('#sidenav').width();
-        var MSAbsc = (displayed === true) ? 0 : -MSWidth;
-        var mainAbsc = (displayed === false) ? 0 : -MSWidth;
-        $main.animate({
+        var MSAbsc = (displayed === true) ? 0 : -sidenav.width();
+        var mainAbsc = (displayed === false) ? 0 : -sidenav.width();
+        main.animate({
             right: -mainAbsc
         });
-        $smenu.animate({
+        sidemenu.animate({
             right: MSAbsc,
-            width: sbWidth
+            width: sidenav.width()
         }).toggleClass('active');
     }
 
     // resize side-menu width x height
     $(window).resize(function () {
-        $smenu.height($(window).height() - $('#header').height());
-        if ($smenu.hasClass('active')) {
+        sidemenu.height($(window).height() - $('#header').height());
+        if (sidemenu.hasClass('active')) {
             sideMenuToggle(false);
-            $(this).width($('#sidenav').width());
+            $(this).width(sidenav.width());
         }
     });
     $(window).trigger('resize');

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/portal-components.css">
     <link rel="stylesheet" href="css/fileupload/jquery.fileupload.css"/>
     <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui.css"/>
-    <link rel="stylesheet" href="css/gs-transfer.css">
+<!--    <link rel="stylesheet" href="css/gs-transfer.css">-->
     <link rel="stylesheet" href="css/gst.css">
     <noscript>
         <link rel="stylesheet" href="css/fileupload/jquery.fileupload-noscript.css">
@@ -58,207 +58,206 @@
 
 <div id="main">
 
-<!--top-nav-->
-<div class="clearfix">
-    <div id="top-nav">
-        <ul class="list-inline pull-left pl-m">
-            <li class="univers-name"><i class="glyphicon glyphicon-transfer"></i>&nbsp;&nbsp;<em>Group S Transfer</em>
-            </li>
-        </ul>
-        <ul class="list-inline pull-right pr-m">
-            <li class="user-name mr-s">Username</li>
-            <li id="signout" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Se déconnecter">&nbsp;&nbsp;<i
-                    class="fa fa-sign-out"></i></li>
-        </ul>
+    <!--top-nav-->
+    <div class="clearfix">
+        <div id="top-nav">
+            <ul class="list-inline pull-left pl-m">
+                <li class="univers-name"><i class="glyphicon glyphicon-transfer"></i>&nbsp;&nbsp;<em>Group S Transfer</em>
+                </li>
+            </ul>
+            <ul class="list-inline pull-right pr-m">
+                <li class="user-name mr-s">Username</li>
+                <li id="signout" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Se déconnecter">&nbsp;&nbsp;<i
+                        class="fa fa-sign-out"></i></li>
+            </ul>
+        </div>
     </div>
-</div>
 
-<div class="container-fluid">
+    <div class="container-fluid">
 
-    <!--main content-->
-    <div class="row">
+        <!--main content-->
+        <div class="row">
 
-        <div class="col-md-3 col-xs-12">
+            <div class="col-md-3 col-xs-12">
 
-            <!--SIDEBAR LEFT-->
-            <div class="row">
+                <!--SIDEBAR LEFT-->
+                <div class="row">
 
-                <!--upload -->
-                <div id="upload-modal">
+                    <!--upload -->
+                    <div id="upload-modal">
 
-                    <!-- Button trigger modal -->
-                    <div id="btn-upload-div" class="text-center" data-toggle="modal" data-target="#uploadFiles"
-                         href="#uploadFiles">
-                        <span></span>
-                    </div>
+                        <!-- Button trigger modal -->
+                        <div id="btn-upload-div" class="btn-portal text-center" data-toggle="modal" data-target="#uploadFiles"
+                             href="#uploadFiles">
+                            <span></span>
+                        </div>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="uploadFiles" tabindex="-1" role="dialog" aria-labelledby="uploadFiles1" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"
-                                            aria-hidden="true">&times;</button>
-                                    <h4 id="modalh4" class="modal-title text-muted text-center"></h4>
-                                </div>
+                        <!-- Modal -->
+                        <div class="modal fade" id="uploadFiles" tabindex="-1" role="dialog" aria-labelledby="uploadFiles1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-hidden="true">&times;</button>
+                                        <h4 id="modalh4" class="modal-title text-muted text-center"></h4>
+                                    </div>
 
-                                <div class="modal-body">
+                                    <div class="modal-body">
 
-                                    <blockquote id="modalbq" class="text-muted">
+                                        <blockquote id="modalbq" class="text-muted">
 
-                                    </blockquote>
+                                        </blockquote>
 
-                                    <form class="" id="uploadForm" action="/" method="post"
-                                          enctype="multipart/form-data">
-                                        <p class="text-left">
-                                            <!--loop-->
-                                            <!--<label class="radio control-label"><input type="radio" name="reportory" value="---">dirname</label>-->
-                                            <!--/loop-->
-                                        </p>
+                                        <form class="" id="uploadForm" action="/" method="post"
+                                              enctype="multipart/form-data">
+                                            <p class="text-left">
+                                                <!--loop-->
+                                                <!--<label class="radio control-label"><input type="radio" name="reportory" value="---">dirname</label>-->
+                                                <!--/loop-->
+                                            </p>
 
-                                        <p class="text-center">
-                                            <input name="upload" type="file" multiple="" size="50"/>
-                                            <input name="token" type="hidden" size="50"/>
-                                            <br/>
-                                            <input type="submit" value="Upload" style="display: none;"/>
-                                        </p>
-                                    </form>
-                                    <div class="row">
-                                        <div class="col-md-offset-2 col-md-8 col-xs-12">
-                                            <div id="files" class="files">
-                                                <div id="progress" class="progress">
-                                                    <div class="progress-bar progress-bar-striped active"></div>
+                                            <p class="text-center">
+                                                <input name="upload" type="file" multiple="" size="50"/>
+                                                <input name="token" type="hidden" size="50"/>
+                                                <br/>
+                                                <input type="submit" value="Upload" style="display: none;"/>
+                                            </p>
+                                        </form>
+                                        <div class="row">
+                                            <div class="col-md-offset-2 col-md-8 col-xs-12">
+                                                <div id="files" class="files">
+                                                    <div id="progress" class="progress">
+                                                        <div class="progress-bar progress-bar-striped active"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-
                                 </div>
-
-
                             </div>
-
                         </div>
+                        <!--/Modal-->
                     </div>
-                    <!--/Modal-->
+                    <!--/upload-->
+
+                    <!--sidenav-->
+
+                    <div id="sidenav"></div>
+
+                    <!--/sidenav-->
+
                 </div>
-                <!--/upload-->
+            </div><!--/col-md-3 col-xs-12-->
 
-                <!--sidenav-->
+            <div class="col-md-9 col-xs-12">
 
-                <div id="sidenav"></div>
+                <div id="contentTable">
+                    <!--TABLE CONTENT-->
+                    <div class="col-xs-12">
+                        <div class="filter"><!-- FILTERS -->
+                            <!--filtrer par-->
+                            <div class="btn-group pull-left">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    Filtrer par <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a id="filterNew" href="#"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;Nouveaux
+                                        fichiers</a></li>
+                                    <li class="divider"></li>
+                                    <li><a id="filterDL" href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Fichiers
+                                        non-téléchargés</a></li>
+                                    <li class="divider"></li>
+                                    <li><a id="filterClear" href="#"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;Clear
+                                        all
+                                        filters</a></li>
+                                </ul>
+                            </div>
+                        </div>
 
-                <!--/sidenav-->
+                        <input class="pull-left ml-s" type="text" name="search" placeholder="Recherche ..."/>
 
-            </div>
-        </div><!--/col-md-3 col-xs-12-->
-
-        <div class="col-md-9 col-xs-12">
-
-            <div id="contentTable">
-                <!--TABLE CONTENT-->
-                <div class="col-xs-12">
-                    <div class="filter"><!-- FILTERS -->
-                        <!--filtrer par-->
-                        <div class="btn-group pull-left">
-                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                Filtrer par <span class="caret"></span>
+                        <!--refresh & toggle config table-->
+                        <div class="btn-group pull-right ml-s mr-m">
+                            <button type="button" class="btn btn-default reloadme"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Rafraîchir
                             </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a id="filterNew" href="#"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;Nouveaux
-                                    fichiers</a></li>
-                                <li class="divider"></li>
-                                <li><a id="filterDL" href="#"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Fichiers
-                                    non-téléchargés</a></li>
-                                <li class="divider"></li>
-                                <li><a id="filterClear" href="#"><i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;Clear
-                                    all
-                                    filters</a></li>
-                            </ul>
+                            <button id="toggle-side-menu" type="button" class="btn btn-default"><i
+                                    class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;Affichage
+                            </button>
                         </div>
                     </div>
-
-                    <input class="pull-left ml-s" type="text" name="search" placeholder="Recherche ..."/>
-
-                    <!--refresh & toggle config table-->
-                    <div class="btn-group pull-right ml-s mr-m">
-                        <button type="button" class="btn btn-default reloadme"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Rafraîchir
-                        </button>
-                        <button id="toggle-side-menu" type="button" class="btn btn-default"><i
-                                class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;Affichage
-                        </button>
-                    </div>
-                </div>
-            </div><!--/contentTable-->
+                </div><!--/contentTable-->
 
                 <table id="tableID" class="display table table-striped">
-                    <thead>
-                    <!-- BEGIN: Underscore Template Definition. -->
-                    <script id="headertpl" type="text/template" class="template">
-                        <tr>
-                            <th><input name="btSelectAll" type="checkbox"/></th>
-                            <th><i class="fa fa-download fa-lg"></i></th>
-                            <th>[[date]]</th>
-                            <th>[[name]]</th>
-                            <th>[[user]]</th>
-                            <th>[[empl]]</th>
-                            <th>[[label]]</th>
-                            <th>[[refdoc]]</th>
-                            <th>[[size]]</th>
-                            <th>[[ext]]</th>
-                            <th>[[path]]</th>
-                            <th>[[refCl]]</th>
-                            <th>[[count]]</th>
-                            <th>[[refGS]]</th>
-                            <th>[[del]]</th>
-                            <th>download Count</th>
-                            <th>isNew</th>
-                        </tr>
-                    </script>
-                    <!-- END: Underscore Template Definition. -->
-                    </thead>
-                    <tbody>
-                    <!-- BEGIN: Underscore Template Definition. -->
-                    <script id="bodytpl" type="text/template">
+                        <thead>
+                        <!-- BEGIN: Underscore Template Definition. -->
+                        <script id="headertpl" type="text/template" class="template">
+                            <tr>
+                                <th><input name="btSelectAll" type="checkbox"/></th>
+                                <th><i class="fa fa-download fa-lg"></i></th>
+                                <th>[[date]]</th>
+                                <th>[[name]]</th>
+                                <th>[[user]]</th>
+                                <th>[[empl]]</th>
+                                <th>[[label]]</th>
+                                <th>[[refdoc]]</th>
+                                <th>[[size]]</th>
+                                <th>[[ext]]</th>
+                                <th>[[path]]</th>
+                                <th>[[refCl]]</th>
+                                <th>[[count]]</th>
+                                <th>[[refGS]]</th>
+                                <th>[[del]]</th>
+                                <th>download Count</th>
+                                <th>isNew</th>
+                            </tr>
+                        </script>
+                        <!-- END: Underscore Template Definition. -->
+                        </thead>
+                        <tbody>
+                        <!-- BEGIN: Underscore Template Definition. -->
+                        <script id="bodytpl" type="text/template">
 
-                        <tr class="[[classNew]]">
-                            <td><input name="cb[[index]]" type="checkbox"/></td>
-                            <td data-order="[[downloadCount]]">
-                                <a class="dlfile" data-file-id="[[fileId]]" data-filename="[[fileName]]">
-                                    <i class="fa [[dlClass]] fa-lg [[alreadyDL]]"></i>
-                                    <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]
-                                    </small>
-                                </a></td>
-                            <td data-order="[[date]]">[[dateFormatted]]</td>
-                            <!--TODO: reverse date-->
-                            <td>[[fileName]]</td>
-                            <td>[[uploadUserName]]</td>
-                            <td>[[employerNumber]]</td>
-                            <td>[[label]]</td>
-                            <td>[[referenceDocument]]</td>
-                            <td data-order="[[size]]">[[sizeFormatted]]</td>
-                            <td data-order="[[extension]]">[[extensionFormatted]]</td>
-                            <td>[[path]]</td>
-                            <td>[[referenceClient]]</td>
-                            <td>[[counter]]</td>
-                            <td>[[referenceGroupS]]</td>
-                            <td>
-                                <a class="remove" title="Remove" data-file-id="[[fileId]]">
-                                    <i class="fa fa-trash fa-lg"></i></a></td>
-                            <td>[[downloadCount]]</td>
-                            <td>[[isNew]]</td>
-                        </tr>
+                            <tr class="[[classNew]]">
+                                <td><input name="cb[[index]]" type="checkbox"/></td>
+                                <td data-order="[[downloadCount]]">
+                                    <a class="dlfile" data-file-id="[[fileId]]" data-filename="[[fileName]]">
+                                        <i class="fa [[dlClass]] fa-lg [[alreadyDL]]"></i>
+                                        <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]
+                                        </small>
+                                    </a></td>
+                                <td data-order="[[date]]">[[dateFormatted]]</td>
+                                <!--TODO: reverse date-->
+                                <td>[[fileName]]</td>
+                                <td>[[uploadUserName]]</td>
+                                <td>[[employerNumber]]</td>
+                                <td>[[label]]</td>
+                                <td>[[referenceDocument]]</td>
+                                <td data-order="[[size]]">[[sizeFormatted]]</td>
+                                <td data-order="[[extension]]">[[extensionFormatted]]</td>
+                                <td>[[path]]</td>
+                                <td>[[referenceClient]]</td>
+                                <td>[[counter]]</td>
+                                <td>[[referenceGroupS]]</td>
+                                <td>
+                                    <a class="remove" title="Remove" data-file-id="[[fileId]]">
+                                        <i class="fa fa-trash fa-lg"></i></a></td>
+                                <td>[[downloadCount]]</td>
+                                <td>[[isNew]]</td>
+                            </tr>
 
-                    </script>
-                    <!-- END: Underscore Template Definition. -->
-                    </tbody>
-                </table>
+                        </script>
+                        <!-- END: Underscore Template Definition. -->
+                        </tbody>
+                    </table>
+                <!--/table-->
+
             </div>
         </div>
+        <!--/row main content-->
 
     </div>
     <!--/container-fluid-->
+
 </div>
 <!--/main-->
 
