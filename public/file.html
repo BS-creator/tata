@@ -67,7 +67,7 @@
         </ul>
         <ul class="list-inline pull-right pr-m">
             <li class="user-name mr-s">Username</li>
-            <li id="signout" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Se déconnecter">&nbsp;&nbsp;<i
+            <li id="signout" rel="tooltip" data-toggle="tooltip" data-placement="left" title="">&nbsp;&nbsp;<i
                     class="fa fa-sign-out"></i></li>
         </ul>
     </div>
@@ -147,7 +147,45 @@
 
                 <!--sidenav-->
 
-                <div id="sidenav"></div>
+                <div id="sidenav">
+                    <!-- BEGIN: Underscore Template Definition. -->
+                    <script id="menuL1" type="text/template" class="template">
+                       <ul class="level1">
+                           <li class="level1">
+                               <a href="#">[[allDocs]]</a>
+                               <%= level2 %>
+                           </li>
+                           <li id="upload">
+                               <a href="#">[[uploadText]]</a>
+                           </li>
+                       </ul>
+                    </script>
+                    <!-- END: Underscore Template Definition. -->
+
+                    <!-- BEGIN: Underscore Template Definition. -->
+                    <script id="menuL2" type="text/template" class="template">
+                        <ul class="level2">
+                            <li class="level2">
+                                <a href="#">[[categoryNumber]] - [[categoryName]]</a>
+                                [[level3({
+                                    referenceDocument:referenceDocument,
+                                    typeDocument:typeDocument
+                                })]]
+                            </li>
+                        </ul>
+                    </script>
+                    <!-- END: Underscore Template Definition. -->
+
+                    <!-- BEGIN: Underscore Template Definition. -->
+                    <script id="menuL3" type="text/template" class="template">
+                        <ul class="level3">
+                            <li id="[[referenceDocument]]" class="level3">
+                                <a href="#">[[referenceDocument]] - [[typeDocument]]</a>
+                            </li>
+                        </ul>
+                    </script>
+                    <!-- END: Underscore Template Definition. -->
+                </div>
 
                 <!--/sidenav-->
 
@@ -298,7 +336,7 @@
 <script src="js/gs-transfer.js"></script>
 <script src="js/gst.js"></script>
 <script src="js/side-menu.js"></script>
-<!-- endbuild --></div>
+<!-- endbuild -->
 
 </body>
 </html>
