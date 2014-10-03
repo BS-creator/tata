@@ -246,7 +246,7 @@ $(function (_, moment) {
     function downloadAll() {
 
         //TODO: replace getSelections
-        var array = $(tableId).bootstrapTable('getSelections'),
+        var array = getSelection(),
             listID = '';
 
         $.each(array, function (i, item) {
@@ -306,8 +306,6 @@ $(function (_, moment) {
                 $('#progress').show();
             }
         });
-
-
     }
 
     function ListFolderUpload(destFolders) {
@@ -324,7 +322,6 @@ $(function (_, moment) {
                         destFolders[key] + '" type="radio" />' + destFolders[key] + '/</label>'
                 );
             }
-
         }
     }
 
@@ -333,6 +330,7 @@ $(function (_, moment) {
      * MENU
      * */
 
+    //TODO
     function menuActionClick(e, data) {
 
         //console.log(data);
@@ -403,88 +401,6 @@ $(function (_, moment) {
             }
         }
     }
-
-
-    /*function buildTree() {
-
-        var tree = [];
-        var cat = [];
-
-        refDocUsed = getUsedDocRef(AjaxData);
-
-        // BUILD TREE
-        $.each(category, function (i, item) {
-
-            var refdoc = parseInt(item.referenceDocument),
-                numcat = parseInt(item.categoryNumber);
-            //if (numcat == 0) numcat = 98;
-
-            if ($.inArray(refdoc, refDocUsed) > -1) { // doc is used
-                //adding label
-                if ($.inArray(numcat, cat) > -1) { // category exists --> add children
-                    //add child node
-                    tree[(tree.length - 1)]
-                        .children[(tree[(tree.length - 1)].children.length)] = {
-                        "id": refdoc,
-                        "data": refdoc,
-                        "text": refdoc + " - " + labelDoc_i18n(item),
-                        "li_attr": {"class": "leaf"}
-                    }
-                } else {
-                    // create category
-                    cat[cat.length] = numcat;
-                    tree[tree.length] =
-                    {
-
-                        "text": numcat + " - " + labelCat_i18n(item),
-                        "state": {
-                            "opened": true,
-                            "disabled": false,
-                            "selected": false
-                        },
-                        "children": [
-                            { //add document
-                                "id": refdoc,
-                                "text": refdoc + " - " + labelDoc_i18n(item),
-                                "li_attr": {"class": "leaf"}
-                            }
-                        ]
-                    };
-                }
-            }
-        });
-
-        // ---> ADDING the "OTHER CATEGORY"
-        if ($.inArray(-1, refDocUsed) > -1) {
-            tree[tree.length] =
-            {
-                "id": "other",
-                "text": i18n[lang].tree.other,
-                "state": {
-                    "opened": true,
-                    "disabled": false,
-                    "selected": false
-                },
-                "children": [],
-                "li_attr": {"class": "leaf"}
-            };
-        }
-
-        // ---> ADDING the "UPLOAD CATEGORY"
-        tree[tree.length] =
-        {
-            "id": "upload",
-            "text": i18n[lang].tree.upload, //'Documents transmis à Group S',
-            "state": {
-                "opened": true,
-                "disabled": false,
-                "selected": false
-            },
-            "li_attr": {"class": "leaf"}
-        };
-
-        return tree;
-    }*/
 
     function templateMenu(){
 
