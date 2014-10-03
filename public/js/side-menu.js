@@ -5,7 +5,7 @@ $('document').ready(function () {
     ///////////////////////////////////////////////////////
 
     var $main = $('#main');
-    var $snav = $('.sidenav');
+    //var $snav = $('.sidenav');
     var $smenu = $('#side-menu');
 
 
@@ -30,9 +30,9 @@ $('document').ready(function () {
         });
         $smenu.animate({
             right: MSAbsc,
-            width: sbWidth
+            width: MSWidth
         }).toggleClass('active');
-    }
+    };
 
     // resize side-menu width x height
     $(window).resize(function () {
