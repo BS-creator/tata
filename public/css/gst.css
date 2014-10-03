@@ -382,6 +382,48 @@ input[type="text"] {
 }
 
 /*********************************************
+                    CONTENT
+*********************************************/
+#contentTable {
+  overflow: hidden;
+}
+
+/*********************************************
+                    TABLE
+*********************************************/
+#tableID_wrapper {
+  margin: 0;
+  overflow: hidden;
+  overflow-x: auto;
+}
+#tableID {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid #ccc;
+}
+th {
+  border-right: 1px solid #ccc;
+}
+th:last-child {
+  border-right: none;
+}
+table.dataTable thead th,
+table.dataTable thead td {
+  padding: 10px 18px;
+  border-bottom: 1px solid #ccc;
+}
+td {
+  border-right: 1px solid #eee;
+
+  /* add ... */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+td:last-child {
+  border-right: none;
+}
+/*********************************************
                     MISC
 **********************************************/
 
@@ -393,6 +435,10 @@ i.fa, li {
 .fa,
 .glyphicon {
   font-size: 18px !important;
+}
+
+.center {
+  text-align: center !important;
 }
 
 
