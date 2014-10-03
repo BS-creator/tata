@@ -54,7 +54,7 @@
             "filter":{
                 "new": "Nieuwe bestanden",
                 "notDL": "Bestanden niet gedownloaden",
-                "clear": "schrapen filters"
+                "clear": "Schrapen filters"
             }
         },
         "url": {
