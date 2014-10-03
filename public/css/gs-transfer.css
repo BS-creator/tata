@@ -12,17 +12,16 @@
 /* table */
 /* pagination */
 /* misc */
+body {
+  min-height: 650px;
+}
 #logindiv {
   min-height: 700px;
 }
 .template {
   display: none;
 }
-header #banner-header ul.lang {
-  margin-top: 36px;
-  margin-right: 17px;
-}
-header #banner-header ul.lang a.login-lang {
+header #banner-header ul a.login-lang {
   font-family: sans-serif;
   font-style: normal;
   font-weight: bold;
@@ -63,8 +62,8 @@ header #info-header li.univers-name {
   min-height: 1px;
 }
 #upload-modal #btn-upload-div {
-  width: 100%;
-  margin-bottom: 9px;
+  /*        width: 100%;
+        margin-bottom: 9px;*/
 }
 #upload-modal form#uploadForm {
   width: 100%;

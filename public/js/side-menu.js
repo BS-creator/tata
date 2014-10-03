@@ -4,20 +4,19 @@ $('document').ready(function () {
     //                  SIDE-MENU
     ///////////////////////////////////////////////////////
 
-//console.log($('#main').offset().top);
     var $main = $('#main');
-    var $sbleft = $('.sidebar-left');
+    var $snav = $('.sidenav');
     var $smenu = $('#side-menu');
 
 
     // initialize size & display /default
     (function () {
-        var sbWidth = $('#sidebar-left').width();
+        var sbWidth = $('#sidenav').width();
         $('#side-menu').css({
-            top: $('#main').offset().top, // get top height to align
+            top: $main.offset().top, // get top height to align
             right: -sbWidth,
             width: sbWidth,
-            height: $(window).height() - $('#main').offset().top
+            height: $(window).height() - $main.offset().top
         }).removeClass();
     })();
 
@@ -31,7 +30,7 @@ $('document').ready(function () {
         });
         $smenu.animate({
             right: MSAbsc,
-            width: $sbleft.width()
+            width: sbWidth
         }).toggleClass('active');
     }
 
