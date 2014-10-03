@@ -336,7 +336,7 @@ $(function (_, moment) {
 
         //console.log(data);
         if (data.node.parent && data.node.id !== 'upload' && data.node.id !== 'root') {
-            $('.breadcrumb').html('<li class="active">' + $("#" + data.node.parent + " a:first").html().substring(7) + '</li><li class="active">' + data.node.text + '</li><li><a href="#"></a></li>');
+            $('#breadcrumb').html('<li class="active">' + $("#" + data.node.parent + " a:first").html().substring(7) + '</li><li class="active">' + data.node.text + '</li><li><a href="#"></a></li>');
         } else {
             $('.breadcrumb').html('<li class="active">' + data.node.text + '</li><li><a href="#"></a></li>');
         }
@@ -614,7 +614,7 @@ $(function (_, moment) {
                 [10, 20, 50, -1],
                 [10, 20, 50, i18n[lang].listAll]
             ],
-            "dom": '<"top"CT>rt<"bottom"ilp>',
+            "dom": '<"top"CT>rt<"page"p><"bottom"il>',
             "language": {
                 "url": i18n[lang].url.table
             },
@@ -809,8 +809,14 @@ $(function (_, moment) {
 
     function setEventsHTML() {
 
+        /***** TOOLTIP *****/
+        //$("[rel=tooltip]").tooltip();
+
         /***** SIGN OUT *****/
-        $('#signout').attr('title', i18n[lang].button.signout);
+        var signoutBtn = $('#signout');
+        signoutBtn.tooltip();
+        //signoutBtn.attr('title', i18n[lang].button.signout);
+
 
         /***** UPLOAD *****/
         //TODO: put it in CSS, just use it to translate!!!
@@ -915,6 +921,8 @@ $(function (_, moment) {
             .off('keyup').on('keyup', function (event) {
                 setTimeout(filterDate, 500, event); // 500ms
             });
+
+
     }
 
     /****************************************************
