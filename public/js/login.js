@@ -119,7 +119,9 @@ $ ( function () {
   $ ( '#submit-login' ).on ( 'click', submitLogin );
   $ ( 'input' ).keypress ( enterPressed );
   $ ( '.login-lang' ).on ( 'click', function () {
-
-    sessionStorage.setItem ( 'lang', $ ( this ).html ().toLowerCase () );
+    var lang = $ ( this ).html ().toLowerCase ();
+    $ ( '.login-lang' ).removeClass('defaultlang');
+    $ ( '.' + lang ).addClass ( 'defaultlang' );
+    sessionStorage.setItem ( 'lang', lang );
   } );
 } );
