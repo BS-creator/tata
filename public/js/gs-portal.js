@@ -11,8 +11,12 @@ $('document').ready(function () {
     ///////////////////////////////////////////////////////
 
     $(function () {
+        $('.cat1 > a:nth-child(1)').on('click', function(){
+            console.log($(this));
+        });
 
-        $('.level2 a').on('click', function(){
+
+        $('#root').on('click', function(){
             alert($(this).next());
             $(this).next().toggle();
         });

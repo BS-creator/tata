@@ -24,13 +24,13 @@ header {
   height: 80.9px;
   background-color: #0064bb;
 }
-header ul {
+ul.lang {
   margin: 0;
-  padding: 0;
+  padding: 50px 19px 0 0;
   color: white;
   letter-spacing: .1em;
-  font-size: 16px;
-  font-style: italic;
+  font-size: 14px;
+  font-style: normal;
   font-weight: 400;
 }
 #logo {
@@ -41,8 +41,15 @@ header ul {
   overflow: hidden;
   padding:10px;
 }
+header .login-lang {
+  color: rgba(255,255,255,.4);
+}
+header .login-lang:hover,
+header .login-lang:focus,
+header .login-lang:active,
+header .login-lang.active
 header .default-lang {
-  color: rgba(255,255,255,.7);
+  color: rgba(255,255,255,.8);
 }
 
 /* login form */
@@ -88,9 +95,17 @@ td#top-nav ul:not(i)  {
 **********************************************/
 #breadcrumb{
   display: table-cell;
-  line-height: 20px;
+  line-height: 31px;
 }
-
+#breadcrumb li {
+  margin: 0;
+}
+#breadcrumb li:after {
+  content: '\00a0/';
+}
+#breadcrumb li:last-child:after {
+  content: '';
+}
 
 /**********************************************
                     SIDEBAR LEFT      #sidenav
@@ -424,6 +439,7 @@ table.table,
   margin: 0 !important;
 }
 th {
+  padding: 15px 0;
   border-right: 1px solid #f2f2f2;
 }
 th:last-child {
@@ -484,6 +500,9 @@ div.dataTables_paginate ul.pagination {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
+.pagination > li > a {
+  padding: 15px 12px;
+}
 .pagination > li.active,
 .pagination > li > a,
 .pagination > li > span {
@@ -540,7 +559,7 @@ i.fa, li {
 li[class^="level"] > a {
   display: block;
   margin-bottom: 1px;
-  height: 50px;
+/*  height: 50px;*/
   /* add ... on resize instead of break line */
   white-space: nowrap;
   overflow: hidden;
@@ -555,7 +574,7 @@ li[class^="level"] > a {
 
 #upload a,
 li.level1 > a {
-  padding: 15px 0px 15px 30px;
+  padding: 15px 0px 15px 19px;
   font-size: 14px;
   background-color: #2e8ac1;
              color: #FFF;
