@@ -16,8 +16,6 @@ $ ( function () {
         } else if (window.location.hostname.indexOf ( 'prestaweb' ) > -1) {
             sessionStorage.setItem ( 'baseURL', '//prestaweb.groups.be/itransfer/' );
             sessionStorage.setItem ( 'serverURL', '//prestaweb.groups.be/ariane/' );
-        } else {
-            //??
         }
     }
 

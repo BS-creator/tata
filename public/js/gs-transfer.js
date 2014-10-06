@@ -466,7 +466,6 @@ $ ( function ( _, moment ) {
      * TABLE
      * */
 
-
     function templateTable () { //TODO: make it REUSABLE --> parameter for tbody, theader and tableID
 
         var tpl = _.template ( $ ( '#headertpl' ).html () );
@@ -635,12 +634,12 @@ $ ( function ( _, moment ) {
                     searchable: true
                 }
             ],
-            colVis        : {
+            /*colVis        : {
                 activate  : 'mouseover',
                 buttonText: i18n[lang].showHide,
                 exclude   : [ 0, 1, 14, 15, 16 ],
                 restore   : 'restore'
-            }, /* tableTools: {
+            },*/ /* tableTools: {
              "sRowSelect": "multi"
              },*/
             'initComplete': function () {
@@ -656,6 +655,28 @@ $ ( function ( _, moment ) {
         //jQuery TABLE object
         oTable = $ ( tableId ).dataTable ();
     }
+
+    /****************************************************
+     * COLUMN VISIBLE
+     * */
+
+    function fillColumnList () {
+        //console.log(table.columns().header().to$().html());
+        var list = $('.side-menu-list');
+        var i = 0;
+        var li;
+        while(i < 17) {
+            var headerCol = table.columns(i).header().to$().html();
+            li = document.createElement('li' );
+            li.innerHTML = headerCol;
+            console.log(i + "\t", headerCol);
+            i++;
+            list.append(li);
+        }
+
+    }
+
+
 
     /****************************************************
      * AJAX
@@ -757,6 +778,9 @@ $ ( function ( _, moment ) {
     }
 
     function setEventsHTML () {
+
+        /***** VISIBLE COLUMNS *****/
+        fillColumnList();
 
         /***** TOOLTIP *****/
         $ ( '[rel=tooltip]' ).tooltip ();
