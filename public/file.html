@@ -150,8 +150,8 @@
                     <!-- BEGIN: Underscore Template Definition. -->
                     <script id="menuL1" type="text/template" class="template">
                        <ul class="level1">
-                           <li class="level1">
-                               <a href="#">[[allDocs]]</a>
+                           <li  class="level1">
+                               <a id="root" href="#">[[allDocs]]</a>
                                [[categoryNode]]
                            </li>
                            <li id="upload">
@@ -164,7 +164,7 @@
                     <!-- BEGIN: Underscore Template Definition. -->
                     <script id="menuL2" type="text/template" class="template">
                         <ul class="level2">
-                            <li class="level2">
+                            <li class="level2 cat[[categoryNumber]]">
                                 <a href="#">[[categoryNumber]] - [[categoryName]]</a>
                                 [[ leafNode ]]
                             </li>

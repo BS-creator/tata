@@ -335,80 +335,60 @@ $ ( function ( _, moment ) {
    * MENU
    * */
 
-    //TODO
-  function menuActionClick () {
+  function menuRootClick () {
+
+    oTable.fnFilterClear ();
+    table.columns ( '.detailsLayer' ).visible ( false, false );
+    table.columns ( '.fileLayer' ).visible ( true, false );
+    table.columns.adjust ().draw ( false ); // adjust column sizing and redraw
+
+    table.column ( 4 ).search ( 'trf_fich' ).draw (); //filter on uploadUserName
+
+    $ ( '#breadcrumb' ).html ( '<li class="active">' + i18n[lang].tree.root + '</li><li><a href="#"></a></li>' );
+  }
+
+  function menuOtherClick () {
+
+    oTable.fnFilterClear ();
+    table.columns ( '.detailsLayer' ).visible ( true, false );
+    table.columns ( '.fileLayer' ).visible ( false, false );
+    table.columns.adjust ().draw ( false ); // adjust column sizing and redraw
+
+    table
+      .column ( 4 ).search ( '[^' + username + ']', true, false )
+      .column ( 7 ).search ( '^\\s*$', true, false )
+      .draw (); //filter on uploadUserName != username
+
+    $ ( '#breadcrumb' ).html ( '<li class="active">' + i18n[lang].tree.other + '</li><li><a href="#"></a></li>' );
+  }
+
+  function menuUploadClick () {
+
+    oTable.fnFilterClear ();
+    table.columns ( '.detailsLayer' ).visible ( true, false );
+    table.columns ( '.fileLayer' ).visible ( false, false );
+    table.columns.adjust ().draw ( false ); // adjust column sizing and redraw
+
+    table.column ( 4 ).search ( username ).draw (); //filter on uploadUserName
+
+    $ ( '#breadcrumb' ).html ( '<li class="active">' + i18n[lang].tree.upload + '</li><li><a href="#"></a></li>' );
+  }
+
+  function menuRefDocClick () {
     var that = $ ( this );
     var nodeID = that.attr ( 'id' ),
         nodeText = that.text (),
-        nodeParentText = that.parent ().text ();
+        nodeParentText = that.closest ('li.level2' ).find('a:first').text ();
 
-    console.log ( 'that', that );
-    console.log ( 'nodeID', nodeID );
-    console.log ( 'nodeText', nodeText );
-    console.log ( 'nodeParentText', nodeParentText );
-
-    //console.log(data);
-    if (nodeID === 'upload' && nodeID === 'root') {
-      $ ( '#breadcrumb' ).html ( '<li class="active">' + nodeText + '</li><li><a href="#"></a></li>' );
-
-    } else {
-      $ ( '#breadcrumb' ).html ( '<li class="active">' + nodeParentText + '</li><li class="active">' + nodeText + '</li><li><a href="#"></a></li>' );
-    }
-
-    if (nodeID === 'root') {
+    $ ( '#breadcrumb' ).html ( '<li class="active">' + nodeParentText + '</li><li class="active">' + nodeText + '</li><li><a href="#"></a></li>' );
+    if (nodeID > -1 && that.hasClass ( 'level3' )) {
 
       oTable.fnFilterClear ();
       table.columns ( '.detailsLayer' ).visible ( false, false );
       table.columns ( '.fileLayer' ).visible ( true, false );
       table.columns.adjust ().draw ( false ); // adjust column sizing and redraw
 
-      table.column ( 4 ).search ( 'trf_fich' ).draw (); //filter on uploadUserName
-
-      //$('.breadcrumb').html('<li class="active">Tous les documents</li><li><a href="#"></a></li>');
-
-    }
-    else {
-      //data.instance.toggle_node(data.node);
-
-      if (nodeID > -1 && that.hasClass ( 'level3' )) {
-
-        oTable.fnFilterClear ();
-        table.columns ( '.detailsLayer' ).visible ( false, false );
-        table.columns ( '.fileLayer' ).visible ( true, false );
-        table.columns.adjust ().draw ( false ); // adjust column sizing and redraw
-
-        table.column ( 7 ).search ( nodeID ).draw (); //filter on referenceDocument
-
-      }
-
-      //Filter for upload
-      if (nodeID === 'upload') {
-        //console.log("upload");
-
-        oTable.fnFilterClear ();
-        table.columns ( '.detailsLayer' ).visible ( true, false );
-        table.columns ( '.fileLayer' ).visible ( false, false );
-        table.columns.adjust ().draw ( false ); // adjust column sizing and redraw
-
-        table.column ( 4 ).search ( username ).draw (); //filter on uploadUserName
-
-
-      }
-      //Filter for other category
-      if (nodeID === 'other') {
-
-        oTable.fnFilterClear ();
-        table.columns ( '.detailsLayer' ).visible ( true, false );
-        table.columns ( '.fileLayer' ).visible ( false, false );
-        table.columns.adjust ().draw ( false ); // adjust column sizing and redraw
-
-        table
-          .column ( 4 ).search ( '[^' + username + ']', true, false )
-          .column ( 7 ).search ( '^\\s*$', true, false )
-          .draw (); //filter on uploadUserName != username
-
-
-      }
+      table.column ( 7 ).search ( nodeID ).draw (); //filter on referenceDocument
     }
   }
 
@@ -555,7 +535,7 @@ $ ( function ( _, moment ) {
       ordering      : true,
       info          : true,
       scrollX       : true,
-      //stateSave: true,
+      //stateSave: true, //TODO: put it true when deploy to prod!!!
       lengthMenu    : [
         [10, 20, 50, -1],
         [10, 20, 50, i18n[lang].listAll]
@@ -773,8 +753,13 @@ $ ( function ( _, moment ) {
     //signoutBtn.attr('title', i18n[lang].button.signout);
 
     /***** MENU FILTERS *****/
+    $ ( '#root' ).on ( 'click', menuRootClick);
+    $ ( '#upload' ).off( 'click' ).on ('click', menuUploadClick);
+    $ ( '.cat98' ).off( 'click' ).on ( 'click', menuOtherClick);
+    $ ( 'li.level3' ).off( 'click' ).on ( 'click', menuRefDocClick );
 
-    $ ( 'li.level3' ).on ( 'click', menuActionClick );
+
+    //menuUploadClick menuOtherClick menuRootClick
 
     /***** UPLOAD *****/
       //TODO: put it in CSS, just use it to translate!!!
