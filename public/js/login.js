@@ -101,8 +101,9 @@ $ ( function () {
        },*/
       error   : function ( xhr ) {
         $ ( '#loader' ).hide ();
-        if (xhr.status === 403) alert ( 'ERROR: login / password incorrect.' );
-        else {
+        if (xhr.status === 403) {
+          alert ( 'ERROR: login / password incorrect.' );
+        } else {
           alert ( 'ERROR: connection problem' );
         }
       }
@@ -111,7 +112,7 @@ $ ( function () {
 
   //set language
   sessionStorage.setItem ( 'lang', getNavigatorLanguage () );
-  $ ( getNavigatorLanguage () ).addClass ( 'defaultlang' );
+  $ ( '.' + getNavigatorLanguage () ).addClass ( 'defaultlang' );
 
 
   //set event
