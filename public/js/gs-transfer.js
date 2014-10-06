@@ -565,6 +565,7 @@ $ ( function ( _, moment ) {
       language      : {
         url: i18n[lang].url.table
       },
+      //pagingType: 'full',
       order         : [
         [ 2, 'desc' ]
       ],
@@ -701,7 +702,7 @@ $ ( function ( _, moment ) {
     } );
   }
 
-  function LoadFolder () {
+  function loadFolder () {
     //folder
     return $.ajax ( {
       type   : 'GET',
@@ -712,7 +713,7 @@ $ ( function ( _, moment ) {
     } );
   }
 
-  function LoadCategory () {
+  function loadCategory () {
 
     return $.ajax ( {
       type   : 'GET',
@@ -724,7 +725,7 @@ $ ( function ( _, moment ) {
 
   }
 
-  function LoadData () {
+  function loadData () {
 
     $ ( '#loader' ).show ();
 
@@ -893,12 +894,11 @@ $ ( function ( _, moment ) {
    * */
 
   function render () {
-    $.when ( LoadCategory (), LoadData (), LoadFolder () ).done ( function () {
+    $.when ( loadCategory (), loadData (), loadFolder () ).done ( function () {
 
       //Add label for reference of Document
       mergeLabelDoc ();
 
-      //var $table = createTable();
       createDataTable ();
 
       createMenu ();
