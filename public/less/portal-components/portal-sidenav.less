@@ -1,96 +1,54 @@
-/* sidenav JSTREE CUSTOM STYLE */
-div#sidenav {
-  padding-top: 1px;
-  margin-bottom: 35px;
-  ul.jstree-container-ul,
-  ul.jstree-children {
+/********************************************
+                SIDENAV
+********************************************/
+#sidenav {
     padding: 0;
-    margin: 0;
-    li a {
-      display: block;
-      width: 100%;
-      text-decoration: none;
+    a,
+    li[class^="level"] > a {
+        display: block;
+        margin-bottom: 1px;
+        height: 50px;
+        padding: 15px 0px 15px 50px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+        /* transition */
+        -webkit-transition: all 0.4s ease; /* Safari 3.2+, Chrome */
+           -moz-transition: all 0.4s ease; /* Firefox 4-15 */
+             -o-transition: all 0.4s ease; /* Opera 10.5-12.00 */
+                transition: all 0.4s ease; /* Firefox 16+, Opera 12.50+ */
     }
-  }
-}
 
-// head titles
-div#sidenav > ul > li#root > a {
-  margin: 0;
-  padding: 8px 0 8px 12px;
-  cursor: pointer;
-  border-left: 0;
-  border: 0;
-  font-weight: bold;
-  font-size: 13px;
-  font-weight: bold;
-  color: #808080;
-  background-color: #F2F2F2;
-}
-div#sidenav > ul > li#root > a:hover,
-div#sidenav > ul > li#root > a:focus,
-div#sidenav > ul > li#root > a:active,
-div#sidenav > ul > li#root > a.active,
-div#sidenav > ul > li#root > a.jstree-clicked {
-  border-left: 3px solid #2871B0;
-  color: #125B9A;
-}
-// /head titles
+    #upload a,
+    li.level1 > a {
+        font-size: 14px;
+        background-color: #2e8ac1;
+        color: #FFF;
+    }
+    #upload > a:hover,
+    #upload > a:focus,
+    #upload > a:active,
+    li.level1 > a:hover,
+    li.level1 > a:focus,
+    li.level1 > a:active {
+        background-color: #0064bb;
+    }
+    #upload > a.active
+    li.level1 > a.active {
+        background-color: #3f9ad0;
+    }
 
-// lvl 1
-div#sidenav ul li ul li a {
-  font-weight: bold;
-  color: #808080;
-  padding: 5px 0 5px 20px;
-}
+    li.level2 > a {
+        font-size: 12px;
+        background-color: #f2f2f2;
+        color: #404040;
 
-// lvl 2
-div#sidenav ul li ul li ul li a {
-  font-weight: normal;
-  padding: 5px 0 5px 52px;
-}
-div#sidenav > ul > li > ul > li#other > a:hover,
-div#sidenav > ul > li > ul > li#other > a:focus,
-div#sidenav > ul > li > ul > li#other > a:active,
-div#sidenav > ul > li > ul > li#other > a.active,
-div#sidenav > ul > li > ul > li > ul > li > a:hover,
-div#sidenav > ul > li > ul > li > ul > li > a:focus,
-div#sidenav > ul > li > ul > li > ul > li > a:active,
-div#sidenav > ul > li > ul > li > ul > li > a.active,{
-  letter-spacing: .016em;
-  border-left: 3px solid #2871B0;
-  background-color: white;
-  color: #808080;
-}
-div#sidenav > ul > li > ul > li#other > a:hover,
-div#sidenav > ul > li > ul > li#other > a:focus,
-div#sidenav > ul > li > ul > li#other > a:active,
-div#sidenav > ul > li > ul > li#other > a.active,
-div#sidenav > ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:hover,
-div#sidenav > ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:focus,
-div#sidenav > ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a:active,
-div#sidenav > ul > li.jstree-open > ul > li.jstree-open > ul > li.jstree-leaf > a.active {
-  color: #3D86C5;
-}
-// documents transmis à GS
-div#sidenav ul li ul li#upload a {
-  display: block;
-  width: 100%;
-  font-size: 13px !important;
-  font-weight: bold;
-  background-color: #F2F2F2;
-  margin: 0px;
-  padding: 8px 0px 8px 12px;
-  cursor: pointer;
-  text-decoration: none;
-}
-div#sidenav ul li ul li#upload a:hover,
-div#sidenav ul li ul li#upload a:focus,
-div#sidenav ul li ul li#upload a:active,
-div#sidenav ul li ul li#upload a.active {
-  border-left: 3px solid #2871B0;
-  color: #125B9A;
-}
+    }
 
-
-
+    li.level3 > a {
+        font-size: 12px;
+        background-color: transparent;
+        color: #404040;
+    }
+}

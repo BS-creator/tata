@@ -51,7 +51,6 @@ $('document').ready(function () {
     // side-menu desactive
     $('.side-menu-head-icon').on('click', function () {
         sideMenuToggle(false);
-        // $('#side-menu').hide();
     });
 
     // side-menu li active class

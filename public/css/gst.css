@@ -22,7 +22,7 @@ body {
 ****************************************************/
 header {
   height: 80.9px;
-  background-color: #0b68a1;
+  background-color: #0064bb;
 }
 header ul {
   margin: 0;
@@ -41,7 +41,15 @@ header ul {
   overflow: hidden;
   padding:10px;
 }
+header .default-lang {
+  color: rgba(255,255,255,.7);
+}
 
+/* login form */
+.default-lang {
+  color: #0700c5;
+  text-decoration: underline;
+}
 
 /**********************************************
                     TOP NAV
@@ -59,9 +67,9 @@ td#top-nav ul:not(i)  {
 #signout,
 #toggle-side-menu {
   -webkit-transition: all 0.5s ease;/* Safari 3.2+, Chrome */
-  -moz-transition: all 0.5s ease;/* Firefox 4-15 */
-  -o-transition: all 0.5s ease;/* Opera 10.5-12.00 */
-  transition: all 0.5s ease;/* Firefox 16+, Opera 12.50+ */
+     -moz-transition: all 0.5s ease;/* Firefox 4-15 */
+       -o-transition: all 0.5s ease;/* Opera 10.5-12.00 */
+          transition: all 0.5s ease;/* Firefox 16+, Opera 12.50+ */
 }
 
 #signout:hover,
@@ -104,7 +112,7 @@ td#top-nav ul:not(i)  {
   font-weight: 300;
   font-size: 14px;
   color: #FFF;
-  background-color: #3f9ad0;
+  background-color: #378fdd;
   cursor: pointer;
   /* add ... on resize instead of break line */
   white-space: nowrap;
@@ -121,13 +129,13 @@ li.sidebar-h-0:hover,
 li.sidebar-h-0:focus,
 li.sidebar-h-0:active,
 li.sidebar-h-0.active {
-  background-color: #0b68a1;
+  background-color: #0064bb;
 }
 li.sidebar-h-1:hover,
 li.sidebar-h-1:focus,
 li.sidebar-h-1:active,
 li.sidebar-h-1.active {
-  background-color: #0620B8;
+  background-color: #0700c5;
 }
 li.sidebar-h-2:hover,
 li.sidebar-h-2:focus,
@@ -152,7 +160,7 @@ li.sidebar-h-5:hover,
 li.sidebar-h-5:focus,
 li.sidebar-h-5:active,
 li.sidebar-h-5.active {
-  background-color: #0b68a1;
+  background-color: #0064bb;
 }
 
 /**********************************************
@@ -162,7 +170,7 @@ li.sidebar-h-5.active {
 /* position for sliding effect */
 #side-menu {
   position: fixed;
-  background-color: #0b68a1;
+  background-color: #0064bb;
   color: white;
 }
 #main {
@@ -178,7 +186,7 @@ li.sidebar-h-5.active {
   margin: 0px;
   font-size: 16px;
   text-transform: uppercase;
-  background-color: #3F9AD0;
+  background-color: #378fdd;
   color: #ABD3E1;
 }
 .side-menu-head-icon {
@@ -186,9 +194,9 @@ li.sidebar-h-5.active {
   color: white;
     /* transition */
   -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
-  -moz-transition: all 0.4s ease;/* Firefox 4-15 */
-  -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
-  transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
+     -moz-transition: all 0.4s ease;/* Firefox 4-15 */
+       -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
+          transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
 }
 .side-menu-head-icon i {
   opacity: .6;
@@ -219,14 +227,14 @@ li.sidebar-h-5.active {
   text-overflow: ellipsis;
   font-size: 14px;
   color: #FFF;
-  background-color: #0b68a1;
+  background-color: #0064bb;
   cursor: pointer;
   
   /* transition */
   -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
-  -moz-transition: all 0.4s ease;/* Firefox 4-15 */
-  -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
-  transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
+     -moz-transition: all 0.4s ease;/* Firefox 4-15 */
+       -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
+          transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
 }
 .side-menu-list > li:hover,
 .side-menu-list > li:focus,
@@ -234,7 +242,7 @@ li.sidebar-h-5.active {
   background-color: #2e8ac1;
 }
 .side-menu-list > li.active {
-  background-color: #3f9ad0;
+  background-color: #378fdd;
 }
 
 #init-conf {
@@ -244,8 +252,8 @@ li.sidebar-h-5.active {
 #init-conf:focus,
 #init-conf:active,
 #init-conf.active {
-  background-color: #3f9ad0;
-  border-color: #3f9ad0;
+  background-color: #378fdd;
+      border-color: #378fdd;
   opacity: 1;
 }
 
@@ -253,34 +261,36 @@ li.sidebar-h-5.active {
                     COLORS
 ***********************************************/
 .bg-green     { background-color: #02b158; }
-.bg-darkgreen { background-color: #238553; }
-.bg-gs-clear  { background-color: #3f9ad0; }
-.bg-gs        { background-color: #0b68a1; }
-.bg-king      { background-color: #0620B8; }
+.bg-darkgreen { background-color: #249067; }
+.bg-gs-clear  { background-color: #378fdd; }
+.bg-gs        { background-color: #0064bb; }
+.bg-king      { background-color: #0700c5; }
 .bg-indigo    { background-color: #3003A1; }
 .bg-viola     { background-color: #8806B8; }
 .bg-darkpink  { background-color: #AE0179; }
 
-
-
-
-input[type="text"] {
-  padding: 14px 13px;
+input[type="text"],
+input[type="password"] {
   font-size: 14px;
+  height: 50px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.06) inset, 0px 0px 8px rgba(102, 175, 233, 0.45);
 }
 
 
 /**********************************************
                     BUTTONS
 ***********************************************/
+.btn-portal,
 .btn-portal-blue,
 .btn-portal-default,
 .btn-portal-green {
   display: inline-block;
   vertical-align: middle;
   text-align: center;
-/*  padding-top: 14px;
-  padding-bottom: 14px;*/
   padding:  14px 30px;
 
   /* add ... */
@@ -312,47 +322,49 @@ input[type="text"] {
      -moz-transition: all 0.4s ease;/* Firefox 4-15 */
        -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
           transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
+
+/*  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.06) inset, 0px 0px 8px rgba(102, 175, 233, 0.45);*/
 }
 
 .btn-portal-default {
   background-color: transparent;
-  color: #999;
   border-color: #ccc;
+         color: #999;
 }
 .btn-portal-default:hover,
 .btn-portal-default:focus,
 .btn-portal-default:active,
 .btn-portal-default.active {
-  color: #222;
   border-color: #adadad;
+         color: #222;
 }
 
 
 .btn-portal-blue {
   margin-bottom: 1px;
-  color: #FFF;
-  background-color: #3f9ad0;
-  border-color: #3f9ad0;
+  background-color: #378fdd;
+      border-color: #378fdd;
+             color: #FFF;
 }
 .btn-portal-blue:hover,
 .btn-portal-blue:focus,
 .btn-portal-blue:active,
 .btn-portal-blue.active {
-  background-color: #0b68a1;
-  border-color: #0b68a1;
+  background-color: #0064bb;
+      border-color: #0064bb;
 }
 
 .btn-portal-green {
   background-color: #02b158;
-  border-color: #02b158;
-  color: #FFF;
+      border-color: #02b158;
+             color: #FFF;
 }
 .btn-portal-green:hover,
 .btn-portal-green:focus,
 .btn-portal-green:active,
 .btn-portal-green.active {
-  background-color: #238553;
-  border-color: #238553;
+  background-color: #249067;
+      border-color: #249067;
 }
 
 /**********************************************
@@ -435,7 +447,7 @@ td:last-child {
 
 .table tbody tr.active td,
 .table tbody tr.active th {
-  background-color: #3f9ad0 !important;
+  background-color: #378fdd !important;
   color: #FFF !important;
 }
 .table tbody tr.active td a,
@@ -475,7 +487,7 @@ div.dataTables_paginate ul.pagination {
 .pagination > li.active,
 .pagination > li > a,
 .pagination > li > span {
-  color: #3f9ad0;
+  color: #378fdd;
 }
 .bottom {
   display: table;
@@ -525,30 +537,28 @@ i.fa, li {
 
 
 #upload a,
-[class^="level"] > a {
-  /* tous ce qui est commun au li de sidenav */
-}
-
-#upload a,
-li.level1 > a {
+li[class^="level"] > a {
   display: block;
   margin-bottom: 1px;
   height: 50px;
-  padding: 15px 0px 15px 19px;
   /* add ... on resize instead of break line */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 14px;
-  color: #FFF;
-  background-color: #2e8ac1;
   cursor: pointer;
-
   /* transition */
   -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
-  -moz-transition: all 0.4s ease;/* Firefox 4-15 */
-  -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
-  transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
+     -moz-transition: all 0.4s ease;/* Firefox 4-15 */
+       -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
+          transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
+}
+
+#upload a,
+li.level1 > a {
+  padding: 15px 0px 15px 30px;
+  font-size: 14px;
+  background-color: #2e8ac1;
+             color: #FFF;
 }
 #upload > a:hover,
 #upload > a:focus,
@@ -556,49 +566,24 @@ li.level1 > a {
 li.level1 > a:hover,
 li.level1 > a:focus,
 li.level1 > a:active {
-  background-color: #0b68a1;
+  background-color: #0064bb;
 }
 #upload > a.active
 li.level1 > a.active {
-  background-color: #3f9ad0;
+  background-color: #378fdd;
 }
 
 li.level2 > a {
-  display: block;
-  margin-bottom: 1px;
-  height: 50px;
   padding: 15px 0px 15px 30px;
-  /* add ... on resize instead of break line */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   font-size: 12px;
-  color: #404040;
   background-color: #f2f2f2;
-  cursor: pointer;
-  /* transition */
-  -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
-  -moz-transition: all 0.4s ease;/* Firefox 4-15 */
-  -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
-  transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
+             color: #404040;
+
 }
 
 li.level3 > a {
-  display: block;
-  margin-bottom: 1px;
-  height: 50px;
   padding: 15px 0px 15px 50px;
-  /* add ... on resize instead of break line */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   font-size: 12px;
-  color: #404040;
   background-color: transparent;
-  cursor: pointer;
-  /* transition */
-  -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
-  -moz-transition: all 0.4s ease;/* Firefox 4-15 */
-  -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
-  transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
+             color: #404040;
 }
