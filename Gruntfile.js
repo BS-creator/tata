@@ -273,8 +273,8 @@ module.exports = function (grunt) {
         if (target !== 'watch') {
             grunt.task.run([
                 'clean:server',
-                'concurrent:test',
-                'autoprefixer'
+                'concurrent:test'//,
+                //'autoprefixer'
             ]);
         }
 

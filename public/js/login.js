@@ -2,51 +2,49 @@
  * Created by bisconti on 29/08/14.
  */
 
-$(function () {
-    "use strict";
+$ ( function () {
+    'use strict';
 
-    /***  GLOBAL VARIABLES ***/
-    setURL();
-
-    var serverURL = sessionStorage.getItem('serverURL'),
-        baseURL = sessionStorage.getItem('baseURL');
-
-
-    function setURL() {
-        if (window.location.hostname.indexOf('localhost') > -1) {
-            sessionStorage.setItem('baseURL', '//localhost:4000/itransfer/');
-            sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
+    function setURL () {
+        if (window.location.hostname.indexOf ( 'localhost' ) > -1) {
+            sessionStorage.setItem ( 'baseURL', '//localhost:4000/' );
+            sessionStorage.setItem ( 'serverURL', '//172.20.20.64:8018/' );
             //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
-        } else if (window.location.hostname.indexOf('qaiapps') > -1) { //QA
-            sessionStorage.setItem('baseURL', '//qaiapps.groups.be/itransfer/');
-            sessionStorage.setItem('serverURL', '//qaiapps.groups.be/ariane/');
-        } else if (window.location.hostname.indexOf('prestaweb') > -1) {
-            sessionStorage.setItem('baseURL', '//prestaweb.groups.be/itransfer/');
-            sessionStorage.setItem('serverURL', '//prestaweb.groups.be/ariane/');
-        } else {
-            //??
+        } else if (window.location.hostname.indexOf ( 'qaiapps' ) > -1) { //QA
+            sessionStorage.setItem ( 'baseURL', '//qaiapps.groups.be/itransfer/' );
+            sessionStorage.setItem ( 'serverURL', '//qaiapps.groups.be/ariane/' );
+        } else if (window.location.hostname.indexOf ( 'prestaweb' ) > -1) {
+            sessionStorage.setItem ( 'baseURL', '//prestaweb.groups.be/itransfer/' );
+            sessionStorage.setItem ( 'serverURL', '//prestaweb.groups.be/ariane/' );
         }
     }
 
+    setURL ();
+    /***  GLOBAL VARIABLES ***/
 
-    function reportError(error, message) {
+
+    var serverURL = sessionStorage.getItem ( 'serverURL' ),
+    baseURL = sessionStorage.getItem ( 'baseURL' );
+
+
+    function reportError ( error, message ) {
         message = message || '';
-        console.error(
-                'ERROR: ' + message + ' [' + error.toString() + ']\n' +
+        console.error (
+                'ERROR: ' + message + ' [' + error.toString () + ']\n' +
                 '\nName:\t\t' + (error.name || '-') +
                 '\nMessage:\t' + (error.message || '-') +
                 '\nFile:\t\t\t' + (error.fileName || '-') +
-                '\nSource:\t\t' + ((error.toSource && error.toSource()) || '-') +
+                '\nSource:\t\t' + ((error.toSource && error.toSource ()) || '-') +
                 '\nLine #:\t\t' + (error.lineNumber || '-') +
                 '\nColumn #:\t' + (error.columnNumber || '-') +
-                '\n\nStack:\n\n' + (error.stack || '-'));
+                '\n\nStack:\n\n' + (error.stack || '-') );
     }
 
-    window.onerror = function (message, filename, lineno, colno, error) {
+    window.onerror = function ( message, filename, lineno, colno, error ) {
         error.fileName = error.fileName || filename || null;
         error.lineNumber = error.lineNumber || lineno || null;
         error.columnNumber = error.columnNumber || colno || null;
-        reportError(error, 'Uncatched Exception');
+        reportError ( error, 'Uncatched Exception' );
     };
 
     /**
@@ -56,64 +54,72 @@ $(function () {
      */
     function getNavigatorLanguage () {
         var locale = (window.navigator.userLanguage || window.navigator.language);
-        locale = /..-../.test(locale) ? locale.split('-')[0] : locale.split('_')[0];
-        if ((locale !== "en") && (locale !== "fr") && (locale !== "nl") ) locale = 'en';
+        locale = /..-../.test ( locale ) ? locale.split ( '-' )[0] : locale.split ( '_' )[0];
+        if ((locale !== 'en') && (locale !== 'fr') && (locale !== 'nl')) {
+            locale = 'en';
+        }
         return locale;
     }
 
 
-    function enterPressed (e) {
-        if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
-            submitLogin();
+    function enterPressed ( e ) {
+        if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
+            submitLogin ();
             return false;
         } else {
             return true;
         }
     }
 
-    function submitLogin(){
+    function submitLogin () {
         var credentials =
-        {
-            "login"     : $('#login').val(),
-            "password"  : $('#password').val()
-        };
+            {
+                'login'   : $ ( '#login' ).val (),
+                'password': $ ( '#password' ).val ()
+            };
 
-      $('#loader').show();
+        $ ( '#loader' ).show ();
 
-        $.ajax({
-            type: "POST",
-            url: serverURL + 'login',
-            data: credentials,
-            success: function (data){
-                if(data.token){
-                    sessionStorage.setItem("token", data.token);
-                    sessionStorage.setItem("username", credentials.login);
+        $.ajax ( {
+            type    : 'POST',
+            url     : serverURL + 'login',
+            data    : credentials,
+            success : function ( data ) {
+                if (data.token) {
+                    sessionStorage.setItem ( 'token', data.token );
+                    sessionStorage.setItem ( 'username', credentials.login );
                 }
                 //redirect to itransfer;
                 window.location = baseURL + 'file.html';
-                window.login = $('#login').val();
+                window.login = $ ( '#login' ).val ();
             },
             dataType: 'json',
             /*complete: function () {
-              $('#loader').hide();
-            },*/
-            error: function (xhr) {
-                $('#loader').hide();
-                if(xhr.status === 403) alert( "ERROR: login / password incorrect." );
-                else{
-                    alert ( "ERROR: connection problem");
+             $('#loader').hide();
+             },*/
+            error   : function ( xhr ) {
+                $ ( '#loader' ).hide ();
+                if (xhr.status === 403) {
+                    alert ( 'ERROR: login / password incorrect.' );
+                } else {
+                    alert ( 'ERROR: connection problem' );
                 }
             }
-        });
+        } );
     }
 
     //set language
-    sessionStorage.setItem("lang", getNavigatorLanguage() );
+    sessionStorage.setItem ( 'lang', getNavigatorLanguage () );
+    $ ( '.' + getNavigatorLanguage () ).addClass ( 'defaultlang' );
+
 
     //set event
-    $('#submit-login').on('click', submitLogin);
-    $('input').keypress(enterPressed);
-    $('.login-lang').on('click', function (){
-       sessionStorage.setItem("lang", $(this).html().toLowerCase());
-    });
-});
+    $ ( '#submit-login' ).on ( 'click', submitLogin );
+    $ ( 'input' ).keypress ( enterPressed );
+    $ ( '.login-lang' ).on ( 'click', function () {
+        var lang = $ ( this ).html ().toLowerCase ();
+        $ ( '.login-lang' ).removeClass ( 'defaultlang' );
+        $ ( '.' + lang ).addClass ( 'defaultlang' );
+        sessionStorage.setItem ( 'lang', lang );
+    } );
+} );
