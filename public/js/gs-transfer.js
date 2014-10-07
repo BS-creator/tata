@@ -953,6 +953,14 @@ $ ( function ( _, moment ) {
                 window.location = baseURL;
             }
         } );
+
+        // datepicker
+        $('#sandbox-container .input-daterange').datepicker({
+            language: "fr",
+            calendarWeeks: true,
+            autoclose: true,
+            todayHighlight: true
+        });
     }
 
     $ ( 'document' ).ready ( main () );

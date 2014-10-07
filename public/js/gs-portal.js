@@ -22,4 +22,12 @@ $('document').ready(function () {
         });
 
     });
+
+/*    $(function () {
+        $('.login-lang').on('click', function(){
+            console.log($(this));
+            $(this).addClass('active').siblings().removeClass('active');
+        });
+    });*/
+
 });

@@ -41,14 +41,14 @@ ul.lang {
   overflow: hidden;
   padding:10px;
 }
-header .login-lang {
+.login-lang > a {
   color: rgba(255,255,255,.4);
 }
-header .login-lang:hover,
-header .login-lang:focus,
-header .login-lang:active,
-header .login-lang.active
-header .default-lang {
+.login-lang > a:hover,
+.login-lang > a:focus,
+.login-lang > a:active,
+.login-lang > a.active,
+.default-lang > a {
   color: rgba(255,255,255,.8);
 }
 
@@ -67,8 +67,10 @@ td#top-nav ul:not(i)  {
   height: 50px;
   line-height: 50px;
   font-size: 16px;
-  font-weight: 500;
   color: #a0a0a0;
+}
+#top-nav .univers-name {
+  font-weight: 500;
 }
 
 #signout,
@@ -129,10 +131,10 @@ td#top-nav ul:not(i)  {
   color: #FFF;
   background-color: #378fdd;
   cursor: pointer;
-  /* add ... on resize instead of break line */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1em;
   /* transition */
   -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
      -moz-transition: all 0.4s ease;/* Firefox 4-15 */
@@ -306,7 +308,7 @@ input[type="password"]:focus {
   display: inline-block;
   vertical-align: middle;
   text-align: center;
-  padding:  14px 30px;
+  padding:  15px 30px;
 
   /* add ... */
   white-space: nowrap;
@@ -317,6 +319,7 @@ input[type="password"]:focus {
   font-family: 'Roboto';
   font-weight: 300;
   font-size: 14px;
+  line-height: 1em;
 
   /* style */
   background-image: none;
@@ -324,10 +327,9 @@ input[type="password"]:focus {
   border-width: 1px;
   border-style: solid;
   cursor: pointer;
-
   /* unselectable text */
   -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
+     -moz-user-select: none;     /* Firefox all */
       -ms-user-select: none;      /* IE 10+ */
        -o-user-select: none;
           user-select: none;
@@ -556,26 +558,27 @@ i.fa, li {
 
 
 #upload a,
-li[class^="level"] > a {
-  display: block;
-  margin-bottom: 1px;
-/*  height: 50px;*/
-  /* add ... on resize instead of break line */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
+li.level1 > a {
   /* transition */
   -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
      -moz-transition: all 0.4s ease;/* Firefox 4-15 */
        -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
           transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
 }
+#upload a,
+li[class^="level"] > a {
+  display: block;
+  margin-bottom: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  font-size: 14px;
+}
 
 #upload a,
 li.level1 > a {
   padding: 15px 0px 15px 19px;
-  font-size: 14px;
   background-color: #2e8ac1;
              color: #FFF;
 }
@@ -591,18 +594,52 @@ li.level1 > a:active {
 li.level1 > a.active {
   background-color: #378fdd;
 }
-
 li.level2 > a {
   padding: 15px 0px 15px 30px;
-  font-size: 12px;
   background-color: #f2f2f2;
              color: #404040;
 
 }
+li.level2 > a:hover,
+li.level2 > a:focus,
+li.level2 > a:active,
+li.level2 > a.active {
+  border-left: 3px solid #0064bb;
+  color: #0064bb;
 
+}
 li.level3 > a {
   padding: 15px 0px 15px 50px;
-  font-size: 12px;
   background-color: transparent;
              color: #404040;
 }
+
+
+/****************************************************
+                    DATEPICKER
+****************************************************/
+#datepicker {
+  display: table;
+
+}
+
+#datepicker input {
+  display: table-cell;
+  max-width: 130px;
+  text-align: center;
+}
+
+.dp-to {
+  display: table-cell;
+  cursor: none;
+  font-size: 14px;
+  padding: 14px 7px 14px 7px;
+  margin: 0;
+  background-color: #f2f2f2;
+  color: #888;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  font-size: 14px;
+  height: 50px;
+}
+

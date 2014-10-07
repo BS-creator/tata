@@ -39,9 +39,9 @@
                                                            src="css/images/header-logo-groups.png"></a></li>
         </ul>
         <ul class="list-inline pull-right lang">
-            <li><a class="login-lang" href="#">FR</a></li>
-            <li><a class="login-lang" href="#">EN</a></li>
-            <li><a class="login-lang" href="#">NL</a></li>
+            <li class="login-lang"><a href="#">FR</a></li>
+            <li class="login-lang"><a href="#">EN</a></li>
+            <li class="login-lang"><a href="#">NL</a></li>
         </ul>
     </div>
 </header>
@@ -214,7 +214,15 @@
                                 </div>
                             </div>
 
+                            <!--search-->
                             <input class="pull-left ml-s" type="text" name="search" placeholder=""/>
+
+                            <!--datepicker-->
+                            <div class="pull-left ml-s" id="datepicker">
+                                <input type="text" class="" name="start" placeholder=""/>
+                                <span class="dp-to">à</span>
+                                <input type="text" class="" name="end" placeholder=""/>
+                            </div>
 
                             <!--refresh & toggle config table-->
                             <div class="btn-group pull-right ml-s">
