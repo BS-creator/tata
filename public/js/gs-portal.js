@@ -1,25 +1,25 @@
-$('document').ready(function () {
+$( 'document' ).ready( function () {
 
     // tooltip - add rel='tooltip' to the tooltip element
-    $(function () {
-        $("[rel='tooltip']").tooltip();
-    });
+    $( function () {
+        $( "[rel='tooltip']" ).tooltip();
+    } );
 
 
     ////////////////////////////////////////////////////////
     //                  SIDENAV
     ///////////////////////////////////////////////////////
 
-    $(function () {
-        $('.cat1 > a:nth-child(1)').on('click', function(){
-            console.log($(this));
-        });
+    $( function () {
+        $( '.cat1 > a:nth-child(1)' ).on( 'click', function () {
+            console.log( $( this ) );
+        } );
 
 
-        $('#root').on('click', function(){
-            alert($(this).next());
-            $(this).next().toggle();
-        });
+        $( '#root' ).on( 'click', function () {
+            alert( $( this ).next() );
+            $( this ).next().toggle();
+        } );
 
-    });
-});
+    } );
+} );

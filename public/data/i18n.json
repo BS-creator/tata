@@ -4,6 +4,7 @@
             "search": "Recherche...",
             "reload": "Rafraîchir",
             "filter":{
+                "filterby": "Filtrer par",
                 "new": "Nouveaux fichiers",
                 "notDL": "Fichiers non-téléchargés",
                 "clear": "Retirer tous les filtres"
@@ -57,6 +58,7 @@
             "search": "Zoeken...",
             "reload": "Opnieuw laden",
             "filter":{
+                "filterby": "Filter door",
                 "new": "Nieuwe bestanden",
                 "notDL": "Bestanden niet gedownloaden",
                 "clear": "Schrapen filters"
@@ -110,6 +112,7 @@
             "search": "Searching...",
             "reload": "Reload",
             "filter":{
+                "filterby": "Filter by",
                 "new": "New Files",
                 "notDL": "Files not downloaded",
                 "clear": "Clear all filters"

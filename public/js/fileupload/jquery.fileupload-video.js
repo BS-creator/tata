@@ -12,15 +12,15 @@
 /* jshint nomen:false */
 /* global define, window, document */
 
-(function (factory) {
+(function ( factory ) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
         // Register as an anonymous AMD module:
-        define([
+        define( [
             'jquery',
             'load-image',
             './jquery.fileupload-process'
-        ], factory);
+        ], factory );
     } else {
         // Browser globals:
         factory(
@@ -28,29 +28,29 @@
             window.loadImage
         );
     }
-}(function ($, loadImage) {
+}( function ( $, loadImage ) {
     'use strict';
 
     // Prepend to the default processQueue:
     $.blueimp.fileupload.prototype.options.processQueue.unshift(
         {
-            action: 'loadVideo',
+            action     : 'loadVideo',
             // Use the action as prefix for the "@" options:
-            prefix: true,
-            fileTypes: '@',
+            prefix     : true,
+            fileTypes  : '@',
             maxFileSize: '@',
-            disabled: '@disableVideoPreview'
+            disabled   : '@disableVideoPreview'
         },
         {
-            action: 'setVideo',
-            name: '@videoPreviewName',
+            action  : 'setVideo',
+            name    : '@videoPreviewName',
             disabled: '@disableVideoPreview'
         }
     );
 
     // The File Upload Video Preview plugin extends the fileupload widget
     // with video preview functionality:
-    $.widget('blueimp.fileupload', $.blueimp.fileupload, {
+    $.widget( 'blueimp.fileupload', $.blueimp.fileupload, {
 
         options: {
             // The regular expression for the types of video files to load,
@@ -58,7 +58,7 @@
             loadVideoFileTypes: /^video\/.*$/
         },
 
-        _videoElement: document.createElement('video'),
+        _videoElement: document.createElement( 'video' ),
 
         processActions: {
 
@@ -66,7 +66,7 @@
             // as video element if the browser supports playing it.
             // Accepts the options fileTypes (regular expression)
             // and maxFileSize (integer) to limit the files to load:
-            loadVideo: function (data, options) {
+            loadVideo: function ( data, options ) {
                 if (options.disabled) {
                     return data;
                 }
@@ -74,14 +74,14 @@
                     url,
                     video;
                 if (this._videoElement.canPlayType &&
-                    this._videoElement.canPlayType(file.type) &&
-                    ($.type(options.maxFileSize) !== 'number' ||
+                    this._videoElement.canPlayType( file.type ) &&
+                    ($.type( options.maxFileSize ) !== 'number' ||
                         file.size <= options.maxFileSize) &&
                     (!options.fileTypes ||
-                        options.fileTypes.test(file.type))) {
-                    url = loadImage.createObjectURL(file);
+                        options.fileTypes.test( file.type ))) {
+                    url = loadImage.createObjectURL( file );
                     if (url) {
-                        video = this._videoElement.cloneNode(false);
+                        video = this._videoElement.cloneNode( false );
                         video.src = url;
                         video.controls = true;
                         data.video = video;
@@ -92,7 +92,7 @@
             },
 
             // Sets the video element as a property of the file object:
-            setVideo: function (data, options) {
+            setVideo : function ( data, options ) {
                 if (data.video && !options.disabled) {
                     data.files[data.index][options.name || 'preview'] = data.video;
                 }
@@ -101,6 +101,6 @@
 
         }
 
-    });
+    } );
 
-}));
+} ));

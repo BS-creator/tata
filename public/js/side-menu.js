@@ -1,61 +1,62 @@
-$('document').ready(function () {
+$( 'document' ).ready( function () {
+    'use strict';
 
     ////////////////////////////////////////////////////////
     //                  SIDE-MENU
     ///////////////////////////////////////////////////////
 
-    var $main = $('#main');
+    var $main = $( '#main' );
     //var $snav = $('.sidenav');
-    var $smenu = $('#side-menu');
+    var $smenu = $( '#side-menu' );
 
     // initialize size & display /default
     (function () {
-        var sbWidth = $('#sidenav').width();
-        $('#side-menu').css({
-            top: $main.offset().top, // get top height to align
-            right: -sbWidth,
-            width: sbWidth,
-            height: $(window).height() - $main.offset().top
-        }).removeClass();
+        var sbWidth = $( '#sidenav' ).width();
+        $( '#side-menu' ).css( {
+            top   : $main.offset().top, // get top height to align
+            right : -sbWidth,
+            width : sbWidth,
+            height: $( window ).height() - $main.offset().top
+        } ).removeClass();
     })();
 
     // set position
-    var sideMenuToggle = function (displayed) {
-        var sbWidth = $('#sidenav').width();
+    var sideMenuToggle = function ( displayed ) {
+        var sbWidth = $( '#sidenav' ).width();
         var MSAbsc = (displayed === true) ? 0 : -sbWidth;
         var mainAbsc = (displayed === false) ? 0 : -sbWidth;
-        $main.animate({
+        $main.animate( {
             right: -mainAbsc
-        });
-        $smenu.animate({
+        } );
+        $smenu.animate( {
             right: MSAbsc,
             width: sbWidth
-        }).toggleClass('active');
+        } ).toggleClass( 'active' );
     };
 
     // resize side-menu width x height
-    $(window).resize(function () {
-        $smenu.height($(window).height() - $('header').height());
-        if ($smenu.hasClass('active')) {
-            sideMenuToggle(false);
-            $(this).width($('#sidenav').width());
+    $( window ).resize( function () {
+        $smenu.height( $( window ).height() - $( 'header' ).height() );
+        if ($smenu.hasClass( 'active' )) {
+            sideMenuToggle( false );
+            $( this ).width( $( '#sidenav' ).width() );
         }
-    });
-    $(window).trigger('resize');
+    } );
+    $( window ).trigger( 'resize' );
 
     // side-menu active
-    $('#toggle-side-menu').on('click', function () {
-        sideMenuToggle(!$('#side-menu').hasClass('active'));
-    });
+    $( '#toggle-side-menu' ).on( 'click', function () {
+        sideMenuToggle( !$( '#side-menu' ).hasClass( 'active' ) );
+    } );
 
     // side-menu desactive
-    $('.side-menu-head-icon').on('click', function () {
-        sideMenuToggle(false);
-    });
+    $( '.side-menu-head-icon' ).on( 'click', function () {
+        sideMenuToggle( false );
+    } );
 
     // side-menu li active class
-    $('.side-menu-list > li').on('click', function () {
-        $(this).toggleClass('active');
-    });
+    $( '.side-menu-list > li' ).on( 'click', function () {
+        $( this ).toggleClass( 'active' );
+    } );
 
-});
+} );
