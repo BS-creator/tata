@@ -256,6 +256,13 @@ $( function ( _, moment ){
      * DOWNLOAD (ZIP)
      * */
 
+    function addDownloadButton(){
+        $('.multiDL' ).html('');
+        var btn = $('<button class="btn-portal-green downloadall">'+i18n[lang].button.multiDL+'</button>');
+        var multidl = $('.multiDL' );
+        multidl.append(btn);
+    }
+
     function downloadAll(){
 
         //TODO: replace getSelections
@@ -349,7 +356,7 @@ $( function ( _, moment ){
         table.columns().visible( false, false );
         table.columns( '.defaultView' ).visible( true, false );
         table.columns.adjust().draw( false );
-        $( '#breadcrumb' ).html('');
+        $( '#breadcrumb' ).html( '' );
         createVisibleColumnList();
     }
 
@@ -488,14 +495,14 @@ $( function ( _, moment ){
      * MENU COLUMN VISIBLE
      * */
 
-     function createVisibleColumnList(){
+    function createVisibleColumnList(){
         var exclude = [ 0, 1, 14, 15, 16 ],
             list = $( '.side-menu-list' ),
             i = 0,
             headerCol = '',
             li = '';
 
-        list.html('');
+        list.html( '' );
 
         while (i < 17) {
             if ($.inArray( i, exclude ) === -1) {
@@ -594,7 +601,7 @@ $( function ( _, moment ){
                 [10, 20, 50, -1],
                 [10, 20, 50, i18n[lang].listAll]
             ],
-            dom           : '<"top"C>rt<"page"p><"bottom"il>',
+            dom           : '<"top"C>rt<"multiDL"><"page"p><"bottom"il>',
             /*"dom": '<"top"CT>rt<"page"p><"bottom"li>',*/
             language      : {
                 url: i18n[lang].url.table
@@ -605,19 +612,19 @@ $( function ( _, moment ){
             ],
             columnDefs    : [
                 {
-                    className : 'defaultView',
+                    className    : 'defaultView',
                     targets      : 0,  //checkbox
                     orderDataType: 'dom-checkbox',
                     //orderable: false,
                     searchable   : true
                 },
                 {
-                    className : 'defaultView',
-                    targets: 1    //Download
+                    className: 'defaultView',
+                    targets  : 1    //Download
                 },
                 {
-                    className : 'defaultView',
-                    targets: 2    // Date
+                    className: 'defaultView',
+                    targets  : 2    // Date
                 },
                 {
                     className : 'detailsLayer',
@@ -673,7 +680,7 @@ $( function ( _, moment ){
                     searchable: false
                 },
                 {
-                    className : 'defaultView',
+                    className: 'defaultView',
                     targets  : 14,      // remove
                     orderable: false
                 },
@@ -701,8 +708,6 @@ $( function ( _, moment ){
                     .column( 4 ).search( '[^' + username + ']', true, false )
                     .column( 15 ).search( '0' )   // not downloaded yet
                     .draw();
-
-
             }
         } );
 
@@ -815,7 +820,7 @@ $( function ( _, moment ){
         $( '#toggle-side-menu' ).html( '<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.colVisible );
 
 
-        oTable.on( 'length.dt', function () {
+        oTable.on( 'length.dt', function (){
             var sbWidth = $( '#sidenav' ).width(),
                 mainTop = $( '#main' ).offset().top;
             console.log( "test 2" );
@@ -828,7 +833,7 @@ $( function ( _, moment ){
         } );
 
         $( 'p.side-menu-head' ).text( i18n[lang].sideMenu.config );
-        $( '#init-conf' ).text( i18n[lang].sideMenu.reset );
+        $( '#init-conf' ).html( '<i class="fa fa-dot-circle-o"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].sideMenu.reset );
 
         createVisibleColumnList();
 
@@ -839,6 +844,7 @@ $( function ( _, moment ){
         var trActive = $( 'tr.active' );
 
         if (trActive && trActive.length > 0) {
+            addDownloadButton();
             $( '.downloadall' ).show();
         } else {
             $( '.downloadall' ).toggle();
@@ -869,6 +875,8 @@ $( function ( _, moment ){
 
     /***** LANGUAGE SETTINGS *****/
     function setEventLanguageSettings(){
+        $( '.' + lang ).addClass( 'default-lang' );
+
         $( '.login-lang' ).on( 'click', function (){
             var lang = $( this ).html().toLowerCase();
             $( '.login-lang' ).removeClass( 'default-lang' );
@@ -893,6 +901,15 @@ $( function ( _, moment ){
             small.data( 'dl', dl ); // increment by one the download count
             small.html( '&nbsp;' + dl );
         } );
+    }
+
+    /***** MULTIDOWNLOAD *****/
+    function setEventMultiDownload(){
+
+        var dlBtn = $( '.downloadall' );
+        dlBtn.on( 'click', downloadAll );
+        dlBtn.html('<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDL);
+
     }
 
     /***** DELETE *****/
@@ -967,9 +984,9 @@ $( function ( _, moment ){
 
     function setEventDatePicker(){
 
-        $( '.dateBegin' ).attr('placeholder', i18n[lang].datepicker.start);
-        $( '.dp-to' ).text(i18n[lang].datepicker.to);
-        $( '.dateEnd' ).attr('placeholder', i18n[lang].datepicker.end);
+        $( '.dateBegin' ).attr( 'placeholder', i18n[lang].datepicker.start );
+        $( '.dp-to' ).text( i18n[lang].datepicker.to );
+        $( '.dateEnd' ).attr( 'placeholder', i18n[lang].datepicker.end );
 
         $( '#datepicker' ).datepicker( {
             format        : 'dd/mm/yyyy',
@@ -1016,8 +1033,7 @@ $( function ( _, moment ){
 
         setEventDeleteFile();
 
-        /***** MULTIDOWNLOAD *****/
-        $( '.downloadall' ).on( 'click', downloadAll );
+        setEventMultiDownload();
 
         /***** TOOLTIP *****/
         //$( '[rel=tooltip]' ).tooltip();
@@ -1027,6 +1043,7 @@ $( function ( _, moment ){
     /****************************************************
      * MAIN
      * */
+
 
     function render(){
         $.when( loadCategory(), loadData(), loadFolder() ).done( function (){
@@ -1041,7 +1058,6 @@ $( function ( _, moment ){
             //set upload form events
             uploadForm();
 
-            //set all other events
             setEventsHTML();
 
         } );
@@ -1061,8 +1077,8 @@ $( function ( _, moment ){
         $.getJSON( 'data/i18n.json', function ( data ){
             i18n = data;
 
-            if(lang !== 'en'){
-                $.getScript(i18n[lang].url.datepicker);
+            if (lang !== 'en') {
+                $.getScript( i18n[lang].url.datepicker );
             }
 
             if (i18n[lang]) {   // if language is set,

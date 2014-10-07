@@ -4,6 +4,7 @@
             "search": "Recherche...",
             "reload": "Rafraîchir",
             "colVisible": "Afficher",
+            "multiDL": "Télécharger les fichiers",
             "filter":{
                 "filterby": "Filtrer par",
                 "new": "Nouveaux fichiers",
@@ -65,6 +66,7 @@
             "search": "Zoeken...",
             "reload": "Opnieuw laden",
             "colVisible": "Tonen",
+            "multiDL": "Bestaden gedownloaden",
             "filter":{
                 "filterby": "Filter door",
                 "new": "Nieuwe bestanden",
@@ -126,6 +128,7 @@
             "search": "Searching...",
             "reload": "Reload",
             "colVisible": "Show Column",
+            "multiDL": "Files Download",
             "filter":{
                 "filterby": "Filter by",
                 "new": "New Files",
