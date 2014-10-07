@@ -180,100 +180,7 @@ li.sidebar-h-5.active {
   background-color: #0064bb;
 }
 
-/**********************************************
-                    SIDE MENU       #side-menu
-***********************************************/
-
-/* position for sliding effect */
-#side-menu {
-  position: absolute;
-  background-color: #0064bb;
-  color: white;
-}
-#main {
-  position: relative;
-  width: 100%;
-}
-
-/* style */
-.side-menu-head,
-.side-menu-head-icon {
-  height: 50px;
-  line-height: 50px;
-  margin: 0px;
-  font-size: 16px;
-  text-transform: uppercase;
-  background-color: #378fdd;
-  color: #ABD3E1;
-}
-.side-menu-head-icon {
-  cursor: pointer;
-  color: white;
-    /* transition */
-  -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
-     -moz-transition: all 0.4s ease;/* Firefox 4-15 */
-       -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
-          transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
-}
-.side-menu-head-icon i {
-  opacity: .6;
-}
-.side-menu-head-icon:hover i,
-.side-menu-head-icon:focus i,
-.side-menu-head-icon:active i,
-.side-menu-head-icon.active i {
-  opacity: 1;
-}
-
-.side-menu-list {
-  margin: 1px 0 0 0;
-  padding: 0;
-}
-.side-menu-list > li.active:before {
-  font-size: 14px;
-  font-family: 'FontAwesome';
-  content: "\f00c";
-}
-.side-menu-list > li {
-  height: 50px;
-  margin-bottom: 1px;
-  padding: 15px 0px 15px 30px;
-  /* add ... on resize instead of break line */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 14px;
-  color: #FFF;
-  background-color: #0064bb;
-  cursor: pointer;
-  
-  /* transition */
-  -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
-     -moz-transition: all 0.4s ease;/* Firefox 4-15 */
-       -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
-          transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
-}
-.side-menu-list > li:hover,
-.side-menu-list > li:focus,
-.side-menu-list > li:active {
-  background-color: #2e8ac1;
-}
-.side-menu-list > li.active {
-  background-color: #378fdd;
-}
-
-#init-conf {
-  opacity: .7;
-}
-#init-conf:hover,
-#init-conf:focus,
-#init-conf:active,
-#init-conf.active {
-  background-color: #378fdd;
-      border-color: #378fdd;
-  opacity: 1;
-}
-
+/* LOGIN */
 
 input[type="text"],
 input[type="password"] {
@@ -375,9 +282,6 @@ td:last-child {
 table.dataTable thead th {
   padding: 14px 18px;
 }
-table.dataTable tbody td {
-  padding: 5px 10px;
-}
 /*********************************************
                     PAGE
 **********************************************/
@@ -407,7 +311,7 @@ div.dataTables_paginate ul.pagination {
   border-bottom-right-radius: 0px;
 }
 .pagination > li > a {
-  padding: 15px 12px;
+  padding: 9px 14px;
 }
 .pagination > li.active,
 .pagination > li > a,
@@ -466,7 +370,6 @@ i.fa, li {
   max-width: 130px;
   text-align: center;
 }
-
 .dp-to {
   box-shadow: 0;
   height: 50px;
@@ -481,3 +384,10 @@ i.fa, li {
   border-bottom: 1px solid #ccc;
 }
 
+.input-daterange input:first-child {
+  border-radius: 0;
+}
+
+.input-daterange input:last-child {
+  border-radius: 0;
+}
