@@ -821,8 +821,10 @@ $ ( function ( _, moment ) {
 
         /***** LANGUAGE SETTINGS *****/
         $ ( '.login-lang' ).on ( 'click', function () {
-            //console.log($(this).html().toLowerCase());
-            sessionStorage.setItem ( 'lang', $ ( this ).html ().toLowerCase () );
+            var lang = $ ( this ).html ().toLowerCase ();
+            $ ( '.login-lang' ).removeClass ( 'default-lang' );
+            $ ( '.' + lang ).addClass ( 'default-lang' );
+            sessionStorage.setItem ( 'lang', lang );
             location.reload ();
         } );
 
