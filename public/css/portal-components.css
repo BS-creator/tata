@@ -415,6 +415,17 @@ li.level2 > a {
   background-color: #f2f2f2;
   color: #606060;
 }
+li.level2 > a,
+li.level3 > a {
+  -webkit-transition: all 0.1s ease;
+  /* Safari 3.2+, Chrome */
+  -moz-transition: all 0.1s ease;
+  /* Firefox 4-15 */
+  -o-transition: all 0.1 ease;
+  /* Opera 10.5-12.00 */
+  transition: all 0.1s ease;
+  /* Firefox 16+, Opera 12.50+ */
+}
 li.level2 > a:hover,
 li.level2 > a:focus,
 li.level3 > a:hover,
@@ -716,6 +727,7 @@ table tr th .pw-btn-group-th .pw-btn-th,
   color: #FFF;
   background-color: #0064bb;
   cursor: pointer;
+  border-bottom: 1px solid #00407a;
   /* transition */
   -webkit-transition: all 0.4s ease;
   /* Safari 3.2+, Chrome */
