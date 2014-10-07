@@ -10,8 +10,13 @@ $( 'document' ).ready( function () {
     //                  SIDENAV
     ///////////////////////////////////////////////////////
 
-    $( function () {
-        $( '.cat1 > a:nth-child(1)' ).on( 'click', function () {
+console.log($('#root'));
+    $( "#root" ).on( 'click', function () {
+        console.log($(this));
+        $(this).addClass('active');
+    });
+
+    $( '.level2 a' ).on( 'click', function () {
             console.log( $( this ) );
         } );
 
@@ -21,5 +26,5 @@ $( 'document' ).ready( function () {
             $( this ).next().toggle();
         } );
 
-    } );
+
 } );
