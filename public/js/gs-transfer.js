@@ -517,6 +517,7 @@ $( function ( _, moment ){
             }
             i++;
         }
+
         setEventColumnListVisible();
     }
 
@@ -819,24 +820,14 @@ $( function ( _, moment ){
 
         $( '#toggle-side-menu' ).html( '<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.colVisible );
 
-
         oTable.on( 'length.dt', function (){
-            var sbWidth = $( '#sidenav' ).width(),
-                mainTop = $( '#main' ).offset().top;
-            console.log( "test 2" );
-            $( '#side-menu' ).css( {
-                top   : mainTop, // get top height to align
-                right : -sbWidth,
-                width : sbWidth,
-                height: $( window ).height() - mainTop
-            } ).removeClass();
+
         } );
 
         $( 'p.side-menu-head' ).text( i18n[lang].sideMenu.config );
-        $( '#init-conf' ).html( '<i class="fa fa-dot-circle-o"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].sideMenu.reset );
+        $( '#init-conf' ).html( i18n[lang].sideMenu.reset );
 
         createVisibleColumnList();
-
 
     }
 

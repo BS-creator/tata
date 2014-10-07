@@ -41,22 +41,22 @@ ul.lang {
   overflow: hidden;
   padding:10px;
 }
-.login-lang > a {
+.lang a {
   color: rgba(255,255,255,.4);
+  -webkit-transition: all 0.5s ease;/* Safari 3.2+, Chrome */
+  -moz-transition: all 0.5s ease;/* Firefox 4-15 */
+  -o-transition: all 0.5s ease;/* Opera 10.5-12.00 */
+  transition: all 0.5s ease;/* Firefox 16+, Opera 12.50+ */
 }
-.login-lang > a:hover,
-.login-lang > a:focus,
-.login-lang > a:active,
-.login-lang > a.active,
-.default-lang > a {
-  color: rgba(255,255,255,.8);
+.lang a:hover,
+.lang a:focus,
+.lang a:active {
+  color: rgba(255,255,255,.9);
+}
+a.default-lang {
+  color: rgba(255,255,255,.7);
 }
 
-/* login form */
-.default-lang {
-  color: #0700c5;
-  text-decoration: underline;
-}
 
 /**********************************************
                     TOP NAV
