@@ -3,6 +3,7 @@
         "button": {
             "search": "Recherche...",
             "reload": "Rafraîchir",
+            "colVisible": "Afficher",
             "filter":{
                 "filterby": "Filtrer par",
                 "new": "Nouveaux fichiers",
@@ -12,7 +13,8 @@
             "signout" : "Se Déconnecter"
         },
         "url": {
-            "table": "DataTables/resources/language/FR.json"
+            "table": "DataTables/resources/language/FR.json",
+            "datepicker": "js/locale/bootstrap-datepicker.fr.js"
         },
         "col": {
             "new": "Nouveau",
@@ -43,6 +45,11 @@
             "add": "Document ajouté",
             "del": "Document supprimé"
         },
+        "datepicker" : {
+            "to": "à",
+            "start": "Date Début",
+            "end": "Date Fin"
+        },
         "listAll": "Tous",
         "showHide": "Afficher les colonnes",
         "upload": "Transmettre des fichiers à Group S",
@@ -57,6 +64,7 @@
         "button": {
             "search": "Zoeken...",
             "reload": "Opnieuw laden",
+            "colVisible": "Tonen",
             "filter":{
                 "filterby": "Filter door",
                 "new": "Nieuwe bestanden",
@@ -66,7 +74,8 @@
             "signout" : "Uit Loggen"
         },
         "url": {
-            "table": "DataTables/resources/language/NL.json"
+            "table": "DataTables/resources/language/NL.json",
+            "datepicker": "js/locale/bootstrap-datepicker.nl.js"
         },
         "col": {
             "new": "Nieuw",
@@ -97,6 +106,11 @@
             "add": "Document toegevoegd",
             "del": "Document geschrapt"
         },
+        "datepicker" : {
+            "to": "tot",
+            "start": "Beginnen Datum",
+            "end": "Einde Datum"
+        },
         "listAll": "Alle",
         "showHide": "Tonen colonnen",
         "upload": "Documenten op de server uploaden",
@@ -111,6 +125,7 @@
         "button": {
             "search": "Searching...",
             "reload": "Reload",
+            "colVisible": "Show Column",
             "filter":{
                 "filterby": "Filter by",
                 "new": "New Files",
@@ -150,6 +165,11 @@
         "file": {
             "add": "Document added",
             "del": "Document deleted"
+        },
+        "datepicker" : {
+            "to": "to",
+            "start": "Start Date",
+            "end": "End Date"
         },
         "listAll": "all",
         "showHide": "Show / hide columns",

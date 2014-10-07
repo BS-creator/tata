@@ -1,20 +1,20 @@
-$( function ( _, moment ) {
+$( function ( _, moment ){
     'use strict';
 
     /***  GLOBAL VARIABLES ***/
 
-    var serverURL   = sessionStorage.getItem( 'serverURL' ),
-        baseURL     = sessionStorage.getItem( 'baseURL' ),
-        lang        = sessionStorage.getItem( 'lang' ),
-        TABLEID     = '#tableID',
-        table       = {},
-        oTable      = {},
-        i18n        = {},
-        AjaxData    = [],
-        category    = [],
-        refDocUsed  = [],
-        username    = sessionStorage.getItem( 'username' ).toLowerCase(),
-        token       = sessionStorage.getItem( 'token' );
+    var serverURL = sessionStorage.getItem( 'serverURL' ),
+    baseURL = sessionStorage.getItem( 'baseURL' ),
+    lang = sessionStorage.getItem( 'lang' ),
+    TABLEID = '#tableID',
+    table = {},
+    oTable = {},
+    i18n = {},
+    AjaxData = [],
+    category = [],
+    refDocUsed = [],
+    username = sessionStorage.getItem( 'username' ).toLowerCase(),
+    token = sessionStorage.getItem( 'token' );
 
 
     _.templateSettings = {
@@ -40,7 +40,7 @@ $( function ( _, moment ) {
      * HELPER
      * */
 
-    function reportError ( error, message ) {
+    function reportError( error, message ){
         message = message || '';
         console.error(
                 'ERROR: ' + message + ' [' + error.toString() + ']\n' +
@@ -54,14 +54,14 @@ $( function ( _, moment ) {
         );
     }
 
-    window.onerror = function ( message, filename, lineno, colno, error ) {
+    window.onerror = function ( message, filename, lineno, colno, error ){
         error.fileName = error.fileName || filename || null;
         error.lineNumber = error.lineNumber || lineno || null;
         error.columnNumber = error.columnNumber || colno || null;
         reportError( error, 'Uncatched Exception' );
     };
 
-    function bytesToSize ( bytes ) {
+    function bytesToSize( bytes ){
         var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
         if (bytes === 0) {
             return '0 Byte';
@@ -70,8 +70,8 @@ $( function ( _, moment ) {
         return Math.round( bytes / Math.pow( 1024, i ), 2 ) + ' ' + sizes[i];
     }
 
-    function sortUnique ( array ) {
-        array = array.sort( function ( a, b ) {
+    function sortUnique( array ){
+        array = array.sort( function ( a, b ){
             return a - b;
         } );
         if (array.length > 1) {
@@ -86,9 +86,9 @@ $( function ( _, moment ) {
         return array; // only 1 or no element in the array.
     }
 
-    function getUsedDocRef ( data ) {
+    function getUsedDocRef( data ){
         var a = [];
-        $.each( data, function ( i, item ) {
+        $.each( data, function ( i, item ){
             var ref = parseInt( item.referenceDocument );
             if (!isNaN( ref )) {
                 a[a.length] = ref;
@@ -99,10 +99,10 @@ $( function ( _, moment ) {
         return sortUnique( a );
     }
 
-    function mergeLabelDoc () {
+    function mergeLabelDoc(){
 
-        $.each( category, function ( i, cat ) {
-            $.each( AjaxData, function ( j, row ) {
+        $.each( category, function ( i, cat ){
+            $.each( AjaxData, function ( j, row ){
                 if (cat.referenceDocument === parseInt( row.referenceDocument )) {
                     row.label = labelDoci18n( cat );
                 } else {
@@ -114,13 +114,13 @@ $( function ( _, moment ) {
         } );
     }
 
-    function yearFirst ( date ) { //TODO: use moment!
+    function yearFirst( date ){ //TODO: use moment!
         return date.slice( 6, 11 ) + '-' +
             date.slice( 3, 5 ) + '-' +
             date.slice( 0, 2 );
     }
 
-    function filterDate () {
+    function filterDate(){
         //TODO: use DATATABLE date filter!!!
         //TODO: filterDate(inputStart, inputEnd)
 
@@ -159,7 +159,7 @@ $( function ( _, moment ) {
      * INTERNATIONALIZATION i18n
      * */
 
-    function labelDoci18n ( item ) {
+    function labelDoci18n( item ){
         if (lang === 'fr') {
             return item.labelDoc_f;
         } else if (lang === 'nl') {
@@ -171,7 +171,7 @@ $( function ( _, moment ) {
         }
     }
 
-    function labelCati18n ( item ) {
+    function labelCati18n( item ){
         if (lang === 'fr') {
             return item.labelCategory_f;
         } else if (lang === 'nl') {
@@ -187,7 +187,7 @@ $( function ( _, moment ) {
      * FORMAT COLUMNS
      * */
 
-    function formatExtension ( value, row ) {
+    function formatExtension( value, row ){
         if (value || value !== '') {
             var v = value.toLowerCase();
 
@@ -232,7 +232,7 @@ $( function ( _, moment ) {
         }
     }
 
-    function formatSize ( value ) {
+    function formatSize( value ){
         var val = parseInt( value );
         if (val > 1024) {
             return Math.round( val / 1024, 2 ) + ' KB';
@@ -247,11 +247,16 @@ $( function ( _, moment ) {
 
     //TODO: function formatUserName(value) { return value.toUpperCase(); }
 
+
+    function getSelectedRows(){
+        return table.rows( '.active' ).data();
+    }
+
     /****************************************************
      * DOWNLOAD (ZIP)
      * */
 
-    function downloadAll () {
+    function downloadAll(){
 
         //TODO: replace getSelections
         var array = getSelectedRows(),
@@ -259,7 +264,7 @@ $( function ( _, moment ) {
 
         console.log( array );
 
-        $.each( array, function ( i, item ) {
+        $.each( array, function ( i, item ){
             console.log( item );
             listID += item.idFile + '@!';
         } );
@@ -271,7 +276,7 @@ $( function ( _, moment ) {
 
         var form = $( '<form method="POST" action="' + serverURL + 'file/zip">' );
 
-        $.each( params, function ( k, v ) {
+        $.each( params, function ( k, v ){
             form.append( $( '<input type="hidden" name="' + k +
                 '" value="' + v + '">' ) );
         } );
@@ -286,7 +291,7 @@ $( function ( _, moment ) {
      * UPLOAD
      * */
 
-    function uploadForm () {
+    function uploadForm(){
         // set token for upload
         var $uploadform = $( '#uploadForm' );
         $( 'input[name="token"]' ).val( token );
@@ -295,29 +300,29 @@ $( function ( _, moment ) {
 
         $uploadform.fileupload( {
             sequentialUploads: true,
-            progressall      : function ( e, data ) {
+            progressall      : function ( e, data ){
                 var progress = parseInt( data.loaded / data.total * 100, 10 );
                 $( '#progress .progress-bar' ).css( 'width', progress + '%' );
             },
-            add              : function ( e, data ) {
+            add              : function ( e, data ){
                 data.submit()
-                    .error( function ( jqXHR, textStatus ) {
+                    .error( function ( jqXHR, textStatus ){
                         alert( 'Error ' + textStatus );
                     } )
-                    .complete( function () {
+                    .complete( function (){
                         //console.log("result file upload: ", result);
                         $( '#progress' ).hide();
                         $( '.close' ).click();
                         location.reload();
                     } );
             },
-            start            : function () {
+            start            : function (){
                 $( '#progress' ).show();
             }
         } );
     }
 
-    function listFolderUpload ( destFolders ) {
+    function listFolderUpload( destFolders ){
         var listFolder = $( '#uploadForm p:first' );
         for (var key in destFolders) {
             if (destFolders[key] === 'Presta') {
@@ -339,7 +344,16 @@ $( function ( _, moment ) {
      * MENU
      * */
 
-    function menuRootClick () {
+    function resetDefaultView(){
+        oTable.fnFilterClear();
+        table.columns().visible( false, false );
+        table.columns( '.defaultView' ).visible( true, false );
+        table.columns.adjust().draw( false );
+        $( '#breadcrumb' ).html('');
+        createVisibleColumnList();
+    }
+
+    function menuRootClick(){
 
         oTable.fnFilterClear();
         table.columns( '.detailsLayer' ).visible( false, false );
@@ -349,9 +363,11 @@ $( function ( _, moment ) {
         table.column( 4 ).search( 'trf_fich' ).draw(); //filter on uploadUserName
 
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.root + '</li>' );
+
+        createVisibleColumnList();
     }
 
-    function menuOtherClick () {
+    function menuOtherClick(){
 
         oTable.fnFilterClear();
         table.columns( '.detailsLayer' ).visible( true, false );
@@ -364,9 +380,11 @@ $( function ( _, moment ) {
             .draw(); //filter on uploadUserName != username
 
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.other + '</li>' );
+
+        createVisibleColumnList();
     }
 
-    function menuUploadClick () {
+    function menuUploadClick(){
 
         oTable.fnFilterClear();
         table.columns( '.detailsLayer' ).visible( true, false );
@@ -376,16 +394,18 @@ $( function ( _, moment ) {
         table.column( 4 ).search( username ).draw(); //filter on uploadUserName
 
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.upload + '</li>' );
+
+        createVisibleColumnList();
     }
 
-    function menuRefDocClick () {
-        var that = $( this );
-        var nodeID = that.attr( 'id' ),
-            nodeText = that.text(),
-            nodeParentText = that.closest( 'li.level2' ).find( 'a:first' ).text();
+    function menuRefDocClick(){
+        var $this = $( this );
+        var nodeID = $this.attr( 'id' ),
+            nodeText = $this.text(),
+            nodeParentText = $this.closest( 'li.level2' ).find( 'a:first' ).text();
 
         $( '#breadcrumb' ).html( '<li class="active">' + nodeParentText + '</li><li class="active">' + nodeText + '</li>' );
-        if (nodeID > -1 && that.hasClass( 'level3' )) {
+        if (nodeID > -1 && $this.hasClass( 'level3' )) {
 
             oTable.fnFilterClear();
             table.columns( '.detailsLayer' ).visible( false, false );
@@ -394,9 +414,11 @@ $( function ( _, moment ) {
 
             table.column( 7 ).search( nodeID ).draw(); //filter on referenceDocument
         }
+
+        createVisibleColumnList();
     }
 
-    function templateMenu () {
+    function templateMenu(){
 
         var prevCat = -100;
         var htmlLeafNode = '';
@@ -409,7 +431,7 @@ $( function ( _, moment ) {
         refDocUsed = getUsedDocRef( AjaxData );
 
         // BUILD leaf and category node
-        $.each( category, function ( i, item ) {
+        $.each( category, function ( i, item ){
 
             var refdoc = parseInt( item.referenceDocument ),
                 numcat = parseInt( item.categoryNumber );
@@ -456,17 +478,46 @@ $( function ( _, moment ) {
         return htmlMenu;
     }
 
-    function createMenu () {
+    function createMenu(){
 
         $( '#sidenav' ).html( templateMenu() );
 
     }
 
     /****************************************************
+     * MENU COLUMN VISIBLE
+     * */
+
+     function createVisibleColumnList(){
+        var exclude = [ 0, 1, 14, 15, 16 ],
+            list = $( '.side-menu-list' ),
+            i = 0,
+            headerCol = '',
+            li = '';
+
+        list.html('');
+
+        while (i < 17) {
+            if ($.inArray( i, exclude ) === -1) {
+                headerCol = table.columns( i ).header().to$().html();
+                li = document.createElement( 'li' );
+                li.innerHTML = '&nbsp;&nbsp;&nbsp;' + headerCol;
+                li.setAttribute( 'data-index', i );
+                if (table.column( i ).visible()) {
+                    li.className += "active";
+                }
+                list.append( li );
+            }
+            i++;
+        }
+        setEventColumnListVisible();
+    }
+
+    /****************************************************
      * TABLE
      * */
 
-    function templateTable () { //TODO: make it REUSABLE --> parameter for tbody, theader and tableID
+    function templateTable(){ //TODO: make it REUSABLE --> parameter for tbody, theader and tableID
 
         var tpl = _.template( $( '#headertpl' ).html() );
 
@@ -476,7 +527,7 @@ $( function ( _, moment ) {
         tpl = _.template( $( '#bodytpl' ).html() );
         var html = {};
 
-        _.each( AjaxData, function ( row ) {
+        _.each( AjaxData, function ( row ){
 
             /* if (row.isNew) return "<i class='fa fa-check text-success'></i>";
              else return "<i class='fa fa-times'></i>";*/
@@ -528,7 +579,7 @@ $( function ( _, moment ) {
         $table.find( 'tbody' ).html( html );
     }
 
-    function createDataTable () {
+    function createDataTable(){
 
         templateTable();
 
@@ -554,16 +605,18 @@ $( function ( _, moment ) {
             ],
             columnDefs    : [
                 {
+                    className : 'defaultView',
                     targets      : 0,  //checkbox
-                    visible      : true,
                     orderDataType: 'dom-checkbox',
                     //orderable: false,
                     searchable   : true
                 },
                 {
+                    className : 'defaultView',
                     targets: 1    //Download
                 },
                 {
+                    className : 'defaultView',
                     targets: 2    // Date
                 },
                 {
@@ -579,23 +632,23 @@ $( function ( _, moment ) {
                     searchable: true
                 },
                 {
-                    className: 'fileLayer',
+                    className: 'fileLayer defaultView',
                     targets  : 5    //employerNumber
                 },
                 {
-                    className: 'fileLayer',
+                    className: 'fileLayer defaultView',
                     targets  : 6    // label
                 },
                 {
-                    className: 'fileLayer',
+                    className: 'fileLayer defaultView',
                     targets  : 7    //referenceDocument
                 },
                 {
-                    className: 'fileLayer',
+                    className: 'fileLayer defaultView',
                     targets  : 8    // size
                 },
                 {
-                    className: 'fileLayer',
+                    className: 'fileLayer defaultView',
                     targets  : 9    //extension
                 },
                 {
@@ -620,6 +673,7 @@ $( function ( _, moment ) {
                     searchable: false
                 },
                 {
+                    className : 'defaultView',
                     targets  : 14,      // remove
                     orderable: false
                 },
@@ -629,7 +683,7 @@ $( function ( _, moment ) {
                     searchable: true
                 },
                 {
-                    targets   : 16,
+                    targets   : 16,     //isNew
                     visible   : false,
                     searchable: true
                 }
@@ -642,7 +696,7 @@ $( function ( _, moment ) {
              },*/ /* tableTools: {
              "sRowSelect": "multi"
              },*/
-            'initComplete': function () {
+            'initComplete': function (){
                 table
                     .column( 4 ).search( '[^' + username + ']', true, false )
                     .column( 15 ).search( '0' )   // not downloaded yet
@@ -657,39 +711,9 @@ $( function ( _, moment ) {
     }
 
     /****************************************************
-     * COLUMN VISIBLE
-     * */
-
-    function fillColumnList () {
-        //console.log(table.columns().header().to$().html());
-        var exclude = [ 0, 1, 14, 15, 16 ],
-            list = $( '.side-menu-list' ),
-            i = 0,
-            headerCol = '',
-            li = '';
-        while (i < 17) {
-            if ($.inArray( i, exclude ) === -1) {
-                headerCol = table.columns( i ).header().to$().html();
-                li = document.createElement( 'li' );
-                li.innerHTML = '&nbsp;&nbsp;&nbsp;' + headerCol;
-
-                if (table.column( i ).visible()) {
-                    li.className += "active";
-                }
-                list.append( li );
-            }
-            i++;
-        }
-        $( 'p.side-menu-head' ).text( i18n[lang].sideMenu.config );
-        $( '#init-conf' ).text( i18n[lang].sideMenu.reset );
-
-    }
-
-
-    /****************************************************
      * AJAX
      * */
-    function deleteFile ( filePath, $this ) {
+    function deleteFile( filePath, $this ){
         //The FTP can delete a file by its path or by its ID (same method on backend)
         //So it works if the fileID is in the filePath
         var data = {
@@ -700,7 +724,7 @@ $( function ( _, moment ) {
             type   : 'DELETE',
             url    : serverURL + 'file/',
             data   : data,
-            success: function ( data ) {
+            success: function ( data ){
                 if (data) {
                     alert( i18n[lang].file.del );
                     table
@@ -715,30 +739,30 @@ $( function ( _, moment ) {
         } );
     }
 
-    function loadFolder () {
+    function loadFolder(){
         //folder
         return $.ajax( {
             type   : 'GET',
             url    : serverURL + 'folder/' + token + '/',
-            success: function ( data ) {
+            success: function ( data ){
                 listFolderUpload( data );
             }
         } );
     }
 
-    function loadCategory () {
+    function loadCategory(){
 
         return $.ajax( {
             type   : 'GET',
             url    : serverURL + 'category/',
-            success: function ( data ) {
+            success: function ( data ){
                 category = data;
             }
         } );
 
     }
 
-    function loadData () {
+    function loadData(){
 
         $( '#loader' ).show();
 
@@ -746,19 +770,19 @@ $( function ( _, moment ) {
             type      : 'POST',
             url       : serverURL + 'file/list/',
             data      : { 'token': token },
-            success   : function ( data ) {
+            success   : function ( data ){
                 AjaxData = data;
             },
-            complete  : function () {
+            complete  : function (){
                 $( '#loader' ).hide();
             },
-            error     : function () {
+            error     : function (){
                 $( '#loader' ).hide();
                 alert( i18n[lang].error0 );
             },
             dataType  : 'json',
             statusCode: {
-                403: function () {
+                403: function (){
                     $( '#loader' ).hide();
                     alert( i18n[lang].errorSession );
                     window.location = baseURL;
@@ -771,11 +795,47 @@ $( function ( _, moment ) {
      * EVENTS
      * */
 
-    function getSelectedRows () {
-        return table.rows( '.active' ).data();
+    function setEventColumnListVisible(){
+        $( '.side-menu-list > li' ).off( 'click' ).on( 'click', function (){
+            var $this = $( this ),
+                index = $this.data( 'index' ),
+                visible = table.column( index ).visible();
+            $this.toggleClass( 'active' );
+            table.column( index ).visible( !visible );
+        } );
+
+        $( '#init-conf' ).off( 'click' ).on( 'click', function (){
+            resetDefaultView();
+
+        } );
     }
 
-    function toggleDLButton () {
+    function setEventSideMenuColumnList(){
+
+        $( '#toggle-side-menu' ).html( '<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.colVisible );
+
+
+        oTable.on( 'length.dt', function () {
+            var sbWidth = $( '#sidenav' ).width(),
+                mainTop = $( '#main' ).offset().top;
+            console.log( "test 2" );
+            $( '#side-menu' ).css( {
+                top   : mainTop, // get top height to align
+                right : -sbWidth,
+                width : sbWidth,
+                height: $( window ).height() - mainTop
+            } ).removeClass();
+        } );
+
+        $( 'p.side-menu-head' ).text( i18n[lang].sideMenu.config );
+        $( '#init-conf' ).text( i18n[lang].sideMenu.reset );
+
+        createVisibleColumnList();
+
+
+    }
+
+    function toggleDLButton(){
         var trActive = $( 'tr.active' );
 
         if (trActive && trActive.length > 0) {
@@ -794,7 +854,7 @@ $( function ( _, moment ) {
     }
 
     /***** UPLOAD *****/
-    function setEventUpload() {
+    function setEventUpload(){
         //TODO: put it in CSS, just use it to translate!!!
         $( '#btn-upload-div' ).find( 'span' ).html( '<i class="fa fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].upload );
         $( '#modalh4' ).html( '<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].modalupload );
@@ -802,14 +862,14 @@ $( function ( _, moment ) {
 
         $( 'input[type=file]' ).bootstrapFileInput( i18n[lang].modalbtn );
 
-        $( '#upload-modal .btn-upload' ).on( 'click', function () {
+        $( '#upload-modal .btn-upload' ).on( 'click', function (){
             $( this ).toggleClass( 'active', 'active' );
         } );
     }
 
     /***** LANGUAGE SETTINGS *****/
     function setEventLanguageSettings(){
-        $( '.login-lang' ).on( 'click', function () {
+        $( '.login-lang' ).on( 'click', function (){
             var lang = $( this ).html().toLowerCase();
             $( '.login-lang' ).removeClass( 'default-lang' );
             $( '.' + lang ).addClass( 'default-lang' );
@@ -821,7 +881,7 @@ $( function ( _, moment ) {
 
     /***** DOWNLOAD *****/
     function setEventDownload(){
-        $( TABLEID ).on( 'click', '.dlfile', function () {
+        $( TABLEID ).on( 'click', '.dlfile', function (){
             var $this = $( this );
             $this.attr( 'href', serverURL + 'file/' + token + '/' + $this.data( 'file-id' ) + '/' + $this.data( 'filename' ) );
             //Update icon
@@ -835,14 +895,21 @@ $( function ( _, moment ) {
         } );
     }
 
+    /***** DELETE *****/
+    function setEventDeleteFile(){
+        $( '.remove' ).on( 'click', function (){
+            deleteFile( $( this ).data( 'file-id' ), $( this ) );
+        } );
+    }
+
     /***** CHECKBOX SELECT ALL *****/
     function setEventCheckBox(){
-        $( 'input[name|=cb]' ).on( 'change', function () {
+        $( 'input[name|=cb]' ).on( 'change', function (){
             $( this ).closest( 'tr' ).toggleClass( 'active' );
             toggleDLButton();
         } );
 
-        $( 'td:not(:first-child)' ).on( 'click', function () {
+        $( 'td:not(:first-child)' ).on( 'click', function (){
             $( this ).closest( 'tr' ).toggleClass( 'active' );
             var cb = $( this ).closest( 'tr' ).find( 'input[name|=cb]' );
             cb.prop( 'checked', !cb.prop( 'checked' ) );
@@ -853,47 +920,81 @@ $( function ( _, moment ) {
     /***** FILTER *****/
     function setEventFiltersMenu(){
 
-        $('#filterby' ).html(i18n[lang].button.filter.filterby + '<span class="caret"></span>');//
+        $( '#filterby' ).html( i18n[lang].button.filter.filterby + '&nbsp;&nbsp;&nbsp;<span class="caret"></span>' );//
 
         var filterNew = $( '#filterNew' );
-        filterNew.on( 'click', function () {
+        filterNew.on( 'click', function (){
             table
                 .column( 16 ).search( 'true' )
                 //.column(4).search('[^' + username + ']', true, false)
                 .draw();
         } );
-        filterNew.text( '<i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.new );
+        filterNew.html( '<i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.new );
 
         var filterDL = $( '#filterDL' );
-        filterDL.on( 'click', function () {
+        filterDL.on( 'click', function (){
             table
                 .column( 15 ).search( '0' )
                 .column( 4 ).search( '[^' + username + ']', true, false )
                 .draw();
         } );
-        filterDL.text( '<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Fichiers non-téléchargés'+i18n[lang].button.filter.notDL );
+        filterDL.html( '<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Fichiers non-téléchargés' + i18n[lang].button.filter.notDL );
 
         var filterClear = $( '#filterClear' );
-        filterClear.on( 'click', function () {
+        filterClear.on( 'click', function (){
             $( 'input[name=search]' ).text( '' );
             oTable.fnFilterClear();
         } );
-        filterClear.text( '<i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.clear );
+        filterClear.html( '<i class="fa fa-times"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.clear );
     }
 
     /***** SEARCH *****/
     function setEventSearch(){
         var searchInput = $( 'input[name=search]' );
         searchInput.attr( 'placeholder', i18n[lang].button.search );
-        searchInput.on( 'keyup', function () {
+        searchInput.on( 'keyup', function (){
             table.search( this.value ).draw();
         } );
     }
 
+    function setEventReload(){
+        var reloadBtn = $( '.reloadme' );
+        reloadBtn.html( '<i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.reload );
+        reloadBtn.on( 'click', function (){
+            location.reload();
+        } );
+    }
 
-    function setEventsHTML () {
+    function setEventDatePicker(){
 
-        fillColumnList();
+        $( '.dateBegin' ).attr('placeholder', i18n[lang].datepicker.start);
+        $( '.dp-to' ).text(i18n[lang].datepicker.to);
+        $( '.dateEnd' ).attr('placeholder', i18n[lang].datepicker.end);
+
+        $( '#datepicker' ).datepicker( {
+            format        : 'dd/mm/yyyy',
+            forceParse    : true,
+            language      : lang,
+            weekStart     : 1,
+            autoclose     : true,
+            todayHighlight: true,
+            startView     : 1,
+            clearBtn      : true
+            //calendarWeeks : true,
+            //minViewMode: 1 //month view
+        } );
+        /*.on( 'changeDate', filterDate )
+         .off( 'keyup' ).on( 'keyup', function ( event ) {
+         setTimeout( filterDate, 500, event ); // 500ms
+         } );
+         */
+
+    }
+
+
+    function setEventsHTML(){
+
+        setEventSideMenuColumnList();
 
         setEventMenuFilters();
 
@@ -909,44 +1010,17 @@ $( function ( _, moment ) {
 
         setEventCheckBox();
 
+        setEventDatePicker();
+
+        setEventReload();
+
+        setEventDeleteFile();
+
         /***** MULTIDOWNLOAD *****/
         $( '.downloadall' ).on( 'click', downloadAll );
 
         /***** TOOLTIP *****/
-        $( '[rel=tooltip]' ).tooltip();
-
-        /***** SIGN OUT *****/
-        //var signoutBtn = $('#signout');
-        //signoutBtn.tooltip();
-        //signoutBtn.attr('title', i18n[lang].button.signout);
-
-        /***** RELOAD *****/
-        $( '.reloadme' ).on( 'click', function () {
-            //$table.bootstrapTable('onFilter');
-            //TODO: clear filter?
-            location.reload();
-        } );
-
-        /***** DELETE *****/
-        $( '.remove' ).on( 'click', function () {
-            deleteFile( $( this ).data( 'file-id' ), $( this ) );
-        } );
-
-
-        /***** DATE PICKER *****/
-        $( '#datepicker input' ).datepicker( {
-            format        : 'dd/mm/yyyy',
-            language      : lang === 'nl' ? 'nl-BE' : lang,
-            autoclose     : true,
-            todayHighlight: true,
-            startView     : 1
-            //minViewMode: 1 //month view
-        } )
-            .on( 'changeDate', filterDate )
-            .off( 'keyup' ).on( 'keyup', function ( event ) {
-                setTimeout( filterDate, 500, event ); // 500ms
-            } );
-
+        //$( '[rel=tooltip]' ).tooltip();
 
     }
 
@@ -954,8 +1028,8 @@ $( function ( _, moment ) {
      * MAIN
      * */
 
-    function render () {
-        $.when( loadCategory(), loadData(), loadFolder() ).done( function () {
+    function render(){
+        $.when( loadCategory(), loadData(), loadFolder() ).done( function (){
 
             //Add label for reference of Document
             mergeLabelDoc();
@@ -973,19 +1047,24 @@ $( function ( _, moment ) {
         } );
     }
 
-    function main () {
+    function main(){
 
         $( '.user-name' ).html( username.toUpperCase() );
 
         // LOGOUT
-        $( '#signout' ).on( 'click', function () {
+        $( '#signout' ).on( 'click', function (){
             sessionStorage.setItem( 'token', '' );
             window.location = baseURL;
         } );
 
         //i18n
-        $.getJSON( 'data/i18n.json', function ( data ) {
+        $.getJSON( 'data/i18n.json', function ( data ){
             i18n = data;
+
+            if(lang !== 'en'){
+                $.getScript(i18n[lang].url.datepicker);
+            }
+
             if (i18n[lang]) {   // if language is set,
                 render();       // load data and create table
             } else {
@@ -994,13 +1073,6 @@ $( function ( _, moment ) {
             }
         } );
 
-        // datepicker
-        $('#sandbox-container .input-daterange').datepicker({
-            language: "fr",
-            calendarWeeks: true,
-            autoclose: true,
-            todayHighlight: true
-        });
     }
 
     $( 'document' ).ready( main() );

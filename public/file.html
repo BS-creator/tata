@@ -198,6 +198,7 @@
                                 <!--filtrer par-->
                                 <div class="btn-group pull-left">
                                     <button id="filterby" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        &nbsp;&nbsp;&nbsp;
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a id="filterNew" href="#"></a></li>
@@ -213,18 +214,19 @@
                             <input class="pull-left ml-s" type="text" name="search" placeholder=""/>
 
                             <!--datepicker-->
-                            <div class="pull-left ml-s" id="datepicker">
-                                <input type="text" class="" name="start" placeholder=""/>
-                                <span class="dp-to">à</span>
-                                <input type="text" class="" name="end" placeholder=""/>
+                            <div class="pull-left ml-s input-daterange" id="datepicker">
+                                <input type="text" class="dateBegin" name="start" placeholder=""/>
+                                <span class="dp-to">.</span>
+                                <input type="text" class="dateEnd" name="end" placeholder=""/>
                             </div>
 
                             <!--refresh & toggle config table-->
                             <div class="btn-group pull-right ml-s">
-                                <button type="button" class="btn btn-default reloadme"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Rafraîchir
+                                <button type="button" class="btn btn-default reloadme">
+                                    &nbsp;&nbsp;&nbsp;
                                 </button>
-                                <button id="toggle-side-menu" type="button" class="btn btn-default"><i
-                                        class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;Affichage
+                                <button id="toggle-side-menu" type="button" class="btn btn-default">
+                                    &nbsp;&nbsp;&nbsp;
                                 </button>
                             </div>
                         </div>
