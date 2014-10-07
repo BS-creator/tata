@@ -110,7 +110,7 @@ $ ( function () {
 
     //set language
     sessionStorage.setItem ( 'lang', getNavigatorLanguage () );
-    $ ( '.' + getNavigatorLanguage () ).addClass ( 'defaultlang' );
+    $ ( '.' + getNavigatorLanguage () ).addClass ( 'default-lang' );
 
 
     //set event
@@ -118,8 +118,8 @@ $ ( function () {
     $ ( 'input' ).keypress ( enterPressed );
     $ ( '.login-lang' ).on ( 'click', function () {
         var lang = $ ( this ).html ().toLowerCase ();
-        $ ( '.login-lang' ).removeClass ( 'defaultlang' );
-        $ ( '.' + lang ).addClass ( 'defaultlang' );
+        $ ( '.login-lang' ).removeClass ( 'default-lang' );
+        $ ( '.' + lang ).addClass ( 'default-lang' );
         sessionStorage.setItem ( 'lang', lang );
     } );
 } );

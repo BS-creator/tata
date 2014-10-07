@@ -34,6 +34,10 @@
             "upload": "Fichiers transmis à Group S",
             "other": "Autres Documents"
         },
+        "sideMenu": {
+            "config": "Configuration de la Table",
+            "reset": "Réinitialiser la vue"
+        },
         "file": {
             "add": "Document ajouté",
             "del": "Document supprimé"
@@ -83,6 +87,10 @@
             "upload": "Overgebrachte documenten naar Group S",
             "other": "Andere Documenten"
         },
+        "sideMenu": {
+            "config": "Configuratie van de table",
+            "reset": "Reset Vue"
+        },
         "file": {
             "add": "Document toegevoegd",
             "del": "Document geschrapt"
@@ -131,6 +139,10 @@
             "root": "All documents",
             "upload": "Uploaded documents to Group S",
             "other": "Other Documents"
+        },
+        "sideMenu": {
+            "config": "Table Configuration",
+            "reset": "Reset Vue"
         },
         "file": {
             "add": "Document added",

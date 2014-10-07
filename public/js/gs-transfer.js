@@ -348,7 +348,7 @@ $ ( function ( _, moment ) {
 
         table.column ( 4 ).search ( 'trf_fich' ).draw (); //filter on uploadUserName
 
-        $ ( '#breadcrumb' ).html ( '<li class="active">' + i18n[lang].tree.root + '</li><li><a href="#"></a></li>' );
+        $ ( '#breadcrumb' ).html ( '<li class="active">' + i18n[lang].tree.root + '</li>' );
     }
 
     function menuOtherClick () {
@@ -363,7 +363,7 @@ $ ( function ( _, moment ) {
             .column ( 7 ).search ( '^\\s*$', true, false )
             .draw (); //filter on uploadUserName != username
 
-        $ ( '#breadcrumb' ).html ( '<li class="active">' + i18n[lang].tree.other + '</li><li><a href="#"></a></li>' );
+        $ ( '#breadcrumb' ).html ( '<li class="active">' + i18n[lang].tree.other + '</li>' );
     }
 
     function menuUploadClick () {
@@ -375,7 +375,7 @@ $ ( function ( _, moment ) {
 
         table.column ( 4 ).search ( username ).draw (); //filter on uploadUserName
 
-        $ ( '#breadcrumb' ).html ( '<li class="active">' + i18n[lang].tree.upload + '</li><li><a href="#"></a></li>' );
+        $ ( '#breadcrumb' ).html ( '<li class="active">' + i18n[lang].tree.upload + '</li>' );
     }
 
     function menuRefDocClick () {
@@ -384,7 +384,7 @@ $ ( function ( _, moment ) {
             nodeText = that.text (),
             nodeParentText = that.closest ( 'li.level2' ).find ( 'a:first' ).text ();
 
-        $ ( '#breadcrumb' ).html ( '<li class="active">' + nodeParentText + '</li><li class="active">' + nodeText + '</li><li><a href="#"></a></li>' );
+        $ ( '#breadcrumb' ).html ( '<li class="active">' + nodeParentText + '</li><li class="active">' + nodeText + '</li>' );
         if (nodeID > -1 && that.hasClass ( 'level3' )) {
 
             oTable.fnFilterClear ();
@@ -662,17 +662,28 @@ $ ( function ( _, moment ) {
 
     function fillColumnList () {
         //console.log(table.columns().header().to$().html());
-        var list = $('.side-menu-list');
-        var i = 0;
-        var li;
+        var exclude = [ 0, 1, 14, 15, 16 ],
+            list = $('.side-menu-list' ),
+            i = 0,
+            headerCol = '',
+            li = '';
         while(i < 17) {
-            var headerCol = table.columns(i).header().to$().html();
-            li = document.createElement('li' );
-            li.innerHTML = headerCol;
-            console.log(i + "\t", headerCol);
+            if ($.inArray( i, exclude ) === -1 ){
+                headerCol = table.columns(i).header().to$().html();
+                li = document.createElement('li' );
+                li.innerHTML = '&nbsp;&nbsp;&nbsp;' + headerCol;
+                //console.log(i + "\t", headerCol);
+
+                if(table.column(i).visible()){
+                    console.log("table.column("+i+").visible() = ", table.column(i).visible());
+                    li.className += "active";
+                }
+                list.append(li);
+            }
             i++;
-            list.append(li);
         }
+        $('p.side-menu-head' ).text(i18n[lang].sideMenu.config);
+        $('#init-conf' ).text(i18n[lang].sideMenu.reset);
 
     }
 
