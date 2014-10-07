@@ -186,7 +186,7 @@ li.sidebar-h-5.active {
 
 /* position for sliding effect */
 #side-menu {
-  position: fixed;
+  position: absolute;
   background-color: #0064bb;
   color: white;
 }
@@ -630,16 +630,16 @@ li.level3 > a {
 }
 
 .dp-to {
+  box-shadow: 0;
+  height: 50px;
   display: table-cell;
+  margin: 0;
+  padding: 14px 7px 14px 7px;
   cursor: none;
   font-size: 14px;
-  padding: 14px 7px 14px 7px;
-  margin: 0;
   background-color: #f2f2f2;
   color: #888;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
-  font-size: 14px;
-  height: 50px;
 }
 
