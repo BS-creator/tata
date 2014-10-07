@@ -14,19 +14,19 @@
 
 /* global define, window, XDomainRequest */
 
-(function (factory) {
+(function ( factory ) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
         // Register as an anonymous AMD module:
-        define(['jquery'], factory);
+        define( ['jquery'], factory );
     } else {
         // Browser globals:
-        factory(window.jQuery);
+        factory( window.jQuery );
     }
-}(function ($) {
+}( function ( $ ) {
     'use strict';
     if (window.XDomainRequest && !$.support.cors) {
-        $.ajaxTransport(function (s) {
+        $.ajaxTransport( function ( s ) {
             if (s.crossDomain && s.async) {
                 if (s.timeout) {
                     s.xdrTimeout = s.timeout;
@@ -34,13 +34,13 @@
                 }
                 var xdr;
                 return {
-                    send: function (headers, completeCallback) {
-                        var addParamChar = /\?/.test(s.url) ? '&' : '?';
+                    send : function ( headers, completeCallback ) {
+                        var addParamChar = /\?/.test( s.url ) ? '&' : '?';
 
-                        function callback(status, statusText, responses, responseHeaders) {
+                        function callback ( status, statusText, responses, responseHeaders ) {
                             xdr.onload = xdr.onerror = xdr.ontimeout = $.noop;
                             xdr = null;
-                            completeCallback(status, statusText, responses, responseHeaders);
+                            completeCallback( status, statusText, responses, responseHeaders );
                         }
 
                         xdr = new XDomainRequest();
@@ -55,7 +55,7 @@
                             s.url = s.url + addParamChar + '_method=PATCH';
                             s.type = 'POST';
                         }
-                        xdr.open(s.type, s.url);
+                        xdr.open( s.type, s.url );
                         xdr.onload = function () {
                             callback(
                                 200,
@@ -65,15 +65,15 @@
                             );
                         };
                         xdr.onerror = function () {
-                            callback(404, 'Not Found');
+                            callback( 404, 'Not Found' );
                         };
                         if (s.xdrTimeout) {
                             xdr.ontimeout = function () {
-                                callback(0, 'timeout');
+                                callback( 0, 'timeout' );
                             };
                             xdr.timeout = s.xdrTimeout;
                         }
-                        xdr.send((s.hasContent && s.data) || null);
+                        xdr.send( (s.hasContent && s.data) || null );
                     },
                     abort: function () {
                         if (xdr) {
@@ -83,6 +83,6 @@
                     }
                 };
             }
-        });
+        } );
     }
-}));
+} ));

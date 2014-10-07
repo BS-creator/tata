@@ -11,42 +11,42 @@
 
 /* global define, window */
 
-(function (factory) {
+(function ( factory ) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
         // Register as an anonymous AMD module:
-        define([
+        define( [
             'jquery',
             './jquery.fileupload-process'
-        ], factory);
+        ], factory );
     } else {
         // Browser globals:
         factory(
             window.jQuery
         );
     }
-}(function ($) {
+}( function ( $ ) {
     'use strict';
 
     // Append to the default processQueue:
     $.blueimp.fileupload.prototype.options.processQueue.push(
         {
-            action: 'validate',
+            action          : 'validate',
             // Always trigger this action,
             // even if the previous action was rejected: 
-            always: true,
+            always          : true,
             // Options taken from the global options map:
-            acceptFileTypes: '@',
-            maxFileSize: '@',
-            minFileSize: '@',
+            acceptFileTypes : '@',
+            maxFileSize     : '@',
+            minFileSize     : '@',
             maxNumberOfFiles: '@',
-            disabled: '@disableValidation'
+            disabled        : '@disableValidation'
         }
     );
 
     // The File Upload Validation plugin extends the fileupload widget
     // with file validation functionality:
-    $.widget('blueimp.fileupload', $.blueimp.fileupload, {
+    $.widget( 'blueimp.fileupload', $.blueimp.fileupload, {
 
         options: {
             /*
@@ -66,17 +66,17 @@
             getNumberOfFiles: $.noop,
 
             // Error and info messages:
-            messages: {
+            messages        : {
                 maxNumberOfFiles: 'Maximum number of files exceeded',
-                acceptFileTypes: 'File type not allowed',
-                maxFileSize: 'File is too large',
-                minFileSize: 'File is too small'
+                acceptFileTypes : 'File type not allowed',
+                maxFileSize     : 'File is too large',
+                minFileSize     : 'File is too small'
             }
         },
 
         processActions: {
 
-            validate: function (data, options) {
+            validate: function ( data, options ) {
                 if (options.disabled) {
                     return data;
                 }
@@ -87,32 +87,32 @@
                 if (options.minFileSize || options.maxFileSize) {
                     fileSize = file.size;
                 }
-                if ($.type(options.maxNumberOfFiles) === 'number' &&
+                if ($.type( options.maxNumberOfFiles ) === 'number' &&
                     (settings.getNumberOfFiles() || 0) + data.files.length >
                     options.maxNumberOfFiles) {
-                    file.error = settings.i18n('maxNumberOfFiles');
-                } else if (options.acceptFileTypes && !(options.acceptFileTypes.test(file.type) ||
-                    options.acceptFileTypes.test(file.name))) {
-                    file.error = settings.i18n('acceptFileTypes');
+                    file.error = settings.i18n( 'maxNumberOfFiles' );
+                } else if (options.acceptFileTypes && !(options.acceptFileTypes.test( file.type ) ||
+                    options.acceptFileTypes.test( file.name ))) {
+                    file.error = settings.i18n( 'acceptFileTypes' );
                 } else if (fileSize > options.maxFileSize) {
-                    file.error = settings.i18n('maxFileSize');
-                } else if ($.type(fileSize) === 'number' &&
+                    file.error = settings.i18n( 'maxFileSize' );
+                } else if ($.type( fileSize ) === 'number' &&
                     fileSize < options.minFileSize) {
-                    file.error = settings.i18n('minFileSize');
+                    file.error = settings.i18n( 'minFileSize' );
                 } else {
                     delete file.error;
                 }
                 if (file.error || data.files.error) {
                     data.files.error = true;
-                    dfd.rejectWith(this, [data]);
+                    dfd.rejectWith( this, [data] );
                 } else {
-                    dfd.resolveWith(this, [data]);
+                    dfd.resolveWith( this, [data] );
                 }
                 return dfd.promise();
             }
 
         }
 
-    });
+    } );
 
-}));
+} ));

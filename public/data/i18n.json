@@ -4,6 +4,7 @@
             "search": "Recherche...",
             "reload": "Rafraîchir",
             "filter":{
+                "filterby": "Filtrer par",
                 "new": "Nouveaux fichiers",
                 "notDL": "Fichiers non-téléchargés",
                 "clear": "Retirer tous les filtres"
@@ -34,6 +35,10 @@
             "upload": "Fichiers transmis à Group S",
             "other": "Autres Documents"
         },
+        "sideMenu": {
+            "config": "Configuration de la Table",
+            "reset": "Réinitialiser la vue"
+        },
         "file": {
             "add": "Document ajouté",
             "del": "Document supprimé"
@@ -53,6 +58,7 @@
             "search": "Zoeken...",
             "reload": "Opnieuw laden",
             "filter":{
+                "filterby": "Filter door",
                 "new": "Nieuwe bestanden",
                 "notDL": "Bestanden niet gedownloaden",
                 "clear": "Schrapen filters"
@@ -83,6 +89,10 @@
             "upload": "Overgebrachte documenten naar Group S",
             "other": "Andere Documenten"
         },
+        "sideMenu": {
+            "config": "Configuratie van de table",
+            "reset": "Reset Vue"
+        },
         "file": {
             "add": "Document toegevoegd",
             "del": "Document geschrapt"
@@ -102,6 +112,7 @@
             "search": "Searching...",
             "reload": "Reload",
             "filter":{
+                "filterby": "Filter by",
                 "new": "New Files",
                 "notDL": "Files not downloaded",
                 "clear": "Clear all filters"
@@ -131,6 +142,10 @@
             "root": "All documents",
             "upload": "Uploaded documents to Group S",
             "other": "Other Documents"
+        },
+        "sideMenu": {
+            "config": "Table Configuration",
+            "reset": "Reset Vue"
         },
         "file": {
             "add": "Document added",
