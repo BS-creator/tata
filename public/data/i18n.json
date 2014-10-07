@@ -3,6 +3,7 @@
         "button": {
             "search": "Recherche...",
             "reload": "Rafraîchir",
+            "colVisible": "Afficher",
             "filter":{
                 "filterby": "Filtrer par",
                 "new": "Nouveaux fichiers",
@@ -57,6 +58,7 @@
         "button": {
             "search": "Zoeken...",
             "reload": "Opnieuw laden",
+            "colVisible": "Tonen",
             "filter":{
                 "filterby": "Filter door",
                 "new": "Nieuwe bestanden",
@@ -66,7 +68,8 @@
             "signout" : "Uit Loggen"
         },
         "url": {
-            "table": "DataTables/resources/language/NL.json"
+            "table": "DataTables/resources/language/NL.json",
+            "datepicker": "js/locale/"
         },
         "col": {
             "new": "Nieuw",
@@ -111,6 +114,7 @@
         "button": {
             "search": "Searching...",
             "reload": "Reload",
+            "colVisible": "Show Column",
             "filter":{
                 "filterby": "Filter by",
                 "new": "New Files",

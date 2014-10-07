@@ -12,11 +12,12 @@ $( 'document' ).ready( function () {
     // initialize size & display /default
     (function () {
         var sbWidth = $( '#sidenav' ).width();
+        var mainTop = $main.offset().top;
         $( '#side-menu' ).css( {
-            top   : $main.offset().top, // get top height to align
+            top   : mainTop, // get top height to align
             right : -sbWidth,
             width : sbWidth,
-            height: $( window ).height() - $main.offset().top
+            height: $( window ).height() - mainTop
         } ).removeClass();
     })();
 
@@ -42,6 +43,7 @@ $( 'document' ).ready( function () {
             $( this ).width( $( '#sidenav' ).width() );
         }
     } );
+
     $( window ).trigger( 'resize' );
 
     // side-menu active
