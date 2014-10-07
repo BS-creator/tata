@@ -3,18 +3,18 @@ $( function ( _, moment ) {
 
     /***  GLOBAL VARIABLES ***/
 
-    var serverURL = sessionStorage.getItem( 'serverURL' ),
-    baseURL = sessionStorage.getItem( 'baseURL' ),
-    lang = sessionStorage.getItem( 'lang' ),
-    tableId = '#tableID',
-    table = {},
-    oTable = {},
-    i18n = {},
-    AjaxData = [],
-    category = [],
-    refDocUsed = [],
-    username = sessionStorage.getItem( 'username' ).toLowerCase(),
-    token = sessionStorage.getItem( 'token' );
+    var serverURL   = sessionStorage.getItem( 'serverURL' ),
+        baseURL     = sessionStorage.getItem( 'baseURL' ),
+        lang        = sessionStorage.getItem( 'lang' ),
+        TABLEID     = '#tableID',
+        table       = {},
+        oTable      = {},
+        i18n        = {},
+        AjaxData    = [],
+        category    = [],
+        refDocUsed  = [],
+        username    = sessionStorage.getItem( 'username' ).toLowerCase(),
+        token       = sessionStorage.getItem( 'token' );
 
 
     _.templateSettings = {
@@ -124,7 +124,7 @@ $( function ( _, moment ) {
         //TODO: use DATATABLE date filter!!!
         //TODO: filterDate(inputStart, inputEnd)
 
-        var $table = $( tableId );
+        var $table = $( TABLEID );
         var dateEnd = yearFirst( $( 'input[name=end]' ).val() );
         var dateStart = yearFirst( $( 'input[name=start]' ).val() );
         var expr = '';
@@ -470,7 +470,7 @@ $( function ( _, moment ) {
 
         var tpl = _.template( $( '#headertpl' ).html() );
 
-        var $table = $( tableId );
+        var $table = $( TABLEID );
         $table.find( 'thead' ).html( tpl( i18n[lang].col ) );
 
         tpl = _.template( $( '#bodytpl' ).html() );
@@ -533,7 +533,7 @@ $( function ( _, moment ) {
         templateTable();
 
         //DataTable object
-        table = $( tableId ).DataTable( {
+        table = $( TABLEID ).DataTable( {
             paging        : true,
             ordering      : true,
             info          : true,
@@ -653,7 +653,7 @@ $( function ( _, moment ) {
         } );
 
         //jQuery TABLE object
-        oTable = $( tableId ).dataTable();
+        oTable = $( TABLEID ).dataTable();
     }
 
     /****************************************************
@@ -821,7 +821,7 @@ $( function ( _, moment ) {
 
     /***** DOWNLOAD *****/
     function setEventDownload(){
-        $( tableId ).on( 'click', '.dlfile', function () {
+        $( TABLEID ).on( 'click', '.dlfile', function () {
             var $this = $( this );
             $this.attr( 'href', serverURL + 'file/' + token + '/' + $this.data( 'file-id' ) + '/' + $this.data( 'filename' ) );
             //Update icon

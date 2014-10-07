@@ -5,7 +5,7 @@
 $( function () {
     'use strict';
 
-    function setURL () {
+    (function setURL () {
         if (window.location.hostname.indexOf( 'localhost' ) > -1) {
             sessionStorage.setItem( 'baseURL', '//localhost:4000/' );
             sessionStorage.setItem( 'serverURL', '//172.20.20.64:8018/' );
@@ -17,14 +17,11 @@ $( function () {
             sessionStorage.setItem( 'baseURL', '//prestaweb.groups.be/itransfer/' );
             sessionStorage.setItem( 'serverURL', '//prestaweb.groups.be/ariane/' );
         }
-    }
+    }());
 
-    setURL();
     /***  GLOBAL VARIABLES ***/
-
-
-    var serverURL = sessionStorage.getItem( 'serverURL' ),
-    baseURL = sessionStorage.getItem( 'baseURL' );
+    var serverURL   = sessionStorage.getItem( 'serverURL' ),
+        baseURL     = sessionStorage.getItem( 'baseURL' );
 
 
     function reportError ( error, message ) {
