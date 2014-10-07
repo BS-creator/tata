@@ -920,7 +920,7 @@ $( function ( _, moment ){
     /***** FILTER *****/
     function setEventFiltersMenu(){
 
-        $( '#filterby' ).html( i18n[lang].button.filter.filterby + '&nbsp;<span class="caret"></span>' );//
+        $( '#filterby' ).html( i18n[lang].button.filter.filterby + '&nbsp;&nbsp;&nbsp;<span class="caret"></span>' );//
 
         var filterNew = $( '#filterNew' );
         filterNew.on( 'click', function (){
@@ -966,19 +966,21 @@ $( function ( _, moment ){
     }
 
     function setEventDatePicker(){
-        if(lang === 'fr'){
-            $.getScript('js/locale/bootstrap-datepicker.fr.js');
-        }else if (lang === 'nl'){
-            $.getScript('js/locale/bootstrap-datepicker.nl-BE.js');
-        }
 
-        $( '#sandbox-container .input-daterange' ).datepicker( {
+        $( '.dateBegin' ).attr('placeholder', i18n[lang].datepicker.start);
+        $( '.dp-to' ).text(i18n[lang].datepicker.to);
+        $( '.dateEnd' ).attr('placeholder', i18n[lang].datepicker.end);
+
+        $( '#datepicker' ).datepicker( {
             format        : 'dd/mm/yyyy',
-            language      : lang === 'nl' ? 'nl-BE' : lang,
-            //calendarWeeks : true,
+            forceParse    : true,
+            language      : lang,
+            weekStart     : 1,
             autoclose     : true,
             todayHighlight: true,
-            startView     : 1
+            startView     : 1,
+            clearBtn      : true
+            //calendarWeeks : true,
             //minViewMode: 1 //month view
         } );
         /*.on( 'changeDate', filterDate )
@@ -1011,6 +1013,8 @@ $( function ( _, moment ){
         setEventDatePicker();
 
         setEventReload();
+
+        setEventDeleteFile();
 
         /***** MULTIDOWNLOAD *****/
         $( '.downloadall' ).on( 'click', downloadAll );
@@ -1056,6 +1060,11 @@ $( function ( _, moment ){
         //i18n
         $.getJSON( 'data/i18n.json', function ( data ){
             i18n = data;
+
+            if(lang !== 'en'){
+                $.getScript(i18n[lang].url.datepicker);
+            }
+
             if (i18n[lang]) {   // if language is set,
                 render();       // load data and create table
             } else {

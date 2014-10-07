@@ -13,7 +13,8 @@
             "signout" : "Se Déconnecter"
         },
         "url": {
-            "table": "DataTables/resources/language/FR.json"
+            "table": "DataTables/resources/language/FR.json",
+            "datepicker": "js/locale/bootstrap-datepicker.fr.js"
         },
         "col": {
             "new": "Nouveau",
@@ -44,6 +45,11 @@
             "add": "Document ajouté",
             "del": "Document supprimé"
         },
+        "datepicker" : {
+            "to": "à",
+            "start": "Date Début",
+            "end": "Date Fin"
+        },
         "listAll": "Tous",
         "showHide": "Afficher les colonnes",
         "upload": "Transmettre des fichiers à Group S",
@@ -69,7 +75,7 @@
         },
         "url": {
             "table": "DataTables/resources/language/NL.json",
-            "datepicker": "js/locale/"
+            "datepicker": "js/locale/bootstrap-datepicker.nl.js"
         },
         "col": {
             "new": "Nieuw",
@@ -99,6 +105,11 @@
         "file": {
             "add": "Document toegevoegd",
             "del": "Document geschrapt"
+        },
+        "datepicker" : {
+            "to": "tot",
+            "start": "Beginnen Datum",
+            "end": "Einde Datum"
         },
         "listAll": "Alle",
         "showHide": "Tonen colonnen",
@@ -154,6 +165,11 @@
         "file": {
             "add": "Document added",
             "del": "Document deleted"
+        },
+        "datepicker" : {
+            "to": "to",
+            "start": "Start Date",
+            "end": "End Date"
         },
         "listAll": "all",
         "showHide": "Show / hide columns",
