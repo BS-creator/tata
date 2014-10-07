@@ -10,7 +10,7 @@ $( 'document' ).ready( function () {
     //                  SIDENAV
     ///////////////////////////////////////////////////////
 
-console.log($('#root'));
+
     $( "#root" ).on( 'click', function () {
         console.log($(this));
         $(this).addClass('active');

@@ -875,6 +875,8 @@ $( function ( _, moment ){
 
     /***** LANGUAGE SETTINGS *****/
     function setEventLanguageSettings(){
+        $( '.' + lang ).addClass( 'default-lang' );
+
         $( '.login-lang' ).on( 'click', function (){
             var lang = $( this ).html().toLowerCase();
             $( '.login-lang' ).removeClass( 'default-lang' );
