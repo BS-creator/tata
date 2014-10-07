@@ -3,52 +3,84 @@
 ********************************************/
 #sidenav {
     padding: 0;
-    a,
-    li[class^="level"] > a {
-        display: block;
-        margin-bottom: 1px;
-        height: 50px;
-        padding: 15px 0px 15px 50px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        cursor: pointer;
-        /* transition */
-        -webkit-transition: all 0.4s ease; /* Safari 3.2+, Chrome */
-           -moz-transition: all 0.4s ease; /* Firefox 4-15 */
-             -o-transition: all 0.4s ease; /* Opera 10.5-12.00 */
-                transition: all 0.4s ease; /* Firefox 16+, Opera 12.50+ */
+    ul {
+        padding: 0;
     }
 
-    #upload a,
-    li.level1 > a {
-        font-size: 14px;
-        background-color: #2e8ac1;
-        color: #FFF;
-    }
-    #upload > a:hover,
-    #upload > a:focus,
-    #upload > a:active,
-    li.level1 > a:hover,
-    li.level1 > a:focus,
-    li.level1 > a:active {
-        background-color: #0064bb;
-    }
-    #upload > a.active
-    li.level1 > a.active {
-        background-color: #3f9ad0;
-    }
+}
+#upload a,
+li.level1 > a {
+    font-size: 14px;
+    /* transition */
+    -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
+       -moz-transition: all 0.4s ease;/* Firefox 4-15 */
+         -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
+            transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
+}
+#upload a,
+li[class^="level"] > a {
+    display: block;
+    margin-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
 
-    li.level2 > a {
-        font-size: 12px;
-        background-color: #f2f2f2;
-        color: #404040;
+#upload a,
+li.level1 > a {
+    padding: 15px 0px 15px 19px;
+    background-color: @gs-blue;
+    color: #FFF;
+}
+#upload > a:hover,
+#upload > a:focus,
+#upload > a:active,
+li.level1 > a:hover,
+li.level1 > a:focus,
+li.level1 > a:active {
+    background-color: @gs-lt-blue;
+}
+#upload > a:active,
+li.level1 > a:active,
+#upload > a.active,
+li.level1 > a.active {
+    background-color: @gs-xlt-blue;
+}
+li.level2 > a {
+    padding: 7px 0px 8px 30px;
+    background-color: #f2f2f2;
+    color: #606060;
+}
+li.level2 > a:hover,
+li.level2 > a:focus,
+li.level3 > a:hover,
+li.level3 > a:focus {
+    border-left: 3px solid @gs-blue;
+    color: @gs-blue;
+}
+li.level2 > a:active,
+li.level2 > a.active,
+li.level3 > a:active,
+li.level3 > a.active{
+    border-left: 3px solid @gs-lt-blue;
+    color: @gs-blue;
+}
 
-    }
+li.level2 a,
+li.level3 a {
+    font-size: 12px;
+}
+li.level3 > a {
+    padding: 7px 0px 8px 50px;
+    background-color: transparent;
+    color: #707070;
+}
 
+@media (max-width:768px) {
+    li.level2 > a,
     li.level3 > a {
-        font-size: 12px;
-        background-color: transparent;
-        color: #404040;
+        padding: 15px 0px 15px 50px;
     }
 }
+

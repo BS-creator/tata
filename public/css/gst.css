@@ -274,17 +274,6 @@ li.sidebar-h-5.active {
   opacity: 1;
 }
 
-/**********************************************
-                    COLORS
-***********************************************/
-.bg-green     { background-color: #02b158; }
-.bg-darkgreen { background-color: #249067; }
-.bg-gs-clear  { background-color: #378fdd; }
-.bg-gs        { background-color: #0064bb; }
-.bg-king      { background-color: #0700c5; }
-.bg-indigo    { background-color: #3003A1; }
-.bg-viola     { background-color: #8806B8; }
-.bg-darkpink  { background-color: #AE0179; }
 
 input[type="text"],
 input[type="password"] {
@@ -298,98 +287,6 @@ input[type="password"]:focus {
 }
 
 
-/**********************************************
-                    BUTTONS
-***********************************************/
-.btn-portal,
-.btn-portal-blue,
-.btn-portal-default,
-.btn-portal-green {
-  display: inline-block;
-  vertical-align: middle;
-  text-align: center;
-  padding:  15px 30px;
-
-  /* add ... */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  /* type */
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 1em;
-
-  /* style */
-  background-image: none;
-  border-radius: 0;
-  border-width: 1px;
-  border-style: solid;
-  cursor: pointer;
-  /* unselectable text */
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-     -moz-user-select: none;     /* Firefox all */
-      -ms-user-select: none;      /* IE 10+ */
-       -o-user-select: none;
-          user-select: none;
-
-  /* transition */
-  -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
-     -moz-transition: all 0.4s ease;/* Firefox 4-15 */
-       -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
-          transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
-
-/*  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.06) inset, 0px 0px 8px rgba(102, 175, 233, 0.45);*/
-}
-
-.btn-portal-default {
-  background-color: transparent;
-  border-color: #ccc;
-         color: #999;
-}
-.btn-portal-default:hover,
-.btn-portal-default:focus,
-.btn-portal-default:active,
-.btn-portal-default.active {
-  border-color: #adadad;
-         color: #222;
-}
-
-
-.btn-portal-blue {
-  margin-bottom: 1px;
-  background-color: #378fdd;
-      border-color: #378fdd;
-             color: #FFF;
-}
-.btn-portal-blue:hover,
-.btn-portal-blue:focus,
-.btn-portal-blue:active,
-.btn-portal-blue.active {
-  background-color: #0064bb;
-      border-color: #0064bb;
-}
-
-.btn-portal-green {
-  background-color: #02b158;
-      border-color: #02b158;
-             color: #FFF;
-}
-.btn-portal-green:hover,
-.btn-portal-green:focus,
-.btn-portal-green:active,
-.btn-portal-green.active {
-  background-color: #249067;
-      border-color: #249067;
-}
-
-/**********************************************
-                    DOWNLOAD BUTTON
-**********************************************/
-.downloadall {
-  display: none;
-}
 .ColVis{
   display: none;
 }
@@ -474,6 +371,13 @@ td:last-child {
   color: #FFF !important;
 }
 
+/* define height */
+table.dataTable thead th {
+  padding: 14px 18px;
+}
+table.dataTable tbody td {
+  padding: 5px 10px;
+}
 /*********************************************
                     PAGE
 **********************************************/
@@ -547,72 +451,6 @@ i.fa, li {
 /*
 2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
 */
-
-
-/********************************************
-                SIDENAV
-********************************************/
-#sidenav ul {
-  padding: 0;
-}
-
-
-#upload a,
-li.level1 > a {
-  /* transition */
-  -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
-     -moz-transition: all 0.4s ease;/* Firefox 4-15 */
-       -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
-          transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
-}
-#upload a,
-li[class^="level"] > a {
-  display: block;
-  margin-bottom: 1px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-#upload a,
-li.level1 > a {
-  padding: 15px 0px 15px 19px;
-  background-color: #2e8ac1;
-             color: #FFF;
-}
-#upload > a:hover,
-#upload > a:focus,
-#upload > a:active,
-li.level1 > a:hover,
-li.level1 > a:focus,
-li.level1 > a:active {
-  background-color: #0064bb;
-}
-#upload > a.active
-li.level1 > a.active {
-  background-color: #378fdd;
-}
-li.level2 > a {
-  padding: 15px 0px 15px 30px;
-  background-color: #f2f2f2;
-             color: #404040;
-
-}
-li.level2 > a:hover,
-li.level2 > a:focus,
-li.level2 > a:active,
-li.level2 > a.active {
-  border-left: 3px solid #0064bb;
-  color: #0064bb;
-
-}
-li.level3 > a {
-  padding: 15px 0px 15px 50px;
-  background-color: transparent;
-             color: #404040;
-}
 
 
 /****************************************************
