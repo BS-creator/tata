@@ -5,7 +5,7 @@
 /* position for sliding effect */
 #side-menu {
     position: absolute;
-    background-color: @gs-blue;
+    background-color:   @gs-blue;
     color: white;
 }
 #main {
@@ -21,20 +21,19 @@
     margin: 0px;
     font-size: 16px;
     text-transform: uppercase;
-    background-color: @gs-lt-blue;
-    color: #ABD3E1;
+    background-color:   @gs-lt-blue;
+    color:              lighten(@gs-lt-blue,30%);
 }
 .side-menu-head-icon {
     cursor: pointer;
     color: white;
-    /* transition */
+}
+.side-menu-head-icon i {
+    opacity: .6;
     -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
        -moz-transition: all 0.4s ease;/* Firefox 4-15 */
          -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
             transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
-}
-.side-menu-head-icon i {
-    opacity: .6;
 }
 .side-menu-head-icon:hover i,
 .side-menu-head-icon:focus i,
@@ -50,8 +49,14 @@
 .side-menu-list > li.active:before {
     font-size: 14px;
     font-family: 'FontAwesome';
-    content: "\f00c";
+    content: "\f046\00a0\00a0\00a0";
 }
+.side-menu-list > li:before {
+    font-size: 14px;
+    font-family: 'FontAwesome';
+    content: "\f096\00a0\00a0\00a0";
+}
+
 .side-menu-list > li {
     height: 50px;
     margin-bottom: 1px;
@@ -61,12 +66,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 14px;
-    color: #FFF;
-    background-color: @gs-blue;
+    color:                  lighten(@gs-lt-blue, 30%);
+    background-color:        @gs-blue;
     cursor: pointer;
-
-    border-bottom: 1px solid @gs-dk-blue;
-
     /* transition */
     -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
        -moz-transition: all 0.4s ease;/* Firefox 4-15 */
@@ -83,7 +85,7 @@
             transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
 }
 .side-menu-list > li.active {
-    background-color: @gs-lt-blue;
+    background-color:       @gs-lt-blue;
 }
 
 
@@ -93,15 +95,13 @@
     content: "\f192\00a0\00a0\00a0";
 }
 #init-conf {
-    border-top: 1px solid @gs-lt-blue;
-    border-bottom: 1px solid @gs-lt-blue;
-    opacity: .7;
+    border: 0;
+    background-color:       darken(@gs-lt-blue, 10%);
 }
 #init-conf:hover,
 #init-conf:focus,
 #init-conf:active,
 #init-conf.active {
-    background-color: @gs-lt-blue;
-    border-color: @gs-lt-blue;
+    background-color:       @gs-lt-blue;
     opacity: 1;
 }

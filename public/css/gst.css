@@ -42,19 +42,15 @@ ul.lang {
   padding:10px;
 }
 .lang a {
-  color: rgba(255,255,255,.4);
-  -webkit-transition: all 0.5s ease;/* Safari 3.2+, Chrome */
-  -moz-transition: all 0.5s ease;/* Firefox 4-15 */
-  -o-transition: all 0.5s ease;/* Opera 10.5-12.00 */
-  transition: all 0.5s ease;/* Firefox 16+, Opera 12.50+ */
+  color: #00306a; /* @gs-dk-blue */
 }
 .lang a:hover,
 .lang a:focus,
 .lang a:active {
-  color: rgba(255,255,255,.9);
+  color: #479fed;
 }
 a.default-lang {
-  color: rgba(255,255,255,.7);
+  color: #479fed;
 }
 
 
@@ -266,9 +262,16 @@ td {
 td:last-child {
   border-right: none;
 }
-
-.table tbody tr.active td,
-.table tbody tr.active th {
+.table tbody tr.active:hover td,
+.table tbody tr.active:focus td {
+  background-color: #0064bb !important;
+  color: #FFF !important;
+  -webkit-transition: all 0.2s ease;/* Safari 3.2+, Chrome */
+     -moz-transition: all 0.2s ease;/* Firefox 4-15 */
+       -o-transition: all 0.2s ease;/* Opera 10.5-12.00 */
+          transition: all 0.2s ease;/* Firefox 16+, Opera 12.50+ */
+}
+.table tbody tr.active td {
   background-color: #378fdd !important;
   color: #FFF !important;
 }

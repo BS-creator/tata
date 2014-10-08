@@ -258,7 +258,7 @@ $( function ( _, moment ){
 
     function addDownloadButton(){
         $('.multiDL' ).html('');
-        var btn = $('<button class="btn-portal-green downloadall">'+i18n[lang].button.multiDL+'</button>');
+        var btn = $('<button class="btn-portal-green downloadall mt-xs"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;'+i18n[lang].button.multiDL+'</button>');
         var multidl = $('.multiDL' );
         multidl.append(btn);
     }

@@ -383,6 +383,7 @@ li.level1 > a {
 }
 #upload a,
 li[class^="level"] > a {
+  font-size: 14px;
   display: block;
   margin-bottom: 0;
   white-space: nowrap;
@@ -440,14 +441,10 @@ li.level3 > a.active {
   border-left: 3px solid #378fdd;
   color: #0064bb;
 }
-li.level2 a,
-li.level3 a {
-  font-size: 14px;
-}
 li.level3 > a {
   padding: 9px 0px 9px 50px;
   background-color: transparent;
-  color: #707070;
+  color: #777;
 }
 @media (max-width: 768px) {
   li.level2 > a,
@@ -596,16 +593,16 @@ table tr th .pw-btn-group-th .pw-btn-th,
   border-color: #63a4dd;
 }
 .btn-portal-green {
-  background-color: #02b158;
-  border-color: #02b158;
+  background-color: #009a60;
+  border-color: #009a60;
   color: #FFF;
 }
 .btn-portal-green:hover,
 .btn-portal-green:focus,
 .btn-portal-green:active,
 .btn-portal-green.active {
-  background-color: #249067;
-  border-color: #249067;
+  background-color: #00c078;
+  border-color: #00c078;
 }
 /**********************************************
                     DOWNLOAD BUTTON
@@ -682,12 +679,14 @@ table tr th .pw-btn-group-th .pw-btn-th,
   font-size: 16px;
   text-transform: uppercase;
   background-color: #378fdd;
-  color: #ABD3E1;
+  color: #bad8f3;
 }
 .side-menu-head-icon {
   cursor: pointer;
   color: white;
-  /* transition */
+}
+.side-menu-head-icon i {
+  opacity: .6;
   -webkit-transition: all 0.4s ease;
   /* Safari 3.2+, Chrome */
   -moz-transition: all 0.4s ease;
@@ -696,9 +695,6 @@ table tr th .pw-btn-group-th .pw-btn-th,
   /* Opera 10.5-12.00 */
   transition: all 0.4s ease;
   /* Firefox 16+, Opera 12.50+ */
-}
-.side-menu-head-icon i {
-  opacity: .6;
 }
 .side-menu-head-icon:hover i,
 .side-menu-head-icon:focus i,
@@ -713,7 +709,12 @@ table tr th .pw-btn-group-th .pw-btn-th,
 .side-menu-list > li.active:before {
   font-size: 14px;
   font-family: 'FontAwesome';
-  content: "\f00c";
+  content: "\f046\00a0\00a0\00a0";
+}
+.side-menu-list > li:before {
+  font-size: 14px;
+  font-family: 'FontAwesome';
+  content: "\f096\00a0\00a0\00a0";
 }
 .side-menu-list > li {
   height: 50px;
@@ -724,10 +725,9 @@ table tr th .pw-btn-group-th .pw-btn-th,
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 14px;
-  color: #FFF;
+  color: #d0e4f7;
   background-color: #0064bb;
   cursor: pointer;
-  border-bottom: 1px solid #00407a;
   /* transition */
   -webkit-transition: all 0.4s ease;
   /* Safari 3.2+, Chrome */
@@ -760,16 +760,14 @@ table tr th .pw-btn-group-th .pw-btn-th,
   content: "\f192\00a0\00a0\00a0";
 }
 #init-conf {
-  border-top: 1px solid #378fdd;
-  border-bottom: 1px solid #378fdd;
-  opacity: .7;
+  border: 0;
+  background-color: #2175c0;
 }
 #init-conf:hover,
 #init-conf:focus,
 #init-conf:active,
 #init-conf.active {
   background-color: #378fdd;
-  border-color: #378fdd;
   opacity: 1;
 }
 a,
