@@ -372,8 +372,8 @@ $( function ( _, moment ){
         table.columns().visible( false, false );
         table.columns( '.defaultView' ).visible( true, false );
         table.columns.adjust().draw( false );
-        $( '#breadcrumb' ).html( '' );
-        createVisibleColumnList();
+        $( '#breadcrumb' ).html( '&nbsp;' );
+        updateMenuVisibleColumnList();
     }
 
     function menuRootClick(){
@@ -384,7 +384,7 @@ $( function ( _, moment ){
         table.columns.adjust().draw( false ); // adjust column sizing and redraw
         table.column( 4 ).search( 'trf_fich' ).draw(); //filter on uploadUserName
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.root + '</li>' );
-        createVisibleColumnList();
+        updateMenuVisibleColumnList();
     }
 
     function menuOtherClick(){
@@ -398,7 +398,7 @@ $( function ( _, moment ){
             .column( 7 ).search( '^\\s*$', true, false )
             .draw(); //filter on uploadUserName != username
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.other + '</li>' );
-        createVisibleColumnList();
+        updateMenuVisibleColumnList();
     }
 
     function menuUploadClick(){
@@ -409,7 +409,7 @@ $( function ( _, moment ){
         table.columns.adjust().draw( false ); // adjust column sizing and redraw
         table.column( 4 ).search( username ).draw(); //filter on uploadUserName
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.upload + '</li>' );
-        createVisibleColumnList();
+        updateMenuVisibleColumnList();
     }
 
     function menuRefDocClick(){
@@ -419,8 +419,12 @@ $( function ( _, moment ){
             nodeParentText = $this.closest( 'li.level2' ).find( 'a:first' ).text();
 
         $( '#breadcrumb' ).html( '<li class="active">' + nodeParentText + '</li><li class="active">' + nodeText + '</li>' );
-        if (nodeID > -1 && $this.hasClass( 'level3' )) {
 
+        $( '#root' ).children('[class^=level]' ).removeClass('active');
+        $this.addClass('active');
+        $this.parents('[class^=level]').addClass('active');
+
+        if (nodeID > -1 && $this.hasClass( 'level3' )) {
             table
                 .search( '' )
                 .columns().search( '' );
@@ -429,7 +433,7 @@ $( function ( _, moment ){
             table.columns.adjust().draw( false ); // adjust column sizing and redraw
             table.column( 7 ).search( nodeID ).draw(); //filter on referenceDocument
         }
-        createVisibleColumnList();
+        updateMenuVisibleColumnList();
     }
 
     function templateMenu(){
@@ -502,7 +506,7 @@ $( function ( _, moment ){
      * MENU COLUMN VISIBLE
      * */
 
-    function createVisibleColumnList(){
+    function updateMenuVisibleColumnList(){
         var exclude = [ 0, 1, 14, 15, 16 ],
             list = $( '.side-menu-list' ),
             i = 0,
@@ -834,7 +838,7 @@ $( function ( _, moment ){
         $( 'p.side-menu-head' ).text( i18n[lang].sideMenu.config );
         $( '#init-conf' ).html( i18n[lang].sideMenu.reset );
 
-        createVisibleColumnList();
+        updateMenuVisibleColumnList();
 
     }
 
