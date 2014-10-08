@@ -114,44 +114,48 @@ $( function ( _, moment ){
         } );
     }
 
-    function yearFirst( date ){ //TODO: use moment!
-        return date.slice( 6, 11 ) + '-' +
-            date.slice( 3, 5 ) + '-' +
-            date.slice( 0, 2 );
-    }
-
     function filterDate(){
-        //TODO: use DATATABLE date filter!!!
         //TODO: filterDate(inputStart, inputEnd)
 
-        var $table = $( TABLEID );
-        var dateEnd = yearFirst( $( 'input[name=end]' ).val() );
-        var dateStart = yearFirst( $( 'input[name=start]' ).val() );
-        var expr = '';
+        var dateStart = moment( $( '.dateBegin' ).val(), 'DD/MM/YYYY' ),
+            dateEnd = moment( $( '.dateEnd' ).val(), 'DD/MM/YYYY' ),
+            dateBeginValid = moment( dateStart ).isValid(),
+            dateEndValid = moment( dateEnd ).isValid();
 
-        //console.log(dateStart, dateEnd);
-        if (dateStart !== "--" && dateEnd === "--") {
-            //FROM
-            expr = 'item["date"] > "' + dateStart + '" ';
-        }
-        if (dateStart === "--" && dateEnd !== "--") {
-            //UP TO
-            expr = 'item["date"] < "' + dateEnd + '"';
-        }
-        if (dateStart !== '--' && dateEnd !== "--" && dateEnd !== '') {
-            //FROM TO
-            expr += 'item["date"] > "' + dateStart +
-                '" && item["date"] < "' + dateEnd + '"';
-        }
-        if (dateStart === "--" && dateEnd === "--") {
-            //ALL DATE
-            $table.bootstrapTable( 'onFilter' );
-            return;
-        }
+        //reset filter
+        table
+            .search( '' )
+            .columns().search( '' );
+            //.column( 4 ).search( 'trf_fich' );
+        //.draw();
 
-        //console.log("start: expr", expr);
-        $table.bootstrapTable( 'onFilter', expr );
+        oTable.dataTableExt.afnFiltering.push(
+            function ( settings, data, dataIndex ){
 
+                var date = moment( data[2], 'DD/MM/YYYY' );
+
+                if (dateBeginValid && dateEndValid) {
+                    return (moment( dateStart ).isBefore( date ) && moment( dateEnd ).isAfter( date ));
+                }
+
+                if (!dateBeginValid && dateEndValid) {
+                    return moment( dateEnd ).isAfter( date );
+                }
+
+                if (dateBeginValid && !dateEndValid) {
+                    return moment( dateStart ).isBefore( date );
+                }
+
+                if (!dateBeginValid && !dateEndValid) {
+                    return true;
+                }
+
+                // all failed
+                return false;
+            }
+        );
+
+        table.draw();
     }
 
 
@@ -161,25 +165,25 @@ $( function ( _, moment ){
 
     function labelDoci18n( item ){
         if (lang === 'fr') {
-            return item.labelDoc_f;
+            return item.labelDocFR;
         } else if (lang === 'nl') {
-            return item.labelDoc_n;
+            return item.labelDocNL;
         } else if (lang === 'de') {
-            return item.labelDoc_d;
+            return item.labelDocDE;
         } else {
-            return item.labelDoc_x;
+            return item.labelDocX;
         }
     }
 
     function labelCati18n( item ){
         if (lang === 'fr') {
-            return item.labelCategory_f;
+            return item.labelCategoryFR;
         } else if (lang === 'nl') {
-            return item.labelCategory_n;
+            return item.labelCategoryNL;
         } else if (lang === 'de') {
-            return item.labelCategory_d;
+            return item.labelCategoryDE;
         } else {
-            return item.labelCategory_x;
+            return item.labelCategoryX;
         }
     }
 
@@ -257,10 +261,10 @@ $( function ( _, moment ){
      * */
 
     function addDownloadButton(){
-        $('.multiDL' ).html('');
-        var btn = $('<button class="btn-portal-green downloadall mt-xs"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;'+i18n[lang].button.multiDL+'</button>');
-        var multidl = $('.multiDL' );
-        multidl.append(btn);
+        $( '.multiDL' ).html( '' );
+        var btn = $( '<button class="btn-portal-green downloadall mt-xs"><i class="fa fa-download"></i>' + i18n[lang].button.multiDL + '</button>' );
+        var multidl = $( '.multiDL' );
+        multidl.append( btn );
     }
 
     function downloadAll(){
@@ -351,8 +355,20 @@ $( function ( _, moment ){
      * MENU
      * */
 
+    function resetFilters(){
+        //oTable.fnFilterClear();
+        table
+            .search( '' )
+            .columns().search( '' );
+
+        $( '.dateBegin' ).val( '' );
+        $( '.dateEnd' ).val( '' );
+        $( '#datepicker' ).datepicker( 'update' );
+        $( 'input[name="search"]' ).val( '' );
+    }
+
     function resetDefaultView(){
-        oTable.fnFilterClear();
+        resetFilters();
         table.columns().visible( false, false );
         table.columns( '.defaultView' ).visible( true, false );
         table.columns.adjust().draw( false );
@@ -362,46 +378,37 @@ $( function ( _, moment ){
 
     function menuRootClick(){
 
-        oTable.fnFilterClear();
+        resetFilters();
         table.columns( '.detailsLayer' ).visible( false, false );
         table.columns( '.fileLayer' ).visible( true, false );
         table.columns.adjust().draw( false ); // adjust column sizing and redraw
-
         table.column( 4 ).search( 'trf_fich' ).draw(); //filter on uploadUserName
-
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.root + '</li>' );
-
         createVisibleColumnList();
     }
 
     function menuOtherClick(){
 
-        oTable.fnFilterClear();
+        resetFilters();
         table.columns( '.detailsLayer' ).visible( true, false );
         table.columns( '.fileLayer' ).visible( false, false );
         table.columns.adjust().draw( false ); // adjust column sizing and redraw
-
         table
             .column( 4 ).search( '[^' + username + ']', true, false )
             .column( 7 ).search( '^\\s*$', true, false )
             .draw(); //filter on uploadUserName != username
-
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.other + '</li>' );
-
         createVisibleColumnList();
     }
 
     function menuUploadClick(){
 
-        oTable.fnFilterClear();
+        resetFilters();
         table.columns( '.detailsLayer' ).visible( true, false );
         table.columns( '.fileLayer' ).visible( false, false );
         table.columns.adjust().draw( false ); // adjust column sizing and redraw
-
         table.column( 4 ).search( username ).draw(); //filter on uploadUserName
-
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.upload + '</li>' );
-
         createVisibleColumnList();
     }
 
@@ -414,14 +421,14 @@ $( function ( _, moment ){
         $( '#breadcrumb' ).html( '<li class="active">' + nodeParentText + '</li><li class="active">' + nodeText + '</li>' );
         if (nodeID > -1 && $this.hasClass( 'level3' )) {
 
-            oTable.fnFilterClear();
+            table
+                .search( '' )
+                .columns().search( '' );
             table.columns( '.detailsLayer' ).visible( false, false );
             table.columns( '.fileLayer' ).visible( true, false );
             table.columns.adjust().draw( false ); // adjust column sizing and redraw
-
             table.column( 7 ).search( nodeID ).draw(); //filter on referenceDocument
         }
-
         createVisibleColumnList();
     }
 
@@ -899,7 +906,7 @@ $( function ( _, moment ){
 
         var dlBtn = $( '.downloadall' );
         dlBtn.on( 'click', downloadAll );
-        dlBtn.html('<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDL);
+        dlBtn.html( '<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDL );
 
     }
 
@@ -951,7 +958,7 @@ $( function ( _, moment ){
         var filterClear = $( '#filterClear' );
         filterClear.on( 'click', function (){
             $( 'input[name=search]' ).text( '' );
-            oTable.fnFilterClear();
+            resetFilters();
         } );
         filterClear.html( '<i class="fa fa-times"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.clear );
     }
@@ -975,27 +982,38 @@ $( function ( _, moment ){
 
     function setEventDatePicker(){
 
-        $( '.dateBegin' ).attr( 'placeholder', i18n[lang].datepicker.start );
-        $( '.dp-to' ).text( i18n[lang].datepicker.to );
-        $( '.dateEnd' ).attr( 'placeholder', i18n[lang].datepicker.end );
+        var db = $( '.dateBegin' ),
+            de = $( '.dateEnd' );
 
-        $( '#datepicker' ).datepicker( {
-            format        : 'dd/mm/yyyy',
-            forceParse    : true,
-            language      : lang,
-            weekStart     : 1,
-            autoclose     : true,
-            todayHighlight: true,
-            startView     : 1,
-            clearBtn      : true
-            //calendarWeeks : true,
-            //minViewMode: 1 //month view
-        } );
-        /*.on( 'changeDate', filterDate )
-         .off( 'keyup' ).on( 'keyup', function ( event ) {
+        db.attr( 'placeholder', i18n[lang].datepicker.start );
+        db.val( '' );
+
+        $( '.dp-to' ).text( i18n[lang].datepicker.to );
+
+        de.attr( 'placeholder', i18n[lang].datepicker.end );
+        de.val( '' );
+
+
+        $( '#datepicker' )
+            .datepicker( {
+                format        : 'dd/mm/yyyy',
+                forceParse    : true,
+                language      : lang,
+                weekStart     : 1,
+                autoclose     : true,
+                todayHighlight: true,
+                startView     : 1,
+                clearBtn      : true
+                //calendarWeeks : true,
+                //minViewMode: 1 //month view
+            } )
+            .on( 'changeDate', filterDate )
+            .on( 'clearDate', filterDate );
+
+        /*.off( 'keyup' ).on( 'keyup', function ( event ){
          setTimeout( filterDate, 500, event ); // 500ms
-         } );
-         */
+         } );*/
+
 
     }
 
