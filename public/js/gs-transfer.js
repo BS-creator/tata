@@ -1,4 +1,4 @@
-$( function ( _, moment ){
+var gsTransfer = ( function ( _, moment ){
     'use strict';
 
     /***  GLOBAL VARIABLES ***/
@@ -114,47 +114,64 @@ $( function ( _, moment ){
         } );
     }
 
-    function filterDate(){
-        //TODO: filterDate(inputStart, inputEnd)
+    /**
+     *
+     * @param date {string}
+     * @returns {string || null}
+     */
+    function validateDate( date ){
 
-        var dateStart = moment( $( '.dateBegin' ).val(), 'DD/MM/YYYY' ),
-            dateEnd = moment( $( '.dateEnd' ).val(), 'DD/MM/YYYY' ),
-            dateBeginValid = moment( dateStart ).isValid(),
-            dateEndValid = moment( dateEnd ).isValid();
+        var sYear;
+        var sMonth;
+        var sDay;
+        var dateError = false;
 
-        //reset filter
-        table
-            .search( '' )
-            .columns().search( '' );
-            //.column( 4 ).search( 'trf_fich' );
-        //.draw();
-
-        oTable.dataTableExt.afnFiltering.push(
-            function ( settings, data, dataIndex ){
-
-                var date = moment( data[2], 'DD/MM/YYYY' );
-
-                if (dateBeginValid && dateEndValid) {
-                    return (moment( dateStart ).isBefore( date ) && moment( dateEnd ).isAfter( date ));
-                }
-
-                if (!dateBeginValid && dateEndValid) {
-                    return moment( dateEnd ).isAfter( date );
-                }
-
-                if (dateBeginValid && !dateEndValid) {
-                    return moment( dateStart ).isBefore( date );
-                }
-
-                if (!dateBeginValid && !dateEndValid) {
-                    return true;
-                }
-
-                // all failed
-                return false;
+        if (date) {
+            var sDate = date.split( /[.,\/ -]/ );
+            sDay = sDate[0];
+            sMonth = sDate[1];
+            sYear = sDate[2];
+            if (sDay && isNaN( sDay )) {
+                    dateError = true;
             }
-        );
+            if (sMonth && isNaN( sMonth )) {
+                    dateError = true;
+            } else {
+                sMonth = new Date().getMonth() + 1;
+            }
 
+            if (sYear) {
+                if (isNaN( sYear )) {
+                    dateError = true;
+                } else {
+                    if (sYear < 100) {
+                        if (sYear < 50) {
+                            sYear = 2000 + parseInt( sYear );
+                        } else {
+                            sYear = 1900 + parseInt( sYear );
+                        }
+                    }
+                }
+            } else {
+                sYear = new Date().getFullYear(); // fix bug : if month = 0 and year = 0 -> month <> january
+            }
+
+            if (!dateError && (!moment( {year: sYear, month: sMonth - 1, day: sDay} ).isValid())) { dateError = true; }
+        }
+        return !dateError ? moment( {year: sYear, month: sMonth - 1, day: sDay} ).format( "DD-MM-YYYY" ).toString() : null;
+    }
+
+
+    function filterDateClear(){
+        //$( this ).val('').datepicker('update');
+        this.select();
+    }
+    function filterDateKeyUp(){
+        setTimeout( filterDate, 1000 );
+        //filterDate();
+    }
+
+    function filterDate(){
         table.draw();
     }
 
@@ -247,7 +264,9 @@ $( function ( _, moment ){
         //return bytesToSize(val);
     }
 
-    //TODO: function formatPath(value) {return value.replace('/data/' + username + '/', '');}
+    function formatPath( value ){
+        return value.replace( '/data/' + username + '/', '' );
+    }
 
     //TODO: function formatUserName(value) { return value.toUpperCase(); }
 
@@ -261,31 +280,38 @@ $( function ( _, moment ){
      * */
 
     function addDownloadButton(){
-        $( '.multiDL' ).html( '' );
-        var btn = $( '<button class="btn-portal-green downloadall mt-xs"><i class="fa fa-download"></i>' + i18n[lang].button.multiDL + '</button>' );
         var multidl = $( '.multiDL' );
-        multidl.append( btn );
+        multidl.html( '' );
+        var btn =
+                multidl.append(
+                        '<button class="btn-portal-green downloadall mt-xs">' +
+                        '<i class="fa fa-download"></i>' +
+                        i18n[lang].button.multiDL +
+                        '</button>'
+                );
     }
 
     function downloadAll(){
 
-        //TODO: replace getSelections
         var array = getSelectedRows(),
             listID = '';
 
-        console.log( array );
 
+        //console.log( array );
         $.each( array, function ( i, item ){
-            console.log( item );
-            listID += item.idFile + '@!';
+            //console.log( item );
+            listID += $( item[14] ).data( 'file-id' ) + '@!';
         } );
+
+        //console.log(listID);
 
         var params = {
             'token' : token,
             'fileID': listID
         };
 
-        var form = $( '<form method="POST" action="' + serverURL + 'file/zip">' );
+        $( '#multiDownloadForm' ).remove();
+        var form = $( '<form id="multiDownloadForm" method="POST" action="' + serverURL + 'file/zip">' );
 
         $.each( params, function ( k, v ){
             form.append( $( '<input type="hidden" name="' + k +
@@ -294,7 +320,7 @@ $( function ( _, moment ){
 
         $( 'body' ).append( form );
 
-        //form.submit();
+        form.submit();
 
     }
 
@@ -356,14 +382,13 @@ $( function ( _, moment ){
      * */
 
     function resetFilters(){
-        //oTable.fnFilterClear();
+
         table
             .search( '' )
             .columns().search( '' );
 
-        $( '.dateBegin' ).val( '' );
-        $( '.dateEnd' ).val( '' );
-        $( '#datepicker' ).datepicker( 'update' );
+        $( '.dateBegin' ).val( '' ).datepicker( 'update' );
+        $( '.dateEnd' ).val( '' ).datepicker( 'update' );
         $( 'input[name="search"]' ).val( '' );
     }
 
@@ -386,6 +411,14 @@ $( function ( _, moment ){
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.root + '</li>' );
         updateMenuVisibleColumnList();
     }
+
+    function menuCategoryClick() {
+        console.log('test');
+        //list children
+        // get ref doc number
+        //filter on ref docs
+    }
+
 
     function menuOtherClick(){
 
@@ -420,9 +453,9 @@ $( function ( _, moment ){
 
         $( '#breadcrumb' ).html( '<li class="active">' + nodeParentText + '</li><li class="active">' + nodeText + '</li>' );
 
-        $( '#root' ).children('[class^=level]' ).removeClass('active');
-        $this.addClass('active');
-        $this.parents('[class^=level]').addClass('active');
+        $( '#root' ).children( '[class^=level]' ).removeClass( 'active' );
+        $this.addClass( 'active' );
+        $this.parents( '[class^=level]' ).addClass( 'active' );
 
         if (nodeID > -1 && $this.hasClass( 'level3' )) {
             table
@@ -569,6 +602,8 @@ $( function ( _, moment ){
                 row.alreadyDL = 'text-primary';
             }
 
+            row.strippedPath = formatPath( row.path );
+
             //TODO: how to improve this code? ==> ugly
             row.employerNumber = parseInt( row.employerNumber );
             if (isNaN( row.employerNumber )) {
@@ -590,7 +625,6 @@ $( function ( _, moment ){
             row.dateFormatted = moment( row.date, 'YYYY-MM-DD' ).format( 'DD/MM/YYYY' );
             row.sizeFormatted = formatSize( row.size );
             row.extensionFormatted = formatExtension( row.extension, row );
-            //row.uploadUserName.toUpperCase();
 
             html += tpl( row );
         } );
@@ -707,14 +741,6 @@ $( function ( _, moment ){
                     searchable: true
                 }
             ],
-            /*colVis        : {
-             activate  : 'mouseover',
-             buttonText: i18n[lang].showHide,
-             exclude   : [ 0, 1, 14, 15, 16 ],
-             restore   : 'restore'
-             },*/ /* tableTools: {
-             "sRowSelect": "multi"
-             },*/
             'initComplete': function (){
                 table
                     .column( 4 ).search( '[^' + username + ']', true, false )
@@ -832,7 +858,7 @@ $( function ( _, moment ){
         $( '#toggle-side-menu' ).html( '<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.colVisible );
 
         oTable.on( 'length.dt', function (){
-
+            console.log( 'test' );
         } );
 
         $( 'p.side-menu-head' ).text( i18n[lang].sideMenu.config );
@@ -857,6 +883,7 @@ $( function ( _, moment ){
     function setEventMenuFilters(){
         $( '#root' ).on( 'click', menuRootClick );
         $( '#upload' ).off( 'click' ).on( 'click', menuUploadClick );
+        $( '[class^=cat]' ).off('click' ).on('click', menuCategoryClick);
         $( '.cat98' ).off( 'click' ).on( 'click', menuOtherClick );
         $( 'li.level3' ).off( 'click' ).on( 'click', menuRefDocClick );
     }
@@ -923,12 +950,20 @@ $( function ( _, moment ){
 
     /***** CHECKBOX SELECT ALL *****/
     function setEventCheckBox(){
+        //TODO: remove sorting when click on btSelectAll
+        $( 'input[name=btSelectAll]' ).on( 'change', function (){
+            var cb = $( 'input[name|=cb]' );
+            cb.prop( 'checked', !cb.prop( 'checked' ) );
+            cb.closest( 'tr' ).toggleClass( 'active' );
+            toggleDLButton();
+        } );
+
         $( 'input[name|=cb]' ).on( 'change', function (){
             $( this ).closest( 'tr' ).toggleClass( 'active' );
             toggleDLButton();
         } );
 
-        $( 'td:not(:first-child)' ).on( 'click', function (){
+        $( 'td:not( :first-child, :nth-child(2), :last-child )' ).on( 'click', function (){
             $( this ).closest( 'tr' ).toggleClass( 'active' );
             var cb = $( this ).closest( 'tr' ).find( 'input[name|=cb]' );
             cb.prop( 'checked', !cb.prop( 'checked' ) );
@@ -937,7 +972,7 @@ $( function ( _, moment ){
     }
 
     /***** FILTER *****/
-    function setEventFiltersMenu(){
+    function setEventFiltersButton(){
 
         $( '#filterby' ).html( i18n[lang].button.filter.filterby + '&nbsp;&nbsp;&nbsp;<span class="caret"></span>' );//
 
@@ -991,36 +1026,37 @@ $( function ( _, moment ){
 
         db.attr( 'placeholder', i18n[lang].datepicker.start );
         db.val( '' );
+        db.on('focus', filterDateClear );
+        db.on( 'keyup', filterDateKeyUp );
+        db.on( 'change', filterDate );
 
         $( '.dp-to' ).text( i18n[lang].datepicker.to );
 
         de.attr( 'placeholder', i18n[lang].datepicker.end );
         de.val( '' );
-
+        de.on( 'keyup', filterDateKeyUp );
+        de.on( 'change', filterDate );
 
         $( '#datepicker' )
             .datepicker( {
-                format        : 'dd/mm/yyyy',
-                forceParse    : true,
-                language      : lang,
-                weekStart     : 1,
-                autoclose     : true,
-                todayHighlight: true,
-                startView     : 1,
-                clearBtn      : true
+                format            : 'dd/mm/yyyy',
+                forceParse        : true,
+                language          : lang,
+                weekStart         : 1,
+                autoclose         : true,
+                todayHighlight    : true,
+                //startView         : 1,
+                keyboardNavigation: false,
+                clearBtn          : true
                 //calendarWeeks : true,
                 //minViewMode: 1 //month view
-            } )
-            .on( 'changeDate', filterDate )
-            .on( 'clearDate', filterDate );
-
-        /*.off( 'keyup' ).on( 'keyup', function ( event ){
-         setTimeout( filterDate, 500, event ); // 500ms
-         } );*/
-
+            } );
 
     }
 
+    function setEventBreadCrumb(){
+        $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].breadrumb + '</li>' );
+    }
 
     function setEventsHTML(){
 
@@ -1036,7 +1072,7 @@ $( function ( _, moment ){
 
         setEventSearch();
 
-        setEventFiltersMenu();
+        setEventFiltersButton();
 
         setEventCheckBox();
 
@@ -1047,6 +1083,8 @@ $( function ( _, moment ){
         setEventDeleteFile();
 
         setEventMultiDownload();
+
+        setEventBreadCrumb();
 
         /***** TOOLTIP *****/
         //$( '[rel=tooltip]' ).tooltip();

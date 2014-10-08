@@ -149,10 +149,12 @@
                 <div id="sidenav" class="mt-l">
                     <!-- BEGIN: Underscore Template Definition. -->
                     <script id="menuL1" type="text/template" class="template">
-                       <ul class="level1">
+                       <ul>
                            <li  class="level1">
                                <a id="root" href="#">[[allDocs]]</a>
-                               [[categoryNode]]
+                               <ul >
+                                [[categoryNode]]
+                               </ul>
                            </li>
                            <li id="upload">
                                <a href="#">[[uploadText]]</a>
@@ -163,22 +165,20 @@
 
                     <!-- BEGIN: Underscore Template Definition. -->
                     <script id="menuL2" type="text/template" class="template">
-                        <ul class="level2">
                             <li class="level2 cat[[categoryNumber]]">
                                 <a href="#">[[categoryNumber]] - [[categoryName]]</a>
-                                [[ leafNode ]]
+                                <ul>
+                                    [[ leafNode ]]
+                                </ul>
                             </li>
-                        </ul>
                     </script>
                     <!-- END: Underscore Template Definition. -->
 
                     <!-- BEGIN: Underscore Template Definition. -->
                     <script id="menuL3" type="text/template" class="template">
-                        <ul class="level3">
                             <li id="[[referenceDocument]]" class="level3">
                                 <a href="#">[[referenceDocument]] - [[typeDocument]]</a>
                             </li>
-                        </ul>
                     </script>
                     <!-- END: Underscore Template Definition. -->
                 </div>
@@ -290,7 +290,7 @@
                                 <td>[[referenceDocument]]</td>
                                 <td data-order="[[size]]">[[sizeFormatted]]</td>
                                 <td class="center" data-order="[[extension]]">[[extensionFormatted]]</td>
-                                <td>[[path]]</td>
+                                <td data-order="[[path]]">[[strippedPath]]</td>
                                 <td>[[referenceClient]]</td>
                                 <td>[[counter]]</td>
                                 <td>[[referenceGroupS]]</td>
@@ -335,13 +335,13 @@
 <!-- build:js js/file.min.js-->
 <script src="js/jquery.js"></script>
 <script src="bootstrap-3.2.0/js/bootstrap.min.js"></script>
+<script src="js/underscore.js/underscore-1.6.0.js"></script>
+<script src="js/moment/moment-with-langs.min-2.5.0.js"></script>
 <script src="DataTables/media/js/jquery.dataTables.js"></script>
 <script src="DataTables/resources/bootstrap/3/dataTables.bootstrap.js"></script>
 <script src="DataTables/extensions/ColVis/js/dataTables.colVis.js"></script>
-<!--<script src="DataTables/plugins/fnFilterClear.js"></script>-->
+<script src="DataTables/plugins/date_range.js"></script>
 <script src="DataTables/plugins/dom-checkbox.js"></script>
-<script src="js/underscore.js/underscore-1.6.0.js"></script>
-<script src="js/moment/moment-with-langs.min-2.5.0.js"></script>
 <script src="js/bootstrap.file-input.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/fileupload/vendor/jquery.ui.widget.js"></script>

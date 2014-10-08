@@ -1,187 +1,190 @@
 {
     "fr": {
-        "button": {
-            "search": "Recherche...",
-            "reload": "Rafraîchir",
+        "button"      : {
+            "search"    : "Recherche...",
+            "reload"    : "Rafraîchir",
             "colVisible": "Afficher",
-            "multiDL": "Télécharger les fichiers",
-            "filter":{
+            "multiDL"   : "Télécharger les fichiers",
+            "filter"    : {
                 "filterby": "Filtrer par",
-                "new": "Nouveaux fichiers",
-                "notDL": "Fichiers non-téléchargés",
-                "clear": "Retirer tous les filtres"
+                "new"     : "Nouveaux fichiers",
+                "notDL"   : "Fichiers non-téléchargés",
+                "clear"   : "Retirer tous les filtres"
             },
-            "signout" : "Se Déconnecter"
+            "signout"   : "Se Déconnecter"
         },
-        "url": {
-            "table": "DataTables/resources/language/FR.json",
+        "breadrumb"   : "Nouveaux Fichiers non-téléchargés",
+        "url"         : {
+            "table"     : "DataTables/resources/language/FR.json",
             "datepicker": "js/locale/bootstrap-datepicker.fr.js"
         },
-        "col": {
-            "new": "Nouveau",
-            "date": "Date",
-            "name": "Nom",
-            "user": "Utilisateur",
-            "empl": "Employeur",
-            "label": "Libell&eacute;",
+        "col"         : {
+            "new"   : "Nouveau",
+            "date"  : "Date",
+            "name"  : "Nom",
+            "user"  : "Utilisateur",
+            "empl"  : "Employeur",
+            "label" : "Libell&eacute;",
             "refdoc": "N° Document",
-            "size": "Taille",
-            "ext": "Type",
-            "path": "Chemin",
-            "refCl": "Ref Client",
-            "count": "#",
-            "refGS": "Ref Group S",
-            "del": "Effacer"
+            "size"  : "Taille",
+            "ext"   : "Type",
+            "path"  : "Chemin",
+            "refCl" : "Ref Client",
+            "count" : "#",
+            "refGS" : "Ref Group S",
+            "del"   : "Effacer"
         },
-        "tree": {
-            "root": "Tous les documents",
+        "tree"        : {
+            "root"  : "Tous les documents",
             "upload": "Fichiers transmis à Group S",
-            "other": "Autres Documents"
+            "other" : "Autres Documents"
         },
-        "sideMenu": {
+        "sideMenu"    : {
             "config": "Configuration de la Table",
-            "reset": "Réinitialiser la vue"
+            "reset" : "Réinitialiser la vue"
         },
-        "file": {
+        "file"        : {
             "add": "Document ajouté",
             "del": "Document supprimé"
         },
-        "datepicker" : {
-            "to": "à",
-            "start": "Date Début",
-            "end": "Date Fin"
+        "datepicker"  : {
+            "to"   : "à",
+            "start": "JJ/MM/YYYY",
+            "end"  : "JJ/MM/YYYY"
         },
-        "listAll": "Tous",
-        "showHide": "Afficher les colonnes",
-        "upload": "Transmettre des fichiers à Group S",
-        "modalupload": "Transmettre des fichiers sur le serveur de Group S",
-        "modalbq": "Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.",
-        "modalbtn": "Sélectionner les fichiers à ajouter",
-        "error0": "Erreur de connexion.",
-        "error5xx": "Service temporairement indisponible, veuillez réessayer plus tard.",
+        "listAll"     : "Tous",
+        "showHide"    : "Afficher les colonnes",
+        "upload"      : "Transmettre des fichiers à Group S",
+        "modalupload" : "Transmettre des fichiers sur le serveur de Group S",
+        "modalbq"     : "Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.",
+        "modalbtn"    : "Sélectionner les fichiers à ajouter",
+        "error0"      : "Erreur de connexion.",
+        "error5xx"    : "Service temporairement indisponible, veuillez réessayer plus tard.",
         "errorSession": "Session expirée"
     },
     "nl": {
-        "button": {
-            "search": "Zoeken...",
-            "reload": "Opnieuw laden",
+        "button"      : {
+            "search"    : "Zoeken...",
+            "reload"    : "Opnieuw laden",
             "colVisible": "Tonen",
-            "multiDL": "Bestanden gedownloaden",
-            "filter":{
+            "multiDL"   : "Bestanden gedownloaden",
+            "filter"    : {
                 "filterby": "Filter door",
-                "new": "Nieuwe bestanden",
-                "notDL": "Bestanden niet gedownloaden",
-                "clear": "Schrapen filters"
+                "new"     : "Nieuwe bestanden",
+                "notDL"   : "Bestanden niet gedownloaden",
+                "clear"   : "Schrapen filters"
             },
-            "signout" : "Uit Loggen"
+            "signout"   : "Uit Loggen"
         },
-        "url": {
-            "table": "DataTables/resources/language/NL.json",
+        "breadrumb"   : "Nieuwe bestanden niet gedownloaden",
+        "url"         : {
+            "table"     : "DataTables/resources/language/NL.json",
             "datepicker": "js/locale/bootstrap-datepicker.nl.js"
         },
-        "col": {
-            "new": "Nieuw",
-            "date": "Datum",
-            "name": "Naam",
-            "user": "Gebruiker",
-            "empl": "Werkgever",
-            "label": "Label",
+        "col"         : {
+            "new"   : "Nieuw",
+            "date"  : "Datum",
+            "name"  : "Naam",
+            "user"  : "Gebruiker",
+            "empl"  : "Werkgever",
+            "label" : "Label",
             "refdoc": "N° Document",
-            "size": "Groote",
-            "ext": "Type",
-            "path": "Locatie",
-            "refCl": "Ref Client",
-            "count": "#",
-            "refGS": "Ref Group S",
-            "del": "geschrapt"
+            "size"  : "Groote",
+            "ext"   : "Type",
+            "path"  : "Locatie",
+            "refCl" : "Ref Client",
+            "count" : "#",
+            "refGS" : "Ref Group S",
+            "del"   : "geschrapt"
         },
-        "tree": {
-            "root": "Alle documenten",
+        "tree"        : {
+            "root"  : "Alle documenten",
             "upload": "Overgebrachte documenten naar Group S",
-            "other": "Andere Documenten"
+            "other" : "Andere Documenten"
         },
-        "sideMenu": {
+        "sideMenu"    : {
             "config": "Configuratie van de table",
-            "reset": "Reset Vue"
+            "reset" : "Reset Vue"
         },
-        "file": {
+        "file"        : {
             "add": "Document toegevoegd",
             "del": "Document geschrapt"
         },
-        "datepicker" : {
-            "to": "tot",
+        "datepicker"  : {
+            "to"   : "tot",
             "start": "Beginnen Datum",
-            "end": "Einde Datum"
+            "end"  : "Einde Datum"
         },
-        "listAll": "Alle",
-        "showHide": "Tonen colonnen",
-        "upload": "Documenten op de server uploaden",
-        "modalupload": "Document uploaden op Group S server",
-        "modalbq": "Gelieve de doelmap te selecteren alvorens uw bestanden toe te voegen.",
-        "modalbtn": "Selectionneer documenten om toe te voegen",
-        "error0": "Verbindingsfout.",
-        "error5xx": "Dienst tijdelijk onbeschikbaar. Probeer het later opnieuw.",
+        "listAll"     : "Alle",
+        "showHide"    : "Tonen colonnen",
+        "upload"      : "Documenten op de server uploaden",
+        "modalupload" : "Document uploaden op Group S server",
+        "modalbq"     : "Gelieve de doelmap te selecteren alvorens uw bestanden toe te voegen.",
+        "modalbtn"    : "Selectionneer documenten om toe te voegen",
+        "error0"      : "Verbindingsfout.",
+        "error5xx"    : "Dienst tijdelijk onbeschikbaar. Probeer het later opnieuw.",
         "errorSession": "Sessie verlopen"
     },
     "en": {
-        "button": {
-            "search": "Searching...",
-            "reload": "Reload",
+        "button"      : {
+            "search"    : "Searching...",
+            "reload"    : "Reload",
             "colVisible": "Show Column",
-            "multiDL": "Files Download",
-            "filter":{
+            "multiDL"   : "Files Download",
+            "filter"    : {
                 "filterby": "Filter by",
-                "new": "New Files",
-                "notDL": "Files not downloaded",
-                "clear": "Clear all filters"
+                "new"     : "New Files",
+                "notDL"   : "Files not downloaded",
+                "clear"   : "Clear all filters"
             },
-            "signout" : "Sign Out"
+            "signout"   : "Sign Out"
         },
-        "url": {
+        "breadrumb"   : "New Files not downloaded yet",
+        "url"         : {
             "table": "DataTables/resources/language/EN.json"
         },
-        "col": {
-            "new": "New",
-            "date": "Date",
-            "name": "Name",
-            "user": "User",
-            "empl": "Employer",
-            "label": "Label",
+        "col"         : {
+            "new"   : "New",
+            "date"  : "Date",
+            "name"  : "Name",
+            "user"  : "User",
+            "empl"  : "Employer",
+            "label" : "Label",
             "refdoc": "N° Document",
-            "size": "Size",
-            "ext": "Type",
-            "path": "Path",
-            "refCl": "Ref Client",
-            "count": "#",
-            "refGS": "Ref Group S",
-            "del": "Delete"
+            "size"  : "Size",
+            "ext"   : "Type",
+            "path"  : "Path",
+            "refCl" : "Ref Client",
+            "count" : "#",
+            "refGS" : "Ref Group S",
+            "del"   : "Delete"
         },
-        "tree": {
-            "root": "All documents",
+        "tree"        : {
+            "root"  : "All documents",
             "upload": "Uploaded documents to Group S",
-            "other": "Other Documents"
+            "other" : "Other Documents"
         },
-        "sideMenu": {
+        "sideMenu"    : {
             "config": "Table Configuration",
-            "reset": "Reset Vue"
+            "reset" : "Reset Vue"
         },
-        "file": {
+        "file"        : {
             "add": "Document added",
             "del": "Document deleted"
         },
-        "datepicker" : {
-            "to": "to",
+        "datepicker"  : {
+            "to"   : "to",
             "start": "Start Date",
-            "end": "End Date"
+            "end"  : "End Date"
         },
-        "listAll": "all",
-        "showHide": "Show / hide columns",
-        "upload": "Upload Documents on the server",
-        "modalupload": "Upload Document to Group S server",
-        "modalbq": "Please, select the folder of upload before uploading document.",
-        "modalbtn": "Please select files to upload",
-        "error0": "Connection error.",
-        "error5xx": "Service temporally unavailable, please try later.",
+        "listAll"     : "all",
+        "showHide"    : "Show / hide columns",
+        "upload"      : "Upload Documents on the server",
+        "modalupload" : "Upload Document to Group S server",
+        "modalbq"     : "Please, select the folder of upload before uploading document.",
+        "modalbtn"    : "Please select files to upload",
+        "error0"      : "Connection error.",
+        "error5xx"    : "Service temporally unavailable, please try later.",
         "errorSession": "Session expired"
     }
 }
