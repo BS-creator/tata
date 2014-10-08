@@ -28,11 +28,11 @@ $( 'document' ).ready( function () {
         var mainAbsc = (displayed === false) ? 0 : -sbWidth;
         $main.animate( {
             right: -mainAbsc
-        } );
+        },200 );
         $smenu.animate( {
             right: MSAbsc,
             width: sbWidth
-        } ).toggleClass( 'active' );
+        },200 ).toggleClass( 'active' );
     };
 
     // resize side-menu width x height
