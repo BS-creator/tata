@@ -27,25 +27,24 @@ li[class^="level"] > a {
     text-overflow: ellipsis;
     cursor: pointer;
 }
-
 #upload a,
 li.level1 > a {
     padding: 15px 0px 15px 19px;
     background-color: @gs-blue;
     color: #FFF;
 }
-#upload > a:hover,
-#upload > a:focus,
-#upload > a:active,
-li.level1 > a:hover,
-li.level1 > a:focus,
-li.level1 > a:active {
+#upload:hover > a,
+#upload:focus > a,
+#upload:active > a,
+li.level1:hover > a,
+li.level1:focus > a,
+li.level1:active > a {
     background-color: @gs-lt-blue;
 }
-#upload > a:active,
-li.level1 > a:active,
-#upload > a.active,
-li.level1 > a.active {
+#upload:active > a,
+li.level1:active > a,
+#upload.active > a,
+li.level1.active > a {
     background-color: @gs-xlt-blue;
 }
 li.level2 > a {
@@ -60,21 +59,20 @@ li.level3 > a {
          -o-transition: all 0.1 ease;/* Opera 10.5-12.00 */
             transition: all 0.1s ease;/* Firefox 16+, Opera 12.50+ */
 }
-li.level2 > a:hover,
-li.level2 > a:focus,
-li.level3 > a:hover,
-li.level3 > a:focus {
+li.level2:hover > a,
+li.level2:focus > a,
+li.level3:hover > a,
+li.level3:focus > a {
     border-left: 3px solid @gs-blue;
     color: @gs-blue;
 }
-li.level2 > a:active,
-li.level2 > a.active,
-li.level3 > a:active,
-li.level3 > a.active{
+li.level2:active > a,
+li.level2.active > a,
+li.level3:active > a,
+li.level3.active > a{
     border-left: 3px solid @gs-lt-blue;
     color: @gs-blue;
 }
-
 li.level3 > a {
     padding: 9px 0px 9px 50px;
     background-color: transparent;

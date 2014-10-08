@@ -397,18 +397,18 @@ li.level1 > a {
   background-color: #0064bb;
   color: #FFF;
 }
-#upload > a:hover,
-#upload > a:focus,
-#upload > a:active,
-li.level1 > a:hover,
-li.level1 > a:focus,
-li.level1 > a:active {
+#upload:hover > a,
+#upload:focus > a,
+#upload:active > a,
+li.level1:hover > a,
+li.level1:focus > a,
+li.level1:active > a {
   background-color: #378fdd;
 }
-#upload > a:active,
-li.level1 > a:active,
-#upload > a.active,
-li.level1 > a.active {
+#upload:active > a,
+li.level1:active > a,
+#upload.active > a,
+li.level1.active > a {
   background-color: #63a4dd;
 }
 li.level2 > a {
@@ -427,17 +427,17 @@ li.level3 > a {
   transition: all 0.1s ease;
   /* Firefox 16+, Opera 12.50+ */
 }
-li.level2 > a:hover,
-li.level2 > a:focus,
-li.level3 > a:hover,
-li.level3 > a:focus {
+li.level2:hover > a,
+li.level2:focus > a,
+li.level3:hover > a,
+li.level3:focus > a {
   border-left: 3px solid #0064bb;
   color: #0064bb;
 }
-li.level2 > a:active,
-li.level2 > a.active,
-li.level3 > a:active,
-li.level3 > a.active {
+li.level2:active > a,
+li.level2.active > a,
+li.level3:active > a,
+li.level3.active > a {
   border-left: 3px solid #378fdd;
   color: #0064bb;
 }
@@ -663,6 +663,8 @@ table tr th .pw-btn-group-th .pw-btn-th,
 /* position for sliding effect */
 #side-menu {
   position: absolute;
+  bottom: 0;
+  height: 100%;
   background-color: #0064bb;
   color: white;
 }

@@ -6,7 +6,6 @@ $( 'document' ).ready( function () {
     ///////////////////////////////////////////////////////
 
     var $main = $( '#main' );
-    //var $snav = $('.sidenav');
     var $smenu = $( '#side-menu' );
 
     // initialize size & display /default
@@ -16,8 +15,7 @@ $( 'document' ).ready( function () {
         $( '#side-menu' ).css( {
             top   : mainTop, // get top height to align
             right : -sbWidth,
-            width : sbWidth,
-            height: $( window ).height() - mainTop
+            width : sbWidth
         } ).removeClass();
     })();
 
@@ -37,7 +35,6 @@ $( 'document' ).ready( function () {
 
     // resize side-menu width x height
     $( window ).resize( function () {
-        $smenu.height( $( window ).height() - $( 'header' ).height() );
         if ($smenu.hasClass( 'active' )) {
             sideMenuToggle( false );
             $( this ).width( $( '#sidenav' ).width() );

@@ -547,7 +547,6 @@ var gsTransfer = ( function ( _, moment ){
             li = '';
 
         list.html( '' );
-
         while (i < 17) {
             if ($.inArray( i, exclude ) === -1) {
                 headerCol = table.columns( i ).header().to$().html();
@@ -561,7 +560,6 @@ var gsTransfer = ( function ( _, moment ){
             }
             i++;
         }
-
         setEventColumnListVisible();
     }
 
