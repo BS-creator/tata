@@ -460,7 +460,8 @@ var gsTransfer = ( function ( _, moment ){
 
         $( '#breadcrumb' ).html( '<li class="active">' + nodeParentText + '</li><li class="active">' + nodeText + '</li>' );
 
-        $( '#root' ).children( '.level1, .level2, .level3' ).removeClass( 'active' );
+
+        $('[class^=level] .active').removeClass( 'active' );
         $this.addClass( 'active' );
         $this.parents( '[class^=level]' ).addClass( 'active' );
 
@@ -889,11 +890,11 @@ var gsTransfer = ( function ( _, moment ){
     /***** MENU FILTERS *****/
     function setEventMenuFilters(){
         $( '#root' ).on( 'click', menuRootClick );
-        $( '#upload' ).off( 'click' ).on( 'click', menuUploadClick );
-        $( 'li.level2' ).off('click' ).on('click', menuCategoryClick);
+        $( '#upload' ).unbind( 'click' ).on( 'click', menuUploadClick );
+        $( 'li.level2' ).unbind('click' ).on('click', menuCategoryClick);
         //TODO: change others category!!!
-        $( '.cat98' ).off( 'click' ).on( 'click', menuOtherClick );
-        $( 'li.level3' ).off( 'click' ).on( 'click', menuRefDocClick );
+        $( '.cat98' ).unbind( 'click' ).on( 'click', menuOtherClick );
+        $( 'li.level3' ).unbind( 'click' ).on( 'click', menuRefDocClick );
     }
 
     /***** UPLOAD *****/
