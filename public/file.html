@@ -165,7 +165,7 @@
 
                     <!-- BEGIN: Underscore Template Definition. -->
                     <script id="menuL2" type="text/template" class="template">
-                            <li class="level2 cat[[categoryNumber]]">
+                            <li class="level2" data-category="[[categoryNumber]]">
                                 <a href="#">[[categoryNumber]] - [[categoryName]]</a>
                                 <ul>
                                     [[ leafNode ]]
@@ -176,7 +176,7 @@
 
                     <!-- BEGIN: Underscore Template Definition. -->
                     <script id="menuL3" type="text/template" class="template">
-                            <li id="[[referenceDocument]]" class="level3">
+                            <li id="[[referenceDocument]]" data-refdoc="[[referenceDocument]]" class="level3">
                                 <a href="#">[[referenceDocument]] - [[typeDocument]]</a>
                             </li>
                     </script>
@@ -337,6 +337,7 @@
 <script src="bootstrap-3.2.0/js/bootstrap.min.js"></script>
 <script src="js/underscore.js/underscore-1.6.0.js"></script>
 <script src="js/moment/moment-with-langs.min-2.5.0.js"></script>
+<script src="js/moment/moment-range.js"></script>
 <script src="DataTables/media/js/jquery.dataTables.js"></script>
 <script src="DataTables/resources/bootstrap/3/dataTables.bootstrap.js"></script>
 <script src="DataTables/extensions/ColVis/js/dataTables.colVis.js"></script>

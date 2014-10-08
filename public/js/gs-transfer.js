@@ -401,7 +401,7 @@ var gsTransfer = ( function ( _, moment ){
         updateMenuVisibleColumnList();
     }
 
-    function menuRootClick(){
+    function menuRootClick(event){
 
         resetFilters();
         table.columns( '.detailsLayer' ).visible( false, false );
@@ -410,18 +410,23 @@ var gsTransfer = ( function ( _, moment ){
         table.column( 4 ).search( 'trf_fich' ).draw(); //filter on uploadUserName
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.root + '</li>' );
         updateMenuVisibleColumnList();
+        event.preventDefault();
     }
 
-    function menuCategoryClick() {
+    function menuCategoryClick(event) {
         console.log('test');
+        resetFilters();
+        var refdocs = $( this ).children('.level3' );//.data('refdoc');
+        console.log(refdocs);
         //list children
         // get ref doc number
         //filter on ref docs
+        event.preventDefault();
     }
 
 
-    function menuOtherClick(){
-
+    function menuOtherClick(event){
+    //TODO: change others category!!!
         resetFilters();
         table.columns( '.detailsLayer' ).visible( true, false );
         table.columns( '.fileLayer' ).visible( false, false );
@@ -432,9 +437,10 @@ var gsTransfer = ( function ( _, moment ){
             .draw(); //filter on uploadUserName != username
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.other + '</li>' );
         updateMenuVisibleColumnList();
+        event.preventDefault();
     }
 
-    function menuUploadClick(){
+    function menuUploadClick(event){
 
         resetFilters();
         table.columns( '.detailsLayer' ).visible( true, false );
@@ -443,9 +449,10 @@ var gsTransfer = ( function ( _, moment ){
         table.column( 4 ).search( username ).draw(); //filter on uploadUserName
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.upload + '</li>' );
         updateMenuVisibleColumnList();
+        event.preventDefault();
     }
 
-    function menuRefDocClick(){
+    function menuRefDocClick(event){
         var $this = $( this );
         var nodeID = $this.attr( 'id' ),
             nodeText = $this.text(),
@@ -453,11 +460,12 @@ var gsTransfer = ( function ( _, moment ){
 
         $( '#breadcrumb' ).html( '<li class="active">' + nodeParentText + '</li><li class="active">' + nodeText + '</li>' );
 
-        $( '#root' ).children( '[class^=level]' ).removeClass( 'active' );
+        $( '#root' ).children( '.level1, .level2, .level3' ).removeClass( 'active' );
         $this.addClass( 'active' );
         $this.parents( '[class^=level]' ).addClass( 'active' );
 
         if (nodeID > -1 && $this.hasClass( 'level3' )) {
+            //clear filters
             table
                 .search( '' )
                 .columns().search( '' );
@@ -467,6 +475,7 @@ var gsTransfer = ( function ( _, moment ){
             table.column( 7 ).search( nodeID ).draw(); //filter on referenceDocument
         }
         updateMenuVisibleColumnList();
+        event.preventDefault();
     }
 
     function templateMenu(){
@@ -881,7 +890,8 @@ var gsTransfer = ( function ( _, moment ){
     function setEventMenuFilters(){
         $( '#root' ).on( 'click', menuRootClick );
         $( '#upload' ).off( 'click' ).on( 'click', menuUploadClick );
-        $( '[class^=cat]' ).off('click' ).on('click', menuCategoryClick);
+        $( 'li.level2' ).off('click' ).on('click', menuCategoryClick);
+        //TODO: change others category!!!
         $( '.cat98' ).off( 'click' ).on( 'click', menuOtherClick );
         $( 'li.level3' ).off( 'click' ).on( 'click', menuRefDocClick );
     }
