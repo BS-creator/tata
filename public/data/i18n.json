@@ -30,7 +30,7 @@
             "ext"   : "Type",
             "path"  : "Chemin",
             "refCl" : "Ref Client",
-            "count" : "#",
+            "count" : "Compteur",
             "refGS" : "Ref Group S",
             "del"   : "Effacer"
         },
@@ -57,7 +57,7 @@
         "upload"      : "Transmettre des fichiers à Group S",
         "modalupload" : "Transmettre des fichiers à Group S",
         "modalbq"     : "Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.",
-        "modalbtn"    : "Sélectionner les fichiers à ajouter",
+        "modalbtn"    : "Sélectionner les fichiers à transmettre",
         "error0"      : "Erreur de connexion.",
         "error5xx"    : "Service temporairement indisponible, veuillez réessayer plus tard.",
         "errorSession": "Session expirée"
@@ -93,7 +93,7 @@
             "ext"   : "Type",
             "path"  : "Locatie",
             "refCl" : "Ref Client",
-            "count" : "#",
+            "count" : "Teller",
             "refGS" : "Ref Group S",
             "del"   : "Geschrapt"
         },
@@ -155,7 +155,7 @@
             "ext"   : "Type",
             "path"  : "Path",
             "refCl" : "Ref Client",
-            "count" : "#",
+            "count" : "Counter",
             "refGS" : "Ref Group S",
             "del"   : "Delete"
         },
