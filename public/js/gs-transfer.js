@@ -394,7 +394,7 @@ var gsTransfer = ( function ( _, moment ){
         $( '.dateBegin' ).val( '' ).datepicker( 'update' );
         $( '.dateEnd' ).val( '' ).datepicker( 'update' );
         $( 'input[name="search"]' ).val( '' );
-        $('[class^=level]' ).removeClass('active');
+        $( '[class^=level]' ).removeClass( 'active' );
     }
 
     function resetDefaultView(){
@@ -676,13 +676,12 @@ var gsTransfer = ( function ( _, moment ){
             ordering      : true,
             info          : true,
             scrollX       : true,
-            //stateSave: true, //TODO: put it true when deploy to prod!!!
+            stateSave     : true, //DEPLOY: put it true when deploy to prod!!!
             lengthMenu    : [
                 [10, 20, 50, -1],
                 [10, 20, 50, i18n[lang].listAll]
             ],
             dom           : '<"top"C>rt<"multiDL"><"page"p><"bottom"il>',
-            /*"dom": '<"top"CT>rt<"page"p><"bottom"li>',*/
             language      : {
                 url: i18n[lang].url.table
             },
@@ -983,30 +982,30 @@ var gsTransfer = ( function ( _, moment ){
         } );
     }
 
-    function toggleAllIconCheck(activated){
-        if(activated){
+    function toggleAllIconCheck( activated ){
+        if (activated) {
             $( '.iconSelect' )
                 .find( 'i' )
                 .removeClass( 'fa-square-o fa-check-square-o' )
-                .addClass('fa-check-square-o');
-            $( 'td' ).closest( 'tr' ).addClass('active');
+                .addClass( 'fa-check-square-o' );
+            $( 'td' ).closest( 'tr' ).addClass( 'active' );
 
-        }else{
+        } else {
             $( '.iconSelect' )
                 .find( 'i' )
                 .removeClass( 'fa-square-o fa-check-square-o' )
-                .addClass('fa-square-o');
-            $( 'td' ).closest( 'tr' ).removeClass('active');
+                .addClass( 'fa-square-o' );
+            $( 'td' ).closest( 'tr' ).removeClass( 'active' );
         }
     }
 
     function toggleIconCheck(){
         var tr = $( this ).closest( 'tr' );
 
-            tr
-                .find( '.iconSelect' )
-                .find('i')
-                .toggleClass( 'fa-square-o fa-check-square-o' );
+        tr
+            .find( '.iconSelect' )
+            .find( 'i' )
+            .toggleClass( 'fa-square-o fa-check-square-o' );
 
         tr.toggleClass( 'active' );
         toggleDLButton();
@@ -1016,9 +1015,9 @@ var gsTransfer = ( function ( _, moment ){
     function setEventCheckBox(){
 
         $( '#btnSelectAll' ).on( 'click', function (){
-            var $this = $(this );
+            var $this = $( this );
             $this.toggleClass( 'fa-square-o fa-check-square-o' );
-            toggleAllIconCheck($this.hasClass('fa-check-square-o'));
+            toggleAllIconCheck( $this.hasClass( 'fa-check-square-o' ) );
             toggleDLButton();
         } );
 
