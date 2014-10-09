@@ -612,7 +612,7 @@ var gsTransfer = ( function ( _, moment ){
 
         _.each( AjaxData, function ( row ){
 
-            /* if (row.isNew) return "<i class='fa fa-check text-success'></i>";
+            /* if (row.isNew) return "<i class='fa fa-check-square-o text-success'></i>";
              else return "<i class='fa fa-times'></i>";*/
 
             if (row.isNew) {
@@ -980,17 +980,31 @@ var gsTransfer = ( function ( _, moment ){
         } );
     }
 
-    function toggleAllIconCheck(){
-        $( '.iconSelect' )
-            .find( 'i' )
-            .toggleClass( 'fa-square-o fa-check' );
-        $( 'td' ).closest( 'tr' ).toggleClass( 'active' );
+    function toggleAllIconCheck(activated){
+        if(activated){
+            $( '.iconSelect' )
+                .find( 'i' )
+                .removeClass( 'fa-square-o fa-check-square-o' )
+                .addClass('fa-check-square-o');
+            $( 'td' ).closest( 'tr' ).addClass('active');
 
+        }else{
+            $( '.iconSelect' )
+                .find( 'i' )
+                .removeClass( 'fa-square-o fa-check-square-o' )
+                .addClass('fa-square-o');
+            $( 'td' ).closest( 'tr' ).removeClass('active');
+        }
     }
 
     function toggleIconCheck(){
         var tr = $( this ).closest( 'tr' );
-        tr.find( '.iconSelect' ).find('i').toggleClass( 'fa-square-o fa-check' );
+
+            tr
+                .find( '.iconSelect' )
+                .find('i')
+                .toggleClass( 'fa-square-o fa-check-square-o' );
+
         tr.toggleClass( 'active' );
         toggleDLButton();
     }
@@ -999,8 +1013,9 @@ var gsTransfer = ( function ( _, moment ){
     function setEventCheckBox(){
 
         $( '#btnSelectAll' ).on( 'click', function (){
-            $(this ).toggleClass( 'fa-square-o fa-check' );
-            toggleAllIconCheck();
+            var $this = $(this );
+            $this.toggleClass( 'fa-square-o fa-check-square-o' );
+            toggleAllIconCheck($this.hasClass('fa-check-square-o'));
             toggleDLButton();
         } );
 
