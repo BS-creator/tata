@@ -104,17 +104,17 @@
 
                                     <div class="modal-body">
 
-                                        <blockquote id="modalbq" class="text-muted">
+                                        <blockquote id="modalbq" class="text-muted text-info">
 
                                         </blockquote>
 
                                         <form class="" id="uploadForm" action="/" method="post"
                                               enctype="multipart/form-data">
-                                            <p class="text-left">
+                                            <div class="dir-list">
                                                 <!--loop-->
                                                 <!--<label class="radio control-label"><input type="radio" name="reportory" value="---">dirname</label>-->
                                                 <!--/loop-->
-                                            </p>
+                                            </div>
 
                                             <p class="text-center">
                                                 <input name="upload" type="file" multiple="" size="50"/>
@@ -312,8 +312,20 @@
 
     </div>
     <!--/container-fluid-->
+
+
 </div>
 <!--/main-->
+
+
+<div id="footer-grave"></div> <!--ANKER POINT FOR FOOTER-->
+
+<footer id="footer">
+    <hr>
+    <p class="text-center">
+        <small>© 2014 Group S</small>
+    </p>
+</footer>
 
 <div id="side-menu">
     <p class="side-menu-head-icon text-center pr-m"><i class="fa fa-chevron-right"></i></p>
@@ -323,14 +335,6 @@
     </ul>
     <button id="init-conf" class="btn-portal-blue wide"></button>
 </div>
-
-
-<footer>
-    <hr>
-    <p class="text-center">
-        <small>© 2014 Group S</small>
-    </p>
-</footer>
 
 <!-- build:js js/file.min.js-->
 <script src="js/jquery.js"></script>

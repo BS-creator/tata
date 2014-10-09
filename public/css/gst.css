@@ -11,6 +11,7 @@ ul.sidebar-left
   font-style: normal;
 }
 body {
+  height:100%;
   position: relative;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
@@ -24,6 +25,25 @@ header {
   height: 80.9px;
   background-color: #0064bb;
 }
+
+
+
+
+#main {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+}
+
+/*****************************************************
+                  FOOTER
+*****************************************************/
+
+
+
+
+
+
 ul.lang {
   margin: 0;
   padding: 50px 19px 0 0;
@@ -72,9 +92,9 @@ td#top-nav ul:not(i)  {
 #signout,
 #toggle-side-menu {
   -webkit-transition: all 0.5s ease;/* Safari 3.2+, Chrome */
-     -moz-transition: all 0.5s ease;/* Firefox 4-15 */
-       -o-transition: all 0.5s ease;/* Opera 10.5-12.00 */
-          transition: all 0.5s ease;/* Firefox 16+, Opera 12.50+ */
+  -moz-transition: all 0.5s ease;/* Firefox 4-15 */
+  -o-transition: all 0.5s ease;/* Opera 10.5-12.00 */
+  transition: all 0.5s ease;/* Firefox 16+, Opera 12.50+ */
 }
 
 #signout:hover,
@@ -87,7 +107,26 @@ td#top-nav ul:not(i)  {
 #toggle-side-menu.active {
   color: #505050;
 }
-
+/**********************************************
+                    MODAL
+**********************************************/
+.modal-content {
+  border-radius: 2px;
+}
+#uploadForm div.dir-list {
+  text-align: left;
+  float: none;
+  margin: 0 auto;
+  padding: 0 50%;
+}
+.progress {
+  display: none;
+}
+.file-input-wrapper:before {
+  font-family: "FontAwesome";
+  content: "\f00e\00a0\00a0\00a0";
+  font-size: 16px;
+}
 /**********************************************
                     BREADCRUMP
 **********************************************/
@@ -133,9 +172,9 @@ td#top-nav ul:not(i)  {
   line-height: 1em;
   /* transition */
   -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
-     -moz-transition: all 0.4s ease;/* Firefox 4-15 */
-       -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
-          transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
+  -moz-transition: all 0.4s ease;/* Firefox 4-15 */
+  -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
+  transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
 }
 
 li.sidebar-h-0:hover,
@@ -202,7 +241,7 @@ input[type="password"]:focus {
   display: none;
   position: fixed;
   z-index: 999;
-/* overflow: show; */
+  /* overflow: show; */
   margin: auto;
   top: 0;
   left: 0;
@@ -271,7 +310,7 @@ i.fa, li {
   height: 50px;
   display: table-cell;
   margin: 0;
-  padding: 14px 7px 14px 7px;
+  padding: 14px 11px 14px 11px;
   cursor: none;
   font-size: 14px;
   background-color: #f2f2f2;
@@ -287,3 +326,5 @@ i.fa, li {
 .input-daterange input:last-child {
   border-radius: 0;
 }
+
+
