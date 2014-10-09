@@ -26,7 +26,6 @@ th {
 .sorting_desc {
     color: #333;
 }
-/*  */
 
 th:last-child {
     border-right: none;
@@ -48,27 +47,46 @@ td:last-child {
 }
 .table tbody tr.active:hover td,
 .table tbody tr.active:focus td {
-    background-color:       @gs-lt-blue !important;
-    color: #FFF !important;
+    /*background-color:       @gs-lt-blue !important;
+    color: #FFF !important;*/
+    background-color:       lighten(@gs-blue,55%) !important;
+    color: #606060;
     -webkit-transition: all 0.2s ease;/* Safari 3.2+, Chrome */
        -moz-transition: all 0.2s ease;/* Firefox 4-15 */
          -o-transition: all 0.2s ease;/* Opera 10.5-12.00 */
             transition: all 0.2s ease;/* Firefox 16+, Opera 12.50+ */
 }
 .table tbody tr.active td {
-    background-color:       @gs-xlt-blue !important;
-    color: #FFF !important;
+    /*background-color:       @gs-xlt-blue !important;
+    color: #FFF !important;*/
+
+    background-color:        lighten(@gs-blue,60%) !important;
+    color: #606060;
 }
 .table tbody tr.active td a,
-.table tbody tr.active td i,
+.table tbody tr.active td i:not(1),
 .table tbody tr.active td small {
-    color: #FFF !important;
+    color: #656565;
 }
 
 /* define height */
 table.dataTable thead th {
     padding: 14px 18px;
 }
+
+/* Icon check */
+th:first-child,
+td:first-child {
+    text-align: center;
+    color: #989898;
+    font-size: 12px;
+}
+
+tr.active td:first-child i.fa-check {
+    color: @gs-green !important;
+}
+
+
 /*********************************************
                     PAGINATION
 **********************************************/
