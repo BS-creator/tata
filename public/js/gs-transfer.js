@@ -288,7 +288,7 @@ var gsTransfer = ( function ( _, moment ){
         var btn =
                 multidl.append(
                         '<button class="btn-portal-green downloadall mt-xs">' +
-                        '<i class="fa fa-download"></i>' +
+                        '<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' +
                         i18n[lang].button.multiDL +
                         '</button>'
                 );
