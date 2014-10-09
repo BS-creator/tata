@@ -394,6 +394,7 @@ var gsTransfer = ( function ( _, moment ){
         $( '.dateBegin' ).val( '' ).datepicker( 'update' );
         $( '.dateEnd' ).val( '' ).datepicker( 'update' );
         $( 'input[name="search"]' ).val( '' );
+        $('[class^=level]' ).removeClass('active');
     }
 
     function resetDefaultView(){
@@ -454,8 +455,11 @@ var gsTransfer = ( function ( _, moment ){
             numDocRegex = '(',
             child = {};
 
+
         $( '[class^=level] .active' ).removeClass( 'active' );
         $( '#breadcrumb' ).html( '<li class="active">' + $this.children( 'a' ).text() + '</li>' );
+        $this.addClass( 'active' );
+        $this.parents( 'li' ).addClass( 'active' );
 
         for (var i = 0; i < levl3.length; i++) {
             child = $( levl3[i] );
@@ -990,7 +994,7 @@ var gsTransfer = ( function ( _, moment ){
 
     function toggleIconCheck(){
         var tr = $( this ).closest( 'tr' );
-        tr.find( '.iconSelect' ).find('i').toggleClass( 'fa-square-o fa-check-square-o' );
+        tr.find( '.iconSelect' ).find( 'i' ).toggleClass( 'fa-square-o fa-check-square-o' );
         tr.toggleClass( 'active' );
         toggleDLButton();
     }
@@ -999,7 +1003,7 @@ var gsTransfer = ( function ( _, moment ){
     function setEventCheckBox(){
 
         $( '#btnSelectAll' ).on( 'click', function (){
-            $(this ).toggleClass( 'fa-square-o fa-check-square-o' );
+            $( this ).toggleClass( 'fa-square-o fa-check-square-o' );
             toggleAllIconCheck();
             toggleDLButton();
         } );
