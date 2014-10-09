@@ -39,17 +39,6 @@ header {
                   FOOTER
 *****************************************************/
 
-#footer-grave {
-  height: 100px; /* WILL IMPACT THE #footer POSITION */
-}
-
-#footer {
-  position: relative;
-  margin-top: -100px; /* MUST BE EQUAL TO #footer-grave's height */
-  height: 100px;
-  background:#646464;
-}
-
 
 
 
@@ -118,7 +107,26 @@ td#top-nav ul:not(i)  {
 #toggle-side-menu.active {
   color: #505050;
 }
-
+/**********************************************
+                    MODAL
+**********************************************/
+.modal-content {
+  border-radius: 2px;
+}
+#uploadForm div.dir-list {
+  text-align: left;
+  float: none;
+  margin: 0 auto;
+  padding: 0 50%;
+}
+.progress {
+  display: none;
+}
+.file-input-wrapper:before {
+  font-family: "FontAwesome";
+  content: "\f00e\00a0\00a0\00a0";
+  font-size: 16px;
+}
 /**********************************************
                     BREADCRUMP
 **********************************************/

@@ -8,6 +8,7 @@
     }
 
 }
+#upload { margin-top: 30.1px !important; }
 #upload a,
 li.level1 > a {
     font-size: 14px;
@@ -19,7 +20,6 @@ li.level1 > a {
 }
 #upload a,
 li[class^="level"] > a {
-    font-size: 14px;
     display: block;
     margin-bottom: 0;
     white-space: nowrap;
@@ -69,20 +69,26 @@ li.level3:focus > a {
 li.level2:active > a,
 li.level2.active > a,
 li.level3:active > a,
-li.level3.active > a{
+li.level3.active > a {
     border-left: 3px solid @gs-lt-blue;
     color: @gs-blue;
 }
 li.level3 > a {
-    padding: 9px 0px 9px 50px;
+    padding: 0 0 0 50px;
+    line-height: 19px;
+    font-size: 12px;
     background-color: transparent;
     color: #777;
 }
 
+li.level1 > a,
+li.level2 > a {
+    font-size: 14px;
+}
+
 @media (max-width:768px) {
-    li.level2 > a,
     li.level3 > a {
-        padding: 15px 0px 15px 50px;
+        padding: 9px 0px 9px 50px;
     }
 }
 

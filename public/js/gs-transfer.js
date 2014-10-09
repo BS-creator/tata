@@ -360,16 +360,16 @@ var gsTransfer = ( function ( _, moment ){
     }
 
     function listFolderUpload( destFolders ){
-        var listFolder = $( '#uploadForm p:first' );
+        var listFolder = $( '#uploadForm div.dir-list' );
         for (var key in destFolders) {
             if (destFolders[key] === 'Presta') {
                 listFolder.append(
-                        '<label class="radio control-label"><input name="destFolder" value="' +
+                        '<label class="radio"><input name="destFolder" value="' +
                         destFolders[key] + '" type="radio" checked />' + destFolders[key] + '/</label>'
                 );
             } else {
                 listFolder.append(
-                        '<label class="radio control-label"><input name="destFolder" value="' +
+                        '<label class="radio"><input name="destFolder" value="' +
                         destFolders[key] + '" type="radio" />' + destFolders[key] + '/</label>'
                 );
             }
