@@ -132,10 +132,10 @@ var gsTransfer = ( function ( _, moment ){
             sMonth = sDate[1];
             sYear = sDate[2];
             if (sDay && isNaN( sDay )) {
-                    dateError = true;
+                dateError = true;
             }
             if (sMonth && isNaN( sMonth )) {
-                    dateError = true;
+                dateError = true;
             } else {
                 sMonth = new Date().getMonth() + 1;
             }
@@ -156,7 +156,9 @@ var gsTransfer = ( function ( _, moment ){
                 sYear = new Date().getFullYear(); // fix bug : if month = 0 and year = 0 -> month <> january
             }
 
-            if (!dateError && (!moment( {year: sYear, month: sMonth - 1, day: sDay} ).isValid())) { dateError = true; }
+            if (!dateError && (!moment( {year: sYear, month: sMonth - 1, day: sDay} ).isValid())) {
+                dateError = true;
+            }
         }
         return !dateError ? moment( {year: sYear, month: sMonth - 1, day: sDay} ).format( "DD-MM-YYYY" ).toString() : null;
     }
@@ -166,6 +168,7 @@ var gsTransfer = ( function ( _, moment ){
         //$( this ).val('').datepicker('update');
         this.select();
     }
+
     function filterDateKeyUp(){
         setTimeout( filterDate, 1000 );
         //filterDate();
@@ -386,7 +389,7 @@ var gsTransfer = ( function ( _, moment ){
         table
             .search( '' )
             .columns().search( '' );
-
+        $( '#breadcrumb' ).html( '&nbsp;' );
         $( '.dateBegin' ).val( '' ).datepicker( 'update' );
         $( '.dateEnd' ).val( '' ).datepicker( 'update' );
         $( 'input[name="search"]' ).val( '' );
@@ -397,36 +400,24 @@ var gsTransfer = ( function ( _, moment ){
         table.columns().visible( false, false );
         table.columns( '.defaultView' ).visible( true, false );
         table.columns.adjust().draw( false );
-        $( '#breadcrumb' ).html( '&nbsp;' );
+
         updateMenuVisibleColumnList();
     }
 
-    function menuRootClick(event){
+    function menuRootClick( event ){
 
         resetFilters();
         table.columns( '.detailsLayer' ).visible( false, false );
         table.columns( '.fileLayer' ).visible( true, false );
         table.columns.adjust().draw( false ); // adjust column sizing and redraw
-        table.column( 4 ).search( 'trf_fich' ).draw(); //filter on uploadUserName
+        table.column( 4 ).search( '[^' + username + ']', true, false ).draw(); //filter on uploadUserName
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.root + '</li>' );
         updateMenuVisibleColumnList();
         event.preventDefault();
     }
 
-    function menuCategoryClick(event) {
-        console.log('test');
-        resetFilters();
-        var refdocs = $( this ).children('.level3' );//.data('refdoc');
-        console.log(refdocs);
-        //list children
-        // get ref doc number
-        //filter on ref docs
-        event.preventDefault();
-    }
+    function menuOtherClick( event ){
 
-
-    function menuOtherClick(event){
-    //TODO: change others category!!!
         resetFilters();
         table.columns( '.detailsLayer' ).visible( true, false );
         table.columns( '.fileLayer' ).visible( false, false );
@@ -435,33 +426,58 @@ var gsTransfer = ( function ( _, moment ){
             .column( 4 ).search( '[^' + username + ']', true, false )
             .column( 7 ).search( '^\\s*$', true, false )
             .draw(); //filter on uploadUserName != username
+        $( '[class^=level] .active' ).removeClass( 'active' );
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.other + '</li>' );
         updateMenuVisibleColumnList();
         event.preventDefault();
     }
 
-    function menuUploadClick(event){
+    function menuUploadClick( event ){
 
         resetFilters();
         table.columns( '.detailsLayer' ).visible( true, false );
         table.columns( '.fileLayer' ).visible( false, false );
         table.columns.adjust().draw( false ); // adjust column sizing and redraw
         table.column( 4 ).search( username ).draw(); //filter on uploadUserName
+        $( '[class^=level] .active' ).removeClass( 'active' );
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.upload + '</li>' );
         updateMenuVisibleColumnList();
         event.preventDefault();
     }
 
-    function menuRefDocClick(event){
-        var $this = $( this );
+    function menuCategoryClick( event ){
+
+        resetFilters();
+        var $this = $( this ).parent( 'li' ),
+            levl3 = $this.find( '.level3' ), //list children
+            numDocRegex = '(',
+            child = {};
+
+        $( '[class^=level] .active' ).removeClass( 'active' );
+        $( '#breadcrumb' ).html('<li class="active">' + $this.children( 'a' ).text() + '</li>');
+
+        for (var i = 0; i < levl3.length; i++) {
+            child = $( levl3[i] );
+            numDocRegex += '^' + child.data( 'refdoc' ) + '$|'; // get ref doc number
+            child.addClass( 'active' );
+        }
+        numDocRegex = numDocRegex.replace( /\|([^\|]*)$/, '$1' ); //remove last '|'
+        numDocRegex += ')';
+
+        table.column( 7 ).search( numDocRegex, true, false ).draw(); //filter on ref docs
+        updateMenuVisibleColumnList();
+        event.preventDefault();
+    }
+
+    function menuRefDocClick( event ){
+        var $this = $( this ).parent( 'li' );
         var nodeID = $this.attr( 'id' ),
             nodeText = $this.text(),
-            nodeParentText = $this.closest( 'li.level2' ).find( 'a:first' ).text();
+            nodeParentText = $this.closest( 'li.level2' ).children( 'a' ).text();
 
         $( '#breadcrumb' ).html( '<li class="active">' + nodeParentText + '</li><li class="active">' + nodeText + '</li>' );
 
-
-        $('[class^=level] .active').removeClass( 'active' );
+        $( '[class^=level] .active' ).removeClass( 'active' );
         $this.addClass( 'active' );
         $this.parents( '[class^=level]' ).addClass( 'active' );
 
@@ -478,6 +494,7 @@ var gsTransfer = ( function ( _, moment ){
         updateMenuVisibleColumnList();
         event.preventDefault();
     }
+
 
     function templateMenu(){
 
@@ -520,13 +537,18 @@ var gsTransfer = ( function ( _, moment ){
         } );
 
         //other category
+        //TODO: add manually!!!! it is too custom to make it a rule!!!
         if ($.inArray( -1, refDocUsed ) > -1) {
-            htmlCategoryNode += createCategoryNode(
+            /*htmlCategoryNode += createCategoryNode(
                 {
                     categoryNumber: 98,
                     categoryName  : i18n[lang].tree.other,
                     leafNode      : ''
-                } );
+                } );*/
+            htmlCategoryNode +=
+                '<li class="level2" >' +
+                    '<a id="other" href="#">'+i18n[lang].tree.other+'</a>' +
+                '</li>';
         }
 
         var htmlMenu = _.template( $( '#menuL1' ).html() )(
@@ -668,8 +690,8 @@ var gsTransfer = ( function ( _, moment ){
                 {
                     className    : 'defaultView',
                     targets      : 0,  //checkbox
-                    orderDataType: 'dom-checkbox',
-                    //orderable: false,
+                    //orderDataType: 'dom-checkbox',
+                    orderable: false,
                     searchable   : true
                 },
                 {
@@ -705,12 +727,12 @@ var gsTransfer = ( function ( _, moment ){
                     targets  : 7    //referenceDocument
                 },
                 {
-                    className: 'fileLayer defaultView',
+                    className: 'defaultView',
                     targets  : 8    // size
                 },
                 {
-                    className: 'fileLayer defaultView',
-                    targets  : 9    //extension
+                    className: 'defaultView',
+                    targets  : 9    //extension or type
                 },
                 {
                     className : 'detailsLayer',
@@ -890,11 +912,11 @@ var gsTransfer = ( function ( _, moment ){
     /***** MENU FILTERS *****/
     function setEventMenuFilters(){
         $( '#root' ).on( 'click', menuRootClick );
-        $( '#upload' ).unbind( 'click' ).on( 'click', menuUploadClick );
-        $( 'li.level2' ).unbind('click' ).on('click', menuCategoryClick);
+        $( '#upload' ).children( 'a' ).off( 'click' ).on( 'click', menuUploadClick );
+        $( 'li.level2' ).children( 'a' ).off( 'click' ).on( 'click', menuCategoryClick );
         //TODO: change others category!!!
-        $( '.cat98' ).unbind( 'click' ).on( 'click', menuOtherClick );
-        $( 'li.level3' ).unbind( 'click' ).on( 'click', menuRefDocClick );
+        $( '#other' ).off( 'click' ).on( 'click', menuOtherClick );
+        $( 'li.level3' ).children( 'a' ).off( 'click' ).on( 'click', menuRefDocClick );
     }
 
     /***** UPLOAD *****/
@@ -997,16 +1019,17 @@ var gsTransfer = ( function ( _, moment ){
         var filterDL = $( '#filterDL' );
         filterDL.on( 'click', function (){
             table
-                .column( 15 ).search( '0' )
-                .column( 4 ).search( '[^' + username + ']', true, false )
+                .column( 15 ).search( '^0$', true, false )
+                //.column( 4 ).search( '[^' + username + ']', true, false )
                 .draw();
         } );
-        filterDL.html( '<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Fichiers non-téléchargés' + i18n[lang].button.filter.notDL );
+        filterDL.html( '<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.notDL );
 
         var filterClear = $( '#filterClear' );
         filterClear.on( 'click', function (){
             $( 'input[name=search]' ).text( '' );
             resetFilters();
+            table.draw();
         } );
         filterClear.html( '<i class="fa fa-times"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.clear );
     }
@@ -1035,7 +1058,7 @@ var gsTransfer = ( function ( _, moment ){
 
         db.attr( 'placeholder', i18n[lang].datepicker.start );
         db.val( '' );
-        db.on('focus', filterDateClear );
+        db.on( 'focus', filterDateClear );
         db.on( 'keyup', filterDateKeyUp );
         db.on( 'change', filterDate );
 
