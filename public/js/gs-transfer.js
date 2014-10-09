@@ -216,37 +216,37 @@ var gsTransfer = ( function ( _, moment ){
             var v = value.toLowerCase();
 
             if (v.indexOf( 'pdf' ) !== -1) {
-                return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<a  data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
                     '<i class="fa fa-file-pdf-o fa-lg" title="pdf"></i>' +
                     '</a>';
             }
             else if (v.indexOf( 'zip' ) !== -1) {
-                return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<a  data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
                     '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>' +
                     '</a>';
             }
             else if (v.indexOf( 'xls' ) !== -1 || v.indexOf( 'csv' ) !== -1) {
-                return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<a  data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
                     '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>' +
                     '</a>';
             }
             else if (v.indexOf( 'dat' ) !== -1) {
-                return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<a  data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
                     '<i class="fa fa-file-text-o fa-lg" title="dat"></i>' +
                     '</a>';
             }
             else if (v.indexOf( 'jpg' ) !== -1 || v.indexOf( 'png' ) !== -1) {
-                return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<a  data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
                     '<i class="fa fa-file-picture-o fa-lg" title="image"></i>' +
                     '</a>';
             }
             else {
-                return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<a  data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
                     '<i class="fa fa-file-o fa-lg" ></i>' +
                     '</a>';
             }
             if (v.indexOf( 'dat' ) !== -1 || v.indexOf( 'csv' ) !== -1) {
-                return '<a class="dlfile" data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<a  data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
                     '<i class="fa fa-bar-chart"></i>' +
                     '</a>';
             }
@@ -331,7 +331,7 @@ var gsTransfer = ( function ( _, moment ){
      * UPLOAD
      * */
 
-    function uploadForm(){
+    function setEventuploadForm(){
         // set token for upload
         var $uploadform = $( '#uploadForm' );
         $( 'input[name="token"]' ).val( token );
@@ -339,24 +339,25 @@ var gsTransfer = ( function ( _, moment ){
         $uploadform.attr( 'action', serverURL + 'file/upload' );
 
         $uploadform.fileupload( {
-            sequentialUploads: true,
-            progressall      : function ( e, data ){
+            progressall: function ( e, data ){
                 var progress = parseInt( data.loaded / data.total * 100, 10 );
-                $( '#progress .progress-bar' ).css( 'width', progress + '%' );
+                $( '#progress' ).find( '.progress-bar' ).css( 'width', progress + '%' );
             },
-            add              : function ( e, data ){
+            add        : function ( e, data ){
                 data.submit()
-                    .error( function ( jqXHR, textStatus ){
-                        alert( 'Error ' + textStatus );
-                    } )
-                    .complete( function (){
-                        //console.log("result file upload: ", result);
+                    .success(function () {
                         $( '#progress' ).hide();
                         $( '.close' ).click();
                         location.reload();
+                    })
+                    .error( function ( jqXHR, textStatus ){
+                        alert( 'Error ' + textStatus );
+                    } )
+                    .complete( function ( result ){
+                        //console.log( "result file upload: ", result );
                     } );
             },
-            start            : function (){
+            start      : function (){
                 $( '#progress' ).show();
             }
         } );
@@ -454,7 +455,7 @@ var gsTransfer = ( function ( _, moment ){
             child = {};
 
         $( '[class^=level] .active' ).removeClass( 'active' );
-        $( '#breadcrumb' ).html('<li class="active">' + $this.children( 'a' ).text() + '</li>');
+        $( '#breadcrumb' ).html( '<li class="active">' + $this.children( 'a' ).text() + '</li>' );
 
         for (var i = 0; i < levl3.length; i++) {
             child = $( levl3[i] );
@@ -540,14 +541,14 @@ var gsTransfer = ( function ( _, moment ){
         //TODO: add manually!!!! it is too custom to make it a rule!!!
         if ($.inArray( -1, refDocUsed ) > -1) {
             /*htmlCategoryNode += createCategoryNode(
-                {
-                    categoryNumber: 98,
-                    categoryName  : i18n[lang].tree.other,
-                    leafNode      : ''
-                } );*/
+             {
+             categoryNumber: 98,
+             categoryName  : i18n[lang].tree.other,
+             leafNode      : ''
+             } );*/
             htmlCategoryNode +=
                 '<li class="level2" >' +
-                    '<a id="other" href="#">'+i18n[lang].tree.other+'</a>' +
+                '<a id="other" href="#">' + i18n[lang].tree.other + '</a>' +
                 '</li>';
         }
 
@@ -688,11 +689,11 @@ var gsTransfer = ( function ( _, moment ){
             ],
             columnDefs    : [
                 {
-                    className    : 'defaultView',
-                    targets      : 0,  //checkbox
+                    className : 'defaultView',
+                    targets   : 0,  //checkbox
                     //orderDataType: 'dom-checkbox',
-                    orderable: false,
-                    searchable   : true
+                    orderable : false,
+                    searchable: true
                 },
                 {
                     className: 'defaultView',
@@ -1139,7 +1140,7 @@ var gsTransfer = ( function ( _, moment ){
             createMenu();
 
             //set upload form events
-            uploadForm();
+            setEventuploadForm();
 
             setEventsHTML();
 
