@@ -990,7 +990,7 @@ var gsTransfer = ( function ( _, moment ){
 
     function toggleIconCheck(){
         var tr = $( this ).closest( 'tr' );
-        tr.find( 'i' ).toggleClass( 'fa-square-o fa-check' );
+        tr.find( '.iconSelect' ).find('i').toggleClass( 'fa-square-o fa-check' );
         tr.toggleClass( 'active' );
         toggleDLButton();
     }
