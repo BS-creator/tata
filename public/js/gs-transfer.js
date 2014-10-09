@@ -455,7 +455,6 @@ var gsTransfer = ( function ( _, moment ){
             numDocRegex = '(',
             child = {};
 
-
         $( '[class^=level] .active' ).removeClass( 'active' );
         $( '#breadcrumb' ).html( '<li class="active">' + $this.children( 'a' ).text() + '</li>' );
         $this.addClass( 'active' );
@@ -984,17 +983,31 @@ var gsTransfer = ( function ( _, moment ){
         } );
     }
 
-    function toggleAllIconCheck(){
-        $( '.iconSelect' )
-            .find( 'i' )
-            .toggleClass( 'fa-square-o fa-check-square-o' );
-        $( 'td' ).closest( 'tr' ).toggleClass( 'active' );
+    function toggleAllIconCheck(activated){
+        if(activated){
+            $( '.iconSelect' )
+                .find( 'i' )
+                .removeClass( 'fa-square-o fa-check-square-o' )
+                .addClass('fa-check-square-o');
+            $( 'td' ).closest( 'tr' ).addClass('active');
 
+        }else{
+            $( '.iconSelect' )
+                .find( 'i' )
+                .removeClass( 'fa-square-o fa-check-square-o' )
+                .addClass('fa-square-o');
+            $( 'td' ).closest( 'tr' ).removeClass('active');
+        }
     }
 
     function toggleIconCheck(){
         var tr = $( this ).closest( 'tr' );
-        tr.find( '.iconSelect' ).find( 'i' ).toggleClass( 'fa-square-o fa-check-square-o' );
+
+            tr
+                .find( '.iconSelect' )
+                .find('i')
+                .toggleClass( 'fa-square-o fa-check-square-o' );
+
         tr.toggleClass( 'active' );
         toggleDLButton();
     }
@@ -1003,8 +1016,9 @@ var gsTransfer = ( function ( _, moment ){
     function setEventCheckBox(){
 
         $( '#btnSelectAll' ).on( 'click', function (){
-            $( this ).toggleClass( 'fa-square-o fa-check-square-o' );
-            toggleAllIconCheck();
+            var $this = $(this );
+            $this.toggleClass( 'fa-square-o fa-check-square-o' );
+            toggleAllIconCheck($this.hasClass('fa-check-square-o'));
             toggleDLButton();
         } );
 
