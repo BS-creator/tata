@@ -49,7 +49,7 @@ module.exports = function (grunt) {
             },
             styles: {
                 files: ['<%= config.app %>/css/{,*/}*.css'],
-                tasks: ['newer:copy:styles', 'autoprefixer']
+                tasks: ['newer:copy:styles']//, 'autoprefixer']
             },
             livereload: {
                 options: {

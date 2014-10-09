@@ -7,20 +7,22 @@ $.fn.dataTableExt.afnFiltering.push(
         var dateStart = moment( $( '.dateBegin' ).val(), 'DD/MM/YYYY' ),
             dateEnd = moment( $( '.dateEnd' ).val(), 'DD/MM/YYYY' ),
             dateBeginValid = moment( dateStart ).isValid(),
-            dateEndValid = moment( dateEnd ).isValid();
+            dateEndValid = moment( dateEnd ).isValid(),
+            range =  moment().range(dateStart, dateEnd);
+
 
         var date = moment( data[2], 'DD/MM/YYYY' );
 
         if (dateBeginValid && dateEndValid) {
-            return (moment( dateStart ).isBefore( date ) && moment( dateEnd ).isAfter( date ));
+            return range.contains(date);
         }
 
         if (!dateBeginValid && dateEndValid) {
-            return moment( dateEnd ).isAfter( date );
+            return moment( dateEnd.add(1, 'days') ).isAfter( date );
         }
 
         if (dateBeginValid && !dateEndValid) {
-            return moment( dateStart ).isBefore( date );
+            return moment( dateStart.subtract(1, 'days') ).isBefore( date );
         }
 
         if (!dateBeginValid && !dateEndValid) {
