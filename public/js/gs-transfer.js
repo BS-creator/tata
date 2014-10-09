@@ -345,11 +345,11 @@ var gsTransfer = ( function ( _, moment ){
             },
             add        : function ( e, data ){
                 data.submit()
-                    .success(function () {
+                    .success( function (){
                         $( '#progress' ).hide();
                         $( '.close' ).click();
                         location.reload();
-                    })
+                    } )
                     .error( function ( jqXHR, textStatus ){
                         alert( 'Error ' + textStatus );
                     } )
@@ -980,27 +980,34 @@ var gsTransfer = ( function ( _, moment ){
         } );
     }
 
+    function toggleAllIconCheck(){
+        $( '.iconSelect' )
+            .find( 'i' )
+            .toggleClass( 'fa-square-o fa-check' );
+        $( 'td' ).closest( 'tr' ).toggleClass( 'active' );
+
+    }
+
+    function toggleIconCheck(){
+        var tr = $( this ).closest( 'tr' );
+        tr.find( 'i' ).toggleClass( 'fa-square-o fa-check' );
+        tr.toggleClass( 'active' );
+        toggleDLButton();
+    }
+
     /***** CHECKBOX SELECT ALL *****/
     function setEventCheckBox(){
-        //TODO: remove sorting when click on btSelectAll
-        $( 'input[name=btSelectAll]' ).on( 'change', function (){
-            var cb = $( 'input[name|=cb]' );
-            cb.prop( 'checked', !cb.prop( 'checked' ) );
-            cb.closest( 'tr' ).toggleClass( 'active' );
+
+        $( '#btnSelectAll' ).on( 'click', function (){
+            $(this ).toggleClass( 'fa-square-o fa-check' );
+            toggleAllIconCheck();
             toggleDLButton();
         } );
 
-        $( 'input[name|=cb]' ).on( 'change', function (){
-            $( this ).closest( 'tr' ).toggleClass( 'active' );
-            toggleDLButton();
-        } );
+        $( '.iconSelect' ).on( 'click', toggleIconCheck );
 
-        $( 'td:not( :first-child, :nth-child(2), :last-child )' ).on( 'click', function (){
-            $( this ).closest( 'tr' ).toggleClass( 'active' );
-            var cb = $( this ).closest( 'tr' ).find( 'input[name|=cb]' );
-            cb.prop( 'checked', !cb.prop( 'checked' ) );
-            toggleDLButton();
-        } );
+        $( 'td:not( :first-child, :nth-child(2), :last-child )' )
+            .on( 'click', toggleIconCheck );
     }
 
     /***** FILTER *****/
