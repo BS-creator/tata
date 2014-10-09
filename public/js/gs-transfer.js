@@ -612,7 +612,7 @@ var gsTransfer = ( function ( _, moment ){
 
         _.each( AjaxData, function ( row ){
 
-            /* if (row.isNew) return "<i class='fa fa-check text-success'></i>";
+            /* if (row.isNew) return "<i class='fa fa-check-square-o text-success'></i>";
              else return "<i class='fa fa-times'></i>";*/
 
             if (row.isNew) {
@@ -983,14 +983,14 @@ var gsTransfer = ( function ( _, moment ){
     function toggleAllIconCheck(){
         $( '.iconSelect' )
             .find( 'i' )
-            .toggleClass( 'fa-square-o fa-check' );
+            .toggleClass( 'fa-square-o fa-check-square-o' );
         $( 'td' ).closest( 'tr' ).toggleClass( 'active' );
 
     }
 
     function toggleIconCheck(){
         var tr = $( this ).closest( 'tr' );
-        tr.find( '.iconSelect' ).find('i').toggleClass( 'fa-square-o fa-check' );
+        tr.find( '.iconSelect' ).find('i').toggleClass( 'fa-square-o fa-check-square-o' );
         tr.toggleClass( 'active' );
         toggleDLButton();
     }
@@ -999,7 +999,7 @@ var gsTransfer = ( function ( _, moment ){
     function setEventCheckBox(){
 
         $( '#btnSelectAll' ).on( 'click', function (){
-            $(this ).toggleClass( 'fa-square-o fa-check' );
+            $(this ).toggleClass( 'fa-square-o fa-check-square-o' );
             toggleAllIconCheck();
             toggleDLButton();
         } );

@@ -929,7 +929,8 @@ td:first-child {
   color: #989898;
   font-size: 12px;
 }
-tr.active td:first-child i.fa-check {
+tr.active td:first-child i.fa-check,
+tr.active td:first-child i.fa-check-square-o {
   color: #00c078 !important;
 }
 /*********************************************
