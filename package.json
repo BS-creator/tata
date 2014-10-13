@@ -1,6 +1,6 @@
 {
-  "name": "itransfer",
-  "version": "1.1.0",
+  "name": "gs-transfer",
+  "version": "1.1.1",
   "devDependencies": {
     "autoprefixer": "^3.1.0",
     "grunt": "~0.4.1",
@@ -25,7 +25,7 @@
     "grunt-rev": "~0.1.0",
     "grunt-svgmin": "~0.4.0",
     "grunt-text-replace": "^0.3.12",
-    "grunt-usemin": "~2.1.0",
+    "grunt-usemin": "^2.4.0",
     "gulp-clean": "^0.3.1",
     "jshint-stylish": "~0.1.5",
     "load-grunt-tasks": "~0.4.0",
