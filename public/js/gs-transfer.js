@@ -541,7 +541,7 @@ var gsTransfer = ( function ( _, moment ){
         } );
 
         //other category
-        //TODO: add manually!!!! it is too custom to make it a rule!!!
+        //TODO:DONE add manually!!!! it is too custom to make it a rule!!!
         if ($.inArray( -1, refDocUsed ) > -1) {
             /*htmlCategoryNode += createCategoryNode(
              {
@@ -1157,17 +1157,15 @@ var gsTransfer = ( function ( _, moment ){
         $.when( loadCategory(), loadData(), loadFolder() ).done( function (){
 
             //Add label for reference of Document
-            mergeLabelDoc();
+            $.when(mergeLabelDoc() ).done ( function (){
+                //Template of Table and Menu
+                $.when(createDataTable(),createMenu() ).done( function () {
+                    //set upload form events
+                    setEventuploadForm();
 
-            createDataTable();
-
-            createMenu();
-
-            //set upload form events
-            setEventuploadForm();
-
-            setEventsHTML();
-
+                    setEventsHTML();
+                });
+            });
         } );
     }
 
