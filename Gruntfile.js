@@ -171,7 +171,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= config.dist %>',
-                    src: '{,*/}*.html',
+                    src: ['<%= config.dist %>/{,*/}*.html'],
                     dest: '<%= config.dist %>'
                 }]
             }
@@ -294,11 +294,12 @@ module.exports = function (grunt) {
         //'concat',
         'cssmin',
         'uglify',
+        'htmlmin',
         'copy:dist',
         //'modernizr',
         //'rev',
-        'usemin',
-        'htmlmin'
+        'usemin'
+
     ]);
 
     grunt.registerTask('default', [
