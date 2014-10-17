@@ -15,8 +15,8 @@ $( function () {
             sessionStorage.setItem( 'baseURL', '//qaiapps.groups.be/itransfer/' );
             sessionStorage.setItem( 'serverURL', '//qaiapps.groups.be/ariane/' );
         } else if (window.location.hostname.indexOf( 'prestaweb' ) > -1) {
-            sessionStorage.setItem( 'baseURL', '//prestaweb.groups.be/itransfer/' );
-            sessionStorage.setItem( 'serverURL', '//prestaweb.groups.be/ariane/' );
+            sessionStorage.setItem( 'baseURL', '//transfer.groups.be/' );
+            sessionStorage.setItem( 'serverURL', '//transfer.groups.be/ariane/' );
         }
     }());
 

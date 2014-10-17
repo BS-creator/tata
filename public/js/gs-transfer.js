@@ -1008,6 +1008,7 @@ var gsTransfer = ( function ( _, moment ){
             .toggleClass( 'fa-square-o fa-check-square-o' );
 
         tr.toggleClass( 'active' );
+        //TODO: Download file !!!
         toggleDLButton();
     }
 
@@ -1091,6 +1092,7 @@ var gsTransfer = ( function ( _, moment ){
 
         de.attr( 'placeholder', i18n[lang].datepicker.end );
         de.val( '' );
+        de.on( 'focus', filterDateClear );
         de.on( 'keyup', filterDateKeyUp );
         de.on( 'change', filterDate );
 
@@ -1104,9 +1106,9 @@ var gsTransfer = ( function ( _, moment ){
                 todayHighlight    : true,
                 //startView         : 1,
                 keyboardNavigation: false,
-                clearBtn          : true
+                clearBtn          : true,
                 //calendarWeeks : true,
-                //minViewMode: 1 //month view
+                minViewMode: 1 //month view
             } );
 
     }
