@@ -1,0 +1,79 @@
+.bg-xlt-blue {
+  background-color: #63a4dd;
+}
+.bg-lt-blue {
+  background-color: #378fdd;
+}
+.bg-blue {
+  background-color: #0065bd;
+}
+.bg-dk-blue {
+  background-color: #00407a;
+}
+.bg-lt-green {
+  background-color: #00fd9e;
+}
+.bg-green {
+  background-color: #00c078;
+}
+.bg-dk-green {
+  background-color: #009a60;
+}
+.bg-lt-indigo {
+  background-color: #0a00fe;
+}
+.bg-indigo {
+  background-color: #0700c5;
+}
+.bg-dk-indigo {
+  background-color: #06009f;
+}
+.bg-viola {
+  background-color: #8806b8;
+}
+.bg-dk-pink {
+  background-color: #ae0179;
+}
+.green-light,
+.isNew {
+  color: #00fd9e;
+}
+/*
+    #0064bb
+    #0700c5
+    #3003A1
+    #8806B8
+    #AE0179
+    #0064bb
+    */
+.header-gradient,
+.gs-head-gradient {
+  background: -moz-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, 90deg, color-stop(0%, #0056a1), color-stop(100%, #0065bd));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);
+  /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0056a1', endColorstr='#0065bd', GradientType='0');
+  /* for IE */
+  background: linear-gradient(0deg, #0056a1 0%, #0065bd 100%);
+  /* W3C */
+}
+.center {
+  text-align: center !important;
+}
+i.fa,
+li {
+  cursor: pointer;
+}
+.fa,
+.glyphicon {
+  font-size: 18px !important;
+}
+.hide {
+  display: none;
+}
