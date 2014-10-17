@@ -4,28 +4,38 @@
 
 /* position for sliding effect */
 #side-menu {
+    display: table;
     position: absolute;
     bottom: 0;
     height: 100%;
     background-color:   @gs-blue;
     color: white;
 }
-#main {
-    position: relative;
-    width: 100%;
-}
 
 /* head */
+.side-menu-head {
+    line-height: @xl;
+    marin-bottom: 1px;
+}
+.side-menu-head-icon {
+    line-height: @xl;
+    marin-bottom: 1px;
+}
+.side-menu-head-icon:hover,
+.side-menu-head-icon:focus,
+.side-menu-head-icon:active,
+.side-menu-head-icon.active {
+    background-color:   darken(@gs-lt-blue, 10%);
+}
 .side-menu-head,
 .side-menu-head-icon {
-    height: 50px;
-    line-height: 50px;
     margin: 0px;
     font-size: 16px;
     text-transform: uppercase;
-    background-color:   @gs-lt-blue;
+    background-color:   @gs-blue;
     color:              lighten(@gs-lt-blue,30%);
 }
+
 .side-menu-head-icon {
     cursor: pointer;
     color: white;

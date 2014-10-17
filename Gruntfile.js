@@ -244,7 +244,7 @@ module.exports = function (grunt) {
                 },
                 files: {
                     "public/css/portal-components.css": "public/less/portal-components/portal-components.less",
-                    "public/css/gs-transfer.css": "public/less/gs-transfer.less"
+                    "public/css/gst.css": "public/less/gst.less"
                 }
             }
         }

@@ -867,9 +867,12 @@ var gsTransfer = ( function ( _, moment ){
         } );
     }
 
+
+
     /****************************************************
      * EVENTS
      * */
+
 
     function setEventColumnListVisible(){
         $( '.side-menu-list > li' ).off( 'click' ).on( 'click', function (){
@@ -882,7 +885,6 @@ var gsTransfer = ( function ( _, moment ){
 
         $( '#init-conf' ).off( 'click' ).on( 'click', function (){
             resetDefaultView();
-
         } );
     }
 
@@ -890,8 +892,16 @@ var gsTransfer = ( function ( _, moment ){
 
         $( '#toggle-side-menu' ).html( '<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.colVisible );
 
+        // slide off #side-menu
         oTable.on( 'length.dt', function (){
-            console.log( 'test' );
+            var sbWidth = $( '#sidenav' ).width();
+            $('#main').animate( {
+                right: 0
+            },200 );
+            $('#side-menu').animate( {
+                right: -sbWidth,
+                width: sbWidth
+            },200 ).removeClass( 'active' );
         } );
 
         $( 'p.side-menu-head' ).text( i18n[lang].sideMenu.config );
@@ -1113,6 +1123,7 @@ var gsTransfer = ( function ( _, moment ){
 
     }
 
+
     function setEventBreadCrumb(){
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].breadrumb + '</li>' );
     }
@@ -1172,7 +1183,6 @@ var gsTransfer = ( function ( _, moment ){
     }
 
     function main(){
-
         $( '.user-name' ).html( username.toUpperCase() );
 
         // LOGOUT
@@ -1198,8 +1208,34 @@ var gsTransfer = ( function ( _, moment ){
         } );
 
     }
-
     $( 'document' ).ready( main() );
+
+/*    function setSideMenuHeight(){
+        var sbWidth = $( '#sidenav' ).width();
+        var mainTop = $('#main').offset().top;
+        $('#main').animate( {
+            right: 0
+        },200 );
+
+        $('#side-menu').animate( {
+            right: -sbWidth,
+            width: sbWidth,
+            bottom: 0
+        },200 )
+            .css( {
+                height: $( window).height(),
+                top   : mainTop, // get top height to align
+                right : -sbWidth,
+                width : sbWidth,
+                bottom: 0
+            } ).removeClass();
+    }*/
+
+/*    $('[name="tableID_length"]').on('click', function(e){
+        e.stopPropagation();
+        console.log( $( '#contentTable' ).height() );
+        $('#side-menu').height( $( window).height() );
+    });*/
 
 }( _, moment ) );
 
