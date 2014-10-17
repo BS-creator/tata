@@ -4,9 +4,6 @@ div#header
 div#top-nav
 ul.sidebar-left
 */
-.noshow {
-  display: none;
-}
 .bg-xlt-blue {
   background-color: #63a4dd;
 }
@@ -48,9 +45,15 @@ ul.sidebar-left
   color: #00fd9e;
 }
 /*
-2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
-*/
-.header-gradient {
+    #0064bb
+    #0700c5
+    #3003A1
+    #8806B8
+    #AE0179
+    #0064bb
+    */
+.header-gradient,
+.gs-head-gradient {
   background: -moz-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);
   /* FF3.6+ */
   background: -webkit-gradient(linear, 90deg, color-stop(0%, #0056a1), color-stop(100%, #0065bd));
@@ -66,14 +69,49 @@ ul.sidebar-left
   background: linear-gradient(0deg, #0056a1 0%, #0065bd 100%);
   /* W3C */
 }
+.center {
+  text-align: center !important;
+}
+i.fa,
+li {
+  cursor: pointer;
+}
+.fa,
+.glyphicon {
+  font-size: 18px !important;
+}
+.hide {
+  display: none;
+}
 @font-face {
   font-family: 'Roboto';
   src: url('../fonts/Roboto/Roboto-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
+/***************************************************
+                       Main -Footer                  STICKY FOOTER RULES
+****************************************************/
+html,
 body {
   height: 100%;
+  margin: 0;
+}
+#main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  margin: 0 auto -80.9px;
+  /*    bottom: 0;*/
+}
+#footer-grave {
+  height: 60px;
+}
+#footer {
+  height: 60px;
+}
+body {
   position: relative;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
@@ -84,32 +122,20 @@ body {
 ****************************************************/
 header {
   height: 80.9px;
+  line-height: 80.9px;
   background-color: #0064bb;
 }
-#main {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-}
-/*****************************************************
-                  FOOTER
-*****************************************************/
 ul.lang {
   margin: 0;
-  padding: 50px 19px 0 0;
+  padding: 0 19px 0 0;
   color: white;
   letter-spacing: .1em;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
 }
-#logo {
-  float: left;
-  display: block;
-  height: 73px;
-  width: 73px;
-  overflow: hidden;
-  padding: 10px;
+#header-logo {
+  padding-left: 10px;
 }
 .lang a {
   color: #00306a;
@@ -194,76 +220,6 @@ td#top-nav ul:not(i) {
 #breadcrumb li:last-child:after {
   content: '';
 }
-/**********************************************
-                    SIDEBAR LEFT      #sidenav
-***********************************************/
-/* ul */
-.sidebar-left {
-  margin: 0;
-  padding: 0;
-}
-.sidebar-left ul {
-  padding: 0;
-}
-.sidebar-left li {
-  margin-bottom: 1px;
-  padding: 15px 0 15px 21px;
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 14px;
-  color: #FFF;
-  background-color: #378fdd;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1em;
-  /* transition */
-  -webkit-transition: all 0.4s ease;
-  /* Safari 3.2+, Chrome */
-  -moz-transition: all 0.4s ease;
-  /* Firefox 4-15 */
-  -o-transition: all 0.4s ease;
-  /* Opera 10.5-12.00 */
-  transition: all 0.4s ease;
-  /* Firefox 16+, Opera 12.50+ */
-}
-li.sidebar-h-0:hover,
-li.sidebar-h-0:focus,
-li.sidebar-h-0:active,
-li.sidebar-h-0.active {
-  background-color: #0064bb;
-}
-li.sidebar-h-1:hover,
-li.sidebar-h-1:focus,
-li.sidebar-h-1:active,
-li.sidebar-h-1.active {
-  background-color: #0700c5;
-}
-li.sidebar-h-2:hover,
-li.sidebar-h-2:focus,
-li.sidebar-h-2:active,
-li.sidebar-h-2.active {
-  background-color: #3003A1;
-}
-li.sidebar-h-3:hover,
-li.sidebar-h-3:focus,
-li.sidebar-h-3:active,
-li.sidebar-h-3.active {
-  background-color: #8806B8;
-}
-li.sidebar-h-4:hover,
-li.sidebar-h-4:focus,
-li.sidebar-h-4:active,
-li.sidebar-h-4.active {
-  background-color: #AE0179;
-}
-li.sidebar-h-5:hover,
-li.sidebar-h-5:focus,
-li.sidebar-h-5:active,
-li.sidebar-h-5.active {
-  background-color: #0064bb;
-}
 /* LOGIN */
 input[type="text"],
 input[type="password"] {
@@ -274,9 +230,6 @@ input[type="password"] {
 input[type="text"]:focus,
 input[type="password"]:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.06) inset, 0px 0px 8px rgba(102, 175, 233, 0.45);
-}
-.ColVis {
-  display: none;
 }
 /**********************************************
                     LOADER
@@ -309,23 +262,6 @@ input[type="password"]:focus {
 #contentTable {
   overflow: hidden;
 }
-/*********************************************
-                    MISC
-**********************************************/
-i.fa,
-li {
-  cursor: pointer;
-}
-.fa,
-.glyphicon {
-  font-size: 18px !important;
-}
-.center {
-  text-align: center !important;
-}
-/*
-2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
-*/
 /****************************************************
                     DATEPICKER
 ****************************************************/
@@ -359,6 +295,9 @@ li {
 /*********************************************
                     TABLE
 *********************************************/
+.ColVis {
+  display: none;
+}
 .dataTables_scroll {
   border: 1px solid #ccc;
 }
@@ -403,7 +342,7 @@ td:last-child {
 .table tbody tr.active:hover td,
 .table tbody tr.active:focus td {
   /*background-color:       @gs-lt-blue !important;
-  color: #FFF !important;*/
+    color: #FFF !important;*/
   background-color: #d6ecff !important;
   color: #606060;
   -webkit-transition: all 0.2s ease;
@@ -417,7 +356,7 @@ td:last-child {
 }
 .table tbody tr.active td {
   /*background-color:       @gs-xlt-blue !important;
-  color: #FFF !important;*/
+    color: #FFF !important;*/
   background-color: #f0f8ff !important;
   color: #606060;
 }
@@ -491,3 +430,30 @@ div.dataTables_length label {
 .dataTables_wrapper .dataTables_info {
   float: none;
 }
+/*********************************************
+                    RESPONSIVE
+**********************************************/
+@media (max-width: 1154px) {
+  div.btn-group:nth-child(4) {
+    margin-top: 4.55px;
+    margin-left: 0 !important;
+    float: left;
+  }
+}
+@media (max-width: 650px) {
+  #datepicker {
+    margin-top: 4.55px;
+    margin-left: 0 !important;
+    float: left;
+  }
+}
+@media (max-width: 350px) {
+  input[name^="search"] {
+    margin-top: 4.55px;
+    margin-left: 0 !important;
+    float: left;
+  }
+}
+/*
+2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
+*/

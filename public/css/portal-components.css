@@ -2,9 +2,6 @@
 /* @author  :   Group S */
 /* @date    :   2014-09 */
 /* @version :   BETA 0.2 */
-.noshow {
-  display: none;
-}
 .bg-xlt-blue {
   background-color: #63a4dd;
 }
@@ -46,9 +43,15 @@
   color: #00fd9e;
 }
 /*
-2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
-*/
-.header-gradient {
+    #0064bb
+    #0700c5
+    #3003A1
+    #8806B8
+    #AE0179
+    #0064bb
+    */
+.header-gradient,
+.gs-head-gradient {
   background: -moz-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);
   /* FF3.6+ */
   background: -webkit-gradient(linear, 90deg, color-stop(0%, #0056a1), color-stop(100%, #0065bd));
@@ -63,6 +66,20 @@
   /* for IE */
   background: linear-gradient(0deg, #0056a1 0%, #0065bd 100%);
   /* W3C */
+}
+.center {
+  text-align: center !important;
+}
+i.fa,
+li {
+  cursor: pointer;
+}
+.fa,
+.glyphicon {
+  font-size: 18px !important;
+}
+.hide {
+  display: none;
 }
 body {
   font-size: 12px;
@@ -669,25 +686,34 @@ table tr th .pw-btn-group-th .pw-btn-th,
 ***********************************************/
 /* position for sliding effect */
 #side-menu {
+  display: table;
   position: absolute;
   bottom: 0;
   height: 100%;
   background-color: #0064bb;
   color: white;
 }
-#main {
-  position: relative;
-  width: 100%;
-}
 /* head */
+.side-menu-head {
+  line-height: 50px;
+  marin-bottom: 1px;
+}
+.side-menu-head-icon {
+  line-height: 50px;
+  marin-bottom: 1px;
+}
+.side-menu-head-icon:hover,
+.side-menu-head-icon:focus,
+.side-menu-head-icon:active,
+.side-menu-head-icon.active {
+  background-color: #2175c0;
+}
 .side-menu-head,
 .side-menu-head-icon {
-  height: 50px;
-  line-height: 50px;
   margin: 0px;
   font-size: 16px;
   text-transform: uppercase;
-  background-color: #378fdd;
+  background-color: #0064bb;
   color: #bad8f3;
 }
 .side-menu-head-icon {

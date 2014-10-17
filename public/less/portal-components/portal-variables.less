@@ -4,9 +4,7 @@
 @gutter-width:          32px;
 @wrapper-padding:       15px;
 
-.noshow {
-    display: none;
-}
+
 //////////////////////////////////////////////////      COLORS
 // analog triad 30° base on #0064bb             /http://colorschemedesigner.com
 ////////////////////////////////////////////////
@@ -50,18 +48,22 @@
 .bg-viola           { background-color: @gs-viola; }
 .bg-dk-pink         { background-color: @gs-darkpink; }
 
-
-
 .green-light,
 .isNew {
     color:           @gs-lt-green;
 }
-//////////////////////////////////////////////////////////////////////////////
-// Margin - Padding
-
 /*
-2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
-*/
+    #0064bb
+    #0700c5
+    #3003A1
+    #8806B8
+    #AE0179
+    #0064bb
+    */
+//////////////////////////////////////////////////////////////////////////////
+// Margin - Padding                                                             SEQUENCE GR BASED ON 50
+// 2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
+
 @xxs:  4.55px;
 @xs:   7.3px;
 @s:    11.8px;
@@ -73,12 +75,21 @@
 
 
 //////////////////////////////////////////////////////////////////////////////
-// MIXINS
+// TYPE SIZE
+@xs-font-size:  10px;
+@s-font-size:   11px;
+@m-font-size:   12px;
+@l-font-size:   14px;
+@xl-font-size:  16px;
+
+//////////////////////////////////////////////////////////////////////////////
+// MISCELLANEOUS
 @text-shadow: 0 1px 1px rgba(255,255,255,1);
 @box-shadow:  0 1px 2px rgba(0,0,0,0.3);
 
 // gradient header Group S
-.header-gradient {
+.header-gradient,
+.gs-head-gradient {
     background: -moz-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);/* FF3.6+ */
     background: -webkit-gradient(linear, 90deg, color-stop(0%, #0056a1), color-stop(100%, #0065bd));/* Chrome,Safari4+ */
     background: -webkit-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);/* Chrome10+,Safari5.1+ */
@@ -87,11 +98,18 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0056a1', endColorstr='#0065bd', GradientType='0'); /* for IE */
     background: linear-gradient(0deg, #0056a1 0%, #0065bd 100%);/* W3C */
 }
+.center {
+    text-align: center !important;
+}
+i.fa, li {
+    cursor: pointer;
+}
+.fa,
+.glyphicon {
+    font-size: 18px !important;
+}
+.hide {
+    display: none;
+}
 
-//////////////////////////////////////////////////////////////////////////////
-// TYPE SIZE
-@xs-font-size:  10px;
-@s-font-size:   11px;
-@m-font-size:   12px;
-@l-font-size:   14px;
-@xl-font-size:  16px;
+

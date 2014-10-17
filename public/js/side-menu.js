@@ -15,12 +15,19 @@ $( 'document' ).ready( function () {
         $( '#side-menu' ).css( {
             top   : mainTop, // get top height to align
             right : -sbWidth,
-            width : sbWidth
+            width : sbWidth,
+/*
+            bottom: 0
+*/
         } ).removeClass();
     })();
 
     // set position
     var sideMenuToggle = function ( displayed ) {
+
+        // set height
+        $( '#side-menu' ).height( ( $( '#main' ).height() ) - $('footer').height() );
+
         var sbWidth = $( '#sidenav' ).width();
         var MSAbsc = (displayed === true) ? 0 : -sbWidth;
         var mainAbsc = (displayed === false) ? 0 : -sbWidth;
@@ -57,5 +64,6 @@ $( 'document' ).ready( function () {
     $( '.side-menu-list > li' ).on( 'click', function () {
         $( this ).toggleClass( 'active' );
     } );
+
 
 } );
