@@ -4,6 +4,31 @@ div#header
 div#top-nav
 ul.sidebar-left
 */
+
+/*********************************************
+                    RESPONSIVE
+**********************************************/
+@media (max-width: 1154px) {
+  div.btn-group:nth-child(4) {
+    margin-top: 4.55px;
+    margin-left: 0 !important;
+    float: left;
+  }
+}
+@media (max-width: 650px) {
+  #datepicker {
+    margin-top: 4.55px;
+    margin-left: 0 !important;
+    float: left;
+  }
+}
+@media (max-width: 350px) {
+  input[name^="search"] {
+    margin-top: 4.55px;
+    margin-left: 0 !important;
+    float: left;
+  }
+}
 .bg-xlt-blue {
   background-color: #63a4dd;
 }
@@ -73,7 +98,7 @@ ul.sidebar-left
   text-align: center !important;
 }
 i.fa,
-li {
+li, tr a {
   cursor: pointer;
 }
 .fa,
@@ -430,30 +455,107 @@ div.dataTables_length label {
 .dataTables_wrapper .dataTables_info {
   float: none;
 }
-/*********************************************
-                    RESPONSIVE
-**********************************************/
-@media (max-width: 1154px) {
-  div.btn-group:nth-child(4) {
-    margin-top: 4.55px;
-    margin-left: 0 !important;
-    float: left;
-  }
+
+
+/* note */
+#warningQuota p {
+  margin-top: 6px;
 }
-@media (max-width: 650px) {
-  #datepicker {
-    margin-top: 4.55px;
-    margin-left: 0 !important;
-    float: left;
-  }
+/********************************************
+                INFO.JS
+********************************************/
+/* text */
+.introjs-tooltip {
+  padding: 19px;
+  font-size: 14px;
 }
-@media (max-width: 350px) {
-  input[name^="search"] {
-    margin-top: 4.55px;
-    margin-left: 0 !important;
-    float: left;
-  }
+
+.introjs-bullets ul {
+  clear: both;
+  margin: 15px auto;
+  padding: 0px;
+  display: inline-block;
 }
-/*
-2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
-*/
+.introjs-bullets ul li a {
+  width: 7px;
+  height: 7px;
+}
+.introjs-tooltipbuttons {
+  margin: 0 auto 15px;
+}
+.introjs-button {
+  margin: 0;
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  border: none;
+  text-decoration: none;
+  text-shadow: none;
+  font: 22px FontAwesome;
+  background-color: transparent;
+  background-image: none;
+}
+.introjs-button:hover,
+.introjs-button:active,
+.introjs-button:focus,
+.introjs-button.active {
+  border: 0;
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+}
+.introjs-tooltipbuttons {
+  margin: 0;
+  white-space: normal;
+}
+.introjs-prevbutton:before {
+  content: "\f053";
+  float: left;
+}
+.introjs-nextbutton:before {
+  content: "\f054";
+  float: right;
+}
+.introjs-prevbutton {
+  float: left;
+  padding-top:0;
+  padding-left:0;
+  margin: 0;
+}
+.introjs-nextbutton {
+  float: right;
+  padding-top:0;
+  padding-right: 0;
+  margin: 0;
+}
+.introjs-helperNumberLayer {
+  top: -18px;
+  left: -18px;
+  font-size: 14px;
+  background: #080;
+  border: 1px solid #FFF;
+}
+.introjs-skipbutton {
+  padding: 0;
+  margin: 0;
+  font-size: 0px;
+}
+.introjs-helperLayer,
+.introjs-helperLayer *,
+.introjs-helperLayer:before,
+.introjs-helperLayer:after,
+.introjs-helperLayer *:after,
+.introjs-helperLayer *:before,
+.introjs-tooltipReferenceLayer,
+.introjs-tooltipReferenceLayer *,
+.introjs-tooltipReferenceLayer:before,
+.introjs-tooltipReferenceLayer:after,
+.introjs-tooltipReferenceLayer *:before,
+.introjs-tooltipReferenceLayer *:after {
+  box-sizing: content-box !important;
+  -moz-box-sizing: content-box !important;
+  -webkit-box-sizing: content-box !important;
+}
+
+.introjs-helperNumberLayer {
+  display: none;
+}

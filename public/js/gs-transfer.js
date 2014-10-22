@@ -1171,10 +1171,6 @@ var gsTransfer = ( function ( _, moment, introJs ){
                         intro: i18n[lang].help.headers
                     },
                     {
-                        element: '.bottom',
-                        intro: i18n[lang].help.bottom
-                    },
-                    {
                         element: '#btn-upload-div',
                         intro: i18n[lang].help.upload,
                         position: 'right'
@@ -1208,10 +1204,10 @@ var gsTransfer = ( function ( _, moment, introJs ){
                         intro: i18n[lang].help.datepicker,
                         position: 'bottom'
                     },
-                    {
+                    /*{
                         element: '.reloadme',
                         intro: i18n[lang].help.reloadme
-                    },
+                    },*/
                     {
                         element: '#signout',
                         intro: i18n[lang].help.logoff,
@@ -1219,10 +1215,10 @@ var gsTransfer = ( function ( _, moment, introJs ){
                     }
                 ]
             });
-            intro.setOption("skipLabel", i18n[lang].help.skipLabel);
-            intro.setOption("nextLabel", i18n[lang].help.nextLabel);
-            intro.setOption("prevLabel", i18n[lang].help.prevLabel);
-            intro.setOption("doneLabel", i18n[lang].help.doneLabel);
+            intro.setOption("skipLabel","");
+            intro.setOption("nextLabel", "");
+            intro.setOption("prevLabel", "");
+            intro.setOption("doneLabel", "");
             intro.start();
         });
 

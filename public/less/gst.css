@@ -454,6 +454,16 @@ div.dataTables_length label {
     float: left;
   }
 }
-/*
-2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
-*/
+
+/* note */
+   #warningQuota p {
+     margin-top: 10px;
+   }
+/********************************************
+                INFO.JS
+********************************************/
+.introjs-tooltip {
+  padding: 19px;
+  font-size: 14px;
+}
+
