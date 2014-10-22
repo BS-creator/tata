@@ -216,39 +216,39 @@ var gsTransfer = ( function ( _, moment, introJs ){
             var v = value.toLowerCase();
 
             if (v.indexOf( 'pdf' ) !== -1) {
-                return '<a  data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<span  ' +
                     '<i class="fa fa-file-pdf-o fa-lg" title="pdf"></i>' +
-                    '</a>';
+                    '</span>' ;
             }
             else if (v.indexOf( 'zip' ) !== -1) {
-                return '<a  data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<span  ' +
                     '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>' +
-                    '</a>';
+                    '</span>' ;
             }
             else if (v.indexOf( 'xls' ) !== -1 || v.indexOf( 'csv' ) !== -1) {
-                return '<a  data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<span  ' +
                     '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>' +
-                    '</a>';
+                    '</span>' ;
             }
             else if (v.indexOf( 'dat' ) !== -1) {
-                return '<a  data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<span  ' +
                     '<i class="fa fa-file-text-o fa-lg" title="dat"></i>' +
-                    '</a>';
+                    '</span>' ;
             }
             else if (v.indexOf( 'jpg' ) !== -1 || v.indexOf( 'png' ) !== -1) {
-                return '<a  data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<span  ' +
                     '<i class="fa fa-file-picture-o fa-lg" title="image"></i>' +
-                    '</a>';
+                    '</span>' ;
             }
             else {
-                return '<a  data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<span  ' +
                     '<i class="fa fa-file-o fa-lg" ></i>' +
-                    '</a>';
+                    '</span>' ;
             }
             if (v.indexOf( 'dat' ) !== -1 || v.indexOf( 'csv' ) !== -1) {
-                return '<a  data-id="' + row.idFile + '" data-file="' + row.fileName + '" >' +
+                return '<span  ' +
                     '<i class="fa fa-bar-chart"></i>' +
-                    '</a>';
+                    '</span>' ;
             }
             return value;
         } else {
@@ -1150,8 +1150,8 @@ var gsTransfer = ( function ( _, moment, introJs ){
                         intro: i18n[lang].help.table
                     },
                     {
-                        element: '#breadcrumb',
-                        intro: i18n[lang].help.breadcrumb
+                        element: '.iconSelect',
+                        intro: i18n[lang].help.checkbox
                     },
                     {
                         element: '.dlfile',
@@ -1162,17 +1162,13 @@ var gsTransfer = ( function ( _, moment, introJs ){
                         intro: i18n[lang].help.dlfileLabel
                     },
                     {
-                        element: '.iconSelect',
-                        intro: i18n[lang].help.checkbox
+                        element: '.remove',
+                        intro: i18n[lang].help.remove,
+                        position: 'left'
                     },
                     {
                         element: '.dataTables_scrollHeadInner > table:nth-child(1) > thead:nth-child(1) > tr:nth-child(1)',
                         intro: i18n[lang].help.headers
-                    },
-                    {
-                        element: '.remove',
-                        intro: i18n[lang].help.remove,
-                        position: 'left'
                     },
                     {
                         element: '.bottom',
@@ -1187,6 +1183,15 @@ var gsTransfer = ( function ( _, moment, introJs ){
                         element: 'li.level1',
                         intro: i18n[lang].help.menu,
                         position: 'right'
+                    },
+                    {
+                        element: '#upload',
+                        intro: i18n[lang].help.uploaded,
+                        position: 'right'
+                    },
+                    {
+                        element: '#breadcrumb',
+                        intro: i18n[lang].help.breadcrumb
                     },
                     {
                         element: '#filterby',
@@ -1206,6 +1211,11 @@ var gsTransfer = ( function ( _, moment, introJs ){
                     {
                         element: '.reloadme',
                         intro: i18n[lang].help.reloadme
+                    },
+                    {
+                        element: '#signout',
+                        intro: i18n[lang].help.logoff,
+                        position: 'left'
                     }
                 ]
             });

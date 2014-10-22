@@ -72,10 +72,12 @@
             "dlfile"    : "Cliquez ici pour télécharger le fichier. Le numéro représente le nombre de fois que le fichier a déjà été téléchargé",
             "dlfileLabel": "Cliquez sur le lien pour télécharger le fichier.",
             "checkbox"  : "Cliquez sur les checkboxes pour sélectionner des fichiers à télécharger.",
-            "remove"    : "Cliquez sur cet icône pour supprimer le fichier."
+            "remove"    : "Cliquez sur cet icône pour supprimer le fichier.",
+            "uploaded"  : "Cliquez ici pour afficher les fichiers que vous avez envoyés à Group S",
+            "logoff"    : "Cliquez ici pour vous déconnectez de l'application"
 
         },
-        "warningQuota": "Cet Application est exclusivement destinée au transfert de fichier. Veillez a bien supprimer vos fichiers après le telechargement.",
+        "warningQuota": "Cette application est exclusivement destinée au transfert de fichier. Veillez a bien supprimer vos fichiers après le telechargement.",
         "listAll"     : "Tous",
         "showHide"    : "Afficher les colonnes",
         "upload"      : "Transmettre des fichiers à Group S",
