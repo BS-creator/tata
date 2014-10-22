@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width">
 
     <!-- build:css css/file.min.css -->
-    <link rel="stylesheet" href="bootstrap-3.2.0/css/bootstrap.css"/>
+    <link rel="stylesheet" href="bootstrap-3.2.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="font-awesome-4.2.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="css/datepicker.css">
-    <link rel="stylesheet" href="DataTables/media/css/jquery.dataTables.css"/>
+    <link rel="stylesheet" href="DataTables/media/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="DataTables/resources/bootstrap/3/dataTables.bootstrap.css"/>
     <link rel="stylesheet" href="DataTables/extensions/ColVis/css/dataTables.colVis.css"/>
+    <link rel="stylesheet" href="css/introjs.min.css"/>
     <link rel="stylesheet" href="css/portal-components.css">
     <link rel="stylesheet" href="css/fileupload/jquery.fileupload.css"/>
     <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui.css"/>
@@ -23,6 +24,7 @@
     <noscript>
         <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui-noscript.css">
     </noscript>
+
     <!-- endbuild -->
 </head>
 <body>
@@ -87,7 +89,8 @@
                     <div id="upload-modal">
 
                         <!-- Button trigger modal -->
-                        <div id="btn-upload-div" class="btn-portal-blue wide text-center" data-toggle="modal" data-target="#uploadFiles"
+                        <div id="btn-upload-div" class="btn-portal-blue wide text-center"
+                             data-toggle="modal" data-target="#uploadFiles"
                              href="#uploadFiles">
                             <span></span>
                         </div>
@@ -211,7 +214,7 @@
                             </div>
 
                             <!--search-->
-                            <input class="pull-left ml-s" type="text" name="search" placeholder=""/>
+                            <input id="searchBox" class="pull-left ml-s" type="text" name="search" placeholder=""/>
 
                             <!--datepicker-->
                             <div class="pull-left ml-s input-daterange" id="datepicker">
@@ -228,6 +231,9 @@
 <!--                                <button id="toggle-side-menu" type="button" class="btn btn-default">
                                     &nbsp;&nbsp;&nbsp;
                                 </button>-->
+                                <button id="help" type="button" class="btn btn-default">
+                                    &nbsp;&nbsp;&nbsp;
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -329,14 +335,14 @@
     </p>
 </footer>
 
-<div id="side-menu">
+<!--<div id="side-menu">
     <p class="side-menu-head text-center"></p>
     <p class="side-menu-head-icon text-center pr-m"><i class="fa fa-chevron-right"></i></p>
     <ul class="side-menu-list">
-           <!-- <li>&nbsp;&nbsp;&nbsp;Pavlova</li>-->
+           &lt;!&ndash; <li>&nbsp;&nbsp;&nbsp;Pavlova</li>&ndash;&gt;
     </ul>
     <button id="init-conf" class="btn-portal-blue wide"></button>
-</div>
+</div>-->
 
 <!-- build:js js/file.min.js-->
 <script src="js/jquery.js"></script>
@@ -349,6 +355,7 @@
 <script src="DataTables/extensions/ColVis/js/dataTables.colVis.js"></script>
 <script src="DataTables/plugins/date_range.js"></script>
 <script src="DataTables/plugins/dom-checkbox.js"></script>
+<script src="js/intro.min.js"></script>
 <script src="js/bootstrap.file-input.js"></script>
 <script src="js/bootstrap-datepicker.js"></script>
 <script src="js/fileupload/vendor/jquery.ui.widget.js"></script>

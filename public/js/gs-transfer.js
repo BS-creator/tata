@@ -1,4 +1,4 @@
-var gsTransfer = ( function ( _, moment ){
+var gsTransfer = ( function ( _, moment, introJs ){
     'use strict';
 
     /***  GLOBAL VARIABLES ***/
@@ -683,7 +683,7 @@ var gsTransfer = ( function ( _, moment ){
                 [10, 20, 50, -1],
                 [10, 20, 50, i18n[lang].listAll]
             ],
-            dom           : '<"top"C>rt<"multiDL"><"page"p><"bottom"il>',
+            dom           : '<"top"C>rt<"#warningQuota"><"multiDL"><"page"p><"bottom"il>',
             language      : {
                 url: i18n[lang].url.table
             },
@@ -1133,9 +1133,97 @@ var gsTransfer = ( function ( _, moment ){
         $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].breadrumb + '</li>' );
     }
 
+    function setEventHelpButton(){
+        $("#btn-upload-div").attr("data-intro", "ENVOIE DE FICHIER");
+        var helpBtn = $( '#help' );
+        helpBtn.html('<i class="fa fa-question"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.help);
+        helpBtn.on('click', function(){
+            //console.log("test");
+            var intro = introJs();
+            intro.setOptions({
+                steps: [
+                    {
+                        intro: i18n[lang].help.welcome
+                    },
+                    {
+                        element: '#tableID',
+                        intro: i18n[lang].help.table
+                    },
+                    {
+                        element: '#breadcrumb',
+                        intro: i18n[lang].help.breadcrumb
+                    },
+                    {
+                        element: '.dlfile',
+                        intro: i18n[lang].help.dlfile
+                    },
+                    {
+                        element: '.dlfileLabel',
+                        intro: i18n[lang].help.dlfileLabel
+                    },
+                    {
+                        element: '.iconSelect',
+                        intro: i18n[lang].help.checkbox
+                    },
+                    {
+                        element: '.dataTables_scrollHeadInner > table:nth-child(1) > thead:nth-child(1) > tr:nth-child(1)',
+                        intro: i18n[lang].help.headers
+                    },
+                    {
+                        element: '.remove',
+                        intro: i18n[lang].help.remove,
+                        position: 'left'
+                    },
+                    {
+                        element: '.bottom',
+                        intro: i18n[lang].help.bottom
+                    },
+                    {
+                        element: '#btn-upload-div',
+                        intro: i18n[lang].help.upload,
+                        position: 'right'
+                    },
+                    {
+                        element: 'li.level1',
+                        intro: i18n[lang].help.menu,
+                        position: 'right'
+                    },
+                    {
+                        element: '#filterby',
+                        intro: i18n[lang].help.filterby,
+                        position: 'left'
+                    },
+                    {
+                        element: '#searchBox',
+                        intro: i18n[lang].help.searchBox,
+                        position: 'bottom'
+                    },
+                    {
+                        element: '#datepicker',
+                        intro: i18n[lang].help.datepicker,
+                        position: 'bottom'
+                    },
+                    {
+                        element: '.reloadme',
+                        intro: i18n[lang].help.reloadme
+                    }
+                ]
+            });
+            intro.setOption("skipLabel", i18n[lang].help.skipLabel);
+            intro.setOption("nextLabel", i18n[lang].help.nextLabel);
+            intro.setOption("prevLabel", i18n[lang].help.prevLabel);
+            intro.setOption("doneLabel", i18n[lang].help.doneLabel);
+            intro.start();
+        });
+
+
+    }
+
+
+
     function setEventsHTML(){
 
-        setEventSideMenuColumnList();
+        //setEventSideMenuColumnList();
 
         setEventMenuFilters();
 
@@ -1161,6 +1249,12 @@ var gsTransfer = ( function ( _, moment ){
 
         setEventBreadCrumb();
 
+        setEventHelpButton();
+
+
+
+
+
         /***** TOOLTIP *****/
         //$( '[rel=tooltip]' ).tooltip();
 
@@ -1175,13 +1269,15 @@ var gsTransfer = ( function ( _, moment ){
         $.when( loadCategory(), loadData(), loadFolder() ).done( function (){
 
             //Add label for reference of Document
-            $.when(mergeLabelDoc() ).done ( function (){
+            $.when( mergeLabelDoc() ).done ( function (){
                 //Template of Table and Menu
-                $.when(createDataTable(),createMenu() ).done( function () {
+                $.when( createDataTable(), createMenu() ).done( function () {
                     //set upload form events
-                    setEventuploadForm();
-
-                    setEventsHTML();
+                    $.when( setEventuploadForm(), setEventsHTML() ).done( function () {
+                        setTimeout(function(){
+                            $( '#warningQuota' ).html('<p>'+ i18n[lang].warningQuota + '</p>');
+                        }, 1000);
+                    });
                 });
             });
         } );
@@ -1242,5 +1338,5 @@ var gsTransfer = ( function ( _, moment ){
         $('#side-menu').height( $( window).height() );
     });*/
 
-}( _, moment ) );
+}( _, moment, introJs ) );
 

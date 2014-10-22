@@ -11,6 +11,7 @@
                 "notDL"   : "Fichiers non-téléchargés",
                 "clear"   : "Retirer tous les filtres"
             },
+            "help"      : "Aide",
             "signout"   : "Se Déconnecter"
         },
         "breadrumb"   : "Nouveaux Fichiers non-téléchargés",
@@ -52,6 +53,29 @@
             "start": "date début",
             "end"  : "date fin"
         },
+        "help"        : {
+            "skipLabel" : "SORTIR",
+            "nextLabel" : "SUIVANT",
+            "prevLabel" : "PRECEDENT",
+            "doneLabel" : "FIN",
+            "welcome"   : "Bienvenue dans l'aide de Group S Transfer. Appuyer sur \"SUIVANT\" pour continuer. Vous pouvez utiliser les flèches du clavier si vous le souhaitez. Quand vous arrivez sur l'application, vous verrez les nouveaux fichiers que vous n'avez pas encore téléchargés. ",
+            "upload"    : "Cliquez ici pour envoyer des fichiers à Group S.",
+            "menu"      : "Cliquez sur une catégorie et/ou un numéro de document pour filtrer les fichiers.",
+            "filterby"  : "Utilisez se boutton pour filtrer les fichiers que vous n'avez pas encore téléchargés.",
+            "searchBox" : "Ceci est un champ de recherche. Entrez un numéro d'employeur ou un libellé pour filtrer les fichiers.",
+            "datepicker": "Cliquez dans le champ pour sélectionner une date et filtrer les fichiers.",
+            "reloadme"  : "Cliquez sur ce boutton pour recharger la page et les données.",
+            "table"     : "Voici la liste des fichiers que vous pouvez télécharger",
+            "headers"   : "Cliquer sur l'entête pour trier la colonne. Maintenez les touches MAJ et cliquez sur une autre entête pour appliquer plusieurs fonctions de tri.",
+            "bottom"    : "Choisissez le nombre d'élément que vous voulez afficher.",
+            "breadcrumb": "Voici la liste des filtres par catégories et numéro de documents.",
+            "dlfile"    : "Cliquez ici pour télécharger le fichier. Le numéro représente le nombre de fois que le fichier a déjà été téléchargé",
+            "dlfileLabel": "Cliquez sur le lien pour télécharger le fichier.",
+            "checkbox"  : "Cliquez sur les checkboxes pour sélectionner des fichiers à télécharger.",
+            "remove"    : "Cliquez sur cet icône pour supprimer le fichier."
+
+        },
+        "warningQuota": "Cet Application est exclusivement destinée au transfert de fichier. Veillez a bien supprimer vos fichiers après le telechargement.",
         "listAll"     : "Tous",
         "showHide"    : "Afficher les colonnes",
         "upload"      : "Transmettre des fichiers à Group S",
@@ -74,6 +98,7 @@
                 "notDL"   : "Bestanden niet gedownloaden",
                 "clear"   : "Schrapen filters"
             },
+            "help"      : "Hulp",
             "signout"   : "Uit Loggen"
         },
         "breadrumb"   : "Nieuwe bestanden niet gedownloaden",
@@ -115,6 +140,7 @@
             "start": "Beginnen Datum",
             "end"  : "Einde Datum"
         },
+        "warningQuota": "Cet Application est exclusivement destinee au transfert de fichier. Veillez a bien supprimer vos fichiers apres le telechargement.",
         "listAll"     : "Alle",
         "showHide"    : "Tonen colonnen",
         "upload"      : "Documenten op de server uploaden",
@@ -137,6 +163,7 @@
                 "notDL"   : "Files not downloaded",
                 "clear"   : "Clear all filters"
             },
+            "help"      : "Help",
             "signout"   : "Sign Out"
         },
         "breadrumb"   : "New Files not downloaded yet",
@@ -177,6 +204,7 @@
             "start": "Start Date",
             "end"  : "End Date"
         },
+        "warningQuota": "Cet Application est exclusivement destinee au transfert de fichier. Veillez a bien supprimer vos fichiers apres le telechargement.",
         "listAll"     : "all",
         "showHide"    : "Show / hide columns",
         "upload"      : "Upload Documents on the server",
