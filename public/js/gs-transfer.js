@@ -450,6 +450,8 @@ var gsTransfer = ( function ( _, moment ){
     function menuCategoryClick( event ){
 
         resetFilters();
+        table.columns( '.detailsLayer' ).visible( false, false );
+        table.columns( '.fileLayer' ).visible( true, false );
         var $this = $( this ).parent( 'li' ),
             levl3 = $this.find( '.level3' ), //list children
             numDocRegex = '(',
