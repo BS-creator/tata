@@ -974,6 +974,12 @@ var gsTransfer = ( function ( _, moment ){
             small.data( 'dl', dl ); // increment by one the download count
             small.html( '&nbsp;' + dl );
         } );
+
+        //donwload Single file by click on label
+        $( TABLEID ).on( 'click', '.dlfileLabel', function (){
+            var $this = $( this );
+            $this.attr( 'href', serverURL + 'file/' + token + '/' + $this.data( 'file-id' ) + '/' + $this.data( 'filename' ) );
+        } );
     }
 
     /***** MULTIDOWNLOAD *****/
@@ -1018,7 +1024,6 @@ var gsTransfer = ( function ( _, moment ){
             .toggleClass( 'fa-square-o fa-check-square-o' );
 
         tr.toggleClass( 'active' );
-        //TODO: Download file !!!
         toggleDLButton();
     }
 
@@ -1034,8 +1039,6 @@ var gsTransfer = ( function ( _, moment ){
 
         $( '.iconSelect' ).on( 'click', toggleIconCheck );
 
-        $( 'td:not( :first-child, :nth-child(2), :last-child )' )
-            .on( 'click', toggleIconCheck );
     }
 
     /***** FILTER *****/
@@ -1114,11 +1117,11 @@ var gsTransfer = ( function ( _, moment ){
                 weekStart         : 1,
                 autoclose         : true,
                 todayHighlight    : true,
-                //startView         : 1,
+                startView         : 1,
                 keyboardNavigation: false,
-                clearBtn          : true,
+                clearBtn          : true
                 //calendarWeeks : true,
-                minViewMode: 1 //month view
+                //minViewMode: 1 //month view
             } );
 
     }
