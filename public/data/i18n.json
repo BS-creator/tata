@@ -49,8 +49,8 @@
         },
         "datepicker"  : {
             "to"   : "à",
-            "start": "JJ/MM/YYYY",
-            "end"  : "JJ/MM/YYYY"
+            "start": "date début",
+            "end"  : "date fin"
         },
         "listAll"     : "Tous",
         "showHide"    : "Afficher les colonnes",
