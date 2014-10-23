@@ -1125,7 +1125,6 @@ var gsTransfer = ( function ( _, moment, introJs ){
                 //calendarWeeks : true,
                 //minViewMode: 1 //month view
             } );
-
     }
 
 
@@ -1134,7 +1133,6 @@ var gsTransfer = ( function ( _, moment, introJs ){
     }
 
     function setEventHelpButton(){
-        $("#btn-upload-div").attr("data-intro", "ENVOIE DE FICHIER");
         var helpBtn = $( '#help' );
         helpBtn.html('<i class="fa fa-question"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.help);
         helpBtn.on('click', function(){
@@ -1219,17 +1217,14 @@ var gsTransfer = ( function ( _, moment, introJs ){
                     }
                 ]
             });
-            intro.setOption("skipLabel", i18n[lang].help.skipLabel);
-            intro.setOption("nextLabel", i18n[lang].help.nextLabel);
-            intro.setOption("prevLabel", i18n[lang].help.prevLabel);
-            intro.setOption("doneLabel", i18n[lang].help.doneLabel);
+            intro.setOption("skipLabel", '');
+            intro.setOption("nextLabel", '');
+            intro.setOption("prevLabel", '');
+            intro.setOption("doneLabel", '');
             intro.start();
         });
 
-
     }
-
-
 
     function setEventsHTML(){
 
@@ -1260,10 +1255,6 @@ var gsTransfer = ( function ( _, moment, introJs ){
         setEventBreadCrumb();
 
         setEventHelpButton();
-
-
-
-
 
         /***** TOOLTIP *****/
         //$( '[rel=tooltip]' ).tooltip();
