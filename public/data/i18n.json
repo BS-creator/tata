@@ -125,7 +125,7 @@
         },
         "tree"      : {
             "root"  : "Alle documenten",
-            "upload": "Geuploadde documenten bekijken",
+            "upload": "Geüploade documenten bekijken",
             "other" : "Andere Documenten"
         },
         "sideMenu"  : {
@@ -147,7 +147,7 @@
             "nextLabel"  : "VOLGENDE",
             "prevLabel"  : "VORIGE",
             "doneLabel"  : "END",
-            "welcome"    : "Welkom bij van Group S Transfer. Deze helpfunctie zal u begeleiden in het gebruik van deze applicatie. Druk op \" VOLGENDE \" om verder te gaan . U kan ook de pijlen gebruiken als u wilt.",
+            "welcome"    : "Welkom bij van Group S Transfer. Deze helpfunctie zal u begeleiden in het gebruik van deze applicatie. U kan ook de pijlen gebruiken als u wilt.",
             "upload"     : "Klik hier om de bestanden te verzenden naar Group S.",
             "menu"       : " Klik op een categorie en / of een documentnummer om bestanden te filteren.",
             "filterby"   : "Selecteer enkel de nieuwe, niet gedownloade bestanden of deactiveer de toegepaste filters.",
