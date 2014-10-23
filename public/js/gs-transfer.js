@@ -1224,11 +1224,11 @@ var gsTransfer = ( function ( _, moment, introJs ){
                     }
                 ]
             });
-            /*intro.setOption("skipLabel", '');
-            intro.setOption("nextLabel", '→');
-            intro.setOption("prevLabel", '←');
-            intro.setOption("doneLabel", '');*/
-            intro.setOption('showButtons', false);
+            intro.setOption("skipLabel", '');
+            intro.setOption("nextLabel", '');//'→');
+            intro.setOption("prevLabel", '');//'←');
+            intro.setOption("doneLabel", '');
+            /*intro.setOption('showButtons', false);*/
             intro.start();
         });
 

@@ -1,5 +1,19 @@
 /*
-2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
+/* @author  :   Group S */
+/* @date    :   2014-09 */
+/* @version :   BETA 0.1 */
+/* SUMMARY */
+/* index.html */
+/* file.html */
+/* header */
+/* loader */
+/* modal box upload */
+/* bootstrap-table */
+/* table */
+/* table */
+/* pagination */
+/* misc */
+/*
 div#header
 div#top-nav
 ul.sidebar-left
@@ -89,8 +103,32 @@ li {
   font-weight: normal;
   font-style: normal;
 }
+/*********************************************
+                    RESPONSIVE
+**********************************************/
+@media (max-width: 1154px) {
+  div.btn-group:nth-child(4) {
+    margin-top: 4.55px;
+    margin-left: 0 !important;
+    float: left;
+  }
+}
+@media (max-width: 650px) {
+  #datepicker {
+    margin-top: 4.55px;
+    margin-left: 0 !important;
+    float: left;
+  }
+}
+@media (max-width: 350px) {
+  input[name^="search"] {
+    margin-top: 4.55px;
+    margin-left: 0 !important;
+    float: left;
+  }
+}
 /***************************************************
-                       Main -Footer                  STICKY FOOTER RULES
+Main - Footer                  STICKY FOOTER RULES
 ****************************************************/
 html,
 body {
@@ -118,7 +156,7 @@ body {
   overflow-x: hidden;
 }
 /***************************************************
-                       HEADER
+HEADER
 ****************************************************/
 header {
   height: 80.9px;
@@ -150,7 +188,7 @@ a.default-lang {
   color: #479fed;
 }
 /**********************************************
-                    TOP NAV
+TOP NAV
 ***********************************************/
 #top-nav ul,
 td#top-nav ul:not(i) {
@@ -185,7 +223,7 @@ td#top-nav ul:not(i) {
   color: #505050;
 }
 /**********************************************
-                    MODAL
+MODAL
 **********************************************/
 .modal-content {
   border-radius: 2px;
@@ -205,7 +243,7 @@ td#top-nav ul:not(i) {
   font-size: 16px;
 }
 /**********************************************
-                    BREADCRUMP
+BREADCRUMP
 **********************************************/
 #breadcrumb {
   display: table-cell;
@@ -232,7 +270,7 @@ input[type="password"]:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.06) inset, 0px 0px 8px rgba(102, 175, 233, 0.45);
 }
 /**********************************************
-                    LOADER
+LOADER
 ***********************************************/
 #loader {
   display: none;
@@ -257,13 +295,13 @@ input[type="password"]:focus {
   right: 0;
 }
 /*********************************************
-                    CONTENT
+CONTENT
 *********************************************/
 #contentTable {
   overflow: hidden;
 }
 /****************************************************
-                    DATEPICKER
+DATEPICKER
 ****************************************************/
 #datepicker {
   display: table;
@@ -293,7 +331,7 @@ input[type="password"]:focus {
   border-radius: 0;
 }
 /*********************************************
-                    TABLE
+TABLE
 *********************************************/
 .ColVis {
   display: none;
@@ -381,7 +419,7 @@ tr.active td:first-child i.fa-check-square-o {
   color: #00c078 !important;
 }
 /*********************************************
-                    PAGINATION
+PAGINATION
 **********************************************/
 .page {
   margin: 19.1px 0;
@@ -430,40 +468,103 @@ div.dataTables_length label {
 .dataTables_wrapper .dataTables_info {
   float: none;
 }
-/*********************************************
-                    RESPONSIVE
-**********************************************/
-@media (max-width: 1154px) {
-  div.btn-group:nth-child(4) {
-    margin-top: 4.55px;
-    margin-left: 0 !important;
-    float: left;
-  }
-}
-@media (max-width: 650px) {
-  #datepicker {
-    margin-top: 4.55px;
-    margin-left: 0 !important;
-    float: left;
-  }
-}
-@media (max-width: 350px) {
-  input[name^="search"] {
-    margin-top: 4.55px;
-    margin-left: 0 !important;
-    float: left;
-  }
-}
-
 /* note */
-   #warningQuota p {
-     margin-top: 10px;
-   }
+#warningQuota p {
+  margin-top: 6px;
+}
 /********************************************
                 INFO.JS
 ********************************************/
+/* text */
 .introjs-tooltip {
   padding: 19px;
   font-size: 14px;
 }
-
+.introjs-bullets ul {
+  clear: both;
+  margin: 15px auto;
+  padding: 0px;
+  display: inline-block;
+}
+.introjs-bullets ul li a {
+  width: 7px;
+  height: 7px;
+}
+.introjs-tooltipbuttons {
+  margin: 0 auto 15px;
+}
+.introjs-button {
+  margin: 0;
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  border: none;
+  text-decoration: none;
+  text-shadow: none;
+  font: 22px FontAwesome;
+  background-color: transparent;
+  background-image: none;
+}
+.introjs-button:hover,
+.introjs-button:active,
+.introjs-button:focus,
+.introjs-button.active {
+  border: 0;
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
+}
+.introjs-tooltipbuttons {
+  margin: 0;
+  white-space: normal;
+}
+.introjs-prevbutton:before {
+  content: "\f053";
+  float: left;
+}
+.introjs-nextbutton:before {
+  content: "\f054";
+  float: right;
+}
+.introjs-prevbutton {
+  float: left;
+  padding-top: 0;
+  padding-left: 0;
+  margin: 0;
+}
+.introjs-nextbutton {
+  float: right;
+  padding-top: 0;
+  padding-right: 0;
+  margin: 0;
+}
+.introjs-helperNumberLayer {
+  top: -18px;
+  left: -18px;
+  font-size: 14px;
+  background: #080;
+  border: 1px solid #FFF;
+}
+.introjs-skipbutton {
+  padding: 0;
+  margin: 0;
+  font-size: 0px;
+}
+.introjs-helperLayer,
+.introjs-helperLayer *,
+.introjs-helperLayer:before,
+.introjs-helperLayer:after,
+.introjs-helperLayer *:after,
+.introjs-helperLayer *:before,
+.introjs-tooltipReferenceLayer,
+.introjs-tooltipReferenceLayer *,
+.introjs-tooltipReferenceLayer:before,
+.introjs-tooltipReferenceLayer:after,
+.introjs-tooltipReferenceLayer *:before,
+.introjs-tooltipReferenceLayer *:after {
+  box-sizing: content-box !important;
+  -moz-box-sizing: content-box !important;
+  -webkit-box-sizing: content-box !important;
+}
+.introjs-helperNumberLayer {
+  display: none;
+}
