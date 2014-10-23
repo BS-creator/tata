@@ -1125,7 +1125,6 @@ var gsTransfer = ( function ( _, moment, introJs ){
                 //calendarWeeks : true,
                 //minViewMode: 1 //month view
             } );
-
     }
 
 
@@ -1134,7 +1133,6 @@ var gsTransfer = ( function ( _, moment, introJs ){
     }
 
     function setEventHelpButton(){
-        $("#btn-upload-div").attr("data-intro", "ENVOIE DE FICHIER");
         var helpBtn = $( '#help' );
         helpBtn.html('<i class="fa fa-question"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.help);
         helpBtn.on('click', function(){
@@ -1151,15 +1149,18 @@ var gsTransfer = ( function ( _, moment, introJs ){
                     },
                     {
                         element: '.iconSelect',
-                        intro: i18n[lang].help.checkbox
+                        intro: i18n[lang].help.checkbox,
+                        position: 'right'
                     },
                     {
                         element: '.dlfile',
-                        intro: i18n[lang].help.dlfile
+                        intro: i18n[lang].help.dlfile,
+                        position: 'right'
                     },
                     {
                         element: '.dlfileLabel',
-                        intro: i18n[lang].help.dlfileLabel
+                        intro: i18n[lang].help.dlfileLabel,
+                        position: 'right'
                     },
                     {
                         element: '.remove',
@@ -1168,7 +1169,13 @@ var gsTransfer = ( function ( _, moment, introJs ){
                     },
                     {
                         element: '.dataTables_scrollHeadInner > table:nth-child(1) > thead:nth-child(1) > tr:nth-child(1)',
-                        intro: i18n[lang].help.headers
+                        intro: i18n[lang].help.headers,
+                        position: 'bottom'
+                    },
+                    {
+                        element: '.bottom',
+                        intro: i18n[lang].help.bottom,
+                        position: 'left'
                     },
                     {
                         element: '#btn-upload-div',
@@ -1187,7 +1194,8 @@ var gsTransfer = ( function ( _, moment, introJs ){
                     },
                     {
                         element: '#breadcrumb',
-                        intro: i18n[lang].help.breadcrumb
+                        intro: i18n[lang].help.breadcrumb,
+                        position: 'right'
                     },
                     {
                         element: '#filterby',
@@ -1204,10 +1212,11 @@ var gsTransfer = ( function ( _, moment, introJs ){
                         intro: i18n[lang].help.datepicker,
                         position: 'bottom'
                     },
-                    /*{
+                    {
                         element: '.reloadme',
-                        intro: i18n[lang].help.reloadme
-                    },*/
+                        intro: i18n[lang].help.reloadme,
+                        position: 'left'
+                    },
                     {
                         element: '#signout',
                         intro: i18n[lang].help.logoff,
@@ -1215,17 +1224,15 @@ var gsTransfer = ( function ( _, moment, introJs ){
                     }
                 ]
             });
-            intro.setOption("skipLabel","");
-            intro.setOption("nextLabel", "");
-            intro.setOption("prevLabel", "");
-            intro.setOption("doneLabel", "");
+            /*intro.setOption("skipLabel", '');
+            intro.setOption("nextLabel", '→');
+            intro.setOption("prevLabel", '←');
+            intro.setOption("doneLabel", '');*/
+            intro.setOption('showButtons', false);
             intro.start();
         });
 
-
     }
-
-
 
     function setEventsHTML(){
 
@@ -1256,10 +1263,6 @@ var gsTransfer = ( function ( _, moment, introJs ){
         setEventBreadCrumb();
 
         setEventHelpButton();
-
-
-
-
 
         /***** TOOLTIP *****/
         //$( '[rel=tooltip]' ).tooltip();

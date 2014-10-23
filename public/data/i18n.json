@@ -54,28 +54,27 @@
             "end"  : "date fin"
         },
         "help"        : {
-            "skipLabel" : "SORTIR",
-            "nextLabel" : "SUIVANT",
-            "prevLabel" : "PRECEDENT",
-            "doneLabel" : "FIN",
-            "welcome"   : "Bienvenue dans l'aide de Group S Transfer. Appuyer sur \"SUIVANT\" pour continuer. Vous pouvez utiliser les flèches du clavier si vous le souhaitez. Quand vous arrivez sur l'application, vous verrez les nouveaux fichiers que vous n'avez pas encore téléchargés. ",
-            "upload"    : "Cliquez ici pour envoyer des fichiers à Group S.",
-            "menu"      : "Cliquez sur une catégorie et/ou un numéro de document pour filtrer les fichiers.",
-            "filterby"  : "Utilisez se boutton pour filtrer les fichiers que vous n'avez pas encore téléchargés.",
-            "searchBox" : "Ceci est un champ de recherche. Entrez un numéro d'employeur ou un libellé pour filtrer les fichiers.",
-            "datepicker": "Cliquez dans le champ pour sélectionner une date et filtrer les fichiers.",
-            "reloadme"  : "Cliquez sur ce boutton pour recharger la page et les données.",
-            "table"     : "Voici la liste des fichiers que vous pouvez télécharger",
-            "headers"   : "Cliquer sur l'entête pour trier la colonne. Maintenez les touches MAJ et cliquez sur une autre entête pour appliquer plusieurs fonctions de tri.",
-            "bottom"    : "Choisissez le nombre d'élément que vous voulez afficher.",
-            "breadcrumb": "Voici la liste des filtres par catégories et numéro de documents.",
-            "dlfile"    : "Cliquez ici pour télécharger le fichier. Le numéro représente le nombre de fois que le fichier a déjà été téléchargé",
-            "dlfileLabel": "Cliquez sur le lien pour télécharger le fichier.",
-            "checkbox"  : "Cliquez sur les checkboxes pour sélectionner des fichiers à télécharger.",
-            "remove"    : "Cliquez sur cet icône pour supprimer le fichier.",
-            "uploaded"  : "Cliquez ici pour afficher les fichiers que vous avez envoyés à Group S",
-            "logoff"    : "Cliquez ici pour vous déconnectez de l'application"
-
+            "skipLabel"  : "SORTIR",
+            "nextLabel"  : "SUIVANT",
+            "prevLabel"  : "PRECEDENT",
+            "doneLabel"  : "FIN",
+            "welcome"    : "Bienvenue dans Group S Transfer. Vous venez d'activer l'aide qui vous guidera dans l'utilisation de l'application. Vous pouvez utiliser les flèches du clavier si vous le souhaitez.",
+            "table"      : "Voici le contenu de votre espace serveur.",
+            "checkbox"   : "Activez les cases pour sélectionner plusieurs fichiers à télécharger.",
+            "dlfile"     : "Cliquez sur cet icône pour télécharger un seul fichier. (Le nombre à  droite de l'icône est le compteur de vos téléchargements).",
+            "dlfileLabel": "Cliquez sur cet icône pour télécharger un seul fichier.",
+            "remove"     : "Supprimez vos fichiers téléchargés et libérez votre espace disque.",
+            "headers"    : "La saisie des entêtes permet de trier (par colonne, par ordre alphabétique, croissant-décroissant). \"Ctrl + click\" permet de cumuler plusieurs tris.",
+            "bottom"     : "Choisissez le nombre d'élément que vous voulez afficher.",
+            "upload"     : "Activer ce bouton pour envoyer vos fichiers à Group S.",
+            "menu"       : "Sélectionner une catégorie de document ou un type de document pour filtrer l'affichage.",
+            "filterby"   : "Sélectionner vos nouveaux fichiers, non-téléchargés ou désactiver vos filtres",
+            "searchBox"  : "Faites vos recherches par mot clé. Entrez un numéro d'employeur ou un libellé pour filtrer les fichiers.",
+            "datepicker" : "Définissez une période comme critère de filtre",
+            "reloadme"   : "Cliquez sur ce boutton pour recharger la page et les données.",
+            "breadcrumb" : "Voici la liste des filtres par catégories et numéro de documents.",
+            "uploaded"   : "Voyez ce que vous avez transmis à Group S.",
+            "logoff"     : "Cliquez ici pour vous déconnectez de l'application."
         },
         "warningQuota": "Cette application est exclusivement destinée au transfert de fichier. Veillez a bien supprimer vos fichiers après le telechargement.",
         "listAll"     : "Tous",
@@ -89,26 +88,26 @@
         "errorSession": "Session expirée"
     },
     "nl": {
-        "button"      : {
+        "button"    : {
             "search"    : "Zoeken...",
             "reload"    : "Opnieuw laden",
             "colVisible": "Tonen",
-            "multiDL"   : "Bestanden gedownloaden",
+            "multiDL"   : "Bestanden downloaden",
             "filter"    : {
                 "filterby": "Filter door",
                 "new"     : "Nieuwe bestanden",
-                "notDL"   : "Bestanden niet gedownloaden",
-                "clear"   : "Schrapen filters"
+                "notDL"   : "Niet gedownloadde bestanden",
+                "clear"   : "Filters verwijderen"
             },
             "help"      : "Hulp",
             "signout"   : "Uit Loggen"
         },
-        "breadrumb"   : "Nieuwe bestanden niet gedownloaden",
-        "url"         : {
+        "breadrumb" : "Nieuwe bestanden niet gedownload",
+        "url"       : {
             "table"     : "DataTables/resources/language/NL.json",
             "datepicker": "js/locale/bootstrap-datepicker.nl.js"
         },
-        "col"         : {
+        "col"       : {
             "new"   : "Nieuw",
             "date"  : "Datum",
             "name"  : "Naam",
@@ -122,27 +121,51 @@
             "refCl" : "Ref Client",
             "count" : "Teller",
             "refGS" : "Ref Group S",
-            "del"   : "Geschrapt"
+            "del"   : "Verwijderen"
         },
-        "tree"        : {
+        "tree"      : {
             "root"  : "Alle documenten",
-            "upload": "Overgebrachte documenten naar Group S",
+            "upload": "Geüploade documenten bekijken",
             "other" : "Andere Documenten"
         },
-        "sideMenu"    : {
+        "sideMenu"  : {
             "config": "Configuratie van de table",
             "reset" : "Reset View"
         },
-        "file"        : {
+        "file"      : {
             "add": "Document toegevoegd",
-            "del": "Document geschrapt"
+            "del": "Document verwijderd"
         },
-        "datepicker"  : {
+        "datepicker": {
             "to"   : "tot",
-            "start": "Beginnen Datum",
-            "end"  : "Einde Datum"
+            "start": "Begindatum",
+            "end"  : "Einddatum"
         },
-        "warningQuota": "Cet Application est exclusivement destinee au transfert de fichier. Veillez a bien supprimer vos fichiers apres le telechargement.",
+
+        "help"        : {
+            "skipLabel"  : "UITLOGGEN",
+            "nextLabel"  : "VOLGENDE",
+            "prevLabel"  : "VORIGE",
+            "doneLabel"  : "END",
+            "welcome"    : "Welkom bij van Group S Transfer. Deze helpfunctie zal u begeleiden in het gebruik van deze applicatie. U kan ook de pijlen gebruiken als u wilt.",
+            "upload"     : "Klik hier om de bestanden te verzenden naar Group S.",
+            "menu"       : " Klik op een categorie en / of een documentnummer om bestanden te filteren.",
+            "filterby"   : "Selecteer enkel de nieuwe, niet gedownloade bestanden of deactiveer de toegepaste filters.",
+            "searchBox"  : " Zoekveld. Voer het nummer van een werknemer of benaming in om de bestanden te filteren.",
+            "datepicker" : " Klik op het veld om te filteren op datum.",
+            "reloadme"   : " Klik op deze knop om de pagina te herladen.",
+            "table"      : " Hier is de lijst van bestanden die u kunt downloaden",
+            "headers"    : " Klik op de kop om de kolom te sorteren. Hou de SHIFT toets ingedrukt en klik op een andere kolom om op meerdere kolommen te sorteren.",
+            "bottom"     : "Selecteer het aantal bestanden om te tonen.",
+            "breadcrumb" : " Hier is de lijst met toegepaste filters per categorie en het nummer van het document.",
+            "dlfile"     : "Klik hier om het bestand te downloaden. Het nummer geeft aan hoe vaak het bestand is gedownload.",
+            "dlfileLabel": "Klik op de link om het bestand te downloaden.",
+            "checkbox"   : "Klik op de checkboxes om bestanden te selecteren.",
+            "uploaded"   : "Klik hier om de verzonden bestanden te zien.",
+            "logoff"     : "Kilk hier om de applicatie te sluiten.",
+            "remove"     : "Klik op het  icoon om het bestand te verwijderen."
+        },
+        "warningQuota": " Deze toepassing is voorzien voor de overdracht van bestanden. Gelieve regelmatig de bestanden te verwijderen.",
         "listAll"     : "Alle",
         "showHide"    : "Tonen colonnen",
         "upload"      : "Documenten op de server uploaden",
