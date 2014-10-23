@@ -92,17 +92,17 @@
             "search"    : "Zoeken...",
             "reload"    : "Opnieuw laden",
             "colVisible": "Tonen",
-            "multiDL"   : "Bestanden gedownloaden",
+            "multiDL"   : "Bestanden downloaden",
             "filter"    : {
                 "filterby": "Filter door",
                 "new"     : "Nieuwe bestanden",
-                "notDL"   : "Bestanden niet gedownloaden",
-                "clear"   : "Schrapen filters"
+                "notDL"   : "Niet gedownloadde bestanden",
+                "clear"   : "Filters verwijderen"
             },
             "help"      : "Hulp",
             "signout"   : "Uit Loggen"
         },
-        "breadrumb" : "Nieuwe bestanden niet gedownloaden",
+        "breadrumb" : "Nieuwe bestanden niet gedownload",
         "url"       : {
             "table"     : "DataTables/resources/language/NL.json",
             "datepicker": "js/locale/bootstrap-datepicker.nl.js"
@@ -121,11 +121,11 @@
             "refCl" : "Ref Client",
             "count" : "Teller",
             "refGS" : "Ref Group S",
-            "del"   : "Geschrapt"
+            "del"   : "Verwijderen"
         },
         "tree"      : {
             "root"  : "Alle documenten",
-            "upload": "Overgebrachte documenten naar Group S",
+            "upload": "Geuploadde documenten bekijken",
             "other" : "Andere Documenten"
         },
         "sideMenu"  : {
@@ -134,12 +134,12 @@
         },
         "file"      : {
             "add": "Document toegevoegd",
-            "del": "Document geschrapt"
+            "del": "Document verwijderd"
         },
         "datepicker": {
             "to"   : "tot",
-            "start": "Beginnen Datum",
-            "end"  : "Einde Datum"
+            "start": "Begindatum",
+            "end"  : "Einddatum"
         },
 
         "help"        : {
@@ -147,24 +147,25 @@
             "nextLabel"  : "VOLGENDE",
             "prevLabel"  : "VORIGE",
             "doneLabel"  : "END",
-            "welcome"    : "Welkom op de hulp van Group S Transfer. Druk op \" VOLGENDE \" om verder te gaan . U kunt de pijlen gebruiken als u wilt . Wanneer je aankomt op de toepassing , zal u de nieuwe bestanden zien",
-            "upload"     : "Klik hier om de bestanden te verzenden naar Group S",
+            "welcome"    : "Welkom bij van Group S Transfer. Deze helpfunctie zal u begeleiden in het gebruik van deze applicatie. Druk op \" VOLGENDE \" om verder te gaan . U kan ook de pijlen gebruiken als u wilt.",
+            "upload"     : "Klik hier om de bestanden te verzenden naar Group S.",
             "menu"       : " Klik op een categorie en / of een documentnummer om bestanden te filteren.",
-            "filterby"   : " knop om enkel de nieuwe bestanden te filteren.",
-            "searchBox"  : " Zoekveld. Voer een werkgevernummer of benaming in  om bestanden te filteren.",
-            "datepicker" : " Klik op het veld om te filteren op datum of type bestand.",
+            "filterby"   : "Selecteer enkel de nieuwe, niet gedownloade bestanden of deactiveer de toegepaste filters.",
+            "searchBox"  : " Zoekveld. Voer het nummer van een werknemer of benaming in om de bestanden te filteren.",
+            "datepicker" : " Klik op het veld om te filteren op datum.",
             "reloadme"   : " Klik op deze knop om de pagina te herladen.",
             "table"      : " Hier is de lijst van bestanden die u kunt downloaden",
-            "headers"    : " Klik op de kop om de kolom te sorteren . Houd de SHIFT toets ingedrukt en klik op een andere kolom om meerdere functies toe te passen.",
-            "bottom"     : "Selecteer de gewenste documenten om te tonen.",
-            "breadcrumb" : " Hier is de lijst met filters per categorie en de  nummer van het document.",
-            "dlfile"     : "klik hier om het bestand op te laden. Het cijfer = totale download voltooid",
-            "dlfileLabel": "klik op de link om het bestand op te laden .",
-            "checkbox"   : "klik op de checkboxes om de bestanden te selecteren.",
+            "headers"    : " Klik op de kop om de kolom te sorteren. Hou de SHIFT toets ingedrukt en klik op een andere kolom om op meerdere kolommen te sorteren.",
+            "bottom"     : "Selecteer het aantal bestanden om te tonen.",
+            "breadcrumb" : " Hier is de lijst met toegepaste filters per categorie en het nummer van het document.",
+            "dlfile"     : "Klik hier om het bestand te downloaden. Het nummer geeft aan hoe vaak het bestand is gedownload.",
+            "dlfileLabel": "Klik op de link om het bestand te downloaden.",
+            "checkbox"   : "Klik op de checkboxes om bestanden te selecteren.",
+            "uploaded"   : "Klik hier om de verzonden bestanden te zien.",
+            "logoff"     : "Kilk hier om de applicatie te sluiten.",
             "remove"     : "Klik op het  icoon om het bestand te verwijderen."
         },
         "warningQuota": " Deze toepassing is voorzien voor de overdracht van bestanden. Gelieve regelmatig de bestanden te verwijderen.",
-        "warningQuota": "Cet Application est exclusivement destinee au transfert de fichier. Veillez a bien supprimer vos fichiers apres le telechargement.",
         "listAll"     : "Alle",
         "showHide"    : "Tonen colonnen",
         "upload"      : "Documenten op de server uploaden",

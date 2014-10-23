@@ -1218,8 +1218,8 @@ var gsTransfer = ( function ( _, moment, introJs ){
                 ]
             });
             intro.setOption("skipLabel", '');
-            intro.setOption("nextLabel", '');
-            intro.setOption("prevLabel", '');
+            intro.setOption("nextLabel", '→');
+            intro.setOption("prevLabel", '←');
             intro.setOption("doneLabel", '');
             intro.start();
         });
