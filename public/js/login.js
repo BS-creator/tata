@@ -14,7 +14,7 @@ $( function (){
             //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
         } else if ( window.location.hostname.indexOf( 'deviapps' ) > -1 ) { //dev
             /***** DEV *****/
-            sessionStorage.setItem( 'serverURL', '//deviapps.groups.be/itransfer/public/' );
+            sessionStorage.setItem( 'baseURL', '//deviapps.groups.be/itransfer/public/' );
             sessionStorage.setItem( 'serverURL', '//deviapps.groups.be/ariane/' );
         } else if ( window.location.hostname.indexOf( 'qaiapps' ) > -1 ) { //QA
             /***** QA *****/
