@@ -1307,6 +1307,11 @@ var gsTransfer = ( function ( _, moment, introJs ){
         $.getJSON( 'data/i18n.json', function ( data ){
             i18n = data;
 
+            //Default Language
+            if ( (lang !== 'en') && (lang !== 'fr') && (lang !== 'nl') ) {
+                lang = 'en';
+            }
+
             if (lang !== 'en') {
                 $.getScript( i18n[lang].url.datepicker );
             }
