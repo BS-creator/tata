@@ -83,7 +83,7 @@
         "modalupload" : "Transmettre des fichiers à Group S",
         "modalbq"     : "Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.",
         "modalbtn"    : "Sélectionner les fichiers à transmettre",
-        "error0"      : "Erreur de connexion.",
+        "error0"      : "Erreur de connexion: ",
         "error5xx"    : "Service temporairement indisponible, veuillez réessayer plus tard.",
         "errorSession": "Session expirée"
     },
@@ -236,7 +236,7 @@
         "modalupload" : "Upload Document to Group S server",
         "modalbq"     : "Please, select the folder of upload before uploading document.",
         "modalbtn"    : "Please select files to upload",
-        "error0"      : "Connection error.",
+        "error0"      : "Connection error: File list is empty",
         "error5xx"    : "Service temporally unavailable, please try later.",
         "errorSession": "Session expired"
     }

@@ -857,6 +857,8 @@ var gsTransfer = ( function ( _, moment, introJs ){
             error     : function (){
                 $( '#loader' ).hide();
                 alert( i18n[lang].error0 );
+                AjaxData = [];
+                //TODO: if file list is empty: ask them to upload a file...
             },
             dataType  : 'json',
             statusCode: {
@@ -1316,6 +1318,8 @@ var gsTransfer = ( function ( _, moment, introJs ){
                 window.location = baseURL;
             }
         } );
+
+
 
     }
     $( 'document' ).ready( main() );
