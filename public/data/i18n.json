@@ -83,7 +83,7 @@
         "modalupload" : "Transmettre des fichiers à Group S",
         "modalbq"     : "Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.",
         "modalbtn"    : "Sélectionner les fichiers à transmettre",
-        "error0"      : "Erreur de connexion: ",
+        "error0"      : "Erreur: Problème lors de la récupération de la liste des fichiers sur le serveur. ",
         "error5xx"    : "Service temporairement indisponible, veuillez réessayer plus tard.",
         "errorSession": "Session expirée"
     },
@@ -229,14 +229,14 @@
             "start": "Start Date",
             "end"  : "End Date"
         },
-        "warningQuota": "Cet Application est exclusivement destinee au transfert de fichier. Veillez a bien supprimer vos fichiers apres le telechargement.",
+        "warningQuota": "This application is exclusively aimed to transfer files. Please delete files once you've downloaded them.",
         "listAll"     : "all",
         "showHide"    : "Show / hide columns",
         "upload"      : "Upload Documents on the server",
         "modalupload" : "Upload Document to Group S server",
         "modalbq"     : "Please, select the folder of upload before uploading document.",
         "modalbtn"    : "Please select files to upload",
-        "error0"      : "Connection error: File list is empty",
+        "error0"      : "Error: Problem retrieving file list",
         "error5xx"    : "Service temporally unavailable, please try later.",
         "errorSession": "Session expired"
     }
