@@ -543,7 +543,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
         } );
 
         //other category
-        //TODO:DONE add manually!!!! it is too custom to make it a rule!!!
+        //DONE: added manually!!!! it is too custom to make it a rule!!!
         if ($.inArray( -1, refDocUsed ) > -1) {
             /*htmlCategoryNode += createCategoryNode(
              {
@@ -678,7 +678,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
             ordering      : true,
             info          : true,
             scrollX       : true,
-            stateSave     : false, //TODO: DEPLOY: put it true when deploy to prod!!!
+            stateSave     : false,
             lengthMenu    : [
                 [10, 20, 50, -1],
                 [10, 20, 50, i18n[lang].listAll]
@@ -804,7 +804,12 @@ var gsTransfer = ( function ( _, moment, introJs ){
             data   : data,
             success: function ( data ){
                 if (data) {
-                    alert( i18n[lang].file.del );
+                    //alert( i18n[lang].file.del );
+                    swal({
+                        title: i18n[lang].file.del,
+                        type: "success",
+                        timer: 4000
+                    });
                     table
                         .row( $this.closest( 'tr' ) )
                         .remove()
@@ -820,8 +825,9 @@ var gsTransfer = ( function ( _, moment, introJs ){
     function loadFolder(){
         //folder
         return $.ajax( {
-            type   : 'GET',
-            url    : serverURL + 'folder/' + token + '/',
+            type   : 'POST',
+            url    : serverURL + 'folder/', // + token + '/',
+            data   : { 'token': token },
             success: function ( data ){
                 listFolderUpload( data );
             }
@@ -856,7 +862,13 @@ var gsTransfer = ( function ( _, moment, introJs ){
             },
             error     : function (){
                 $( '#loader' ).hide();
-                alert( i18n[lang].error0 );
+                //alert( i18n[lang].error0 );
+                swal({
+                    title: "ERROR",
+                    text: i18n[lang].error0,
+                    type: "error",
+                    timer: 4000
+                });
                 AjaxData = [];
                 //TODO: if file list is empty: ask them to upload a file...
             },
@@ -864,7 +876,13 @@ var gsTransfer = ( function ( _, moment, introJs ){
             statusCode: {
                 403: function (){
                     $( '#loader' ).hide();
-                    alert( i18n[lang].errorSession );
+                    //alert( i18n[lang].errorSession );
+                    swal({
+                        title: "ERROR",
+                        text: i18n[lang].errorSession,
+                        type: "error",
+                        timer: 4000
+                    });
                     window.location = baseURL;
                 }
             }
@@ -1287,6 +1305,10 @@ var gsTransfer = ( function ( _, moment, introJs ){
                     $.when( setEventuploadForm(), setEventsHTML() ).done( function () {
                         setTimeout(function(){
                             $( '#warningQuota' ).html('<p>'+ i18n[lang].warningQuota + '</p>');
+
+                            if(AjaxData.length === 0){
+                                $('#btn-upload-div').trigger('click');
+                            }
                         }, 1000);
                     });
                 });
@@ -1319,7 +1341,13 @@ var gsTransfer = ( function ( _, moment, introJs ){
             if (i18n[lang]) {   // if language is set,
                 render();       // load data and create table
             } else {
-                alert( 'ERROR loading data' );
+                //alert( 'ERROR loading data' );
+                swal({
+                    title: "ERROR",
+                    text: "ERROR loading data",
+                    type: "error",
+                    timer: 4000
+                });
                 window.location = baseURL;
             }
         } );

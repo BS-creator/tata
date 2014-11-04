@@ -9,9 +9,9 @@ $( function (){
         if ( window.location.hostname.indexOf( 'localhost' ) > -1 ) {
             /***** LOCAL *****/
             //sessionStorage.setItem( 'baseURL', '//localhost:4000/itransfer/' );
-            sessionStorage.setItem( 'baseURL', '//localhost:4000/' );
-            //sessionStorage.setItem( 'serverURL', '//172.20.20.64:8018/' );
-            sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+            sessionStorage.setItem( 'baseURL', '//localhost:4001/' );
+            sessionStorage.setItem( 'serverURL', '//172.20.20.64:8018/' );
+            //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
         } else if ( window.location.hostname.indexOf( 'deviapps' ) > -1 ) { //dev
             /***** DEV *****/
             sessionStorage.setItem( 'baseURL', '//deviapps.groups.be/itransfer/public/' );
@@ -105,9 +105,21 @@ $( function (){
             error   : function ( xhr ){
                 $( '#loader' ).hide();
                 if ( xhr.status === 403 ) {
-                    alert( 'ERROR: login / password incorrect.' );
+                    /*alert( 'ERROR: login / password incorrect.' );*/
+                    swal({
+                        title: "ERROR",
+                        text: "Login / password incorrect.",
+                        type: "error",
+                        timer: 3000
+                    });
                 } else {
-                    alert( 'ERROR: connection problem' );
+                    //alert( 'ERROR: connection problem' );
+                    swal({
+                        title: "ERROR",
+                        text: "Connection problem.",
+                        type: "error",
+                        timer: 3000
+                    });
                 }
             }
         } );
