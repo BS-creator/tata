@@ -41,10 +41,7 @@ header #info-header li.univers-name {
   position: relative;
   min-height: 1px;
 }
-#upload-modal #btn-upload-div {
-  /*        width: 100%;
-        margin-bottom: 9px;*/
-}
+
 #upload-modal form#uploadForm {
   width: 100%;
 }

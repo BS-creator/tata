@@ -90,10 +90,6 @@ i.fa,
 li {
   cursor: pointer;
 }
-.fa,
-.glyphicon {
-  font-size: 18px !important;
-}
 .hide {
   display: none;
 }
@@ -405,7 +401,7 @@ td:last-child {
 }
 /* define height */
 table.dataTable thead th {
-  padding: 14px 18px;
+  padding: 17px 18px 16px;
 }
 /* Icon check */
 th:first-child,
@@ -567,4 +563,11 @@ div.dataTables_length label {
 }
 .introjs-helperNumberLayer {
   display: none;
+}
+#btn-upload-div,
+#btn-upload-div span {
+  text-align: left;
+}
+#btn-upload-div {
+  padding: 17px 10px 16px 19px !important;
 }

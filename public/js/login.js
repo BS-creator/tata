@@ -8,10 +8,10 @@ $( function (){
     (function setURL(){
         if ( window.location.hostname.indexOf( 'localhost' ) > -1 ) {
             /***** LOCAL *****/
-                //sessionStorage.setItem( 'baseURL', '//localhost:4000/itransfer/' );
-            sessionStorage.setItem( 'baseURL', '//localhost:4000/' );
-            sessionStorage.setItem( 'serverURL', '//172.20.20.64:8018/' );
-            //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+            sessionStorage.setItem( 'baseURL', '//localhost:4000/itransfer/' );
+            //sessionStorage.setItem( 'baseURL', '//localhost:4000/' );
+            //sessionStorage.setItem( 'serverURL', '//172.20.20.64:8018/' );
+            sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
         } else if ( window.location.hostname.indexOf( 'deviapps' ) > -1 ) { //dev
             /***** DEV *****/
             sessionStorage.setItem( 'baseURL', '//deviapps.groups.be/itransfer/public/' );
