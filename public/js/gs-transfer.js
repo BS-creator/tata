@@ -678,7 +678,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
             ordering      : true,
             info          : true,
             scrollX       : true,
-            stateSave     : true, //DEPLOY: put it true when deploy to prod!!!
+            stateSave     : false, //TODO: DEPLOY: put it true when deploy to prod!!!
             lengthMenu    : [
                 [10, 20, 50, -1],
                 [10, 20, 50, i18n[lang].listAll]
@@ -689,7 +689,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
             },
             //pagingType: 'full',
             order         : [
-                [ 2, 'desc' ]
+                [ 1, 'asc' ], [ 2, 'desc' ]
             ],
             columnDefs    : [
                 {
@@ -779,7 +779,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
             'initComplete': function (){
                 table
                     .column( 4 ).search( '[^' + username + ']', true, false )
-                    .column( 15 ).search( '0' )   // not downloaded yet
+                    //.column( 15 ).search( '0' )   // not downloaded yet
                     .draw();
             }
         } );

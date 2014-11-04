@@ -70,10 +70,6 @@ i.fa,
 li {
   cursor: pointer;
 }
-.fa,
-.glyphicon {
-  font-size: 18px !important;
-}
 .hide {
   display: none;
 }

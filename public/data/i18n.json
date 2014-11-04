@@ -14,7 +14,7 @@
             "help"      : "Aide",
             "signout"   : "Se Déconnecter"
         },
-        "breadrumb"   : "Nouveaux Fichiers non téléchargés",
+        "breadrumb"   : "Tous les fichiers triés par \"nouveaux\" et \"non téléchargés\"",
         "url"         : {
             "table"     : "DataTables/resources/language/FR.json",
             "datepicker": "js/locale/bootstrap-datepicker.fr.js"
@@ -102,7 +102,7 @@
             "help"      : "Hulp",
             "signout"   : "Uit Loggen"
         },
-        "breadrumb" : "Nieuwe bestanden niet gedownload",
+        "breadrumb" : "Alle bestanden bij nieuwe en niet gedownload gesorteerd",
         "url"       : {
             "table"     : "DataTables/resources/language/NL.json",
             "datepicker": "js/locale/bootstrap-datepicker.nl.js"
@@ -213,7 +213,7 @@
         },
         "tree"        : {
             "root"  : "Show all documents",
-            "upload": "how uploaded documents to Group S",
+            "upload": "Show uploaded documents to Group S",
             "other" : "Other Documents"
         },
         "sideMenu"    : {
