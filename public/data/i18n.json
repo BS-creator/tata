@@ -96,13 +96,13 @@
             "filter"    : {
                 "filterby": "Filter door",
                 "new"     : "Nieuwe bestanden",
-                "notDL"   : "Niet gedownloadde bestanden",
+                "notDL"   : "Niet gedownloade bestanden",
                 "clear"   : "Filters verwijderen"
             },
             "help"      : "Hulp",
             "signout"   : "Uit Loggen"
         },
-        "breadrumb" : "Alle bestanden bij nieuwe en niet gedownload gesorteerd",
+        "breadrumb" : "Alle bestanden, gesorteerd volgens \"nieuw\" en \"niet gedownload\"",
         "url"       : {
             "table"     : "DataTables/resources/language/NL.json",
             "datepicker": "js/locale/bootstrap-datepicker.nl.js"
@@ -118,9 +118,9 @@
             "size"  : "Groote",
             "ext"   : "Type",
             "path"  : "Locatie",
-            "refCl" : "Ref Client",
+            "refCl" : "Ref. Klant",
             "count" : "Teller",
-            "refGS" : "Ref Group S",
+            "refGS" : "Ref. Group S",
             "del"   : "Verwijderen"
         },
         "tree"      : {
@@ -129,8 +129,8 @@
             "other" : "Andere Documenten"
         },
         "sideMenu"  : {
-            "config": "Configuratie van de table",
-            "reset" : "Reset View"
+            "config": "Configuratie van de tabel",
+            "reset" : "Standaardconfiguratie herstellen"
         },
         "file"      : {
             "add": "Document toegevoegd",
@@ -160,18 +160,18 @@
             "breadcrumb" : " Hier is de lijst met toegepaste filters per categorie en het nummer van het document.",
             "dlfile"     : "Klik hier om het bestand te downloaden. Het nummer geeft aan hoe vaak het bestand is gedownload.",
             "dlfileLabel": "Klik op de link om het bestand te downloaden.",
-            "checkbox"   : "Klik op de checkboxes om bestanden te selecteren.",
+            "checkbox"   : "Klik op de selectievakjes om bestanden te selecteren.",
             "uploaded"   : "Klik hier om de verzonden bestanden te zien.",
             "logoff"     : "Kilk hier om de applicatie te sluiten.",
             "remove"     : "Klik op het  icoon om het bestand te verwijderen."
         },
         "warningQuota": " Deze toepassing is voorzien voor de overdracht van bestanden. Gelieve regelmatig de bestanden te verwijderen.",
         "listAll"     : "Alle",
-        "showHide"    : "Tonen colonnen",
-        "upload"      : "Documenten op de server uploaden",
-        "modalupload" : "Document uploaden op Group S server",
+        "showHide"    : "Kolommen tonen",
+        "upload"      : "Documenten uploaden naar de server",
+        "modalupload" : "Document uploaden naar Group S server",
         "modalbq"     : "Gelieve de doelmap te selecteren alvorens uw bestanden toe te voegen.",
-        "modalbtn"    : "Selectionneer documenten om toe te voegen",
+        "modalbtn"    : "Selecteer de documenten om toe te voegen",
         "error0"      : "Verbindingsfout.",
         "error5xx"    : "Dienst tijdelijk onbeschikbaar. Probeer het later opnieuw.",
         "errorSession": "Sessie verlopen"
