@@ -13,6 +13,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
     AjaxData = [],
     category = [],
     refDocUsed = [],
+    menuFilter = [],
     username = sessionStorage.getItem( 'username' ).toLowerCase(),
     token = sessionStorage.getItem( 'token' );
 
@@ -63,7 +64,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
 
     function bytesToSize( bytes ){
         var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-        if (bytes === 0) {
+        if ( bytes === 0 ) {
             return '0 Byte';
         }
         var i = parseInt( Math.floor( Math.log( bytes ) / Math.log( 1024 ) ) );
@@ -74,10 +75,10 @@ var gsTransfer = ( function ( _, moment, introJs ){
         array = array.sort( function ( a, b ){
             return a - b;
         } );
-        if (array.length > 1) {
+        if ( array.length > 1 ) {
             var ret = [array[0]];
             for (var i = 1; i < array.length; i++) { // start loop at 1 as element 0 can never be a duplicate
-                if (array[i - 1] !== array[i]) {
+                if ( array[i - 1] !== array[i] ) {
                     ret.push( array[i] );
                 }
             }
@@ -90,7 +91,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
         var a = [];
         $.each( data, function ( i, item ){
             var ref = parseInt( item.referenceDocument );
-            if (!isNaN( ref )) {
+            if ( !isNaN( ref ) ) {
                 a[a.length] = ref;
             } else {
                 a[a.length] = -1;
@@ -103,10 +104,10 @@ var gsTransfer = ( function ( _, moment, introJs ){
 
         $.each( category, function ( i, cat ){
             $.each( AjaxData, function ( j, row ){
-                if (cat.referenceDocument === parseInt( row.referenceDocument )) {
+                if ( cat.referenceDocument === parseInt( row.referenceDocument ) ) {
                     row.label = labelDoci18n( cat );
                 } else {
-                    if (!row.referenceDocument) {
+                    if ( !row.referenceDocument ) {
                         row.label = row.fileName;
                     }
                 }
@@ -126,26 +127,26 @@ var gsTransfer = ( function ( _, moment, introJs ){
         var sDay;
         var dateError = false;
 
-        if (date) {
+        if ( date ) {
             var sDate = date.split( /[.,\/ -]/ );
             sDay = sDate[0];
             sMonth = sDate[1];
             sYear = sDate[2];
-            if (sDay && isNaN( sDay )) {
+            if ( sDay && isNaN( sDay ) ) {
                 dateError = true;
             }
-            if (sMonth && isNaN( sMonth )) {
+            if ( sMonth && isNaN( sMonth ) ) {
                 dateError = true;
             } else {
                 sMonth = new Date().getMonth() + 1;
             }
 
-            if (sYear) {
-                if (isNaN( sYear )) {
+            if ( sYear ) {
+                if ( isNaN( sYear ) ) {
                     dateError = true;
                 } else {
-                    if (sYear < 100) {
-                        if (sYear < 50) {
+                    if ( sYear < 100 ) {
+                        if ( sYear < 50 ) {
                             sYear = 2000 + parseInt( sYear );
                         } else {
                             sYear = 1900 + parseInt( sYear );
@@ -156,7 +157,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
                 sYear = new Date().getFullYear(); // fix bug : if month = 0 and year = 0 -> month <> january
             }
 
-            if (!dateError && (!moment( {year: sYear, month: sMonth - 1, day: sDay} ).isValid())) {
+            if ( !dateError && (!moment( {year: sYear, month: sMonth - 1, day: sDay} ).isValid()) ) {
                 dateError = true;
             }
         }
@@ -184,11 +185,11 @@ var gsTransfer = ( function ( _, moment, introJs ){
      * */
 
     function labelDoci18n( item ){
-        if (lang === 'fr') {
+        if ( lang === 'fr' ) {
             return item.labelDocFR;
-        } else if (lang === 'nl') {
+        } else if ( lang === 'nl' ) {
             return item.labelDocNL;
-        } else if (lang === 'de') {
+        } else if ( lang === 'de' ) {
             return item.labelDocDE;
         } else {
             return item.labelDocX;
@@ -196,11 +197,11 @@ var gsTransfer = ( function ( _, moment, introJs ){
     }
 
     function labelCati18n( item ){
-        if (lang === 'fr') {
+        if ( lang === 'fr' ) {
             return item.labelCategoryFR;
-        } else if (lang === 'nl') {
+        } else if ( lang === 'nl' ) {
             return item.labelCategoryNL;
-        } else if (lang === 'de') {
+        } else if ( lang === 'de' ) {
             return item.labelCategoryDE;
         } else {
             return item.labelCategoryX;
@@ -212,43 +213,43 @@ var gsTransfer = ( function ( _, moment, introJs ){
      * */
 
     function formatExtension( value, row ){
-        if (value || value !== '') {
+        if ( value || value !== '' ) {
             var v = value.toLowerCase();
 
-            if (v.indexOf( 'pdf' ) !== -1) {
+            if ( v.indexOf( 'pdf' ) !== -1 ) {
                 return '<span  ' +
                     '<i class="fa fa-file-pdf-o fa-lg" title="pdf"></i>' +
-                    '</span>' ;
+                    '</span>';
             }
-            else if (v.indexOf( 'zip' ) !== -1) {
+            else if ( v.indexOf( 'zip' ) !== -1 ) {
                 return '<span  ' +
                     '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>' +
-                    '</span>' ;
+                    '</span>';
             }
-            else if (v.indexOf( 'xls' ) !== -1 || v.indexOf( 'csv' ) !== -1) {
+            else if ( v.indexOf( 'xls' ) !== -1 || v.indexOf( 'csv' ) !== -1 ) {
                 return '<span  ' +
                     '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>' +
-                    '</span>' ;
+                    '</span>';
             }
-            else if (v.indexOf( 'dat' ) !== -1) {
+            else if ( v.indexOf( 'dat' ) !== -1 ) {
                 return '<span  ' +
                     '<i class="fa fa-file-text-o fa-lg" title="dat"></i>' +
-                    '</span>' ;
+                    '</span>';
             }
-            else if (v.indexOf( 'jpg' ) !== -1 || v.indexOf( 'png' ) !== -1) {
+            else if ( v.indexOf( 'jpg' ) !== -1 || v.indexOf( 'png' ) !== -1 ) {
                 return '<span  ' +
                     '<i class="fa fa-file-picture-o fa-lg" title="image"></i>' +
-                    '</span>' ;
+                    '</span>';
             }
             else {
                 return '<span  ' +
                     '<i class="fa fa-file-o fa-lg" ></i>' +
-                    '</span>' ;
+                    '</span>';
             }
-            if (v.indexOf( 'dat' ) !== -1 || v.indexOf( 'csv' ) !== -1) {
+            if ( v.indexOf( 'dat' ) !== -1 || v.indexOf( 'csv' ) !== -1 ) {
                 return '<span  ' +
                     '<i class="fa fa-bar-chart"></i>' +
-                    '</span>' ;
+                    '</span>';
             }
             return value;
         } else {
@@ -258,7 +259,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
 
     function formatSize( value ){
         var val = parseInt( value );
-        if (val > 1024) {
+        if ( val > 1024 ) {
             return Math.round( val / 1024, 2 ) + ' KB';
         }
         else {
@@ -366,7 +367,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
     function listFolderUpload( destFolders ){
         var listFolder = $( '#uploadForm div.dir-list' );
         for (var key in destFolders) {
-            if (destFolders[key] === 'Presta') {
+            if ( destFolders[key] === 'Presta' ) {
                 listFolder.append(
                         '<label class="radio"><input name="destFolder" value="' +
                         destFolders[key] + '" type="radio" checked />' + destFolders[key] + '/</label>'
@@ -487,7 +488,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
         $this.addClass( 'active' );
         $this.parents( '[class^=level]' ).addClass( 'active' );
 
-        if (nodeID > -1 && $this.hasClass( 'level3' )) {
+        if ( nodeID > -1 && $this.hasClass( 'level3' ) ) {
             //clear filters
             table
                 .search( '' )
@@ -502,55 +503,39 @@ var gsTransfer = ( function ( _, moment, introJs ){
     }
 
 
-    function templateMenu(){
+    function templateMenu( menu ){
 
-        var prevCat = -100;
-        var htmlLeafNode = '';
-        var htmlCategoryNode = '';
-
-        var createLeafNode = _.template( $( '#menuL3' ).html() ),
+        var htmlLeafNode = '',
+            htmlCategoryNode = '',
+            currentCat = '',
+            currentCatLabel = '',
+            createLeafNode = _.template( $( '#menuL3' ).html() ),
             createCategoryNode = _.template( $( '#menuL2' ).html() );
 
-
-        refDocUsed = getUsedDocRef( AjaxData );
-
-        // BUILD leaf and category node
-        $.each( category, function ( i, item ){
-
-            var refdoc = parseInt( item.referenceDocument ),
-                numcat = parseInt( item.categoryNumber );
-
-            if ($.inArray( refdoc, refDocUsed ) > -1) { // doc is used
+        $.each( menu, function ( i, catArray ){
+            $.each( catArray, function ( j, item ){
 
                 htmlLeafNode += createLeafNode(
                     {
-                        referenceDocument: refdoc,
+                        referenceDocument: parseInt( item.referenceDocument ),
                         typeDocument     : labelDoci18n( item )
                     } );
+                currentCat = parseInt( item.categoryNumber );
+                currentCatLabel = labelCati18n( item );
 
-                if (prevCat !== numcat) {//new category
-
-                    htmlCategoryNode += createCategoryNode(
-                        {
-                            categoryNumber: numcat,
-                            categoryName  : labelCati18n( item ),
-                            leafNode      : htmlLeafNode
-                        } );
-                    htmlLeafNode = '';
-                    prevCat = numcat;
-                }
-            }
+            } );
+            htmlCategoryNode += createCategoryNode(
+                {
+                    categoryNumber: currentCat,
+                    categoryName  : currentCatLabel,
+                    leafNode      : htmlLeafNode
+                } );
+            htmlLeafNode = '';
         } );
 
         //other category
         //DONE: added manually!!!! it is too custom to make it a rule!!!
-        if ($.inArray( -1, refDocUsed ) > -1) {
-            /*htmlCategoryNode += createCategoryNode(
-             {
-             categoryNumber: 98,
-             categoryName  : i18n[lang].tree.other,
-             leafNode      : ''
-             } );*/
+        if ( $.inArray( -1, refDocUsed ) > -1 ) {
             htmlCategoryNode +=
                 '<li class="level2" >' +
                 '<a id="other" href="#">' + i18n[lang].tree.other + '</a>' +
@@ -567,9 +552,20 @@ var gsTransfer = ( function ( _, moment, introJs ){
         return htmlMenu;
     }
 
+    function filterMenu(){
+        refDocUsed = getUsedDocRef( AjaxData );
+        return _.groupBy( _.filter( category, function ( obj ){
+            if ( $.inArray( parseInt( obj.referenceDocument ), refDocUsed ) > -1 ) {
+                return obj;
+            }
+        } ), function ( obj ){
+            return obj.categoryNumber;
+        } );
+    }
+
     function createMenu(){
 
-        $( '#sidenav' ).html( templateMenu() );
+        $( '#sidenav' ).html( templateMenu( filterMenu() ) );
 
     }
 
@@ -586,12 +582,12 @@ var gsTransfer = ( function ( _, moment, introJs ){
 
         list.html( '' );
         while (i < 17) {
-            if ($.inArray( i, exclude ) === -1) {
+            if ( $.inArray( i, exclude ) === -1 ) {
                 headerCol = table.columns( i ).header().to$().html();
                 li = document.createElement( 'li' );
                 li.innerHTML = '&nbsp;&nbsp;&nbsp;' + headerCol;
                 li.setAttribute( 'data-index', i );
-                if (table.column( i ).visible()) {
+                if ( table.column( i ).visible() ) {
                     li.className += "active";
                 }
                 list.append( li );
@@ -620,7 +616,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
             /* if (row.isNew) return "<i class='fa fa-check-square-o text-success'></i>";
              else return "<i class='fa fa-times'></i>";*/
 
-            if (row.isNew) {
+            if ( row.isNew ) {
                 row.classNew = 'isNew';
             }
             else {
@@ -628,10 +624,10 @@ var gsTransfer = ( function ( _, moment, introJs ){
             }
 
             row.downloadCount = parseInt( row.downloadCount );
-            if (isNaN( row.downloadCount )) {
+            if ( isNaN( row.downloadCount ) ) {
                 row.downloadCount = -1;
             }
-            if (row.downloadCount > 0) {
+            if ( row.downloadCount > 0 ) {
                 row.alreadyDL = 'text-muted';
             }
             else {
@@ -642,16 +638,16 @@ var gsTransfer = ( function ( _, moment, introJs ){
 
             //TODO: how to improve this code? ==> ugly
             row.employerNumber = parseInt( row.employerNumber );
-            if (isNaN( row.employerNumber )) {
+            if ( isNaN( row.employerNumber ) ) {
                 row.employerNumber = '';
             }
 
             row.referenceDocument = parseInt( row.referenceDocument );
-            if (isNaN( row.referenceDocument )) {
+            if ( isNaN( row.referenceDocument ) ) {
                 row.referenceDocument = '';
             }
 
-            if (row.uploadUserName === username) {
+            if ( row.uploadUserName === username ) {
                 row.dlClass = 'fa-upload';
             }
             else {
@@ -689,7 +685,8 @@ var gsTransfer = ( function ( _, moment, introJs ){
             },
             //pagingType: 'full',
             order         : [
-                [ 1, 'asc' ], [ 2, 'desc' ]
+                [ 1, 'asc' ],
+                [ 2, 'desc' ]
             ],
             columnDefs    : [
                 {
@@ -803,13 +800,13 @@ var gsTransfer = ( function ( _, moment, introJs ){
             url    : serverURL + 'file/',
             data   : data,
             success: function ( data ){
-                if (data) {
+                if ( data ) {
                     //alert( i18n[lang].file.del );
-                    swal({
+                    swal( {
                         title: i18n[lang].file.del,
-                        type: "success",
-                        timer: 4000
-                    });
+                        type : "success",
+                        timer: 2000
+                    } );
                     table
                         .row( $this.closest( 'tr' ) )
                         .remove()
@@ -826,7 +823,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
         //folder
         return $.ajax( {
             type   : 'POST',
-            url    : serverURL + 'folder/', // + token + '/',
+            url    : serverURL + 'folder/',
             data   : { 'token': token },
             success: function ( data ){
                 listFolderUpload( data );
@@ -863,32 +860,30 @@ var gsTransfer = ( function ( _, moment, introJs ){
             error     : function (){
                 $( '#loader' ).hide();
                 //alert( i18n[lang].error0 );
-                swal({
+                swal( {
                     title: "ERROR",
-                    text: i18n[lang].error0,
-                    type: "error",
+                    text : i18n[lang].error0,
+                    type : "error",
                     timer: 4000
-                });
+                } );
                 AjaxData = [];
-                //TODO: if file list is empty: ask them to upload a file...
             },
             dataType  : 'json',
             statusCode: {
                 403: function (){
                     $( '#loader' ).hide();
                     //alert( i18n[lang].errorSession );
-                    swal({
+                    swal( {
                         title: "ERROR",
-                        text: i18n[lang].errorSession,
-                        type: "error",
+                        text : i18n[lang].errorSession,
+                        type : "error",
                         timer: 4000
-                    });
+                    } );
                     window.location = baseURL;
                 }
             }
         } );
     }
-
 
 
     /****************************************************
@@ -917,13 +912,13 @@ var gsTransfer = ( function ( _, moment, introJs ){
         // slide off #side-menu
         oTable.on( 'length.dt', function (){
             var sbWidth = $( '#sidenav' ).width();
-            $('#main').animate( {
+            $( '#main' ).animate( {
                 right: 0
-            },200 );
-            $('#side-menu').animate( {
+            }, 200 );
+            $( '#side-menu' ).animate( {
                 right: -sbWidth,
                 width: sbWidth
-            },200 ).removeClass( 'active' );
+            }, 200 ).removeClass( 'active' );
         } );
 
         $( 'p.side-menu-head' ).text( i18n[lang].sideMenu.config );
@@ -936,7 +931,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
     function toggleDLButton(){
         var trActive = $( 'tr.active' );
 
-        if (trActive && trActive.length > 0) {
+        if ( trActive && trActive.length > 0 ) {
             addDownloadButton();
             $( '.downloadall' ).show();
         } else {
@@ -1021,7 +1016,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
     }
 
     function toggleAllIconCheck( activated ){
-        if (activated) {
+        if ( activated ) {
             $( '.iconSelect' )
                 .find( 'i' )
                 .removeClass( 'fa-square-o fa-check-square-o' )
@@ -1070,6 +1065,9 @@ var gsTransfer = ( function ( _, moment, introJs ){
 
         var filterNew = $( '#filterNew' );
         filterNew.on( 'click', function (){
+            $( '#breadcrumb' ).html(
+                    $( '#breadcrumb' ).html() +
+                    '<li class="active">' + i18n[lang].button.filter.new + '</li>' );
             table
                 .column( 16 ).search( 'true' )
                 //.column(4).search('[^' + username + ']', true, false)
@@ -1079,6 +1077,9 @@ var gsTransfer = ( function ( _, moment, introJs ){
 
         var filterDL = $( '#filterDL' );
         filterDL.on( 'click', function (){
+            $( '#breadcrumb' ).html(
+                    $( '#breadcrumb' ).html() +
+                    '<li class="active">' + i18n[lang].button.filter.notDL + '</li>' );
             table
                 .column( 15 ).search( '^0$', true, false )
                 //.column( 4 ).search( '[^' + username + ']', true, false )
@@ -1088,6 +1089,9 @@ var gsTransfer = ( function ( _, moment, introJs ){
 
         var filterClear = $( '#filterClear' );
         filterClear.on( 'click', function (){
+            $( '#breadcrumb' ).html(
+                    $( '#breadcrumb' ).html() +
+                    '<li class="active">' + i18n[lang].button.filter.clear + '</li>' );
             $( 'input[name=search]' ).text( '' );
             resetFilters();
             table.draw();
@@ -1154,103 +1158,103 @@ var gsTransfer = ( function ( _, moment, introJs ){
 
     function setEventHelpButton(){
         var helpBtn = $( '#help' );
-        helpBtn.html('<i class="fa fa-question"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.help);
-        helpBtn.on('click', function(){
+        helpBtn.html( '<i class="fa fa-question"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.help );
+        helpBtn.on( 'click', function (){
             //console.log("test");
             var intro = introJs();
-            intro.setOptions({
+            intro.setOptions( {
                 steps: [
                     {
                         intro: i18n[lang].help.welcome
                     },
                     {
                         element: '#tableID',
-                        intro: i18n[lang].help.table
+                        intro  : i18n[lang].help.table
                     },
                     {
-                        element: '.iconSelect',
-                        intro: i18n[lang].help.checkbox,
+                        element : '.iconSelect',
+                        intro   : i18n[lang].help.checkbox,
                         position: 'right'
                     },
                     {
-                        element: '.dlfile',
-                        intro: i18n[lang].help.dlfile,
+                        element : '.dlfile',
+                        intro   : i18n[lang].help.dlfile,
                         position: 'right'
                     },
                     {
-                        element: '.dlfileLabel',
-                        intro: i18n[lang].help.dlfileLabel,
+                        element : '.dlfileLabel',
+                        intro   : i18n[lang].help.dlfileLabel,
                         position: 'right'
                     },
                     {
-                        element: '.remove',
-                        intro: i18n[lang].help.remove,
+                        element : '.remove',
+                        intro   : i18n[lang].help.remove,
                         position: 'left'
                     },
                     {
-                        element: '.dataTables_scrollHeadInner > table:nth-child(1) > thead:nth-child(1) > tr:nth-child(1)',
-                        intro: i18n[lang].help.headers,
+                        element : '.dataTables_scrollHeadInner > table:nth-child(1) > thead:nth-child(1) > tr:nth-child(1)',
+                        intro   : i18n[lang].help.headers,
                         position: 'bottom'
                     },
                     {
-                        element: '.bottom',
-                        intro: i18n[lang].help.bottom,
+                        element : '.bottom',
+                        intro   : i18n[lang].help.bottom,
                         position: 'left'
                     },
                     {
-                        element: '#btn-upload-div',
-                        intro: i18n[lang].help.upload,
+                        element : '#btn-upload-div',
+                        intro   : i18n[lang].help.upload,
                         position: 'right'
                     },
                     {
-                        element: 'li.level1',
-                        intro: i18n[lang].help.menu,
+                        element : 'li.level1',
+                        intro   : i18n[lang].help.menu,
                         position: 'right'
                     },
                     {
-                        element: '#upload',
-                        intro: i18n[lang].help.uploaded,
+                        element : '#upload',
+                        intro   : i18n[lang].help.uploaded,
                         position: 'right'
                     },
                     {
-                        element: '#breadcrumb',
-                        intro: i18n[lang].help.breadcrumb,
+                        element : '#breadcrumb',
+                        intro   : i18n[lang].help.breadcrumb,
                         position: 'right'
                     },
                     {
-                        element: '#filterby',
-                        intro: i18n[lang].help.filterby,
+                        element : '#filterby',
+                        intro   : i18n[lang].help.filterby,
                         position: 'left'
                     },
                     {
-                        element: '#searchBox',
-                        intro: i18n[lang].help.searchBox,
+                        element : '#searchBox',
+                        intro   : i18n[lang].help.searchBox,
                         position: 'bottom'
                     },
                     {
-                        element: '#datepicker',
-                        intro: i18n[lang].help.datepicker,
+                        element : '#datepicker',
+                        intro   : i18n[lang].help.datepicker,
                         position: 'bottom'
                     },
                     {
-                        element: '.reloadme',
-                        intro: i18n[lang].help.reloadme,
+                        element : '.reloadme',
+                        intro   : i18n[lang].help.reloadme,
                         position: 'left'
                     },
                     {
-                        element: '#signout',
-                        intro: i18n[lang].help.logoff,
+                        element : '#signout',
+                        intro   : i18n[lang].help.logoff,
                         position: 'left'
                     }
                 ]
-            });
-            intro.setOption("skipLabel", '');
-            intro.setOption("nextLabel", '');//'→');
-            intro.setOption("prevLabel", '');//'←');
-            intro.setOption("doneLabel", '');
+            } );
+            intro.setOption( "skipLabel", '' );
+            intro.setOption( "nextLabel", '' );//'→');
+            intro.setOption( "prevLabel", '' );//'←');
+            intro.setOption( "doneLabel", '' );
             /*intro.setOption('showButtons', false);*/
             intro.start();
-        });
+        } );
 
     }
 
@@ -1298,21 +1302,21 @@ var gsTransfer = ( function ( _, moment, introJs ){
         $.when( loadCategory(), loadData(), loadFolder() ).done( function (){
 
             //Add label for reference of Document
-            $.when( mergeLabelDoc() ).done ( function (){
+            $.when( mergeLabelDoc() ).done( function (){
                 //Template of Table and Menu
-                $.when( createDataTable(), createMenu() ).done( function () {
+                $.when( createDataTable(), createMenu() ).done( function (){
                     //set upload form events
-                    $.when( setEventuploadForm(), setEventsHTML() ).done( function () {
-                        setTimeout(function(){
-                            $( '#warningQuota' ).html('<p>'+ i18n[lang].warningQuota + '</p>');
+                    $.when( setEventuploadForm(), setEventsHTML() ).done( function (){
+                        setTimeout( function (){
+                            $( '#warningQuota' ).html( '<p>' + i18n[lang].warningQuota + '</p>' );
 
-                            if(AjaxData.length === 0){
-                                $('#btn-upload-div').trigger('click');
+                            if ( AjaxData.length === 0 ) {
+                                $( '#btn-upload-div' ).trigger( 'click' );
                             }
-                        }, 1000);
-                    });
-                });
-            });
+                        }, 1000 );
+                    } );
+                } );
+            } );
         } );
     }
 
@@ -1334,55 +1338,55 @@ var gsTransfer = ( function ( _, moment, introJs ){
                 lang = 'en';
             }
 
-            if (lang !== 'en') {
+            if ( lang !== 'en' ) {
                 $.getScript( i18n[lang].url.datepicker );
             }
 
-            if (i18n[lang]) {   // if language is set,
+            if ( i18n[lang] ) {   // if language is set,
                 render();       // load data and create table
             } else {
                 //alert( 'ERROR loading data' );
-                swal({
+                swal( {
                     title: "ERROR",
-                    text: "ERROR loading data",
-                    type: "error",
+                    text : "ERROR loading data",
+                    type : "error",
                     timer: 4000
-                });
+                } );
                 window.location = baseURL;
             }
         } );
 
 
-
     }
+
     $( 'document' ).ready( main() );
 
-/*    function setSideMenuHeight(){
-        var sbWidth = $( '#sidenav' ).width();
-        var mainTop = $('#main').offset().top;
-        $('#main').animate( {
-            right: 0
-        },200 );
+    /*    function setSideMenuHeight(){
+     var sbWidth = $( '#sidenav' ).width();
+     var mainTop = $('#main').offset().top;
+     $('#main').animate( {
+     right: 0
+     },200 );
 
-        $('#side-menu').animate( {
-            right: -sbWidth,
-            width: sbWidth,
-            bottom: 0
-        },200 )
-            .css( {
-                height: $( window).height(),
-                top   : mainTop, // get top height to align
-                right : -sbWidth,
-                width : sbWidth,
-                bottom: 0
-            } ).removeClass();
-    }*/
+     $('#side-menu').animate( {
+     right: -sbWidth,
+     width: sbWidth,
+     bottom: 0
+     },200 )
+     .css( {
+     height: $( window).height(),
+     top   : mainTop, // get top height to align
+     right : -sbWidth,
+     width : sbWidth,
+     bottom: 0
+     } ).removeClass();
+     }*/
 
-/*    $('[name="tableID_length"]').on('click', function(e){
-        e.stopPropagation();
-        console.log( $( '#contentTable' ).height() );
-        $('#side-menu').height( $( window).height() );
-    });*/
+    /*    $('[name="tableID_length"]').on('click', function(e){
+     e.stopPropagation();
+     console.log( $( '#contentTable' ).height() );
+     $('#side-menu').height( $( window).height() );
+     });*/
 
 }( _, moment, introJs ) );
 
