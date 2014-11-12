@@ -13,7 +13,6 @@ var gsTransfer = ( function ( _, moment, introJs ){
     AjaxData = [],
     category = [],
     refDocUsed = [],
-    menuFilter = [],
     username = sessionStorage.getItem( 'username' ).toLowerCase(),
     token = sessionStorage.getItem( 'token' );
 
