@@ -182,6 +182,8 @@ ul.lang {
 }
 a.default-lang {
   color: #479fed;
+  border: 1px solid #479fed;
+  padding: 2px;
 }
 /**********************************************
 TOP NAV

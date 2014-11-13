@@ -1,4 +1,4 @@
-var gsTransfer = ( function ( _, moment, introJs ){
+var gsTransfer = (function ( _, moment, introJs ){
     'use strict';
 
     /***  GLOBAL VARIABLES ***/
@@ -301,9 +301,9 @@ var gsTransfer = ( function ( _, moment, introJs ){
 
 
         //console.log( array );
+
         $.each( array, function ( i, item ){
-            //console.log( item );
-            listID += $( item[14] ).data( 'file-id' ) + '@!';
+            listID += $( item[14] ).data( 'file-id' ) + '&' + item[3] + '@!';
         } );
 
         //console.log(listID);
@@ -351,7 +351,13 @@ var gsTransfer = ( function ( _, moment, introJs ){
                         location.reload();
                     } )
                     .error( function ( jqXHR, textStatus ){
-                        alert( 'Error ' + textStatus );
+                        console.log( jqXHR );
+                        swal( {
+                            title: "ERROR",
+                            type : "error",
+                            timer: 4000
+                        } );
+
                     } )
                     .complete( function ( result ){
                         //console.log( "result file upload: ", result );
@@ -844,7 +850,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
 
     function loadData(){
 
-        $( '#loader' ).show();
+        showLoading();
 
         return $.ajax( {
             type      : 'POST',
@@ -854,10 +860,10 @@ var gsTransfer = ( function ( _, moment, introJs ){
                 AjaxData = data;
             },
             complete  : function (){
-                $( '#loader' ).hide();
+                hideLoading();
             },
             error     : function (){
-                $( '#loader' ).hide();
+                hideLoading();
                 //alert( i18n[lang].error0 );
                 swal( {
                     title: "ERROR",
@@ -870,7 +876,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
             dataType  : 'json',
             statusCode: {
                 403: function (){
-                    $( '#loader' ).hide();
+                    hideLoading();
                     //alert( i18n[lang].errorSession );
                     swal( {
                         title: "ERROR",
@@ -889,6 +895,14 @@ var gsTransfer = ( function ( _, moment, introJs ){
      * EVENTS
      * */
 
+
+    function showLoading(){
+        $( '#loader' ).show();
+    }
+
+    function hideLoading(){
+        $( '#loader' ).hide();
+    }
 
     function setEventColumnListVisible(){
         $( '.side-menu-list > li' ).off( 'click' ).on( 'click', function (){
@@ -1347,7 +1361,7 @@ var gsTransfer = ( function ( _, moment, introJs ){
                 //alert( 'ERROR loading data' );
                 swal( {
                     title: "ERROR",
-                    text : "ERROR loading data",
+                    text : "ERROR loading language data",
                     type : "error",
                     timer: 4000
                 } );
@@ -1387,5 +1401,4 @@ var gsTransfer = ( function ( _, moment, introJs ){
      $('#side-menu').height( $( window).height() );
      });*/
 
-}( _, moment, introJs ) );
-
+}( _, moment, introJs ));
