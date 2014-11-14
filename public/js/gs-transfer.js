@@ -292,6 +292,7 @@ var gsTransfer = (function ( _, moment, introJs ){
                         i18n[lang].button.multiDL +
                         '</button>'
                 );
+        $( '.downloadall' ).on( 'click', downloadAll );
     }
 
     function downloadAll(){
