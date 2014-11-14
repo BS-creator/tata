@@ -61,6 +61,16 @@ var gsTransfer = (function ( _, moment, introJs ){
         reportError( error, 'Uncatched Exception' );
     };
 
+    function getUrlParameter( sParam ){
+        var sPageURL = window.location.search.substring( 1 );
+        var sURLVariables = sPageURL.split( '&' );
+        for (var i = 0; i < sURLVariables.length; i++) {
+            if ( sURLVariables[i] === sParam ) {
+                return sURLVariables[i];
+            }
+        }
+    }
+
     function bytesToSize( bytes ){
         var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
         if ( bytes === 0 ) {
@@ -328,7 +338,7 @@ var gsTransfer = (function ( _, moment, introJs ){
 
         swal( {
             title: i18n[lang].file.dl,
-            type : "warning",
+            type : 'warning',
             timer: (fileNumber * 1200)
         } );
         // about 1,2 seconds per files (õ_ó) .... it's a good guess, what a shame... (╯_╰”)
@@ -358,7 +368,9 @@ var gsTransfer = (function ( _, moment, introJs ){
                     .success( function (){
                         $( '#progress' ).hide();
                         $( '.close' ).click();
-                        location.reload();
+                        //window.location.reload();
+                        window.location = baseURL + 'file.html?upload';
+
                     } )
                     .error( function ( jqXHR, textStatus ){
                         console.log( jqXHR );
@@ -423,6 +435,9 @@ var gsTransfer = (function ( _, moment, introJs ){
     }
 
     function menuRootClick( event ){
+        /*$( '#root' ).parent('li.level1').addClass("active");
+        console.log($( '#root' ).parent('li.level1'));*/
+        $( '#upload' ).removeClass('active');
 
         resetFilters();
         table.columns( '.detailsLayer' ).visible( false, false );
@@ -452,6 +467,8 @@ var gsTransfer = (function ( _, moment, introJs ){
 
     function menuUploadClick( event ){
 
+        $( '#root' ).parent('li.level1').removeClass("active");
+        $( '#upload' ).addClass('active');
         resetFilters();
         table.columns( '.detailsLayer' ).visible( true, false );
         table.columns( '.fileLayer' ).visible( false, false );
@@ -826,7 +843,7 @@ var gsTransfer = (function ( _, moment, introJs ){
                         .row( $this.closest( 'tr' ) )
                         .remove()
                         .draw();
-                    //location.reload();
+                    //window.location.reload();
                 } else {
                     alert( 'ERROR' );
                 }
@@ -995,7 +1012,8 @@ var gsTransfer = (function ( _, moment, introJs ){
             $( '.login-lang' ).removeClass( 'default-lang' );
             $( '.' + lang ).addClass( 'default-lang' );
             sessionStorage.setItem( 'lang', lang );
-            location.reload();
+            window.location = baseURL + 'file.html';
+            //window.location.reload();
         } );
     }
 
@@ -1135,7 +1153,8 @@ var gsTransfer = (function ( _, moment, introJs ){
         var reloadBtn = $( '.reloadme' );
         reloadBtn.html( '<i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.reload );
         reloadBtn.on( 'click', function (){
-            location.reload();
+            window.location = baseURL + 'file.html';
+            //window.location.reload();
         } );
     }
 
@@ -1331,10 +1350,15 @@ var gsTransfer = (function ( _, moment, introJs ){
                     //set upload form events
                     $.when( setEventuploadForm(), setEventsHTML() ).done( function (){
                         setTimeout( function (){
+                            var showUpload = getUrlParameter( 'upload' );
+                            //console.log(showUpload);
                             $( '#warningQuota' ).html( '<p>' + i18n[lang].warningQuota + '</p>' );
 
                             if ( AjaxData.length === 0 ) {
                                 $( '#btn-upload-div' ).trigger( 'click' );
+                            }
+                            if ( showUpload === 'upload' ) {
+                                $( '#upload' ).find( 'a' ).trigger( 'click' );
                             }
                         }, 1000 );
                     } );
