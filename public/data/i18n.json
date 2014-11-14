@@ -46,7 +46,8 @@
         },
         "file"        : {
             "add": "Document ajouté",
-            "del": "Document supprimé"
+            "del": "Document supprimé",
+            "dl" : "Vos documents sont en cours de téléchargement. \n\n Merci de patienter."
         },
         "datepicker"  : {
             "to"   : "à",
@@ -134,7 +135,8 @@
         },
         "file"      : {
             "add": "Document toegevoegd",
-            "del": "Document verwijderd"
+            "del": "Document verwijderd",
+            "dl" : "Uw bestanden zijn aan het downloaden. \n\n Dank u voor uw geduld."
         },
         "datepicker": {
             "to"   : "tot",
@@ -222,7 +224,8 @@
         },
         "file"        : {
             "add": "Document added",
-            "del": "Document deleted"
+            "del": "Document deleted",
+            "dl" : "Your files are being downloaded. \n\n Thank you for your patience."
         },
         "datepicker"  : {
             "to"   : "to",

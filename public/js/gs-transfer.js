@@ -298,13 +298,15 @@ var gsTransfer = (function ( _, moment, introJs ){
     function downloadAll(){
 
         var array = getSelectedRows(),
-            listID = '';
+            listID = '',
+            fileNumber = 0;
 
 
         //console.log( array );
 
         $.each( array, function ( i, item ){
             listID += $( item[14] ).data( 'file-id' ) + '&' + item[3] + '@!';
+            fileNumber++;
         } );
 
         //console.log(listID);
@@ -323,6 +325,13 @@ var gsTransfer = (function ( _, moment, introJs ){
         } );
 
         $( 'body' ).append( form );
+
+        swal( {
+            title: i18n[lang].file.dl,
+            type : "warning",
+            timer: (fileNumber * 1200)
+        } );
+        // about 1,2 seconds per files (õ_ó) .... it's a good guess, what a shame... (╯_╰”)
 
         form.submit();
 
