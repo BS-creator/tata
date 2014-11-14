@@ -116,7 +116,7 @@
             "empl"  : "Werkgever",
             "label" : "Label",
             "refdoc": "N° Doc",
-            "size"  : "Groote",
+            "size"  : "Grootte",
             "ext"   : "Type",
             "path"  : "Locatie",
             "refCl" : "Ref. Klant",
@@ -126,7 +126,7 @@
         },
         "tree"      : {
             "root"  : "Alle documenten weergeven",
-            "upload": "Geüploade documenten bekijken weergeven",
+            "upload": "Geüploade documenten bekijken",
             "other" : "Andere Documenten"
         },
         "sideMenu"  : {
@@ -170,8 +170,8 @@
         "warningQuota": " Deze toepassing is voorzien voor de overdracht van bestanden. Gelieve regelmatig de bestanden te verwijderen.",
         "listAll"     : "Alle",
         "showHide"    : "Kolommen tonen",
-        "upload"      : "Documenten uploaden naar de server",
-        "modalupload" : "Document uploaden naar Group S server",
+        "upload"      : "Documenten uploaden naar Group S",
+        "modalupload" : "Documenten uploaden naar Group S",
         "modalbq"     : "Gelieve de doelmap te selecteren alvorens uw bestanden toe te voegen.",
         "modalbtn"    : "Selecteer de documenten om toe te voegen",
         "error0"      : "Verbindingsfout.",
