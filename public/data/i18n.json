@@ -37,8 +37,8 @@
             "del"   : "Effacer"
         },
         "tree"        : {
-            "root"  : "Afficher tous les fichiers",
-            "upload": "Afficher les fichiers transmis à Group S",
+            "root"  : "Afficher tous les fichiers publiés par Group S",
+            "upload": "Afficher mes fichiers transmis à Group S",
             "other" : "Autres Documents"
         },
         "sideMenu"    : {
@@ -127,8 +127,8 @@
             "del"   : "Verwijderen"
         },
         "tree"      : {
-            "root"  : "Alle documenten weergeven",
-            "upload": "Geüploade documenten bekijken",
+            "root"  : "Alle documenten van Group S weergeven ",
+            "upload": "Mijn geüploade documenten bekijken",
             "other" : "Andere Documenten"
         },
         "sideMenu"  : {
@@ -217,8 +217,8 @@
             "del"   : "Delete"
         },
         "tree"        : {
-            "root"  : "Show all documents",
-            "upload": "Show uploaded documents to Group S",
+            "root"  : "Show all documents published by Group S",
+            "upload": "Show my uploaded documents to Group S",
             "other" : "Other Documents"
         },
         "sideMenu"    : {
