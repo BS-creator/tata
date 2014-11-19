@@ -1328,7 +1328,7 @@ var gsTransfer = (function ( _, moment, introJs ){
 
     function setEventsHTML(){
 
-        //setEventSideMenuColumnList();
+        setEventSideMenuColumnList();
 
         setEventMenuFilters();
 
@@ -1382,6 +1382,7 @@ var gsTransfer = (function ( _, moment, introJs ){
 
                             if ( AjaxData.length === 0 ) {
                                 $( '#btn-upload-div' ).trigger( 'click' );
+                                console.log(">>> NO files");
                             }
                             if ( showUpload === 'upload' ) {
                                 $( '#upload' ).find( 'a' ).trigger( 'click' );
