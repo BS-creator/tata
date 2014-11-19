@@ -33,6 +33,7 @@ table tr th .pw-btn-group-th,
 ***********************************************/
 .btn-portal,
 .btn-portal-blue,
+.btn-portal-red,
 .btn-portal-default,
 .btn-portal-green {
     display: inline-block;
@@ -119,9 +120,22 @@ table tr th .pw-btn-group-th,
     border-color:       @gs-green;
 }
 
+.btn-portal-red {
+  background-color:   @gs-darkpink;
+  border-color:       @gs-darkpink;
+  color: #FFF;
+}
+.btn-portal-red:hover,
+.btn-portal-red:focus,
+.btn-portal-red:active,
+.btn-portal-red.active {
+  background-color:   @gs-viola;
+  border-color:       @gs-viola;
+}
+
 /**********************************************
                     DOWNLOAD BUTTON
 **********************************************/
-.downloadall {
+.downloadall, .deleteAll {
     display: none;
 }

@@ -124,55 +124,25 @@ var gsTransfer = (function ( _, moment, introJs ){
         } );
     }
 
-    /**
-     *
-     * @param date {string}
-     * @returns {string || null}
-     */
-    function validateDate( date ){
+    function getFilesID(){
+        var array = getSelectedRows(),
+            listID = '',
+            fileNumber = 0;
 
-        var sYear;
-        var sMonth;
-        var sDay;
-        var dateError = false;
+        console.log( array );
 
-        if ( date ) {
-            var sDate = date.split( /[.,\/ -]/ );
-            sDay = sDate[0];
-            sMonth = sDate[1];
-            sYear = sDate[2];
-            if ( sDay && isNaN( sDay ) ) {
-                dateError = true;
-            }
-            if ( sMonth && isNaN( sMonth ) ) {
-                dateError = true;
-            } else {
-                sMonth = new Date().getMonth() + 1;
-            }
+        $.each( array, function ( i, item ){
+            listID += $( item[14] ).data( 'file-id' ) + '&' + item[3] + '@!';
+            fileNumber++;
+        } );
 
-            if ( sYear ) {
-                if ( isNaN( sYear ) ) {
-                    dateError = true;
-                } else {
-                    if ( sYear < 100 ) {
-                        if ( sYear < 50 ) {
-                            sYear = 2000 + parseInt( sYear );
-                        } else {
-                            sYear = 1900 + parseInt( sYear );
-                        }
-                    }
-                }
-            } else {
-                sYear = new Date().getFullYear(); // fix bug : if month = 0 and year = 0 -> month <> january
-            }
+        console.log( listID );
 
-            if ( !dateError && (!moment( {year: sYear, month: sMonth - 1, day: sDay} ).isValid()) ) {
-                dateError = true;
-            }
-        }
-        return !dateError ? moment( {year: sYear, month: sMonth - 1, day: sDay} ).format( "DD-MM-YYYY" ).toString() : null;
+        return {
+            'token' : token,
+            'fileID': listID
+        };
     }
-
 
     function filterDateClear(){
         //$( this ).val('').datepicker('update');
@@ -292,17 +262,38 @@ var gsTransfer = (function ( _, moment, introJs ){
      * DOWNLOAD (ZIP)
      * */
 
-    function addDownloadButton(){
+    function addLowerButton(){
         var multidl = $( '.multiDL' );
+        multidl.html( '' );
+        multidl.append(
+                '<button class="btn-portal-green downloadall mt-xs">' +
+                '<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' +
+                i18n[lang].button.multiDL +
+                '</button>'
+        );
+        $( '.downloadall' ).on( 'click', downloadAll );
+
+        multidl.append(
+                '<button class="btn-portal-red deleteAll mt-xs pull-right">' +
+                '<i class="fa fa-trash"></i>&nbsp;&nbsp;&nbsp;' +
+                i18n[lang].button.multiDelete +
+                '</button>'
+        );
+        $( '.deleteAll' ).on( 'click', deleteAll );
+    }
+
+    function addDeleteButton( tag ){
+        var multidl = $( tag );
         multidl.html( '' );
         var btn =
                 multidl.append(
-                        '<button class="btn-portal-green downloadall mt-xs">' +
-                        '<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' +
-                        i18n[lang].button.multiDL +
+                        '<button class="btn-portal-green deleteAll mt-xs">' +
+                        '<i class="fa fa-trash"></i>&nbsp;&nbsp;&nbsp;' +
+                        i18n[lang].button.multiDelete +
                         '</button>'
                 );
-        $( '.downloadall' ).on( 'click', downloadAll );
+        $( '.deleteAll' ).on( 'click', deleteAll );
+
     }
 
     function downloadAll(){
@@ -434,21 +425,21 @@ var gsTransfer = (function ( _, moment, introJs ){
         updateMenuVisibleColumnList();
     }
 
-    function setBreadCrumb(text, textChild){
-        if(textChild) {
+    function setBreadCrumb( text, textChild ){
+        if ( textChild ) {
             $( '#breadcrumb' ).html( i18n[lang].result + '<li class="active noclick">' + text + '</li><li class="active noclick">' + textChild + '</li>' );
-        } else if (text) {
+        } else if ( text ) {
             $( '#breadcrumb' ).html( i18n[lang].result + '<li class="active noclick">' + text + '</li>' );
         } else {
-            console.log("error Setting BreadCrumb.");
+            console.log( "error Setting BreadCrumb." );
         }
     }
 
     function menuRootClick( event ){
         /*$( '#root' ).parent('li.level1').addClass("active");
-        console.log($( '#root' ).parent('li.level1'));*/
-        console.log("test");
-        $( '#upload' ).removeClass('active');
+         console.log($( '#root' ).parent('li.level1'));*/
+        console.log( "test" );
+        $( '#upload' ).removeClass( 'active' );
 
         resetFilters();
         table.columns( '.detailsLayer' ).visible( false, false );
@@ -458,7 +449,7 @@ var gsTransfer = (function ( _, moment, introJs ){
         table.columns.adjust().draw( false );
         //filter on uploadUserName
         table.column( 4 ).search( '[^' + username + ']', true, false ).draw();
-        setBreadCrumb(i18n[lang].tree.root);
+        setBreadCrumb( i18n[lang].tree.root );
         //$( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.root + '</li>' );
         updateMenuVisibleColumnList();
         event.preventDefault();
@@ -475,7 +466,7 @@ var gsTransfer = (function ( _, moment, introJs ){
             .column( 7 ).search( '^\\s*$', true, false )
             .draw(); //filter on uploadUserName != username
         $( '[class^=level] .active' ).removeClass( 'active' );
-        setBreadCrumb(i18n[lang].tree.other);
+        setBreadCrumb( i18n[lang].tree.other );
         //$( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.other + '</li>' );
         updateMenuVisibleColumnList();
         event.preventDefault();
@@ -483,15 +474,15 @@ var gsTransfer = (function ( _, moment, introJs ){
 
     function menuUploadClick( event ){
 
-        $( '#root' ).parent('li.level1').removeClass("active");
-        $( '#upload' ).addClass('active');
+        $( '#root' ).parent( 'li.level1' ).removeClass( "active" );
+        $( '#upload' ).addClass( 'active' );
         resetFilters();
         table.columns( '.detailsLayer' ).visible( true, false );
         table.columns( '.fileLayer' ).visible( false, false );
         table.columns.adjust().draw( false ); // adjust column sizing and redraw
         table.column( 4 ).search( username ).draw(); //filter on uploadUserName
         $( '[class^=level] .active' ).removeClass( 'active' );
-        setBreadCrumb(i18n[lang].tree.upload);
+        setBreadCrumb( i18n[lang].tree.upload );
         //$( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.upload + '</li>' );
         updateMenuVisibleColumnList();
         event.preventDefault();
@@ -508,7 +499,7 @@ var gsTransfer = (function ( _, moment, introJs ){
             child = {};
 
         $( '[class^=level] .active' ).removeClass( 'active' );
-        setBreadCrumb( $this.children( 'a' ).text());
+        setBreadCrumb( $this.children( 'a' ).text() );
         //$( '#breadcrumb' ).html( '<li class="active">' + $this.children( 'a' ).text() + '</li>' );
         $this.addClass( 'active' );
         $this.parents( 'li' ).addClass( 'active' );
@@ -535,7 +526,7 @@ var gsTransfer = (function ( _, moment, introJs ){
             nodeText = $this.text(),
             nodeParentText = $this.closest( 'li.level2' ).children( 'a' ).text();
 
-        setBreadCrumb(nodeParentText,nodeText );
+        setBreadCrumb( nodeParentText, nodeText );
         //$( '#breadcrumb' ).html( '<li class="active">' + nodeParentText + '</li><li class="active">' + nodeText + '</li>' );
 
         $( '[class^=level] .active' ).removeClass( 'active' );
@@ -621,9 +612,7 @@ var gsTransfer = (function ( _, moment, introJs ){
     }
 
     function createMenu(){
-
         $( '#sidenav' ).html( templateMenu( filterMenu() ) );
-
     }
 
     /****************************************************
@@ -845,20 +834,34 @@ var gsTransfer = (function ( _, moment, introJs ){
     /****************************************************
      * AJAX
      * */
+
+    function signout(){
+
+        return $.ajax( {
+            type    : 'DELETE',
+            url     : serverURL + 'login/',
+            data    : {"token": token},
+            complete: function (){
+                //swal({title: "OK", type: "success"});
+                sessionStorage.setItem( 'token', '' );
+                window.location = baseURL;
+            }
+        } );
+
+    }
+
     function deleteFile( filePath, $this ){
         //The FTP can delete a file by its path or by its ID (same method on backend)
         //So it works if the fileID is in the filePath
-        var data = {
-            token   : token,
-            filePath: filePath
-        };
-        $.ajax( {
+        return $.ajax( {
             type   : 'DELETE',
             url    : serverURL + 'file/',
-            data   : data,
+            data   : {
+                token   : token,
+                filePath: filePath
+            },
             success: function ( data ){
                 if ( data ) {
-                    //alert( i18n[lang].file.del );
                     swal( {
                         title: i18n[lang].file.del,
                         type : "success",
@@ -872,6 +875,32 @@ var gsTransfer = (function ( _, moment, introJs ){
                 } else {
                     alert( 'ERROR' );
                 }
+            }
+        } );
+    }
+
+    function deleteAll(){
+
+        //var params = getFilesID();
+        return $.ajax( {
+            type   : 'DELETE',
+            url    : serverURL + 'file/multi',
+            data   : getFilesID(),
+            success: function (){
+                swal( {
+                    title: i18n[lang].file.del,
+                    type : "success",
+                    timer: 2000
+                } );
+                window.location.reload();
+            },
+            error  : function (){
+                swal( {
+                    title: "ERROR",
+                    text : i18n[lang].error5xx,
+                    type : "error",
+                    timer: 5000
+                } );
             }
         } );
     }
@@ -997,10 +1026,12 @@ var gsTransfer = (function ( _, moment, introJs ){
         var trActive = $( 'tr.active' );
 
         if ( trActive && trActive.length > 0 ) {
-            addDownloadButton();
+            addLowerButton();
             $( '.downloadall' ).show();
+            $( '.deleteAll' ).show();
         } else {
             $( '.downloadall' ).toggle();
+            $( '.deleteAll' ).toggle();
         }
     }
 
@@ -1046,6 +1077,11 @@ var gsTransfer = (function ( _, moment, introJs ){
     /***** DOWNLOAD *****/
     function setEventDownload(){
         $( TABLEID ).on( 'click', '.dlfile', function (){
+            swal( {
+                title: i18n[lang].file.dl,
+                type : 'warning',
+                timer: 4000
+            } );
             var $this = $( this );
             $this.attr( 'href', serverURL + 'file/' + token + '/' + $this.data( 'file-id' ) + '/' + $this.data( 'filename' ) );
             //Update icon
@@ -1079,6 +1115,14 @@ var gsTransfer = (function ( _, moment, introJs ){
         $( '.remove' ).on( 'click', function (){
             deleteFile( $( this ).data( 'file-id' ), $( this ) );
         } );
+    }
+
+    /***** MULTI DELETE *****/
+    function setEventMultiDelete(){
+        var dlBtn = $( '.deleteAll' );
+        dlBtn.on( 'click', deleteAll );
+        dlBtn.html( '<i class="fa fa-trash"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDelete );
+
     }
 
     function toggleAllIconCheck( activated ){
@@ -1220,7 +1264,7 @@ var gsTransfer = (function ( _, moment, introJs ){
 
 
     function setEventBreadCrumb(){
-        setBreadCrumb(i18n[lang].breadrumb);
+        setBreadCrumb( i18n[lang].breadrumb );
         //$( '#breadcrumb' ).html( i18n[lang].result + '<li class="active">' + i18n[lang].breadrumb + '</li>' );
     }
 
@@ -1308,6 +1352,10 @@ var gsTransfer = (function ( _, moment, introJs ){
                         element : '.reloadme',
                         intro   : i18n[lang].help.reloadme,
                         position: 'left'
+                    },{
+                        element : '#toggle-side-menu',
+                        intro   : i18n[lang].help.columnMenu,
+                        position: 'left'
                     },
                     {
                         element : '#signout',
@@ -1350,6 +1398,8 @@ var gsTransfer = (function ( _, moment, introJs ){
 
         setEventDeleteFile();
 
+        setEventMultiDelete();
+
         setEventMultiDownload();
 
         setEventBreadCrumb();
@@ -1382,7 +1432,7 @@ var gsTransfer = (function ( _, moment, introJs ){
 
                             if ( AjaxData.length === 0 ) {
                                 $( '#btn-upload-div' ).trigger( 'click' );
-                                console.log(">>> NO files");
+                                console.log( ">>> NO files" );
                             }
                             if ( showUpload === 'upload' ) {
                                 $( '#upload' ).find( 'a' ).trigger( 'click' );
@@ -1398,10 +1448,7 @@ var gsTransfer = (function ( _, moment, introJs ){
         $( '.user-name' ).html( username.toUpperCase() );
 
         // LOGOUT
-        $( '#signout' ).on( 'click', function (){
-            sessionStorage.setItem( 'token', '' );
-            window.location = baseURL;
-        } );
+        $( '#signout' ).on( 'click', signout );
 
         //i18n
         $.getJSON( 'data/i18n.json', function ( data ){

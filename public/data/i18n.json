@@ -1,18 +1,19 @@
 {
     "fr": {
         "button"      : {
-            "search"    : "Recherche...",
-            "reload"    : "Rafraîchir",
-            "colVisible": "Afficher",
-            "multiDL"   : "Télécharger les fichiers",
-            "filter"    : {
+            "search"     : "Recherche...",
+            "reload"     : "Rafraîchir",
+            "colVisible" : "Afficher",
+            "multiDL"    : "Télécharger les fichiers",
+            "multiDelete": "Effacer les fichiers",
+            "filter"     : {
                 "filterby": "Filtrer par",
                 "new"     : "Nouveaux fichiers",
                 "notDL"   : "Fichiers non téléchargés",
                 "clear"   : "Retirer tous les filtres"
             },
-            "help"      : "Aide",
-            "signout"   : "Se Déconnecter"
+            "help"       : "Aide",
+            "signout"    : "Se Déconnecter"
         },
         "breadrumb"   : "Tous les fichiers triés par \"nouveaux\" et \"non téléchargés\"",
         "result"      : "Resultat: ",
@@ -76,6 +77,7 @@
             "reloadme"   : "Cliquez sur ce bouton pour recharger la page et les données.",
             "breadcrumb" : "Voici la liste des filtres par catégorie et numéro de document.",
             "uploaded"   : "Voyez ce que vous avez transmis à Group S.",
+            "columnMenu" : "Afficher/cacher les colonnes de la table. ",
             "logoff"     : "Cliquez ici pour vous déconnecter de l'application."
         },
         "warningQuota": "Cette application est exclusivement destinée au transfert de fichier. Veillez à bien supprimer vos fichiers après le téléchargement.",
@@ -91,18 +93,19 @@
     },
     "nl": {
         "button"    : {
-            "search"    : "Zoeken...",
-            "reload"    : "Opnieuw laden",
-            "colVisible": "Tonen",
-            "multiDL"   : "Bestanden downloaden",
-            "filter"    : {
+            "search"     : "Zoeken...",
+            "reload"     : "Opnieuw laden",
+            "colVisible" : "Tonen",
+            "multiDL"    : "Bestanden downloaden",
+            "multiDelete": "Bestanden Verwijderen",
+            "filter"     : {
                 "filterby": "Filter door",
                 "new"     : "Nieuwe bestanden",
                 "notDL"   : "Niet gedownloade bestanden",
                 "clear"   : "Filters verwijderen"
             },
-            "help"      : "Help",
-            "signout"   : "Uit Loggen"
+            "help"       : "Help",
+            "signout"    : "Uit Loggen"
         },
         "breadrumb" : "Alle bestanden, gesorteerd volgens \"nieuw\" en \"niet gedownload\"",
         "result"    : "Resultaten: ",
@@ -127,17 +130,17 @@
             "del"   : "Verwijderen"
         },
         "tree"      : {
-            "root"  : "Alle documenten van Group S weergeven ",
-            "upload": "Mijn geüploade documenten bekijken",
-            "other" : "Andere Documenten"
+            "root"  : "Alle bestanden van Group S weergeven ",
+            "upload": "Mijn geüploade bestanden bekijken",
+            "other" : "Andere bestanden"
         },
         "sideMenu"  : {
             "config": "Configuratie van de tabel",
             "reset" : "Standaardconfiguratie herstellen"
         },
         "file"      : {
-            "add": "Document toegevoegd",
-            "del": "Document verwijderd",
+            "add": "Bestand toegevoegd",
+            "del": "Bestand verwijderd",
             "dl" : "Uw bestanden zijn aan het downloaden. \n\n Dank u voor uw geduld."
         },
         "datepicker": {
@@ -167,33 +170,35 @@
             "checkbox"   : "Klik op de selectievakjes om bestanden te selecteren.",
             "uploaded"   : "Klik hier om de verzonden bestanden te zien.",
             "logoff"     : "Kilk hier om de applicatie te sluiten.",
+            "columnMenu" : "Tonen kolommen van het table. ",
             "remove"     : "Klik op het  icoon om het bestand te verwijderen."
         },
         "warningQuota": " Deze toepassing is voorzien voor de overdracht van bestanden. Gelieve regelmatig de bestanden te verwijderen.",
         "listAll"     : "Alle",
         "showHide"    : "Kolommen tonen",
-        "upload"      : "Documenten uploaden naar Group S",
-        "modalupload" : "Documenten uploaden naar Group S",
+        "upload"      : "Bestanden uploaden naar Group S",
+        "modalupload" : "Bestanden uploaden naar Group S",
         "modalbq"     : "Gelieve de doelmap te selecteren alvorens uw bestanden toe te voegen.",
-        "modalbtn"    : "Selecteer de documenten om toe te voegen",
+        "modalbtn"    : "Selecteer de bestanden om toe te voegen",
         "error0"      : "Verbindingsfout.",
         "error5xx"    : "Dienst tijdelijk onbeschikbaar. Probeer het later opnieuw.",
         "errorSession": "Sessie verlopen"
     },
     "en": {
         "button"      : {
-            "search"    : "Searching...",
-            "reload"    : "Reload",
-            "colVisible": "Show Column",
-            "multiDL"   : "Files Download",
-            "filter"    : {
+            "search"     : "Searching...",
+            "reload"     : "Reload",
+            "colVisible" : "Show Column",
+            "multiDL"    : "Download files",
+            "multiDelete": "Delete files",
+            "filter"     : {
                 "filterby": "Filter by",
                 "new"     : "New Files",
                 "notDL"   : "Files not downloaded",
                 "clear"   : "Clear all filters"
             },
-            "help"      : "Help",
-            "signout"   : "Sign Out"
+            "help"       : "Help",
+            "signout"    : "Sign Out"
         },
         "breadrumb"   : "New Files not downloaded yet",
         "result"      : "Results: ",
@@ -217,17 +222,17 @@
             "del"   : "Delete"
         },
         "tree"        : {
-            "root"  : "Show all documents published by Group S",
-            "upload": "Show my uploaded documents to Group S",
-            "other" : "Other Documents"
+            "root"  : "Show all files published by Group S",
+            "upload": "Show my uploaded files to Group S",
+            "other" : "Other files"
         },
         "sideMenu"    : {
             "config": "Table Configuration",
             "reset" : "Reset Vue"
         },
         "file"        : {
-            "add": "Document added",
-            "del": "Document deleted",
+            "add": "File added",
+            "del": "File deleted",
             "dl" : "Your files are being downloaded. \n\n Thank you for your patience."
         },
         "datepicker"  : {
@@ -249,21 +254,22 @@
             "headers"    : "The headers allow you to sort (by column, by alphabetical order,ascending-descending). \"Ctrl + clic\" allows to group filters.",
             "bottom"     : "Choose the number of entry to show.",
             "upload"     : "Clic on this button to send your files to Group S.",
-            "menu"       : "Select a document category or a type of document in order to apply a filter .",
+            "menu"       : "Select a file category or a type of file in order to apply a filter .",
             "filterby"   : "Select your new files, your files not yet downloaded or deactivate filters.",
             "searchBox"  : "Search by keyword. Input a employer number or a label to filter files.",
             "datepicker" : "Define a period as a filter.",
             "reloadme"   : "Clic on this button to reload the page.",
             "breadcrumb" : "This is the list of filter by category and document number.",
             "uploaded"   : "See the files you sent to Group S.",
+            "columnMenu" : "Show/hide columns from the table. ",
             "logoff"     : "Clic here to log off."
         },
         "warningQuota": "This application is exclusively aimed to transfer files. Please delete files once you've downloaded them.",
         "listAll"     : "all",
         "showHide"    : "Show / hide columns",
-        "upload"      : "Upload Documents on the server",
-        "modalupload" : "Upload Document to Group S server",
-        "modalbq"     : "Please, select the folder of upload before uploading document.",
+        "upload"      : "Upload files on the server",
+        "modalupload" : "Upload files to Group S server",
+        "modalbq"     : "Please, select the folder of upload before uploading files.",
         "modalbtn"    : "Please select files to upload",
         "error0"      : "Error: Problem retrieving file list",
         "error5xx"    : "Service temporally unavailable, please try later.",

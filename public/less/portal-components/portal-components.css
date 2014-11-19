@@ -553,6 +553,7 @@ table tr th .pw-btn-group-th .pw-btn-th,
 ***********************************************/
 .btn-portal,
 .btn-portal-blue,
+.btn-portal-red,
 .btn-portal-default,
 .btn-portal-green {
   display: inline-block;
@@ -635,10 +636,23 @@ table tr th .pw-btn-group-th .pw-btn-th,
   background-color: #00c078;
   border-color: #00c078;
 }
+.btn-portal-red {
+  background-color: #ae0179;
+  border-color: #ae0179;
+  color: #FFF;
+}
+.btn-portal-red:hover,
+.btn-portal-red:focus,
+.btn-portal-red:active,
+.btn-portal-red.active {
+  background-color: #8806b8;
+  border-color: #8806b8;
+}
 /**********************************************
                     DOWNLOAD BUTTON
 **********************************************/
-.downloadall {
+.downloadall,
+.deleteAll {
   display: none;
 }
 .green-light,

@@ -90,9 +90,6 @@ i.fa,
 li {
   cursor: pointer;
 }
-li.noclick {
-  cursor: text;
-}
 .hide {
   display: none;
 }
