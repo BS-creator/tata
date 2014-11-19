@@ -434,17 +434,32 @@ var gsTransfer = (function ( _, moment, introJs ){
         updateMenuVisibleColumnList();
     }
 
+    function setBreadCrumb(text, textChild){
+        if(textChild) {
+            $( '#breadcrumb' ).html( i18n[lang].result + '<li class="active noclick">' + text + '</li><li class="active noclick">' + textChild + '</li>' );
+        } else if (text) {
+            $( '#breadcrumb' ).html( i18n[lang].result + '<li class="active noclick">' + text + '</li>' );
+        } else {
+            console.log("error Setting BreadCrumb.");
+        }
+    }
+
     function menuRootClick( event ){
         /*$( '#root' ).parent('li.level1').addClass("active");
         console.log($( '#root' ).parent('li.level1'));*/
+        console.log("test");
         $( '#upload' ).removeClass('active');
 
         resetFilters();
         table.columns( '.detailsLayer' ).visible( false, false );
         table.columns( '.fileLayer' ).visible( true, false );
-        table.columns.adjust().draw( false ); // adjust column sizing and redraw
-        table.column( 4 ).search( '[^' + username + ']', true, false ).draw(); //filter on uploadUserName
-        $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.root + '</li>' );
+        // adjust column sizing and redraw
+        //table.draw();
+        table.columns.adjust().draw( false );
+        //filter on uploadUserName
+        table.column( 4 ).search( '[^' + username + ']', true, false ).draw();
+        setBreadCrumb(i18n[lang].tree.root);
+        //$( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.root + '</li>' );
         updateMenuVisibleColumnList();
         event.preventDefault();
     }
@@ -460,7 +475,8 @@ var gsTransfer = (function ( _, moment, introJs ){
             .column( 7 ).search( '^\\s*$', true, false )
             .draw(); //filter on uploadUserName != username
         $( '[class^=level] .active' ).removeClass( 'active' );
-        $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.other + '</li>' );
+        setBreadCrumb(i18n[lang].tree.other);
+        //$( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.other + '</li>' );
         updateMenuVisibleColumnList();
         event.preventDefault();
     }
@@ -475,7 +491,8 @@ var gsTransfer = (function ( _, moment, introJs ){
         table.columns.adjust().draw( false ); // adjust column sizing and redraw
         table.column( 4 ).search( username ).draw(); //filter on uploadUserName
         $( '[class^=level] .active' ).removeClass( 'active' );
-        $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.upload + '</li>' );
+        setBreadCrumb(i18n[lang].tree.upload);
+        //$( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.upload + '</li>' );
         updateMenuVisibleColumnList();
         event.preventDefault();
     }
@@ -491,7 +508,8 @@ var gsTransfer = (function ( _, moment, introJs ){
             child = {};
 
         $( '[class^=level] .active' ).removeClass( 'active' );
-        $( '#breadcrumb' ).html( '<li class="active">' + $this.children( 'a' ).text() + '</li>' );
+        setBreadCrumb( $this.children( 'a' ).text());
+        //$( '#breadcrumb' ).html( '<li class="active">' + $this.children( 'a' ).text() + '</li>' );
         $this.addClass( 'active' );
         $this.parents( 'li' ).addClass( 'active' );
 
@@ -503,7 +521,10 @@ var gsTransfer = (function ( _, moment, introJs ){
         numDocRegex = numDocRegex.replace( /\|([^\|]*)$/, '$1' ); //remove last '|'
         numDocRegex += ')';
 
-        table.column( 7 ).search( numDocRegex, true, false ).draw(); //filter on ref docs
+        table
+            .column( 4 ).search( '[^' + username + ']', true, false )
+            .column( 7 ).search( numDocRegex, true, false )
+            .draw(); //filter on ref docs
         updateMenuVisibleColumnList();
         event.preventDefault();
     }
@@ -514,7 +535,8 @@ var gsTransfer = (function ( _, moment, introJs ){
             nodeText = $this.text(),
             nodeParentText = $this.closest( 'li.level2' ).children( 'a' ).text();
 
-        $( '#breadcrumb' ).html( '<li class="active">' + nodeParentText + '</li><li class="active">' + nodeText + '</li>' );
+        setBreadCrumb(nodeParentText,nodeText );
+        //$( '#breadcrumb' ).html( '<li class="active">' + nodeParentText + '</li><li class="active">' + nodeText + '</li>' );
 
         $( '[class^=level] .active' ).removeClass( 'active' );
         $this.addClass( 'active' );
@@ -528,7 +550,10 @@ var gsTransfer = (function ( _, moment, introJs ){
             table.columns( '.detailsLayer' ).visible( false, false );
             table.columns( '.fileLayer' ).visible( true, false );
             table.columns.adjust().draw( false ); // adjust column sizing and redraw
-            table.column( 7 ).search( nodeID ).draw(); //filter on referenceDocument
+            table
+                .column( 4 ).search( '[^' + username + ']', true, false )
+                .column( 7 ).search( '^' + nodeID + '$', true, false )
+                .draw(); //filter on referenceDocument
         }
         updateMenuVisibleColumnList();
         event.preventDefault();
@@ -1195,7 +1220,8 @@ var gsTransfer = (function ( _, moment, introJs ){
 
 
     function setEventBreadCrumb(){
-        $( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].breadrumb + '</li>' );
+        setBreadCrumb(i18n[lang].breadrumb);
+        //$( '#breadcrumb' ).html( i18n[lang].result + '<li class="active">' + i18n[lang].breadrumb + '</li>' );
     }
 
     function setEventHelpButton(){

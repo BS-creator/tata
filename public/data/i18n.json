@@ -15,6 +15,7 @@
             "signout"   : "Se Déconnecter"
         },
         "breadrumb"   : "Tous les fichiers triés par \"nouveaux\" et \"non téléchargés\"",
+        "result"      : "Resultat: ",
         "url"         : {
             "table"     : "DataTables/resources/language/FR.json",
             "datepicker": "js/locale/bootstrap-datepicker.fr.js"
@@ -100,10 +101,11 @@
                 "notDL"   : "Niet gedownloade bestanden",
                 "clear"   : "Filters verwijderen"
             },
-            "help"      : "Hulp",
+            "help"      : "Help",
             "signout"   : "Uit Loggen"
         },
         "breadrumb" : "Alle bestanden, gesorteerd volgens \"nieuw\" en \"niet gedownload\"",
+        "result"    : "Resultaten: ",
         "url"       : {
             "table"     : "DataTables/resources/language/NL.json",
             "datepicker": "js/locale/bootstrap-datepicker.nl.js"
@@ -194,6 +196,7 @@
             "signout"   : "Sign Out"
         },
         "breadrumb"   : "New Files not downloaded yet",
+        "result"      : "Results: ",
         "url"         : {
             "table": "DataTables/resources/language/EN.json"
         },
