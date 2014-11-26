@@ -40,6 +40,10 @@ var gsTransfer = (function ( _, moment, introJs ){
      * HELPER
      * */
 
+    function endsWith( str, suffix ){
+        return str.indexOf( suffix, str.length - suffix.length ) !== -1;
+    }
+
     function reportError( error, message ){
         message = message || '';
         console.error(
@@ -322,9 +326,9 @@ var gsTransfer = (function ( _, moment, introJs ){
             var fileid = listID.slice( 0, listID.indexOf( '&' ) );
             var filename = listID.slice( listID.indexOf( '&' ) + 1, listID.indexOf( '@' ) );
 
-            var link = document.createElement('a');
+            var link = document.createElement( 'a' );
             link.href = serverURL + 'file/' + token + '/' + fileid + '/' + filename;
-            document.body.appendChild(link);
+            document.body.appendChild( link );
             link.click();
         } else {
             var params = {
@@ -1109,10 +1113,20 @@ var gsTransfer = (function ( _, moment, introJs ){
             small.html( '&nbsp;' + dl );
         } );
 
-        //donwload Single file by click on label
+        //download Single file by click on label
         $( TABLEID ).on( 'click', '.dlfileLabel', function (){
-            var $this = $( this );
-            $this.attr( 'href', serverURL + 'file/' + token + '/' + $this.data( 'file-id' ) + '/' + $this.data( 'filename' ) );
+            var $this = $( this ),
+                filename = $this.data( 'filename' ),
+                fileID = $this.data( 'file-id' ),
+                url = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
+
+            if ( filename.endsWith( '.PDF' ) || filename.endsWith( '.pdf' ) ) {
+                url = baseURL + 'pdfjs/web/viewer.html?file=' + serverURL + 'file/' + token + '/' + fileID + '/' + filename;
+                window.open( url, '_blank' );
+            } else {
+                $this.attr( 'href', url );
+            }
+
         } );
     }
 
