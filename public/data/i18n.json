@@ -47,14 +47,20 @@
             "reset" : "Réinitialiser la vue"
         },
         "file"        : {
-            "add": "Document ajouté",
-            "del": "Document supprimé",
-            "dl" : "Vos documents sont en cours de téléchargement. \n\n Merci de patienter."
+            "add"     : "Document ajouté",
+            "del"     : "Document supprimé",
+            "dl"      : "Vos documents sont en cours de téléchargement. \n\n Merci de patienter.",
+            "noselect": "Aucun fichier sélectionné."
         },
         "datepicker"  : {
             "to"   : "à",
             "start": "date début",
             "end"  : "date fin"
+        },
+        "dialog"      : {
+            "delf": "Suppression de fichier",
+            "sure": "Êtes-vous sûr de vouloir supprimer ce(s) fichier(s)?",
+            "del" : "Effacer"
         },
         "help"        : {
             "skipLabel"  : "SORTIR",
@@ -92,7 +98,7 @@
         "errorSession": "Session expirée"
     },
     "nl": {
-        "button"    : {
+        "button"      : {
             "search"     : "Zoeken...",
             "reload"     : "Opnieuw laden",
             "colVisible" : "Tonen",
@@ -107,13 +113,13 @@
             "help"       : "Help",
             "signout"    : "Uit Loggen"
         },
-        "breadrumb" : "Alle bestanden, gesorteerd volgens \"nieuw\" en \"niet gedownload\"",
-        "result"    : "Resultaten: ",
-        "url"       : {
+        "breadrumb"   : "Alle bestanden, gesorteerd volgens \"nieuw\" en \"niet gedownload\"",
+        "result"      : "Resultaten: ",
+        "url"         : {
             "table"     : "DataTables/resources/language/NL.json",
             "datepicker": "js/locale/bootstrap-datepicker.nl.js"
         },
-        "col"       : {
+        "col"         : {
             "new"   : "Nieuw",
             "date"  : "Datum",
             "name"  : "Naam",
@@ -129,26 +135,31 @@
             "refGS" : "Ref. Group S",
             "del"   : "Verwijderen"
         },
-        "tree"      : {
+        "tree"        : {
             "root"  : "Alle bestanden van Group S weergeven ",
             "upload": "Mijn geüploade bestanden bekijken",
             "other" : "Andere bestanden"
         },
-        "sideMenu"  : {
+        "sideMenu"    : {
             "config": "Configuratie van de tabel",
             "reset" : "Standaardconfiguratie herstellen"
         },
-        "file"      : {
-            "add": "Bestand toegevoegd",
-            "del": "Bestand verwijderd",
-            "dl" : "Uw bestanden zijn aan het downloaden. \n\n Dank u voor uw geduld."
+        "file"        : {
+            "add"     : "Bestand toegevoegd",
+            "del"     : "Bestand verwijderd",
+            "dl"      : "Uw bestanden zijn aan het downloaden. \n\n Dank u voor uw geduld.",
+            "noselect": "Geen bestand geselecteerd."
         },
-        "datepicker": {
+        "datepicker"  : {
             "to"   : "tot",
             "start": "Begindatum",
             "end"  : "Einddatum"
         },
-
+        "dialog"      : {
+            "delf": "Bestanden verwijderen",
+            "sure": "Bent u zeker?",
+            "del" : "Verwijderen"
+        },
         "help"        : {
             "skipLabel"  : "UITLOGGEN",
             "nextLabel"  : "VOLGENDE",
@@ -231,14 +242,20 @@
             "reset" : "Reset Vue"
         },
         "file"        : {
-            "add": "File added",
-            "del": "File deleted",
-            "dl" : "Your files are being downloaded. \n\n Thank you for your patience."
+            "add"     : "File added",
+            "del"     : "File deleted",
+            "dl"      : "Your files are being downloaded. \n\n Thank you for your patience.",
+            "noselect": "No file selected."
         },
         "datepicker"  : {
             "to"   : "to",
             "start": "Start Date",
             "end"  : "End Date"
+        },
+        "dialog"      : {
+            "delf": "Delete File",
+            "sure": "Are you sure you want to delete file(s)?",
+            "del" : "Delete"
         },
         "help"        : {
             "skipLabel"  : "EXIT",
@@ -248,21 +265,21 @@
             "welcome"    : "Welcome in Group S Transfer. This tutorial will guide through the features of the application. You can use the arrow keys on your keyboard to browse.",
             "table"      : "This is the content of your server.",
             "checkbox"   : "Check to select more than one file to download.",
-            "dlfile"     : "Clic on this icon to download only one file. (The number on the right of the icon is the number of downloads).",
-            "dlfileLabel": "Clic on this icon to download only one file.",
+            "dlfile"     : "Click on this icon to download only one file. (The number on the right of the icon is the number of downloads).",
+            "dlfileLabel": "Click on this icon to download only one file.",
             "remove"     : "Delete the file and free up disk space.",
             "headers"    : "The headers allow you to sort (by column, by alphabetical order,ascending-descending). \"Ctrl + clic\" allows to group filters.",
             "bottom"     : "Choose the number of entry to show.",
-            "upload"     : "Clic on this button to send your files to Group S.",
+            "upload"     : "Click on this button to send your files to Group S.",
             "menu"       : "Select a file category or a type of file in order to apply a filter .",
             "filterby"   : "Select your new files, your files not yet downloaded or deactivate filters.",
             "searchBox"  : "Search by keyword. Input a employer number or a label to filter files.",
             "datepicker" : "Define a period as a filter.",
-            "reloadme"   : "Clic on this button to reload the page.",
+            "reloadme"   : "Click on this button to reload the page.",
             "breadcrumb" : "This is the list of filter by category and document number.",
             "uploaded"   : "See the files you sent to Group S.",
             "columnMenu" : "Show/hide columns from the table. ",
-            "logoff"     : "Clic here to log off."
+            "logoff"     : "Click here to log off."
         },
         "warningQuota": "This application is exclusively aimed to transfer files. Please delete files once you've downloaded them.",
         "listAll"     : "all",
