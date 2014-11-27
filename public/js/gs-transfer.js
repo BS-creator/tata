@@ -84,22 +84,6 @@ var gsTransfer = (function ( _, moment, introJs ){
         return Math.round( bytes / Math.pow( 1024, i ), 2 ) + ' ' + sizes[i];
     }
 
-    function sortUnique( array ){
-        array = array.sort( function ( a, b ){
-            return a - b;
-        } );
-        if ( array.length > 1 ) {
-            var ret = [array[0]];
-            for ( var i = 1; i < array.length; i++ ) { // start loop at 1 as element 0 can never be a duplicate
-                if ( array[i - 1] !== array[i] ) {
-                    ret.push( array[i] );
-                }
-            }
-            return ret;
-        }
-        return array; // only 1 or no element in the array.
-    }
-
     function getUsedDocRef( data ){
         var a = [];
         $.each( data, function ( i, item ){
@@ -110,7 +94,7 @@ var gsTransfer = (function ( _, moment, introJs ){
                 a[a.length] = -1;
             }
         } );
-        return sortUnique( a );
+        return _.uniq( a );
     }
 
     function mergeLabelDoc(){
@@ -143,25 +127,13 @@ var gsTransfer = (function ( _, moment, introJs ){
         //console.log( listID );
 
         return {
-            'token' : token,
-            'fileID': listID
+            'fileNumber': fileNumber,
+            'data': {
+                'token' : token,
+                'fileID': listID
+            }
         };
     }
-
-    function filterDateClear(){
-        //$( this ).val('').datepicker('update');
-        this.select();
-    }
-
-    function filterDateKeyUp(){
-        setTimeout( filterDate, 1000 );
-        //filterDate();
-    }
-
-    function filterDate(){
-        table.draw();
-    }
-
 
     /****************************************************
      * INTERNATIONALIZATION i18n
@@ -301,7 +273,7 @@ var gsTransfer = (function ( _, moment, introJs ){
 
     function downloadAll(){
 
-        var array = getSelectedRows(),
+        /*var array = getSelectedRows(),
             listID = '',
             fileNumber = 0;
 
@@ -311,35 +283,32 @@ var gsTransfer = (function ( _, moment, introJs ){
         $.each( array, function ( i, item ){
             listID += $( item[14] ).data( 'file-id' ) + '&' + item[3] + '@!';
             fileNumber++;
-        } );
+        } );*/
 
+        var params = getFilesID();
         //console.log(listID);
 
-        if ( fileNumber === 0 ) {
+        if ( params.fileNumber === 0 ) {
             swal( {
                 title: i18n[lang].file.noselect,
                 type : 'error',
                 timer: 3000
             } );
         }
-        if ( fileNumber === 1 ) {
-            var fileid = listID.slice( 0, listID.indexOf( '&' ) );
-            var filename = listID.slice( listID.indexOf( '&' ) + 1, listID.indexOf( '@' ) );
+        if ( params.fileNumber === 1 ) {
+            var fileid = params.data.listID.slice( 0, params.data.listID.indexOf( '&' ) );
+            var filename = params.data.listID.slice( params.data.listID.indexOf( '&' ) + 1, params.data.listID.indexOf( '@' ) );
 
             var link = document.createElement( 'a' );
             link.href = serverURL + 'file/' + token + '/' + fileid + '/' + filename;
             document.body.appendChild( link );
             link.click();
         } else {
-            var params = {
-                'token' : token,
-                'fileID': listID
-            };
 
             $( '#multiDownloadForm' ).remove();
             var form = $( '<form id="multiDownloadForm" method="POST" action="' + serverURL + 'file/zip">' );
 
-            $.each( params, function ( k, v ){
+            $.each( params.data, function ( k, v ){
                 form.append( $( '<input type="hidden" name="' + k +
                 '" value="' + v + '">' ) );
             } );
@@ -349,7 +318,7 @@ var gsTransfer = (function ( _, moment, introJs ){
             swal( {
                 title: i18n[lang].file.dl,
                 type : 'warning',
-                timer: (fileNumber * 1200)
+                timer: (params.data.fileNumber * 1200)
             } );
             // about 1,2 seconds per files (õ_ó) .... it's a good guess, what a shame... (╯_╰”)
 
@@ -902,7 +871,7 @@ var gsTransfer = (function ( _, moment, introJs ){
         return $.ajax( {
             type   : 'DELETE',
             url    : serverURL + 'file/multi',
-            data   : getFilesID(),
+            data   : getFilesID().data,
             success: function (){
                 swal( {
                     title: i18n[lang].file.del,
@@ -1120,7 +1089,7 @@ var gsTransfer = (function ( _, moment, introJs ){
                 fileID = $this.data( 'file-id' ),
                 url = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
 
-            if ( filename.endsWith( '.PDF' ) || filename.endsWith( '.pdf' ) ) {
+            if ( endsWith(filename, '.PDF' ) || endsWith(filename, '.pdf' ) ) {
                 url = baseURL + 'pdfjs/web/viewer.html?file=' + serverURL + 'file/' + token + '/' + fileID + '/' + filename;
                 window.open( url, '_blank' );
             } else {
@@ -1289,17 +1258,17 @@ var gsTransfer = (function ( _, moment, introJs ){
 
         db.attr( 'placeholder', i18n[lang].datepicker.start );
         db.val( '' );
-        db.on( 'focus', filterDateClear );
-        db.on( 'keyup', filterDateKeyUp );
-        db.on( 'change', filterDate );
+        db.on( 'focus', function (){this.select();} );
+        db.on( 'keyup', function (){setTimeout( table.draw(), 1000 );} );
+        db.on( 'change', function (){table.draw();} );
 
         $( '.dp-to' ).text( i18n[lang].datepicker.to );
 
         de.attr( 'placeholder', i18n[lang].datepicker.end );
         de.val( '' );
-        de.on( 'focus', filterDateClear );
-        de.on( 'keyup', filterDateKeyUp );
-        de.on( 'change', filterDate );
+        de.on( 'focus', function (){this.select();} );
+        de.on( 'keyup', function (){setTimeout( table.draw(), 1000 );} );
+        de.on( 'change', function (){table.draw();} );
 
         $( '#datepicker' )
             .datepicker( {
