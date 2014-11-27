@@ -128,7 +128,7 @@ var gsTransfer = (function ( _, moment, introJs ){
 
         return {
             'fileNumber': fileNumber,
-            'data': {
+            'data'      : {
                 'token' : token,
                 'fileID': listID
             }
@@ -274,16 +274,16 @@ var gsTransfer = (function ( _, moment, introJs ){
     function downloadAll(){
 
         /*var array = getSelectedRows(),
-            listID = '',
-            fileNumber = 0;
+         listID = '',
+         fileNumber = 0;
 
 
-        //console.log( array );
+         //console.log( array );
 
-        $.each( array, function ( i, item ){
-            listID += $( item[14] ).data( 'file-id' ) + '&' + item[3] + '@!';
-            fileNumber++;
-        } );*/
+         $.each( array, function ( i, item ){
+         listID += $( item[14] ).data( 'file-id' ) + '&' + item[3] + '@!';
+         fileNumber++;
+         } );*/
 
         var params = getFilesID();
         //console.log(listID);
@@ -296,11 +296,11 @@ var gsTransfer = (function ( _, moment, introJs ){
             } );
         }
         if ( params.fileNumber === 1 ) {
-            var fileid = params.data.listID.slice( 0, params.data.listID.indexOf( '&' ) );
-            var filename = params.data.listID.slice( params.data.listID.indexOf( '&' ) + 1, params.data.listID.indexOf( '@' ) );
+            var fileID = params.data.fileID.slice( 0, params.data.fileID.indexOf( '&' ) );
+            var filename = params.data.fileID.slice( params.data.fileID.indexOf( '&' ) + 1, params.data.fileID.indexOf( '@' ) );
 
             var link = document.createElement( 'a' );
-            link.href = serverURL + 'file/' + token + '/' + fileid + '/' + filename;
+            link.href = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
             document.body.appendChild( link );
             link.click();
         } else {
@@ -609,14 +609,14 @@ var gsTransfer = (function ( _, moment, introJs ){
      * */
 
     function updateMenuVisibleColumnList(){
-        var exclude = [0, 1, 14, 15, 16],
+        var exclude = [0, 1, 15, 16, 17],
             list = $( '.side-menu-list' ),
             i = 0,
             headerCol = '',
             li = '';
 
         list.html( '' );
-        while (i < 17) {
+        while (i < 18) {
             if ( $.inArray( i, exclude ) === -1 ) {
                 headerCol = table.columns( i ).header().to$().html();
                 li = document.createElement( 'li' );
@@ -692,6 +692,11 @@ var gsTransfer = (function ( _, moment, introJs ){
             row.dateFormatted = moment( row.date, 'YYYY-MM-DD' ).format( 'DD/MM/YYYY' );
             row.sizeFormatted = formatSize( row.size );
             row.extensionFormatted = formatExtension( row.extension, row );
+
+            var date = moment(row.uploadStamp, 'MM/DD/YYYY hh:mm:ss a');
+            row.uploadStamp = date.format('DD/MM/YYYY HH:mm:ss');
+            row.uploadStampOrder = date.format('YYYY/MM/DD HH:mm:ss');
+
 
             html += tpl( row );
         } );
@@ -793,20 +798,26 @@ var gsTransfer = (function ( _, moment, introJs ){
                     searchable: false
                 },
                 {
+                    targets   : 14,     //uploadStamp
+                    visible   : false,
+                    searchable: true
+                },
+                {
                     className: 'defaultView',
-                    targets  : 14,      // remove
+                    targets  : 15,      // remove
                     orderable: false
                 },
                 {
-                    targets   : 15,      // downloadCount
+                    targets   : 16,      // downloadCount
                     visible   : false,
                     searchable: true
                 },
                 {
-                    targets   : 16,     //isNew
+                    targets   : 17,     //isNew
                     visible   : false,
                     searchable: true
                 }
+
             ],
             'initComplete': function (){
                 table
@@ -1089,7 +1100,7 @@ var gsTransfer = (function ( _, moment, introJs ){
                 fileID = $this.data( 'file-id' ),
                 url = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
 
-            if ( endsWith(filename, '.PDF' ) || endsWith(filename, '.pdf' ) ) {
+            if ( endsWith( filename, '.PDF' ) || endsWith( filename, '.pdf' ) ) {
                 url = baseURL + 'pdfjs/web/viewer.html?file=' + serverURL + 'file/' + token + '/' + fileID + '/' + filename;
                 window.open( url, '_blank' );
             } else {
