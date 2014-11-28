@@ -2,7 +2,7 @@
  * Created by bisconti on 29/08/14.
  */
 
-$( function (){
+$( function (swal){
     'use strict';
 
     (function setURL(){
@@ -10,8 +10,11 @@ $( function (){
             /***** LOCAL *****/
             //sessionStorage.setItem( 'baseURL', '//localhost:4000/itransfer/' );
             sessionStorage.setItem( 'baseURL', '//localhost:4001/' );
-            sessionStorage.setItem( 'serverURL', '//172.20.20.64:8018/' );
-            //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+            //sessionStorage.setItem( 'serverURL', '//172.20.20.64:8018/' );
+            sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+        } else if ( window.location.hostname.indexOf( '172.20.20.64' ) > -1 ){
+            sessionStorage.setItem( 'baseURL', '//172.20.20.64:4001/' );
+            sessionStorage.setItem( 'serverURL', '//deviapps.groups.be/ariane/');
         } else if ( window.location.hostname.indexOf( 'deviapps' ) > -1 ) { //dev
             /***** DEV *****/
             sessionStorage.setItem( 'baseURL', '//deviapps.groups.be/itransfer/public/' );
@@ -139,4 +142,4 @@ $( function (){
         $( '.' + lang ).addClass( 'default-lang' );
         sessionStorage.setItem( 'lang', lang );
     } );
-} );
+}(swal) );

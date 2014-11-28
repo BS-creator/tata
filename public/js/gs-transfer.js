@@ -1,4 +1,4 @@
-var gsTransfer = (function ( _, moment, introJs ){
+var gsTransfer = (function ( _, moment, introJs, swal ){
     'use strict';
 
     /***  GLOBAL VARIABLES ***/
@@ -482,7 +482,7 @@ var gsTransfer = (function ( _, moment, introJs ){
         resetFilters();
         table.columns( '.detailsLayer' ).visible( false, false );
         table.columns( '.fileLayer' ).visible( true, false );
-        var $this = $( this ).parent( 'li' ),
+        var $this = $( event.currentTarget ).parent( 'li' ),
             levl3 = $this.find( '.level3' ), //list children
             numDocRegex = '(',
             child = {};
@@ -510,7 +510,7 @@ var gsTransfer = (function ( _, moment, introJs ){
     }
 
     function menuRefDocClick( event ){
-        var $this = $( this ).parent( 'li' );
+        var $this = $( event.currentTarget ).parent( 'li' );
         var nodeID = $this.attr( 'id' ),
             nodeText = $this.text(),
             nodeParentText = $this.closest( 'li.level2' ).children( 'a' ).text();
@@ -636,15 +636,16 @@ var gsTransfer = (function ( _, moment, introJs ){
      * TABLE
      * */
 
-    function templateTable(){ //TODO: make it REUSABLE --> parameter for tbody, theader and tableID
 
+    function templateHeader(){
         var tpl = _.template( $( '#headertpl' ).html() );
 
-        var $table = $( TABLEID );
-        $table.find( 'thead' ).html( tpl( i18n[lang].col ) );
+        $( TABLEID ).find( 'thead' ).html( tpl( i18n[lang].col ) );
+    }
 
-        tpl = _.template( $( '#bodytpl' ).html() );
-        var html = {};
+    function templateTable(){ //TODO: make it REUSABLE --> parameter for tbody, theader and tableID
+
+        var tpl = _.template( $( '#bodytpl' ).html() );
 
         _.each( AjaxData, function ( row ){
 
@@ -693,21 +694,22 @@ var gsTransfer = (function ( _, moment, introJs ){
             row.sizeFormatted = formatSize( row.size );
             row.extensionFormatted = formatExtension( row.extension, row );
 
-            var date = moment(row.uploadStamp, 'MM/DD/YYYY hh:mm:ss a');
-            row.uploadStamp = date.format('DD/MM/YYYY HH:mm:ss');
-            row.uploadStampOrder = date.format('YYYY/MM/DD HH:mm:ss');
+            var date = moment( row.uploadStamp, 'MM/DD/YYYY hh:mm:ss a' );
+            row.uploadStamp = date.format( 'DD/MM/YYYY HH:mm:ss' );
+            row.uploadStampOrder = date.format( 'YYYY/MM/DD HH:mm:ss' );
 
 
-            html += tpl( row );
+            table.rows.add(
+                $( tpl( row ).trim() )
+            );
         } );
 
-        $table.find( 'tbody' ).html( html );
+        //$table.find( 'tbody' ).html( html );
     }
 
     function createDataTable(){
 
-        templateTable();
-
+        templateHeader();
         //DataTable object
         table = $( TABLEID ).DataTable( {
             paging        : true,
@@ -820,6 +822,7 @@ var gsTransfer = (function ( _, moment, introJs ){
 
             ],
             'initComplete': function (){
+                templateTable();
                 table
                     .column( 4 ).search( '[^' + username + ']', true, false )
                     //.column( 15 ).search( '0' )   // not downloaded yet
@@ -829,6 +832,8 @@ var gsTransfer = (function ( _, moment, introJs ){
 
         //jQuery TABLE object
         oTable = $( TABLEID ).dataTable();
+
+
     }
 
     /****************************************************
@@ -1177,17 +1182,6 @@ var gsTransfer = (function ( _, moment, introJs ){
         }
     }
 
-    function toggleIconCheck(){
-        var tr = $( this ).closest( 'tr' );
-
-        tr
-            .find( '.iconSelect' )
-            .find( 'i' )
-            .toggleClass( 'fa-square-o fa-check-square-o' );
-
-        tr.toggleClass( 'active' );
-        toggleDLButton();
-    }
 
     /***** CHECKBOX SELECT ALL *****/
     function setEventCheckBox(){
@@ -1199,7 +1193,14 @@ var gsTransfer = (function ( _, moment, introJs ){
             toggleDLButton();
         } );
 
-        $( '.iconSelect' ).off( 'click' ).on( 'click', toggleIconCheck );
+        var icon = $( '.iconSelect' );
+        $( '.iconSelect' ).off( 'click' ).on( 'click', function (){
+            var $this = $( this );
+            $this.find( 'i' ).toggleClass( 'fa-square-o fa-check-square-o' );
+            $this.closest( 'tr' ).toggleClass( 'active' );
+            toggleDLButton();
+            //toggleIconCheck(this);
+        } );
 
     }
 
@@ -1516,4 +1517,4 @@ var gsTransfer = (function ( _, moment, introJs ){
     $( 'document' ).ready( main() );
 
 
-}( _, moment, introJs ));
+}( _, moment, introJs, swal ));

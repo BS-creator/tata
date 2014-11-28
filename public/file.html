@@ -290,45 +290,45 @@
             <!-- END: Underscore Template Definition. -->
             </thead>
             <tbody>
-            <!-- BEGIN: Underscore Template Definition. -->
-            <script id="bodytpl" type="text/template">
 
-                <tr class="[[classNew]]">
-                    <td class="center iconSelect"><i class="fa fa-square-o"></i></td>
-                    <td class="center" data-order="[[downloadCount]]">
-                        <a class="dlfile" data-file-id="[[fileId]]" data-filename="[[fileName]]">
-                            <i class="fa [[dlClass]] fa-lg [[alreadyDL]]"></i>
-                            <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]
-                            </small>
-                        </a></td>
-                    <td class="center" data-order="[[date]]">[[dateFormatted]]</td>
-                    <td>[[fileName]]</td>
-                    <td>[[uploadUserName]]</td>
-                    <td>[[employerNumber]]</td>
-                    <td>
-                        <a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">
-                            [[label]]</a>
-                    </td>
-                    <td>[[referenceDocument]]</td>
-                    <td data-order="[[size]]">[[sizeFormatted]]</td>
-                    <td class="center" data-order="[[extension]]">[[extensionFormatted]]</td>
-                    <td data-order="[[path]]">[[strippedPath]]</td>
-                    <td>[[referenceClient]]</td>
-                    <td>[[counter]]</td>
-                    <td>[[referenceGroupS]]</td>
-                    <td data-order="[[uploadStampOrder]]" class="center">[[uploadStamp]]</td>
-                    <td class="center">
-                        <a class="remove" title="Remove" data-file-id="[[fileId]]">
-                            <i class="fa fa-trash fa-lg"></i></a></td>
-                    <td class="center">[[downloadCount]]</td>
-                    <td class="center">[[isNew]]</td>
-
-                </tr>
-
-            </script>
-            <!-- END: Underscore Template Definition. -->
             </tbody>
         </table>
+        <!-- BEGIN: Underscore Template Definition. -->
+        <script id="bodytpl" type="text/template">
+            <tr class="[[classNew]]">
+                <td class="center iconSelect"><i class="fa fa-square-o"></i></td>
+                <td class="center" data-order="[[downloadCount]]">
+                    <a class="dlfile" data-file-id="[[fileId]]" data-filename="[[fileName]]">
+                        <i class="fa [[dlClass]] fa-lg [[alreadyDL]]"></i>
+                        <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]
+                        </small>
+                    </a></td>
+                <td class="center" data-order="[[date]]">[[dateFormatted]]</td>
+                <td>[[fileName]]</td>
+                <td>[[uploadUserName]]</td>
+                <td>[[employerNumber]]</td>
+                <td>
+                    <a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">
+                        [[label]]</a>
+                </td>
+                <td>[[referenceDocument]]</td>
+                <td data-order="[[size]]">[[sizeFormatted]]</td>
+                <td class="center" data-order="[[extension]]">[[extensionFormatted]]</td>
+                <td data-order="[[path]]">[[strippedPath]]</td>
+                <td>[[referenceClient]]</td>
+                <td>[[counter]]</td>
+                <td>[[referenceGroupS]]</td>
+                <td data-order="[[uploadStampOrder]]" class="center">[[uploadStamp]]</td>
+                <td class="center">
+                    <a class="remove" title="Remove" data-file-id="[[fileId]]">
+                        <i class="fa fa-trash fa-lg"></i></a></td>
+                <td class="center">[[downloadCount]]</td>
+                <td class="center">[[isNew]]</td>
+
+            </tr>
+
+        </script>
+        <!-- END: Underscore Template Definition. -->
     </div>
     <!--/#content-table-->
 </div>
@@ -369,7 +369,7 @@
 <script src="js/lodash.min.js"></script>
 <script src="js/moment/moment.min.js"></script>
 <script src="js/moment/moment-range.js"></script>
-<script src="DataTables/media/js/jquery.dataTables.js"></script>
+<script src="DataTables/media/js/jquery.dataTables.min.js"></script>
 <script src="DataTables/resources/bootstrap/3/dataTables.bootstrap.js"></script>
 <script src="DataTables/extensions/ColVis/js/dataTables.colVis.js"></script>
 <script src="DataTables/plugins/date_range.js"></script>
