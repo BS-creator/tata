@@ -689,13 +689,43 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             row.uploadStamp = date.format( 'DD/MM/YYYY HH:mm:ss' );
             row.uploadStampOrder = date.format( 'YYYY/MM/DD HH:mm:ss' );
 
-
             table.rows.add(
                 $( tpl( row ).trim() )
             );
         } );
+    }
 
-        //$table.find( 'tbody' ).html( html );
+    function initTableComplete(){
+        templateTable();
+        oTable = $( TABLEID ).dataTable();
+        table
+            .column( 4 ).search( '[^' + username + ']', true, false )
+            //.column( 15 ).search( '0' )   // not downloaded yet
+            .draw();
+        //set upload form events
+        $( TABLEID ).on( 'draw.dt', function (){
+            setEventCheckBox();
+            setEventDeleteFile();
+
+        } );
+
+        setEventuploadForm();
+
+        setEventsHTML();
+
+        setTimeout( function (){
+            var showUpload = getUrlParameter( 'upload' );
+            //console.log(showUpload);
+            $( '#warningQuota' ).html( '<p>' + i18n[lang].warningQuota + '</p>' );
+
+            if ( AjaxData.length === 0 ) {
+                $( '#btn-upload-div' ).trigger( 'click' );
+                console.log( ">>> NO files" );
+            }
+            if ( showUpload === 'upload' ) {
+                $( '#upload' ).find( 'a' ).trigger( 'click' );
+            }
+        }, 1000 );
     }
 
     function createDataTable(){
@@ -815,30 +845,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 }
 
             ],
-            'initComplete': function (){
-                templateTable();
-                oTable = $( TABLEID ).dataTable();
-                table
-                    .column( 4 ).search( '[^' + username + ']', true, false )
-                    //.column( 15 ).search( '0' )   // not downloaded yet
-                    .draw();
-                //set upload form events
-                $.when( setEventuploadForm(), setEventsHTML() ).then( function (){
-                    setTimeout( function (){
-                        var showUpload = getUrlParameter( 'upload' );
-                        //console.log(showUpload);
-                        $( '#warningQuota' ).html( '<p>' + i18n[lang].warningQuota + '</p>' );
-
-                        if ( AjaxData.length === 0 ) {
-                            $( '#btn-upload-div' ).trigger( 'click' );
-                            console.log( ">>> NO files" );
-                        }
-                        if ( showUpload === 'upload' ) {
-                            $( '#upload' ).find( 'a' ).trigger( 'click' );
-                        }
-                    }, 1000 );
-                } );
-            }
+            'initComplete': initTableComplete
         } );
 
     }
@@ -1213,7 +1220,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             toggleDLButton();
         } );
 
-        $( '.iconSelect' ).on( 'click', function ( e ){
+        $( '.iconSelect' ).off( 'click' ).on( 'click', function ( e ){
             e.preventDefault();
             var $this = $( this );
             $this.find( 'i' ).toggleClass( 'fa-square-o fa-check-square-o' );
