@@ -7,12 +7,12 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
     baseURL = sessionStorage.getItem( 'baseURL' ),
     lang = sessionStorage.getItem( 'lang' ),
     TABLEID = '#tableID',
-    table = {},
-    oTable = {},
-    i18n = {},
-    AjaxData = [],
-    category = [],
-    refDocUsed = [],
+    table = {},  //DataTable object
+    oTable = {}, //Jquery Data object
+    i18n = {},   // Language
+    AjaxData = [], // Data
+    category = [], // Data
+    refDocUsed = [], // Data
     username = sessionStorage.getItem( 'username' ).toLowerCase(),
     token = sessionStorage.getItem( 'token' );
 
@@ -86,7 +86,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
     function getUsedDocRef( data ){
         var a = [];
-        $.each( data, function ( i, item ){
+        _.each( data, function ( item, i ){
             var ref = parseInt( item.referenceDocument );
             if ( !isNaN( ref ) ) {
                 a[a.length] = ref;
@@ -99,8 +99,8 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
     function mergeLabelDoc(){
 
-        $.each( category, function ( i, cat ){
-            $.each( AjaxData, function ( j, row ){
+        _.each( category, function ( cat, i ){
+            _.each( AjaxData, function ( row, j ){
                 if ( cat.referenceDocument === parseInt( row.referenceDocument ) ) {
                     row.label = labelDoci18n( cat );
                 } else {
@@ -119,8 +119,10 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
         //console.log( array );
 
-        $.each( array, function ( i, item ){
-            listID += $( item[14] ).data( 'file-id' ) + '&' + item[3] + '@!';
+        var it;
+        _.each( array, function ( item, i ){
+            it = $( item[1] );
+            listID += it.data( 'file-id' ) + '&' + it.data( 'filename' ) + '@!';
             fileNumber++;
         } );
 
@@ -257,12 +259,13 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         );
         $( '.deleteAll' ).off( 'click' ).on( 'click', function (){
             swal( {
-                    title             : i18n[lang].dialog.delf,
-                    text              : i18n[lang].dialog.sure,
+                    title             : i18n[lang].dialog.delAction,
+                    text              : i18n[lang].dialog.delSure,
                     type              : "warning",
                     showCancelButton  : true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText : i18n[lang].dialog.del,
+                    confirmButtonText : i18n[lang].dialog.delConfirm,
+                    cancelButtonText  : i18n[lang].dialog.cancel,
                     closeOnConfirm    : false
                 },
                 function (){
@@ -272,18 +275,6 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
     }
 
     function downloadAll(){
-
-        /*var array = getSelectedRows(),
-         listID = '',
-         fileNumber = 0;
-
-
-         //console.log( array );
-
-         $.each( array, function ( i, item ){
-         listID += $( item[14] ).data( 'file-id' ) + '&' + item[3] + '@!';
-         fileNumber++;
-         } );*/
 
         var params = getFilesID();
         //console.log(listID);
@@ -308,7 +299,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             $( '#multiDownloadForm' ).remove();
             var form = $( '<form id="multiDownloadForm" method="POST" action="' + serverURL + 'file/zip">' );
 
-            $.each( params.data, function ( k, v ){
+            _.each( params.data, function ( v, k ){
                 form.append( $( '<input type="hidden" name="' + k +
                 '" value="' + v + '">' ) );
             } );
@@ -346,13 +337,6 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             },
             add        : function ( e, data ){
                 data.submit()
-                    .success( function (){
-                        $( '#progress' ).hide();
-                        $( '.close' ).click();
-                        //window.location.reload();
-                        window.location = baseURL + 'file.html?upload';
-
-                    } )
                     .error( function ( jqXHR, textStatus ){
                         console.log( jqXHR );
                         swal( {
@@ -360,7 +344,12 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                             type : "error",
                             timer: 4000
                         } );
-
+                    } )
+                    .success( function (){
+                        $( '#progress' ).hide();
+                        $( '.close' ).click();
+                        //window.location.reload();
+                        window.location = baseURL + 'file.html?upload';
                     } )
                     .complete( function ( result ){
                         //console.log( "result file upload: ", result );
@@ -370,6 +359,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 $( '#progress' ).show();
             }
         } );
+
     }
 
     function listFolderUpload( destFolders ){
@@ -549,8 +539,8 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             createLeafNode = _.template( $( '#menuL3' ).html() ),
             createCategoryNode = _.template( $( '#menuL2' ).html() );
 
-        $.each( menu, function ( i, catArray ){
-            $.each( catArray, function ( j, item ){
+        _.each( menu, function ( catArray, i ){
+            _.each( catArray, function ( item, j ){
 
                 htmlLeafNode += createLeafNode(
                     {
@@ -572,7 +562,8 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
         //other category
         //DONE: added manually!!!! it is too custom to make it a rule!!!
-        if ( $.inArray( -1, refDocUsed ) > -1 ) {
+        //if ( $.inArray( -1, refDocUsed ) > -1 )
+        if ( _.contains( refDocUsed, -1 ) ) {
             htmlCategoryNode +=
                 '<li class="level2" >' +
                 '<a id="other" href="#">' + i18n[lang].tree.other + '</a>' +
@@ -711,7 +702,10 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
         templateHeader();
         //DataTable object
+        //jQuery TABLE object
+
         table = $( TABLEID ).DataTable( {
+            //retrieve      : true,
             paging        : true,
             ordering      : true,
             info          : true,
@@ -823,16 +817,29 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             ],
             'initComplete': function (){
                 templateTable();
+                oTable = $( TABLEID ).dataTable();
                 table
                     .column( 4 ).search( '[^' + username + ']', true, false )
                     //.column( 15 ).search( '0' )   // not downloaded yet
                     .draw();
+                //set upload form events
+                $.when( setEventuploadForm(), setEventsHTML() ).then( function (){
+                    setTimeout( function (){
+                        var showUpload = getUrlParameter( 'upload' );
+                        //console.log(showUpload);
+                        $( '#warningQuota' ).html( '<p>' + i18n[lang].warningQuota + '</p>' );
+
+                        if ( AjaxData.length === 0 ) {
+                            $( '#btn-upload-div' ).trigger( 'click' );
+                            console.log( ">>> NO files" );
+                        }
+                        if ( showUpload === 'upload' ) {
+                            $( '#upload' ).find( 'a' ).trigger( 'click' );
+                        }
+                    }, 1000 );
+                } );
             }
         } );
-
-        //jQuery TABLE object
-        oTable = $( TABLEID ).dataTable();
-
 
     }
 
@@ -842,17 +849,28 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
     function signout(){
 
-        return $.ajax( {
-            type    : 'DELETE',
-            url     : serverURL + 'login/',
-            data    : { "token": token },
-            complete: function (){
-                //swal({title: "OK", type: "success"});
-                sessionStorage.setItem( 'token', '' );
-                window.location = baseURL;
-            }
-        } );
-
+        swal( {
+                title             : i18n[lang].dialog.signout,
+                text              : i18n[lang].dialog.signoutSure,
+                type              : "warning",
+                showCancelButton  : true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText : i18n[lang].dialog.signoutConfirm,
+                cancelButtonText  : i18n[lang].dialog.cancel,
+                closeOnConfirm    : false
+            },
+            function (){
+                return $.ajax( {
+                    type    : 'DELETE',
+                    url     : serverURL + 'login/',
+                    data    : { "token": token },
+                    complete: function (){
+                        //swal({title: "OK", type: "success"});
+                        sessionStorage.setItem( 'token', '' );
+                        window.location = baseURL;
+                    }
+                } );
+            } );
     }
 
     function deleteFile( filePath, cell ){
@@ -1129,18 +1147,18 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         $( '.remove' ).off( 'click' ).on( 'click', function (){
             var $this = $( this );
             swal( {
-                    title             : i18n[lang].dialog.delf,
-                    text              : i18n[lang].dialog.sure,
+                    title             : i18n[lang].dialog.delAction,
+                    text              : i18n[lang].dialog.delSure,
                     type              : "warning",
                     showCancelButton  : true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText : i18n[lang].dialog.del,
+                    confirmButtonText : i18n[lang].dialog.delConfirm,
+                    cancelButtonText  : i18n[lang].dialog.cancel,
                     closeOnConfirm    : false
                 },
                 function (){
                     deleteFile( $this.data( 'file-id' ), $this );
                 } );
-
         } );
     }
 
@@ -1149,12 +1167,13 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         var dlBtn = $( '.deleteAll' );
         dlBtn.off( 'click' ).on( 'click', function (){
             swal( {
-                    title             : i18n[lang].dialog.delf,
-                    text              : i18n[lang].dialog.sure,
+                    title             : i18n[lang].dialog.delAction,
+                    text              : i18n[lang].dialog.delSure,
                     type              : "warning",
                     showCancelButton  : true,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText : i18n[lang].dialog.del,
+                    confirmButtonText : i18n[lang].dialog.delConfirm,
+                    cancelButtonText  : i18n[lang].dialog.cancel,
                     closeOnConfirm    : false
                 },
                 function (){
@@ -1186,15 +1205,16 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
     /***** CHECKBOX SELECT ALL *****/
     function setEventCheckBox(){
 
-        $( '#btnSelectAll' ).off( 'click' ).on( 'click', function (){
+        $( '#btnSelectAll' ).off( 'click' ).on( 'click', function ( e ){
+            e.preventDefault();
             var $this = $( this );
             $this.toggleClass( 'fa-square-o fa-check-square-o' );
             toggleAllIconCheck( $this.hasClass( 'fa-check-square-o' ) );
             toggleDLButton();
         } );
 
-        var icon = $( '.iconSelect' );
-        $( '.iconSelect' ).off( 'click' ).on( 'click', function (){
+        $( '.iconSelect' ).on( 'click', function ( e ){
+            e.preventDefault();
             var $this = $( this );
             $this.find( 'i' ).toggleClass( 'fa-square-o fa-check-square-o' );
             $this.closest( 'tr' ).toggleClass( 'active' );
@@ -1227,7 +1247,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 $( '#breadcrumb' ).html() +
                 '<li class="active">' + i18n[lang].button.filter.notDL + '</li>' );
             table
-                .column( 15 ).search( '^0$', true, false )
+                .column( 16 ).search( '^0$', true, false )
                 //.column( 4 ).search( '[^' + username + ']', true, false )
                 .draw();
         } );
@@ -1453,29 +1473,15 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
 
     function render(){
-        $.when( loadCategory(), loadData(), loadFolder() ).done( function (){
+        $.when( loadCategory(), loadData(), loadFolder() ).then( function (){
 
             //Add label for reference of Document
             $.when( mergeLabelDoc() ).done( function (){
                 //Template of Table and Menu
-                $.when( createDataTable(), createMenu() ).done( function (){
-                    //set upload form events
-                    $.when( setEventuploadForm(), setEventsHTML() ).done( function (){
-                        setTimeout( function (){
-                            var showUpload = getUrlParameter( 'upload' );
-                            //console.log(showUpload);
-                            $( '#warningQuota' ).html( '<p>' + i18n[lang].warningQuota + '</p>' );
+                createDataTable();
+                createMenu();
 
-                            if ( AjaxData.length === 0 ) {
-                                $( '#btn-upload-div' ).trigger( 'click' );
-                                console.log( ">>> NO files" );
-                            }
-                            if ( showUpload === 'upload' ) {
-                                $( '#upload' ).find( 'a' ).trigger( 'click' );
-                            }
-                        }, 1000 );
-                    } );
-                } );
+
             } );
         } );
     }

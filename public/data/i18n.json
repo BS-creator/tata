@@ -59,9 +59,13 @@
             "end"  : "date fin"
         },
         "dialog"      : {
-            "delf": "Suppression de fichier",
-            "sure": "Êtes-vous sûr de vouloir supprimer ce(s) fichier(s)?",
-            "del" : "Effacer"
+            "delAction"     : "Suppression de fichier",
+            "delSure"       : "Êtes-vous sûr de vouloir supprimer ce(s) fichier(s)? \n Cela peut prendre un certain temps",
+            "delConfirm"    : "Effacer",
+            "signout"       : "Déconnexion",
+            "signoutSure"   : "Êtes-vous sûr de vouloir vous déconnecter?",
+            "signoutConfirm": "Sortir",
+            "cancel"        : "Annuler"
         },
         "help"        : {
             "skipLabel"  : "SORTIR",
@@ -158,9 +162,13 @@
             "end"  : "Einddatum"
         },
         "dialog"      : {
-            "delf": "Bestanden verwijderen",
-            "sure": "Bent u zeker?",
-            "del" : "Verwijderen"
+            "delAction"     : "Bestanden verwijderen",
+            "delSure"       : "Bent u zeker?",
+            "delConfirm"    : "Verwijderen",
+            "signout"       : "Uitloggen",
+            "signoutSure"   : "Bent u zeker?",
+            "signoutConfirm": "Uitgaan",
+            "cancel"        : "Annuleren"
         },
         "help"        : {
             "skipLabel"  : "UITLOGGEN",
@@ -256,9 +264,13 @@
             "end"  : "End Date"
         },
         "dialog"      : {
-            "delf": "Delete File",
-            "sure": "Are you sure you want to delete file(s)?",
-            "del" : "Delete"
+            "delAction"     : "Delete File",
+            "delSure"       : "Are you sure you want to delete file(s)? \n It may take a moment",
+            "delConfirm"    : "Delete",
+            "signout"       : "Sign Off",
+            "signoutSure"   : "Are you sure?",
+            "signoutConfirm": "log off",
+            "cancel"        : "Cancel"
         },
         "help"        : {
             "skipLabel"  : "EXIT",
