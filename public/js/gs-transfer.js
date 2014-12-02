@@ -120,7 +120,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         //console.log( array );
 
         var it;
-        _.each( array, function ( item, i ){
+        _.each( array, function ( item ){
             it = $( item[1] );
             listID += it.data( 'file-id' ) + '&' + it.data( 'filename' ) + '@!';
             fileNumber++;
@@ -989,9 +989,13 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         } );
     }
 
-    function setEventSideMenuColumnList(){
-
+    function setI18nSideMenuColumnList(){
         $( '#toggle-side-menu' ).html( '<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.colVisible );
+        $( 'p.side-menu-head' ).text( i18n[lang].sideMenu.config );
+        $( '#init-conf' ).html( i18n[lang].sideMenu.reset );
+    }
+
+    function setEventSideMenuColumnList(){
 
         // slide off #side-menu
         oTable.on( 'length.dt', function (){
@@ -1005,11 +1009,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             }, 200 ).removeClass( 'active' );
         } );
 
-        $( 'p.side-menu-head' ).text( i18n[lang].sideMenu.config );
-        $( '#init-conf' ).html( i18n[lang].sideMenu.reset );
-
         updateMenuVisibleColumnList();
-
     }
 
     function toggleDLButton(){
@@ -1030,20 +1030,21 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         $( '#root' ).off( 'click' ).on( 'click', menuRootClick );
         $( '#upload' ).children( 'a' ).off( 'click' ).on( 'click', menuUploadClick );
         $( 'li.level2' ).children( 'a' ).off( 'click' ).on( 'click', menuCategoryClick );
-        //TODO: change others category!!!
         $( '#other' ).off( 'click' ).on( 'click', menuOtherClick );
         $( 'li.level3' ).children( 'a' ).off( 'click' ).on( 'click', menuRefDocClick );
     }
 
     /***** UPLOAD *****/
-    function setEventUpload(){
+    function seti18nUpload(){
         //TODO: put it in CSS, just use it to translate!!!
         $( '#btn-upload-div' ).find( 'span' ).html( '<i class="fa fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].upload );
         $( '#modalh4' ).html( '<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].modalupload );
         $( '#modalbq' ).html( i18n[lang].modalbq );
-
         $( 'input[type=file]' ).bootstrapFileInput( i18n[lang].modalbtn );
 
+    }
+
+    function setEventUpload(){
         $( '#upload-modal .btn-upload' ).off( 'click' ).on( 'click', function (){
             $( this ).toggleClass( 'active', 'active' );
         } );
@@ -1102,12 +1103,13 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
     }
 
     /***** MULTIDOWNLOAD *****/
+
+    function seti18nMultiDownload(){
+        $( '.downloadall' ).html( '<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDL );
+    }
+
     function setEventMultiDownload(){
-
-        var dlBtn = $( '.downloadall' );
-        dlBtn.html( '<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDL );
-        dlBtn.off( 'click' ).on( 'click', downloadAll );
-
+        $( '.downloadall' ).off( 'click' ).on( 'click', downloadAll );
     }
 
     /***** DELETE *****/
@@ -1131,9 +1133,13 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
     }
 
     /***** MULTI DELETE *****/
+
+    function setI18nMultiDelete(){
+        $( '.deleteAll' ).html( '<i class="fa fa-trash"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDelete );
+    }
+
     function setEventMultiDelete(){
-        var dlBtn = $( '.deleteAll' );
-        dlBtn.off( 'click' ).on( 'click', function (){
+        $( '.deleteAll' ).off( 'click' ).on( 'click', function (){
             swal( {
                     title             : i18n[lang].dialog.delAction,
                     text              : i18n[lang].dialog.delSure,
@@ -1148,7 +1154,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                     deleteAll();
                 } );
         } );
-        dlBtn.html( '<i class="fa fa-trash"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDelete );
+
 
     }
 
@@ -1193,12 +1199,17 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
     }
 
     /***** FILTER *****/
+
+    function seti18nFiltersButton(){
+        $( '#filterby' ).html( i18n[lang].button.filter.filterby + '&nbsp;&nbsp;&nbsp;<span class="caret"></span>' );//
+        $( '#filterNew' ).html( '<i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.new );
+        $( '#filterDL' ).html( '<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.notDL );
+        $( '#filterClear' ).html( '<i class="fa fa-times"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.clear );
+    }
+
     function setEventFiltersButton(){
 
-        $( '#filterby' ).html( i18n[lang].button.filter.filterby + '&nbsp;&nbsp;&nbsp;<span class="caret"></span>' );//
-
-        var filterNew = $( '#filterNew' );
-        filterNew.off( 'click' ).on( 'click', function (){
+        $( '#filterNew' ).off( 'click' ).on( 'click', function (){
             $( '#breadcrumb' ).html(
                 $( '#breadcrumb' ).html() +
                 '<li class="active">' + i18n[lang].button.filter.new + '</li>' );
@@ -1207,10 +1218,9 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 //.column(4).search('[^' + username + ']', true, false)
                 .draw();
         } );
-        filterNew.html( '<i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.new );
 
-        var filterDL = $( '#filterDL' );
-        filterDL.off( 'click' ).on( 'click', function (){
+
+        $( '#filterDL' ).off( 'click' ).on( 'click', function (){
             $( '#breadcrumb' ).html(
                 $( '#breadcrumb' ).html() +
                 '<li class="active">' + i18n[lang].button.filter.notDL + '</li>' );
@@ -1219,10 +1229,9 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 //.column( 4 ).search( '[^' + username + ']', true, false )
                 .draw();
         } );
-        filterDL.html( '<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.notDL );
 
-        var filterClear = $( '#filterClear' );
-        filterClear.off( 'click' ).on( 'click', function (){
+
+        $( '#filterClear' ).off( 'click' ).on( 'click', function (){
             $( '#breadcrumb' ).html(
                 $( '#breadcrumb' ).html() +
                 '<li class="active">' + i18n[lang].button.filter.clear + '</li>' );
@@ -1230,14 +1239,17 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             resetFilters();
             table.draw();
         } );
-        filterClear.html( '<i class="fa fa-times"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.clear );
+
     }
 
     /***** SEARCH *****/
+
+    function setI18nSearch(){
+        $( 'input[name=search]' ).attr( 'placeholder', i18n[lang].button.search );
+    }
+
     function setEventSearch(){
-        var searchInput = $( 'input[name=search]' );
-        searchInput.attr( 'placeholder', i18n[lang].button.search );
-        searchInput.on( 'keyup', function (){
+        $( 'input[name=search]' ).on( 'keyup', function (){
             table.search( this.value ).draw();
         } );
     }
@@ -1251,20 +1263,22 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         } );
     }
 
+    function seti18nDatePicker(){
+        $( '.dp-to' ).text( i18n[lang].datepicker.to );
+        $( '.dateBegin' ).attr( 'placeholder', i18n[lang].datepicker.start );
+        $( '.dateEnd' ).attr( 'placeholder', i18n[lang].datepicker.end );
+    }
+
     function setEventDatePicker(){
 
         var db = $( '.dateBegin' ),
             de = $( '.dateEnd' );
 
-        db.attr( 'placeholder', i18n[lang].datepicker.start );
         db.val( '' );
         db.on( 'focus', function (){this.select();} );
         db.on( 'keyup', function (){setTimeout( table.draw(), 1000 );} );
         db.on( 'change', function (){table.draw();} );
 
-        $( '.dp-to' ).text( i18n[lang].datepicker.to );
-
-        de.attr( 'placeholder', i18n[lang].datepicker.end );
         de.val( '' );
         de.on( 'focus', function (){this.select();} );
         de.on( 'keyup', function (){setTimeout( table.draw(), 1000 );} );
@@ -1287,12 +1301,16 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
     }
 
 
-    function setEventBreadCrumb(){
+    function setI18nBreadCrumb(){
         setBreadCrumb( i18n[lang].breadrumb );
         //$( '#breadcrumb' ).html( i18n[lang].result + '<li class="active">' + i18n[lang].breadrumb + '</li>' );
     }
 
-    function setEventHelpButton(){
+    function setI18nQuotaWarning(){
+        $( '#warningQuota' ).html( '<p>' + i18n[lang].warningQuota + '</p>' );
+    }
+
+    function seti18nHelpButton(){
         var helpBtn = $( '#help' );
         helpBtn.html( '<i class="fa fa-question"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.help );
         helpBtn.off( 'click' ).on( 'click', function (){
@@ -1400,15 +1418,32 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
     function setEventPreData(){
 
+        seti18nUpload();
+
+        setI18nMultiDelete();
+
+        seti18nMultiDownload();
+
+        seti18nFiltersButton();
+
+        seti18nDatePicker();
+
+        setI18nBreadCrumb();
+
+        seti18nHelpButton();
+
+        setI18nSearch();
+
+        setI18nSideMenuColumnList();
+
         setEventUpload();
 
         setEventLanguageSettings();
 
         setEventReload();
 
-        setEventBreadCrumb();
+        setEventuploadForm();
 
-        setEventHelpButton();
 
     }
 
@@ -1445,7 +1480,6 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         oTable = $( TABLEID ).dataTable();
         table
             .column( 4 ).search( '[^' + username + ']', true, false )
-            //.column( 15 ).search( '0' )   // not downloaded yet
             .draw();
 
         //set upload form events
@@ -1455,22 +1489,21 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
         } );
 
-        setEventuploadForm();
-
         setEventsHTML();
 
+        if ( 'upload' === getUrlParameter( 'upload' ) ) {
+            $( '#upload' ).find( 'a' ).trigger( 'click' );
+        }
+
         setTimeout( function (){
-            var showUpload = getUrlParameter( 'upload' );
-            //console.log(showUpload);
-            $( '#warningQuota' ).html( '<p>' + i18n[lang].warningQuota + '</p>' );
+
+            setI18nQuotaWarning();
 
             if ( AjaxData.length === 0 ) {
                 $( '#btn-upload-div' ).trigger( 'click' );
                 console.log( ">>> NO files" );
             }
-            if ( showUpload === 'upload' ) {
-                $( '#upload' ).find( 'a' ).trigger( 'click' );
-            }
+
         }, 1000 );
     }
 
@@ -1480,16 +1513,16 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
 
     function render(){
+        setEventPreData();
+
         $.when( loadCategory(), loadData(), loadFolder() ).then( function (){
 
-            setEventPreData();
             //Add label for reference of Document
             $.when( mergeLabelDoc() ).done( function (){
 
                 //Template of Table and Menu
                 createDataTable();
                 createMenu();
-
 
             } );
         } );

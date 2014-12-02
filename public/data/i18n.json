@@ -244,7 +244,7 @@
             "del"        : "Delete"
         },
         "tree"        : {
-            "root"  : "Show all files published by Group S",
+            "root"  : "Show all files sent by Group S",
             "upload": "Show my uploaded files to Group S",
             "other" : "Other files"
         },
