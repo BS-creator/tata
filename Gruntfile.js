@@ -27,6 +27,8 @@ module.exports = function (grunt) {
         // Project settings
         config: config,
 
+        pkg: grunt.file.readJSON('package.json'),
+
         // Watches files for changes and runs tasks based on the changed files
         watch: {
             /*bower: {
@@ -202,6 +204,20 @@ module.exports = function (grunt) {
              }
          },
 
+        'string-replace': {
+            version: {
+                files: {
+                   /*['index.html']*/
+                },
+                options: {
+                    replacements: [{
+                        pattern: /@@versionNumber@@/g,
+                        replacement: '<%= pkg.version %>'
+                    }]
+                }
+            }
+        },
+
 
         // Copies remaining files to places other tasks can use
         copy: {
@@ -259,6 +275,7 @@ module.exports = function (grunt) {
             'clean:server',
             'concurrent:server',
             //'autoprefixer',
+            'string-replace',
             'connect:livereload',
             'watch'
         ]);

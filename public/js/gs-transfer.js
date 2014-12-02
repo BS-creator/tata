@@ -86,7 +86,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
     function getUsedDocRef( data ){
         var a = [];
-        _.each( data, function ( item, i ){
+        _.each( data, function ( item ){
             var ref = parseInt( item.referenceDocument );
             if ( !isNaN( ref ) ) {
                 a[a.length] = ref;
@@ -99,8 +99,8 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
     function mergeLabelDoc(){
 
-        _.each( category, function ( cat, i ){
-            _.each( AjaxData, function ( row, j ){
+        _.each( category, function ( cat ){
+            _.each( AjaxData, function ( row ){
                 if ( cat.referenceDocument === parseInt( row.referenceDocument ) ) {
                     row.label = labelDoci18n( cat );
                 } else {
@@ -174,41 +174,34 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             var v = value.toLowerCase();
 
             if ( v.indexOf( 'pdf' ) !== -1 ) {
-                return '<span  ' +
+                return '<span>  ' +
                     '<i class="fa fa-file-pdf-o fa-lg" title="pdf"></i>' +
                     '</span>';
-            }
-            else if ( v.indexOf( 'zip' ) !== -1 ) {
-                return '<span  ' +
+            } else if ( v.indexOf( 'zip' ) !== -1 ) {
+                return '<span>  ' +
                     '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>' +
                     '</span>';
-            }
-            else if ( v.indexOf( 'xls' ) !== -1 || v.indexOf( 'csv' ) !== -1 ) {
-                return '<span  ' +
+            } else if ( v.indexOf( 'xls' ) !== -1 || v.indexOf( 'csv' ) !== -1 ) {
+                return '<span> ' +
                     '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>' +
                     '</span>';
-            }
-            else if ( v.indexOf( 'dat' ) !== -1 ) {
-                return '<span  ' +
+            } else if ( v.indexOf( 'dat' ) !== -1 ) {
+                return '<span>  ' +
                     '<i class="fa fa-file-text-o fa-lg" title="dat"></i>' +
                     '</span>';
-            }
-            else if ( v.indexOf( 'jpg' ) !== -1 || v.indexOf( 'png' ) !== -1 ) {
-                return '<span  ' +
+            } else if ( v.indexOf( 'jpg' ) !== -1 || v.indexOf( 'png' ) !== -1 ) {
+                return '<span>  ' +
                     '<i class="fa fa-file-picture-o fa-lg" title="image"></i>' +
                     '</span>';
-            }
-            else {
-                return '<span  ' +
+            } else if ( v.indexOf( 'dat' ) !== -1 || v.indexOf( 'csv' ) !== -1 ) {
+                return '<span>  ' +
+                    '<i class="fa fa-bar-chart"></i>' +
+                    '</span>';
+            } else {
+                return '<span>  ' +
                     '<i class="fa fa-file-o fa-lg" ></i>' +
                     '</span>';
             }
-            if ( v.indexOf( 'dat' ) !== -1 || v.indexOf( 'csv' ) !== -1 ) {
-                return '<span  ' +
-                    '<i class="fa fa-bar-chart"></i>' +
-                    '</span>';
-            }
-            return value;
         } else {
             return '';
         }
@@ -689,51 +682,19 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             row.uploadStamp = date.format( 'DD/MM/YYYY HH:mm:ss' );
             row.uploadStampOrder = date.format( 'YYYY/MM/DD HH:mm:ss' );
 
+
             table.rows.add(
                 $( tpl( row ).trim() )
             );
         } );
     }
 
-    function initTableComplete(){
-        templateTable();
-        oTable = $( TABLEID ).dataTable();
-        table
-            .column( 4 ).search( '[^' + username + ']', true, false )
-            //.column( 15 ).search( '0' )   // not downloaded yet
-            .draw();
-        //set upload form events
-        $( TABLEID ).on( 'draw.dt', function (){
-            setEventCheckBox();
-            setEventDeleteFile();
-
-        } );
-
-        setEventuploadForm();
-
-        setEventsHTML();
-
-        setTimeout( function (){
-            var showUpload = getUrlParameter( 'upload' );
-            //console.log(showUpload);
-            $( '#warningQuota' ).html( '<p>' + i18n[lang].warningQuota + '</p>' );
-
-            if ( AjaxData.length === 0 ) {
-                $( '#btn-upload-div' ).trigger( 'click' );
-                console.log( ">>> NO files" );
-            }
-            if ( showUpload === 'upload' ) {
-                $( '#upload' ).find( 'a' ).trigger( 'click' );
-            }
-        }, 1000 );
-    }
 
     function createDataTable(){
 
         templateHeader();
-        //DataTable object
-        //jQuery TABLE object
 
+        //DataTable object
         table = $( TABLEID ).DataTable( {
             //retrieve      : true,
             paging        : true,
@@ -1437,19 +1398,29 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
     }
 
+    function setEventPreData(){
+
+        setEventUpload();
+
+        setEventLanguageSettings();
+
+        setEventReload();
+
+        setEventBreadCrumb();
+
+        setEventHelpButton();
+
+    }
+
     function setEventsHTML(){
 
         setEventSideMenuColumnList();
 
         setEventMenuFilters();
 
-        setEventUpload();
-
-        setEventLanguageSettings();
+        setEventSearch();
 
         setEventDownload();
-
-        setEventSearch();
 
         setEventFiltersButton();
 
@@ -1457,21 +1428,50 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
         setEventDatePicker();
 
-        setEventReload();
-
         setEventDeleteFile();
 
         setEventMultiDelete();
 
         setEventMultiDownload();
 
-        setEventBreadCrumb();
+    }
 
-        setEventHelpButton();
+    function initTableComplete(){
 
-        /***** TOOLTIP *****/
-        //$( '[rel=tooltip]' ).tooltip();
+        table.clear();
 
+        templateTable();
+
+        oTable = $( TABLEID ).dataTable();
+        table
+            .column( 4 ).search( '[^' + username + ']', true, false )
+            //.column( 15 ).search( '0' )   // not downloaded yet
+            .draw();
+
+        //set upload form events
+        $( TABLEID ).on( 'draw.dt', function (){
+            setEventCheckBox();
+            setEventDeleteFile();
+
+        } );
+
+        setEventuploadForm();
+
+        setEventsHTML();
+
+        setTimeout( function (){
+            var showUpload = getUrlParameter( 'upload' );
+            //console.log(showUpload);
+            $( '#warningQuota' ).html( '<p>' + i18n[lang].warningQuota + '</p>' );
+
+            if ( AjaxData.length === 0 ) {
+                $( '#btn-upload-div' ).trigger( 'click' );
+                console.log( ">>> NO files" );
+            }
+            if ( showUpload === 'upload' ) {
+                $( '#upload' ).find( 'a' ).trigger( 'click' );
+            }
+        }, 1000 );
     }
 
     /****************************************************
@@ -1482,8 +1482,10 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
     function render(){
         $.when( loadCategory(), loadData(), loadFolder() ).then( function (){
 
+            setEventPreData();
             //Add label for reference of Document
             $.when( mergeLabelDoc() ).done( function (){
+
                 //Template of Table and Menu
                 createDataTable();
                 createMenu();

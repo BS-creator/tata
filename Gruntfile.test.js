@@ -1,122 +1,83 @@
-/**
- * Created by bisconti on 09/10/14.
- */
+/*global module:false*/
 module.exports = function(grunt) {
 
-
-    // Load grunt tasks automatically
-    require('load-grunt-tasks')(grunt);
-
-    // Time how long tasks take. Can help when optimizing build times
-    require('time-grunt')(grunt);
-
-    // Configurable paths
-    var config = {
-        app: 'public',
-        dist: 'dist'
-    };
-
-    // Project configuration.
-    grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-
-        // Project settings
-        config: config,
-
-        // Watches files for changes and runs tasks based on the changed files
-        watch: {
-
-            js: {
-                files: ['<%= config.app %>/js/{,*/}*.js'],
-                // tasks: ['jshint'],
-                options: {
-                    livereload: true
-                }
-            },
-            jstest: {
-                files: ['test/spec/{,*/}*.js'],
-                tasks: ['test:watch']
-            },
-            gruntfile: {
-                files: ['Gruntfile.js']
-            },
-            styles: {
-                files: ['<%= config.app %>/css/{,*/}*.css'],
-                tasks: ['newer:copy:styles']
-            },
-            livereload: {
-                options: {
-                    livereload: '<%= connect.options.livereload %>'
-                },
-                files: [
-                    '<%= config.app %>/{,*/}*.*'
-                ]
-            }
-        },
-        useminPrepare: {
-            html: ['<%= config.app %>/index.html','<%= config.app %>/file.html']
-        },
-        usemin:{
-            html: ['dist/index.html', 'dist/file.html']
-        },
-        /*copy:{
-            html: {
-                src: ['public/index.html','public/file.html'],
-                dest: 'dist/'
-            }
-        }*/
-        // Copies remaining files to places other tasks can use
-        copy: {
-            dist: {
-                files: [{
-                    expand: true,
-                    dot: true,
-                    cwd: '<%= config.app %>',
-                    dest: '<%= config.dist %>',
-                    src: ['data/i18n.json']
-                }]
-            },
-            styles: {
-                expand: true,
-                dot: true,
-                cwd: '<%= config.app %>/css',
-                dest: '.tmp/styles/',
-                src: '{,*/}*.css'
-            }
+  // Project configuration.
+  grunt.initConfig({
+    // Metadata.
+    pkg: grunt.file.readJSON('package.json'),
+    banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+      '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+      '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
+      '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
+      ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+    // Task configuration.
+    concat: {
+      options: {
+        banner: '<%= banner %>',
+        stripBanners: true
+      },
+      dist: {
+        src: ['lib/<%= pkg.name %>.js'],
+        dest: 'dist/<%= pkg.name %>.js'
+      }
+    },
+    uglify: {
+      options: {
+        banner: '<%= banner %>'
+      },
+      dist: {
+        src: '<%= concat.dist.dest %>',
+        dest: 'dist/<%= pkg.name %>.min.js'
+      }
+    },
+    jshint: {
+      options: {
+        curly: true,
+        eqeqeq: true,
+        immed: true,
+        latedef: true,
+        newcap: true,
+        noarg: true,
+        sub: true,
+        undef: true,
+        unused: true,
+        boss: true,
+        eqnull: true,
+        browser: true,
+        globals: {
+          jQuery: true
         }
-    });
+      },
+      gruntfile: {
+        src: 'Gruntfile.js'
+      },
+      lib_test: {
+        src: ['lib/**/*.js', 'test/**/*.js']
+      }
+    },
+    qunit: {
+      files: ['test/**/*.html']
+    },
+    watch: {
+      gruntfile: {
+        files: '<%= jshint.gruntfile.src %>',
+        tasks: ['jshint:gruntfile']
+      },
+      lib_test: {
+        files: '<%= jshint.lib_test.src %>',
+        tasks: ['jshint:lib_test', 'qunit']
+      }
+    }
+  });
 
-    // Load the plugin that provides the "uglify" task.
-    //grunt.loadNpmTasks('grunt-usemin');
-    require('matchdep').filterAll('grunt-*').forEach(grunt.loadNpmTasks);
+  // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
-    // Default task(s).
-    //grunt.registerTask('default', ['uglify']);
-    grunt.registerTask('default', ['build']);
-
-    // simple build task
-    grunt.registerTask('build', [
-        'copy',
-        'useminPrepare',
-        'concat',
-        'cssmin',
-        'uglify',
-        'usemin'
-    ]);
-
-    grunt.registerTask('serve', function (target) {
-        if (target === 'dist') {
-            return grunt.task.run(['build', 'connect:dist:keepalive']);
-        }
-
-        grunt.task.run([
-            'clean:server',
-            'concurrent:server',
-            //'autoprefixer',
-            'connect:livereload',
-            'watch'
-        ]);
-    });
-
+  // Default task.
+  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
 
 };
