@@ -13,6 +13,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
     AjaxData = [], // Data
     category = [], // Data
     refDocUsed = [], // Data
+    numberCol = 18,
     username = sessionStorage.getItem( 'username' ).toLowerCase(),
     token = sessionStorage.getItem( 'token' );
 
@@ -40,11 +41,11 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
      * HELPER
      * */
 
-    function endsWith( str, suffix ){
+    var endsWith = function ( str, suffix ){
         return str.indexOf( suffix, str.length - suffix.length ) !== -1;
     }
 
-    function reportError( error, message ){
+    var reportError = function ( error, message ){
         message = message || '';
         console.error(
             'ERROR: ' + message + ' [' + error.toString() + ']\n' +
@@ -65,7 +66,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         reportError( error, 'Uncatched Exception' );
     };
 
-    function getUrlParameter( sParam ){
+    var getUrlParameter = function ( sParam ){
         var sPageURL = window.location.search.substring( 1 );
         var sURLVariables = sPageURL.split( '&' );
         for ( var i = 0; i < sURLVariables.length; i++ ) {
@@ -73,18 +74,18 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 return sURLVariables[i];
             }
         }
-    }
+    };
 
-    function bytesToSize( bytes ){
+    var bytesToSize = function ( bytes ){
         var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
         if ( bytes === 0 ) {
             return '0 Byte';
         }
         var i = parseInt( Math.floor( Math.log( bytes ) / Math.log( 1024 ) ) );
         return Math.round( bytes / Math.pow( 1024, i ), 2 ) + ' ' + sizes[i];
-    }
+    };
 
-    function getUsedDocRef( data ){
+    var getUsedDocRef = function ( data ){
         var a = [];
         _.each( data, function ( item ){
             var ref = parseInt( item.referenceDocument );
@@ -95,9 +96,9 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             }
         } );
         return _.uniq( a );
-    }
+    };
 
-    function mergeLabelDoc(){
+    var mergeLabelDoc = function (){
 
         _.each( category, function ( cat ){
             _.each( AjaxData, function ( row ){
@@ -110,23 +111,19 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 }
             } );
         } );
-    }
+    };
 
-    function getFilesID(){
+    var getFilesID = function (){
         var array = getSelectedRows(),
             listID = '',
+            it = null,
             fileNumber = 0;
 
-        //console.log( array );
-
-        var it;
         _.each( array, function ( item ){
-            it = $( item[1] );
+            it = $( item[1].display );
             listID += it.data( 'file-id' ) + '&' + it.data( 'filename' ) + '@!';
             fileNumber++;
         } );
-
-        //console.log( listID );
 
         return {
             'fileNumber': fileNumber,
@@ -135,79 +132,90 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 'fileID': listID
             }
         };
-    }
+    };
 
     /****************************************************
      * INTERNATIONALIZATION i18n
      * */
 
-    function labelDoci18n( item ){
-        if ( lang === 'fr' ) {
-            return item.labelDocFR;
-        } else if ( lang === 'nl' ) {
-            return item.labelDocNL;
-        } else if ( lang === 'de' ) {
-            return item.labelDocDE;
-        } else {
-            return item.labelDocX;
-        }
-    }
+    var labelDoci18n = function ( item ){
 
-    function labelCati18n( item ){
-        if ( lang === 'fr' ) {
-            return item.labelCategoryFR;
-        } else if ( lang === 'nl' ) {
-            return item.labelCategoryNL;
-        } else if ( lang === 'de' ) {
-            return item.labelCategoryDE;
-        } else {
-            return item.labelCategoryX;
-        }
-    }
+        var doc = {
+            'fr'     : function (){
+                return item.labelDocFR;
+            },
+            'nl'     : function (){
+                return item.labelDocNL;
+            },
+            'de'     : function (){
+                return item.labelDocDE;
+            },
+            'default': function (){
+                return item.labelDocX;
+            }
+        };
+        return (doc[lang] || doc['default'])();
+    };
+
+    var labelCati18n = function ( item ){
+        var cat = {
+            'fr'     : function (){
+                return item.labelCategoryFR;
+            },
+            'nl'     : function (){
+                return item.labelCategoryNL;
+            },
+            'de'     : function (){
+                return item.labelCategoryDE;
+            },
+            'default': function (){
+                return item.labelCategoryX;
+            }
+        };
+        return (cat[lang] || cat['default'])();
+    };
 
     /****************************************************
      * FORMAT COLUMNS
      * */
 
-    function formatExtension( value, row ){
+    var formatExtension = function ( value ){
+
         if ( value || value !== '' ) {
             var v = value.toLowerCase();
-
-            if ( v.indexOf( 'pdf' ) !== -1 ) {
-                return '<span>  ' +
-                    '<i class="fa fa-file-pdf-o fa-lg" title="pdf"></i>' +
-                    '</span>';
-            } else if ( v.indexOf( 'zip' ) !== -1 ) {
-                return '<span>  ' +
-                    '<i class="fa fa-file-archive-o fa-lg" title="zip"></i>' +
-                    '</span>';
-            } else if ( v.indexOf( 'xls' ) !== -1 || v.indexOf( 'csv' ) !== -1 ) {
-                return '<span> ' +
-                    '<i class="fa fa-file-excel-o fa-lg" title="xls"></i>' +
-                    '</span>';
-            } else if ( v.indexOf( 'dat' ) !== -1 ) {
-                return '<span>  ' +
-                    '<i class="fa fa-file-text-o fa-lg" title="dat"></i>' +
-                    '</span>';
-            } else if ( v.indexOf( 'jpg' ) !== -1 || v.indexOf( 'png' ) !== -1 ) {
-                return '<span>  ' +
-                    '<i class="fa fa-file-picture-o fa-lg" title="image"></i>' +
-                    '</span>';
-            } else if ( v.indexOf( 'dat' ) !== -1 || v.indexOf( 'csv' ) !== -1 ) {
-                return '<span>  ' +
-                    '<i class="fa fa-bar-chart"></i>' +
-                    '</span>';
-            } else {
-                return '<span>  ' +
-                    '<i class="fa fa-file-o fa-lg" ></i>' +
-                    '</span>';
-            }
+            var extension = {
+                'pdf'    : function (){
+                    return '<span><i class="fa fa-file-pdf-o fa-lg" title="pdf"></i></span>';
+                },
+                'zip'    : function (){
+                    return '<span><i class="fa fa-file-archive-o fa-lg" title="zip"></i></span>';
+                },
+                'xls'    : function (){
+                    return '<span><i class="fa fa-file-excel-o fa-lg" title="xls"></i></span>';
+                },
+                'dat'    : function (){
+                    return '<span><i class="fa fa-bar-chart fa-lg"></i></span>';
+                },
+                'csv'    : function (){
+                    return '<span><i class="fa fa-file-text-o fa-lg" title="dat"></i></span>';
+                },
+                'jpg'    : function (){
+                    return '<span><i class="fa fa-file-picture-o fa-lg" title="image"></i></span>';
+                },
+                'png'    : function (){
+                    return '<span><i class="fa fa-file-picture-o fa-lg" title="image"></i></span>';
+                },
+                'default': function (){
+                    return '<span><i class="fa fa-file-o fa-lg" ></i></span>';
+                }
+            };
+            return (extension[v] || extension['default'])();
         } else {
             return '';
         }
-    }
+    };
 
-    function formatSize( value ){
+    var formatSize = function ( value ){
         var val = parseInt( value );
         if ( val > 1024 ) {
             return Math.round( val / 1024, 2 ) + ' KB';
@@ -216,24 +224,24 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             return val;
         }
         //return bytesToSize(val);
-    }
+    };
 
-    function formatPath( value ){
+    var formatPath = function ( value ){
         return value.replace( '/data/' + username + '/', '' );
-    }
+    };
 
     //TODO: function formatUserName(value) { return value.toUpperCase(); }
 
 
-    function getSelectedRows(){
+    var getSelectedRows = function (){
         return table.rows( '.active' ).data();
-    }
+    };
 
     /****************************************************
      * DOWNLOAD (ZIP)
      * */
 
-    function addLowerButton(){
+    var addLowerButton = function (){
         var multidl = $( '.multiDL' );
         multidl.html( '' );
         multidl.append(
@@ -265,12 +273,11 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                     deleteAll();
                 } );
         } );
-    }
+    };
 
-    function downloadAll(){
+    var downloadAll = function (){
 
         var params = getFilesID();
-        //console.log(listID);
 
         if ( params.fileNumber === 0 ) {
             swal( {
@@ -278,6 +285,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 type : 'error',
                 timer: 3000
             } );
+            return;
         }
         if ( params.fileNumber === 1 ) {
             var fileID = params.data.fileID.slice( 0, params.data.fileID.indexOf( '&' ) );
@@ -302,21 +310,19 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             swal( {
                 title: i18n[lang].file.dl,
                 type : 'warning',
-                timer: (params.data.fileNumber * 1200)
+                timer: (params.fileNumber * 1200)
             } );
             // about 1,2 seconds per files (õ_ó) .... it's a good guess, what a shame... (╯_╰”)
 
             form.submit();
         }
-
-
-    }
+    };
 
     /****************************************************
      * UPLOAD
      * */
 
-    function setEventuploadForm(){
+    var setEventuploadForm = function (){
         // set token for upload
         var $uploadform = $( '#uploadForm' );
         $( 'input[name="token"]' ).val( token );
@@ -352,32 +358,25 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 $( '#progress' ).show();
             }
         } );
+    };
 
-    }
-
-    function listFolderUpload( destFolders ){
+    var listFolderUpload = function ( destFolders ){
         var listFolder = $( '#uploadForm div.dir-list' );
         for ( var key in destFolders ) {
-            if ( destFolders[key] === 'Presta' ) {
-                listFolder.append(
-                    '<label class="radio"><input name="destFolder" value="' +
-                    destFolders[key] + '" type="radio" checked />' + destFolders[key] + '/</label>'
-                );
-            } else {
-                listFolder.append(
-                    '<label class="radio"><input name="destFolder" value="' +
-                    destFolders[key] + '" type="radio" />' + destFolders[key] + '/</label>'
-                );
-            }
+            listFolder.append(
+                '<label class="radio"><input name="destFolder" value="' +
+                destFolders[key] + '" type="radio" ' +
+                ( (destFolders[key] === 'Presta') ? 'checked' : '') + ' />' +
+                destFolders[key] + '/</label>'
+            );
         }
-    }
-
+    };
 
     /****************************************************
      * MENU
      * */
 
-    function resetFilters(){
+    var resetFilters = function (){
 
         table
             .search( '' )
@@ -387,18 +386,18 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         $( '.dateEnd' ).val( '' ).datepicker( 'update' );
         $( 'input[name="search"]' ).val( '' );
         $( '[class^=level]' ).removeClass( 'active' );
-    }
+    };
 
-    function resetDefaultView(){
+    var resetDefaultView = function (){
         resetFilters();
         table.columns().visible( false, false );
         table.columns( '.defaultView' ).visible( true, false );
         table.columns.adjust().draw( false );
 
         updateMenuVisibleColumnList();
-    }
+    };
 
-    function setBreadCrumb( text, textChild ){
+    var setBreadCrumb = function ( text, textChild ){
         if ( textChild ) {
             $( '#breadcrumb' ).html( i18n[lang].result + '<li class="active noclick">' + text + '</li><li class="active noclick">' + textChild + '</li>' );
         } else if ( text ) {
@@ -406,28 +405,24 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         } else {
             console.log( "error Setting BreadCrumb." );
         }
-    }
+    };
 
-    function menuRootClick( event ){
-        /*$( '#root' ).parent('li.level1').addClass("active");
-         console.log($( '#root' ).parent('li.level1'));*/
+    var menuRootClick = function ( event ){
+
         $( '#upload' ).removeClass( 'active' );
-
         resetFilters();
         table.columns( '.detailsLayer' ).visible( false, false );
         table.columns( '.fileLayer' ).visible( true, false );
         // adjust column sizing and redraw
-        //table.draw();
         table.columns.adjust().draw( false );
         //filter on uploadUserName
         table.column( 4 ).search( '[^' + username + ']', true, false ).draw();
         setBreadCrumb( i18n[lang].tree.root );
-        //$( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.root + '</li>' );
         updateMenuVisibleColumnList();
         event.preventDefault();
-    }
+    };
 
-    function menuOtherClick( event ){
+    var menuOtherClick = function ( event ){
 
         resetFilters();
         table.columns( '.detailsLayer' ).visible( true, false );
@@ -439,12 +434,11 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             .draw(); //filter on uploadUserName != username
         $( '[class^=level] .active' ).removeClass( 'active' );
         setBreadCrumb( i18n[lang].tree.other );
-        //$( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.other + '</li>' );
         updateMenuVisibleColumnList();
         event.preventDefault();
-    }
+    };
 
-    function menuUploadClick( event ){
+    var menuUploadClick = function ( event ){
 
         $( '#root' ).parent( 'li.level1' ).removeClass( "active" );
         $( '#upload' ).addClass( 'active' );
@@ -455,12 +449,11 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         table.column( 4 ).search( username ).draw(); //filter on uploadUserName
         $( '[class^=level] .active' ).removeClass( 'active' );
         setBreadCrumb( i18n[lang].tree.upload );
-        //$( '#breadcrumb' ).html( '<li class="active">' + i18n[lang].tree.upload + '</li>' );
         updateMenuVisibleColumnList();
         event.preventDefault();
-    }
+    };
 
-    function menuCategoryClick( event ){
+    var menuCategoryClick = function ( event ){
 
         resetFilters();
         table.columns( '.detailsLayer' ).visible( false, false );
@@ -472,7 +465,6 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
         $( '[class^=level] .active' ).removeClass( 'active' );
         setBreadCrumb( $this.children( 'a' ).text() );
-        //$( '#breadcrumb' ).html( '<li class="active">' + $this.children( 'a' ).text() + '</li>' );
         $this.addClass( 'active' );
         $this.parents( 'li' ).addClass( 'active' );
 
@@ -490,16 +482,15 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             .draw(); //filter on ref docs
         updateMenuVisibleColumnList();
         event.preventDefault();
-    }
+    };
 
-    function menuRefDocClick( event ){
+    var menuRefDocClick = function ( event ){
         var $this = $( event.currentTarget ).parent( 'li' );
         var nodeID = $this.attr( 'id' ),
             nodeText = $this.text(),
             nodeParentText = $this.closest( 'li.level2' ).children( 'a' ).text();
 
         setBreadCrumb( nodeParentText, nodeText );
-        //$( '#breadcrumb' ).html( '<li class="active">' + nodeParentText + '</li><li class="active">' + nodeText + '</li>' );
 
         $( '[class^=level] .active' ).removeClass( 'active' );
         $this.addClass( 'active' );
@@ -520,10 +511,10 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         }
         updateMenuVisibleColumnList();
         event.preventDefault();
-    }
+    };
 
 
-    function templateMenu( menu ){
+    var templateMenu = function ( menu ){
 
         var htmlLeafNode = '',
             htmlCategoryNode = '',
@@ -532,8 +523,8 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             createLeafNode = _.template( $( '#menuL3' ).html() ),
             createCategoryNode = _.template( $( '#menuL2' ).html() );
 
-        _.each( menu, function ( catArray, i ){
-            _.each( catArray, function ( item, j ){
+        _.each( menu, function ( catArray ){
+            _.each( catArray, function ( item ){
 
                 htmlLeafNode += createLeafNode(
                     {
@@ -555,7 +546,6 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
         //other category
         //DONE: added manually!!!! it is too custom to make it a rule!!!
-        //if ( $.inArray( -1, refDocUsed ) > -1 )
         if ( _.contains( refDocUsed, -1 ) ) {
             htmlCategoryNode +=
                 '<li class="level2" >' +
@@ -571,28 +561,28 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             }
         );
         return htmlMenu;
-    }
+    };
 
-    function filterMenu(){
+    var filterMenu = function (){
         refDocUsed = getUsedDocRef( AjaxData );
         return _.groupBy( _.filter( category, function ( obj ){
-            if ( $.inArray( parseInt( obj.referenceDocument ), refDocUsed ) > -1 ) {
+            if ( _.contains( refDocUsed, parseInt( obj.referenceDocument ) ) ) {
                 return obj;
             }
         } ), function ( obj ){
             return obj.categoryNumber;
         } );
-    }
+    };
 
-    function createMenu(){
+    var createMenu = function (){
         $( '#sidenav' ).html( templateMenu( filterMenu() ) );
-    }
+    };
 
     /****************************************************
      * MENU COLUMN VISIBLE
      * */
 
-    function updateMenuVisibleColumnList(){
+    var updateMenuVisibleColumnList = function (){
         var exclude = [0, 1, 15, 16, 17],
             list = $( '.side-menu-list' ),
             i = 0,
@@ -600,8 +590,8 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             li = '';
 
         list.html( '' );
-        while (i < 18) {
-            if ( $.inArray( i, exclude ) === -1 ) {
+        while (i < numberCol) {
+            if ( !_.contains( exclude, i ) ) {
                 headerCol = table.columns( i ).header().to$().html();
                 li = document.createElement( 'li' );
                 li.innerHTML = '&nbsp;&nbsp;&nbsp;' + headerCol;
@@ -614,12 +604,11 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             i++;
         }
         setEventColumnListVisible();
-    }
+    };
 
     /****************************************************
      * TABLE
      * */
-
 
     function templateHeader(){
         var tpl = _.template( $( '#headertpl' ).html() );
@@ -627,7 +616,9 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         $( TABLEID ).find( 'thead' ).html( tpl( i18n[lang].col ) );
     }
 
-    function templateTable(){ //TODO: make it REUSABLE --> parameter for tbody, theader and tableID
+    var templateTable = function (){
+
+        //TODO: make it REUSABLE --> parameter for tbody, theader and tableID
 
         var tpl = _.template( $( '#bodytpl' ).html() );
 
@@ -640,7 +631,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 row.downloadCount = -1;
             }
 
-            row.alreadyDL = row.downloadCount > 0 ?  'text-muted' :  'text-primary';
+            row.alreadyDL = row.downloadCount > 0 ? 'text-muted' : 'text-primary';
 
             row.strippedPath = formatPath( row.path );
 
@@ -666,7 +657,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
     }
 
 
-    function createDataTable(){
+    var createDataTable = function (){
 
         templateHeader();
 
@@ -780,18 +771,16 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                     visible   : false,
                     searchable: true
                 }
-
             ],
             'initComplete': initTableComplete
         } );
-
-    }
+    };
 
     /****************************************************
      * AJAX
      * */
 
-    function signOut(){
+    var signOut = function (){
 
         swal( {
                 title             : i18n[lang].dialog.signout,
@@ -815,9 +804,9 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                     }
                 } );
             } );
-    }
+    };
 
-    function deleteFile( filePath, cell ){
+    var deleteFile = function ( filePath, cell ){
         //The FTP can delete a file by its path or by its ID (same method on backend)
         //So it works if the fileID is in the filePath
 
@@ -841,9 +830,9 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 //window.location.reload();
             }
         } );
-    }
+    };
 
-    function deleteAll(){
+    var deleteAll = function (){
 
         //var params = getFilesID();
         return $.ajax( {
@@ -869,9 +858,9 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 } );
             }
         } );
-    }
+    };
 
-    function loadFolder(){
+    var loadFolder = function (){
 
         return $.ajax( {
             type   : 'POST',
@@ -881,9 +870,9 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 listFolderUpload( data );
             }
         } );
-    }
+    };
 
-    function loadCategory(){
+    var loadCategory = function (){
 
         return $.ajax( {
             type   : 'GET',
@@ -892,10 +881,9 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 category = data;
             }
         } );
+    };
 
-    }
-
-    function loadData(){
+    var loadData = function (){
 
         showLoading();
 
@@ -935,23 +923,21 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 }
             }
         } );
-    }
-
+    };
 
     /****************************************************
      * EVENTS
      * */
 
-
-    function showLoading(){
+    var showLoading = function (){
         $( '#loader' ).show();
-    }
+    };
 
-    function hideLoading(){
+    var hideLoading = function (){
         $( '#loader' ).hide();
-    }
+    };
 
-    function setEventColumnListVisible(){
+    var setEventColumnListVisible = function (){
         $( '.side-menu-list > li' ).off( 'click' ).on( 'click', function (){
             var $this = $( this ),
                 index = $this.data( 'index' ),
@@ -963,15 +949,15 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         $( '#init-conf' ).off( 'click' ).on( 'click', function (){
             resetDefaultView();
         } );
-    }
+    };
 
-    function setI18nSideMenuColumnList(){
+    var setI18nSideMenuColumnList = function (){
         $( '#toggle-side-menu' ).html( '<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.colVisible );
         $( 'p.side-menu-head' ).text( i18n[lang].sideMenu.config );
         $( '#init-conf' ).html( i18n[lang].sideMenu.reset );
-    }
+    };
 
-    function setEventSideMenuColumnList(){
+    var setEventSideMenuColumnList = function (){
 
         // slide off #side-menu
         oTable.on( 'length.dt', function (){
@@ -986,9 +972,9 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         } );
 
         updateMenuVisibleColumnList();
-    }
+    };
 
-    function toggleDLButton(){
+    var toggleDLButton = function (){
         var trActive = $( 'tr.active' );
 
         if ( trActive && trActive.length > 0 ) {
@@ -999,35 +985,35 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             $( '.downloadall' ).toggle();
             $( '.deleteAll' ).toggle();
         }
-    }
+    };
 
     /***** MENU FILTERS *****/
-    function setEventMenuFilters(){
+    var setEventMenuFilters = function (){
         $( '#root' ).off( 'click' ).on( 'click', menuRootClick );
         $( '#upload' ).children( 'a' ).off( 'click' ).on( 'click', menuUploadClick );
         $( 'li.level2' ).children( 'a' ).off( 'click' ).on( 'click', menuCategoryClick );
         $( '#other' ).off( 'click' ).on( 'click', menuOtherClick );
         $( 'li.level3' ).children( 'a' ).off( 'click' ).on( 'click', menuRefDocClick );
-    }
+    };
 
     /***** UPLOAD *****/
-    function seti18nUpload(){
+    var setI18nUpload = function (){
         //TODO: put it in CSS, just use it to translate!!!
         $( '#btn-upload-div' ).find( 'span' ).html( '<i class="fa fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].upload );
         $( '#modalh4' ).html( '<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].modalupload );
         $( '#modalbq' ).html( i18n[lang].modalbq );
         $( 'input[type=file]' ).bootstrapFileInput( i18n[lang].modalbtn );
 
-    }
+    };
 
-    function setEventUpload(){
+    var setEventUpload = function (){
         $( '#upload-modal .btn-upload' ).off( 'click' ).on( 'click', function (){
             $( this ).toggleClass( 'active', 'active' );
         } );
-    }
+    };
 
     /***** LANGUAGE SETTINGS *****/
-    function setEventLanguageSettings(){
+    var setEventLanguageSettings = function (){
         $( '.' + lang ).addClass( 'default-lang' );
 
         $( '.login-lang' ).off( 'click' ).on( 'click', function (){
@@ -1038,11 +1024,11 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             window.location = baseURL + 'file.html';
             //window.location.reload();
         } );
-    }
+    };
 
 
     /***** DOWNLOAD *****/
-    function setEventDownload(){
+    var setEventDownload = function (){
         $( TABLEID ).on( 'click', '.dlfile', function (){
             swal( {
                 title: i18n[lang].file.dl,
@@ -1076,20 +1062,20 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             }
 
         } );
-    }
+    };
 
     /***** MULTIDOWNLOAD *****/
 
-    function seti18nMultiDownload(){
+    var setI18nMultiDownload = function (){
         $( '.downloadall' ).html( '<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDL );
-    }
+    };
 
-    function setEventMultiDownload(){
+    var setEventMultiDownload = function (){
         $( '.downloadall' ).off( 'click' ).on( 'click', downloadAll );
-    }
+    };
 
     /***** DELETE *****/
-    function setEventDeleteFile(){
+    var setEventDeleteFile = function (){
         $( '.remove' ).off( 'click' ).on( 'click', function (){
             var $this = $( this );
             swal( {
@@ -1106,15 +1092,15 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                     deleteFile( $this.data( 'file-id' ), $this );
                 } );
         } );
-    }
+    };
 
     /***** MULTI DELETE *****/
 
-    function setI18nMultiDelete(){
+    var setI18nMultiDelete = function (){
         $( '.deleteAll' ).html( '<i class="fa fa-trash"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDelete );
-    }
+    };
 
-    function setEventMultiDelete(){
+    var setEventMultiDelete = function (){
         $( '.deleteAll' ).off( 'click' ).on( 'click', function (){
             swal( {
                     title             : i18n[lang].dialog.delAction,
@@ -1130,11 +1116,9 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                     deleteAll();
                 } );
         } );
+    };
 
-
-    }
-
-    function toggleAllIconCheck( activated ){
+    var toggleAllIconCheck = function ( activated ){
         if ( activated ) {
             $( '.iconSelect' )
                 .find( 'i' )
@@ -1149,11 +1133,11 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 .addClass( 'fa-square-o' );
             $( 'td' ).closest( 'tr' ).removeClass( 'active' );
         }
-    }
+    };
 
 
     /***** CHECKBOX SELECT ALL *****/
-    function setEventCheckBox(){
+    var setEventCheckBox = function (){
 
         $( '#btnSelectAll' ).off( 'click' ).on( 'click', function ( e ){
             e.preventDefault();
@@ -1172,18 +1156,18 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             //toggleIconCheck(this);
         } );
 
-    }
+    };
 
     /***** FILTER *****/
 
-    function seti18nFiltersButton(){
+    var setI18nFiltersButton = function (){
         $( '#filterby' ).html( i18n[lang].button.filter.filterby + '&nbsp;&nbsp;&nbsp;<span class="caret"></span>' );//
         $( '#filterNew' ).html( '<i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.new );
         $( '#filterDL' ).html( '<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.notDL );
         $( '#filterClear' ).html( '<i class="fa fa-times"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.clear );
-    }
+    };
 
-    function setEventFiltersButton(){
+    var setEventFiltersButton = function (){
 
         $( '#filterNew' ).off( 'click' ).on( 'click', function (){
             $( '#breadcrumb' ).html(
@@ -1216,36 +1200,36 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             table.draw();
         } );
 
-    }
+    };
 
     /***** SEARCH *****/
 
-    function setI18nSearch(){
+    var setI18nSearch = function (){
         $( 'input[name=search]' ).attr( 'placeholder', i18n[lang].button.search );
-    }
+    };
 
-    function setEventSearch(){
+    var setEventSearch = function (){
         $( 'input[name=search]' ).on( 'keyup', function (){
             table.search( this.value ).draw();
         } );
-    }
+    };
 
-    function setEventReload(){
+    var setEventReload = function (){
         var reloadBtn = $( '.reloadme' );
         reloadBtn.html( '<i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.reload );
         reloadBtn.off( 'click' ).on( 'click', function (){
             window.location = baseURL + 'file.html';
             //window.location.reload();
         } );
-    }
+    };
 
-    function seti18nDatePicker(){
+    var setI18nDatePicker = function (){
         $( '.dp-to' ).text( i18n[lang].datepicker.to );
         $( '.dateBegin' ).attr( 'placeholder', i18n[lang].datepicker.start );
         $( '.dateEnd' ).attr( 'placeholder', i18n[lang].datepicker.end );
-    }
+    };
 
-    function setEventDatePicker(){
+    var setEventDatePicker = function (){
 
         var db = $( '.dateBegin' ),
             de = $( '.dateEnd' );
@@ -1274,19 +1258,19 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 //calendarWeeks : true,
                 //minViewMode: 1 //month view
             } );
-    }
+    };
 
 
-    function setI18nBreadCrumb(){
+    var setI18nBreadCrumb = function (){
         setBreadCrumb( i18n[lang].breadrumb );
         //$( '#breadcrumb' ).html( i18n[lang].result + '<li class="active">' + i18n[lang].breadrumb + '</li>' );
-    }
+    };
 
-    function setI18nQuotaWarning(){
+    var setI18nQuotaWarning = function (){
         $( '#warningQuota' ).html( '<p>' + i18n[lang].warningQuota + '</p>' );
-    }
+    };
 
-    function seti18nHelpButton(){
+    var setI18nHelpButton = function (){
         var helpBtn = $( '#help' );
         helpBtn.html( '<i class="fa fa-question"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.help );
         helpBtn.off( 'click' ).on( 'click', function (){
@@ -1390,64 +1374,42 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             intro.start();
         } );
 
-    }
+    };
 
-    function setEventPreData(){
+    var setEventPreData = function (){
 
-        seti18nUpload();
-
+        setI18nUpload();
         setI18nMultiDelete();
-
-        seti18nMultiDownload();
-
-        seti18nFiltersButton();
-
-        seti18nDatePicker();
-
+        setI18nMultiDownload();
+        setI18nFiltersButton();
+        setI18nDatePicker();
         setI18nBreadCrumb();
-
-        seti18nHelpButton();
-
+        setI18nHelpButton();
         setI18nSearch();
-
         setI18nSideMenuColumnList();
 
         setEventUpload();
-
         setEventLanguageSettings();
-
         setEventReload();
-
         setEventuploadForm();
+    };
 
-
-    }
-
-    function setEventsHTML(){
+    var setEventsHTML = function (){
 
         setEventSideMenuColumnList();
-
         setEventMenuFilters();
-
         setEventSearch();
-
         setEventDownload();
-
         setEventFiltersButton();
-
         setEventCheckBox();
-
         setEventDatePicker();
-
         setEventDeleteFile();
-
         setEventMultiDelete();
-
         setEventMultiDownload();
 
-    }
+    };
 
-    function initTableComplete(){
+    var initTableComplete = function (){
 
         table.clear();
 
@@ -1481,14 +1443,14 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             }
 
         }, 1000 );
-    }
+    };
 
     /****************************************************
      * MAIN
      * */
 
 
-    function render(){
+    var render = function (){
         setEventPreData();
 
         $.when( loadCategory(), loadData(), loadFolder() ).then( function (){
@@ -1502,9 +1464,9 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
             } );
         } );
-    }
+    };
 
-    function main(){
+    var main = function (){
         $( '.user-name' ).html( username.toUpperCase() );
 
         // LOGOUT
@@ -1536,9 +1498,27 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 window.location = baseURL;
             }
         } );
-    }
+    };
 
+    //TODO: replace by module design pattern
     $( 'document' ).ready( main() );
 
+    return {
+        signOut                    : signOut,
+        getFilesID                 : getFilesID,
+        getSelectedRows            : getSelectedRows,
+        setBreadCrumb              : setBreadCrumb,
+        createMenu                 : createMenu,
+        createTable                : createDataTable,
+        menuRootClick              : menuRootClick,
+        menuCategoryClick          : menuCategoryClick,
+        menuOtherClick             : menuOtherClick,
+        menuRefDocClick            : menuRefDocClick,
+        toggleDLButton             : toggleDLButton,
+        toggleAllIconCheck         : toggleAllIconCheck,
+        updateMenuVisibleColumnList: updateMenuVisibleColumnList,
+        showLoading                : showLoading,
+        hideLoading                : hideLoading
+    };
 
 }( _, moment, introJs, swal ));
