@@ -633,46 +633,22 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
         _.each( AjaxData, function ( row ){
 
-            /* if (row.isNew) return "<i class='fa fa-check-square-o text-success'></i>";
-             else return "<i class='fa fa-times'></i>";*/
-
-            if ( row.isNew ) {
-                row.classNew = 'isNew';
-            }
-            else {
-                row.classNew = 'notNew';
-            }
+            row.classNew = row.isNew ? 'isNew' : 'notNew';
 
             row.downloadCount = parseInt( row.downloadCount );
             if ( isNaN( row.downloadCount ) ) {
                 row.downloadCount = -1;
             }
-            if ( row.downloadCount > 0 ) {
-                row.alreadyDL = 'text-muted';
-            }
-            else {
-                row.alreadyDL = 'text-primary';
-            }
+
+            row.alreadyDL = row.downloadCount > 0 ?  'text-muted' :  'text-primary';
 
             row.strippedPath = formatPath( row.path );
 
-            //TODO: how to improve this code? ==> ugly
-            row.employerNumber = parseInt( row.employerNumber );
-            if ( isNaN( row.employerNumber ) ) {
-                row.employerNumber = '';
-            }
+            row.employerNumber = parseInt( row.employerNumber ) || '';
 
-            row.referenceDocument = parseInt( row.referenceDocument );
-            if ( isNaN( row.referenceDocument ) ) {
-                row.referenceDocument = '';
-            }
+            row.referenceDocument = parseInt( row.referenceDocument ) || '';
 
-            if ( row.uploadUserName === username ) {
-                row.dlClass = 'fa-upload';
-            }
-            else {
-                row.dlClass = 'fa-download';
-            }
+            row.dlClass = row.uploadUserName === username ? 'fa-upload' : 'fa-download';
 
             row.dateFormatted = moment( row.date, 'YYYY-MM-DD' ).format( 'DD/MM/YYYY' );
             row.sizeFormatted = formatSize( row.size );
@@ -815,7 +791,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
      * AJAX
      * */
 
-    function signout(){
+    function signOut(){
 
         swal( {
                 title             : i18n[lang].dialog.signout,
@@ -896,7 +872,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
     }
 
     function loadFolder(){
-        //folder
+
         return $.ajax( {
             type   : 'POST',
             url    : serverURL + 'folder/',
@@ -1532,7 +1508,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
         $( '.user-name' ).html( username.toUpperCase() );
 
         // LOGOUT
-        $( '#signout' ).off( 'click' ).on( 'click', signout );
+        $( '#signout' ).off( 'click' ).on( 'click', signOut );
 
         //i18n
         $.getJSON( 'data/i18n.json', function ( data ){

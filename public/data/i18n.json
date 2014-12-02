@@ -240,7 +240,7 @@
             "refCl"      : "Ref Client",
             "count"      : "Counter",
             "refGS"      : "Ref Group S",
-            "uploadStamp": "Upload",
+            "uploadStamp": "Upload Time",
             "del"        : "Delete"
         },
         "tree"        : {
