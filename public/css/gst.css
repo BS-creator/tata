@@ -93,6 +93,14 @@ li {
 .hide {
   display: none;
 }
+.unselectable {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
 @font-face {
   font-family: 'Roboto';
   src: url('../fonts/Roboto/Roboto-Regular.ttf') format('truetype');
@@ -301,26 +309,29 @@ CONTENT
 /****************************************************
 DATEPICKER
 ****************************************************/
-#datepicker {
-  display: table;
-}
 #datepicker input {
-  display: table-cell;
+  float: left;
   max-width: 130px;
   text-align: center;
 }
 .dp-to {
+  float: left;
   box-shadow: 0;
   height: 50px;
-  display: table-cell;
   margin: 0;
   padding: 14px 11px 14px 11px;
-  cursor: none;
+  cursor: default;
   font-size: 14px;
   background-color: #f2f2f2;
   color: #888;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .input-daterange input:first-child {
   border-radius: 0;

@@ -19,6 +19,7 @@ div#top-nav
 ul.sidebar-left
 */
 @import "portal-components/portal-variables.less";
+@import "portal-components/portal-mixins.less";
 
 @font-face {
     font-family: 'Roboto';
@@ -257,28 +258,31 @@ CONTENT
 DATEPICKER
 ****************************************************/
 #datepicker {
-    display: table;
+//    display: table;
 
 }
 
 #datepicker input {
-    display: table-cell;
+    float: left;
+    //display: table-cell;
     max-width: 130px;
     text-align: center;
 }
 
 .dp-to {
+    float: left;
     box-shadow: 0;
     height: 50px;
-    display: table-cell;
+    //display: table-cell;
     margin: 0;
     padding: 14px 11px 14px 11px;
-    cursor: none;
+    cursor: default;
     font-size: 14px;
     background-color: #f2f2f2;
     color: #888;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
+    .unselectable;
 }
 
 .input-daterange input:first-child {
