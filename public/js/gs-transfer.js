@@ -224,7 +224,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
     var formatSize = function ( value ){
         var val = parseInt( value );
         if ( val > 1024 ) {
-            return Math.round( val / 1024, 2 ) + ' KB';
+            return Math.round( val / 1024) + ' KB';
         }
         else {
             return val;
@@ -559,14 +559,13 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 '</li>';
         }
 
-        var htmlMenu = _.template( $( '#menuL1' ).html() )(
+        return _.template( $( '#menuL1' ).html() )(
             {
                 allDocs     : i18n[lang].tree.root,
                 uploadText  : i18n[lang].tree.upload,
                 categoryNode: htmlCategoryNode
             }
         );
-        return htmlMenu;
     };
 
     var filterMenu = function (){
@@ -823,7 +822,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 token   : token,
                 filePath: filePath
             },
-            success: function ( data ){
+            success: function (){
                 swal( {
                     title: i18n[lang].file.del,
                     type : "success",

@@ -61,7 +61,7 @@
         "dialog"      : {
             "delAction"     : "Suppression de fichier",
             "delSure"       : "Êtes-vous sûr de vouloir supprimer ce(s) fichier(s)? \n Cela peut prendre un certain temps",
-            "delConfirm"    : "Effacer",
+            "delConfirm"    : "Supprimer",
             "signout"       : "Déconnexion",
             "signoutSure"   : "Êtes-vous sûr de vouloir vous déconnecter?",
             "signoutConfirm": "Sortir",
