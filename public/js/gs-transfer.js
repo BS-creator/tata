@@ -1,3 +1,9 @@
+/**
+ * Created by bisconti on 29/08/14.
+ */
+
+/*globals _, moment, introJs, swal*/
+
 var gsTransfer = (function ( _, moment, introJs, swal ){
     'use strict';
 
@@ -43,7 +49,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
     var endsWith = function ( str, suffix ){
         return str.indexOf( suffix, str.length - suffix.length ) !== -1;
-    }
+    };
 
     var reportError = function ( error, message ){
         message = message || '';
@@ -57,7 +63,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             '\nColumn #:\t' + (error.columnNumber || '-') +
             '\n\nStack:\n\n' + (error.stack || '-')
         );
-    }
+    };
 
     window.onerror = function ( message, filename, lineno, colno, error ){
         error.fileName = error.fileName || filename || null;
@@ -654,7 +660,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
                 $( tpl( row ).trim() )
             );
         } );
-    }
+    };
 
 
     var createDataTable = function (){

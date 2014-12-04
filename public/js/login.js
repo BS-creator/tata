@@ -2,6 +2,7 @@
  * Created by bisconti on 29/08/14.
  */
 
+/*globals swal*/
 $( function (swal){
     'use strict';
 
@@ -30,9 +31,29 @@ $( function (swal){
         }
     }());
 
+
+
     /***  GLOBAL VARIABLES ***/
     var serverURL = sessionStorage.getItem( 'serverURL' ),
-    baseURL = sessionStorage.getItem( 'baseURL' );
+    baseURL = sessionStorage.getItem( 'baseURL' ),
+    i18n = {
+        'fr': {
+            'login': "Nom d'utilisateur",
+            'password': "Mot de passe",
+            'button': 'ENTRER'
+        },
+        'nl': {
+            'login': "Gebruikersnaam",
+            'password': "Wachtwoord",
+            'button': 'INLOGGEN'
+        },
+        'en':{
+            'login': "login",
+            'password': "password",
+            'button': 'LOGIN'
+        }
+
+    };
 
 
     function reportError( error, message ){
@@ -127,6 +148,11 @@ $( function (swal){
             }
         } );
     }
+    function setLanguage(lang){
+        $('#login' ).attr('placeholder', i18n[lang].login );
+        $('#password' ).attr('placeholder', i18n[lang].password );
+        $('#submit-login' ).text(i18n[lang].button);
+    }
 
     //set language
     sessionStorage.setItem( 'lang', getNavigatorLanguage() );
@@ -141,5 +167,6 @@ $( function (swal){
         $( '.login-lang' ).removeClass( 'default-lang' );
         $( '.' + lang ).addClass( 'default-lang' );
         sessionStorage.setItem( 'lang', lang );
+        setLanguage(lang);
     } );
 }(swal) );
