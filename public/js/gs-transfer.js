@@ -224,9 +224,8 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
     var formatSize = function ( value ){
         var val = parseInt( value );
         if ( val > 1024 ) {
-            return Math.round( val / 1024) + ' KB';
-        }
-        else {
+            return Math.round( val / 1024 ) + ' KB';
+        } else {
             return val;
         }
         //return bytesToSize(val);
@@ -890,8 +889,6 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
     var loadData = function (){
 
-        showLoading();
-
         return $.ajax( {
             type      : 'POST',
             url       : serverURL + 'file/list/',
@@ -899,12 +896,8 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             success   : function ( data ){
                 AjaxData = data;
             },
-            complete  : function (){
-                hideLoading();
-            },
             error     : function (){
                 hideLoading();
-                //alert( i18n[lang].error0 );
                 swal( {
                     title: "ERROR",
                     text : i18n[lang].error0,
@@ -1425,6 +1418,8 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
             .column( 4 ).search( '[^' + username + ']', true, false )
             .draw();
 
+        hideLoading();
+
         //set upload form events
         $( TABLEID ).on( 'draw.dt', function (){
             setEventCheckBox();
@@ -1456,6 +1451,7 @@ var gsTransfer = (function ( _, moment, introJs, swal ){
 
 
     var render = function (){
+        showLoading();
         setEventPreData();
 
         $.when( loadCategory(), loadData(), loadFolder() ).then( function (){
