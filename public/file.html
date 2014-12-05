@@ -1,402 +1,404 @@
 <!DOCTYPE html>
 <html class="no-js" lang="fr">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta charset="utf-8">
-    <title>Group S Transfer</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
-    <link rel="shortcut icon" href="favicon.ico">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta charset="utf-8">
+  <title>Group S Transfer</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <link rel="shortcut icon" href="favicon.ico">
 
-    <!-- build:css css/file.min.css -->
-    <link rel="stylesheet" href="bootstrap-3.2.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="font-awesome-4.2.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="css/datepicker.css">
-    <link rel="stylesheet" href="DataTables/media/css/jquery.dataTables.1.10.4.min.css"/>
-    <link rel="stylesheet" href="DataTables/resources/bootstrap/3/dataTables.bootstrap.css"/>
-    <link rel="stylesheet" href="DataTables/extensions/ColVis/css/dataTables.colVis.css"/>
-    <link rel="stylesheet" href="css/introjs.min.css"/>
-    <!--<link rel="stylesheet" href="css/themes-introjs/introjs-nazanin.css"/>-->
-    <link rel="stylesheet" href="css/sweet-alert.css"/>
-    <link rel="stylesheet" href="css/portal-components.css">
-    <link rel="stylesheet" href="css/fileupload/jquery.fileupload.css"/>
-    <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui.css"/>
-    <link rel="stylesheet" href="css/gst.css">
-    <noscript>
-        <link rel="stylesheet" href="css/fileupload/jquery.fileupload-noscript.css">
-    </noscript>
-    <noscript>
-        <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui-noscript.css">
-    </noscript>
-    <!-- endbuild -->
+  <!-- build:css css/file.min.css -->
+  <link rel="stylesheet" href="bootstrap-3.2.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="font-awesome-4.2.0/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="css/datepicker.css">
+  <link rel="stylesheet" href="DataTables/media/css/jquery.dataTables.1.10.4.min.css"/>
+  <link rel="stylesheet" href="DataTables/resources/bootstrap/3/dataTables.bootstrap.css"/>
+  <link rel="stylesheet" href="DataTables/extensions/ColVis/css/dataTables.colVis.css"/>
+  <link rel="stylesheet" href="css/introjs.min.css"/>
+  <!--<link rel="stylesheet" href="css/themes-introjs/introjs-nazanin.css"/>-->
+  <link rel="stylesheet" href="css/sweet-alert.css"/>
+  <link rel="stylesheet" href="css/fileupload/jquery.fileupload.css"/>
+  <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui.css"/>
+  <link rel="stylesheet" href="css/portal-components.css">
+  <link rel="stylesheet" href="css/gst.css">
+  <noscript>
+    <link rel="stylesheet" href="css/fileupload/jquery.fileupload-noscript.css">
+  </noscript>
+  <noscript>
+    <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui-noscript.css">
+  </noscript>
+  <!-- endbuild -->
 </head>
 <body>
 <!--[if lt IE 10]>
 <p class="browsehappy text-info">You are using an <strong>outdated</strong> browser.
-    Please <strong>upgrade your browser</strong> to a version >= Internet Explorer 10 or install <a
-        href="https://www.mozilla.org/en-US/firefox">Firefox</a> or <a
-        href="http://www.google.com/chrome/index.html">Chrome</a> (recommended) <br/>
-    Please, check your compatibility view (press F12) if you are in Internet Explorer 10.
+  Please <strong>upgrade your browser</strong> to a version >= Internet Explorer 10 or install <a
+    href="https://www.mozilla.org/en-US/firefox">Firefox</a> or <a
+    href="http://www.google.com/chrome/index.html">Chrome</a> (recommended) <br/>
+  Please, check your compatibility view (press F12) if you are in Internet Explorer 10.
 </p>
 <![endif]-->
 
 <!--loading gif-->
 <div class="row">
-    <div id="loader">
-        <p class="text-center">
-            <img src="css/images/loading-blue.gif" alt="loading ...">
-        </p>
-    </div>
+  <div id="loader">
+    <p class="text-center">
+      <img src="css/images/loading-blue.gif" alt="loading ...">
+    </p>
+  </div>
 </div>
 
 <header>
-    <div id="banner-header" class="header-gradient">
-        <ul class="list-inline pull-left">
-            <li><a id="header-logo" class="clickable"><img alt="Group S Logo" src="css/images/logo-groups.png"><img
-                alt="Group S Logo" src="css/images/logo-groups-brand.png" class="hidden-xs"></a></li>
-        </ul>
-        <ul class="list-inline pull-right lang">
-            <li><a class="login-lang fr" href="#">FR</a></li>
-            <li><a class="login-lang en" href="#">EN</a></li>
-            <li><a class="login-lang nl" href="#">NL</a></li>
-        </ul>
-    </div>
+  <div id="banner-header" class="header-gradient">
+    <ul class="list-inline pull-left">
+      <li><a id="header-logo" class="clickable"><img alt="Group S Logo" src="css/images/logo-groups.png"><img
+        alt="Group S Logo" src="css/images/logo-groups-brand.png" class="hidden-xs"></a></li>
+    </ul>
+    <ul class="list-inline pull-right lang">
+      <li><a class="login-lang fr" href="#">FR</a></li>
+      <li><a class="login-lang en" href="#">EN</a></li>
+      <li><a class="login-lang nl" href="#">NL</a></li>
+    </ul>
+  </div>
 </header>
 
 <div id="main">
 
-    <!--/header-->
-    <!--top-nav-->
-    <div class="clearfix">
-        <div id="top-nav">
-            <ul class="list-inline pull-left pl-m">
-                <li class="univers-name"><i class="glyphicon glyphicon-transfer"></i>&nbsp;&nbsp;<em>Group S
-                    Transfer</em>
-                </li>
-            </ul>
-            <ul class="list-inline pull-right pr-m">
-                <li class="user-name mr-s">Username</li>
-                <li id="signout" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Log Off">
-                    &nbsp;&nbsp;<i
-                    class="fa fa-sign-out"></i></li>
-            </ul>
-        </div>
+  <!--/header-->
+  <!--top-nav-->
+  <div class="clearfix">
+    <div id="top-nav">
+      <ul class="list-inline pull-left pl-m">
+        <li class="univers-name"><i class="glyphicon glyphicon-transfer"></i>&nbsp;&nbsp;<em>Group S
+          Transfer</em>
+        </li>
+      </ul>
+      <ul class="list-inline pull-right pr-m">
+        <li class="user-name mr-s">Username</li>
+        <li id="signout" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Log Off">
+          &nbsp;&nbsp;<i
+          class="fa fa-sign-out"></i></li>
+      </ul>
     </div>
+  </div>
 
-    <div class="container-fluid">
+  <div class="container-fluid">
 
-        <!--main content-->
+    <!--main content-->
+    <div class="row">
+
+      <div class="col-md-3 col-xs-12">
+
+        <!--SIDEBAR LEFT-->
         <div class="row">
 
-            <div class="col-md-3 col-xs-12">
+          <!--upload -->
+          <div id="upload-modal">
 
-                <!--SIDEBAR LEFT-->
-                <div class="row">
+            <!-- Button trigger modal -->
+            <div id="btn-upload-div" class="btn-portal-blue wide text-center"
+                 data-toggle="modal" data-target="#uploadFiles"
+                 href="#uploadFiles">
+              <span></span>
+            </div>
 
-                    <!--upload -->
-                    <div id="upload-modal">
+            <!-- Modal -->
+            <div class="modal fade" id="uploadFiles" tabindex="-1" role="dialog"
+                 aria-labelledby="uploadFiles1"
+                 aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;</button>
+                    <h4 id="modalh4" class="modal-title text-muted text-center"></h4>
+                  </div>
 
-                        <!-- Button trigger modal -->
-                        <div id="btn-upload-div" class="btn-portal-blue wide text-center"
-                             data-toggle="modal" data-target="#uploadFiles"
-                             href="#uploadFiles">
-                            <span></span>
+                  <div class="modal-body">
+
+                    <blockquote id="modalbq" class="text-muted text-info">
+
+                    </blockquote>
+
+                    <form class="" id="uploadForm" action="/" method="post"
+                          enctype="multipart/form-data">
+                      <div class="dir-list">
+                        <!--loop-->
+                        <!--<label class="radio control-label"><input type="radio" name="reportory" value="---">dirname</label>-->
+                        <!--/loop-->
+                      </div>
+
+                      <p class="text-center">
+                        <input name="upload" type="file" multiple="" size="50"/>
+                        <input name="token" type="hidden" size="50"/>
+                        <br/>
+                        <input type="submit" value="Upload" style="display: none;"/>
+                      </p>
+                    </form>
+                    <div class="row">
+                      <div class="col-md-offset-2 col-md-8 col-xs-12">
+                        <div id="files" class="files">
+                          <div id="progress" class="progress">
+                            <div class="progress-bar progress-bar-striped active"></div>
+                          </div>
                         </div>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="uploadFiles" tabindex="-1" role="dialog"
-                             aria-labelledby="uploadFiles1"
-                             aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"
-                                                aria-hidden="true">&times;</button>
-                                        <h4 id="modalh4" class="modal-title text-muted text-center"></h4>
-                                    </div>
-
-                                    <div class="modal-body">
-
-                                        <blockquote id="modalbq" class="text-muted text-info">
-
-                                        </blockquote>
-
-                                        <form class="" id="uploadForm" action="/" method="post"
-                                              enctype="multipart/form-data">
-                                            <div class="dir-list">
-                                                <!--loop-->
-                                                <!--<label class="radio control-label"><input type="radio" name="reportory" value="---">dirname</label>-->
-                                                <!--/loop-->
-                                            </div>
-
-                                            <p class="text-center">
-                                                <input name="upload" type="file" multiple="" size="50"/>
-                                                <input name="token" type="hidden" size="50"/>
-                                                <br/>
-                                                <input type="submit" value="Upload" style="display: none;"/>
-                                            </p>
-                                        </form>
-                                        <div class="row">
-                                            <div class="col-md-offset-2 col-md-8 col-xs-12">
-                                                <div id="files" class="files">
-                                                    <div id="progress" class="progress">
-                                                        <div class="progress-bar progress-bar-striped active"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <!--/Modal-->
-                    </div>
-                    <!--/upload-->
-
-                    <!--sidenav-->
-
-                    <div id="sidenav" class="mt-l">
-                        <!-- BEGIN: Underscore Template Definition. -->
-                        <script id="menuL1" type="text/template" class="template">
-                            <ul>
-                                <li class="level1">
-                                    <a id="root" href="#">[[allDocs]]</a>
-                                    <ul>
-                                        [[categoryNode]]
-                                    </ul>
-                                </li>
-                                <li id="upload">
-                                    <a href="#">[[uploadText]]</a>
-                                </li>
-                            </ul>
-                        </script>
-                        <!-- END: Underscore Template Definition. -->
-
-                        <!-- BEGIN: Underscore Template Definition. -->
-                        <script id="menuL2" type="text/template" class="template">
-                            <li class="level2" data-category="[[categoryNumber]]">
-                                <a href="#">[[categoryNumber]] - [[categoryName]]</a>
-                                <ul>
-                                    [[ leafNode ]]
-                                </ul>
-                            </li>
-                        </script>
-                        <!-- END: Underscore Template Definition. -->
-
-                        <!-- BEGIN: Underscore Template Definition. -->
-                        <script id="menuL3" type="text/template" class="template">
-                            <li id="[[referenceDocument]]" data-refdoc="[[referenceDocument]]" class="level3">
-                                <a href="#">[[referenceDocument]] - [[typeDocument]]</a>
-                            </li>
-                        </script>
-                        <!-- END: Underscore Template Definition. -->
+                      </div>
                     </div>
 
-                    <!--/sidenav-->
+                  </div>
 
                 </div>
+
+              </div>
+
             </div>
-            <!--/col-md-3 col-xs-12-->
+            <!--/Modal-->
+          </div>
+          <!--/upload-->
 
-            <div class="col-md-9 col-xs-12">
-                <div id="contentTable">
+          <!--sidenav-->
 
-                    <!--TABLE CONTENT-->
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="filter"><!-- FILTERS -->
-                                <!--filtrer par-->
-                                <div class="btn-group pull-left">
-                                    <button id="filterby" type="button" class="btn btn-default dropdown-toggle"
-                                            data-toggle="dropdown">
-                                        &nbsp;&nbsp;&nbsp;
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a id="filterNew" href="#"></a></li>
-                                        <li class="divider"></li>
-                                        <li><a id="filterDL" href="#"></a></li>
-                                        <li class="divider"></li>
-                                        <li><a id="filterClear" href="#"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
+          <div id="sidenav" class="mt-l">
+            <!-- BEGIN: Underscore Template Definition. -->
+            <script id="menuL1" type="text/template" class="template">
+              <ul>
+                <li class="level1">
+                  <a id="root" href="#">[[allDocs]]</a>
+                  <ul>
+                    [[categoryNode]]
+                  </ul>
+                </li>
+                <li id="upload">
+                  <a href="#">[[uploadText]]</a>
+                </li>
+              </ul>
+            </script>
+            <!-- END: Underscore Template Definition. -->
 
-                            <!--search-->
-                            <input id="searchBox" class="pull-left ml-s" type="text" name="search" placeholder=""/>
+            <!-- BEGIN: Underscore Template Definition. -->
+            <script id="menuL2" type="text/template" class="template">
+              <li class="level2" data-category="[[categoryNumber]]">
+                <a href="#">[[categoryNumber]] - [[categoryName]]</a>
+                <ul>
+                  [[ leafNode ]]
+                </ul>
+              </li>
+            </script>
+            <!-- END: Underscore Template Definition. -->
 
-                            <!--datepicker-->
-                            <div class="pull-left ml-s input-daterange" id="datepicker">
-                                <input type="text" class="dateBegin" name="start" placeholder=""/>
-                                <span class="dp-to">.</span>
-                                <input type="text" class="dateEnd" name="end" placeholder=""/>
-                            </div>
+            <!-- BEGIN: Underscore Template Definition. -->
+            <script id="menuL3" type="text/template" class="template">
+              <li id="[[referenceDocument]]" data-refdoc="[[referenceDocument]]" class="level3">
+                <a href="#">[[referenceDocument]] - [[typeDocument]]</a>
+              </li>
+            </script>
+            <!-- END: Underscore Template Definition. -->
+          </div>
 
-                            <!--refresh & toggle config table-->
-                            <div class="btn-group pull-right ml-s">
-                                <button type="button" class="btn btn-default reloadme">
-                                    &nbsp;&nbsp;&nbsp;
-                                </button>
-                                <button id="toggle-side-menu" type="button" class="btn btn-default">
-                                    &nbsp;&nbsp;&nbsp;
-                                </button>
-                                <button id="help" type="button" class="btn btn-default">
-                                    &nbsp;&nbsp;&nbsp;
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <ul id="breadcrumb" class="list-inline text-muted">&nbsp;</ul>
-                        </div>
-                    </div>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <button class="btn-portal-green downloadall mb-s pull-left">
-                                <i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;
-                            </button>
-                            <button class="btn-portal-red deleteAll mb-s pull-right">
-                                <i class="fa fa-trash"></i>&nbsp;&nbsp;&nbsp;
-                            </button>
-                        </div>
-                    </div>
+          <!--/sidenav-->
 
-                    <table id="tableID" class="display table table-striped">
-                        <thead>
-                        <!-- BEGIN: Underscore Template Definition. -->
-                        <script id="headertpl" type="text/template" class="template">
-                            <tr>
-                                <th><i id="btnSelectAll" class="fa fa-square-o"></i></th>
-                                <th class="center"><i class="fa fa-download fa-lg"></i></th>
-                                <th class="center">[[date]]</th>
-                                <th>[[name]]</th>
-                                <th>[[user]]</th>
-                                <th>[[empl]]</th>
-                                <th>[[label]]</th>
-                                <th>[[refdoc]]</th>
-                                <th>[[size]]</th>
-                                <th class="center">[[ext]]</th>
-                                <th>[[path]]</th>
-                                <th>[[refCl]]</th>
-                                <th>[[count]]</th>
-                                <th>[[refGS]]</th>
-                                <th>[[uploadStamp]]</th>
-                                <th class="center">[[del]]</th>
-                                <th class="center">download Count</th>
-                                <th class="center">isNew</th>
-                            </tr>
-                        </script>
-                        <!-- END: Underscore Template Definition. -->
-                        </thead>
-                        <tbody>
-                        <tr class="[[classNew]]" style="display:none">
-                            <td class="center iconSelect"><i class="fa fa-square-o"></i></td>
-                            <td class="center" data-order="[[downloadCount]]">
-                                <a class="dlfile" data-file-id="[[fileId]]" data-filename="[[fileName]]">
-                                    <i class="fa [[dlClass]] fa-lg [[alreadyDL]]"></i>
-                                    <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]
-                                    </small>
-                                </a></td>
-                            <td class="center" data-order="[[date]]">[[dateFormatted]]</td>
-                            <td>
-                                <a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">
-                                    [[fileName]]</a>
-                            </td>
-                            <td>[[uploadUserName]]</td>
-                            <td>[[employerNumber]]</td>
-                            <td>
-                                <a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">
-                                    [[label]]</a>
-                            </td>
-                            <td>[[referenceDocument]]</td>
-                            <td data-order="[[size]]">[[sizeFormatted]]</td>
-                            <td class="center" data-order="[[extension]]">[[extensionFormatted]]</td>
-                            <td data-order="[[path]]">[[strippedPath]]</td>
-                            <td>[[referenceClient]]</td>
-                            <td>[[counter]]</td>
-                            <td>[[referenceGroupS]]</td>
-                            <td data-order="[[uploadStampOrder]]" class="center"><span style="display:none">[[uploadStampOrder]] </span>[[uploadStamp]]</td>
-                            <td class="center">
-                                <a class="remove" title="Remove" data-file-id="[[fileId]]">
-                                    <i class="fa fa-trash fa-lg"></i></a></td>
-                            <td class="center">[[downloadCount]]</td>
-                            <td class="center">[[isNew]]</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <!-- BEGIN: Underscore Template Definition. -->
-                    <script id="bodytpl" type="text/template">
-                        <tr class="[[classNew]]">
-                            <td class="center iconSelect"><i class="fa fa-square-o"></i></td>
-                            <td class="center" data-order="[[downloadCount]]">
-                                <a class="dlfile" data-file-id="[[fileId]]" data-filename="[[fileName]]">
-                                    <i class="fa [[dlClass]] fa-lg [[alreadyDL]]"></i>
-                                    <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]
-                                    </small>
-                                </a></td>
-                            <td class="center" data-order="[[date]]">[[dateFormatted]]</td>
-                            <td>
-                                <a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">
-                                    [[fileName]]</a>
-                            </td>
-                            <td>[[uploadUserName]]</td>
-                            <td>[[employerNumber]]</td>
-                            <td>
-                                <a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">
-                                    [[label]]</a>
-                            </td>
-                            <td>[[referenceDocument]]</td>
-                            <td data-order="[[size]]">[[sizeFormatted]]</td>
-                            <td class="center" data-order="[[extension]]">[[extensionFormatted]]</td>
-                            <td data-order="[[path]]">[[strippedPath]]</td>
-                            <td>[[referenceClient]]</td>
-                            <td>[[counter]]</td>
-                            <td>[[referenceGroupS]]</td>
-                            <td data-order="[[uploadStampOrder]]" class="center"><span style="display:none">[[uploadStampOrder]] </span>[[uploadStamp]]</td>
-                            <td class="center">
-                                <a class="remove" title="Remove" data-file-id="[[fileId]]">
-                                    <i class="fa fa-trash fa-lg"></i></a></td>
-                            <td class="center">[[downloadCount]]</td>
-                            <td class="center">[[isNew]]</td>
-                        </tr>
-
-                    </script>
-                    <!-- END: Underscore Template Definition. -->
-                </div>
-                <!--/#content-table-->
-            </div>
         </div>
-        <!--/row main content-->
+      </div>
+      <!--/col-md-3 col-xs-12-->
 
-        <div id="footer-grave"></div>
-        <!--breakpoint for FOOTER-->
+      <div class="col-md-9 col-xs-12">
+        <div id="contentTable">
+
+          <!--TABLE CONTENT-->
+          <div class="container-fluid">
+            <div class="row">
+              <div class="filter"><!-- FILTERS -->
+                <!--filtrer par-->
+                <div class="btn-group pull-left">
+                  <button id="filterby" type="button" class="btn btn-default dropdown-toggle"
+                          data-toggle="dropdown">
+                    &nbsp;&nbsp;&nbsp;
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a id="filterNew" href="#"></a></li>
+                    <li class="divider"></li>
+                    <li><a id="filterDL" href="#"></a></li>
+                    <li class="divider"></li>
+                    <li><a id="filterClear" href="#"></a></li>
+                  </ul>
+                </div>
+              </div>
+
+              <!--search-->
+              <input id="searchBox" class="pull-left ml-s" type="text" name="search" placeholder=""/>
+
+              <!--datepicker-->
+              <div class="pull-left ml-s input-daterange" id="datepicker">
+                <input type="text" class="dateBegin" name="start" placeholder=""/>
+                <span class="dp-to">.</span>
+                <input type="text" class="dateEnd" name="end" placeholder=""/>
+              </div>
+
+              <!--refresh & toggle config table-->
+              <div class="btn-group pull-right ml-s">
+                <button type="button" class="btn btn-default reloadme">
+                  &nbsp;&nbsp;&nbsp;
+                </button>
+                <button id="toggle-side-menu" type="button" class="btn btn-default">
+                  &nbsp;&nbsp;&nbsp;
+                </button>
+                <button id="help" type="button" class="btn btn-default">
+                  &nbsp;&nbsp;&nbsp;
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid">
+            <div class="row">
+              <ul id="breadcrumb" class="list-inline text-muted">&nbsp;</ul>
+            </div>
+          </div>
+          <div class="container-fluid">
+            <div class="row">
+              <button class="btn-portal-green downloadall mb-s pull-left">
+                <i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;
+              </button>
+              <button class="btn-portal-red deleteAll mb-s pull-right">
+                <i class="fa fa-trash"></i>&nbsp;&nbsp;&nbsp;
+              </button>
+            </div>
+          </div>
+
+          <table id="tableID" class="display table table-striped">
+            <thead>
+            <!-- BEGIN: Underscore Template Definition. -->
+            <script id="headertpl" type="text/template" class="template">
+              <tr>
+                <th><i id="btnSelectAll" class="fa fa-square-o"></i></th>
+                <th class="center"><i class="fa fa-download fa-lg"></i></th>
+                <th class="center">[[date]]</th>
+                <th>[[name]]</th>
+                <th>[[user]]</th>
+                <th>[[empl]]</th>
+                <th>[[label]]</th>
+                <th>[[refdoc]]</th>
+                <th>[[size]]</th>
+                <th class="center">[[ext]]</th>
+                <th>[[path]]</th>
+                <th>[[refCl]]</th>
+                <th>[[count]]</th>
+                <th>[[refGS]]</th>
+                <th>[[uploadStamp]]</th>
+                <th class="center">[[del]]</th>
+                <th class="center">download Count</th>
+                <th class="center">isNew</th>
+              </tr>
+            </script>
+            <!-- END: Underscore Template Definition. -->
+            </thead>
+            <tbody>
+            <tr class="[[classNew]]" style="display:none">
+              <td class="center iconSelect"><i class="fa fa-square-o"></i></td>
+              <td class="center" data-order="[[downloadCount]]">
+                <a class="dlfile" data-file-id="[[fileId]]" data-filename="[[fileName]]">
+                  <i class="fa [[dlClass]] fa-lg [[alreadyDL]]"></i>
+                  <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]
+                  </small>
+                </a></td>
+              <td class="center" data-order="[[date]]">[[dateFormatted]]</td>
+              <td>
+                <a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">
+                  [[fileName]]</a>
+              </td>
+              <td>[[uploadUserName]]</td>
+              <td>[[employerNumber]]</td>
+              <td>
+                <a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">
+                  [[label]]</a>
+              </td>
+              <td>[[referenceDocument]]</td>
+              <td data-order="[[size]]">[[sizeFormatted]]</td>
+              <td class="center" data-order="[[extension]]">[[extensionFormatted]]</td>
+              <td data-order="[[path]]">[[strippedPath]]</td>
+              <td>[[referenceClient]]</td>
+              <td>[[counter]]</td>
+              <td>[[referenceGroupS]]</td>
+              <td data-order="[[uploadStampOrder]]" class="center"><span
+                style="display:none">[[uploadStampOrder]] </span>[[uploadStamp]]
+              </td>
+              <td class="center">
+                <a class="remove" title="Remove" data-file-id="[[fileId]]">
+                  <i class="fa fa-trash fa-lg"></i></a></td>
+              <td class="center">[[downloadCount]]</td>
+              <td class="center">[[isNew]]</td>
+            </tr>
+            </tbody>
+          </table>
+          <!-- BEGIN: Underscore Template Definition. -->
+          <script id="bodytpl" type="text/template">
+            <tr class="[[classNew]]">
+              <td class="center iconSelect"><i class="fa fa-square-o"></i></td>
+              <td class="center" data-order="[[downloadCount]]">
+                <a class="dlfile" data-file-id="[[fileId]]" data-filename="[[fileName]]">
+                  <i class="fa [[dlClass]] fa-lg [[alreadyDL]]"></i>
+                  <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]
+                  </small>
+                </a></td>
+              <td class="center" data-order="[[date]]">[[dateFormatted]]</td>
+              <td>
+                <a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">
+                  [[fileName]]</a>
+              </td>
+              <td>[[uploadUserName]]</td>
+              <td>[[employerNumber]]</td>
+              <td>
+                <a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">
+                  [[label]]</a>
+              </td>
+              <td>[[referenceDocument]]</td>
+              <td data-order="[[size]]">[[sizeFormatted]]</td>
+              <td class="center" data-order="[[extension]]">[[extensionFormatted]]</td>
+              <td data-order="[[path]]">[[strippedPath]]</td>
+              <td>[[referenceClient]]</td>
+              <td>[[counter]]</td>
+              <td>[[referenceGroupS]]</td>
+              <td data-order="[[uploadStampOrder]]" class="center"><span
+                style="display:none">[[uploadStampOrder]] </span>[[uploadStamp]]
+              </td>
+              <td class="center">
+                <a class="remove" title="Remove" data-file-id="[[fileId]]">
+                  <i class="fa fa-trash fa-lg"></i></a></td>
+              <td class="center">[[downloadCount]]</td>
+              <td class="center">[[isNew]]</td>
+            </tr>
+
+          </script>
+          <!-- END: Underscore Template Definition. -->
+        </div>
+        <!--/#content-table-->
+      </div>
     </div>
-    <!--/container-fluid-->
+    <!--/row main content-->
+
+    <div id="footer-grave"></div>
+    <!--breakpoint for FOOTER-->
+  </div>
+  <!--/container-fluid-->
 
 </div>
 
 <!--/main-->
 
 <footer id="footer">
-    <hr>
-    <p class="text-center">
-        <small>© 2014 Group S</small>
-    </p>
+  <hr>
+  <p class="text-center">
+    <small>© 2014 Group S</small>
+  </p>
 </footer>
 
 <div id="side-menu">
-    <p class="side-menu-head text-center"></p>
+  <p class="side-menu-head text-center"></p>
 
-    <p class="side-menu-head-icon text-center pr-m"><i class="fa fa-chevron-right"></i></p>
-    <ul class="side-menu-list">
-        &lt;!&ndash;
-        <li>&nbsp;&nbsp;&nbsp;Pavlova</li>&ndash;&gt;
-    </ul>
-    <button id="init-conf" class="btn-portal-blue wide"></button>
+  <p class="side-menu-head-icon text-center pr-m"><i class="fa fa-chevron-right"></i></p>
+  <ul class="side-menu-list">
+  </ul>
+  <button id="init-conf" class="btn-portal-blue wide"></button>
 </div>
 
 <!-- build:js js/file.min.js-->
@@ -423,20 +425,20 @@
 <!-- endbuild -->
 
 <script>
-    (function ( i, s, o, g, r, a, m ){
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function (){
-            (i[r].q = i[r].q || []).push( arguments )
-        }, i[r].l = 1 * new Date();
-        a = s.createElement( o ),
-            m = s.getElementsByTagName( o )[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore( a, m )
-    })( window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga' );
+  (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-    ga( 'create', 'UA-56126741-1', 'auto' );
-    ga( 'send', 'pageview' );
+  ga('create', 'UA-56126741-1', 'auto');
+  ga('send', 'pageview');
 
 </script>
 
