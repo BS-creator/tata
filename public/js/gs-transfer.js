@@ -288,6 +288,61 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     });
   };
 
+  var incrementCounter = function (link){
+    link.find('i').remove();
+    var small = link.find('small'); // cache object
+    link.prepend('<i class="fa fa-download fa-lg text-muted"></i>'); //mark as already downloaded
+    var dl = parseInt(small.data('dl')) + 1;
+    link.parent().data('order', dl);
+    small.data('dl', dl); // increment by one the download count
+    small.html('&nbsp;' + dl);
+  };
+
+  var dlIcon = function (e) {
+    var $this = $(this);
+    swal({
+      title: i18n[lang].file.dl,
+      type : 'warning',
+      timer: 4000
+    });
+    //Update icon
+    incrementCounter($this);
+
+    //$this.attr('href', serverURL + 'file/' + token + '/' + $this.data('file-id') + '/' + $this.data('filename'));
+    //download file (click is not triggered in IE11)
+    location.href = serverURL + 'file/' + token + '/' + $this.data('file-id') +
+    '/' + $this.data('filename');
+    e.stopImmediatePropagation();
+  };
+
+  var dlLabel = function (e) {
+    var $this = $(this),
+      filename = $this.data('filename'),
+      fileID = $this.data('file-id'),
+      url = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
+
+    if (endsWith(filename, '.PDF') || endsWith(filename, '.pdf')) {
+      url = baseURL + 'pdfjs/web/viewer.html?file=' + url;
+      window.open(url, '_blank');
+    } else {
+      swal({
+        title: i18n[lang].file.dl,
+        type : 'warning',
+        timer: 4000
+      });
+      //$this.attr('href', url);
+      location.href = url;
+    }
+    incrementCounter($this.closest('tr').find('a').first());
+    e.stopImmediatePropagation();
+  };
+
+  var incrementAllSelectedRows = function (){
+    _.each($(TABLEID).find('.active'), function(row){
+      incrementCounter($(row).find('a').first());
+    });
+  };
+
   var downloadAll = function () {
 
     var params = getFilesID();
@@ -305,10 +360,15 @@ var gsTransfer = (function (_, moment, introJs, swal) {
       var filename = params.data.fileID.slice(params.data.fileID.indexOf('&') + 1, params.data
         .fileID.indexOf('@'));
 
-      var link = document.createElement('a');
+      /*var link = document.createElement('a');
       link.href = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
       document.body.appendChild(link);
-      link.click();
+      link.click();*/
+
+      location.href = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
+
+      incrementAllSelectedRows();
+
     } else {
 
       $('#multiDownloadForm').remove();
@@ -328,6 +388,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
         timer: (params.fileNumber * 1200)
       });
       // about 1,2 seconds per files (õ_ó) .... it's a good guess, what a shame... (╯_╰”)
+      incrementAllSelectedRows();
 
       form.submit();
     }
@@ -1078,41 +1139,10 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
   /***** DOWNLOAD *****/
   var setEventDownload = function () {
-    $(TABLEID).on('click', '.dlfile', function () {
-      swal({
-        title: i18n[lang].file.dl,
-        type : 'warning',
-        timer: 4000
-      });
-      var $this = $(this);
-      $this.attr('href', serverURL + 'file/' + token + '/' + $this.data('file-id') +
-      '/' + $this.data('filename'));
-      //Update icon
-      $this.find('i').remove();
-      var small = $this.find('small'); // cache object
-      $this.prepend('<i class="fa fa-download fa-lg text-muted"></i>'); //mark as already downloaded
-      var dl = parseInt(small.data('dl')) + 1;
-      $this.parent().data('order', dl);
-      small.data('dl', dl); // increment by one the download count
-      small.html('&nbsp;' + dl);
-    });
+    $(TABLEID).on('click', '.dlfile', dlIcon);
 
     //download Single file by click on label
-    $(TABLEID).on('click', '.dlfileLabel', function () {
-      var $this = $(this),
-        filename = $this.data('filename'),
-        fileID = $this.data('file-id'),
-        url = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
-
-      if (endsWith(filename, '.PDF') || endsWith(filename, '.pdf')) {
-        url = baseURL + 'pdfjs/web/viewer.html?file=' + serverURL + 'file/' +
-        token + '/' + fileID + '/' + filename;
-        window.open(url, '_blank');
-      } else {
-        $this.attr('href', url);
-      }
-
-    });
+    $(TABLEID).on('click', '.dlfileLabel', dlLabel);
   };
 
   /***** MULTIDOWNLOAD *****/

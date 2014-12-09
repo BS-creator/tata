@@ -167,7 +167,7 @@
             "delConfirm"    : "Verwijderen",
             "signout"       : "Uitloggen",
             "signoutSure"   : "Bent u zeker?",
-            "signoutConfirm": "Uitgaan",
+            "signoutConfirm": "Uitloggen",
             "cancel"        : "Annuleren"
         },
         "help"        : {
@@ -269,7 +269,7 @@
             "delConfirm"    : "Delete",
             "signout"       : "Sign Off",
             "signoutSure"   : "Are you sure?",
-            "signoutConfirm": "log off",
+            "signoutConfirm": "Log off",
             "cancel"        : "Cancel"
         },
         "help"        : {
