@@ -891,8 +891,8 @@ var gsTransfer = (function (_, moment, introJs, swal) {
       },
       function () {
         return $.ajax({
-          type    : 'DELETE',
-          url     : serverURL + 'login/',
+          type    : 'POST',
+          url     : serverURL + 'logoff/',
           data    : {
             "token": token
           },
