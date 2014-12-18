@@ -93,7 +93,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     var a = [];
     _.each(data, function (item) {
       var ref = parseInt(item.referenceDocument);
-      if (!isNaN(ref)) {
+      if (!isNaN(ref) && username !== item.uploadUserName) {
         a[a.length] = ref;
       } else {
         a[a.length] = -1;
@@ -208,10 +208,10 @@ var gsTransfer = (function (_, moment, introJs, swal) {
           return '<span><i class="fa fa-file-excel-o fa-lg" title="xls"></i></span>';
         },
         'dat'    : function () {
-          return '<span><i class="fa fa-bar-chart fa-lg"></i></span>';
+          return '<span><i class="fa fa-bar-chart fa-lg" title="dat"></i></span>';
         },
         'csv'    : function () {
-          return '<span><i class="fa fa-file-text-o fa-lg" title="dat"></i></span>';
+          return '<span><i class="fa fa-file-excel-o fa-lg" title="csv"></i></span>';
         },
         'jpg'    : function () {
           return '<span><i class="fa fa-file-picture-o fa-lg" title="image"></i></span>';
@@ -242,9 +242,6 @@ var gsTransfer = (function (_, moment, introJs, swal) {
   var formatPath = function (value) {
     return value.replace('/data/' + username + '/', '');
   };
-
-  //TODO: function formatUserName(value) { return value.toUpperCase(); }
-
 
   var getSelectedRows = function () {
     return table.rows('.active').data();
@@ -288,7 +285,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     });
   };
 
-  var incrementCounter = function (link){
+  var incrementCounter = function (link) {
     link.find('i').remove();
     var small = link.find('small'); // cache object
     link.prepend('<i class="fa fa-download fa-lg text-muted"></i>'); //mark as already downloaded
@@ -310,7 +307,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
     //$this.attr('href', serverURL + 'file/' + token + '/' + $this.data('file-id') + '/' + $this.data('filename'));
     //download file (click is not triggered in IE11)
-    location.href = serverURL + 'file/' + token + '/' + $this.data('file-id') +
+    window.location.href = serverURL + 'file/' + token + '/' + $this.data('file-id') +
     '/' + $this.data('filename');
     e.stopImmediatePropagation();
   };
@@ -331,14 +328,14 @@ var gsTransfer = (function (_, moment, introJs, swal) {
         timer: 4000
       });
       //$this.attr('href', url);
-      location.href = url;
+      window.location.href = url;
     }
     incrementCounter($this.closest('tr').find('a').first());
     e.stopImmediatePropagation();
   };
 
-  var incrementAllSelectedRows = function (){
-    _.each($(TABLEID).find('.active'), function(row){
+  var incrementAllSelectedRows = function () {
+    _.each($(TABLEID).find('.active'), function (row) {
       incrementCounter($(row).find('a').first());
     });
   };
@@ -354,26 +351,23 @@ var gsTransfer = (function (_, moment, introJs, swal) {
         timer: 3000
       });
       return;
-    }
-    if (params.fileNumber === 1) {
+    } else if (params.fileNumber === 1) {
       var fileID = params.data.fileID.slice(0, params.data.fileID.indexOf('&'));
-      var filename = params.data.fileID.slice(params.data.fileID.indexOf('&') + 1, params.data
-        .fileID.indexOf('@'));
+      var filename = params.data.fileID.slice(params.data.fileID.indexOf('&') + 1, params.data.fileID.indexOf('@'));
 
       /*var link = document.createElement('a');
-      link.href = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
-      document.body.appendChild(link);
-      link.click();*/
+       link.href = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
+       document.body.appendChild(link);
+       link.click();*/
 
-      location.href = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
+      window.location.href = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
 
       incrementAllSelectedRows();
 
     } else {
 
       $('#multiDownloadForm').remove();
-      var form = $('<form id="multiDownloadForm" method="POST" action="' + serverURL +
-      'file/zip">');
+      var form = $('<form id="multiDownloadForm" method="POST" action="' + serverURL + 'file/zip">');
 
       _.each(params.data, function (v, k) {
         form.append($('<input type="hidden" name="' + k +
@@ -461,7 +455,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
   };
 
   var listFolderUpload = function (destFolders) {
-    var listFolder = $('#uploadForm div.dir-list');
+    var listFolder = $('#uploadForm').find('div.dir-list');
     for (var key in destFolders) {
       listFolder.append(
         '<label class="radio"><input name="destFolder" value="' +
