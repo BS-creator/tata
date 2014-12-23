@@ -977,10 +977,11 @@ var gsTransfer = (function (_, moment, introJs, swal) {
   };
 
   var loadCategory = function () {
+    var service = 'category/' + sessionStorage.getItem('country') === 'france' ? 'true' : '';
 
     return $.ajax({
       type   : 'GET',
-      url    : serverURL + 'category/',
+      url    : serverURL + service,
       success: function (data) {
         category = data;
       }
@@ -992,9 +993,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     return $.ajax({
       type      : 'POST',
       url       : serverURL + 'file/list/',
-      data      : {
-        'token': token
-      },
+      data      : { 'token': token },
       success   : function (data) {
         AjaxData = data;
       },
