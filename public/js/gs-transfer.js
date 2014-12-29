@@ -1011,7 +1011,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
   var loadFolder = function () {
 
-    if(token){ console.log("token = "+token +" defined ==> OK");}
+   // if(token){ console.log("token = "+token +" defined ==> OK");}
     return $.ajax({
       type   : 'POST',
       url    : serverURL + 'folder/',
@@ -1060,7 +1060,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
   };
 
   var loadData = function () {
-    if(token){ console.log("token = "+token +" defined ==> OK");}
+    //if(token){ console.log("token = "+token +" defined ==> OK");}
     return $.ajax({
       type      : 'POST',
       url       : serverURL + 'file/list/',
@@ -1619,7 +1619,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     showLoading();
     setEventPreData();
 
-    console.log(tokenPortal);
+    //console.log(tokenPortal);
 
     $.when(portalCnx()).then(function(){
 
