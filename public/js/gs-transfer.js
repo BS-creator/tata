@@ -47,12 +47,12 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     var url = window.location.hostname;
     if (_.contains(url, 'localhost')) {
       /***** LOCAL *****/
-        //sessionStorage.setItem( 'baseURL', '//localhost:4000/itransfer/' );
-      sessionStorage.setItem('baseURL', '//localhost:4001/');
-      sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
-      //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+      sessionStorage.setItem( 'baseURL', '//localhost:4000/itransfer/' );
+      //sessionStorage.setItem('baseURL', '//localhost:4001/');
+      //sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
+      sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
       sessionStorage.setItem('country', 'BE');
-      sessionStorage.setItem('tokenPortal', 'F19EG686BTITNPHX788I5WR682E5TBMP8PBHEHK6SJCVFMAUD469HLMN4NK9HUVKJTB17230RKELJ21L91');
+      //sessionStorage.setItem('tokenPortal', 'F19EG686BTITNPHX788I5WR682E5TBMP8PBHEHK6SJCVFMAUD469HLMN4NK9HUVKJTB17230RKELJ21L91');
 
     } else if (_.contains(url,'172.20.20.64')) {
       sessionStorage.setItem('baseURL', '//172.20.20.64:4001/');
@@ -1035,8 +1035,9 @@ var gsTransfer = (function (_, moment, introJs, swal) {
   };
 
   var loadCategory = function () {
-    var service = 'category/' + (sessionStorage.getItem('country') === 'FR' ? 'true' : 'false');
-    if(token){ console.log("token = "+token +" defined ==> OK");}
+    //var service = 'category/' + (sessionStorage.getItem('country') === 'FR' ? 'true' : 'false');
+    var service = 'category/' ;
+    //if(token){ console.log("token = "+token +" defined ==> OK");}
     return $.ajax({
       type   : 'GET',
       url    : serverURL + service,
