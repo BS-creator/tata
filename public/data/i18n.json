@@ -1,310 +1,313 @@
 {
-    "fr": {
-        "button"      : {
-            "search"     : "Recherche...",
-            "reload"     : "Rafraîchir",
-            "colVisible" : "Afficher",
-            "multiDL"    : "Télécharger les fichiers",
-            "multiDelete": "Effacer les fichiers",
-            "filter"     : {
-                "filterby": "Filtrer par",
-                "new"     : "Nouveaux fichiers",
-                "notDL"   : "Fichiers non téléchargés",
-                "clear"   : "Retirer tous les filtres"
-            },
-            "help"       : "Aide",
-            "signout"    : "Se Déconnecter"
-        },
-        "breadrumb"   : "Tous les fichiers triés par \"nouveaux\" et \"non téléchargés\"",
-        "result"      : "Resultat: ",
-        "url"         : {
-            "table"     : "DataTables/resources/language/FR.json",
-            "datepicker": "js/locale/bootstrap-datepicker.fr.js"
-        },
-        "col"         : {
-            "new"        : "Nouveau",
-            "date"       : "Date",
-            "name"       : "Nom",
-            "user"       : "Utilisateur",
-            "empl"       : "Employeur",
-            "label"      : "Libell&eacute;",
-            "refdoc"     : "N° Doc",
-            "size"       : "Taille",
-            "ext"        : "Type",
-            "path"       : "Chemin",
-            "refCl"      : "Ref Client",
-            "count"      : "Compteur",
-            "refGS"      : "Ref Group S",
-            "uploadStamp": "Heure Dépôt",
-            "del"        : "Effacer"
-        },
-        "tree"        : {
-            "root"  : "Afficher tous les fichiers publiés par Group S",
-            "upload": "Afficher mes fichiers transmis à Group S",
-            "other" : "Autres Documents"
-        },
-        "sideMenu"    : {
-            "config": "Configuration de la Table",
-            "reset" : "Réinitialiser la vue"
-        },
-        "file"        : {
-            "add"     : "Document ajouté",
-            "del"     : "Document supprimé",
-            "dl"      : "Vos documents sont en cours de téléchargement. \n\n Merci de patienter.",
-            "noselect": "Aucun fichier sélectionné."
-        },
-        "datepicker"  : {
-            "to"   : "à",
-            "start": "date début",
-            "end"  : "date fin"
-        },
-        "dialog"      : {
-            "delAction"     : "Suppression de fichier",
-            "delSure"       : "Êtes-vous sûr de vouloir supprimer ce(s) fichier(s)? \n Cela peut prendre un certain temps",
-            "delConfirm"    : "Supprimer",
-            "signout"       : "Déconnexion",
-            "signoutSure"   : "Êtes-vous sûr de vouloir vous déconnecter?",
-            "signoutConfirm": "Sortir",
-            "cancel"        : "Annuler"
-        },
-        "help"        : {
-            "skipLabel"  : "SORTIR",
-            "nextLabel"  : "SUIVANT",
-            "prevLabel"  : "PRECEDENT",
-            "doneLabel"  : "FIN",
-            "welcome"    : "Bienvenue dans Group S Transfer. Vous venez d'activer l'aide qui vous guidera dans l'utilisation de l'application. Vous pouvez utiliser les flèches du clavier si vous le souhaitez.",
-            "table"      : "Voici le contenu de votre espace serveur.",
-            "checkbox"   : "Activez les cases pour sélectionner plusieurs fichiers à télécharger.",
-            "dlfile"     : "Cliquez sur cet icône pour télécharger un seul fichier. (Le nombre à  droite de l'icône est le compteur de vos téléchargements).",
-            "dlfileLabel": "Cliquez sur cet icône pour télécharger un seul fichier.",
-            "remove"     : "Supprimez vos fichiers téléchargés et libérez votre espace disque.",
-            "headers"    : "La saisie des entêtes permet de trier (par colonne, par ordre alphabétique, croissant-décroissant). \"Ctrl + clic\" permet de cumuler plusieurs tris.",
-            "bottom"     : "Choisissez le nombre d'éléments que vous voulez afficher.",
-            "upload"     : "Activez ce bouton pour envoyer vos fichiers à Group S.",
-            "menu"       : "Sélectionnez une catégorie de document ou un type de document pour filtrer l'affichage.",
-            "filterby"   : "Sélectionnez vos nouveaux fichiers, vos fichiers non téléchargés uniquement ou choisissez de désactiver vos filtres.",
-            "searchBox"  : "Faites vos recherches par mot-clé. Entrez un numéro d'employeur ou un libellé pour filtrer les fichiers.",
-            "datepicker" : "Définissez une période comme critère de filtre",
-            "reloadme"   : "Cliquez sur ce bouton pour recharger la page et les données.",
-            "breadcrumb" : "Voici la liste des filtres par catégorie et numéro de document.",
-            "uploaded"   : "Voyez ce que vous avez transmis à Group S.",
-            "columnMenu" : "Afficher/cacher les colonnes de la table. ",
-            "logoff"     : "Cliquez ici pour vous déconnecter de l'application."
-        },
-        "warningQuota": "Cette application est exclusivement destinée au transfert de fichier. Veillez à bien supprimer vos fichiers après le téléchargement.",
-        "listAll"     : "Tous",
-        "showHide"    : "Afficher les colonnes",
-        "upload"      : "Transmettre des fichiers à Group S",
-        "modalupload" : "Transmettre des fichiers à Group S",
-        "modalbq"     : "Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.",
-        "modalbtn"    : "Sélectionner les fichiers à transmettre",
-        "error0"      : "Erreur: Problème lors de la récupération de la liste des fichiers sur le serveur. ",
-        "error5xx"    : "Service temporairement indisponible, veuillez réessayer plus tard.",
-        "errorSession": "Session expirée"
+  "fr": {
+    "button": {
+      "search": "Recherche...",
+      "reload": "Rafraîchir",
+      "colVisible": "Afficher",
+      "multiDL": "Télécharger les fichiers",
+      "multiDelete": "Effacer les fichiers",
+      "filter": {
+        "filterby": "Filtrer par",
+        "new": "Nouveaux fichiers",
+        "notDL": "Fichiers non téléchargés",
+        "clear": "Retirer tous les filtres"
+      },
+      "help": "Aide",
+      "signout": "Se Déconnecter"
     },
-    "nl": {
-        "button"      : {
-            "search"     : "Zoeken...",
-            "reload"     : "Opnieuw laden",
-            "colVisible" : "Tonen",
-            "multiDL"    : "Bestanden downloaden",
-            "multiDelete": "Bestanden Verwijderen",
-            "filter"     : {
-                "filterby": "Filter door",
-                "new"     : "Nieuwe bestanden",
-                "notDL"   : "Niet gedownloade bestanden",
-                "clear"   : "Filters verwijderen"
-            },
-            "help"       : "Help",
-            "signout"    : "Uit Loggen"
-        },
-        "breadrumb"   : "Alle bestanden, gesorteerd volgens \"nieuw\" en \"niet gedownload\"",
-        "result"      : "Resultaten: ",
-        "url"         : {
-            "table"     : "DataTables/resources/language/NL.json",
-            "datepicker": "js/locale/bootstrap-datepicker.nl.js"
-        },
-        "col"         : {
-            "new"        : "Nieuw",
-            "date"       : "Datum",
-            "name"       : "Naam",
-            "user"       : "Gebruiker",
-            "empl"       : "Werkgever",
-            "label"      : "Label",
-            "refdoc"     : "N° Doc",
-            "size"       : "Grootte",
-            "ext"        : "Type",
-            "path"       : "Locatie",
-            "refCl"      : "Ref. Klant",
-            "count"      : "Teller",
-            "refGS"      : "Ref. Group S",
-            "uploadStamp": "Upload tijd",
-            "del"        : "Verwijderen"
-        },
-        "tree"        : {
-            "root"  : "Alle bestanden van Group S weergeven ",
-            "upload": "Mijn geüploade bestanden bekijken",
-            "other" : "Andere bestanden"
-        },
-        "sideMenu"    : {
-            "config": "Configuratie van de tabel",
-            "reset" : "Standaardconfiguratie herstellen"
-        },
-        "file"        : {
-            "add"     : "Bestand toegevoegd",
-            "del"     : "Bestand verwijderd",
-            "dl"      : "Uw bestanden zijn aan het downloaden. \n\n Dank u voor uw geduld.",
-            "noselect": "Geen bestand geselecteerd."
-        },
-        "datepicker"  : {
-            "to"   : "tot",
-            "start": "Begindatum",
-            "end"  : "Einddatum"
-        },
-        "dialog"      : {
-            "delAction"     : "Bestanden verwijderen",
-            "delSure"       : "Bent u zeker?",
-            "delConfirm"    : "Verwijderen",
-            "signout"       : "Uitloggen",
-            "signoutSure"   : "Bent u zeker?",
-            "signoutConfirm": "Uitloggen",
-            "cancel"        : "Annuleren"
-        },
-        "help"        : {
-            "skipLabel"  : "UITLOGGEN",
-            "nextLabel"  : "VOLGENDE",
-            "prevLabel"  : "VORIGE",
-            "doneLabel"  : "END",
-            "welcome"    : "Welkom bij van Group S Transfer. Deze helpfunctie zal u begeleiden in het gebruik van deze applicatie. U kan ook de pijlen gebruiken als u wilt.",
-            "upload"     : "Klik hier om de bestanden te verzenden naar Group S.",
-            "menu"       : "Klik op een categorie en / of een documentnummer om bestanden te filteren.",
-            "filterby"   : "Selecteer enkel de nieuwe, niet gedownloade bestanden of deactiveer de toegepaste filters.",
-            "searchBox"  : "Zoekveld. Voer het nummer van een werknemer of benaming in om de bestanden te filteren.",
-            "datepicker" : "Klik op het veld om te filteren op datum.",
-            "reloadme"   : "Klik op deze knop om de pagina te herladen.",
-            "table"      : "Hier is de lijst van bestanden die u kunt downloaden",
-            "headers"    : "Klik op de kop om de kolom te sorteren. Hou de SHIFT toets ingedrukt en klik op een andere kolom om op meerdere kolommen te sorteren.",
-            "bottom"     : "Selecteer het aantal bestanden om te tonen.",
-            "breadcrumb" : "Hier is de lijst met toegepaste filters per categorie en het nummer van het document.",
-            "dlfile"     : "Klik hier om het bestand te downloaden. Het nummer geeft aan hoe vaak het bestand is gedownload.",
-            "dlfileLabel": "Klik op de link om het bestand te downloaden.",
-            "checkbox"   : "Klik op de selectievakjes om bestanden te selecteren.",
-            "uploaded"   : "Klik hier om de verzonden bestanden te zien.",
-            "logoff"     : "Kilk hier om de applicatie te sluiten.",
-            "columnMenu" : "Tonen kolommen van het table. ",
-            "remove"     : "Klik op het  icoon om het bestand te verwijderen."
-        },
-        "warningQuota": " Deze toepassing is voorzien voor de overdracht van bestanden. Gelieve regelmatig de bestanden te verwijderen.",
-        "listAll"     : "Alle",
-        "showHide"    : "Kolommen tonen",
-        "upload"      : "Bestanden uploaden naar Group S",
-        "modalupload" : "Bestanden uploaden naar Group S",
-        "modalbq"     : "Gelieve de doelmap te selecteren alvorens uw bestanden toe te voegen.",
-        "modalbtn"    : "Selecteer de bestanden om toe te voegen",
-        "error0"      : "Verbindingsfout.",
-        "error5xx"    : "Dienst tijdelijk onbeschikbaar. Probeer het later opnieuw.",
-        "errorSession": "Sessie verlopen"
+    "breadrumb": "Tous les fichiers triés par \"nouveaux\" et \"non téléchargés\"",
+    "result": "Resultat: ",
+    "url": {
+      "table": "DataTables/resources/language/FR.json",
+      "datepicker": "js/locale/bootstrap-datepicker.fr.js"
     },
-    "en": {
-        "button"      : {
-            "search"     : "Searching...",
-            "reload"     : "Reload",
-            "colVisible" : "Show Column",
-            "multiDL"    : "Download files",
-            "multiDelete": "Delete files",
-            "filter"     : {
-                "filterby": "Filter by",
-                "new"     : "New Files",
-                "notDL"   : "Files not downloaded",
-                "clear"   : "Clear all filters"
-            },
-            "help"       : "Help",
-            "signout"    : "Sign Out"
-        },
-        "breadrumb"   : "New Files not downloaded yet",
-        "result"      : "Results: ",
-        "url"         : {
-            "table": "DataTables/resources/language/EN.json"
-        },
-        "col"         : {
-            "new"        : "New",
-            "date"       : "Date",
-            "name"       : "Name",
-            "user"       : "User",
-            "empl"       : "Employer",
-            "label"      : "Label",
-            "refdoc"     : "N° Doc",
-            "size"       : "Size",
-            "ext"        : "Type",
-            "path"       : "Path",
-            "refCl"      : "Ref Client",
-            "count"      : "Counter",
-            "refGS"      : "Ref Group S",
-            "uploadStamp": "Upload Time",
-            "del"        : "Delete"
-        },
-        "tree"        : {
-            "root"  : "Show all files sent by Group S",
-            "upload": "Show my uploaded files to Group S",
-            "other" : "Other files"
-        },
-        "sideMenu"    : {
-            "config": "Table Configuration",
-            "reset" : "Reset Vue"
-        },
-        "file"        : {
-            "add"     : "File added",
-            "del"     : "File deleted",
-            "dl"      : "Your files are being downloaded. \n\n Thank you for your patience.",
-            "noselect": "No file selected."
-        },
-        "datepicker"  : {
-            "to"   : "to",
-            "start": "Start Date",
-            "end"  : "End Date"
-        },
-        "dialog"      : {
-            "delAction"     : "Delete File",
-            "delSure"       : "Are you sure you want to delete file(s)? \n It may take a moment",
-            "delConfirm"    : "Delete",
-            "signout"       : "Sign Off",
-            "signoutSure"   : "Are you sure?",
-            "signoutConfirm": "Log off",
-            "cancel"        : "Cancel"
-        },
-        "help"        : {
-            "skipLabel"  : "EXIT",
-            "nextLabel"  : "NEXT",
-            "prevLabel"  : "PREVIOUS",
-            "doneLabel"  : "END",
-            "welcome"    : "Welcome in Group S Transfer. This tutorial will guide through the features of the application. You can use the arrow keys on your keyboard to browse.",
-            "table"      : "This is the content of your server.",
-            "checkbox"   : "Check to select more than one file to download.",
-            "dlfile"     : "Click on this icon to download only one file. (The number on the right of the icon is the number of downloads).",
-            "dlfileLabel": "Click on this icon to download only one file.",
-            "remove"     : "Delete the file and free up disk space.",
-            "headers"    : "The headers allow you to sort (by column, by alphabetical order,ascending-descending). \"Ctrl + clic\" allows to group filters.",
-            "bottom"     : "Choose the number of entry to show.",
-            "upload"     : "Click on this button to send your files to Group S.",
-            "menu"       : "Select a file category or a type of file in order to apply a filter .",
-            "filterby"   : "Select your new files, your files not yet downloaded or deactivate filters.",
-            "searchBox"  : "Search by keyword. Input a employer number or a label to filter files.",
-            "datepicker" : "Define a period as a filter.",
-            "reloadme"   : "Click on this button to reload the page.",
-            "breadcrumb" : "This is the list of filter by category and document number.",
-            "uploaded"   : "See the files you sent to Group S.",
-            "columnMenu" : "Show/hide columns from the table. ",
-            "logoff"     : "Click here to log off."
-        },
-        "warningQuota": "This application is exclusively aimed to transfer files. Please delete files once you've downloaded them.",
-        "listAll"     : "all",
-        "showHide"    : "Show / hide columns",
-        "upload"      : "Upload files on the server",
-        "modalupload" : "Upload files to Group S server",
-        "modalbq"     : "Please, select the folder of upload before uploading files.",
-        "modalbtn"    : "Please select files to upload",
-        "error0"      : "Error: Problem retrieving file list",
-        "error5xx"    : "Service temporally unavailable, please try later.",
-        "errorSession": "Session expired"
-    }
+    "col": {
+      "new": "Nouveau",
+      "date": "Date",
+      "name": "Nom",
+      "user": "Utilisateur",
+      "empl": "Employeur",
+      "label": "Libell&eacute;",
+      "refdoc": "N° Doc",
+      "size": "Taille",
+      "ext": "Type",
+      "path": "Chemin",
+      "refCl": "Ref Client",
+      "count": "Compteur",
+      "refGS": "Ref Group S",
+      "uploadStamp": "Heure Dépôt",
+      "del": "Effacer"
+    },
+    "tree": {
+      "root": "Afficher tous les fichiers publiés par Group S",
+      "upload": "Afficher mes fichiers transmis à Group S",
+      "other": "Autres Documents"
+    },
+    "sideMenu": {
+      "config": "Configuration de la Table",
+      "reset": "Réinitialiser la vue"
+    },
+    "file": {
+      "add": "Document ajouté",
+      "del": "Document supprimé",
+      "dl": "Vos documents sont en cours de téléchargement. \n\n Merci de patienter.",
+      "noselect": "Aucun fichier sélectionné."
+    },
+    "datepicker": {
+      "to": "à",
+      "start": "date début",
+      "end": "date fin"
+    },
+    "dialog": {
+      "delAction": "Suppression de fichier",
+      "delSure": "Êtes-vous sûr de vouloir supprimer ce(s) fichier(s)? \n Cela peut prendre un certain temps",
+      "delConfirm": "Supprimer",
+      "signout": "Déconnexion",
+      "signoutSure": "Êtes-vous sûr de vouloir vous déconnecter?",
+      "signoutConfirm": "Sortir",
+      "cancel": "Annuler"
+    },
+    "help": {
+      "skipLabel": "SORTIR",
+      "nextLabel": "SUIVANT",
+      "prevLabel": "PRECEDENT",
+      "doneLabel": "FIN",
+      "welcome": "Bienvenue dans Group S Transfer. Vous venez d'activer l'aide qui vous guidera dans l'utilisation de l'application. Vous pouvez utiliser les flèches du clavier si vous le souhaitez.",
+      "table": "Voici le contenu de votre espace serveur.",
+      "checkbox": "Activez les cases pour sélectionner plusieurs fichiers à télécharger.",
+      "dlfile": "Cliquez sur cet icône pour télécharger un seul fichier. (Le nombre à  droite de l'icône est le compteur de vos téléchargements).",
+      "dlfileLabel": "Cliquez sur cet icône pour télécharger un seul fichier.",
+      "remove": "Supprimez vos fichiers téléchargés et libérez votre espace disque.",
+      "headers": "La saisie des entêtes permet de trier (par colonne, par ordre alphabétique, croissant-décroissant). \"Ctrl + clic\" permet de cumuler plusieurs tris.",
+      "bottom": "Choisissez le nombre d'éléments que vous voulez afficher.",
+      "upload": "Activez ce bouton pour envoyer vos fichiers à Group S.",
+      "menu": "Sélectionnez une catégorie de document ou un type de document pour filtrer l'affichage.",
+      "filterby": "Sélectionnez vos nouveaux fichiers, vos fichiers non téléchargés uniquement ou choisissez de désactiver vos filtres.",
+      "searchBox": "Faites vos recherches par mot-clé. Entrez un numéro d'employeur ou un libellé pour filtrer les fichiers.",
+      "datepicker": "Définissez une période comme critère de filtre",
+      "reloadme": "Cliquez sur ce bouton pour recharger la page et les données.",
+      "breadcrumb": "Voici la liste des filtres par catégorie et numéro de document.",
+      "uploaded": "Voyez ce que vous avez transmis à Group S.",
+      "columnMenu": "Afficher/cacher les colonnes de la table. ",
+      "logoff": "Cliquez ici pour vous déconnecter de l'application."
+    },
+    "warningQuota": "Cette application est exclusivement destinée au transfert de fichier. Veillez à bien supprimer vos fichiers après le téléchargement.",
+    "listAll": "Tous",
+    "showHide": "Afficher les colonnes",
+    "upload": "Transmettre des fichiers à Group S",
+    "modalupload": "Transmettre des fichiers à Group S",
+    "modalbq": "Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.",
+    "modalbtn": "Sélectionner les fichiers à transmettre",
+    "errorCnx": "Erreur de connection au serveur: Authentification nécessaire.",
+    "error0": "Erreur: Problème lors de la récupération de la liste des fichiers sur le serveur. ",
+    "error5xx": "Service temporairement indisponible, veuillez réessayer plus tard.",
+    "errorSession": "Session expirée"
+  },
+  "nl": {
+    "button": {
+      "search": "Zoeken...",
+      "reload": "Opnieuw laden",
+      "colVisible": "Tonen",
+      "multiDL": "Bestanden downloaden",
+      "multiDelete": "Bestanden Verwijderen",
+      "filter": {
+        "filterby": "Filter door",
+        "new": "Nieuwe bestanden",
+        "notDL": "Niet gedownloade bestanden",
+        "clear": "Filters verwijderen"
+      },
+      "help": "Help",
+      "signout": "Uit Loggen"
+    },
+    "breadrumb": "Alle bestanden, gesorteerd volgens \"nieuw\" en \"niet gedownload\"",
+    "result": "Resultaten: ",
+    "url": {
+      "table": "DataTables/resources/language/NL.json",
+      "datepicker": "js/locale/bootstrap-datepicker.nl.js"
+    },
+    "col": {
+      "new": "Nieuw",
+      "date": "Datum",
+      "name": "Naam",
+      "user": "Gebruiker",
+      "empl": "Werkgever",
+      "label": "Label",
+      "refdoc": "N° Doc",
+      "size": "Grootte",
+      "ext": "Type",
+      "path": "Locatie",
+      "refCl": "Ref. Klant",
+      "count": "Teller",
+      "refGS": "Ref. Group S",
+      "uploadStamp": "Upload tijd",
+      "del": "Verwijderen"
+    },
+    "tree": {
+      "root": "Alle bestanden van Group S weergeven ",
+      "upload": "Mijn geüploade bestanden bekijken",
+      "other": "Andere bestanden"
+    },
+    "sideMenu": {
+      "config": "Configuratie van de tabel",
+      "reset": "Standaardconfiguratie herstellen"
+    },
+    "file": {
+      "add": "Bestand toegevoegd",
+      "del": "Bestand verwijderd",
+      "dl": "Uw bestanden zijn aan het downloaden. \n\n Dank u voor uw geduld.",
+      "noselect": "Geen bestand geselecteerd."
+    },
+    "datepicker": {
+      "to": "tot",
+      "start": "Begindatum",
+      "end": "Einddatum"
+    },
+    "dialog": {
+      "delAction": "Bestanden verwijderen",
+      "delSure": "Bent u zeker?",
+      "delConfirm": "Verwijderen",
+      "signout": "Uitloggen",
+      "signoutSure": "Bent u zeker?",
+      "signoutConfirm": "Uitloggen",
+      "cancel": "Annuleren"
+    },
+    "help": {
+      "skipLabel": "UITLOGGEN",
+      "nextLabel": "VOLGENDE",
+      "prevLabel": "VORIGE",
+      "doneLabel": "END",
+      "welcome": "Welkom bij van Group S Transfer. Deze helpfunctie zal u begeleiden in het gebruik van deze applicatie. U kan ook de pijlen gebruiken als u wilt.",
+      "upload": "Klik hier om de bestanden te verzenden naar Group S.",
+      "menu": "Klik op een categorie en / of een documentnummer om bestanden te filteren.",
+      "filterby": "Selecteer enkel de nieuwe, niet gedownloade bestanden of deactiveer de toegepaste filters.",
+      "searchBox": "Zoekveld. Voer het nummer van een werknemer of benaming in om de bestanden te filteren.",
+      "datepicker": "Klik op het veld om te filteren op datum.",
+      "reloadme": "Klik op deze knop om de pagina te herladen.",
+      "table": "Hier is de lijst van bestanden die u kunt downloaden",
+      "headers": "Klik op de kop om de kolom te sorteren. Hou de SHIFT toets ingedrukt en klik op een andere kolom om op meerdere kolommen te sorteren.",
+      "bottom": "Selecteer het aantal bestanden om te tonen.",
+      "breadcrumb": "Hier is de lijst met toegepaste filters per categorie en het nummer van het document.",
+      "dlfile": "Klik hier om het bestand te downloaden. Het nummer geeft aan hoe vaak het bestand is gedownload.",
+      "dlfileLabel": "Klik op de link om het bestand te downloaden.",
+      "checkbox": "Klik op de selectievakjes om bestanden te selecteren.",
+      "uploaded": "Klik hier om de verzonden bestanden te zien.",
+      "logoff": "Kilk hier om de applicatie te sluiten.",
+      "columnMenu": "Tonen kolommen van het table. ",
+      "remove": "Klik op het  icoon om het bestand te verwijderen."
+    },
+    "warningQuota": " Deze toepassing is voorzien voor de overdracht van bestanden. Gelieve regelmatig de bestanden te verwijderen.",
+    "listAll": "Alle",
+    "showHide": "Kolommen tonen",
+    "upload": "Bestanden uploaden naar Group S",
+    "modalupload": "Bestanden uploaden naar Group S",
+    "modalbq": "Gelieve de doelmap te selecteren alvorens uw bestanden toe te voegen.",
+    "modalbtn": "Selecteer de bestanden om toe te voegen",
+    "errorCnx": "Verbindingsfout: Authentificatie noodzakelijk.",
+    "error0": "Verbindingsfout.",
+    "error5xx": "Dienst tijdelijk onbeschikbaar. Probeer het later opnieuw.",
+    "errorSession": "Sessie verlopen"
+  },
+  "en": {
+    "button": {
+      "search": "Searching...",
+      "reload": "Reload",
+      "colVisible": "Show Column",
+      "multiDL": "Download files",
+      "multiDelete": "Delete files",
+      "filter": {
+        "filterby": "Filter by",
+        "new": "New Files",
+        "notDL": "Files not downloaded",
+        "clear": "Clear all filters"
+      },
+      "help": "Help",
+      "signout": "Sign Out"
+    },
+    "breadrumb": "New Files not downloaded yet",
+    "result": "Results: ",
+    "url": {
+      "table": "DataTables/resources/language/EN.json"
+    },
+    "col": {
+      "new": "New",
+      "date": "Date",
+      "name": "Name",
+      "user": "User",
+      "empl": "Employer",
+      "label": "Label",
+      "refdoc": "N° Doc",
+      "size": "Size",
+      "ext": "Type",
+      "path": "Path",
+      "refCl": "Ref Client",
+      "count": "Counter",
+      "refGS": "Ref Group S",
+      "uploadStamp": "Upload Time",
+      "del": "Delete"
+    },
+    "tree": {
+      "root": "Show all files sent by Group S",
+      "upload": "Show my uploaded files to Group S",
+      "other": "Other files"
+    },
+    "sideMenu": {
+      "config": "Table Configuration",
+      "reset": "Reset Vue"
+    },
+    "file": {
+      "add": "File added",
+      "del": "File deleted",
+      "dl": "Your files are being downloaded. \n\n Thank you for your patience.",
+      "noselect": "No file selected."
+    },
+    "datepicker": {
+      "to": "to",
+      "start": "Start Date",
+      "end": "End Date"
+    },
+    "dialog": {
+      "delAction": "Delete File",
+      "delSure": "Are you sure you want to delete file(s)? \n It may take a moment",
+      "delConfirm": "Delete",
+      "signout": "Sign Off",
+      "signoutSure": "Are you sure?",
+      "signoutConfirm": "Log off",
+      "cancel": "Cancel"
+    },
+    "help": {
+      "skipLabel": "EXIT",
+      "nextLabel": "NEXT",
+      "prevLabel": "PREVIOUS",
+      "doneLabel": "END",
+      "welcome": "Welcome in Group S Transfer. This tutorial will guide through the features of the application. You can use the arrow keys on your keyboard to browse.",
+      "table": "This is the content of your server.",
+      "checkbox": "Check to select more than one file to download.",
+      "dlfile": "Click on this icon to download only one file. (The number on the right of the icon is the number of downloads).",
+      "dlfileLabel": "Click on this icon to download only one file.",
+      "remove": "Delete the file and free up disk space.",
+      "headers": "The headers allow you to sort (by column, by alphabetical order,ascending-descending). \"Ctrl + clic\" allows to group filters.",
+      "bottom": "Choose the number of entry to show.",
+      "upload": "Click on this button to send your files to Group S.",
+      "menu": "Select a file category or a type of file in order to apply a filter .",
+      "filterby": "Select your new files, your files not yet downloaded or deactivate filters.",
+      "searchBox": "Search by keyword. Input a employer number or a label to filter files.",
+      "datepicker": "Define a period as a filter.",
+      "reloadme": "Click on this button to reload the page.",
+      "breadcrumb": "This is the list of filter by category and document number.",
+      "uploaded": "See the files you sent to Group S.",
+      "columnMenu": "Show/hide columns from the table. ",
+      "logoff": "Click here to log off."
+    },
+    "warningQuota": "This application is exclusively aimed to transfer files. Please delete files once you've downloaded them.",
+    "listAll": "all",
+    "showHide": "Show / hide columns",
+    "upload": "Upload files on the server",
+    "modalupload": "Upload files to Group S server",
+    "modalbq": "Please, select the folder of upload before uploading files.",
+    "modalbtn": "Please select files to upload",
+    "errorCnx": "Connection Error: Authentication required.",
+    "error0": "Error: Problem retrieving file list",
+    "error5xx": "Service temporally unavailable, please try later.",
+    "errorSession": "Session expired"
+  }
 }

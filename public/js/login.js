@@ -2,33 +2,39 @@
  * Created by bisconti on 29/08/14.
  */
 
-/*globals swal*/
-$(function (swal) {
+/*globals swal, _ */
+$(function (swal, _) {
   'use strict';
 
+
   (function setURL() {
-    if (window.location.hostname.indexOf('localhost') > -1) {
+    var url = window.location.hostname;
+    if (_.contains(url, 'localhost')) {
       /***** LOCAL *****/
         //sessionStorage.setItem( 'baseURL', '//localhost:4000/itransfer/' );
       sessionStorage.setItem('baseURL', '//localhost:4001/');
       sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
       //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
-    } else if (window.location.hostname.indexOf('172.20.20.64') > -1) {
+    } else if (_.contains(url,'172.20.20.64')) {
       sessionStorage.setItem('baseURL', '//172.20.20.64:4001/');
       sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
-    } else if (window.location.hostname.indexOf('deviapps') > -1) { //dev
+    } else if (_.contains(url,'deviapps')) {
       /***** DEV *****/
       sessionStorage.setItem('baseURL', '//deviapps.groups.be/itransfer/public/');
       sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
-    } else if (window.location.hostname.indexOf('qaiapps') > -1) { //QA
+    } else if (_.contains(url,'qaiapps')) {
       /***** QA *****/
       sessionStorage.setItem('baseURL', '//qaiapps.groups.be/itransfer/');
       sessionStorage.setItem('serverURL', '//qaiapps.groups.be/ariane/');
-    } else if (window.location.hostname.indexOf('transfer.groups.be') > -1) { //PROD
+    } else if (_.contains(url,'transfer.groups.be')) {
       /***** PROD *****/
       sessionStorage.setItem('baseURL', '//transfer.groups.be/');
       sessionStorage.setItem('serverURL', '//transfer.groups.be/ariane/');
-    } else if (window.location.hostname.indexOf('groupsfrance.fr') > -1) { // FRANCE
+    } else if (_.contains(url,'online.groups.be')) {
+      /***** PORTAL *****/
+      sessionStorage.setItem('baseURL', '//online.groups.be/transfer/');
+      sessionStorage.setItem('serverURL', '//online.groups.be/ariane/');
+    } else if (_.contains(url,'groupsfrance.fr')) {
       /***** FRANCE *****/
       sessionStorage.setItem('baseURL', '//online.groupsfrance.fr/transfer/');
       sessionStorage.setItem('serverURL', '//online.groupsfrance.fr/ariane/');
@@ -174,4 +180,4 @@ $(function (swal) {
     sessionStorage.setItem('lang', lang);
     setLanguage(lang);
   });
-}(swal));
+}(swal, _));

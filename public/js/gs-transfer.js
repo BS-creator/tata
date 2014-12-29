@@ -18,8 +18,9 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     category = [], // Data
     refDocUsed = [], // Data
     numberCol = 18,
-    username = sessionStorage.getItem('username').toLowerCase(),
-    token = sessionStorage.getItem('token');
+    username = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '',
+    token = sessionStorage.getItem('token'),
+    tokenPortal = sessionStorage.getItem('tokenPortal');
 
 
   _.templateSettings = {
@@ -40,6 +41,53 @@ var gsTransfer = (function (_, moment, introJs, swal) {
      escape : /<%-([\s\S]+?)%>/g
      };*/
   };
+
+
+  (function setURL() {
+    var url = window.location.hostname;
+    if (_.contains(url, 'localhost')) {
+      /***** LOCAL *****/
+        //sessionStorage.setItem( 'baseURL', '//localhost:4000/itransfer/' );
+      sessionStorage.setItem('baseURL', '//localhost:4001/');
+      sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
+      //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+      sessionStorage.setItem('country', 'BE');
+      sessionStorage.setItem('tokenPortal', 'F19EG686BTITNPHX788I5WR682E5TBMP8PBHEHK6SJCVFMAUD469HLMN4NK9HUVKJTB17230RKELJ21L91');
+
+    } else if (_.contains(url,'172.20.20.64')) {
+      sessionStorage.setItem('baseURL', '//172.20.20.64:4001/');
+      sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+      //sessionStorage.setItem('country', 'BE');
+    } else if (_.contains(url,'deviapps')) {
+      sessionStorage.setItem('baseURL', '//deviapps.groups.be/itransfer/public/');
+      sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+      sessionStorage.setItem('country', 'BE');
+    } else if (_.contains(url,'qaiapps')) {
+      sessionStorage.setItem('baseURL', '//qaiapps.groups.be/itransfer/');
+      sessionStorage.setItem('serverURL', '//qaiapps.groups.be/ariane/');
+      sessionStorage.setItem('country', 'BE');
+
+
+      /***** PRODUCTION *****/
+
+    } else if (_.contains(url,'transfer.groups.be')) {
+      sessionStorage.setItem('baseURL', '//transfer.groups.be/');
+      sessionStorage.setItem('serverURL', '//transfer.groups.be/ariane/');
+      sessionStorage.setItem('country', 'BE');
+    } else if (_.contains(url,'transfer.groupsfrance.fr')) {
+      sessionStorage.setItem('baseURL', '//transfer.groupsfrance.fr/');
+      sessionStorage.setItem('serverURL', '//transfer.groupsfrance.fr/ariane/');
+      sessionStorage.setItem('country', 'FR');
+    } else if (_.contains(url,'online.groups.be')) {
+      sessionStorage.setItem('baseURL', '//online.groups.be/transfer/');
+      sessionStorage.setItem('serverURL', '//online.groups.be/ariane/');
+      sessionStorage.setItem('country', 'BE');
+    } else if (_.contains(url,'online.groupsfrance.fr')) {
+      sessionStorage.setItem('baseURL', '//online.groupsfrance.fr/transfer/');
+      sessionStorage.setItem('serverURL', '//online.groupsfrance.fr/ariane/');
+      sessionStorage.setItem('country', 'FR');
+    }
+  }());
 
   /****************************************************
    * HELPER
@@ -446,7 +494,6 @@ var gsTransfer = (function (_, moment, introJs, swal) {
         } else {
           //console.log( "activeUploads = " + activeUploads + "\tFILE UPLOADED = ", data );
         }
-
 
       }
     });
@@ -964,32 +1011,55 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
   var loadFolder = function () {
 
+    if(token){ console.log("token = "+token +" defined ==> OK");}
     return $.ajax({
       type   : 'POST',
       url    : serverURL + 'folder/',
-      data   : {
-        'token': token
-      },
+      data   : {'token': token},
       success: function (data) {
         listFolderUpload(data);
+      },
+      statusCode: {
+        403: function () {
+          console.log("error loading folder");
+          hideLoading();
+          swal({
+            title: "ERROR",
+            text : i18n[lang].errorCnx,
+            type : "error",
+            timer: 4000
+          });
+        }
       }
     });
   };
 
   var loadCategory = function () {
-    var service = 'category/' + sessionStorage.getItem('country') === 'france' ? 'true' : '';
-
+    var service = 'category/' + (sessionStorage.getItem('country') === 'FR' ? 'true' : 'false');
+    if(token){ console.log("token = "+token +" defined ==> OK");}
     return $.ajax({
       type   : 'GET',
       url    : serverURL + service,
       success: function (data) {
         category = data;
+      },
+      statusCode: {
+        403: function () {
+          hideLoading();
+          console.log("error loading category");
+          swal({
+            title: "ERROR",
+            text : i18n[lang].errorCnx,
+            type : "error",
+            timer: 4000
+          });
+        }
       }
     });
   };
 
   var loadData = function () {
-
+    if(token){ console.log("token = "+token +" defined ==> OK");}
     return $.ajax({
       type      : 'POST',
       url       : serverURL + 'file/list/',
@@ -999,6 +1069,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
       },
       error     : function () {
         hideLoading();
+        console.log("error loading data");
         swal({
           title: "ERROR",
           text : i18n[lang].error0,
@@ -1110,7 +1181,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
   };
 
   var setEventUpload = function () {
-    $('#upload-modal .btn-upload').off('click').on('click', function () {
+    $('#upload-modal').find('.btn-upload').off('click').on('click', function () {
       $(this).toggleClass('active', 'active');
     });
   };
@@ -1547,17 +1618,65 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     showLoading();
     setEventPreData();
 
-    $.when(loadCategory(), loadData(), loadFolder()).then(function () {
+    console.log(tokenPortal);
 
-      //Add label for reference of Document
-      $.when(mergeLabelDoc()).done(function () {
+    $.when(portalCnx()).then(function(){
 
-        //Template of Table and Menu
-        createDataTable();
-        createMenu();
+      $.when(loadCategory(), loadData(), loadFolder()).then(function () {
 
+        //Add label for reference of Document
+        $.when(mergeLabelDoc()).done(function () {
+
+          //Template of Table and Menu
+          createDataTable();
+          createMenu();
+
+        });
       });
     });
+
+  };
+
+  var portalCnx = function (){
+
+    if(tokenPortal){
+      return $.ajax({
+        type      : 'POST',
+        url       : serverURL + 'login/portal/',
+        data      : { 'tokenPortal': tokenPortal },
+        success   : function (data) {
+          //console.log("data = ", data);
+          token = data ?  data.token : '';
+          /* set token for FTP*/
+        },
+        error     : function () {
+          hideLoading();
+          swal({
+            title: "ERROR",
+            text : i18n[lang].error0,
+            type : "error",
+            timer: 4000
+          });
+          AjaxData = [];
+        },
+        dataType  : 'json',
+        statusCode: {
+          403: function () {
+            hideLoading();
+            swal({
+              title: "ERROR",
+              text : i18n[lang].errorSession,
+              type : "error",
+              timer: 4000
+            });
+            setTimeout(function () {
+              window.location = baseURL;
+            }, 4000);
+          }
+        }
+      });
+    }
+
   };
 
   var main = function () {
