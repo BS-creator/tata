@@ -6,7 +6,6 @@
 $(function (swal, _) {
   'use strict';
 
-
   (function setURL() {
     var url = window.location.hostname;
     if (_.contains(url, 'localhost')) {
