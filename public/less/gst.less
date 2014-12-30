@@ -2,8 +2,10 @@
 /* @date    :   2014-10 */
 /* @version :   BETA 1.0 */
 
-@import "portal-components/port-variables.less";
-@import "portal-components/port-mixins.less";
+@portal-cdn-path: '../../portal-cdn/less';
+
+@import "@{portal-cdn-path}/port-variables.less";
+@import "@{portal-cdn-path}/port-mixins.less";
 
 /*********************************************
                     RESPONSIVE
@@ -36,8 +38,9 @@ Main - Footer                  STICKY FOOTER RULES
 ****************************************************/
 html,
 body {
-    height: 100%;
-    margin: 0;
+  height: 100%;
+  margin: 0;
+  font-size: 12px;
 }
 
 #main {
@@ -60,7 +63,6 @@ body {
 body {
   position: relative;
   font-family: "robotoregular", sans-serif;
-  font-size: @m-font-size;
   font-weight: 300;
   overflow-x: hidden;
 }
@@ -916,7 +918,7 @@ disabled look for disabled choices in the results dropdown
   display: none;
 }
 .select2-more-results.select2-active {
-  background: #f4f4f4 url('select2-spinner.gif') no-repeat 100%;
+  background: #f4f4f4 url('images/select2-spinner.gif') no-repeat 100%;
 }
 .select2-results .select2-ajax-error {
   background: rgba(255, 50, 50, 0.2);
@@ -1437,11 +1439,12 @@ table tr th .pw-btn-group-th,
 .btn-portal-blue,
 .btn-portal-red,
 .btn-portal-default,
-.btn-portal-green {
+.btn-portal-green,
+.btn-portal-lightblue {
   display: inline-block;
   vertical-align: middle;
   text-align: center;
-  padding:  15px 30px;
+  padding:  17px 30px;
 
   /* add ... */
   white-space: nowrap;
@@ -1523,16 +1526,30 @@ table tr th .pw-btn-group-th,
 }
 
 .btn-portal-red {
-  background-color:   @gs-darkpink;
-  border-color:       @gs-darkpink;
+  background-color:   lighten(@color-6, 10);
+  border-color:       lighten(@color-6, 10);
   color: #FFF;
 }
 .btn-portal-red:hover,
 .btn-portal-red:focus,
 .btn-portal-red:active,
 .btn-portal-red.active {
-  background-color:   @gs-viola;
-  border-color:       @gs-viola;
+  background-color:   lighten(@color-6, 15);
+  border-color:       lighten(@color-6, 15);
+}
+
+.btn-portal-lightblue {
+  padding-left: 12px;
+  background-color:   @color-15;
+  border-color:       @color-15;
+  color: #FFF;
+}
+.btn-portal-lightblue:hover,
+.btn-portal-lightblue:focus,
+.btn-portal-lightblue:active,
+.btn-portal-lightblue.active {
+  background-color:   lighten(@color-15, 7);
+  border-color:       lighten(@color-15, 7);
 }
 
 /**********************************************

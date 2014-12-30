@@ -1,45 +1,13 @@
 /* @author  :   Gilles Collard - Group S */
 /* @date    :   2014-10 */
 /* @version :   BETA 1.0 */
-.bg-xlt-blue {
-  background-color: #63a4dd;
-}
-.bg-lt-blue {
-  background-color: #378fdd;
-}
-.bg-blue {
-  background-color: #0065bd;
-}
-.bg-dk-blue {
-  background-color: #00407a;
-}
-.bg-lt-green {
-  background-color: #00fd9e;
-}
-.bg-green {
-  background-color: #00c078;
-}
-.bg-dk-green {
-  background-color: #009a60;
-}
-.bg-lt-indigo {
-  background-color: #0a00fe;
-}
-.bg-indigo {
-  background-color: #0700c5;
-}
-.bg-dk-indigo {
-  background-color: #06009f;
-}
-.bg-viola {
-  background-color: #8806b8;
-}
-.bg-dk-pink {
-  background-color: #ae0179;
-}
-.green-light,
-.isNew {
-  color: #00fd9e;
+.unselectable {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .unselectable {
   -webkit-user-select: none;
@@ -80,6 +48,7 @@ html,
 body {
   height: 100%;
   margin: 0;
+  font-size: 12px;
 }
 #main {
   position: relative;
@@ -98,7 +67,6 @@ body {
 body {
   position: relative;
   font-family: "robotoregular", sans-serif;
-  font-size: 12px;
   font-weight: 300;
   overflow-x: hidden;
 }
@@ -619,10 +587,26 @@ SELECT2
   user-select: none;
   background-color: #fff;
   background-image: none;
-  -webkit-transition: all 0.4s ease 0s;
-  -moz-transition: all 0.4s ease 0s;
-  -ms-transition: all 0.4s ease 0s;
-  -o-transition: all 0.4s ease 0s;
+  -webkit-transition-property: all 0.4s ease 0s;
+  -moz-transition-property: all 0.4s ease 0s;
+  -ms-transition-property: all 0.4s ease 0s;
+  -o-transition-property: all 0.4s ease 0s;
+  transition-property: all 0.4s ease 0s;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
 }
 html[dir="rtl"] .select2-container .select2-choice {
   padding: 0 12px 0 0;
@@ -935,7 +919,7 @@ disabled look for disabled choices in the results dropdown
   display: none;
 }
 .select2-more-results.select2-active {
-  background: #f4f4f4 url('select2-spinner.gif') no-repeat 100%;
+  background: #f4f4f4 url('images/select2-spinner.gif') no-repeat 100%;
 }
 .select2-results .select2-ajax-error {
   background: rgba(255, 50, 50, 0.2);
@@ -1223,7 +1207,7 @@ td:first-child {
 }
 tr.active td:first-child i.fa-check,
 tr.active td:first-child i.fa-check-square-o {
-  color: #00c078 !important;
+  color: #00c27b !important;
 }
 /*********************************************
 PAGINATION
@@ -1422,11 +1406,12 @@ table tr th .pw-btn-group-th .pw-btn-th,
 .btn-portal-blue,
 .btn-portal-red,
 .btn-portal-default,
-.btn-portal-green {
+.btn-portal-green,
+.btn-portal-lightblue {
   display: inline-block;
   vertical-align: middle;
   text-align: center;
-  padding: 15px 30px;
+  padding: 17px 30px;
   /* add ... */
   white-space: nowrap;
   overflow: hidden;
@@ -1500,20 +1485,33 @@ table tr th .pw-btn-group-th .pw-btn-th,
 .btn-portal-green:focus,
 .btn-portal-green:active,
 .btn-portal-green.active {
-  background-color: #00c078;
-  border-color: #00c078;
+  background-color: #00c27b;
+  border-color: #00c27b;
 }
 .btn-portal-red {
-  background-color: #ae0179;
-  border-color: #ae0179;
+  background-color: #cc3847;
+  border-color: #cc3847;
   color: #FFF;
 }
 .btn-portal-red:hover,
 .btn-portal-red:focus,
 .btn-portal-red:active,
 .btn-portal-red.active {
-  background-color: #8806b8;
-  border-color: #8806b8;
+  background-color: #d14d5a;
+  border-color: #d14d5a;
+}
+.btn-portal-lightblue {
+  padding-left: 12px;
+  background-color: #2b84a6;
+  border-color: #2b84a6;
+  color: #FFF;
+}
+.btn-portal-lightblue:hover,
+.btn-portal-lightblue:focus,
+.btn-portal-lightblue:active,
+.btn-portal-lightblue.active {
+  background-color: #329bc2;
+  border-color: #329bc2;
 }
 /**********************************************
                     DOWNLOAD BUTTON
