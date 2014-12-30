@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="css/fileupload/jquery.fileupload-ui.css"/>
   <link rel="stylesheet" href="css/portal-components.css">
   <link rel="stylesheet" href="css/gst.css">
+  <link rel="stylesheet" href="css/portal-select2.css">
+
   <noscript>
     <link rel="stylesheet" href="css/fileupload/jquery.fileupload-noscript.css">
   </noscript>
@@ -54,35 +56,14 @@
     <ul class="list-inline pull-left">
       <li><a id="header-logo" class="clickable"><img alt="Group S Logo" src="css/images/logo-groups.png"><img
         alt="Group S Logo" src="css/images/logo-groups-brand.png" class="hidden-xs"></a></li>
-    </ul>
-    <ul class="list-inline pull-right lang">
-      <li><a class="login-lang fr" href="#">FR</a></li>
-      <li><a class="login-lang en" href="#">EN</a></li>
-      <li><a class="login-lang nl" href="#">NL</a></li>
+      <li id="signout" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Log Off">
+      &nbsp;&nbsp;<i class="fa fa-sign-out"></i></li>
     </ul>
   </div>
 </header>
 
-<div id="main">
 
-  <!--/header-->
-  <!--top-nav-->
-  <div class="clearfix">
-    <div id="top-nav">
-      <ul class="list-inline pull-left pl-m">
-        <li class="univers-name"><i class="glyphicon glyphicon-transfer"></i>&nbsp;&nbsp;<em>Group S
-          Transfer</em>
-        </li>
-      </ul>
-      <ul class="list-inline pull-right pr-m">
-        <li class="user-name mr-s">Username</li>
-        <li id="signout" rel="tooltip" data-toggle="tooltip" data-placement="left" title="Log Off">
-          &nbsp;&nbsp;<i
-          class="fa fa-sign-out"></i></li>
-      </ul>
-    </div>
-  </div>
-
+<div id="main" class="pt-s">
   <div class="container-fluid">
 
     <!--main content-->
@@ -235,15 +216,20 @@
                 <input type="text" class="dateEnd" name="end" placeholder=""/>
               </div>
 
+              <select id="clients">
+                <option value="AL">Alabama</option>
+                <option value="WY">Wyoming</option>
+              </select>
+
               <!--refresh & toggle config table-->
               <div class="btn-group pull-right ml-s">
                 <button type="button" class="btn btn-default reloadme">
                   &nbsp;&nbsp;&nbsp;
                 </button>
-                <button id="toggle-side-menu" type="button" class="btn btn-default">
+                <button id="help" type="button" class="btn btn-default">
                   &nbsp;&nbsp;&nbsp;
                 </button>
-                <button id="help" type="button" class="btn btn-default">
+                <button id="toggle-side-menu" type="button" class="btn btn-default">
                   &nbsp;&nbsp;&nbsp;
                 </button>
               </div>
@@ -419,6 +405,7 @@
 <script src="js/fileupload/vendor/jquery.ui.widget.js"></script>
 <script src="js/fileupload/jquery.iframe-transport.js"></script>
 <script src="js/fileupload/jquery.fileupload.js"></script>
+<script src="../cdn/select2/3.5.2/select2.js"></script>
 <script src="js/gs-transfer.js"></script>
 <script src="js/gs-portal.js"></script>
 <script src="js/side-menu.js"></script>

@@ -1035,8 +1035,8 @@ var gsTransfer = (function (_, moment, introJs, swal) {
   };
 
   var loadCategory = function () {
-    //var service = 'category/' + (sessionStorage.getItem('country') === 'FR' ? 'true' : 'false');
-    var service = 'category/' ;
+    var service = 'category/' + (sessionStorage.getItem('country') === 'FR' ? 'true' : 'false');
+    //var service = 'category/' ;
     //if(token){ console.log("token = "+token +" defined ==> OK");}
     return $.ajax({
       type   : 'GET',
@@ -1681,6 +1681,10 @@ var gsTransfer = (function (_, moment, introJs, swal) {
   };
 
   var main = function () {
+
+    // select2 : clients
+    $("#clients").select2();
+
     $('.user-name').html(username.toUpperCase());
 
     // LOGOUT
