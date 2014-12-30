@@ -128,13 +128,10 @@ $(function (swal, _) {
           sessionStorage.setItem('username', credentials.login);
         }
         //redirect to itransfer;
-        window.location = baseURL + 'file.html';
-        window.login = $('#login').val();
+        window.location = baseURL + 'transferApp.html';
+        //window.login = $('#login').val();
       },
       dataType: 'json',
-      /*complete: function () {
-       $('#loader').hide();
-       },*/
       error   : function (xhr) {
         $('#loader').hide();
         if (xhr.status === 403) {

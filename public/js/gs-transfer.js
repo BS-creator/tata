@@ -47,8 +47,8 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     var url = window.location.hostname;
     if (_.contains(url, 'localhost')) {
       /***** LOCAL *****/
-        //sessionStorage.setItem( 'baseURL', '//localhost:4000/itransfer/' );
-      sessionStorage.setItem('baseURL', '//localhost:4001/');
+      sessionStorage.setItem('baseURL', '//localhost:4000/itransfer/');
+      //sessionStorage.setItem('baseURL', '//localhost:4001/');
       sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
       //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
       sessionStorage.setItem('country', 'BE');
@@ -491,7 +491,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
             timer: 4000
           });
           setTimeout(function () {
-            window.location = baseURL + 'file.html?upload';
+            window.location = baseURL + 'transferApp.html?upload';
           }, 4000);
         } else {
           //console.log( "activeUploads = " + activeUploads + "\tFILE UPLOADED = ", data );
@@ -1203,7 +1203,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
       $('.login-lang').removeClass('default-lang');
       $('.' + lang).addClass('default-lang');
       sessionStorage.setItem('lang', lang);
-      window.location = baseURL + 'file.html';
+      window.location = baseURL + 'transferApp.html';
       //window.location.reload();
     });
   };
@@ -1376,7 +1376,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     var reloadBtn = $('.reloadme');
     reloadBtn.html('<i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.reload);
     reloadBtn.off('click').on('click', function () {
-      window.location = baseURL + 'file.html';
+      window.location = baseURL + 'transferApp.html';
       //window.location.reload();
     });
   };
