@@ -1128,6 +1128,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     $('#toggle-side-menu').html('<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang]
       .button.colVisible);
     $('p.side-menu-head').text(i18n[lang].sideMenu.config);
+    $('p.side-menu-head').append('&nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right"></i>');
     $('#init-conf').html(i18n[lang].sideMenu.reset);
   };
 

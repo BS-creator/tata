@@ -377,7 +377,7 @@ li.level2 > a {
   marin-bottom: 1px;
 }
 .side-menu-head-icon {
-  line-height: 50px;
+  line-height: 74px;
   marin-bottom: 1px;
 }
 .side-menu-head-icon:hover,
@@ -397,9 +397,9 @@ li.level2 > a {
 .side-menu-head-icon {
   cursor: pointer;
   color: white;
+  opacity: .6;
 }
 .side-menu-head-icon i {
-  opacity: .6;
   -webkit-transition: all 0.4s ease;
   /* Safari 3.2+, Chrome */
   -moz-transition: all 0.4s ease;
@@ -409,10 +409,10 @@ li.level2 > a {
   transition: all 0.4s ease;
   /* Firefox 16+, Opera 12.50+ */
 }
-.side-menu-head-icon:hover i,
-.side-menu-head-icon:focus i,
-.side-menu-head-icon:active i,
-.side-menu-head-icon.active i {
+.side-menu-head-icon:hover,
+.side-menu-head-icon:focus,
+.side-menu-head-icon:active,
+.side-menu-head-icon.active {
   opacity: 1;
 }
 /* list */
@@ -1501,7 +1501,6 @@ table tr th .pw-btn-group-th .pw-btn-th,
   border-color: #d14d5a;
 }
 .btn-portal-lightblue {
-  padding-left: 12px;
   background-color: #2b84a6;
   border-color: #2b84a6;
   color: #FFF;
@@ -1512,6 +1511,9 @@ table tr th .pw-btn-group-th .pw-btn-th,
 .btn-portal-lightblue.active {
   background-color: #329bc2;
   border-color: #329bc2;
+}
+.validAll {
+  margin-left: 12px;
 }
 /**********************************************
                     DOWNLOAD BUTTON

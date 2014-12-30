@@ -388,7 +388,7 @@ li.level2 > a {
   marin-bottom: 1px;
 }
 .side-menu-head-icon {
-  line-height: @xl;
+  line-height: 74px;
   marin-bottom: 1px;
 }
 .side-menu-head-icon:hover,
@@ -409,18 +409,18 @@ li.level2 > a {
 .side-menu-head-icon {
   cursor: pointer;
   color: white;
+  opacity: .6;
 }
 .side-menu-head-icon i {
-  opacity: .6;
   -webkit-transition: all 0.4s ease;/* Safari 3.2+, Chrome */
   -moz-transition: all 0.4s ease;/* Firefox 4-15 */
   -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
   transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
 }
-.side-menu-head-icon:hover i,
-.side-menu-head-icon:focus i,
-.side-menu-head-icon:active i,
-.side-menu-head-icon.active i {
+.side-menu-head-icon:hover,
+.side-menu-head-icon:focus,
+.side-menu-head-icon:active,
+.side-menu-head-icon.active {
   opacity: 1;
 }
 
@@ -510,6 +510,7 @@ NAV
 /*********************************************
 CONTENT
 *********************************************/
+
 #contentTable {
     overflow: hidden;
 }
@@ -1539,7 +1540,6 @@ table tr th .pw-btn-group-th,
 }
 
 .btn-portal-lightblue {
-  padding-left: 12px;
   background-color:   @color-15;
   border-color:       @color-15;
   color: #FFF;
@@ -1551,11 +1551,15 @@ table tr th .pw-btn-group-th,
   background-color:   lighten(@color-15, 7);
   border-color:       lighten(@color-15, 7);
 }
-
+.validAll {
+  margin-left: 12px;
+}
 /**********************************************
                     DOWNLOAD BUTTON
 **********************************************/
-.downloadall, .deleteAll {
+.downloadall, .deleteAll
+/*,.validAll*/
+{
   display: none;
 }
 
