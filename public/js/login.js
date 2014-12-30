@@ -10,8 +10,8 @@ $(function (swal, _) {
     var url = window.location.hostname;
     if (_.contains(url, 'localhost')) {
       /***** LOCAL *****/
-        //sessionStorage.setItem( 'baseURL', '//localhost:4000/itransfer/' );
-      sessionStorage.setItem('baseURL', '//localhost:4001/');
+      sessionStorage.setItem('baseURL', '//localhost:4000/itransfer/');
+      //sessionStorage.setItem('baseURL', '//localhost:4001/');
       sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
       //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
     } else if (_.contains(url,'172.20.20.64')) {
