@@ -198,7 +198,6 @@ table tr.new td {
   margin: 0 auto;
 }
 .fa-download,
-i,
-a i {
+i {
   cursor: pointer;
 }
