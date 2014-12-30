@@ -1,9 +1,21 @@
+//////////////////////////////////////////////////////////////////////////////
+// TYPE
+
+@font-size-base:            16px;
+@font-size-s:               @font-size-base * 0.8;
+@font-size-m:               @font-size-base;
+@font-size-l:               @font-size-base * 1.25;
+@font-size-xl:              @font-size-base * 1.618;
+
+@font-base:                 normal @font-size-base robotoregular;
+@line-height-base:          1.6;
+@text-white-shadow:         0 1px 1px rgba(255,255,255,1);
+@icon-large-white-shadow:   0 3px 1px rgba(255,255,255,1);
 
 //////////////////////////////////////////////////////////////////////////////
 // Grid
 @gutter-width:          32px;
 @wrapper-padding:       15px;
-
 
 //////////////////////////////////////////////////      COLORS
 // analog triad 30° base on #0064bb             /http://colorschemedesigner.com
@@ -16,22 +28,18 @@
 @gs-lt-blue:        #378fdd;
 @gs-blue:           hsl(208,100%,37%);
 @gs-dk-blue:        #00407a;
-
 @gs-lt-green:       #00fd9e;
 @gs-green:          #00c078;
 @gs-dk-green:       #009a60;
-
 @gs-lt-indigo:      #0a00fe;
 @gs-indigo:         #0700c5;
 @gs-dk-indigo:      #06009f;
-
 @gs-viola:          #8806B8;
 @gs-darkpink:       #AE0179;
 
 @input-border-color:            lighten(#000, 80%);
 @input-border-color-focus:      lighten(#000, 16.1%);
 @input-border-color:            lighten(#000, 6%); // ccc
-
 @btn-default-border-color:      lighten(#000, 8%);
 @btn-default-border-color-focus:lighten(#000, 13.5%);
 
@@ -52,26 +60,42 @@
 .isNew {
     color:           @gs-lt-green;
 }
-/*
-    #0064bb
-    #0700c5
-    #3003A1
-    #8806B8
-    #AE0179
-    #0064bb
-    */
+
+/////////////////////////////////////////////////////////
+// spin color
+@color-1: #27258e;
+@color-2: #5c2ba6;
+@color-3: #8a2ba6;
+@color-4: #a62b94;
+@color-5: #a62b65;
+@color-6: #a62b37;
+@color-7: #a64d2b;
+@color-8: #a67b2b;
+@color-9: #a3a62b;
+@color-10: #75a62b;
+@color-11: #47a62b;
+@color-12: #2ba63d;
+@color-13: #2ba66c;
+@color-14: #2ba69a;
+@color-15: #2b84a6;
+@color-16: #2b56a6;
+
 //////////////////////////////////////////////////////////////////////////////
 // Margin - Padding                                                             SEQUENCE GR BASED ON 50
 // 2.8  4.5  7.3  11.8  19.1  30.1  50  80.9  130.9  211.8  342.7
 
-@xxs:  4.55px;
-@xs:   7.3px;
-@s:    11.8px;
-@m:    19.1px;
-@l:    30.1px;
-@xl:   50px;
-@xxl:  80.9px;
-@xxxl: 130.9px;
+
+@xxs:       4.55px;
+@xs:        7.3px;
+@s:         11.8px;
+@m:         19.1px;
+@l:         30.1px;
+@xl:        50px;
+@xxl:       80.9px;
+@xxxl:      130.9px;
+@xxxxl:     211.8px;
+// 342.7
+// 554.5
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -87,17 +111,7 @@
 @text-shadow: 0 1px 1px rgba(255,255,255,1);
 @box-shadow:  0 1px 2px rgba(0,0,0,0.3);
 
-// gradient header Group S
-.header-gradient,
-.gs-head-gradient {
-    background: -moz-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);/* FF3.6+ */
-    background: -webkit-gradient(linear, 90deg, color-stop(0%, #0056a1), color-stop(100%, #0065bd));/* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);/* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);/* Opera 11.10+ */
-    background: -ms-linear-gradient(90deg, #0056a1 0%, #0065bd 100%);/* IE10+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0056a1', endColorstr='#0065bd', GradientType='0'); /* for IE */
-    background: linear-gradient(0deg, #0056a1 0%, #0065bd 100%);/* W3C */
-}
+
 .center {
     text-align: center !important;
 }
