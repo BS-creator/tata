@@ -52,17 +52,19 @@ var gsTransfer = (function (_, moment, introJs, swal) {
       sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
       //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
       sessionStorage.setItem('country', 'BE');
-      sessionStorage.setItem('tokenPortal', 'F19EG686BTITNPHX788I5WR682E5TBMP8PBHEHK6SJCVFMAUD469HLMN4NK9HUVKJTB17230RKELJ21L91');
+      //sessionStorage.setItem('tokenPortal', 'F19EG686BTITNPHX788I5WR682E5TBMP8PBHEHK6SJCVFMAUD469HLMN4NK9HUVKJTB17230RKELJ21L91');
 
-    } else if (_.contains(url,'172.20.20.64')) {
+    } else if (_.contains(url, '172.20.20.64')) {
       sessionStorage.setItem('baseURL', '//172.20.20.64:4001/');
       sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
-      //sessionStorage.setItem('country', 'BE');
-    } else if (_.contains(url,'deviapps')) {
+      sessionStorage.setItem('country', 'BE');
+
+
+    } else if (_.contains(url, 'deviapps')) {
       sessionStorage.setItem('baseURL', '//deviapps.groups.be/itransfer/public/');
       sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
       sessionStorage.setItem('country', 'BE');
-    } else if (_.contains(url,'qaiapps')) {
+    } else if (_.contains(url, 'qaiapps')) {
       sessionStorage.setItem('baseURL', '//qaiapps.groups.be/itransfer/');
       sessionStorage.setItem('serverURL', '//qaiapps.groups.be/ariane/');
       sessionStorage.setItem('country', 'BE');
@@ -70,19 +72,19 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
       /***** PRODUCTION *****/
 
-    } else if (_.contains(url,'transfer.groups.be')) {
+    } else if (_.contains(url, 'transfer.groups.be')) {
       sessionStorage.setItem('baseURL', '//transfer.groups.be/');
       sessionStorage.setItem('serverURL', '//transfer.groups.be/ariane/');
       sessionStorage.setItem('country', 'BE');
-    } else if (_.contains(url,'transfer.groupsfrance.fr')) {
+    } else if (_.contains(url, 'transfer.groupsfrance.fr')) {
       sessionStorage.setItem('baseURL', '//transfer.groupsfrance.fr/');
       sessionStorage.setItem('serverURL', '//transfer.groupsfrance.fr/ariane/');
       sessionStorage.setItem('country', 'FR');
-    } else if (_.contains(url,'online.groups.be')) {
+    } else if (_.contains(url, 'online.groups.be')) {
       sessionStorage.setItem('baseURL', '//online.groups.be/transfer/');
       sessionStorage.setItem('serverURL', '//online.groups.be/ariane/');
       sessionStorage.setItem('country', 'BE');
-    } else if (_.contains(url,'online.groupsfrance.fr')) {
+    } else if (_.contains(url, 'online.groupsfrance.fr')) {
       sessionStorage.setItem('baseURL', '//online.groupsfrance.fr/transfer/');
       sessionStorage.setItem('serverURL', '//online.groupsfrance.fr/ariane/');
       sessionStorage.setItem('country', 'FR');
@@ -367,7 +369,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
       url = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
 
     if (endsWith(filename, '.PDF') || endsWith(filename, '.pdf')) {
-      url = baseURL + 'pdfjs/web/viewer.html?file=' + url;
+      url = baseURL + 'lib/pdfjs/web/viewer.html?file=' + url;
       window.open(url, '_blank');
     } else {
       swal({
@@ -398,7 +400,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
         type : 'error',
         timer: 3000
       });
-      return;
+
     } else if (params.fileNumber === 1) {
       var fileID = params.data.fileID.slice(0, params.data.fileID.indexOf('&'));
       var filename = params.data.fileID.slice(params.data.fileID.indexOf('&') + 1, params.data.fileID.indexOf('@'));
@@ -1011,7 +1013,9 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
   var loadFolder = function () {
 
-    if(token){ console.log("token = "+token +" defined ==> OK");}
+    if (token) {
+      console.log("token = " + token + " defined ==> OK");
+    }
     return $.ajax({
       type   : 'POST',
       url    : serverURL + 'folder/',
@@ -1036,7 +1040,9 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
   var loadCategory = function () {
     var service = 'category/' + (sessionStorage.getItem('country') === 'FR' ? 'true' : 'false');
-    if(token){ console.log("token = "+token +" defined ==> OK");}
+    if (token) {
+      console.log("token = " + token + " defined ==> OK");
+    }
     return $.ajax({
       type   : 'GET',
       url    : serverURL + service,
@@ -1059,11 +1065,13 @@ var gsTransfer = (function (_, moment, introJs, swal) {
   };
 
   var loadData = function () {
-    if(token){ console.log("token = "+token +" defined ==> OK");}
+    if (token) {
+      console.log("token = " + token + " defined ==> OK");
+    }
     return $.ajax({
       type      : 'POST',
       url       : serverURL + 'file/list/',
-      data      : { 'token': token },
+      data: {'token': token},
       success   : function (data) {
         AjaxData = data;
       },
@@ -1620,7 +1628,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
     console.log(tokenPortal);
 
-    $.when(portalCnx()).then(function(){
+    $.when(portalCnx()).then(function () {
 
       $.when(loadCategory(), loadData(), loadFolder()).then(function () {
 
@@ -1637,16 +1645,16 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
   };
 
-  var portalCnx = function (){
+  var portalCnx = function () {
 
-    if(tokenPortal){
+    if (tokenPortal) {
       return $.ajax({
         type      : 'POST',
         url       : serverURL + 'login/portal/',
-        data      : { 'tokenPortal': tokenPortal },
+        data      : {'tokenPortal': tokenPortal},
         success   : function (data) {
           //console.log("data = ", data);
-          token = data ?  data.token : '';
+          token = data ? data.token : '';
           /* set token for FTP*/
         },
         error     : function () {
