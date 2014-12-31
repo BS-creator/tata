@@ -1013,9 +1013,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
   var loadFolder = function () {
 
-    if (token) {
-      console.log("token = " + token + " defined ==> OK");
-    }
+    // if(token){ console.log("token = "+token +" defined ==> OK");}
     return $.ajax({
       type   : 'POST',
       url    : serverURL + 'folder/',
@@ -1040,9 +1038,8 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
   var loadCategory = function () {
     var service = 'category/' + (sessionStorage.getItem('country') === 'FR' ? 'true' : 'false');
-    if (token) {
-      console.log("token = " + token + " defined ==> OK");
-    }
+    //var service = 'category/' ;
+    //if(token){ console.log("token = "+token +" defined ==> OK");}
     return $.ajax({
       type   : 'GET',
       url    : serverURL + service,
@@ -1065,9 +1062,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
   };
 
   var loadData = function () {
-    if (token) {
-      console.log("token = " + token + " defined ==> OK");
-    }
+    //if(token){ console.log("token = "+token +" defined ==> OK");}
     return $.ajax({
       type      : 'POST',
       url       : serverURL + 'file/list/',
@@ -1626,7 +1621,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     showLoading();
     setEventPreData();
 
-    console.log(tokenPortal);
+    //console.log(tokenPortal);
 
     $.when(portalCnx()).then(function () {
 
@@ -1703,7 +1698,9 @@ var gsTransfer = (function (_, moment, introJs, swal) {
       }
 
       if (lang !== 'en') {
-        $.getScript(i18n[lang].url.datepicker);
+        var test = $.getScript(baseURL + i18n[lang].url.datepicker);
+        //console.log(baseURL + i18n[lang].url.datepicker);
+        console.log(test);
       }
 
       if (i18n[lang]) { // if language is set,
