@@ -259,9 +259,10 @@ module.exports = function (grunt) {
       production: {
         options: {},
         files  : {
-          "public/css/portal-components.css": "public/less/portal-components/portal-components.less",
-          "public/css/gst.css"              : "public/less/gst.less"
+          "public/css/port-components.css": "public/less/port-components.less",
+          "public/css/gst.css"            : "public/less/gst.less"
         }
+
       }
     }
   });
