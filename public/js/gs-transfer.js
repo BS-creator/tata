@@ -403,12 +403,9 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
     } else if (params.fileNumber === 1) {
       var fileID = params.data.fileID.slice(0, params.data.fileID.indexOf('&'));
-      var filename = params.data.fileID.slice(params.data.fileID.indexOf('&') + 1, params.data.fileID.indexOf('@'));
-
-      /*var link = document.createElement('a');
-       link.href = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
-       document.body.appendChild(link);
-       link.click();*/
+      var filename = params.data.fileID.slice(
+        params.data.fileID.indexOf('&') + 1,
+        params.data.fileID.indexOf('@'));
 
       window.location.href = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
 
@@ -452,7 +449,6 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     var activeUploads = null;
 
     $uploadform.fileupload({
-      //sequentialUploads: true,
 
       limitMultiFileUploads: 10,
 
@@ -475,7 +471,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
             //console.log( "activeUploads = ", activeUploads );
           })
       },
-      start      : function () {
+      start: function () {
         $('#progress').show();
       },
       done       : function (e, data) {
