@@ -1522,3 +1522,9 @@ table tr th .pw-btn-group-th .pw-btn-th,
 .deleteAll {
   display: none;
 }
+.fa-download,
+.fa-trash,
+.fa-square-o,
+.facheck-square-o {
+  cursor: pointer !important;
+}
