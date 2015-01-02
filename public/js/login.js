@@ -6,15 +6,14 @@
 $(function (swal, _) {
   'use strict';
 
-
   (function setURL() {
     var url = window.location.hostname;
     if (_.contains(url, 'localhost')) {
       /***** LOCAL *****/
-      sessionStorage.setItem( 'baseURL', '//localhost:4000/itransfer/' );
+      sessionStorage.setItem('baseURL', '//localhost:4000/itransfer/');
       //sessionStorage.setItem('baseURL', '//localhost:4001/');
-      //sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
-      sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+      sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
+      //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
     } else if (_.contains(url,'172.20.20.64')) {
       sessionStorage.setItem('baseURL', '//172.20.20.64:4001/');
       sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
@@ -129,8 +128,8 @@ $(function (swal, _) {
           sessionStorage.setItem('username', credentials.login);
         }
         //redirect to itransfer;
-        window.location = baseURL + 'file.html';
-        window.login = $('#login').val();
+        window.location = baseURL + 'transferApp.html';
+        //window.login = $('#login').val();
       },
       dataType: 'json',
       /*complete: function () {

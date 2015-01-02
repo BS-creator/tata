@@ -240,29 +240,27 @@ module.exports = function ( grunt ){
             }
         },
 
-        // Run some tasks in parallel to speed up build process
-        concurrent      : {
-            server: [
-                'less',
-                'copy:styles'
-            ],
-            test  : [
-                'copy:styles'
-            ],
-            dist  : [
-                'less',
-                'copy:styles'
-            ]
-        },
-        // LESS
-        less            : {
-            production: {
-                options: {},
-                files  : {
-                  "public/css/port-components.css": "public/less/port-components.less",
-                  "public/css/gst.css"            : "public/less/gst.less"
-                }
-            }
+    // Run some tasks in parallel to speed up build process
+    concurrent      : {
+      server: [
+        'less',
+        'copy:styles'
+      ],
+      test  : [
+        'copy:styles'
+      ],
+      dist  : [
+        'less',
+        'copy:styles'
+      ]
+    },
+    // LESS
+    less            : {
+      production: {
+        options: {},
+        files  : {
+          "public/css/port-components.css": "public/less/port-components.less",
+          "public/css/gst.css"            : "public/less/gst.less"
         }
     } );
 
