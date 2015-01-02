@@ -11,7 +11,7 @@ $('document').ready(function () {
   // initialize size & display /default
   (function () {
     var sbWidth = $('#sidenav').width();
-    var mainTop = $main.offset().top;
+    var mainTop = ($main.offset().top)-1;
     $('#side-menu').css({
       top  : mainTop, // get top height to align
       right: -sbWidth,

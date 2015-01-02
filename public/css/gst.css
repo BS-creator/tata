@@ -50,6 +50,10 @@ body {
   margin: 0;
   font-size: 12px;
 }
+.collapse-newspaper,
+.collapse-notification {
+  display: none !important;
+}
 #main {
   position: relative;
   width: 100%;
@@ -1521,4 +1525,10 @@ table tr th .pw-btn-group-th .pw-btn-th,
 .downloadall,
 .deleteAll {
   display: none;
+}
+.fa-download,
+.fa-trash,
+.fa-square-o,
+.facheck-square-o {
+  cursor: pointer !important;
 }
