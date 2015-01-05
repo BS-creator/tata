@@ -24,8 +24,8 @@
     portal         */
 @font-face {
   font-family: 'portalapp';
-  src: url('../fonts/portalapp/portalapp.eot?');
-  src: url('../fonts/portalapp/portalapp.eot?#iefix') format('embedded-opentype'), url('../fonts/portalapp/portalapp.woff') format('woff'), url('../fonts/portalapp/portalapp.ttf') format('truetype'), url('../fonts/portalapp/portalapp.svg?-lf75ar#portalapp') format('svg');
+  src: url('../fonts/portalapp/portalapp.eot?-lf75ar');
+  src: url('../fonts/portalapp/portalapp.eot?#iefix-lf75ar') format('embedded-opentype'), url('../fonts/portalapp/portalapp.woff?-lf75ar') format('woff'), url('../fonts/portalapp/portalapp.ttf?-lf75ar') format('truetype'), url('../fonts/portalapp/portalapp.svg?-lf75ar#portalapp') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -142,6 +142,10 @@ ROBOTO      */
 .robotoCondensedlight {
   font-family: 'robotoCondensedlight';
 }
+
+.librebaskervilleitalic {
+  font-family: 'librebaskervilleitalic';
+}
 .app-muted {
   color: #d9d9d9;
   cursor: default;
@@ -157,6 +161,139 @@ ROBOTO      */
 }
 .app-xxl {
   font-size: 120px;
+}
+
+/*------------------------------*\
+    PORTAL-HEADER
+\*------------------------------*/
+[class^="i-"],
+[class*=" i-"] {
+  font-family: 'portal-header';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.i-groups:before {
+  content: "\e600";
+}
+
+.i-search:before {
+  content: "\f002";
+}
+
+.i-envelope-o:before {
+  content: "\f003";
+}
+
+.i-user:before {
+  content: "\f007";
+}
+
+.i-th:before {
+  content: "\f00a";
+}
+
+.i-check:before {
+  content: "\f00c";
+}
+
+.i-close:before {
+  content: "\f00d";
+}
+
+.i-cog:before {
+  content: "\f013";
+}
+
+.i-lock:before {
+  content: "\f023";
+}
+
+.i-align-justify:before {
+  content: "\f039";
+}
+
+.i-chevron-left:before {
+  content: "\f053";
+}
+
+.i-chevron-right:before {
+  content: "\f054";
+}
+
+.i-plus:before {
+  content: "\f067";
+}
+
+.i-minus:before {
+  content: "\f068";
+}
+
+.i-eye:before {
+  content: "\f06e";
+}
+
+.i-eye-slash:before {
+  content: "\f070";
+}
+
+.i-chevron-up:before {
+  content: "\f077";
+}
+
+.i-chevron-down:before {
+  content: "\f078";
+}
+
+.i-cogs:before {
+  content: "\f085";
+}
+
+.i-comments:before {
+  content: "\f086";
+}
+
+.i-sign-out:before {
+  content: "\f08b";
+}
+
+.i-unlock:before {
+  content: "\f09c";
+}
+
+.i-bell-o:before {
+  content: "\f0a2";
+}
+
+.i-bars:before {
+  content: "\f0c9";
+}
+
+.i-unlock-alt:before {
+  content: "\f13e";
+}
+
+.i-newspaper-o:before {
+  content: "\f1ea";
+}
+
+.i-bell-slash-o:before {
+  content: "\f1f7";
+}
+
+.i-toggle-off:before {
+  content: "\f204";
+}
+
+.i-toggle-on:before {
+  content: "\f205";
 }
 /* portalapp */
 [class^="app-"],
@@ -1226,130 +1363,6 @@ input[type="email"] {
 /*-------------------------------*\
             header
 \*-------------------------------*/
-@font-face {
-  font-family: 'librebaskervilleitalic';
-  src: url('../fonts/Libre_Baskerville/LibreBaskerville-Italic.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'portal-header';
-  src: url('../fonts/Portal/portal-header.eot');
-  src: url('../fonts/Portal/portal-header.ttf') format('truetype'), url('../fonts/Portal/portal-header.woff') format('woff'), url('../fonts/Portal/portal-header.svg?-lf75ar#portalheader') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-.librebaskervilleitalic {
-  font-family: 'librebaskervilleitalic';
-}
-[class^="i-"],
-[class*=" i-"] {
-  font-family: 'portal-header';
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.i-groups:before {
-  content: "\e608";
-}
-.i-search:before {
-  content: "\f002";
-}
-.i-envelope-o:before {
-  content: "\f003";
-}
-.i-user:before {
-  content: "\f007";
-}
-.i-th:before {
-  content: "\f00a";
-}
-.i-cog:before {
-  content: "\f013";
-}
-.i-trash-o:before {
-  content: "\f014";
-}
-.i-download:before {
-  content: "\f019";
-}
-.i-lock:before {
-  content: "\f023";
-}
-.i-book:before {
-  content: "\f02d";
-}
-.i-check-square-o:before {
-  content: "\f046";
-}
-.i-chevron-left:before {
-  content: "\f053";
-}
-.i-chevron-right:before {
-  content: "\f054";
-}
-.i-eye:before {
-  content: "\f06e";
-}
-.i-eye-slash:before {
-  content: "\f070";
-}
-.i-chevron-up:before {
-  content: "\f077";
-}
-.i-chevron-down:before {
-  content: "\f078";
-}
-.i-cogs:before {
-  content: "\f085";
-}
-.i-comments:before {
-  content: "\f086";
-}
-.i-sign-out:before {
-  content: "\f08b";
-}
-.i-sign-in:before {
-  content: "\f090";
-}
-.i-square-o:before {
-  content: "\f096";
-}
-.i-unlock:before {
-  content: "\f09c";
-}
-.i-bell-o:before {
-  content: "\f0a2";
-}
-.i-group:before {
-  content: "\f0c0";
-}
-.i-comment-o:before {
-  content: "\f0e5";
-}
-.i-comments-o:before {
-  content: "\f0e6";
-}
-.i-unlock-alt:before {
-  content: "\f13e";
-}
-.i-newspaper-o:before {
-  content: "\f1ea";
-}
-.i-bell-slash-o:before {
-  content: "\f1f7";
-}
-.i-toggle-off:before {
-  content: "\f204";
-}
-.i-toggle-on:before {
-  content: "\f205";
-}
 /*----------------------------*\
     BS
 \*----------------------------*/
@@ -1448,23 +1461,19 @@ header {
 }
 header > ul {
   width: 100%;
-  margin: 0;
-  padding: 0;
   line-height: 80.9px;
   max-height: 80.9px;
-  height: 80.9px;
+  margin: 0;
+  padding: 0;
 }
 header > ul > li {
   line-height: 80.9px;
   margin: 0;
   color: #fff;
 }
-header ul li {
-  cursor: pointer;
-}
 header .i-newspaper-o,
 header .i-bell-o,
-header .i-th,
+header .i-bars,
 header .i-cog {
   display: inline-block;
   height: 80px;
@@ -1558,8 +1567,6 @@ header ul [class^="collapse-"].active {
 \*----------------------------*/
 .logo-groups {
   line-height: 80px;
-  height: 80px;
-  max-height: 80px;
   margin: 0 auto;
 }
 .logo-groups [class^="i-"] {
