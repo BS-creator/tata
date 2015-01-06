@@ -19,8 +19,8 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     refDocUsed = [], // Data
     numberCol = 18,
     username = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '',
-    token = sessionStorage.getItem('token'),
-    tokenPortal = sessionStorage.getItem('tokenPortal');
+    tokenTransfer = sessionStorage.getItem('tokenTransfer'),
+    tokenPortal = sessionStorage.getItem('token');
 
 
   _.templateSettings = {
@@ -42,58 +42,22 @@ var gsTransfer = (function (_, moment, introJs, swal) {
      };*/
   };
 
-
-  (function setURL() {
-    var url = window.location.hostname;
-    if (_.contains(url, 'localhost')) {
-      /***** LOCAL *****/
-      sessionStorage.setItem('baseURL', '//localhost:4000/itransfer/');
-      //sessionStorage.setItem('baseURL', '//localhost:4001/');
-      sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
-      //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
-      sessionStorage.setItem('country', 'BE');
-      //sessionStorage.setItem('tokenPortal', 'F19EG686BTITNPHX788I5WR682E5TBMP8PBHEHK6SJCVFMAUD469HLMN4NK9HUVKJTB17230RKELJ21L91');
-
-    } else if (_.contains(url, '172.20.20.64')) {
-      sessionStorage.setItem('baseURL', '//172.20.20.64:4001/');
-      sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
-      sessionStorage.setItem('country', 'BE');
-
-
-    } else if (_.contains(url, 'deviapps')) {
-      sessionStorage.setItem('baseURL', '//deviapps.groups.be/itransfer/public/');
-      sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
-      sessionStorage.setItem('country', 'BE');
-    } else if (_.contains(url, 'qaiapps')) {
-      sessionStorage.setItem('baseURL', '//qaiapps.groups.be/itransfer/');
-      sessionStorage.setItem('serverURL', '//qaiapps.groups.be/ariane/');
-      sessionStorage.setItem('country', 'BE');
-
-
-      /***** PRODUCTION *****/
-
-    } else if (_.contains(url, 'transfer.groups.be')) {
-      sessionStorage.setItem('baseURL', '//transfer.groups.be/');
-      sessionStorage.setItem('serverURL', '//transfer.groups.be/ariane/');
-      sessionStorage.setItem('country', 'BE');
-    } else if (_.contains(url, 'transfer.groupsfrance.fr')) {
-      sessionStorage.setItem('baseURL', '//transfer.groupsfrance.fr/');
-      sessionStorage.setItem('serverURL', '//transfer.groupsfrance.fr/ariane/');
-      sessionStorage.setItem('country', 'FR');
-    } else if (_.contains(url, 'online.groups.be')) {
-      sessionStorage.setItem('baseURL', '//online.groups.be/transfer/');
-      sessionStorage.setItem('serverURL', '//online.groups.be/ariane/');
-      sessionStorage.setItem('country', 'BE');
-    } else if (_.contains(url, 'online.groupsfrance.fr')) {
-      sessionStorage.setItem('baseURL', '//online.groupsfrance.fr/transfer/');
-      sessionStorage.setItem('serverURL', '//online.groupsfrance.fr/ariane/');
-      sessionStorage.setItem('country', 'FR');
-    }
-  }());
-
   /****************************************************
    * HELPER
    * */
+
+  var smessage = function (title, message, type, timer) {
+    swal({
+      title: title || ' ',
+      text : message || ' ',
+      type : type || "error",
+      timer: timer || 4000
+    });
+  };
+
+  var errorMessage = function (message, timer) {
+    smessage('ERROR', message, 'error', timer);
+  };
 
   var endsWith = function (str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
@@ -182,7 +146,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     return {
       'fileNumber': fileNumber,
       'data'      : {
-        'token' : token,
+        'token': tokenTransfer,
         'fileID': listID
       }
     };
@@ -347,17 +311,14 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
   var dlIcon = function (e) {
     var $this = $(this);
-    swal({
-      title: i18n[lang].file.dl,
-      type : 'warning',
-      timer: 4000
-    });
+    smessage(i18n[lang].file.dl, ' ', 'warning', 4000);
+
     //Update icon
     incrementCounter($this);
 
     //$this.attr('href', serverURL + 'file/' + token + '/' + $this.data('file-id') + '/' + $this.data('filename'));
     //download file (click is not triggered in IE11)
-    window.location.href = serverURL + 'file/' + token + '/' + $this.data('file-id') +
+    window.location.href = serverURL + 'file/' + tokenTransfer + '/' + $this.data('file-id') +
     '/' + $this.data('filename');
     e.stopImmediatePropagation();
   };
@@ -366,17 +327,14 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     var $this = $(this),
       filename = $this.data('filename'),
       fileID = $this.data('file-id'),
-      url = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
+      url = serverURL + 'file/' + tokenTransfer + '/' + fileID + '/' + filename;
 
     if (endsWith(filename, '.PDF') || endsWith(filename, '.pdf')) {
-      url = baseURL + 'lib/pdfjs/web/viewer.html?file=' + url;
+      url = baseURL + '../cdn/pdfjs/1.0.712/web/viewer.html?file=' + url;
       window.open(url, '_blank');
     } else {
-      swal({
-        title: i18n[lang].file.dl,
-        type : 'warning',
-        timer: 4000
-      });
+      smessage(i18n[lang].file.dl, '', 'warning', 4000);
+
       //$this.attr('href', url);
       window.location.href = url;
     }
@@ -395,19 +353,15 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     var params = getFilesID();
 
     if (params.fileNumber === 0) {
-      swal({
-        title: i18n[lang].file.noselect,
-        type : 'error',
-        timer: 3000
-      });
-      return;
+      errorMessage(i18n[lang].file.noselect, 3000);
+
     } else if (params.fileNumber === 1) {
       var fileID = params.data.fileID.slice(0, params.data.fileID.indexOf('&'));
       var filename = params.data.fileID.slice(
         params.data.fileID.indexOf('&') + 1,
         params.data.fileID.indexOf('@'));
 
-      window.location.href = serverURL + 'file/' + token + '/' + fileID + '/' + filename;
+      window.location.href = serverURL + 'file/' + tokenTransfer + '/' + fileID + '/' + filename;
 
       incrementAllSelectedRows();
 
@@ -423,12 +377,9 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
       $('body').append(form);
 
-      swal({
-        title: i18n[lang].file.dl,
-        type : 'warning',
-        timer: (params.fileNumber * 1200)
-      });
+      smessage(i18n[lang].file.dl, '', 'warning', (params.fileNumber * 1200));
       // about 1,2 seconds per files (õ_ó) .... it's a good guess, what a shame... (╯_╰”)
+
       incrementAllSelectedRows();
 
       form.submit();
@@ -442,7 +393,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
   var setEventuploadForm = function () {
     // set token for upload
     var $uploadform = $('#uploadForm');
-    $('input[name="token"]').val(token);
+    $('input[name="token"]').val(tokenTransfer);
 
     $uploadform.attr('action', serverURL + 'file/upload');
 
@@ -459,12 +410,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
       add        : function (e, data) {
         data.submit()
           .error(function (jqXHR) {
-            //console.log( jqXHR );
-            swal({
-              title: "ERROR",
-              type : "error",
-              timer: 4000
-            });
+            errorMessage(' ', 4000);
           })
           .success(function () {
             activeUploads = $uploadform.fileupload('active');
@@ -480,12 +426,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
         if (activeUploads < 2) {
           $('#progress').hide();
           $('.close').click();
-          //window.location.reload();
-          swal({
-            title: "OK",
-            type : "success",
-            timer: 4000
-          });
+          smessage('OK', ' ', 'success', 4000);
           setTimeout(function () {
             window.location = baseURL + 'transferApp.html?upload';
           }, 4000);
@@ -933,7 +874,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
           type    : 'POST',
           url     : serverURL + 'logoff/',
           data    : {
-            "token": token
+            "token": tokenTransfer
           },
           complete: function () {
             //swal({title: "OK", type: "success"});
@@ -953,15 +894,12 @@ var gsTransfer = (function (_, moment, introJs, swal) {
       type    : 'DELETE',
       url     : serverURL + 'file/',
       data    : {
-        token   : token,
+        token: tokenTransfer,
         filePath: filePath
       },
       success : function () {
-        swal({
-          title: i18n[lang].file.del,
-          type : "success",
-          timer: 2000
-        });
+        smessage(i18n[lang].file.del, '', 'success', 2000);
+
         table
           .row(cell.closest('tr'))
           .remove()
@@ -984,22 +922,13 @@ var gsTransfer = (function (_, moment, introJs, swal) {
       url     : serverURL + 'file/multi',
       data    : getFilesID().data,
       success : function () {
-        swal({
-          title: i18n[lang].file.del,
-          type : "success",
-          timer: 2000
-        });
+        smessage(i18n[lang].file.del, '', 'success', 2000);
         setTimeout(function () {
           window.location.reload();
         }, 2000);
       },
       error   : function () {
-        swal({
-          title: "ERROR",
-          text : i18n[lang].error5xx,
-          type : "error",
-          timer: 5000
-        });
+        errorMessage(i18n[lang].error5xx, 5000);
       },
       complete: function () {
         setCursorToAuto();
@@ -1013,7 +942,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     return $.ajax({
       type   : 'POST',
       url    : serverURL + 'folder/',
-      data   : {'token': token},
+      data      : {'token': tokenTransfer},
       success: function (data) {
         listFolderUpload(data);
       },
@@ -1021,12 +950,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
         403: function () {
           console.log("error loading folder");
           hideLoading();
-          swal({
-            title: "ERROR",
-            text : i18n[lang].errorCnx,
-            type : "error",
-            timer: 4000
-          });
+          errorMessage(i18n[lang].errorCnx, 4000);
         }
       }
     });
@@ -1046,48 +970,32 @@ var gsTransfer = (function (_, moment, introJs, swal) {
         403: function () {
           hideLoading();
           console.log("error loading category");
-          swal({
-            title: "ERROR",
-            text : i18n[lang].errorCnx,
-            type : "error",
-            timer: 4000
-          });
+          errorMessage(i18n[lang].errorCnx, 4000);
         }
       }
     });
   };
 
   var loadData = function () {
-    //if(token){ console.log("token = "+token +" defined ==> OK");}
+    //if(tokenPortal){ console.log("tokenPortal = "+tokenPortal +" defined ==> OK");}
     return $.ajax({
       type      : 'POST',
       url       : serverURL + 'file/list/',
-      data      : { 'token': token },
+      data      : {'token': tokenTransfer},
       success   : function (data) {
         AjaxData = data;
       },
       error     : function () {
         hideLoading();
         console.log("error loading data");
-        swal({
-          title: "ERROR",
-          text : i18n[lang].error0,
-          type : "error",
-          timer: 4000
-        });
+        errorMessage(i18n[lang].error0, 4000);
         AjaxData = [];
       },
       dataType  : 'json',
       statusCode: {
         403: function () {
           hideLoading();
-          //alert( i18n[lang].errorSession );
-          swal({
-            title: "ERROR",
-            text : i18n[lang].errorSession,
-            type : "error",
-            timer: 4000
-          });
+          errorMessage(i18n[lang].errorSession, 4000);
           setTimeout(function () {
             window.location = baseURL;
           }, 4000);
@@ -1639,36 +1547,29 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
   var portalCnx = function () {
 
+    var url = serverURL + 'login/portal/';
     if (tokenPortal) {
+
       return $.ajax({
         type      : 'POST',
-        url       : serverURL + 'login/portal/',
+        url       : url,
         data      : {'tokenPortal': tokenPortal},
         success   : function (data) {
           //console.log("data = ", data);
-          token = data ? data.token : '';
+          tokenTransfer = data ? data.token : '';
+          sessionStorage.setItem('tokenTransfer', tokenTransfer);
           /* set token for FTP*/
         },
         error     : function () {
           hideLoading();
-          swal({
-            title: "ERROR",
-            text : i18n[lang].error0,
-            type : "error",
-            timer: 4000
-          });
+          errorMessage(i18n[lang].error0, 4000);
           AjaxData = [];
         },
         dataType  : 'json',
         statusCode: {
           403: function () {
             hideLoading();
-            swal({
-              title: "ERROR",
-              text : i18n[lang].errorSession,
-              type : "error",
-              timer: 4000
-            });
+            errorMessage(i18n[lang].errorSession, 4000);
             setTimeout(function () {
               window.location = baseURL;
             }, 4000);
@@ -1676,15 +1577,82 @@ var gsTransfer = (function (_, moment, introJs, swal) {
         }
       });
     }
-
   };
 
+  function setURL() {
+    var url = window.location.hostname;
+    if (_.contains(url, 'localhost')) {
+      /***** LOCAL *****/
+      sessionStorage.setItem('baseURL', '//localhost:4000/itransfer/');
+      //sessionStorage.setItem('baseURL', '//localhost:4001/');
+      sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
+      //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+      sessionStorage.setItem('country', 'BE');
+      //sessionStorage.setItem('tokenPortal', 'F19EG686BTITNPHX788I5WR682E5TBMP8PBHEHK6SJCVFMAUD469HLMN4NK9HUVKJTB17230RKELJ21L91');
+
+    } else if (_.contains(url, '172.20.20.64')) {
+      sessionStorage.setItem('baseURL', '//172.20.20.64:4001/');
+      sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+      sessionStorage.setItem('country', 'BE');
+
+
+    } else if (_.contains(url, 'deviapps')) {
+      sessionStorage.setItem('baseURL', '//deviapps.groups.be/itransfer/public/');
+      sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+      sessionStorage.setItem('country', 'BE');
+    } else if (_.contains(url, 'qaiapps')) {
+      sessionStorage.setItem('baseURL', '//qaiapps.groups.be/itransfer/');
+      sessionStorage.setItem('serverURL', '//qaiapps.groups.be/ariane/');
+      sessionStorage.setItem('country', 'BE');
+
+
+      /***** PRODUCTION *****/
+
+    } else if (_.contains(url, 'transfer.groups.be')) {
+      sessionStorage.setItem('baseURL', '//transfer.groups.be/');
+      sessionStorage.setItem('serverURL', '//transfer.groups.be/ariane/');
+      sessionStorage.setItem('country', 'BE');
+    } else if (_.contains(url, 'transfer.groupsfrance.fr')) {
+      sessionStorage.setItem('baseURL', '//transfer.groupsfrance.fr/');
+      sessionStorage.setItem('serverURL', '//transfer.groupsfrance.fr/ariane/');
+      sessionStorage.setItem('country', 'FR');
+    } else if (_.contains(url, 'online.groups.be')) {
+      sessionStorage.setItem('baseURL', '//online.groups.be/transfer/');
+      sessionStorage.setItem('serverURL', '//online.groups.be/ariane/');
+      sessionStorage.setItem('country', 'BE');
+    } else if (_.contains(url, 'online.groupsfrance.fr')) {
+      sessionStorage.setItem('baseURL', '//online.groupsfrance.fr/transfer/');
+      sessionStorage.setItem('serverURL', '//online.groupsfrance.fr/ariane/');
+      sessionStorage.setItem('country', 'FR');
+    }
+  }
+
   var main = function () {
+
+    setURL();
+
+    serverURL = sessionStorage.getItem('serverURL'),
+      baseURL = sessionStorage.getItem('baseURL'),
+      lang = sessionStorage.getItem('lang'),
+      TABLEID = '#tableID',
+      table = {}, //DataTable object
+      oTable = {}, //Jquery Data object
+      i18n = {}, // Language
+      AjaxData = [], // Data
+      category = [], // Data
+      refDocUsed = [], // Data
+      numberCol = 18,
+      username = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '',
+      tokenTransfer = sessionStorage.getItem('tokenTransfer'),
+      tokenPortal = sessionStorage.getItem('token');
 
     // select2 : clients
     $("#clients").select2();
 
-    $('.user-name').html(username.toUpperCase());
+    $("[rel='tooltip']").tooltip();
+
+    //$('.user-name').html(username.toUpperCase());
+    $('.username').find('span').html(username.toUpperCase());
 
     // LOGOUT
     $('#signout').off('click').on('click', signOut);
@@ -1705,13 +1673,8 @@ var gsTransfer = (function (_, moment, introJs, swal) {
       if (i18n[lang]) { // if language is set,
         render(); // load data and create table
       } else {
-        //alert( 'ERROR loading data' );
-        swal({
-          title: "ERROR",
-          text : "ERROR loading language data",
-          type : "error",
-          timer: 4000
-        });
+
+        errorMessage("ERROR loading language data", 4000);
         window.location = baseURL;
       }
     });

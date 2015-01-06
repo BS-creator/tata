@@ -6,42 +6,6 @@
 $(function (swal, _) {
   'use strict';
 
-  (function setURL() {
-    var url = window.location.hostname;
-    if (_.contains(url, 'localhost')) {
-      /***** LOCAL *****/
-      sessionStorage.setItem('baseURL', '//localhost:4000/itransfer/');
-      //sessionStorage.setItem('baseURL', '//localhost:4001/');
-      sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
-      //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
-    } else if (_.contains(url,'172.20.20.64')) {
-      sessionStorage.setItem('baseURL', '//172.20.20.64:4001/');
-      sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
-    } else if (_.contains(url,'deviapps')) {
-      /***** DEV *****/
-      sessionStorage.setItem('baseURL', '//deviapps.groups.be/itransfer/public/');
-      sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
-    } else if (_.contains(url,'qaiapps')) {
-      /***** QA *****/
-      sessionStorage.setItem('baseURL', '//qaiapps.groups.be/itransfer/');
-      sessionStorage.setItem('serverURL', '//qaiapps.groups.be/ariane/');
-    } else if (_.contains(url,'transfer.groups.be')) {
-      /***** PROD *****/
-      sessionStorage.setItem('baseURL', '//transfer.groups.be/');
-      sessionStorage.setItem('serverURL', '//transfer.groups.be/ariane/');
-    } else if (_.contains(url,'online.groups.be')) {
-      /***** PORTAL *****/
-      sessionStorage.setItem('baseURL', '//online.groups.be/transfer/');
-      sessionStorage.setItem('serverURL', '//online.groups.be/ariane/');
-    } else if (_.contains(url,'groupsfrance.fr')) {
-      /***** FRANCE *****/
-      sessionStorage.setItem('baseURL', '//online.groupsfrance.fr/transfer/');
-      sessionStorage.setItem('serverURL', '//online.groupsfrance.fr/ariane/');
-      sessionStorage.setItem('country', 'france');
-    }
-  }());
-
-
   /***  GLOBAL VARIABLES ***/
   var serverURL = sessionStorage.getItem('serverURL'),
     baseURL = sessionStorage.getItem('baseURL'),
@@ -85,6 +49,43 @@ $(function (swal, _) {
     reportError(error, 'Uncatched Exception');
   };
 
+
+  function setURL() {
+    var url = window.location.hostname;
+    if (_.contains(url, 'localhost')) {
+      /***** LOCAL *****/
+      sessionStorage.setItem('baseURL', '//localhost:4000/itransfer/');
+      //sessionStorage.setItem('baseURL', '//localhost:4001/');
+      sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
+      //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+    } else if (_.contains(url, '172.20.20.64')) {
+      sessionStorage.setItem('baseURL', '//172.20.20.64:4001/');
+      sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+    } else if (_.contains(url, 'deviapps')) {
+      /***** DEV *****/
+      sessionStorage.setItem('baseURL', '//deviapps.groups.be/itransfer/public/');
+      sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+    } else if (_.contains(url, 'qaiapps')) {
+      /***** QA *****/
+      sessionStorage.setItem('baseURL', '//qaiapps.groups.be/itransfer/');
+      sessionStorage.setItem('serverURL', '//qaiapps.groups.be/ariane/');
+    } else if (_.contains(url, 'transfer.groups.be')) {
+      /***** PROD *****/
+      sessionStorage.setItem('baseURL', '//transfer.groups.be/');
+      sessionStorage.setItem('serverURL', '//transfer.groups.be/ariane/');
+    } else if (_.contains(url, 'online.groups.be')) {
+      /***** PORTAL *****/
+      sessionStorage.setItem('baseURL', '//online.groups.be/transfer/');
+      sessionStorage.setItem('serverURL', '//online.groups.be/ariane/');
+    } else if (_.contains(url, 'groupsfrance.fr')) {
+      /***** FRANCE *****/
+      sessionStorage.setItem('baseURL', '//online.groupsfrance.fr/transfer/');
+      sessionStorage.setItem('serverURL', '//online.groupsfrance.fr/ariane/');
+      sessionStorage.setItem('country', 'france');
+    }
+  }
+
+
   /**
    * Returns one of supported language, default if not.
    * Supported languages: 'nl', 'fr', 'en' (default).
@@ -124,10 +125,10 @@ $(function (swal, _) {
       data    : credentials,
       success : function (data) {
         if (data.token) {
-          sessionStorage.setItem('token', data.token);
+          sessionStorage.setItem('tokenTransfer', data.token);
           sessionStorage.setItem('username', credentials.login);
         }
-        //redirect to itransfer;
+        //redirect to Transfer;
         window.location = baseURL + 'transferApp.html';
         //window.login = $('#login').val();
       },
@@ -164,19 +165,26 @@ $(function (swal, _) {
     $('#submit-login').text(i18n[lang].button);
   }
 
-  //set language
-  sessionStorage.setItem('lang', getNavigatorLanguage());
-  $('.' + getNavigatorLanguage()).addClass('default-lang');
+  (function init() {
+
+    setURL();
+
+    //set language
+    sessionStorage.setItem('lang', getNavigatorLanguage());
+    $('.' + getNavigatorLanguage()).addClass('default-lang');
 
 
-  //set event
-  $('#submit-login').on('click', submitLogin);
-  $('input').keypress(enterPressed);
-  $('.login-lang').on('click', function () {
-    var lang = $(this).html().toLowerCase();
-    $('.login-lang').removeClass('default-lang');
-    $('.' + lang).addClass('default-lang');
-    sessionStorage.setItem('lang', lang);
-    setLanguage(lang);
-  });
+    //set event
+    $('#submit-login').on('click', submitLogin);
+    $('input').keypress(enterPressed);
+    $('.login-lang').on('click', function () {
+      var lang = $(this).html().toLowerCase();
+      $('.login-lang').removeClass('default-lang');
+      $('.' + lang).addClass('default-lang');
+      sessionStorage.setItem('lang', lang);
+      setLanguage(lang);
+    });
+
+  })();
+
 }(swal, _));

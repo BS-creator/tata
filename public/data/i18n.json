@@ -19,8 +19,8 @@
     "breadrumb": "Tous les fichiers triés par \"nouveaux\" et \"non téléchargés\"",
     "result": "Resultat: ",
     "url": {
-      "table": "lib/DataTables/resources/language/FR.json",
-      "datepicker": "lib/locale/bootstrap-datepicker.fr.js"
+      "table": "../cdn/DataTables/1.10.4/resources/language/FR.json",
+      "datepicker": "../cdn/bootstrap/locale/bootstrap-datepicker.fr.js"
     },
     "col": {
       "new": "Nouveau",
@@ -123,8 +123,8 @@
     "breadrumb": "Alle bestanden, gesorteerd volgens \"nieuw\" en \"niet gedownload\"",
     "result": "Resultaten: ",
     "url": {
-      "table": "lib/DataTables/resources/language/NL.json",
-      "datepicker": "lib/locale/bootstrap-datepicker.nl.js"
+      "table": "../cdn/DataTables/1.10.4/resources/language/NL.json",
+      "datepicker": "../cdn/bootstrap/locale/bootstrap-datepicker.nl.js"
     },
     "col": {
       "new": "Nieuw",
@@ -227,7 +227,7 @@
     "breadrumb": "New Files not downloaded yet",
     "result": "Results: ",
     "url": {
-      "table": "lib/DataTables/resources/language/EN.json"
+      "table": "../cdn/DataTables/1.10.4/resources/language/EN.json"
     },
     "col": {
       "new": "New",

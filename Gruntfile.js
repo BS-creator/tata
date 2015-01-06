@@ -145,7 +145,7 @@ module.exports = function (grunt) {
       },
 
       // The following *-min tasks produce minified files in the dist folder
-      replace      : {
+      /* replace      : {
         example: {
           src         : ['public/js/login.js'],             // source files array (supports minimatch)
           dest        : '<%= config.dist %>/js/',             // destination directory or file
@@ -157,7 +157,7 @@ module.exports = function (grunt) {
             to  : '//'
           }]
         }
-      },
+       },*/
 
       htmlmin: {
         dist: {
@@ -214,6 +214,9 @@ module.exports = function (grunt) {
             replacements: [{
               pattern    : /@@versionNumber@@/g,
               replacement: '<%= pkg.version %>'
+            }, {
+              pattern    : /\/\*BEGIN*\*\/END/g,
+              replacement: ''
             }]
           }
         }
