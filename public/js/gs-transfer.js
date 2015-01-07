@@ -1583,7 +1583,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     var url = window.location.hostname;
     if (_.contains(url, 'localhost')) {
       /***** LOCAL *****/
-      sessionStorage.setItem('TransferBaseURL', '//localhost:4000/itransfer/');
+      sessionStorage.setItem('TransferBaseURL', '//localhost:4000/transfer/');
       //sessionStorage.setItem('TransferBaseURL', '//localhost:4001/');
       sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');
       //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
@@ -1597,11 +1597,11 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
 
     } else if (_.contains(url, 'deviapps')) {
-      sessionStorage.setItem('TransferBaseURL', '//deviapps.groups.be/itransfer/public/');
+      sessionStorage.setItem('TransferBaseURL', '//deviapps.groups.be/transfer/public/');
       sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
       sessionStorage.setItem('country', 'BE');
     } else if (_.contains(url, 'qaiapps')) {
-      sessionStorage.setItem('TransferBaseURL', '//qaiapps.groups.be/itransfer/');
+      sessionStorage.setItem('TransferBaseURL', '//qaiapps.groups.be/transfer/');
       sessionStorage.setItem('TransferServerURL', '//qaiapps.groups.be/ariane/');
       sessionStorage.setItem('country', 'BE');
 
