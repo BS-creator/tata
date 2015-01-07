@@ -1634,7 +1634,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     TransferServerURL = sessionStorage.getItem('TransferServerURL'),
       TransferBaseURL = sessionStorage.getItem('TransferBaseURL'),
       //lang = sessionStorage.getItem('lang') == null ? localStorage.getItem('lastLanguage') : sessionStorage.getItem('lang') ,
-      lang = sessionStorage.getItem('lang') || localStorage.lastLanguage,
+      lang = sessionStorage.getItem('lang') || localStorage.lastLanguage ,
       TABLEID = '#tableID',
       table = {}, //DataTable object
       oTable = {}, //Jquery Data object

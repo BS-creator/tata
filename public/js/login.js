@@ -3,12 +3,13 @@
  */
 
 /*globals swal, _ */
-$(function (swal, _, utils) {
+$(function (swal, _, Utils) {
   'use strict';
 
   /***  GLOBAL VARIABLES ***/
   var TransferServerURL = sessionStorage.getItem('TransferServerURL'),
     TransferBaseURL = sessionStorage.getItem('TransferBaseURL'),
+    lang = sessionStorage.getItem('lang') || localStorage.lastLanguage,
     i18n = {
       'fr': {
         'login'   : "Nom d'utilisateur",
@@ -50,56 +51,6 @@ $(function (swal, _, utils) {
   };
 
 
-  function setURL() {
-    var url = window.location.hostname;
-    if (_.contains(url, 'localhost')) {
-      /***** LOCAL *****/
-        //sessionStorage.setItem('TransferBaseURL', '//localhost:4000/itransfer/');
-      sessionStorage.setItem('TransferBaseURL', '//localhost:4001/');
-      sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');
-      //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-    } else if (_.contains(url, '172.20.20.64')) {
-      sessionStorage.setItem('TransferBaseURL', '//172.20.20.64:4001/');
-      sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-    } else if (_.contains(url, 'deviapps')) {
-      /***** DEV *****/
-      sessionStorage.setItem('TransferBaseURL', '//deviapps.groups.be/itransfer/public/');
-      sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-    } else if (_.contains(url, 'qaiapps')) {
-      /***** QA *****/
-      sessionStorage.setItem('TransferBaseURL', '//qaiapps.groups.be/itransfer/');
-      sessionStorage.setItem('TransferServerURL', '//qaiapps.groups.be/ariane/');
-    } else if (_.contains(url, 'transfer.groups.be')) {
-      /***** PROD *****/
-      sessionStorage.setItem('TransferBaseURL', '//transfer.groups.be/');
-      sessionStorage.setItem('TransferServerURL', '//transfer.groups.be/ariane/');
-    } else if (_.contains(url, 'online.groups.be')) {
-      /***** PORTAL *****/
-      sessionStorage.setItem('TransferBaseURL', '//online.groups.be/transfer/');
-      sessionStorage.setItem('TransferServerURL', '//online.groups.be/ariane/');
-    } else if (_.contains(url, 'groupsfrance.fr')) {
-      /***** FRANCE *****/
-      sessionStorage.setItem('TransferBaseURL', '//online.groupsfrance.fr/transfer/');
-      sessionStorage.setItem('TransferServerURL', '//online.groupsfrance.fr/ariane/');
-      sessionStorage.setItem('country', 'france');
-    }
-  }
-
-
-  /**
-   * Returns one of supported language, default if not.
-   * Supported languages: 'nl', 'fr', 'en' (default).
-   * @returns {string}
-   */
-  function getNavigatorLanguage() {
-    var locale = (window.navigator.userLanguage || window.navigator.language);
-    locale = /..-../.test(locale) ? locale.split('-')[0] : locale.split('_')[0];
-    if ((locale !== 'en') && (locale !== 'fr') && (locale !== 'nl')) {
-      locale = 'en';
-    }
-    return locale;
-  }
-
 
   function enterPressed(e) {
     if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
@@ -111,14 +62,15 @@ $(function (swal, _, utils) {
   }
 
   function submitLogin() {
-    var credentials =
-    {
+    var credentials = {
       'login'   : $('#login').val(),
       'password': $('#password').val()
     };
 
     $('#loader').show();
-
+    if (!TransferServerURL) {
+      console.log("TransferServerURL = " + TransferServerURL);
+    }
     $.ajax({
       type    : 'POST',
       url     : TransferServerURL + 'login',
@@ -138,19 +90,21 @@ $(function (swal, _, utils) {
       error   : function (xhr) {
         $('#loader').hide();
         if (xhr.status === 403) {
-          swal({
+          Utils.errorMessage('Login / password incorrect.', 3000);
+          /*swal({
             title: "ERROR",
             text : "Login / password incorrect.",
             type : "error",
             timer: 3000
-          });
+           });*/
         } else {
-          swal({
+          Utils.errorMessage('Connection problem.', 3000);
+          /*swal({
             title: "ERROR",
             text : "Connection problem.",
             type : "error",
             timer: 3000
-          });
+           });*/
         }
       }
     });
@@ -164,12 +118,12 @@ $(function (swal, _, utils) {
 
   (function init() {
 
-    utils.setURL();
+    Utils.setURL();
 
     //set language
-    sessionStorage.setItem('lang', getNavigatorLanguage());
-    $('.' + getNavigatorLanguage()).addClass('default-lang');
-
+    sessionStorage.setItem('lang', Utils.getNavigatorLanguage());
+    $('.' + Utils.getNavigatorLanguage()).addClass('default-lang');
+    console.log(' Utils.getNavigatorLanguage() = ' + Utils.getNavigatorLanguage());
 
     //set event
     $('#submit-login').on('click', submitLogin);
@@ -184,4 +138,4 @@ $(function (swal, _, utils) {
 
   })();
 
-}(swal, _, utils));
+}(swal, _, Utils));

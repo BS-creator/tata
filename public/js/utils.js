@@ -2,8 +2,9 @@
  * Created by bisconti on 07/01/15.
  */
 
-var utils = function () {
+var Utils = (function () {
   "use strict";
+
   var smessage = function (title, message, type, timer) {
     swal({
       title: title || ' ',
@@ -75,17 +76,8 @@ var utils = function () {
     return locale;
   }
 
-  function enterPressed(e, func) {
-    if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
-      func.call();
-      return false;
-    } else {
-      return true;
-    }
-  }
-
   function setURL() {
-    console.log("test module ok");
+
     var url = window.location.hostname;
     if (_.contains(url, 'localhost')) {
       /***** LOCAL *****/
@@ -100,7 +92,6 @@ var utils = function () {
       sessionStorage.setItem('TransferBaseURL', '//172.20.20.64:4001/');
       sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
       sessionStorage.setItem('country', 'BE');
-
 
     } else if (_.contains(url, 'deviapps')) {
       sessionStorage.setItem('TransferBaseURL', '//deviapps.groups.be/itransfer/public/');
@@ -140,7 +131,6 @@ var utils = function () {
     getUrlParameter     : getUrlParameter,
     endsWith            : endsWith,
     bytesToSize         : bytesToSize,
-    getNavigatorLanguage: getNavigatorLanguage,
-    enterPressed        : enterPressed
+    getNavigatorLanguage: getNavigatorLanguage
   }
-};
+}());
