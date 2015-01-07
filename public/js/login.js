@@ -3,12 +3,12 @@
  */
 
 /*globals swal, _ */
-$(function (swal, _) {
+$(function (swal, _, utils) {
   'use strict';
 
   /***  GLOBAL VARIABLES ***/
-  var serverURL = sessionStorage.getItem('serverURL'),
-    baseURL = sessionStorage.getItem('baseURL'),
+  var TransferServerURL = sessionStorage.getItem('TransferServerURL'),
+    TransferBaseURL = sessionStorage.getItem('TransferBaseURL'),
     i18n = {
       'fr': {
         'login'   : "Nom d'utilisateur",
@@ -54,33 +54,33 @@ $(function (swal, _) {
     var url = window.location.hostname;
     if (_.contains(url, 'localhost')) {
       /***** LOCAL *****/
-      sessionStorage.setItem('baseURL', '//localhost:4000/itransfer/');
-      //sessionStorage.setItem('baseURL', '//localhost:4001/');
-      sessionStorage.setItem('serverURL', '//172.20.20.64:8018/');
-      //sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+        //sessionStorage.setItem('TransferBaseURL', '//localhost:4000/itransfer/');
+      sessionStorage.setItem('TransferBaseURL', '//localhost:4001/');
+      sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');
+      //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
     } else if (_.contains(url, '172.20.20.64')) {
-      sessionStorage.setItem('baseURL', '//172.20.20.64:4001/');
-      sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+      sessionStorage.setItem('TransferBaseURL', '//172.20.20.64:4001/');
+      sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
     } else if (_.contains(url, 'deviapps')) {
       /***** DEV *****/
-      sessionStorage.setItem('baseURL', '//deviapps.groups.be/itransfer/public/');
-      sessionStorage.setItem('serverURL', '//deviapps.groups.be/ariane/');
+      sessionStorage.setItem('TransferBaseURL', '//deviapps.groups.be/itransfer/public/');
+      sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
     } else if (_.contains(url, 'qaiapps')) {
       /***** QA *****/
-      sessionStorage.setItem('baseURL', '//qaiapps.groups.be/itransfer/');
-      sessionStorage.setItem('serverURL', '//qaiapps.groups.be/ariane/');
+      sessionStorage.setItem('TransferBaseURL', '//qaiapps.groups.be/itransfer/');
+      sessionStorage.setItem('TransferServerURL', '//qaiapps.groups.be/ariane/');
     } else if (_.contains(url, 'transfer.groups.be')) {
       /***** PROD *****/
-      sessionStorage.setItem('baseURL', '//transfer.groups.be/');
-      sessionStorage.setItem('serverURL', '//transfer.groups.be/ariane/');
+      sessionStorage.setItem('TransferBaseURL', '//transfer.groups.be/');
+      sessionStorage.setItem('TransferServerURL', '//transfer.groups.be/ariane/');
     } else if (_.contains(url, 'online.groups.be')) {
       /***** PORTAL *****/
-      sessionStorage.setItem('baseURL', '//online.groups.be/transfer/');
-      sessionStorage.setItem('serverURL', '//online.groups.be/ariane/');
+      sessionStorage.setItem('TransferBaseURL', '//online.groups.be/transfer/');
+      sessionStorage.setItem('TransferServerURL', '//online.groups.be/ariane/');
     } else if (_.contains(url, 'groupsfrance.fr')) {
       /***** FRANCE *****/
-      sessionStorage.setItem('baseURL', '//online.groupsfrance.fr/transfer/');
-      sessionStorage.setItem('serverURL', '//online.groupsfrance.fr/ariane/');
+      sessionStorage.setItem('TransferBaseURL', '//online.groupsfrance.fr/transfer/');
+      sessionStorage.setItem('TransferServerURL', '//online.groupsfrance.fr/ariane/');
       sessionStorage.setItem('country', 'france');
     }
   }
@@ -121,16 +121,15 @@ $(function (swal, _) {
 
     $.ajax({
       type    : 'POST',
-      url     : serverURL + 'login',
+      url     : TransferServerURL + 'login',
       data    : credentials,
       success : function (data) {
         if (data.token) {
           sessionStorage.setItem('tokenTransfer', data.token);
           sessionStorage.setItem('username', credentials.login);
+          //redirect to Transfer;
+          window.location = TransferBaseURL + 'transferApp.html';
         }
-        //redirect to Transfer;
-        window.location = baseURL + 'transferApp.html';
-        //window.login = $('#login').val();
       },
       dataType: 'json',
       /*complete: function () {
@@ -139,7 +138,6 @@ $(function (swal, _) {
       error   : function (xhr) {
         $('#loader').hide();
         if (xhr.status === 403) {
-          /*alert( 'ERROR: login / password incorrect.' );*/
           swal({
             title: "ERROR",
             text : "Login / password incorrect.",
@@ -147,7 +145,6 @@ $(function (swal, _) {
             timer: 3000
           });
         } else {
-          //alert( 'ERROR: connection problem' );
           swal({
             title: "ERROR",
             text : "Connection problem.",
@@ -167,7 +164,7 @@ $(function (swal, _) {
 
   (function init() {
 
-    setURL();
+    utils.setURL();
 
     //set language
     sessionStorage.setItem('lang', getNavigatorLanguage());
@@ -187,4 +184,4 @@ $(function (swal, _) {
 
   })();
 
-}(swal, _));
+}(swal, _, utils));
