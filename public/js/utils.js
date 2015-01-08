@@ -76,13 +76,11 @@ var Utils = (function () {
     return locale;
   }
 
-  function setURL() {
-
+  function setTransferURL() {
     var url = window.location.hostname;
     if (_.contains(url, 'localhost')) {
       /***** LOCAL *****/
       sessionStorage.setItem('TransferBaseURL', '//localhost:4000/transfer/');
-      //sessionStorage.setItem('TransferBaseURL', '//localhost:4001/');
       sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');
       //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
       sessionStorage.setItem('country', 'BE');
@@ -127,7 +125,7 @@ var Utils = (function () {
   return {
     smessage            : smessage,
     errorMessage        : errorMessage,
-    setURL              : setURL,
+    setTransferURL: setTransferURL,
     getUrlParameter     : getUrlParameter,
     endsWith            : endsWith,
     bytesToSize         : bytesToSize,

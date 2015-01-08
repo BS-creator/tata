@@ -2,7 +2,7 @@
  * Created by bisconti on 29/08/14.
  */
 /*globals _, moment, introJs, swal*/
-var gsTransfer = (function (_, moment, introJs, swal) {
+var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   'use strict';
 
   /***  GLOBAL VARIABLES ***/
@@ -892,7 +892,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     setCursorToProgress();
     return $.ajax({
       type    : 'DELETE',
-      url: TransferServerURL + 'file/',
+      url     : TransferServerURL + 'file/',
       data    : {
         token: tokenTransfer,
         filePath: filePath
@@ -941,7 +941,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     // if(token){ console.log("token = "+token +" defined ==> OK");}
     return $.ajax({
       type   : 'POST',
-      url: TransferServerURL + 'folder/',
+      url    : TransferServerURL + 'folder/',
       data      : {'token': tokenTransfer},
       success: function (data) {
         listFolderUpload(data);
@@ -962,7 +962,7 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     //if(token){ console.log("token = "+token +" defined ==> OK");}
     return $.ajax({
       type   : 'GET',
-      url: TransferServerURL + service,
+      url    : TransferServerURL + service,
       success: function (data) {
         category = data;
       },
@@ -1033,8 +1033,9 @@ var gsTransfer = (function (_, moment, introJs, swal) {
   var setI18nSideMenuColumnList = function () {
     $('#toggle-side-menu').html('<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang]
       .button.colVisible);
-    $('p.side-menu-head').text(i18n[lang].sideMenu.config);
-    $('p.side-menu-head').append('&nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right"></i>');
+    var $smh = $('p.side-menu-head');
+    $smh.text(i18n[lang].sideMenu.config);
+    $smh.append('&nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right"></i>');
     $('#init-conf').html(i18n[lang].sideMenu.reset);
   };
 
@@ -1579,62 +1580,13 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     }
   };
 
-  function setURL() {
-    var url = window.location.hostname;
-    if (_.contains(url, 'localhost')) {
-      /***** LOCAL *****/
-      sessionStorage.setItem('TransferBaseURL', '//localhost:4000/transfer/');
-      //sessionStorage.setItem('TransferBaseURL', '//localhost:4001/');
-      sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');
-      //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-      sessionStorage.setItem('country', 'BE');
-      //sessionStorage.setItem('tokenPortal', 'F19EG686BTITNPHX788I5WR682E5TBMP8PBHEHK6SJCVFMAUD469HLMN4NK9HUVKJTB17230RKELJ21L91');
-
-    } else if (_.contains(url, '172.20.20.64')) {
-      sessionStorage.setItem('TransferBaseURL', '//172.20.20.64:4001/');
-      sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-      sessionStorage.setItem('country', 'BE');
-
-
-    } else if (_.contains(url, 'deviapps')) {
-      sessionStorage.setItem('TransferBaseURL', '//deviapps.groups.be/transfer/public/');
-      sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-      sessionStorage.setItem('country', 'BE');
-    } else if (_.contains(url, 'qaiapps')) {
-      sessionStorage.setItem('TransferBaseURL', '//qaiapps.groups.be/transfer/');
-      sessionStorage.setItem('TransferServerURL', '//qaiapps.groups.be/ariane/');
-      sessionStorage.setItem('country', 'BE');
-
-
-      /***** PRODUCTION *****/
-
-    } else if (_.contains(url, 'transfer.groups.be')) {
-      sessionStorage.setItem('TransferBaseURL', '//transfer.groups.be/');
-      sessionStorage.setItem('TransferServerURL', '//transfer.groups.be/ariane/');
-      sessionStorage.setItem('country', 'BE');
-    } else if (_.contains(url, 'transfer.groupsfrance.fr')) {
-      sessionStorage.setItem('TransferBaseURL', '//transfer.groupsfrance.fr/');
-      sessionStorage.setItem('TransferServerURL', '//transfer.groupsfrance.fr/ariane/');
-      sessionStorage.setItem('country', 'FR');
-    } else if (_.contains(url, 'online.groups.be')) {
-      sessionStorage.setItem('TransferBaseURL', '//online.groups.be/transfer/');
-      sessionStorage.setItem('TransferServerURL', '//online.groups.be/ariane/');
-      sessionStorage.setItem('country', 'BE');
-    } else if (_.contains(url, 'online.groupsfrance.fr')) {
-      sessionStorage.setItem('TransferBaseURL', '//online.groupsfrance.fr/transfer/');
-      sessionStorage.setItem('TransferServerURL', '//online.groupsfrance.fr/ariane/');
-      sessionStorage.setItem('country', 'FR');
-    }
-  }
-
   var main = function () {
 
-    setURL();
-
+    Utils.setTransferURL();
     TransferServerURL = sessionStorage.getItem('TransferServerURL'),
       TransferBaseURL = sessionStorage.getItem('TransferBaseURL'),
       //lang = sessionStorage.getItem('lang') == null ? localStorage.getItem('lastLanguage') : sessionStorage.getItem('lang') ,
-      lang = sessionStorage.getItem('lang') || localStorage.lastLanguage ,
+      lang = sessionStorage.getItem('lang') || localStorage.lastLanguage,
       TABLEID = '#tableID',
       table = {}, //DataTable object
       oTable = {}, //Jquery Data object
@@ -1647,8 +1599,6 @@ var gsTransfer = (function (_, moment, introJs, swal) {
       tokenTransfer = sessionStorage.getItem('tokenTransfer'),
       tokenPortal = sessionStorage.getItem('token');
 
-    // select2 : clients
-    $("#clients").select2();
 
     $("[rel='tooltip']").tooltip();
 
@@ -1664,7 +1614,12 @@ var gsTransfer = (function (_, moment, introJs, swal) {
 
       //Default Language
       if ((lang !== 'en') && (lang !== 'fr') && (lang !== 'nl')) {
-        lang = 'en';
+        if (sessionStorage.getItem('country') === 'FR') {
+          lang = 'fr';
+        }
+        else {
+          lang = 'en';
+        }
       }
 
       if (lang !== 'en') {
@@ -1672,7 +1627,16 @@ var gsTransfer = (function (_, moment, introJs, swal) {
       }
 
       if (i18n[lang]) { // if language is set,
-        render(); // load data and create table
+        //Add client Select2
+        var option = document.createElement("option");
+        option.text = i18n[lang].button.client;
+        option.value = ' ';
+        var s2 = document.getElementById('clients');
+        s2.add(option, s2[0]);
+        option.selected = true;
+        $('#clients').select2();
+        // load data and create table
+        render();
       } else {
 
         errorMessage("ERROR loading language data", 4000);
@@ -1702,4 +1666,4 @@ var gsTransfer = (function (_, moment, introJs, swal) {
     hideLoading                : hideLoading
   };
 
-}(_, moment, introJs, swal));
+}(_, moment, introJs, swal, Utils));

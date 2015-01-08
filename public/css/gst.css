@@ -544,6 +544,9 @@ DATEPICKER
 /****************************************************
 SELECT2
 ****************************************************/
+.fix-width-select2 {
+  min-width: 120px;
+}
 .select2-container {
   margin: 0;
   position: relative;

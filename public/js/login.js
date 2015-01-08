@@ -69,6 +69,9 @@ $(function (swal, _, Utils) {
 
     $('#loader').show();
     if (!TransferServerURL) {
+      TransferServerURL = sessionStorage.getItem('TransferServerURL');
+      TransferBaseURL = sessionStorage.getItem('TransferBaseURL');
+      lang = sessionStorage.getItem('lang') || localStorage.lastLanguage;
       console.log("TransferServerURL = " + TransferServerURL);
     }
     $.ajax({
@@ -118,7 +121,7 @@ $(function (swal, _, Utils) {
 
   (function init() {
 
-    Utils.setURL();
+    Utils.setTransferURL();
 
     //set language
     sessionStorage.setItem('lang', Utils.getNavigatorLanguage());

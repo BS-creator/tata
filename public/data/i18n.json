@@ -14,7 +14,8 @@
         "clear": "Retirer tous les filtres"
       },
       "help": "Aide",
-      "signout": "Se Déconnecter"
+      "signout": "Se Déconnecter",
+      "client": "Client"
     },
     "breadrumb": "Tous les fichiers triés par \"nouveaux\" et \"non téléchargés\"",
     "result": "Resultat: ",
@@ -118,7 +119,8 @@
         "clear": "Filters verwijderen"
       },
       "help": "Help",
-      "signout": "Uit Loggen"
+      "signout": "Uit Loggen",
+      "client": "Klant"
     },
     "breadrumb": "Alle bestanden, gesorteerd volgens \"nieuw\" en \"niet gedownload\"",
     "result": "Resultaten: ",
@@ -222,7 +224,8 @@
         "clear": "Clear all filters"
       },
       "help": "Help",
-      "signout": "Sign Out"
+      "signout": "Sign Out",
+      "client": "Client"
     },
     "breadrumb": "New Files not downloaded yet",
     "result": "Results: ",
