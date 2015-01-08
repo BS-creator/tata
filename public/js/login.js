@@ -12,45 +12,22 @@ $(function (swal, _, Utils) {
     lang = sessionStorage.getItem('lang') || localStorage.lastLanguage,
     i18n = {
       'fr': {
-        'login'   : "Nom d'utilisateur",
+        'login':  "Nom d'utilisateur",
         'password': "Mot de passe",
-        'button'  : 'ENTRER'
+        'button': 'ENTRER'
       },
       'nl': {
-        'login'   : "Gebruikersnaam",
+        'login':  "Gebruikersnaam",
         'password': "Wachtwoord",
-        'button'  : 'INLOGGEN'
+        'button': 'INLOGGEN'
       },
       'en': {
-        'login'   : "login",
+        'login':  "login",
         'password': "password",
-        'button'  : 'LOGIN'
+        'button': 'LOGIN'
       }
 
     };
-
-
-  function reportError(error, message) {
-    message = message || '';
-    console.error(
-      'ERROR: ' + message + ' [' + error.toString() + ']\n' +
-      '\nName:\t\t' + (error.name || '-') +
-      '\nMessage:\t' + (error.message || '-') +
-      '\nFile:\t\t\t' + (error.fileName || '-') +
-      '\nSource:\t\t' + ((error.toSource && error.toSource()) || '-') +
-      '\nLine #:\t\t' + (error.lineNumber || '-') +
-      '\nColumn #:\t' + (error.columnNumber || '-') +
-      '\n\nStack:\n\n' + (error.stack || '-'));
-  }
-
-  window.onerror = function (message, filename, lineno, colno, error) {
-    error.fileName = error.fileName || filename || null;
-    error.lineNumber = error.lineNumber || lineno || null;
-    error.columnNumber = error.columnNumber || colno || null;
-    reportError(error, 'Uncatched Exception');
-  };
-
-
 
   function enterPressed(e) {
     if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
@@ -63,8 +40,8 @@ $(function (swal, _, Utils) {
 
   function submitLogin() {
     var credentials = {
-      'login'   : $('#login').val(),
-      'password': $('#password').val()
+      login:    $('#login').val(),
+      password: $('#password').val()
     };
 
     $('#loader').show();
@@ -72,13 +49,13 @@ $(function (swal, _, Utils) {
       TransferServerURL = sessionStorage.getItem('TransferServerURL');
       TransferBaseURL = sessionStorage.getItem('TransferBaseURL');
       lang = sessionStorage.getItem('lang') || localStorage.lastLanguage;
-      console.log("TransferServerURL = " + TransferServerURL);
+      console.log('TransferServerURL = ' + TransferServerURL);
     }
     $.ajax({
-      type    : 'POST',
-      url     : TransferServerURL + 'login',
-      data    : credentials,
-      success : function (data) {
+      type:    'POST',
+      url:     TransferServerURL + 'login',
+      data:    credentials,
+      success: function (data) {
         if (data.token) {
           sessionStorage.setItem('tokenTransfer', data.token);
           sessionStorage.setItem('username', credentials.login);
@@ -87,26 +64,26 @@ $(function (swal, _, Utils) {
         }
       },
       dataType: 'json',
-      /*complete: function () {
+      /*complete: function() {
        $('#loader').hide();
        },*/
-      error   : function (xhr) {
+      error:   function (xhr) {
         $('#loader').hide();
         if (xhr.status === 403) {
           Utils.errorMessage('Login / password incorrect.', 3000);
           /*swal({
-            title: "ERROR",
-            text : "Login / password incorrect.",
-            type : "error",
-            timer: 3000
+           title: "ERROR",
+           text : "Login / password incorrect.",
+           type : "error",
+           timer: 3000
            });*/
         } else {
           Utils.errorMessage('Connection problem.', 3000);
           /*swal({
-            title: "ERROR",
-            text : "Connection problem.",
-            type : "error",
-            timer: 3000
+           title: "ERROR",
+           text : "Connection problem.",
+           type : "error",
+           timer: 3000
            });*/
         }
       }
