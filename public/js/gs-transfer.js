@@ -2,7 +2,7 @@
  * Created by bisconti on 29/08/14.
  */
 /*globals _, moment, introJs, swal*/
-var gsTransfer = (function (_, moment, introJs, swal, Utils) {
+var gsTransfer = (function(_, moment, introJs, swal, Utils) {
   'use strict';
 
   _.templateSettings = {
@@ -41,9 +41,9 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     tokenTransfer = sessionStorage.getItem('tokenTransfer'),
     tokenPortal = sessionStorage.getItem('token'),
 
-    getUsedDocRef = function (data) {
+    getUsedDocRef = function(data) {
       var a = [];
-      _.each(data, function (item) {
+      _.each(data, function(item) {
         var ref = parseInt(item.referenceDocument);
         if (!isNaN(ref) && username !== item.uploadUserName) {
           a[a.length] = ref;
@@ -54,10 +54,10 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       return _.uniq(a);
     },
 
-    mergeLabelDoc = function () {
+    mergeLabelDoc = function() {
 
-      _.each(category, function (cat) {
-        _.each(AjaxData, function (row) {
+      _.each(category, function(cat) {
+        _.each(AjaxData, function(row) {
           if (cat.referenceDocument === parseInt(row.referenceDocument)) {
             row.label = labelDocI18n(cat);
           } else {
@@ -69,13 +69,13 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       });
     },
 
-    getFilesID = function () {
+    getFilesID = function() {
       var array = getSelectedRows(),
         listID = '',
         it = null,
         fileNumber = 0;
 
-      _.each(array, function (item) {
+      _.each(array, function(item) {
         it = $(item[1].display);
         listID += it.data('file-id') + '&' + it.data('filename') + '@!';
         fileNumber++;
@@ -90,12 +90,12 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       };
     },
 
-    setCursorToAuto = function () {
+    setCursorToAuto = function() {
       $('body').css('cursor', 'auto');
       $(' .sweet-alert button').css('cursor', 'auto');
     },
 
-    setCursorToProgress = function () {
+    setCursorToProgress = function() {
       $('body').css('cursor', 'progress');
       $(' .sweet-alert button').css('cursor', 'progress');
     },
@@ -104,37 +104,37 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
      * INTERNATIONALIZATION i18n
      * */
 
-    labelDocI18n = function (item) {
+    labelDocI18n = function(item) {
 
       var doc = {
-        fr:      function () {
+        fr:      function() {
           return item.labelDocFR;
         },
-        nl:      function () {
+        nl:      function() {
           return item.labelDocNL;
         },
-        de:      function () {
+        de:      function() {
           return item.labelDocDE;
         },
-        default: function () {
+        default: function() {
           return item.labelDocX;
         }
       };
       return (doc[lang] || doc['default'])();
     },
 
-    labelCati18n = function (item) {
+    labelCati18n = function(item) {
       var cat = {
-        fr:      function () {
+        fr:      function() {
           return item.labelCategoryFR;
         },
-        nl:      function () {
+        nl:      function() {
           return item.labelCategoryNL;
         },
-        de:      function () {
+        de:      function() {
           return item.labelCategoryDE;
         },
-        default: function () {
+        default: function() {
           return item.labelCategoryX;
         }
       };
@@ -145,33 +145,33 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
      * FORMAT COLUMNS
      * */
 
-    formatExtension = function (value) {
+    formatExtension = function(value) {
 
       if (value || value !== '') {
         var v = value.toLowerCase(),
           extension = {
-            pdf:     function () {
+            pdf:     function() {
               return '<span><i class="fa fa-file-pdf-o fa-lg" title="pdf"></i></span>';
             },
-            zip:     function () {
+            zip:     function() {
               return '<span><i class="fa fa-file-archive-o fa-lg" title="zip"></i></span>';
             },
-            xls:     function () {
+            xls:     function() {
               return '<span><i class="fa fa-file-excel-o fa-lg" title="xls"></i></span>';
             },
-            dat:     function () {
+            dat:     function() {
               return '<span><i class="fa fa-bar-chart fa-lg" title="dat"></i></span>';
             },
-            csv:     function () {
+            csv:     function() {
               return '<span><i class="fa fa-file-excel-o fa-lg" title="csv"></i></span>';
             },
-            jpg:     function () {
+            jpg:     function() {
               return '<span><i class="fa fa-file-picture-o fa-lg" title="image"></i></span>';
             },
-            png:     function () {
+            png:     function() {
               return '<span><i class="fa fa-file-picture-o fa-lg" title="image"></i></span>';
             },
-            default: function () {
+            default: function() {
               return '<span><i class="fa fa-file-o fa-lg" ></i></span>';
             }
           };
@@ -180,7 +180,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         return '';
       }
     },
-    formatSize = function (value) {
+    formatSize = function(value) {
       var val = parseInt(value);
       if (val > 1024) {
         return Math.round(val / 1024) + ' KB';
@@ -189,10 +189,10 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       }
       //return bytesToSize(val);
     },
-    formatPath = function (value) {
+    formatPath = function(value) {
       return value.replace('/data/' + username + '/', '');
     },
-    getSelectedRows = function () {
+    getSelectedRows = function() {
       return table.rows('.active').data();
     },
 
@@ -200,7 +200,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
      * DOWNLOAD (ZIP)
      * */
 
-    addLowerButton = function () {
+    addLowerButton = function() {
       var multidl = $('.multiDL');
       multidl.html('');
       multidl.append(
@@ -217,7 +217,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         i18n[lang].button.multiDelete +
         '</button>'
       );
-      $('.deleteAll').off('click').on('click', function () {
+      $('.deleteAll').off('click').on('click', function() {
         swal({
             title:              i18n[lang].dialog.delAction,
             text:               i18n[lang].dialog.delSure,
@@ -228,13 +228,13 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
             cancelButtonText:   i18n[lang].dialog.cancel,
             closeOnConfirm:     false
           },
-          function () {
+          function() {
             deleteAll();
           });
       });
     },
 
-    incrementCounter = function (link) {
+    incrementCounter = function(link) {
       link.find('i').remove();
       var small = link.find('small'), // cache object
         dl = parseInt(small.data('dl')) + 1;
@@ -245,7 +245,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       small.html('&nbsp;' + dl);
     },
 
-    dlIcon = function (e) {
+    dlIcon = function(e) {
       var $this = $(this);
       Utils.smessage(i18n[lang].file.dl, ' ', 'warning', 4000);
 
@@ -259,7 +259,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       e.stopImmediatePropagation();
     },
 
-    dlLabel = function (e) {
+    dlLabel = function(e) {
       var $this = $(this),
         filename = $this.data('filename'),
         fileID = $this.data('file-id'),
@@ -278,13 +278,13 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       e.stopImmediatePropagation();
     },
 
-    incrementAllSelectedRows = function () {
-      _.each($(TABLEID).find('.active'), function (row) {
+    incrementAllSelectedRows = function() {
+      _.each($(TABLEID).find('.active'), function(row) {
         incrementCounter($(row).find('a').first());
       });
     },
 
-    downloadAll = function () {
+    downloadAll = function() {
 
       var params = getFilesID(),
         fileID,
@@ -309,7 +309,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         $('#multiDownloadForm').remove();
         form = $('<form id="multiDownloadForm" method="POST" action="' + TransferServerURL + 'file/zip">');
 
-        _.each(params.data, function (v, k) {
+        _.each(params.data, function(v, k) {
           form.append($('<input type="hidden" name="' + k +
           '" value="' + v + '">'));
         });
@@ -329,7 +329,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
      * UPLOAD
      * */
 
-    setEventuploadForm = function () {
+    setEventuploadForm = function() {
       // set token for upload
       var $uploadform = $('#uploadForm'),
         activeUploads = null;
@@ -341,31 +341,31 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
         limitMultiFileUploads: 10,
 
-        progressall: function (e, data) {
+        progressall: function(e, data) {
           var progress = parseInt(data.loaded / data.total * 100, 10);
           $('#progress').find('.progress-bar').css('width', progress + '%');
         },
-        add:         function (e, data) {
+        add:         function(e, data) {
           data.submit()
-            .error(function (jqXHR) {
+            .error(function(jqXHR) {
               Utils.errorMessage(' ', 4000);
             })
-            .success(function () {
+            .success(function() {
               activeUploads = $uploadform.fileupload('active');
               //console.log( "activeUploads = ", activeUploads );
             })
         },
-        start:       function () {
+        start:       function() {
           $('#progress').show();
         },
-        done:        function (e, data) {
+        done:        function(e, data) {
           activeUploads = $uploadform.fileupload('active');
           //console.log( 'LATER activeUploads = ', activeUploads );
           if (activeUploads < 2) {
             $('#progress').hide();
             $('.close').click();
             Utils.smessage('OK', ' ', 'success', 4000);
-            setTimeout(function () {
+            setTimeout(function() {
               window.location = TransferBaseURL + 'transferApp.html?upload';
             }, 4000);
           }
@@ -378,7 +378,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       //$uploadform.bind( 'fileuploaddone', function( e, data ){/* ... */} )
     },
 
-    listFolderUpload = function (destFolders) {
+    listFolderUpload = function(destFolders) {
       var listFolder = $('#uploadForm').find('div.dir-list'),
         key;
       for (key in destFolders) {
@@ -395,7 +395,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
      * MENU
      * */
 
-    resetFilters = function () {
+    resetFilters = function() {
 
       table
         .search('')
@@ -407,7 +407,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       $('[class^=level]').removeClass('active');
     },
 
-    resetDefaultView = function () {
+    resetDefaultView = function() {
       resetFilters();
       table.columns().visible(false, false);
       table.columns('.defaultView').visible(true, false);
@@ -416,7 +416,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       updateMenuVisibleColumnList();
     },
 
-    setBreadCrumb = function (text, textChild) {
+    setBreadCrumb = function(text, textChild) {
       if (textChild) {
         $('#breadcrumb').html(i18n[lang].result + '<li class="active noclick">' + text +
         '</li><li class="active noclick">' + textChild + '</li>');
@@ -428,7 +428,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       }
     },
 
-    menuRootClick = function (event) {
+    menuRootClick = function(event) {
 
       $('#upload').removeClass('active');
       resetFilters();
@@ -443,7 +443,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       event.preventDefault();
     },
 
-    menuOtherClick = function (event) {
+    menuOtherClick = function(event) {
 
       resetFilters();
       table.columns('.detailsLayer').visible(true, false);
@@ -459,7 +459,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       event.preventDefault();
     },
 
-    menuUploadClick = function (event) {
+    menuUploadClick = function(event) {
 
       $('#root').parent('li.level1').removeClass('active');
       $('#upload').addClass('active');
@@ -474,7 +474,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       event.preventDefault();
     },
 
-    menuCategoryClick = function (event) {
+    menuCategoryClick = function(event) {
 
       resetFilters();
       table.columns('.detailsLayer').visible(false, false);
@@ -506,7 +506,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       event.preventDefault();
     },
 
-    menuRefDocClick = function (event) {
+    menuRefDocClick = function(event) {
       var $this = $(event.currentTarget).parent('li'),
         nodeID = $this.attr('id'),
         nodeText = $this.text(),
@@ -535,7 +535,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       event.preventDefault();
     },
 
-    templateMenu = function (menu) {
+    templateMenu = function(menu) {
 
       var htmlLeafNode = '',
         htmlCategoryNode = '',
@@ -544,8 +544,8 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         createLeafNode = _.template($('#menuL3').html()),
         createCategoryNode = _.template($('#menuL2').html());
 
-      _.each(menu, function (catArray) {
-        _.each(catArray, function (item) {
+      _.each(menu, function(catArray) {
+        _.each(catArray, function(item) {
 
           htmlLeafNode += createLeafNode({
             referenceDocument: parseInt(item.referenceDocument),
@@ -579,18 +579,18 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       });
     },
 
-    filterMenu = function () {
+    filterMenu = function() {
       refDocUsed = getUsedDocRef(AjaxData);
-      return _.groupBy(_.filter(category, function (obj) {
+      return _.groupBy(_.filter(category, function(obj) {
         if (_.contains(refDocUsed, parseInt(obj.referenceDocument))) {
           return obj;
         }
-      }), function (obj) {
+      }), function(obj) {
         return obj.categoryNumber;
       });
     },
 
-    createMenu = function () {
+    createMenu = function() {
       $('#sidenav').html(templateMenu(filterMenu()));
     },
 
@@ -598,7 +598,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
      * MENU COLUMN VISIBLE
      * */
 
-    updateMenuVisibleColumnList = function () {
+    updateMenuVisibleColumnList = function() {
       var exclude = [0, 1, 15, 16, 17],
         list = $('.side-menu-list'),
         i = 0,
@@ -626,19 +626,19 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
      * TABLE
      * */
 
-    templateHeader = function () {
+    templateHeader = function() {
       var tpl = _.template($('#headertpl').html());
 
       $(TABLEID).find('thead').html(tpl(i18n[lang].col));
     },
 
-    templateTable = function () {
+    templateTable = function() {
 
       //TODO: make it REUSABLE --> parameter for tbody, theader and tableID
 
       var tpl = _.template($('#bodytpl').html());
 
-      _.each(AjaxData, function (row) {
+      _.each(AjaxData, function(row) {
 
         row.classNew = row.isNew ? 'isNew' : 'notNew';
 
@@ -671,7 +671,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       });
     },
 
-    createDataTable = function () {
+    createDataTable = function() {
 
       templateHeader();
 
@@ -800,7 +800,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
      * AJAX
      * */
 
-    signOut = function () {
+    signOut = function() {
 
       swal({
           title:              i18n[lang].dialog.signout,
@@ -812,14 +812,14 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
           cancelButtonText:   i18n[lang].dialog.cancel,
           closeOnConfirm:     false
         },
-        function () {
+        function() {
           return $.ajax({
             type:     'POST',
             url:      TransferServerURL + 'logoff/',
             data:     {
               token: tokenTransfer
             },
-            complete: function () {
+            complete: function() {
               //swal({title: "OK", type: "success"});
               sessionStorage.setItem('token', '');
               window.location = TransferBaseURL;
@@ -828,7 +828,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         });
     },
 
-    deleteFile = function (filePath, cell) {
+    deleteFile = function(filePath, cell) {
       //The FTP can delete a file by its path or by its ID (same method on backend)
       //So it works if the fileID is in the filePath
 
@@ -840,7 +840,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
           token:    tokenTransfer,
           filePath: filePath
         },
-        success:  function () {
+        success:  function() {
           Utils.smessage(i18n[lang].file.del, '', 'success', 2000);
 
           table
@@ -849,47 +849,47 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
             .draw();
           //window.location.reload();
         },
-        complete: function () {
+        complete: function() {
           setCursorToAuto();
         }
 
       });
     },
 
-    deleteAll = function () {
+    deleteAll = function() {
       setCursorToProgress();
 
       return $.ajax({
         type:     'DELETE',
         url:      TransferServerURL + 'file/multi',
         data:     getFilesID().data,
-        success:  function () {
+        success:  function() {
           Utils.smessage(i18n[lang].file.del, '', 'success', 2000);
-          setTimeout(function () {
+          setTimeout(function() {
             window.location.reload();
           }, 2000);
         },
-        error:    function () {
+        error:    function() {
           Utils.errorMessage(i18n[lang].error5xx, 5000);
         },
-        complete: function () {
+        complete: function() {
           setCursorToAuto();
         }
       });
     },
 
-    loadFolder = function () {
+    loadFolder = function() {
 
       // if(token){ console.log("token = "+token +" defined ==> OK");}
       return $.ajax({
         type:       'POST',
         url:        TransferServerURL + 'folder/',
         data:       {token: tokenTransfer},
-        success:    function (data) {
+        success:    function(data) {
           listFolderUpload(data);
         },
         statusCode: {
-          403: function () {
+          403: function() {
             console.log('error loading folder');
             hideLoading();
             Utils.errorMessage(i18n[lang].errorCnx, 4000);
@@ -898,18 +898,18 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       });
     },
 
-    loadCategory = function () {
+    loadCategory = function() {
       var service = 'category/' + (sessionStorage.getItem('country') === 'FR' ? 'true' : 'false');
       //var service = 'category/' ;
       //if(token){ console.log("token = "+token +" defined ==> OK");}
       return $.ajax({
         type:       'GET',
         url:        TransferServerURL + service,
-        success:    function (data) {
+        success:    function(data) {
           category = data;
         },
         statusCode: {
-          403: function () {
+          403: function() {
             hideLoading();
             console.log('error loading category');
             Utils.errorMessage(i18n[lang].errorCnx, 4000);
@@ -918,16 +918,16 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       });
     },
 
-    loadData = function () {
+    loadData = function() {
       //if(tokenPortal){ console.log("tokenPortal = "+tokenPortal +" defined ==> OK");}
       return $.ajax({
         type:       'POST',
         url:        TransferServerURL + 'file/list/',
         data:       {token: tokenTransfer},
-        success:    function (data) {
+        success:    function(data) {
           AjaxData = data;
         },
-        error:      function () {
+        error:      function() {
           hideLoading();
           console.log('error loading data');
           Utils.errorMessage(i18n[lang].error0, 4000);
@@ -935,10 +935,10 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         },
         dataType:   'json',
         statusCode: {
-          403: function () {
+          403: function() {
             hideLoading();
             Utils.errorMessage(i18n[lang].errorSession, 4000);
-            setTimeout(function () {
+            setTimeout(function() {
               window.location = TransferBaseURL;
             }, 4000);
           }
@@ -950,16 +950,16 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
      * EVENTS
      * */
 
-    showLoading = function () {
+    showLoading = function() {
       $('#loader').show();
     },
 
-    hideLoading = function () {
+    hideLoading = function() {
       $('#loader').hide();
     },
 
-    setEventColumnListVisible = function () {
-      $('.side-menu-list > li').off('click').on('click', function () {
+    setEventColumnListVisible = function() {
+      $('.side-menu-list > li').off('click').on('click', function() {
         var $this = $(this),
           index = $this.data('index'),
           visible = table.column(index).visible();
@@ -967,12 +967,12 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         table.column(index).visible(!visible);
       });
 
-      $('#init-conf').off('click').on('click', function () {
+      $('#init-conf').off('click').on('click', function() {
         resetDefaultView();
       });
     },
 
-    setI18nSideMenuColumnList = function () {
+    setI18nSideMenuColumnList = function() {
       $('#toggle-side-menu').html('<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang]
         .button.colVisible);
       var $smh = $('p.side-menu-head');
@@ -981,10 +981,10 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       $('#init-conf').html(i18n[lang].sideMenu.reset);
     },
 
-    setEventSideMenuColumnList = function () {
+    setEventSideMenuColumnList = function() {
 
       // slide off #side-menu
-      oTable.on('length.dt', function () {
+      oTable.on('length.dt', function() {
         var sbWidth = $('#sidenav').width();
         $('#main').animate({
           right: 0
@@ -998,7 +998,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       updateMenuVisibleColumnList();
     },
 
-    toggleDLButton = function () {
+    toggleDLButton = function() {
       var trActive = $('tr.active');
 
       if (trActive && trActive.length > 0) {
@@ -1012,7 +1012,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     },
 
     /***** MENU FILTERS *****/
-    setEventMenuFilters = function () {
+    setEventMenuFilters = function() {
       $('#root').off('click').on('click', menuRootClick);
       $('#upload').children('a').off('click').on('click', menuUploadClick);
       $('li.level2').children('a').off('click').on('click', menuCategoryClick);
@@ -1021,7 +1021,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     },
 
     /***** UPLOAD *****/
-    setI18nUpload = function () {
+    setI18nUpload = function() {
       //TODO: put it in CSS, just use it to translate!!!
       $('#btn-upload-div').find('span').html('<i class="fa fa-upload"></i>&nbsp;&nbsp;' + i18n[
         lang].upload);
@@ -1031,17 +1031,17 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
     },
 
-    setEventUpload = function () {
-      $('#upload-modal').find('.btn-upload').off('click').on('click', function () {
+    setEventUpload = function() {
+      $('#upload-modal').find('.btn-upload').off('click').on('click', function() {
         $(this).toggleClass('active', 'active');
       });
     },
 
     /***** LANGUAGE SETTINGS *****/
-    setEventLanguageSettings = function () {
+    setEventLanguageSettings = function() {
       $('.' + lang).addClass('default-lang');
 
-      $('.login-lang').off('click').on('click', function () {
+      $('.login-lang').off('click').on('click', function() {
         var lang = $(this).html().toLowerCase();
         $('.login-lang').removeClass('default-lang');
         $('.' + lang).addClass('default-lang');
@@ -1052,7 +1052,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     },
 
     /***** DOWNLOAD *****/
-    setEventDownload = function () {
+    setEventDownload = function() {
       $(TABLEID).on('click', '.dlfile', dlIcon);
 
       //download Single file by click on label
@@ -1060,17 +1060,17 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     },
 
     /***** MULTIDOWNLOAD *****/
-    setI18nMultiDownload = function () {
+    setI18nMultiDownload = function() {
       $('.downloadall').html('<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDL);
     },
 
-    setEventMultiDownload = function () {
+    setEventMultiDownload = function() {
       $('.downloadall').off('click').on('click', downloadAll);
     },
 
     /***** DELETE *****/
-    setEventDeleteFile = function () {
-      $('.remove').off('click').on('click', function () {
+    setEventDeleteFile = function() {
+      $('.remove').off('click').on('click', function() {
         var $this = $(this);
         swal({
             title:              i18n[lang].dialog.delAction,
@@ -1082,7 +1082,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
             cancelButtonText:   i18n[lang].dialog.cancel,
             closeOnConfirm:     false
           },
-          function () {
+          function() {
             deleteFile($this.data('file-id'), $this);
           });
       });
@@ -1090,12 +1090,12 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
     /***** MULTI DELETE *****/
 
-    setI18nMultiDelete = function () {
+    setI18nMultiDelete = function() {
       $('.deleteAll').html('<i class="fa fa-trash"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDelete);
     },
 
-    setEventMultiDelete = function () {
-      $('.deleteAll').off('click').on('click', function () {
+    setEventMultiDelete = function() {
+      $('.deleteAll').off('click').on('click', function() {
         swal({
             title:              i18n[lang].dialog.delAction,
             text:               i18n[lang].dialog.delSure,
@@ -1106,13 +1106,13 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
             cancelButtonText:   i18n[lang].dialog.cancel,
             closeOnConfirm:     false
           },
-          function () {
+          function() {
             deleteAll();
           });
       });
     },
 
-    toggleAllIconCheck = function (activated) {
+    toggleAllIconCheck = function(activated) {
       if (activated) {
         $('.iconSelect')
           .find('i')
@@ -1130,9 +1130,9 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     },
 
     /***** CHECKBOX SELECT ALL *****/
-    setEventCheckBox = function () {
+    setEventCheckBox = function() {
 
-      $('#btnSelectAll').off('click').on('click', function (e) {
+      $('#btnSelectAll').off('click').on('click', function(e) {
         e.preventDefault();
         var $this = $(this);
         $this.toggleClass('fa-square-o fa-check-square-o');
@@ -1140,7 +1140,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         toggleDLButton();
       });
 
-      $('.iconSelect').off('click').on('click', function (e) {
+      $('.iconSelect').off('click').on('click', function(e) {
         e.preventDefault();
         var $this = $(this);
         $this.find('i').toggleClass('fa-square-o fa-check-square-o');
@@ -1153,7 +1153,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
     /***** FILTER *****/
 
-    setI18nFiltersButton = function () {
+    setI18nFiltersButton = function() {
       $('#filterby').html(i18n[lang].button.filter.filterby +
       '&nbsp;&nbsp;&nbsp;<span class="caret"></span>'); //
       $('#filterNew').html('<i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button
@@ -1164,9 +1164,9 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         .filter.clear);
     },
 
-    setEventFiltersButton = function () {
+    setEventFiltersButton = function() {
 
-      $('#filterNew').off('click').on('click', function () {
+      $('#filterNew').off('click').on('click', function() {
         $('#breadcrumb').html(
           $('#breadcrumb').html() +
           '<li class="active">' + i18n[lang].button.filter.new + '</li>');
@@ -1176,7 +1176,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
           .draw();
       });
 
-      $('#filterDL').off('click').on('click', function () {
+      $('#filterDL').off('click').on('click', function() {
         $('#breadcrumb').html(
           $('#breadcrumb').html() +
           '<li class="active">' + i18n[lang].button.filter.notDL + '</li>');
@@ -1186,7 +1186,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
           .draw();
       });
 
-      $('#filterClear').off('click').on('click', function () {
+      $('#filterClear').off('click').on('click', function() {
         $('#breadcrumb').html(
           $('#breadcrumb').html() +
           '<li class="active">' + i18n[lang].button.filter.clear + '</li>');
@@ -1199,45 +1199,45 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
     /***** SEARCH *****/
 
-    setI18nSearch = function () {
+    setI18nSearch = function() {
       $('input[name=search]').attr('placeholder', i18n[lang].button.search);
     },
 
-    setEventSearch = function () {
-      $('input[name=search]').on('keyup', function () {
+    setEventSearch = function() {
+      $('input[name=search]').on('keyup', function() {
         table.search(this.value).draw();
       });
     },
 
-    setEventReload = function () {
+    setEventReload = function() {
       var reloadBtn = $('.reloadme');
       reloadBtn.html('<i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.reload);
-      reloadBtn.off('click').on('click', function () {
+      reloadBtn.off('click').on('click', function() {
         window.location = TransferBaseURL + 'transferApp.html';
         //window.location.reload();
       });
     },
 
-    setI18nDatePicker = function () {
+    setI18nDatePicker = function() {
       $('.dp-to').text(i18n[lang].datepicker.to);
       $('.dateBegin').attr('placeholder', i18n[lang].datepicker.start);
       $('.dateEnd').attr('placeholder', i18n[lang].datepicker.end);
     },
 
-    setEventDatePicker = function () {
+    setEventDatePicker = function() {
 
       var db = $('.dateBegin'),
         de = $('.dateEnd');
 
       db.val('');
-      db.on('focus', function () { this.select(); });
-      db.on('keyup', function () { setTimeout(table.draw(), 1000); });
-      db.on('change', function () { table.draw(); });
+      db.on('focus', function() { this.select(); });
+      db.on('keyup', function() { setTimeout(table.draw(), 1000); });
+      db.on('change', function() { table.draw(); });
 
       de.val('');
-      de.on('focus', function () { this.select(); });
-      de.on('keyup', function () { setTimeout(table.draw(), 1000); });
-      de.on('change', function () { table.draw(); });
+      de.on('focus', function() { this.select(); });
+      de.on('keyup', function() { setTimeout(table.draw(), 1000); });
+      de.on('change', function() { table.draw(); });
 
       $('#datepicker')
         .datepicker({
@@ -1255,19 +1255,19 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         });
     },
 
-    setI18nBreadCrumb = function () {
+    setI18nBreadCrumb = function() {
       setBreadCrumb(i18n[lang].breadrumb);
       //$( '#breadcrumb' ).html( i18n[lang].result + '<li class="active">' + i18n[lang].breadrumb + '</li>' );
     },
 
-    setI18nQuotaWarning = function () {
+    setI18nQuotaWarning = function() {
       $('#warningQuota').html('<p>' + i18n[lang].warningQuota + '</p>');
     },
 
-    setI18nHelpButton = function () {
+    setI18nHelpButton = function() {
       var helpBtn = $('#help');
       helpBtn.html('<i class="fa fa-question"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.help);
-      helpBtn.off('click').on('click', function () {
+      helpBtn.off('click').on('click', function() {
         //console.log("test");
         var intro = introJs();
         intro.setOptions({
@@ -1370,7 +1370,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
     },
 
-    setEventPreData = function () {
+    setEventPreData = function() {
 
       setI18nUpload();
       setI18nMultiDelete();
@@ -1388,7 +1388,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       setEventuploadForm();
     },
 
-    setEventsHTML = function () {
+    setEventsHTML = function() {
 
       setEventSideMenuColumnList();
       setEventMenuFilters();
@@ -1403,7 +1403,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
     },
 
-    initTableComplete = function () {
+    initTableComplete = function() {
 
       table.clear();
 
@@ -1417,7 +1417,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       hideLoading();
 
       //set upload form events
-      $(TABLEID).on('draw.dt', function () {
+      $(TABLEID).on('draw.dt', function() {
         setEventCheckBox();
         setEventDeleteFile();
 
@@ -1429,7 +1429,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         $('#upload').find('a').trigger('click');
       }
 
-      setTimeout(function () {
+      setTimeout(function() {
 
         setI18nQuotaWarning();
 
@@ -1444,18 +1444,18 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     /****************************************************
      * MAIN
      * */
-    render = function () {
+    render = function() {
       showLoading();
       setEventPreData();
 
       //console.log(tokenPortal);
 
-      $.when(portalCnx()).then(function () {
+      $.when(portalCnx()).then(function() {
 
-        $.when(loadCategory(), loadData(), loadFolder()).then(function () {
+        $.when(loadCategory(), loadData(), loadFolder()).then(function() {
 
           //Add label for reference of Document
-          $.when(mergeLabelDoc()).done(function () {
+          $.when(mergeLabelDoc()).done(function() {
 
             //Template of Table and Menu
             createDataTable();
@@ -1467,7 +1467,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
     },
 
-    portalCnx = function () {
+    portalCnx = function() {
 
       var url = TransferServerURL + 'login/portal/';
       if (tokenPortal) {
@@ -1476,23 +1476,23 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
           type:       'POST',
           url:        url,
           data:       {tokenPortal: tokenPortal},
-          success:    function (data) {
+          success:    function(data) {
             //console.log("data = ", data);
             tokenTransfer = data ? data.token : '';
             sessionStorage.setItem('tokenTransfer', tokenTransfer);
             /* set token for FTP*/
           },
-          error:      function () {
+          error:      function() {
             hideLoading();
             Utils.errorMessage(i18n[lang].error0, 4000);
             AjaxData = [];
           },
           dataType:   'json',
           statusCode: {
-            403: function () {
+            403: function() {
               hideLoading();
               Utils.errorMessage(i18n[lang].errorSession, 4000);
-              setTimeout(function () {
+              setTimeout(function() {
                 window.location = TransferBaseURL;
               }, 4000);
             }
@@ -1501,7 +1501,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       }
     },
 
-    main = function () {
+    main = function() {
 
       Utils.setTransferURL();
       TransferServerURL = sessionStorage.getItem('TransferServerURL'),
@@ -1528,7 +1528,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       $('#signout').off('click').on('click', signOut);
 
       //i18n
-      $.getJSON('data/i18n.json', function (data) {
+      $.getJSON('data/i18n.json', function(data) {
         i18n = data;
 
         //Default Language
