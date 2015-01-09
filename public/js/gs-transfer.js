@@ -599,7 +599,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
      * */
 
     updateMenuVisibleColumnList = function() {
-      var exclude = [0, 1, 15, 16, 17],
+      var exclude = [0, 1, 15, 16, 17, 18],
         list = $('.side-menu-list'),
         i = 0,
         headerCol = '',
@@ -628,7 +628,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     templateHeader = function() {
       var tpl = _.template($('#headertpl').html());
-
       $(TABLEID).find('thead').html(tpl(i18n[lang].col));
     },
 
@@ -1425,7 +1424,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       setEventsHTML();
 
-      if ('upload' === Utils.getUrlParameter('upload')) {
+      if (Utils.getUrlParameter('upload') === 'upload') {
         $('#upload').find('a').trigger('click');
       }
 
