@@ -21,7 +21,7 @@ var Utils = (function() {
       return str.indexOf(suffix, str.length - suffix.length) !== -1;
     },
 
-    getUrlParameter = function(sParam) {
+    getURLParameter = function(sParam) {
       var sPageURL = window.location.search.substring(1),
         sURLVariables = sPageURL.split('&'),
         i;
@@ -125,7 +125,7 @@ var Utils = (function() {
     smessage:        smessage,
     errorMessage:    errorMessage,
     setTransferURL:  setTransferURL,
-    getUrlParameter: getUrlParameter,
+    getURLParameter: getURLParameter,
     endsWith:        endsWith,
     bytesToSize:     bytesToSize,
     getNavigatorLanguage: getNavigatorLanguage

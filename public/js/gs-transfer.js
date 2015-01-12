@@ -42,7 +42,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     tokenPortal = sessionStorage.getItem('token'),
 
     isGMS = function() {
-      return (username && username.toUpperCase().indexOf('F000') === 0);
+      return (username && username.toUpperCase().indexOf('GMS') === 0);
     },
 
     getUsedDocRef = function(data) {
@@ -50,9 +50,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       _.each(data, function(item) {
         var ref = parseInt(item.referenceDocument);
         if (!isNaN(ref) && username !== item.uploadUserName) {
-          a[a.length] = ref;
+          a.push(ref);
         } else {
-          a[a.length] = -1;
+          a.push(-1);
         }
       });
       return _.uniq(a);
@@ -355,15 +355,17 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $uploadform.fileupload({
 
         limitMultiFileUploads: 10,
+        //autoUpload: false,
 
         progressall: function(e, data) {
           var progress = parseInt(data.loaded / data.total * 100, 10);
           $('#progress').find('.progress-bar').css('width', progress + '%');
         },
         add:         function(e, data) {
+          //TODO: add it to the list
           data.submit()
             .error(function(jqXHR) {
-              Utils.errorMessage(' ', 4000);
+              Utils.errorMessage('Error... ', 4000);
             })
             .success(function() {
               activeUploads = $uploadform.fileupload('active');
@@ -373,9 +375,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         start:       function() {
           $('#progress').show();
         },
-        done:        function(e, data) {
+        done:        function() {
           activeUploads = $uploadform.fileupload('active');
-          //console.log( 'LATER activeUploads = ', activeUploads );
           if (activeUploads < 2) {
             $('#progress').hide();
             $('.close').click();
@@ -384,13 +385,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
               window.location = TransferBaseURL + 'transferApp.html?upload';
             }, 4000);
           }
-          /*else {
-           //console.log( "activeUploads = " + activeUploads + "\tFILE UPLOADED = ", data );
-           }*/
         }
       });
-
-      //$uploadform.bind( 'fileuploaddone', function( e, data ){/* ... */} )
     },
 
     listFolderUpload = function(destFolders) {
@@ -446,9 +442,11 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     menuRootClick = function(event) {
 
       $('#upload').removeClass('active');
+      $('#validation').removeClass('active');
       resetFilters();
       table.columns('.detailsLayer').visible(false, false);
       table.columns('.fileLayer').visible(true, false);
+      table.columns('.validation').visible(false, false);
       // adjust column sizing and redraw
       table.columns.adjust().draw(false);
       //filter on uploadUserName
@@ -460,9 +458,12 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     menuOtherClick = function(event) {
 
+      $('#upload').removeClass('active');
+      $('#validation').removeClass('active');
       resetFilters();
       table.columns('.detailsLayer').visible(true, false);
       table.columns('.fileLayer').visible(false, false);
+      table.columns('.validation').visible(false, false);
       table.columns.adjust().draw(false); // adjust column sizing and redraw
       table
         .column(4).search('[^' + username + ']', true, false)
@@ -478,9 +479,11 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       $('#root').parent('li.level1').removeClass('active');
       $('#upload').addClass('active');
+      $('#validation').removeClass('active');
       resetFilters();
       table.columns('.detailsLayer').visible(true, false);
       table.columns('.fileLayer').visible(false, false);
+      table.columns('.validation').visible(false, false);
       table.columns.adjust().draw(false); // adjust column sizing and redraw
       table.column(4).search(username).draw(); //filter on uploadUserName
       $('[class^=level] .active').removeClass('active');
@@ -491,9 +494,12 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     menuCategoryClick = function(event) {
 
+      $('#upload').removeClass('active');
+      $('#validation').removeClass('active');
       resetFilters();
       table.columns('.detailsLayer').visible(false, false);
       table.columns('.fileLayer').visible(true, false);
+      table.columns('.validation').visible(false, false);
       var $this = $(event.currentTarget).parent('li'),
         levl3 = $this.find('.level3'), //list children
         numDocRegex = '(',
@@ -532,6 +538,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('[class^=level] .active').removeClass('active');
       $this.addClass('active');
       $this.parents('[class^=level]').addClass('active');
+      $('#validation').removeClass('active');
+      $('#upload').removeClass('active');
 
       if (nodeID > -1 && $this.hasClass('level3')) {
         //clear filters
@@ -540,6 +548,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           .columns().search('');
         table.columns('.detailsLayer').visible(false, false);
         table.columns('.fileLayer').visible(true, false);
+        table.columns('.validation').visible(false, false);
         table.columns.adjust().draw(false); // adjust column sizing and redraw
         table
           .column(4).search('[^' + username + ']', true, false)
@@ -788,6 +797,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           {
             className: 'defaultView',
             targets:   15, // remove
+            searchable: false,
             orderable: false
           },
           {
@@ -803,7 +813,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           {
             className:  'validation',
             targets:    18, //Validation
-            visible:    true,
+            visible:    false,
             searchable: false,
             orderable:  false
           }
@@ -1061,10 +1071,11 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       resetFilters();
       table.columns('.detailsLayer').visible(true, false);
       table.columns('.fileLayer').visible(false, false);
+      table.columns('.validation').visible(true, false);
       table.columns.adjust().draw(false); // adjust column sizing and redraw
-      table.column(4).search(username).draw(); //filter on uploadUserName
+      table.column(10).search('^' + 'Validation\/', true, false).draw(); //filter on uploadUserName
       $('[class^=level] .active').removeClass('active');
-      setBreadCrumb(i18n[lang].tree.upload);
+      setBreadCrumb(i18n[lang].tree.valid);
       updateMenuVisibleColumnList();
       event.preventDefault();
     },
@@ -1085,9 +1096,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         $selectClients.show();
         $selectClients.select2();
 
-        $validation.on('click', function() {
-
-        });
+        $validation.on('click', menuValidateClick);
       }
     },
 
@@ -1609,9 +1618,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       setEventsHTML();
 
-      if (Utils.getUrlParameter('upload') === 'upload') {
-        $('#upload').find('a').trigger('click');
-      }
+      if (Utils.getURLParameter('upload') === 'upload') { $('#upload').find('a').trigger('click'); }
+      if (Utils.getURLParameter('validation') === 'validation') { $('#validation').find('a').trigger('click'); }
 
       setTimeout(function() {
 
