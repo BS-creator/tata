@@ -2,10 +2,10 @@
  * Created by bisconti on 07/01/15.
  */
 
-var Utils = (function () {
+var Utils = (function() {
   'use strict';
 
-  var smessage = function (title, message, type, timer) {
+  var smessage = function(title, message, type, timer) {
       swal({
         title: title || ' ',
         text:  message || ' ',
@@ -13,15 +13,15 @@ var Utils = (function () {
         timer: timer || 4000
       });
     },
-    errorMessage = function (message, timer) {
+    errorMessage = function(message, timer) {
       smessage('ERROR', message, 'error', timer);
     },
 
-    endsWith = function (str, suffix) {
+    endsWith = function(str, suffix) {
       return str.indexOf(suffix, str.length - suffix.length) !== -1;
     },
 
-    getUrlParameter = function (sParam) {
+    getUrlParameter = function(sParam) {
       var sPageURL = window.location.search.substring(1),
         sURLVariables = sPageURL.split('&'),
         i;
@@ -32,7 +32,7 @@ var Utils = (function () {
       }
     },
 
-    bytesToSize = function (bytes) {
+    bytesToSize = function(bytes) {
       var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'],
         i;
       if (bytes === 0) {
@@ -47,7 +47,7 @@ var Utils = (function () {
      * Supported languages: 'nl', 'fr', 'en' (default).
      * @returns {string}
      */
-    getNavigatorLanguage = function () {
+    getNavigatorLanguage = function() {
       var locale = (window.navigator.userLanguage || window.navigator.language);
       locale = /..-../.test(locale) ? locale.split('-')[0] : locale.split('_')[0];
       if ((locale !== 'en') && (locale !== 'fr') && (locale !== 'nl')) {
@@ -56,7 +56,7 @@ var Utils = (function () {
       return locale;
     },
 
-    setTransferURL = function () {
+    setTransferURL = function() {
       var url = window.location.hostname;
       if (_.contains(url, 'localhost')) {
         /***** LOCAL *****/
@@ -100,7 +100,7 @@ var Utils = (function () {
       }
     },
 
-    reportError = function (error, message) {
+    reportError = function(error, message) {
       message = message || '';
       console.error(
         'ERROR: ' + message + ' [' + error.toString() + ']\n' +
@@ -114,7 +114,7 @@ var Utils = (function () {
       );
     };
 
-  window.onerror = function (message, filename, lineno, colno, error) {
+  window.onerror = function(message, filename, lineno, colno, error) {
     error.fileName = error.fileName || filename || null;
     error.lineNumber = error.lineNumber || lineno || null;
     error.columnNumber = error.columnNumber || colno || null;

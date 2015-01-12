@@ -15,7 +15,8 @@
       },
       "help": "Aide",
       "signout": "Se Déconnecter",
-      "client": "Client"
+      "client": "Client",
+      "validation": "Valider les fichiers"
     },
     "breadrumb": "Tous les fichiers triés par \"nouveaux\" et \"non téléchargés\"",
     "result": "Resultat: ",
@@ -43,6 +44,7 @@
     "tree": {
       "root": "Boîte de réception",
       "upload": "Boîte de dépôts",
+      "valid": "Fichiers à valider",
       "other": "Autres Documents"
     },
     "sideMenu": {
@@ -50,10 +52,11 @@
       "reset": "Réinitialiser la vue"
     },
     "file": {
-      "add": "Document ajouté",
-      "del": "Document supprimé",
+      "add": "Fichier(s) ajouté(s)",
+      "del": "Fichier(s) supprimé(s)",
       "dl": "Vos documents sont en cours de téléchargement. \n\n Merci de patienter.",
-      "noselect": "Aucun fichier sélectionné."
+      "noselect": "Aucun fichier sélectionné!",
+      "valid": "Fichier(s) validé(s)"
     },
     "datepicker": {
       "to": "à",
@@ -64,6 +67,9 @@
       "delAction": "Suppression de fichier",
       "delSure": "Êtes-vous sûr de vouloir supprimer ce(s) fichier(s)? \n Cela peut prendre un certain temps",
       "delConfirm": "Supprimer",
+      "validAction": "Validation de fichier",
+      "validSure": "Êtes-vous sûr de vouloir mettre ce(s) fichier(s) à disposition du client?",
+      "validConfirm": "Valider",
       "signout": "Déconnexion",
       "signoutSure": "Êtes-vous sûr de vouloir vous déconnecter?",
       "signoutConfirm": "Sortir",
@@ -111,7 +117,7 @@
       "reload": "Opnieuw laden",
       "colVisible": "Tonen",
       "multiDL": "Bestanden downloaden",
-      "multiDelete": "Bestanden Verwijderen",
+      "multiDelete": "Bestanden verwijderen",
       "filter": {
         "filterby": "Filter door",
         "new": "Nieuwe bestanden",
@@ -120,7 +126,8 @@
       },
       "help": "Help",
       "signout": "Uit Loggen",
-      "client": "Klant"
+      "client": "Klant",
+      "validation": "Bestanden valideren"
     },
     "breadrumb": "Alle bestanden, gesorteerd volgens \"nieuw\" en \"niet gedownload\"",
     "result": "Resultaten: ",
@@ -148,6 +155,7 @@
     "tree": {
       "root": "Alle bestanden van Group S weergeven ",
       "upload": "Mijn geüploade bestanden bekijken",
+      "valid": "Bestanden valideren",
       "other": "Andere bestanden"
     },
     "sideMenu": {
@@ -155,10 +163,11 @@
       "reset": "Standaardconfiguratie herstellen"
     },
     "file": {
-      "add": "Bestand toegevoegd",
-      "del": "Bestand verwijderd",
+      "add": "Bestand(en) toegevoegd",
+      "del": "Bestand(en) verwijderd",
       "dl": "Uw bestanden zijn aan het downloaden. \n\n Dank u voor uw geduld.",
-      "noselect": "Geen bestand geselecteerd."
+      "noselect": "Geen bestand geselecteerd!.",
+      "valid": "Bestand(en) gevalideerd"
     },
     "datepicker": {
       "to": "tot",
@@ -225,7 +234,8 @@
       },
       "help": "Help",
       "signout": "Sign Out",
-      "client": "Client"
+      "client": "Client",
+      "validation": "Validate files"
     },
     "breadrumb": "New Files not downloaded yet",
     "result": "Results: ",
@@ -250,8 +260,9 @@
       "del": "Delete"
     },
     "tree": {
-      "root": "Show all files sent by Group S",
-      "upload": "Show my uploaded files to Group S",
+      "root": "Inbox",
+      "upload": "Outbox",
+      "valid": "File validation",
       "other": "Other files"
     },
     "sideMenu": {
@@ -259,10 +270,11 @@
       "reset": "Reset Vue"
     },
     "file": {
-      "add": "File added",
-      "del": "File deleted",
+      "add": "File(s) added",
+      "del": "File(s) deleted",
       "dl": "Your files are being downloaded. \n\n Thank you for your patience.",
-      "noselect": "No file selected."
+      "noselect": "No file selected.",
+      "valid": "File(s) validated."
     },
     "datepicker": {
       "to": "to",

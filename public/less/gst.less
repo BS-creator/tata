@@ -278,8 +278,8 @@ LOADER
   }
 }
 
-#upload { margin-top: 30.1px !important; }
-#upload a,
+#upload, #validation { margin-top: 30.1px !important; }
+#upload a, #validation a,
 li.level1 > a {
   font-size: 14px;
   /* transition */
@@ -288,7 +288,7 @@ li.level1 > a {
   -o-transition: all 0.4s ease;/* Opera 10.5-12.00 */
   transition: all 0.4s ease;/* Firefox 16+, Opera 12.50+ */
 }
-#upload a,
+#upload a, #validation a,
 li[class^="level"] > a {
   display: block;
   margin-bottom: 0;
@@ -297,7 +297,7 @@ li[class^="level"] > a {
   text-overflow: ellipsis;
   cursor: pointer;
 }
-#upload a,
+#upload a, #validation a,
 li.level1 > a {
   padding: 15px 0px 15px 19px;
   background-color: @gs-blue;
@@ -306,6 +306,9 @@ li.level1 > a {
 #upload:hover > a,
 #upload:focus > a,
 #upload:active > a,
+#validation:hover > a,
+#validation:focus > a,
+#validation:active > a,
 li.level1:hover > a,
 li.level1:focus > a,
 li.level1:active > a {
@@ -314,7 +317,9 @@ li.level1:active > a {
 #upload:active > a,
 li.level1:active > a,
 #upload.active > a,
-li.level1.active > a {
+li.level1.active > a,
+#validation:active > a,
+#validation.active > a {
   background-color: @gs-xlt-blue;
 }
 li.level2 > a {
@@ -363,6 +368,13 @@ li.level2 > a {
 #upload a:before {
   font-family: FontAwesome;
   content: "\f019\00a0\00a0";
+}
+#validation {
+  display: none;
+  a:before {
+    font-family: FontAwesome;
+    content: "\f019\00a0\00a0";
+  }
 }
 
 @media (max-width:768px) {
@@ -560,6 +572,10 @@ DATEPICKER
 /****************************************************
 SELECT2
 ****************************************************/
+#clients {
+  display: none;
+}
+
 .fix-width-select2 {
   min-width: 120px;
 }
@@ -1557,14 +1573,10 @@ table tr th .pw-btn-group-th,
   background-color:   lighten(@color-15, 7);
   border-color:       lighten(@color-15, 7);
 }
-.validAll {
-  margin-left: 12px;
-}
 /**********************************************
                     DOWNLOAD BUTTON
 **********************************************/
-.downloadall, .deleteAll
-/*,.validAll*/
+.downloadall, .deleteAll, .validAll
 {
   display: none;
 }
