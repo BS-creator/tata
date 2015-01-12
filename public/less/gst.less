@@ -6,6 +6,11 @@
 
 @import "@{portal-cdn-path}/port-variables.less";
 @import "@{portal-cdn-path}/port-mixins.less";
+@import "../../portal-cdn/css/roboto-light.css";
+@import "../../portal-cdn/css/roboto-regular.css";
+@import "../../portal-cdn/css/roboto-medium.css";
+@import "../../portal-cdn/css/libre-baskerville.css";
+@import "../../portal-cdn/css/portal-app.css";
 
 /*********************************************
                     RESPONSIVE
@@ -18,20 +23,23 @@
     }
 }
 @media (max-width: 650px) {
-    #datepicker {
+    #datepicker,
+    #s2id_clients,
+    .reloadme,
+    #help,
+    #toggle-side-menu {
         margin-top: @xxs;
         margin-left: 0 !important;
         float: left;
     }
 }
 @media (max-width: 350px) {
-    input[name^="search"] {
+    #searchBox {
         margin-top: @xxs;
         margin-left: 0 !important;
         float: left;
     }
 }
-
 
 /***************************************************
 Main - Footer                  STICKY FOOTER RULES
@@ -61,7 +69,6 @@ body {
   height: 60px;
 }
 ////////////////////////////////FOOTER
-
 
 body {
   position: relative;
@@ -528,19 +535,21 @@ CONTENT
 
 #contentTable {
     overflow: hidden;
+  #searchBox {
+    max-width: 130px;
+  }
+  .dateBegin,
+  .dateEnd {
+    max-width: 100px;
+  }
 }
 
 /****************************************************
 DATEPICKER
 ****************************************************/
-#datepicker {
-//    display: table;
-
-}
 
 #datepicker input {
     float: left;
-    //display: table-cell;
     max-width: 130px;
     text-align: center;
 }
@@ -549,7 +558,6 @@ DATEPICKER
     float: left;
     box-shadow: 0;
     height: 50px;
-    //display: table-cell;
     margin: 0;
     padding: 14px 11px 14px 11px;
     cursor: default;
