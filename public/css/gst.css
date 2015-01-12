@@ -1,14 +1,11 @@
+@import "../../portal-cdn/css/roboto-light.css";
+@import "../../portal-cdn/css/roboto-regular.css";
+@import "../../portal-cdn/css/roboto-medium.css";
+@import "../../portal-cdn/css/libre-baskerville.css";
+@import "../../portal-cdn/css/portal-app.css";
 /* @author  :   Gilles Collard - Group S */
 /* @date    :   2014-10 */
 /* @version :   BETA 1.0 */
-.unselectable {
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-}
 .unselectable {
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -28,14 +25,18 @@
   }
 }
 @media (max-width: 650px) {
-  #datepicker {
+  #datepicker,
+  #s2id_clients,
+  .reloadme,
+  #help,
+  #toggle-side-menu {
     margin-top: 4.55px;
     margin-left: 0 !important;
     float: left;
   }
 }
 @media (max-width: 350px) {
-  input[name^="search"] {
+  #searchBox {
     margin-top: 4.55px;
     margin-left: 0 !important;
     float: left;
@@ -523,6 +524,13 @@ CONTENT
 *********************************************/
 #contentTable {
   overflow: hidden;
+}
+#contentTable #searchBox {
+  max-width: 130px;
+}
+#contentTable .dateBegin,
+#contentTable .dateEnd {
+  max-width: 100px;
 }
 /****************************************************
 DATEPICKER
