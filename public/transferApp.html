@@ -266,7 +266,7 @@
                 <input type="text" class="dateEnd" name="end" placeholder=""/>
               </div>
 
-              <select id="clients" class="fix-width-select2">
+              <select id="clients" class="pull-left fix-width-select2">
                 <option value="D00000001">D00000001</option>
                 <option value="D00000002">D00000002</option>
                 <option value="D00000003">D00000003</option>
@@ -316,53 +316,53 @@
             <script id="headertpl" type="text/template" class="template">
               <tr>
                 <th><i id="btnSelectAll" class="fa fa-square-o"></i></th>
-                <th class="center"><i class="fa fa-download fa-lg"></i></th>
-                <th class="center">[[date]]</th>
+                <th class="text-center"><i class="fa fa-download fa-lg"></i></th>
+                <th class="text-center">[[date]]</th>
                 <th>[[name]]</th>
                 <th>[[user]]</th>
                 <th>[[empl]]</th>
                 <th>[[label]]</th>
                 <th>[[refdoc]]</th>
-                <th>[[size]]</th>
-                <th class="center">[[ext]]</th>
+                <th class="text-right">[[size]]</th>
+                <th class="text-center">[[ext]]</th>
                 <th>[[path]]</th>
                 <th>[[refCl]]</th>
                 <th>[[count]]</th>
                 <th>[[refGS]]</th>
                 <th>[[uploadStamp]]</th>
-                <th class="center">[[del]]</th>
-                <th class="center">download Count</th>
-                <th class="center">isNew</th>
-                <th class="center">Validation</th>
+                <th class="text-center">[[del]]</th>
+                <th class="text-center">download Count</th>
+                <th class="text-center">isNew</th>
+                <th class="text-center">Validation</th>
               </tr>
             </script>
             <!-- END: Underscore Template Definition. -->
             </thead>
             <tbody>
-            <tr class="[[classNew]]" style="display:none">
+            <tr class="[[classNew]]">
               <td class="center iconSelect"><i class="fa fa-square-o"></i></td>
-              <td class="center" data-order="[[downloadCount]]">
+              <td class="text-center" data-order="[[downloadCount]]">
                 <a class="dlfile" data-file-id="[[fileId]]" data-filename="[[fileName]]">
                   <i class="fa [[dlClass]] fa-lg [[alreadyDL]]"></i>
                   <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]</small>
                 </a></td>
-              <td class="center" data-order="[[date]]">[[dateFormatted]]</td>
+              <td class="text-center" data-order="[[date]]">[[dateFormatted]]</td>
               <td><a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">[[fileName]]</a></td>
               <td>[[uploadUserName]]</td>
               <td>[[employerNumber]]</td>
               <td><a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">[[label]]</a></td>
               <td>[[referenceDocument]]</td>
-              <td data-order="[[size]]">[[sizeFormatted]]</td>
-              <td class="center" data-order="[[extension]]">[[extensionFormatted]]</td>
+              <td data-order="[[size]]" class="text-right">[[sizeFormatted]]</td>
+              <td class="text-center" data-order="[[extension]]">[[extensionFormatted]]</td>
               <td data-order="[[path]]">[[strippedPath]]</td>
               <td>[[referenceClient]]</td>
               <td>[[counter]]</td>
               <td>[[referenceGroupS]]</td>
-              <td data-order="[[uploadStampOrder]]" class="center"><span style="display:none">[[uploadStampOrder]] </span>[[uploadStamp]]</td>
-              <td class="center"><a class="remove" title="Remove" data-file-id="[[fileId]]"><i class="fa fa-trash fa-lg"></i></a></td>
-              <td class="center">[[downloadCount]]</td>
-              <td class="center">[[isNew]]</td>
-              <td class="center"><a class="icon-validation" title="Validation" data-file-id="[[fileId]]"><i class="fa fa-check fa-lg"></i></a></td>
+              <td data-order="[[uploadStampOrder]]" class="text-center"><span style="display:none">[[uploadStampOrder]] </span>[[uploadStamp]]</td>
+              <td class="text-center"><a class="remove" title="Remove" data-file-id="[[fileId]]"><i class="fa fa-trash fa-lg"></i></a></td>
+              <td class="text-center">[[downloadCount]]</td>
+              <td class="text-center">[[isNew]]</td>
+              <td class="text-center"><a class="icon-validation" title="Validation" data-file-id="[[fileId]]"><i class="fa fa-check fa-lg"></i></a></td>
             </tr>
             </tbody>
           </table>
@@ -370,28 +370,28 @@
           <script id="bodytpl" type="text/template">
             <tr class="[[classNew]]">
               <td class="center iconSelect"><i class="fa fa-square-o"></i></td>
-              <td class="center" data-order="[[downloadCount]]">
+              <td class="text-center" data-order="[[downloadCount]]">
                 <a class="dlfile" data-file-id="[[fileId]]" data-filename="[[fileName]]">
                   <i class="fa [[dlClass]] fa-lg [[alreadyDL]]"></i>
                   <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]</small>
                 </a></td>
-              <td class="center" data-order="[[date]]">[[dateFormatted]]</td>
+              <td class="text-center" data-order="[[date]]">[[dateFormatted]]</td>
               <td><a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">[[fileName]]</a></td>
               <td>[[uploadUserName]]</td>
               <td>[[employerNumber]]</td>
               <td><a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">[[label]]</a></td>
               <td>[[referenceDocument]]</td>
-              <td data-order="[[size]]">[[sizeFormatted]]</td>
-              <td class="center" data-order="[[extension]]">[[extensionFormatted]]</td>
+              <td data-order="[[size]]" class="text-right">[[sizeFormatted]]</td>
+              <td class="text-center" data-order="[[extension]]">[[extensionFormatted]]</td>
               <td data-order="[[path]]">[[strippedPath]]</td>
               <td>[[referenceClient]]</td>
               <td>[[counter]]</td>
               <td>[[referenceGroupS]]</td>
-              <td data-order="[[uploadStampOrder]]" class="center"><span style="display:none">[[uploadStampOrder]] </span>[[uploadStamp]]</td>
-              <td class="center"><a class="remove" title="Remove" data-file-id="[[fileId]]"><i class="fa fa-trash fa-lg"></i></a></td>
-              <td class="center">[[downloadCount]]</td>
-              <td class="center">[[isNew]]</td>
-              <td class="center"><a class="icon-validation" title="Validation" data-file-id="[[fileId]]"><i class="fa fa-check fa-lg"></i></a></td>
+              <td data-order="[[uploadStampOrder]]" class="text-center"><span style="display:none">[[uploadStampOrder]] </span>[[uploadStamp]]</td>
+              <td class="text-center"><a class="remove" title="Remove" data-file-id="[[fileId]]"><i class="fa fa-trash fa-lg"></i></a></td>
+              <td class="text-center">[[downloadCount]]</td>
+              <td class="text-center">[[isNew]]</td>
+              <td class="text-center"><a class="icon-validation" title="Validation" data-file-id="[[fileId]]" data-filename="[[fileName]]"><i class="fa fa-check fa-lg"></i></a></td>
             </tr>
           </script>
           <!-- END: Underscore Template Definition. -->

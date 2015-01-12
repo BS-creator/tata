@@ -904,46 +904,41 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
-    validateFile = function(fileId, cell) {
-      //The FTP can delete a file by its path or by its ID (same method on backend)
-      //So it works if the fileID is in the filePath
-
+    validateFile = function(fileName, cell, fileId) {
       setCursorToProgress();
       return $.ajax({
         type:     'POST',
         url:      TransferServerURL + 'file/valid',
         data:     {
           token:    tokenTransfer,
-          filePath: filePath
+          fileName: fileName,
+          fileId:   fileId
         },
-        success:  function() {
-          Utils.smessage(i18n[lang].file.del, '', 'success', 2000);
-
-          table
-            .row(cell.closest('tr'))
-            .remove()
-            .draw();
-          //window.location.reload();
+        success:  function(data) {
+          if (data) {
+            Utils.smessage(i18n[lang].file.valid, '', 'success', 2000);
+            table.row(cell.closest('tr'))
+              .remove()
+              .draw();
+          } else {
+            setCursorToAuto();
+          }
         },
         complete: function() {
           setCursorToAuto();
         }
-
       });
     },
 
     validateAll = function() {
       setCursorToProgress();
-
       return $.ajax({
         type:     'POST',
         url:      TransferServerURL + 'file/multi',
         data:     getFilesID().data,
         success:  function() {
-          Utils.smessage(i18n[lang].file.del, '', 'success', 2000);
-          setTimeout(function() {
-            window.location.reload();
-          }, 2000);
+          Utils.smessage(i18n[lang].file.valid, '', 'success', 2000);
+          setTimeout(function() { window.location.reload(); }, 2000);
         },
         error:    function() {
           Utils.errorMessage(i18n[lang].error5xx, 5000);
@@ -956,6 +951,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
   // clients list for the GMS user
     loadClients = function() {
+      // @dev-code
       return $.Deferred().resolve();
       //setEventGMS
 
@@ -966,6 +962,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           data:       {token: tokenTransfer},
           success:    function(data) {
             listFolderUpload(data);
+          },
+          error:      function(data) {
+
           },
           statusCode: {
             403: function() {
@@ -1069,8 +1068,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('#upload').removeClass('active');
       $('#validation').addClass('active');
       resetFilters();
-      table.columns('.detailsLayer').visible(true, false);
-      table.columns('.fileLayer').visible(false, false);
+      table.columns('.detailsLayer').visible(false, false);
+      table.columns('.fileLayer').visible(true, false);
       table.columns('.validation').visible(true, false);
       table.columns.adjust().draw(false); // adjust column sizing and redraw
       table.column(10).search('^' + 'Validation\/', true, false).draw(); //filter on uploadUserName
@@ -1235,7 +1234,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     /***** VALIDATE *****/
     setEventValidateFile = function() {
 
-      $('.validAll').off('click').on('click', function() {
+      $('.icon-validation').off('click').on('click', function() {
+        var $this = $(this);
         swal({
             title:              i18n[lang].dialog.validAction,
             text:               i18n[lang].dialog.validSure,
@@ -1247,7 +1247,15 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             closeOnConfirm:     false
           },
           function() {
-            validateFile($this.data('file-id'), $this);
+            validateFile($this.data('filename'), $this)
+            .then(function resolved(data) {
+                console.log('resolved = ', data);
+                if (!data) {
+                  console.log('OK COWBOY, it\'s false');
+                }
+              }, function reject(err) {
+                console.log('reject', err);
+              });
           });
       });
     },

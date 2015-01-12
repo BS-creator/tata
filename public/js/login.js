@@ -3,7 +3,7 @@
  */
 
 /*globals swal, _ */
-$(function (swal, _, Utils) {
+$(function(swal, _, Utils) {
   'use strict';
 
   /***  GLOBAL VARIABLES ***/
@@ -11,20 +11,20 @@ $(function (swal, _, Utils) {
     TransferBaseURL = sessionStorage.getItem('TransferBaseURL'),
     lang = sessionStorage.getItem('lang') || localStorage.lastLanguage,
     i18n = {
-      'fr': {
-        'login':  "Nom d'utilisateur",
-        'password': "Mot de passe",
-        'button': 'ENTRER'
+      fr: {
+        login:  'Nom d\'utilisateur',
+        password: 'Mot de passe',
+        button: 'ENTRER'
       },
-      'nl': {
-        'login':  "Gebruikersnaam",
-        'password': "Wachtwoord",
-        'button': 'INLOGGEN'
+      nl: {
+        login:  'Gebruikersnaam',
+        password: 'Wachtwoord',
+        button: 'INLOGGEN'
       },
-      'en': {
-        'login':  "login",
-        'password': "password",
-        'button': 'LOGIN'
+      en: {
+        login:  'login',
+        password: 'password',
+        button: 'LOGIN'
       }
 
     };
@@ -55,7 +55,7 @@ $(function (swal, _, Utils) {
       type:    'POST',
       url:     TransferServerURL + 'login',
       data:    credentials,
-      success: function (data) {
+      success: function(data) {
         if (data.token) {
           sessionStorage.setItem('tokenTransfer', data.token);
           sessionStorage.setItem('username', credentials.login);
@@ -67,7 +67,7 @@ $(function (swal, _, Utils) {
       /*complete: function() {
        $('#loader').hide();
        },*/
-      error:   function (xhr) {
+      error:   function(xhr) {
         $('#loader').hide();
         if (xhr.status === 403) {
           Utils.errorMessage('Login / password incorrect.', 3000);
@@ -103,12 +103,12 @@ $(function (swal, _, Utils) {
     //set language
     sessionStorage.setItem('lang', Utils.getNavigatorLanguage());
     $('.' + Utils.getNavigatorLanguage()).addClass('default-lang');
-    console.log(' Utils.getNavigatorLanguage() = ' + Utils.getNavigatorLanguage());
+    //console.log(' Utils.getNavigatorLanguage() = ' + Utils.getNavigatorLanguage());
 
     //set event
     $('#submit-login').on('click', submitLogin);
     $('input').keypress(enterPressed);
-    $('.login-lang').on('click', function () {
+    $('.login-lang').on('click', function() {
       var lang = $(this).html().toLowerCase();
       $('.login-lang').removeClass('default-lang');
       $('.' + lang).addClass('default-lang');

@@ -153,8 +153,8 @@
       "del": "Verwijderen"
     },
     "tree": {
-      "root": "Alle bestanden van Group S weergeven ",
-      "upload": "Mijn geüploade bestanden bekijken",
+      "root": "Inbox ",
+      "upload": "Outbox",
       "valid": "Bestanden valideren",
       "other": "Andere bestanden"
     },
@@ -179,6 +179,9 @@
       "delSure": "Bent u zeker?",
       "delConfirm": "Verwijderen",
       "signout": "Uitloggen",
+      "validAction": "Validation de fichier",
+      "validSure": "Êtes-vous sûr de vouloir mettre ce(s) fichier(s) à disposition du client?",
+      "validConfirm": "Valider",
       "signoutSure": "Bent u zeker?",
       "signoutConfirm": "Uitloggen",
       "cancel": "Annuleren"
@@ -285,6 +288,9 @@
       "delAction": "Delete File",
       "delSure": "Are you sure you want to delete file(s)? \n It may take a moment",
       "delConfirm": "Delete",
+      "validAction": "Validate file",
+      "validSure": "Are you sure you want to publish file(s) to the client?",
+      "validConfirm": "Validate",
       "signout": "Sign Off",
       "signoutSure": "Are you sure?",
       "signoutConfirm": "Log off",
@@ -320,7 +326,7 @@
     "upload": "Upload files on the server",
     "modalupload": "Upload files to Group S server",
     "modalbq": "Please, select the folder of upload before uploading files.",
-    "modalbtn": "Please select files to upload",
+    "modalbtn": "Select files to upload",
     "errorCnx": "Connection Error: Authentication required.",
     "error0": "Error: Problem retrieving file list",
     "error5xx": "Service temporally unavailable, please try later.",
