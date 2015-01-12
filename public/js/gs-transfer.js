@@ -1054,6 +1054,21 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('#loader').hide();
     },
 
+    menuValidateClick = function() {
+      $('#root').parent('li.level1').removeClass('active');
+      $('#upload').removeClass('active');
+      $('#validation').addClass('active');
+      resetFilters();
+      table.columns('.detailsLayer').visible(true, false);
+      table.columns('.fileLayer').visible(false, false);
+      table.columns.adjust().draw(false); // adjust column sizing and redraw
+      table.column(4).search(username).draw(); //filter on uploadUserName
+      $('[class^=level] .active').removeClass('active');
+      setBreadCrumb(i18n[lang].tree.upload);
+      updateMenuVisibleColumnList();
+      event.preventDefault();
+    },
+
     setEventGMS = function() {
       if (isGMS()) {
         var $validation = $('#validation'),
@@ -1069,6 +1084,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         option.selected = true;
         $selectClients.show();
         $selectClients.select2();
+
+        $validation.on('click', function() {
+
+        });
       }
     },
 
