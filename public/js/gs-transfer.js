@@ -294,8 +294,18 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
     incrementAllSelectedRows = function() {
-      _.each($(TABLEID).find('.active'), function(row) {
+      _.forEach($(TABLEID).find('.active'), function(row) {
         incrementCounter($(row).find('a').first());
+      });
+    },
+
+    resetCheckBox = function() {
+
+      _.forEach($(TABLEID).find('.active'), function(line) {
+        $(line)
+          .removeClass('active')
+          .find('i.fa-check-square-o')
+          .toggleClass('fa-square-o fa-check-square-o');
       });
     },
 
@@ -335,6 +345,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         // about 1,2 seconds per files (õ_ó) .... it's a good guess, what a shame... (╯_╰”)
 
         incrementAllSelectedRows();
+        resetCheckBox();
 
         form.submit();
       }
@@ -894,6 +905,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           setTimeout(function() {
             window.location.reload();
           }, 2000);
+          resetCheckBox();
         },
         error:    function() {
           Utils.errorMessage(i18n[lang].error5xx, 5000);

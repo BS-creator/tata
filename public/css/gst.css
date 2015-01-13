@@ -1296,6 +1296,7 @@ div.dataTables_length label {
 /* note */
 #warningQuota p {
   margin-top: 6px;
+  color: #AA0000;
 }
 /********************************************
                 INFO.JS
