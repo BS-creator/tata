@@ -1276,7 +1276,6 @@ header .i-bell-o,
 header .i-th,
 header .i-cog {
   display: inline-block;
-  height: 80px;
   line-height: 80px;
   padding: 0 10px;
   cursor: pointer;

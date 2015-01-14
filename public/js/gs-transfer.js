@@ -79,7 +79,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         it = null,
         fileNumber = 0;
 
-      _.each(array, function(item) {
+      _.forEach(array, function(item) {
         it = $(item[1].display);
         listID += it.data('file-id') + '&' + it.data('filename') + '@!';
         fileNumber++;
@@ -96,12 +96,12 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     setCursorToAuto = function() {
       $('body').css('cursor', 'auto');
-      $(' .sweet-alert button').css('cursor', 'auto');
+      $('.sweet-alert button').css('cursor', 'auto');
     },
 
     setCursorToProgress = function() {
       $('body').css('cursor', 'progress');
-      $(' .sweet-alert button').css('cursor', 'progress');
+      $('.sweet-alert button').css('cursor', 'progress');
     },
 
     /****************************************************
@@ -223,7 +223,21 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         i18n[lang].button.validation +
         '</button>'
       );
-      $('.validAll').off('click').on('click', validateAll);
+      $('.validAll').off('click').on('click', function() {
+        swal({
+            title:              i18n[lang].dialog.validAction,
+            text:               i18n[lang].dialog.validSure,
+            type:               'warning',
+            showCancelButton:   true,
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText:  i18n[lang].dialog.validConfirm,
+            cancelButtonText:   i18n[lang].dialog.cancel,
+            closeOnConfirm:     false
+          },
+          function() {
+            validateAll();
+          });
+      });
 
       /***** DELETE BUTTON *****/
       multidl.append(
@@ -334,7 +348,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         $('#multiDownloadForm').remove();
         form = $('<form id="multiDownloadForm" method="POST" action="' + TransferServerURL + 'file/zip">');
 
-        _.each(params.data, function(v, k) {
+        _.forEach(params.data, function(v, k) {
           form.append($('<input type="hidden" name="' + k +
           '" value="' + v + '">'));
         });
@@ -360,6 +374,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       var $uploadform = $('#uploadForm'),
         activeUploads = null;
       $('input[name="token"]').val(tokenTransfer);
+      $('input[name="clientName"]').val(username);
 
       $uploadform.attr('action', TransferServerURL + 'file/upload');
 
@@ -392,17 +407,14 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             $('#progress').hide();
             $('.close').click();
             Utils.smessage('OK', ' ', 'success', 4000);
-            setTimeout(function() {
-              window.location = TransferBaseURL + 'transferApp.html?upload';
-            }, 4000);
+            setTimeout(function() { window.location = TransferBaseURL + 'transferApp.html?upload'; }, 4000);
           }
         }
       });
     },
 
     listFolderUpload = function(destFolders) {
-      var listFolder = $('#uploadForm').find('div.dir-list'),
-        key;
+      var listFolder = $('#uploadForm').find('div.dir-list'), key;
       for (key in destFolders) {
         listFolder.append(
           '<label class="radio"><input name="destFolder" value="' +
@@ -579,8 +591,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         createLeafNode = _.template($('#menuL3').html()),
         createCategoryNode = _.template($('#menuL2').html());
 
-      _.each(menu, function(catArray) {
-        _.each(catArray, function(item) {
+      _.forEach(menu, function(catArray) {
+        _.forEach(catArray, function(item) {
 
           htmlLeafNode += createLeafNode({
             referenceDocument: parseInt(item.referenceDocument),
@@ -673,7 +685,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       var tpl = _.template($('#bodytpl').html());
 
-      _.each(AjaxData, function(row) {
+      _.forEach(AjaxData, function(row) {
 
         row.classNew = row.isNew ? 'isNew' : 'notNew';
 
@@ -902,9 +914,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         data:     getFilesID().data,
         success:  function() {
           Utils.smessage(i18n[lang].file.del, '', 'success', 2000);
-          setTimeout(function() {
-            window.location.reload();
-          }, 2000);
+          setTimeout(function() { window.location.reload(); }, 2000);
           resetCheckBox();
         },
         error:    function() {
@@ -916,15 +926,14 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
-    validateFile = function(fileName, cell, fileId) {
+    validateFile = function(fileName, cell) {
       setCursorToProgress();
       return $.ajax({
         type:     'POST',
         url:      TransferServerURL + 'file/valid',
         data:     {
           token:    tokenTransfer,
-          fileName: fileName,
-          fileId:   fileId
+          fileName: fileName
         },
         success:  function(data) {
           if (data) {
@@ -944,16 +953,17 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     validateAll = function() {
       setCursorToProgress();
+
       return $.ajax({
         type:     'POST',
         url:      TransferServerURL + 'file/multi',
         data:     getFilesID().data,
         success:  function() {
           Utils.smessage(i18n[lang].file.valid, '', 'success', 2000);
-          setTimeout(function() { window.location.reload(); }, 2000);
+          setTimeout(function() {  window.location = TransferBaseURL + 'transferApp.html?validation'; }, 2000);
         },
         error:    function() {
-          Utils.errorMessage(i18n[lang].error5xx, 5000);
+          Utils.errorMessage(i18n[lang].errorValid, 5000);
         },
         complete: function() {
           setCursorToAuto();
@@ -973,7 +983,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           url:        TransferServerURL + 'client/',
           data:       {token: tokenTransfer},
           success:    function(data) {
-            listFolderUpload(data);
+            console.log(data);
           },
           error:      function(data) {
 
@@ -1095,17 +1105,17 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       if (isGMS()) {
         var $validation = $('#validation'),
           $selectClients = $('#clients'),
-          option = document.createElement('option'),
-          s2 = document.getElementById('clients');
+          option = document.createElement('option');
 
         $validation.show();
-        //Add client Select2
-        option.text = i18n[lang].button.client;
-        option.value = ' ';
-        s2.add(option, s2[0]);
-        option.selected = true;
         $selectClients.show();
-        $selectClients.select2();
+        $selectClients.select2({
+          placeholder: i18n[lang].button.client,
+          allowClear: true
+        });
+        $selectClients.on('select2-selecting', function(e) {
+          $('input[name="clientName"]').val(e.choice.id);
+        });
 
         $validation.on('click', menuValidateClick);
       }
@@ -1261,9 +1271,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           function() {
             validateFile($this.data('filename'), $this)
             .then(function resolved(data) {
-                console.log('resolved = ', data);
                 if (!data) {
-                  console.log('OK COWBOY, it\'s false');
+                  Utils.errorMessage(i18n[lang].errorValid, 4000)
                 }
               }, function reject(err) {
                 console.log('reject', err);
@@ -1722,7 +1731,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         TABLEID = '#tableID',
         table = {}, //DataTable object
         oTable = {}, //Jquery Data object
-        i18n = {}, // Language
+        i18n = {}, // Language dictionary
         AjaxData = [], // Data
         category = [], // Data
         refDocUsed = [], // Data
@@ -1763,7 +1772,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         } else {
 
           Utils.errorMessage('ERROR loading language data', 4000);
-          window.location = TransferBaseURL;
+          setTimeout(function() {
+            window.location = TransferBaseURL;
+          }, 4000);
         }
       });
     };

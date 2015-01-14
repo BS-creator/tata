@@ -151,7 +151,7 @@
 
                     <form class="" id="uploadForm" action="/" method="post"
                           enctype="multipart/form-data">
-                      <div class="dir-list">
+                      <div class="dir-list" style="display:none">
                         <!--loop-->
                         <!--<label class="radio control-label"><input type="radio" name="reportory" value="---">dirname</label>-->
                         <!--/loop-->
@@ -160,6 +160,7 @@
                       <p class="text-center">
                         <input name="upload" type="file" multiple="" size="50"/>
                         <input name="token" type="hidden" size="50"/>
+                        <input name="clientName" type="hidden" size="50"/>
                         <br/>
                         <input type="submit" value="Upload" style="display: none;"/>
                       </p>
@@ -279,6 +280,9 @@
 
               <!--refresh & toggle config table-->
               <div class="btn-group pull-right ml-s">
+                <button type="button" class="btn btn-default notify">
+                  &nbsp;&nbsp;&nbsp;NOTIFY
+                </button>
                 <button type="button" class="btn btn-default reloadme">
                   &nbsp;&nbsp;&nbsp;
                 </button>

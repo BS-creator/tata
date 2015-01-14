@@ -79,12 +79,6 @@ $(function(swal, _, Utils) {
            });*/
         } else {
           Utils.errorMessage('Connection problem.', 3000);
-          /*swal({
-           title: "ERROR",
-           text : "Connection problem.",
-           type : "error",
-           timer: 3000
-           });*/
         }
       }
     });
