@@ -1,17 +1,17 @@
-@portalcdn-path: '../../portalcdn/less';
-
-@import "@{portalcdn-path}/port-variables.less";
-@import "@{portalcdn-path}/port-mixins.less";
-
-
+.unselectable {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
 #clients {
   display: none;
 }
-
 .fix-width-select2 {
   min-width: 120px;
 }
-
 .select2-container {
   margin: 0;
   position: relative;
@@ -59,7 +59,26 @@
   user-select: none;
   background-color: #fff;
   background-image: none;
-  .transition(all .4s ease 0s);
+  -webkit-transition-property: all 0.4s ease 0s;
+  -moz-transition-property: all 0.4s ease 0s;
+  -ms-transition-property: all 0.4s ease 0s;
+  -o-transition-property: all 0.4s ease 0s;
+  transition-property: all 0.4s ease 0s;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
 }
 html[dir="rtl"] .select2-container .select2-choice {
   padding: 0 12px 0 0;
@@ -232,7 +251,6 @@ html[dir="rtl"] .select2-search input {
   color: #444;
   border: 1px solid #ADADAD;
   outline: none;
-
 }
 .select2-dropdown-open .select2-choice {
   -webkit-box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.125) inset;

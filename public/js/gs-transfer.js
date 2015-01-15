@@ -972,6 +972,37 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
   // clients list for the GMS user
+    loadClientFiles = function(clientName) {
+
+      if (isGMS()) {
+        return $.ajax({
+          type:       'POST',
+          url:        TransferServerURL + 'file/list/',
+          data:       {
+            token: tokenTransfer,
+            clientName: clientName
+          },
+          success:    function(data) {
+            console.log(data);
+          },
+          error:      function(data) {
+
+          },
+          statusCode: {
+            403: function() {
+              console.log('error loading client');
+              hideLoading();
+              Utils.errorMessage(i18n[lang].errorCnx, 4000);
+            }
+          }
+        });
+      } else {
+        //Not a GMS, pass...
+        return $.Deferred().resolve();
+      }
+    },
+
+  // clients list for the GMS user
     loadClients = function() {
       // @dev-code
       return $.Deferred().resolve();
@@ -1111,10 +1142,18 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         $selectClients.show();
         $selectClients.select2({
           placeholder: i18n[lang].button.client,
-          allowClear: true
-        });
-        $selectClients.on('select2-selecting', function(e) {
-          $('input[name="clientName"]').val(e.choice.id);
+          allowClear: true,
+          data:[
+            {id:'D00000001', text:'D00000001'},
+            {id:'D00000002', text:'D00000002'},
+            {id:'D00000003', text:'D00000003'},
+            {id:'D00000004', text:'D00000004'},
+            {id:'D00000005', text:'D00000005'}]
+        }).on('select2-selecting', function(e) {
+          $('input[name="clientName"]').val(e.val);
+          loadClientFiles(e.val);
+        }).on('select2-removed', function() {
+          $('input[name="clientName"]').val(username);
         });
 
         $validation.on('click', menuValidateClick);
