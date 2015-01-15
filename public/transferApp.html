@@ -189,45 +189,45 @@
           <!--sidenav-->
 
           <div id="sidenav" class="mt-l">
-            <!-- BEGIN: Underscore Template Definition. -->
-            <script id="menuL1" type="text/template" class="template">
-              <ul>
-                <li class="level1">
-                  <a id="root" href="#">[[allDocs]]</a>
-                  <ul>
-                    [[categoryNode]]
-                  </ul>
-                </li>
-                <li id="upload">
-                  <a href="#">[[uploadText]]</a>
-                </li>
-                <li id="validation">
-                  <a href="#">[[validationText]]</a>
-                </li>
-              </ul>
-            </script>
-            <!-- END: Underscore Template Definition. -->
 
-            <!-- BEGIN: Underscore Template Definition. -->
-            <script id="menuL2" type="text/template" class="template">
-              <li class="level2" data-category="[[categoryNumber]]">
-                <a href="#">[[categoryNumber]] - [[categoryName]]</a>
+          </div>
+          <!-- BEGIN: Underscore Template Definition. -->
+          <script id="menuL1" type="text/template" class="template">
+            <ul>
+              <li class="level1">
+                <a id="root" href="#">[[allDocs]]</a>
                 <ul>
-                  [[ leafNode ]]
+                  [[categoryNode]]
                 </ul>
               </li>
-            </script>
-            <!-- END: Underscore Template Definition. -->
-
-            <!-- BEGIN: Underscore Template Definition. -->
-            <script id="menuL3" type="text/template" class="template">
-              <li id="[[referenceDocument]]" data-refdoc="[[referenceDocument]]" class="level3">
-                <a href="#">[[referenceDocument]] - [[typeDocument]]</a>
+              <li id="upload">
+                <a href="#">[[uploadText]]</a>
               </li>
-            </script>
-            <!-- END: Underscore Template Definition. -->
-          </div>
+              <li id="validation">
+                <a href="#">[[validationText]]</a>
+              </li>
+            </ul>
+          </script>
+          <!-- END: Underscore Template Definition. -->
 
+          <!-- BEGIN: Underscore Template Definition. -->
+          <script id="menuL2" type="text/template" class="template">
+            <li class="level2" data-category="[[categoryNumber]]">
+              <a href="#">[[categoryNumber]] - [[categoryName]]</a>
+              <ul>
+                [[ leafNode ]]
+              </ul>
+            </li>
+          </script>
+          <!-- END: Underscore Template Definition. -->
+
+          <!-- BEGIN: Underscore Template Definition. -->
+          <script id="menuL3" type="text/template" class="template">
+            <li id="[[referenceDocument]]" data-refdoc="[[referenceDocument]]" class="level3">
+              <a href="#">[[referenceDocument]] - [[typeDocument]]</a>
+            </li>
+          </script>
+          <!-- END: Underscore Template Definition. -->
           <!--/sidenav-->
 
         </div>
@@ -308,31 +308,7 @@
 
           <table id="tableID" class="display table table-striped">
             <thead>
-            <!-- BEGIN: Underscore Template Definition. -->
-            <script id="headertpl" type="text/template" class="template">
-              <tr>
-                <th><i id="btnSelectAll" class="fa fa-square-o"></i></th>
-                <th class="text-center"><i class="fa fa-download fa-lg"></i></th>
-                <th class="text-center">[[date]]</th>
-                <th>[[name]]</th>
-                <th>[[user]]</th>
-                <th>[[empl]]</th>
-                <th>[[label]]</th>
-                <th>[[refdoc]]</th>
-                <th class="text-right">[[size]]</th>
-                <th class="text-center">[[ext]]</th>
-                <th>[[path]]</th>
-                <th>[[refCl]]</th>
-                <th>[[count]]</th>
-                <th>[[refGS]]</th>
-                <th>[[uploadStamp]]</th>
-                <th class="text-center">[[del]]</th>
-                <th class="text-center">download Count</th>
-                <th class="text-center">isNew</th>
-                <th class="text-center">Validation</th>
-              </tr>
-            </script>
-            <!-- END: Underscore Template Definition. -->
+              <!--TEMPLATE-->
             </thead>
             <tbody>
             <tr class="[[classNew]]">
@@ -362,6 +338,33 @@
             </tr>
             </tbody>
           </table>
+
+          <!-- BEGIN: HEADER: Underscore Template Definition. -->
+          <script id="headertpl" type="text/template" class="template">
+            <tr>
+              <th><i id="btnSelectAll" class="fa fa-square-o"></i></th>
+              <th class="text-center"><i class="fa fa-download fa-lg"></i></th>
+              <th class="text-center">[[date]]</th>
+              <th>[[name]]</th>
+              <th>[[user]]</th>
+              <th>[[empl]]</th>
+              <th>[[label]]</th>
+              <th>[[refdoc]]</th>
+              <th class="text-right">[[size]]</th>
+              <th class="text-center">[[ext]]</th>
+              <th>[[path]]</th>
+              <th>[[refCl]]</th>
+              <th>[[count]]</th>
+              <th>[[refGS]]</th>
+              <th>[[uploadStamp]]</th>
+              <th class="text-center">[[del]]</th>
+              <th class="text-center">download Count</th>
+              <th class="text-center">isNew</th>
+              <th class="text-center">Validation</th>
+            </tr>
+          </script>
+          <!-- END: HEADER: Underscore Template Definition. -->
+
           <!-- BEGIN: Underscore Template Definition. -->
           <script id="bodytpl" type="text/template">
             <tr class="[[classNew]]">

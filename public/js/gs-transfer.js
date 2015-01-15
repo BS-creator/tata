@@ -59,6 +59,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
     mergeLabelDoc = function() {
+      var dfd = new $.Deferred();
 
       _.each(category, function(cat) {
         _.each(AjaxData, function(row) {
@@ -71,6 +72,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           }
         });
       });
+      dfd.resolve('hurray');
+
+      return dfd.promise();
     },
 
     getFilesID = function() {
@@ -984,8 +988,23 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           },
           success:    function(data) {
             console.log(data);
+            //destroy dt
+            table.destroy();
+
+            //add new files from clients.
+            AjaxData = data;
+            $.when(mergeLabelDoc())
+              .then(function() {
+                //RESOLVED
+                createDataTable();
+                createMenu();
+              }, function() {
+                //REJECT
+                console.log('FAILED>>>>');
+              }
+            )
           },
-          error:      function(data) {
+          error:      function(err) {
 
           },
           statusCode: {
@@ -1140,6 +1159,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
         $validation.show();
         $selectClients.show();
+        $selectClients.select2('destroy');
         $selectClients.select2({
           placeholder: i18n[lang].button.client,
           allowClear: true,
@@ -1149,14 +1169,15 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             {id:'D00000003', text:'D00000003'},
             {id:'D00000004', text:'D00000004'},
             {id:'D00000005', text:'D00000005'}]
-        }).on('select2-selecting', function(e) {
+        }).off('select2-selecting').on('select2-selecting', function(e) {
           $('input[name="clientName"]').val(e.val);
           loadClientFiles(e.val);
-        }).on('select2-removed', function() {
+        }).off('select2-removed').on('select2-removed', function() {
           $('input[name="clientName"]').val(username);
+          loadClientFiles(username);
         });
 
-        $validation.on('click', menuValidateClick);
+        $validation.off('click').on('click', menuValidateClick);
       }
     },
 
@@ -1677,7 +1698,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       hideLoading();
 
       //set upload form events
-      $(TABLEID).on('draw.dt', function() {
+      $(TABLEID).off('draw.dt').on('draw.dt', function() {
         setEventCheckBox();
         setEventDeleteFile();
         setEventValidateFile();
@@ -1698,7 +1719,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           console.log('>>> NO files');
         }
 
-      }, 1000);
+      }, 500);
     },
 
     /****************************************************
@@ -1715,7 +1736,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         $.when(loadCategory(), loadData(), loadFolder(), loadClients()).then(function() {
 
           //Add label for reference of Document
-          $.when(mergeLabelDoc()).done(function() {
+          $.when(mergeLabelDoc()).then(function() {
 
             //Template of Table and Menu
             createDataTable();
@@ -1724,7 +1745,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           });
         });
       });
-
     },
 
     portalCnx = function() {
