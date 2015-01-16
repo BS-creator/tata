@@ -122,12 +122,12 @@ var Utils = (function() {
   };
 
   return {
-    smessage:        smessage,
-    errorMessage:    errorMessage,
-    setTransferURL:  setTransferURL,
-    getURLParameter: getURLParameter,
-    endsWith:        endsWith,
-    bytesToSize:     bytesToSize,
+    smessage:             smessage,
+    errorMessage:         errorMessage,
+    setTransferURL:       setTransferURL,
+    getURLParameter:      getURLParameter,
+    endsWith:             endsWith,
+    bytesToSize:          bytesToSize,
     getNavigatorLanguage: getNavigatorLanguage
   }
 }());

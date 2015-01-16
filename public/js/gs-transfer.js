@@ -72,28 +72,34 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           }
         });
       });
-      dfd.resolve('hurray');
+      dfd.resolve();
 
       return dfd.promise();
+    },
+
+    getClientName = function() {
+      var $client = $('input[name="clientName"]');
+      return ($client.val() === username) ? null : $client.val();
     },
 
     getFilesID = function() {
       var array = getSelectedRows(),
         listID = '',
         it = null,
-        fileNumber = 0;
+        countFile = 0;
 
       _.forEach(array, function(item) {
         it = $(item[1].display);
         listID += it.data('file-id') + '&' + it.data('filename') + '@!';
-        fileNumber++;
+        countFile++;
       });
 
       return {
-        fileNumber: fileNumber,
+        countFile: countFile,
         data:       {
           token:  tokenTransfer,
-          fileID: listID
+          fileID: listID,
+          clientName: getClientName()
         }
       };
     },
@@ -201,7 +207,28 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       return value.replace('/data/' + username + '/', '');
     },
     getSelectedRows = function() {
-      return table.rows('.active').data();
+      return table.rows('.active', {search: 'applied'}).data();
+    },
+
+    reloadNewData = function(data) {
+      //destroy dt
+      table.destroy();
+
+      //console.log('RELOAD AjaxData', AjaxData);
+      //console.log('RELOAD data', data);
+      //add new files from clients.
+      AjaxData = (data.target) ? AjaxData : (data || AjaxData);
+
+      $.when(mergeLabelDoc())
+        .then(function() {
+          //RESOLVED
+          createDataTable();
+          createMenu();
+        }, function() {
+          //REJECT
+          console.log('>>>>> ERR: FAILED');
+        }
+      )
     },
 
     /****************************************************
@@ -334,10 +361,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         filename,
         form;
 
-      if (params.fileNumber === 0) {
+      if (params.countFile === 0) {
         Utils.errorMessage(i18n[lang].file.noselect, 3000);
 
-      } else if (params.fileNumber === 1) {
+      } else if (params.countFile === 1) {
         fileID = params.data.fileID.slice(0, params.data.fileID.indexOf('&'));
         filename = params.data.fileID.slice(
           params.data.fileID.indexOf('&') + 1,
@@ -359,7 +386,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
         $('body').append(form);
 
-        Utils.smessage(i18n[lang].file.dl, '', 'warning', (params.fileNumber * 1200));
+        Utils.smessage(i18n[lang].file.dl, '', 'warning', (params.countFile * 1200));
         // about 1,2 seconds per files (õ_ó) .... it's a good guess, what a shame... (╯_╰”)
 
         incrementAllSelectedRows();
@@ -472,8 +499,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('#validation').removeClass('active');
       resetFilters();
       table.columns('.detailsLayer').visible(false, false);
-      table.columns('.fileLayer').visible(true, false);
       table.columns('.validation').visible(false, false);
+      table.columns('.fileLayer').visible(true, false);
       // adjust column sizing and redraw
       table.columns.adjust().draw(false);
       //filter on uploadUserName
@@ -488,9 +515,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('#upload').removeClass('active');
       $('#validation').removeClass('active');
       resetFilters();
-      table.columns('.detailsLayer').visible(true, false);
       table.columns('.fileLayer').visible(false, false);
       table.columns('.validation').visible(false, false);
+      table.columns('.detailsLayer').visible(true, false);
       table.columns.adjust().draw(false); // adjust column sizing and redraw
       table
         .column(4).search('[^' + username + ']', true, false)
@@ -508,9 +535,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('#upload').addClass('active');
       $('#validation').removeClass('active');
       resetFilters();
-      table.columns('.detailsLayer').visible(true, false);
       table.columns('.fileLayer').visible(false, false);
       table.columns('.validation').visible(false, false);
+      table.columns('.detailsLayer').visible(true, false);
       table.columns.adjust().draw(false); // adjust column sizing and redraw
       table.column(4).search(username).draw(); //filter on uploadUserName
       $('[class^=level] .active').removeClass('active');
@@ -525,8 +552,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('#validation').removeClass('active');
       resetFilters();
       table.columns('.detailsLayer').visible(false, false);
-      table.columns('.fileLayer').visible(true, false);
       table.columns('.validation').visible(false, false);
+      table.columns('.fileLayer').visible(true, false);
       var $this = $(event.currentTarget).parent('li'),
         levl3 = $this.find('.level3'), //list children
         numDocRegex = '(',
@@ -764,7 +791,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             targets:   2 // Date
           },
           {
-            className:  'detailsLayer',
+            className:  'detailsLayer ',
             targets:    3, // fileName
             visible:    false,
             searchable: true
@@ -796,7 +823,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             targets:   9 //extension or type
           },
           {
-            className:  'detailsLayer',
+            className:  'detailsLayer validation',
             targets:    10, //path
             visible:    false,
             searchable: true
@@ -817,6 +844,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             searchable: false
           },
           {
+            className: 'validation',
             targets:    14, //uploadStamp
             visible:    false,
             searchable: true
@@ -937,7 +965,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         url:      TransferServerURL + 'file/valid',
         data:     {
           token:    tokenTransfer,
-          fileName: fileName
+          fileName: fileName,
+          clientName: getClientName()
         },
         success:  function(data) {
           if (data) {
@@ -986,30 +1015,13 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             token: tokenTransfer,
             clientName: clientName
           },
-          success:    function(data) {
-            console.log(data);
-            //destroy dt
-            table.destroy();
-
-            //add new files from clients.
-            AjaxData = data;
-            $.when(mergeLabelDoc())
-              .then(function() {
-                //RESOLVED
-                createDataTable();
-                createMenu();
-              }, function() {
-                //REJECT
-                console.log('FAILED>>>>');
-              }
-            )
-          },
+          success:    reloadNewData,
           error:      function(err) {
-
+            console.log('>>>>> ERR:', err);
           },
           statusCode: {
             403: function() {
-              console.log('error loading client');
+              console.log('ERROR: loading client files');
               hideLoading();
               Utils.errorMessage(i18n[lang].errorCnx, 4000);
             }
@@ -1040,7 +1052,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           },
           statusCode: {
             403: function() {
-              console.log('error loading client');
+              console.log('ERROR: loading client');
               hideLoading();
               Utils.errorMessage(i18n[lang].errorCnx, 4000);
             }
@@ -1144,7 +1156,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       table.columns('.fileLayer').visible(true, false);
       table.columns('.validation').visible(true, false);
       table.columns.adjust().draw(false); // adjust column sizing and redraw
-      table.column(10).search('^' + 'Validation\/', true, false).draw(); //filter on uploadUserName
+      table.column(10).search('Validation\/', true, false).draw(); //filter on Validation Folder
       $('[class^=level] .active').removeClass('active');
       setBreadCrumb(i18n[lang].tree.valid);
       updateMenuVisibleColumnList();
@@ -1158,6 +1170,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           option = document.createElement('option');
 
         $validation.show();
+        $validation.children('a').off('click').on('click', menuValidateClick);
+
         $selectClients.show();
         $selectClients.select2('destroy');
         $selectClients.select2({
@@ -1171,13 +1185,14 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             {id:'D00000005', text:'D00000005'}]
         }).off('select2-selecting').on('select2-selecting', function(e) {
           $('input[name="clientName"]').val(e.val);
-          loadClientFiles(e.val);
+          loadClientFiles(e.val)
+            .then(function() {
+              $validation.children('a').trigger('click');
+            });
         }).off('select2-removed').on('select2-removed', function() {
           $('input[name="clientName"]').val(username);
           loadClientFiles(username);
         });
-
-        $validation.off('click').on('click', menuValidateClick);
       }
     },
 
@@ -1488,10 +1503,11 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     setEventReload = function() {
       var reloadBtn = $('.reloadme');
       reloadBtn.html('<i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.reload);
-      reloadBtn.off('click').on('click', function() {
+      /*reloadBtn.off('click').on('click', function() {
         window.location = TransferBaseURL + 'transferApp.html';
         //window.location.reload();
-      });
+      });*/
+      reloadBtn.off('click').on('click', reloadNewData);
     },
 
     setI18nDatePicker = function() {
