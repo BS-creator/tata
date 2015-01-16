@@ -1,2 +1,2 @@
 #!/bin/sh
-rsync -rz public/ sdmo:/var/www/itransfer/
+rsync -rz public/ sdmo:/var/www/prestaweb/transfer/
