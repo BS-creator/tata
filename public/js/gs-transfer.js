@@ -409,7 +409,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       var $uploadform = $('#uploadForm'),
         activeUploads = null;
       $('input[name="token"]').val(tokenTransfer);
-      $('input[name="clientName"]').val(username);
 
       $uploadform.attr('action', TransferServerURL + 'file/upload');
 
@@ -424,9 +423,13 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         },
         add:         function(e, data) {
           //TODO: add it to the list
+          /*var $uploadList = $('#uploadList');
+          _.forEach(data.files, function(file) {
+            $uploadList.append('<li>' + file.name + '</li>');
+          });*/
           data.submit()
             .error(function(jqXHR) {
-              Utils.errorMessage('Error... ', 4000);
+              Utils.errorMessage('Error... ' + jqXHR.textStatus, 4000);
             })
             .success(function() {
               activeUploads = $uploadform.fileupload('active');
@@ -442,7 +445,11 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             $('#progress').hide();
             $('.close').click();
             Utils.smessage('OK', ' ', 'success', 4000);
-            setTimeout(function() { window.location = TransferBaseURL + 'transferApp.html?upload'; }, 4000);
+            if ($('input[name="notification"]').prop('checked')) {
+              postNotification().then(function() { console.log('notification sent'); });
+            } else {
+              setTimeout(function() {  window.location = TransferBaseURL + 'transferApp.html?upload'; }, 4000);
+            }
           }
         }
       });
@@ -490,8 +497,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         $('#breadcrumb').html(i18n[lang].result + '<li class="active noclick">' + text +
         '</li><li class="active noclick">' + textChild + '</li>');
       } else if (text) {
-        $('#breadcrumb').html(i18n[lang].result + '<li class="active noclick">' + text +
-        '</li>');
+        $('#breadcrumb').html(i18n[lang].result + '<li class="active noclick">' + text + '</li>');
       } else {
         console.log('error Setting BreadCrumb.');
       }
@@ -1008,6 +1014,32 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
+    postNotification = function() {
+      setCursorToProgress();
+
+      var params = {
+        token: tokenTransfer,
+        clientName: getClientName(),
+        lang: lang
+      };
+
+      return $.ajax({
+        type:     'POST',
+        url:      TransferServerURL + 'notification/',
+        data:     params,
+        success:  function() {
+          //Utils.smessage(i18n[lang].file.XXX, '', 'success', 2000);
+          setTimeout(function() {  window.location = TransferBaseURL + 'transferApp.html?upload'; }, 2000);
+        },
+        error:    function() {
+          Utils.errorMessage(i18n[lang].noNotif, 5000);
+        },
+        complete: function() {
+          setCursorToAuto();
+        }
+      });
+    },
+
   // clients list for the GMS user
     loadClientFiles = function(clientName) {
       showLoading();
@@ -1272,8 +1304,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     /***** UPLOAD *****/
     setI18nUpload = function() {
       //TODO: put it in CSS, just use it to translate!!!
-      $('#btn-upload-div').find('span').html('<i class="fa fa-upload"></i>&nbsp;&nbsp;' + i18n[
-        lang].upload);
+      $('#btn-upload-div').find('span').html('<i class="fa fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].upload);
       $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].modalupload);
       $('#modalbq').html(i18n[lang].modalbq);
       $('input[type=file]').bootstrapFileInput(i18n[lang].modalbtn);
@@ -1747,31 +1778,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       }, 500);
     },
 
-    /****************************************************
-     * MAIN
-     * */
-    render = function() {
-      showLoading();
-      setEventPreData();
-
-      //console.log(tokenPortal);
-
-      $.when(portalCnx()).then(function() {
-
-        $.when(loadCategory(), loadData(), loadFolder(), loadClients()).then(function() {
-
-          //Add label for reference of Document
-          $.when(mergeLabelDoc()).then(function() {
-
-            //Template of Table and Menu
-            createDataTable();
-            createMenu();
-
-          });
-        });
-      });
-    },
-
     portalCnx = function() {
 
       var url = TransferServerURL + 'login/portal/';
@@ -1806,12 +1812,37 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       }
     },
 
+    /****************************************************
+     * MAIN
+     * */
+    render = function() {
+      showLoading();
+      setEventPreData();
+
+      //console.log(tokenPortal);
+
+      $.when(portalCnx()).then(function() {
+
+        $.when(loadCategory(), loadData(), loadFolder(), loadClients()).then(function() {
+
+          //Add label for reference of Document
+          $.when(mergeLabelDoc()).then(function() {
+
+            //Template of Table and Menu
+            createDataTable();
+            createMenu();
+
+          });
+        });
+      });
+    },
+
     main = function() {
 
       Utils.setTransferURL();
       TransferServerURL = sessionStorage.getItem('TransferServerURL'),
         TransferBaseURL = sessionStorage.getItem('TransferBaseURL'),
-        lang = sessionStorage.getItem('lang') || localStorage.lastLanguage,
+        lang = sessionStorage.getItem('lang') || localStorage.lastLanguage || localStorage.lang,
         TABLEID = '#tableID',
         table = {}, //DataTable object
         oTable = {}, //Jquery Data object

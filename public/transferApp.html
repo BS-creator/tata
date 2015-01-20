@@ -132,14 +132,11 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="uploadFiles" tabindex="-1" role="dialog"
-                 aria-labelledby="uploadFiles1"
-                 aria-hidden="true">
+            <div class="modal fade" id="uploadFiles" tabindex="-1" role="dialog" aria-labelledby="uploadFiles1" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-hidden="true">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 id="modalh4" class="modal-title text-muted text-center"></h4>
                   </div>
 
@@ -148,27 +145,33 @@
                     <blockquote id="modalbq" class="text-muted text-info">
 
                     </blockquote>
-
+                    <input name="notification" type="checkbox" /> NOTIFY USER
                     <form class="" id="uploadForm" action="/" method="post"
                           enctype="multipart/form-data">
-                      <!--MUST BE IN THE FORM-->
-                      <input name="notification" type="checkbox" /> NOTIFY USER
-                      <!--DEPRECATED-->
+
+                      <!-- dir-list: DEPRECATED-->
                       <div class="dir-list" style="display:none">
                         <!--loop-->
                         <!--<label class="radio control-label"><input type="radio" name="reportory" value="---">dirname</label>-->
                         <!--/loop-->
                       </div>
 
+                      <div>
+                        <ul id="uploadList">
+                          <!-- filled by JavaScript -->
+                        </ul>
+                      </div>
+
                       <p class="text-center">
                         <input name="upload" type="file" multiple="" size="50"/>
                         <input name="token" type="hidden" size="50"/>
-                        <input name="lang" type="hidden" value=""/>
                         <input name="clientName" type="hidden" size="50"/>
+                        <input name="lang" type="hidden" value=""/>
                         <br/>
-                        <input type="submit" value="Upload" style="display: none;"/>
+                        <input type="submit" value="Upload" style="display: none;" />
                       </p>
                     </form>
+
                     <div class="row">
                       <div class="col-md-offset-2 col-md-8 col-xs-12">
                         <div id="files" class="files">
