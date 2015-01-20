@@ -45,6 +45,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       return (username && username.toUpperCase().indexOf('GMS') === 0);
     },
 
+    getPDFjsURL = function(serverURL, tokenTransfer, fileID, filename) {
+      return TransferBaseURL  + '../cdn/pdfjs/1.0.907/web/viewer.html?file=' + serverURL + 'file/' + tokenTransfer + '/' + fileID + '/' + filename;
+    },
+
     getUsedDocRef = function(data) {
       var a = [];
       _.each(data, function(item) {
@@ -325,8 +329,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         fileID = $this.data('file-id'),
         url = TransferServerURL + 'file/' + tokenTransfer + '/' + fileID + '/' + filename;
 
-      if (endsWith(filename, '.PDF') || endsWith(filename, '.pdf')) {
-        url = TransferBaseURL + '../cdn/pdfjs/1.0.712/web/viewer.html?file=' + url;
+      if (filename && (Utils.endsWith(filename, '.PDF') || Utils.endsWith(filename, '.pdf'))) {
+        url = getPDFjsURL(TransferServerURL, tokenTransfer, fileID, filename);
         window.open(url, '_blank');
       } else {
         Utils.smessage(i18n[lang].file.dl, '', 'warning', 4000);
@@ -1006,7 +1010,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
   // clients list for the GMS user
     loadClientFiles = function(clientName) {
-
+      showLoading();
       if (isGMS()) {
         return $.ajax({
           type:       'POST',
@@ -1017,7 +1021,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           },
           success:    reloadNewData,
           error:      function(err) {
-            console.log('>>>>> ERR:', err);
+            console.log('>>>>> ERR:', JSON.stringify(err));
           },
           statusCode: {
             403: function() {
@@ -1064,11 +1068,15 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       }
     },
 
-    // list of folder to upload files to.
+    /**
+     * @Deprecated
+     *  list of folder to upload files to.
+     *  */
     loadFolder = function() {
 
-      // if(token){ console.log("token = "+token +" defined ==> OK");}
-      return $.ajax({
+      return $.Deferred().resolve(); //DEPRECATED
+
+    /*  return $.ajax({
         type:       'POST',
         url:        TransferServerURL + 'folder/',
         data:       {token: tokenTransfer},
@@ -1082,7 +1090,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             Utils.errorMessage(i18n[lang].errorCnx, 4000);
           }
         }
-      });
+      });*/
     },
 
     // Category of type of document in central db
@@ -1170,7 +1178,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           option = document.createElement('option');
 
         $validation.show();
-        $validation.children('a').off('click').on('click', menuValidateClick);
+        $validation.find('a').off('click').on('click', menuValidateClick);
 
         $selectClients.show();
         $selectClients.select2('destroy');
@@ -1187,7 +1195,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           $('input[name="clientName"]').val(e.val);
           loadClientFiles(e.val)
             .then(function() {
-              $validation.children('a').trigger('click');
+              // doesn't work
+              //$('#validation').find('a').trigger('click');
             });
         }).off('select2-removed').on('select2-removed', function() {
           $('input[name="clientName"]').val(username);
@@ -1842,6 +1851,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         }
 
         if (i18n[lang]) { // if language is set,
+          $('input[name="lang"]').val(lang);
           // load data and create table
           render();
         } else {
@@ -1855,7 +1865,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     };
 
   //TODO: replace by module design pattern
-  $('document').ready(main());
+  $(main());
 
   return {
     signOut:                     signOut,

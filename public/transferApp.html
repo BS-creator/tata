@@ -151,6 +151,9 @@
 
                     <form class="" id="uploadForm" action="/" method="post"
                           enctype="multipart/form-data">
+                      <!--MUST BE IN THE FORM-->
+                      <input name="notification" type="checkbox" /> NOTIFY USER
+                      <!--DEPRECATED-->
                       <div class="dir-list" style="display:none">
                         <!--loop-->
                         <!--<label class="radio control-label"><input type="radio" name="reportory" value="---">dirname</label>-->
@@ -160,6 +163,7 @@
                       <p class="text-center">
                         <input name="upload" type="file" multiple="" size="50"/>
                         <input name="token" type="hidden" size="50"/>
+                        <input name="lang" type="hidden" value=""/>
                         <input name="clientName" type="hidden" size="50"/>
                         <br/>
                         <input type="submit" value="Upload" style="display: none;"/>
@@ -387,10 +391,21 @@
               <td>[[counter]]</td>
               <td>[[referenceGroupS]]</td>
               <td data-order="[[uploadStampOrder]]" class="text-center"><span style="display:none">[[uploadStampOrder]] </span>[[uploadStamp]]</td>
-              <td class="text-center"><a class="remove" title="Remove" data-file-id="[[fileId]]"><i class="fa fa-trash fa-lg"></i></a></td>
+              <td class="text-center"><a class="remove" title="Remove" data-file-id="[[fileId]]">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-square fa-stack-2x"></i>
+                    <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                  </span></a>
+                <!--<i class="fa fa-trash fa-lg"></i></a></td>-->
               <td class="text-center">[[downloadCount]]</td>
               <td class="text-center">[[isNew]]</td>
-              <td class="text-center"><a class="icon-validation" title="Validation" data-file-id="[[fileId]]" data-filename="[[fileName]]"><i class="fa fa-check fa-lg"></i></a></td>
+              <td class="text-center">
+                <a class="icon-validation" title="Validation" data-file-id="[[fileId]]" data-filename="[[fileName]]">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-square fa-stack-2x"></i>
+                    <i class="fa fa-check-square-o fa-stack-1x fa-inverse"></i>
+                  </span></a>
+              </td>
             </tr>
           </script>
           <!-- END: Underscore Template Definition. -->

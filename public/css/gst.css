@@ -6,6 +6,12 @@
 /* @author  :   Gilles Collard - Group S */
 /* @date    :   2014-10 */
 /* @version :   BETA 1.0 */
+.focus-100:hover,
+.focus-100:focus,
+.focus-100:active,
+.focus-100.active {
+  opacity: 1;
+}
 .unselectable {
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -1521,28 +1527,28 @@ table tr th .pw-btn-group-th .pw-btn-th,
   border-color: #00c27b;
 }
 .btn-portal-red {
-  background-color: #cc3847;
-  border-color: #cc3847;
+  background-color: #f50a87;
+  border-color: #f50a87;
   color: #FFF;
 }
 .btn-portal-red:hover,
 .btn-portal-red:focus,
 .btn-portal-red:active,
 .btn-portal-red.active {
-  background-color: #d14d5a;
-  border-color: #d14d5a;
+  background-color: #f62393;
+  border-color: #f62393;
 }
 .btn-portal-lightblue {
-  background-color: #2b84a6;
-  border-color: #2b84a6;
+  background-color: #08c460;
+  border-color: #08c460;
   color: #FFF;
 }
 .btn-portal-lightblue:hover,
 .btn-portal-lightblue:focus,
 .btn-portal-lightblue:active,
 .btn-portal-lightblue.active {
-  background-color: #329bc2;
-  border-color: #329bc2;
+  background-color: #09e671;
+  border-color: #09e671;
 }
 /**********************************************
                     DOWNLOAD BUTTON
@@ -1556,6 +1562,7 @@ table tr th .pw-btn-group-th .pw-btn-th,
 .fa-trash,
 .fa-check,
 .fa-square-o,
-.facheck-square-o {
+.fa-check-square-o,
+span.fa-stack {
   cursor: pointer !important;
 }
