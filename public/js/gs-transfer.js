@@ -1,7 +1,7 @@
 /**
  * Created by bisconti on 29/08/14.
  */
-/*globals _, moment, introJs, swal*/
+/*globals $, _, moment, introJs, swal, console, Utils */
 var gsTransfer = (function(_, moment, introJs, swal, Utils) {
   'use strict';
 
@@ -232,7 +232,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           //REJECT
           console.log('>>>>> ERR: FAILED');
         }
-      )
+      );
     },
 
     /****************************************************
@@ -434,7 +434,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             .success(function() {
               activeUploads = $uploadform.fileupload('active');
               //console.log( "activeUploads = ", activeUploads );
-            })
+            });
         },
         start:       function() {
           $('#progress').show();
@@ -455,7 +455,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
-    listFolderUpload = function(destFolders) {
+/*    listFolderUpload = function(destFolders) {
       var listFolder = $('#uploadForm').find('div.dir-list'), key;
       for (key in destFolders) {
         listFolder.append(
@@ -465,7 +465,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           destFolders[key] + '/</label>'
         );
       }
-    },
+    },*/
 
     /****************************************************
      * MENU
@@ -1075,7 +1075,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       return $.Deferred().resolve();
       //setEventGMS
 
-      if (isGMS()) {
+/*      if (isGMS()) {
         return $.ajax({
           type:       'POST',
           url:        TransferServerURL + 'client/',
@@ -1097,7 +1097,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       } else {
         //Not a GMS, pass...
         return $.Deferred().resolve();
-      }
+      }*/
     },
 
     /**
@@ -1387,7 +1387,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             validateFile($this.data('filename'), $this)
             .then(function resolved(data) {
                 if (!data) {
-                  Utils.errorMessage(i18n[lang].errorValid, 4000)
+                  Utils.errorMessage(i18n[lang].errorValid, 4000);
                 }
               }, function reject(err) {
                 console.log('reject', err);
@@ -1684,12 +1684,12 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
               element:  '#toggle-side-menu',
               intro:    i18n[lang].help.columnMenu,
               position: 'left'
-            },
+            }/*,
             {
               element:  '#signout',
               intro:    i18n[lang].help.logoff,
               position: 'left'
-            }
+            }*/
           ]
         });
         intro.setOption('skipLabel', '');
@@ -1850,10 +1850,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         AjaxData = [], // Data
         category = [], // Data
         refDocUsed = [], // Data
-        numberCol = 18,
         username = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '',
-        tokenTransfer = sessionStorage.getItem('tokenTransfer'),
-        tokenPortal = sessionStorage.getItem('token');
+        numberCol = 18,
+        tokenPortal = sessionStorage.getItem('token'),
+        tokenTransfer = sessionStorage.getItem('tokenTransfer');
 
       $('[rel="tooltip"]').tooltip();
 
