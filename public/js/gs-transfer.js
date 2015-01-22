@@ -42,8 +42,14 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     tokenPortal = sessionStorage.getItem('token'),
     clientList = [],
 
+    /*** HELPER ***/
     isGMS = function() {
       return (username && username.toUpperCase().indexOf('GMS') === 0);
+    },
+
+    getClientName = function() {
+      var $client = $('input[name="clientName"]');
+      return ($client.val() === username) ? false : $client.val();
     },
 
     getPDFjsURL = function(serverURL, tokenTransfer, fileID, filename) {
@@ -80,11 +86,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       dfd.resolve();
 
       return dfd.promise();
-    },
-
-    getClientName = function() {
-      var $client = $('input[name="clientName"]');
-      return ($client.val() === username) ? null : $client.val();
     },
 
     getFilesID = function() {
@@ -408,14 +409,22 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     setEventuploadForm = function() {
       // set token for upload
       var $uploadform = $('#uploadForm'),
-        activeUploads = null;
+        activeUploads = null,
+        listFolder;
       $('input[name="token"]').val(tokenTransfer);
 
       $uploadform.attr('action', TransferServerURL + 'file/upload');
 
-      if (localStorage.country === 'BE' && isGMS()) {
+      if (localStorage.country === 'FR' && isGMS()) {
         $('input[name="notification"]').show();
         $('#notification').text(i18n[lang].notification);
+        listFolder = $uploadform.find('div.dir-list');
+        listFolder.html('');
+        _.forEach(i18n[lang].dirlist, function(v, k) {
+          listFolder.append('<label class="radio"><input name="destFolder" value="' + k + '" type="radio" />' +
+          v + '</label>');
+        });
+
       }
 
       $uploadform.fileupload({
@@ -677,9 +686,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     filterMenu = function() {
       refDocUsed = getUsedDocRef(AjaxData);
       return _.groupBy(_.filter(category, function(obj) {
-        if (_.contains(refDocUsed, parseInt(obj.referenceDocument))) {
-          return obj;
-        }
+        if (_.contains(refDocUsed, parseInt(obj.referenceDocument))) { return obj; }
       }), function(obj) {
         return obj.categoryNumber;
       });
@@ -1901,6 +1908,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
   $(main());
 
   return {
+    i18n:                        i18n,
     signOut:                     signOut,
     getFilesID:                  getFilesID,
     getSelectedRows:             getSelectedRows,

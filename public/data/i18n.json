@@ -24,6 +24,12 @@
       "table":      "../cdn/DataTables/1.10.4/resources/language/FR.json",
       "datepicker": "../cdn/bootstrap/locale/bootstrap-datepicker.fr.js"
     },
+    "dirlist":      {
+      "PPP": "Paie & Post-Paie",
+      "GES": "Gestion des entrées & sorties",
+      "GAR": "Gestion des arrêts",
+      "GAD": "Gestion administative"
+    },
     "col":          {
       "new":         "Nouveau",
       "date":        "Date",
