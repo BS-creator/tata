@@ -72,7 +72,7 @@ var Utils = (function() {
         sessionStorage.setItem('country', 'BE');
 
       } else if (_.contains(url, 'deviapps')) {
-        sessionStorage.setItem('TransferBaseURL', '//deviapps.groups.be/transfer/public/');
+        sessionStorage.setItem('TransferBaseURL', '//deviapps.groups.be/prestaweb/transfer/');
         sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
         sessionStorage.setItem('country', 'BE');
       } else if (_.contains(url, 'qaiapps')) {

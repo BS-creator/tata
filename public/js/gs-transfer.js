@@ -40,6 +40,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     username = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '',
     tokenTransfer = sessionStorage.getItem('tokenTransfer'),
     tokenPortal = sessionStorage.getItem('token'),
+    clientList = [],
 
     isGMS = function() {
       return (username && username.toUpperCase().indexOf('GMS') === 0);
@@ -411,6 +412,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('input[name="token"]').val(tokenTransfer);
 
       $uploadform.attr('action', TransferServerURL + 'file/upload');
+
+      if (localStorage.country === 'FR' && isGMS()) {
+        $('input[name="notification"]').show()
+      }
 
       $uploadform.fileupload({
 
@@ -1040,7 +1045,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
-  // clients list for the GMS user
+  // clients' file list for the GMS user
     loadClientFiles = function(clientName) {
       showLoading();
       if (isGMS()) {
@@ -1069,35 +1074,33 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       }
     },
 
-  // clients list for the GMS user
+  // clients login list for the GMS user
     loadClients = function() {
-      // @dev-code
-      return $.Deferred().resolve();
-      //setEventGMS
 
-/*      if (isGMS()) {
+      var i, len;
+
+      if (isGMS()) {
         return $.ajax({
           type:       'POST',
           url:        TransferServerURL + 'client/',
           data:       {token: tokenTransfer},
           success:    function(data) {
-            console.log(data);
-          },
-          error:      function(data) {
-
-          },
-          statusCode: {
-            403: function() {
-              console.log('ERROR: loading client');
-              hideLoading();
-              Utils.errorMessage(i18n[lang].errorCnx, 4000);
+            len = (data) ? data.length : 0;
+            for (i = 0; i < len; i++) {
+              clientList.push({id: data[i], text: data[i]});
             }
+          },
+          error:      function(err) {
+            console.log('No Clients: ' + err);
+            /*console.log('ERROR: loading client');
+            hideLoading();
+            Utils.errorMessage(i18n[lang].errorCnx, 4000);*/
           }
         });
       } else {
         //Not a GMS, pass...
         return $.Deferred().resolve();
-      }*/
+      }
     },
 
     /**
@@ -1217,12 +1220,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         $selectClients.select2({
           placeholder: i18n[lang].button.client,
           allowClear: true,
-          data:[
-            {id:'D00000001', text:'D00000001'},
-            {id:'D00000002', text:'D00000002'},
-            {id:'D00000003', text:'D00000003'},
-            {id:'D00000004', text:'D00000004'},
-            {id:'D00000005', text:'D00000005'}]
+          data: clientList
         }).off('select2-selecting').on('select2-selecting', function(e) {
           $('input[name="clientName"]').val(e.val);
           loadClientFiles(e.val)
