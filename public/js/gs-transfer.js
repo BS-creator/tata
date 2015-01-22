@@ -58,7 +58,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     getUsedDocRef = function(data) {
       var a = [];
-      _.each(data, function(item) {
+      _.forEach(data, function(item) {
         var ref = parseInt(item.referenceDocument);
         if (!isNaN(ref) && username !== item.uploadUserName) {
           a.push(ref);
@@ -72,8 +72,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     mergeLabelDoc = function() {
       var dfd = new $.Deferred();
 
-      _.each(category, function(cat) {
-        _.each(AjaxData, function(row) {
+      _.forEach(category, function(cat) {
+        _.forEach(AjaxData, function(row) {
           if (cat.referenceDocument === parseInt(row.referenceDocument)) {
             row.label = labelDocI18n(cat);
           } else {
@@ -207,7 +207,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       } else {
         return val;
       }
-      //return bytesToSize(val);
     },
     formatPath = function(value) {
       return value.replace('/data/' + username + '/', '');
@@ -220,8 +219,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       //destroy dt
       table.destroy();
 
-      //console.log('RELOAD AjaxData', AjaxData);
-      //console.log('RELOAD data', data);
       //add new files from clients.
       AjaxData = (data.target) ? AjaxData : (data || AjaxData);
 
@@ -645,7 +642,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         currentCat = '',
         currentCatLabel = '',
         createLeafNode = _.template($('#menuL3').html()),
-        createCategoryNode = _.template($('#menuL2').html());
+        createCategoryNode = _.template($('#menuL2').html()),
+        createCategoryFRNode = _.template($('#menuFR').html());
 
       _.forEach(menu, function(catArray) {
         _.forEach(catArray, function(item) {
@@ -690,6 +688,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       }), function(obj) {
         return obj.categoryNumber;
       });
+    },
+
+    filterMenuCatFR = function() {
+      return _.groupBy()
     },
 
     createMenu = function createMenu() {
@@ -1909,6 +1911,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
   return {
     i18n:                        i18n,
+    filterMenu:                  filterMenu,
     signOut:                     signOut,
     getFilesID:                  getFilesID,
     getSelectedRows:             getSelectedRows,
