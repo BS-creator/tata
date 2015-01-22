@@ -413,8 +413,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       $uploadform.attr('action', TransferServerURL + 'file/upload');
 
-      if (localStorage.country === 'FR' && isGMS()) {
-        $('input[name="notification"]').show()
+      if (localStorage.country === 'BE' && isGMS()) {
+        $('input[name="notification"]').show();
+        $('#notification').text(i18n[lang].notification);
       }
 
       $uploadform.fileupload({
@@ -1085,9 +1086,12 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           url:        TransferServerURL + 'client/',
           data:       {token: tokenTransfer},
           success:    function(data) {
-            len = (data) ? data.length : 0;
+            len = ((data) ? data.length : 0);
             for (i = 0; i < len; i++) {
-              clientList.push({id: data[i], text: data[i]});
+              clientList.push({
+                id: data[i].clientLogin,
+                text: data[i]['label' + lang.charAt(0).toUpperCase()]
+              });
             }
           },
           error:      function(err) {
@@ -1769,7 +1773,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         setI18nQuotaWarning();
 
         if (AjaxData.length === 0) {
-          $('#btn-upload-div').trigger('click');
+          //$('#btn-upload-div').trigger('click');
           console.log('>>> NO files');
         }
 

@@ -1,3 +1,9 @@
+.focus-100:hover,
+.focus-100:focus,
+.focus-100:active,
+.focus-100.active {
+  opacity: 1;
+}
 .unselectable {
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -10,7 +16,7 @@
   display: none;
 }
 .fix-width-select2 {
-  min-width: 120px;
+  min-width: 320px;
 }
 .select2-container {
   margin: 0;
