@@ -732,14 +732,26 @@ td#top-nav ul:not(i) {
 }
 #signout,
 #toggle-side-menu {
-  -webkit-transition: all 0.5s ease;
-  /* Safari 3.2+, Chrome */
-  -moz-transition: all 0.5s ease;
-  /* Firefox 4-15 */
-  -o-transition: all 0.5s ease;
-  /* Opera 10.5-12.00 */
-  transition: all 0.5s ease;
-  /* Firefox 16+, Opera 12.50+ */
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
 }
 #signout:hover,
 #signout:focus,
@@ -780,14 +792,26 @@ input[type=text] {
   color: #999;
   border: 1px solid #ccc;
   /* transition */
-  -webkit-transition: all 0.4s ease;
-  /* Safari 3.2+, Chrome */
-  -moz-transition: all 0.4s ease;
-  /* Firefox 4-15 */
-  -o-transition: all 0.4s ease;
-  /* Opera 10.5-12.00 */
-  transition: all 0.4s ease;
-  /* Firefox 16+, Opera 12.50+ */
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
   opacity: 1;
 }
 input:hover,
@@ -802,7 +826,7 @@ BREADCRUMP
 **********************************************/
 #breadcrumb {
   display: table-cell;
-  line-height: 31px;
+  line-height: 30px;
 }
 #breadcrumb li {
   margin: 0;
@@ -858,6 +882,46 @@ LOADER
 #sidenav ul {
   padding: 0;
 }
+.level0 {
+  font-size: 14px;
+  line-height: 50px;
+  color: #fff;
+  background-color: #086cc4;
+  padding-left: 19px;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
+}
+.level0:before {
+  font-family: FontAwesome;
+  content: "\f114";
+}
+.level0:hover,
+.level0:focus,
+.level0:active {
+  background-color: #097ce1;
+}
+.level0.active:before {
+  font-family: FontAwesome;
+  content: "\f115";
+}
 #upload,
 #validation {
   margin-top: 30.1px !important;
@@ -867,14 +931,26 @@ LOADER
 li.level1 > a {
   font-size: 14px;
   /* transition */
-  -webkit-transition: all 0.4s ease;
-  /* Safari 3.2+, Chrome */
-  -moz-transition: all 0.4s ease;
-  /* Firefox 4-15 */
-  -o-transition: all 0.4s ease;
-  /* Opera 10.5-12.00 */
-  transition: all 0.4s ease;
-  /* Firefox 16+, Opera 12.50+ */
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
 }
 #upload a,
 #validation a,
@@ -889,8 +965,8 @@ li[class^="level"] > a {
 #upload a,
 #validation a,
 li.level1 > a {
-  padding: 15px 0px 15px 19px;
-  background-color: #0065bd;
+  padding: 13px 0px 13px 19px;
+  background-color: #086cc4;
   color: #FFF;
 }
 #upload:hover > a,
@@ -902,7 +978,7 @@ li.level1 > a {
 li.level1:hover > a,
 li.level1:focus > a,
 li.level1:active > a {
-  background-color: #378fdd;
+  background-color: #097ce1;
 }
 #upload:active > a,
 li.level1:active > a,
@@ -910,7 +986,7 @@ li.level1:active > a,
 li.level1.active > a,
 #validation:active > a,
 #validation.active > a {
-  background-color: #63a4dd;
+  background-color: #0a82eb;
 }
 li.level2 > a {
   padding: 9px 0px 9px 30px;
@@ -919,27 +995,39 @@ li.level2 > a {
 }
 li.level2 > a,
 li.level3 > a {
-  -webkit-transition: all 0.1s ease;
-  /* Safari 3.2+, Chrome */
-  -moz-transition: all 0.1s ease;
-  /* Firefox 4-15 */
-  -o-transition: all 0.1s ease;
-  /* Opera 10.5-12.00 */
-  transition: all 0.1s ease;
-  /* Firefox 16+, Opera 12.50+ */
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
 }
 li.level2:hover > a,
 li.level2:focus > a,
 li.level3:hover > a,
 li.level3:focus > a {
-  border-left: 3px solid #0065bd;
+  border-left: 3px solid #086cc4;
   color: #0065bd;
 }
 li.level2:active > a,
 li.level2.active > a,
 li.level3:active > a,
 li.level3.active > a {
-  border-left: 3px solid #378fdd;
+  border-left: 3px solid #0a82eb;
   color: #0065bd;
 }
 li.level3 > a {
@@ -1014,14 +1102,26 @@ li.level2 > a {
   opacity: .6;
 }
 .side-menu-head-icon i {
-  -webkit-transition: all 0.4s ease;
-  /* Safari 3.2+, Chrome */
-  -moz-transition: all 0.4s ease;
-  /* Firefox 4-15 */
-  -o-transition: all 0.4s ease;
-  /* Opera 10.5-12.00 */
-  transition: all 0.4s ease;
-  /* Firefox 16+, Opera 12.50+ */
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
 }
 .side-menu-head-icon:hover,
 .side-menu-head-icon:focus,
@@ -1055,28 +1155,50 @@ li.level2 > a {
   color: #bad8f3;
   background-color: #0065bd;
   cursor: pointer;
-  /* transition */
-  -webkit-transition: all 0.4s ease;
-  /* Safari 3.2+, Chrome */
-  -moz-transition: all 0.4s ease;
-  /* Firefox 4-15 */
-  -o-transition: all 0.4s ease;
-  /* Opera 10.5-12.00 */
-  transition: all 0.4s ease;
-  /* Firefox 16+, Opera 12.50+ */
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
 }
 .side-menu-list > li:hover,
 .side-menu-list > li:focus {
   background-color: #2175c0;
-  /* transition */
-  -webkit-transition: all 0.4s ease;
-  /* Safari 3.2+, Chrome */
-  -moz-transition: all 0.4s ease;
-  /* Firefox 4-15 */
-  -o-transition: all 0.4s ease;
-  /* Opera 10.5-12.00 */
-  transition: all 0.4s ease;
-  /* Firefox 16+, Opera 12.50+ */
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
 }
 .side-menu-list > li.active {
   background-color: #378fdd;
@@ -1299,7 +1421,7 @@ div.dataTables_length label {
 /* note */
 #warningQuota p {
   margin-top: 6px;
-  color: #AA0000;
+  color: #f04328;
 }
 /********************************************
                 INFO.JS
@@ -1457,7 +1579,7 @@ table tr th .pw-btn-group-th .pw-btn-th,
   /* type */
   font-family: 'robotoregular';
   font-weight: 300;
-  font-size: 14px;
+  font-size: 14px !important;
   line-height: 1em;
   /* style */
   background-image: none;
@@ -1465,24 +1587,32 @@ table tr th .pw-btn-group-th .pw-btn-th,
   border-width: 1px;
   border-style: solid;
   cursor: pointer;
-  /* unselectable text */
   -webkit-user-select: none;
-  /* Chrome all / Safari all */
+  -khtml-user-select: none;
   -moz-user-select: none;
-  /* Firefox all */
   -ms-user-select: none;
-  /* IE 10+ */
   -o-user-select: none;
   user-select: none;
-  /* transition */
-  -webkit-transition: all 0.4s ease;
-  /* Safari 3.2+, Chrome */
-  -moz-transition: all 0.4s ease;
-  /* Firefox 4-15 */
-  -o-transition: all 0.4s ease;
-  /* Opera 10.5-12.00 */
-  transition: all 0.4s ease;
-  /* Firefox 16+, Opera 12.50+ */
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
   /* box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.06) inset,
                  0px 0px 8px rgba(102, 175, 233, 0.45); */
 }
@@ -1500,43 +1630,43 @@ table tr th .pw-btn-group-th .pw-btn-th,
 }
 .btn-portal-blue {
   margin-bottom: 1px;
-  background-color: #0065bd;
-  border-color: #0065bd;
+  background-color: #086cc4;
+  border-color: #086cc4;
   color: white;
 }
 .btn-portal-blue:hover,
 .btn-portal-blue:focus,
 .btn-portal-blue:active {
-  background-color: #378fdd;
-  border-color: #378fdd;
+  background-color: #097ce1;
+  border-color: #097ce1;
 }
 .btn-portal-blue.active {
-  background-color: #63a4dd;
-  border-color: #63a4dd;
+  background-color: #08abc4;
+  border-color: #08abc4;
 }
 .btn-portal-green {
-  background-color: #009a60;
-  border-color: #009a60;
+  background-color: #07b559;
+  border-color: #07b559;
   color: #FFF;
 }
 .btn-portal-green:hover,
 .btn-portal-green:focus,
 .btn-portal-green:active,
 .btn-portal-green.active {
-  background-color: #00c27b;
-  border-color: #00c27b;
+  background-color: #08ce65;
+  border-color: #08ce65;
 }
 .btn-portal-red {
-  background-color: #f50a87;
-  border-color: #f50a87;
+  background-color: #dc3c23;
+  border-color: #dc3c23;
   color: #FFF;
 }
 .btn-portal-red:hover,
 .btn-portal-red:focus,
 .btn-portal-red:active,
 .btn-portal-red.active {
-  background-color: #f62393;
-  border-color: #f62393;
+  background-color: #f7543b;
+  border-color: #f7543b;
 }
 .btn-portal-lightblue {
   background-color: #08c460;

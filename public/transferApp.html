@@ -203,10 +203,19 @@
           <!-- BEGIN: Underscore Template Definition. -->
           <script id="menuL1" type="text/template" class="template">
             <ul>
+
               <li class="level1">
                 <a id="root" href="#">[[allDocs]]</a>
                 <ul>
-                  [[categoryNode]]
+                  <li class="level0">&nbsp;&nbsp;Paie & Post-Paie</li>
+                  <li class="level0">&nbsp;&nbsp;Gestion des entrées et sorties</li>
+                  <li class="level0">&nbsp;&nbsp;Gestion des arrêts</li>
+                  <li class="level0">&nbsp;&nbsp;Gestion administrative</li>
+                  <li>
+                    <ul><!--to split in previous folders-->
+                      [[categoryNode]]
+                    </ul>
+                  </li>
                 </ul>
               </li>
               <li id="upload">

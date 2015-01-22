@@ -54,22 +54,22 @@
 .librebaskervilleitalic {
   font-family: 'librebaskervilleitalic';
 }
-.app-muted {
-  color: #d9d9d9;
-  cursor: default;
+/*.app-muted {
+    color: #d9d9d9;
+    cursor: default;
 }
 .app-m {
-  font-size: 25px;
+    font-size: 25px;
 }
 .app-l {
-  font-size: 50px;
+    font-size: 50px;
 }
 .app-xl {
-  font-size: 70px;
+    font-size: 70px;
 }
 .app-xxl {
-  font-size: 120px;
-}
+    font-size: 120px;
+}*/
 li,
 p,
 a {
