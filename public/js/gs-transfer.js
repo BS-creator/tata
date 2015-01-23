@@ -1553,7 +1553,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     setEventReload = function() {
       var reloadBtn = $('.reloadme');
-      reloadBtn.html('<i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.reload);
+      /*reloadBtn.html('<i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.reload);*/
+      reloadBtn.html('<i class="fa fa-refresh"></i>');
       /*reloadBtn.off('click').on('click', function() {
         window.location = TransferBaseURL + 'transferApp.html';
         //window.location.reload();
@@ -1609,7 +1610,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     setI18nHelpButton = function() {
       var helpBtn = $('#help');
+/*
       helpBtn.html('<i class="fa fa-question"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.help);
+*/
+      helpBtn.html('<i class="fa fa-question"></i>');
       helpBtn.off('click').on('click', function() {
         //console.log("test");
         var intro = introJs();

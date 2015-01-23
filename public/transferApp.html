@@ -81,15 +81,15 @@
               <span>Username</span>
             </div>
             <ul class="dropdown-menu dropdown-menu-right" role="menu">
-              <li>
+<!--              <li>
                 <a href="#">
                   <span class="col-app-dropdown-menu center"><i class="fa fa-user"></i></span>
                   &nbsp;&nbsp;Mon compte
                 </a>
-              </li>
+              </li>-->
               <li class="divider"></li>
               <li>
-                <a href="#">
+                <a href="#" data-toggle="modal" data-target="#myContacts">
                   <span class="col-app-dropdown-menu center"><i class="fa fa-book"></i></span>
                   &nbsp;&nbsp;Mes contacts
                 </a>
@@ -109,6 +109,71 @@
   </ul>
 
 </header>
+
+<!-- Modal MY CONTACTS-->
+<div class="modal fade" id="myContacts" tabindex="-1" role="dialog" aria-labelledby="myContactsLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="robotoregular" id="myContactsLabel">Mes contacts</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6 col-xs-12">
+              <div class="caption text-center">
+                <i class="fa fa-user fa-5x text-muted"></i>
+
+                <h4>Comptabilité</h4>
+                <h3>Cedrik Depierre</h3>
+                <address>
+                  <strong>Bureau de Bruxelles</strong><br>
+                  Avenue de Fonsny 40<br>
+                  BE-1060 Bruxelles<br>
+                  <span title="" data-original-title="" rel="tooltip"> <i class="fa fa-phone"></i> </span> +32 2 507 15 11<br>
+                  <span title="" data-original-title="" rel="tooltip"> <i class="fa fa-fax"></i> </span> +32 2 507 15 00<br>
+                </address>
+
+                <address>
+                  <strong>Cedrik Depierre</strong><br>
+                  <a href="mailto:#">cedrik.depierre@groups.be</a>
+                </address>
+              </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+              <div class="caption text-center">
+                <i class="fa fa-user fa-5x text-muted"></i>
+
+                <h4>Dossier</h4>
+                <h3>Marcel Duchamp</h3>
+                <address>
+                  <strong>Bureau de Bruxelles</strong><br>
+                  Avenue de Fonsny 40<br>
+                  BE-1060 Bruxelles<br>
+                  <span title="" data-original-title="" rel="tooltip"> <i class="fa fa-phone"></i> </span> +32 2 507 15 11<br>
+                  <span title="" data-original-title="" rel="tooltip"> <i class="fa fa-fax"></i> </span> +32 2 507 15 00<br>
+                </address>
+
+                <address>
+                  <strong>Marcel Duchamp</strong><br>
+                  <a href="mailto:#">marcel.duchamp@groups.be</a>
+                </address>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 <div id="main" class="pt-s">
   <div class="container-fluid">
@@ -207,7 +272,7 @@
               <li class="level1">
                 <a id="root" href="#">[[allDocs]]</a>
                 <ul>
-                  <li class="level0">&nbsp;&nbsp;Paie & Post-Paie</li>
+                  <li class="level0">&nbsp;&nbsp;Paie &amp; Post-Paie</li>
                   <li class="level0">&nbsp;&nbsp;Gestion des entrées et sorties</li>
                   <li class="level0">&nbsp;&nbsp;Gestion des arrêts</li>
                   <li class="level0">&nbsp;&nbsp;Gestion administrative</li>
@@ -338,7 +403,7 @@
               <td>[[uploadUserName]]</td>
               <td>[[employerNumber]]</td>
               <td><a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">[[label]]</a></td>
-              <td>[[referenceDocument]]</td>
+              <td class="refdoc text-right">[[referenceDocument]]</td>
               <td data-order="[[size]]" class="text-right">[[sizeFormatted]]</td>
               <td class="text-center" data-order="[[extension]]">[[extensionFormatted]]</td>
               <td data-order="[[path]]">[[strippedPath]]</td>
