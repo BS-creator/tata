@@ -63,7 +63,7 @@ var Utils = (function() {
         sessionStorage.setItem('TransferBaseURL', '//localhost:4000/transfer/');
         sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');
         //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-        localStorage.setItem('country', 'FR');
+        localStorage.setItem('country', 'BE');
         //sessionStorage.setItem('tokenPortal', 'F19EG686BTITNPHX788I5WR682E5TBMP8PBHEHK6SJCVFMAUD469HLMN4NK9HUVKJTB17230RKELJ21L91');
 
       } else if (_.contains(url, '172.20.20.64')) {
