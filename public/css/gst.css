@@ -23,8 +23,10 @@
 #clients {
   display: none;
 }
-.fix-width-select2 {
-  min-width: 320px;
+.fix-width-select2,
+#s2id_clients {
+  max-width: 240px;
+  margin-bottom: 7px;
 }
 .select2-container {
   margin: 0;
@@ -1532,6 +1534,9 @@ div.dataTables_length label {
 .dlfileLabel {
   cursor: pointer;
 }
+.validAll {
+  margin-left: 11px;
+}
 /**********************************************
                   Buttons
 *********************************************/
@@ -1648,8 +1653,8 @@ table tr th .pw-btn-group-th .pw-btn-th,
   border-color: #08abc4;
 }
 .btn-portal-green {
-  background-color: #07b559;
-  border-color: #07b559;
+  background-color: #11ac59;
+  border-color: #11ac59;
   color: #FFF;
 }
 .btn-portal-green:hover,
@@ -1660,8 +1665,8 @@ table tr th .pw-btn-group-th .pw-btn-th,
   border-color: #08ce65;
 }
 .btn-portal-red {
-  background-color: #dc3c23;
-  border-color: #dc3c23;
+  background-color: #cf4530;
+  border-color: #cf4530;
   color: #FFF;
 }
 .btn-portal-red:hover,
@@ -1691,11 +1696,25 @@ table tr th .pw-btn-group-th .pw-btn-th,
 .validAll {
   display: none;
 }
+/**********************************************
+                    ICONS
+**********************************************/
+.icon-validation {
+  font-family: FontAwesome;
+  content: "\f147";
+}
+.icon-validation {
+  font-family: FontAwesome;
+  content: "\f046";
+  color: green;
+}
+.icon-validation,
 .fa-download,
 .fa-trash,
 .fa-check,
 .fa-square-o,
 .fa-check-square-o,
+.fa-trash-o,
 span.fa-stack {
   cursor: pointer !important;
 }

@@ -860,7 +860,9 @@ div.dataTables_length label {
 .dlfileLabel {
   cursor: pointer;
 }
-
+.validAll {
+  margin-left: 11px;
+}
 
 /**********************************************
                   Buttons
@@ -961,8 +963,8 @@ table tr th .pw-btn-group-th,
 }
 
 .btn-portal-green {
-  background-color:   darken(@color-15,3);
-  border-color:       darken(@color-15,3);
+  background-color:   desaturate(darken(@color-15,3),10);
+  border-color:       desaturate(darken(@color-15,3),10);
   color: #FFF;
 }
 .btn-portal-green:hover,
@@ -974,8 +976,8 @@ table tr th .pw-btn-group-th,
 }
 
 .btn-portal-red {
-  background-color:   desaturate(lighten(@color-8, 10),20);
-  border-color:       desaturate(lighten(@color-8, 10),20);
+  background-color:   desaturate(lighten(@color-8, 10),30);
+  border-color:       desaturate(lighten(@color-8, 10),30);
   color: #FFF;
 }
 .btn-portal-red:hover,
@@ -1005,12 +1007,25 @@ table tr th .pw-btn-group-th,
 {
   display: none;
 }
-
+/**********************************************
+                    ICONS
+**********************************************/
+.icon-validation {
+  font-family: FontAwesome;
+  content: "\f147";
+}
+.icon-validation {
+  font-family: FontAwesome;
+  content: "\f046";
+  color: green;
+}
+.icon-validation,
 .fa-download,
 .fa-trash,
 .fa-check,
 .fa-square-o,
 .fa-check-square-o,
+.fa-trash-o,
 span.fa-stack {
   cursor: pointer !important;
 }
