@@ -1700,15 +1700,6 @@ table tr th .pw-btn-group-th .pw-btn-th,
 /**********************************************
                     ICONS
 **********************************************/
-.icon-validation:before {
-  font-family: FontAwesome;
-  content: "\f147";
-}
-.icon-validation.active:before {
-  font-family: FontAwesome;
-  content: "\f046";
-  color: green;
-}
 .icon-validation,
 .fa-download,
 .fa-trash,
