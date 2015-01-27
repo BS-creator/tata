@@ -650,8 +650,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         currentCat = '',
         currentCatLabel = '',
         createLeafNode = _.template($('#menuL3').html()),
-        createCategoryNode = _.template($('#menuL2').html()),
-        createCategoryFRNode = _.template($('#menuFR').html());
+        createCategoryNode = _.template($('#menuL2').html());
 
       _.forEach(menu, function(catArray) {
         _.forEach(catArray, function(item) {
@@ -698,13 +697,103 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
+    templateMenuFR = function(menu) {
+
+      var htmlLeafNode = '',
+        htmlCategoryNode = '',
+        currentCat = '',
+        currentCatLabel = '',
+        createLeafNode = _.template($('#menuL3').html()),
+        createCategoryNode = _.template($('#menuL2').html()),
+        catPPP = '', catGAR, catGAD;
+
+      _.forEach(menu, function(catArray) {
+        _.forEach(catArray, function(item) {
+
+          htmlLeafNode += createLeafNode({
+            referenceDocument: parseInt(item.referenceDocument),
+            typeDocument:      labelDocI18n(item)
+          });
+          currentCat = parseInt(item.categoryNumber);
+          currentCatLabel = labelCati18n(item);
+
+        }); //TODO: where is that undefined!!!!!!
+        if (_.contains([0, 1, 3, 4, 5, 6, 7], currentCat)) {
+          catPPP += createCategoryNode({
+            categoryNumber: currentCat,
+            categoryName:   currentCatLabel,
+            leafNode:       htmlLeafNode
+          });
+        } else if (currentCat === 8) {
+          catGAR = createCategoryNode({
+            categoryNumber: currentCat,
+            categoryName:   currentCatLabel,
+            leafNode:       htmlLeafNode
+          });
+        } else if (currentCat === 2) {
+          catGAD = createCategoryNode({
+            categoryNumber: currentCat,
+            categoryName:   currentCatLabel,
+            leafNode:       htmlLeafNode
+          });
+        }
+        htmlLeafNode = '';
+      });
+
+      //other category
+      //DONE: added manually!!!! it is too custom to make it a rule!!!
+      if (_.contains(refDocUsed, -1)) {
+        htmlCategoryNode +=
+          '<li class="level2" >' +
+          '<a id="other" href="#">' + i18n[lang].tree.other + '</a>' +
+          '</li>';
+      }
+
+      return _.template($('#menuFR').html())({
+        allDocs:        i18n[lang].tree.root,
+        uploadText:     i18n[lang].tree.upload,
+        validationText: i18n[lang].tree.valid,
+        catPPP:   catPPP,
+        catGAR:   catGAR,
+        catGAD:   catGAD,
+        categoryNode: ''
+      });
+    },
+
     filterMenuCatFR = function() {
-      return null;
-      //TODO!!!!
+      refDocUsed = getUsedDocRef(AjaxData);
+      var cat = {},
+        i,
+        group = _.groupBy(_.filter(category, function(obj) {
+          if (_.contains(refDocUsed, parseInt(obj.referenceDocument))) { return obj; }
+        }), function(obj) {
+          return obj.categoryNumber;
+        });
+
+      for (i in group) {
+        if (i === '0') {cat.PPP = $.extend({}, cat.PPP, {0: group[i] })}
+        else if (i === '1') {cat.GAD = {1: group[i] } }
+        else if (i === '2') {cat.PPP = $.extend({}, cat.PPP, {2: group[i] })}
+        else if (i === '3') {cat.PPP = $.extend({}, cat.PPP, {3: group[i] })}
+        else if (i === '4') {cat.PPP = $.extend({}, cat.PPP, {4: group[i] })}
+        else if (i === '5') {cat.PPP = $.extend({}, cat.PPP, {5: group[i] })}
+        else if (i === '6') {cat.PPP = $.extend({}, cat.PPP, {6: group[i] })}
+        else if (i === '7') {cat.PPP = $.extend({}, cat.PPP, {7: group[i] })}
+        else if (i === '8') {cat.GAR = {8: group[i] }}
+      }
+      console.log('cat', cat);
+      return cat;
     },
 
     createMenu = function createMenu() {
-      $('#sidenav').html(templateMenu(filterMenu()));
+      if (isFrance()) { //TODO: CHANGE IT BACK!!!!!!!!!!
+        console.log('>>> FRANCE');
+        $('#sidenav').html(templateMenuFR(filterMenu()));
+        $('.level0').show();
+      } else {
+        $('#sidenav').html(templateMenu(filterMenu()));
+      }
+
     },
 
     /****************************************************

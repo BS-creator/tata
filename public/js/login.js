@@ -49,7 +49,6 @@ $(function(swal, _, Utils) {
       TransferServerURL = sessionStorage.getItem('TransferServerURL');
       TransferBaseURL = sessionStorage.getItem('TransferBaseURL');
       lang = sessionStorage.getItem('lang') || localStorage.lastLanguage;
-      console.log('TransferServerURL = ' + TransferServerURL);
     }
     $.ajax({
       type:    'POST',

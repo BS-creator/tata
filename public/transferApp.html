@@ -246,21 +246,45 @@
 
           </div>
           <!-- BEGIN: Underscore Template Definition. -->
+          <script id="menuFR" type="text/template" class="template">
+            <ul>
+
+              <li class="level1">
+                <a id="root" href="#">[[allDocs]]</a>
+                <ul>
+                  <li id="PPP" class="level0">&nbsp;&nbsp;Paie &amp; Post-Paie
+                    [[catPPP]]</li>
+                  <li id="GES" class="level0">&nbsp;&nbsp;Gestion des entrées et sorties</li>
+                  <li id="GAR" class="level0">&nbsp;&nbsp;Gestion des arrêts
+                    [[catGAR]]</li>
+                  <li id="GAD" class="level0">&nbsp;&nbsp;Gestion administrative
+                    [[catGAD]]</li>
+                  <li>
+                    <ul><!--to split in previous folders-->
+                      [[categoryNode]]
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li id="upload">
+                <a href="#">[[uploadText]]</a>
+              </li>
+              <li id="validation">
+                <a href="#">[[validationText]]</a>
+              </li>
+            </ul>
+          </script>
+          <!-- END: Underscore Template Definition. -->
+
+          <!-- BEGIN: Underscore Template Definition. -->
           <script id="menuL1" type="text/template" class="template">
             <ul>
 
               <li class="level1">
                 <a id="root" href="#">[[allDocs]]</a>
                 <ul>
-                  <li id="PPP" class="level0">&nbsp;&nbsp;Paie &amp; Post-Paie</li>
-                  <li id="GES" class="level0">&nbsp;&nbsp;Gestion des entrées et sorties</li>
-                  <li id="GAR" class="level0">&nbsp;&nbsp;Gestion des arrêts</li>
-                  <li id="GAD" class="level0">&nbsp;&nbsp;Gestion administrative</li>
-                  <li>
-                    <ul><!--to split in previous folders-->
-                      [[categoryNode]]
-                    </ul>
-                  </li>
+                  <!--to split in previous folders-->
+                  [[categoryNode]]
                 </ul>
               </li>
               <li id="upload">
