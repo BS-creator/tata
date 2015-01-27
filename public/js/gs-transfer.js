@@ -718,7 +718,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           currentCatLabel = labelCati18n(item);
 
         }); //TODO: where is that undefined!!!!!!
-        if (_.contains([0, 2, 3, 4, 5, 6, 7], currentCat)) {
+        if (_.contains([0, 1, 3, 4, 5, 6, 7], currentCat)) {
           catPPP += createCategoryNode({
             categoryNumber: currentCat,
             categoryName:   currentCatLabel,
@@ -730,7 +730,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             categoryName:   currentCatLabel,
             leafNode:       htmlLeafNode
           });
-        } else if (currentCat === 1) {
+        } else if (currentCat === 2) {
           catGAD = createCategoryNode({
             categoryNumber: currentCat,
             categoryName:   currentCatLabel,
@@ -749,7 +749,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           '</li>';
       }
 
-      return _.template($('#menuL1').html())({
+      return _.template($('#menuFR').html())({
         allDocs:        i18n[lang].tree.root,
         uploadText:     i18n[lang].tree.upload,
         validationText: i18n[lang].tree.valid,
@@ -786,9 +786,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
     createMenu = function createMenu() {
-      if (!isFrance()) { //TODO: CHANGE IT BACK!!!!!!!!!!
+      if (isFrance()) { //TODO: CHANGE IT BACK!!!!!!!!!!
         console.log('>>> FRANCE');
         $('#sidenav').html(templateMenuFR(filterMenu()));
+        $('.level0').show();
       } else {
         $('#sidenav').html(templateMenu(filterMenu()));
       }
