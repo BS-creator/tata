@@ -1700,11 +1700,11 @@ table tr th .pw-btn-group-th .pw-btn-th,
 /**********************************************
                     ICONS
 **********************************************/
-.icon-validation {
+.icon-validation:before {
   font-family: FontAwesome;
   content: "\f147";
 }
-.icon-validation {
+.icon-validation.active:before {
   font-family: FontAwesome;
   content: "\f046";
   color: green;
