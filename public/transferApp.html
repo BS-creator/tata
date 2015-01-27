@@ -188,16 +188,19 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 id="modalh4" class="modal-title text-muted text-center"></h4>
+                    <h4 id="modalh4" class="modal-title text-muted text-center robotoregular"></h4>
                   </div>
 
                   <div class="modal-body">
+<!--
+                    <p id="modalbq" class="lead text-muted text-info text-center">
 
-                    <blockquote id="modalbq" class="text-muted text-info">
+                    </p>-->
 
-                    </blockquote>
-                    <input type="checkbox" style="display: none" name="notification"  value="value">
-                    <label id="notification" for="notification"></label>
+                    <p class="notification">
+                      <input type="checkbox" style="display: none" name="notification"  value="value">
+                      <label id="notification" for="notification"></label>
+                    </p>
 
                     <form class="" id="uploadForm" action="/" method="post"
                           enctype="multipart/form-data">
@@ -225,7 +228,7 @@
                       </p>
                     </form>
 
-                    <div class="row">
+                    <div class="row pb-l">
                       <div class="col-md-offset-2 col-md-8 col-xs-12">
                         <div id="files" class="files">
                           <div id="progress" class="progress">
@@ -485,7 +488,7 @@
               <td class="text-center">[[isNew]]</td>
               <td class="text-center">
                 <a class="icon-validation" title="Validation" data-file-id="[[fileId]]" data-filename="[[fileName]]">
-                  <i class="fa fa-check-square-o fa-lg"></i>
+                  <i class="fa fa-square-o fa-lg"></i>
                 </a>
               </td>
             </tr>

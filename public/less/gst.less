@@ -172,12 +172,25 @@ MODAL
 .modal-content {
     border-radius: 2px;
 }
-
-#uploadForm div.dir-list {
-    text-align: left;
-    float: none;
-    margin: 0 auto;
-    padding: 0 50%;
+.modal-body {
+  .notification {
+    margin: 30px auto 0;
+    text-align: center;
+    margin-bottom: 19px;
+    font-size: 16px;
+  }
+}
+#uploadForm {
+  div.dir-list {
+      text-align: left;
+      float: none;
+      margin: 0 auto 30px;
+      max-width: 191px;
+      label {
+        font-weight: normal;
+        font-size: 14px;
+      }
+  }
 }
 
 .progress {
@@ -294,7 +307,7 @@ LOADER
   &:hover,
   &:focus,
   &:active {
-    background-color: lighten(@color-18,6);
+    background-color: lighten(@color-17,6);
   }
   &.active {
     &:before {
