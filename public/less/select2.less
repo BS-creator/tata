@@ -10,7 +10,7 @@
 
 .fix-width-select2,
 #s2id_clients {
-  max-width: 240px;
+  min-width: 340px;
   margin-bottom: 7px;
 }
 
@@ -47,10 +47,11 @@
   padding: 0 0 0 12px;
   overflow: hidden;
   position: relative;
+  font-weight: bold;
   border: 1px solid #ccc;
   white-space: nowrap;
   line-height: 50px;
-  color: #999;
+  color: darken(@color-9,3);
   text-decoration: none;
   border-radius: 0;
   background-clip: padding-box;
@@ -577,3 +578,4 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
     background-position: 100% -21px !important;
   }
 }
+

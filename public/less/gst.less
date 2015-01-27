@@ -750,7 +750,7 @@ div.dataTables_length label {
 /* note */
 #warningQuota p {
     margin-top: 6px;
-    color: desaturate(lighten(@color-8, 15),5);
+    color: darken(@color-9,3);
 }
 /********************************************
                 INFO.JS
@@ -1029,4 +1029,14 @@ table tr th .pw-btn-group-th,
 .fa-trash-o,
 span.fa-stack {
   cursor: pointer !important;
+}
+
+
+/*  */
+@media screen and (max-width:1281px){
+  .fix-width-select2,
+  #s2id_clients {
+    max-width: 240px;
+    min-width: 240px;
+  }
 }

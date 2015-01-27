@@ -25,7 +25,7 @@
 }
 .fix-width-select2,
 #s2id_clients {
-  max-width: 240px;
+  min-width: 340px;
   margin-bottom: 7px;
 }
 .select2-container {
@@ -61,10 +61,11 @@
   padding: 0 0 0 12px;
   overflow: hidden;
   position: relative;
+  font-weight: bold;
   border: 1px solid #ccc;
   white-space: nowrap;
   line-height: 50px;
-  color: #999;
+  color: #b55907;
   text-decoration: none;
   border-radius: 0;
   background-clip: padding-box;
@@ -1427,7 +1428,7 @@ div.dataTables_length label {
 /* note */
 #warningQuota p {
   margin-top: 6px;
-  color: #f04328;
+  color: #b55907;
 }
 /********************************************
                 INFO.JS
@@ -1718,4 +1719,12 @@ table tr th .pw-btn-group-th .pw-btn-th,
 .fa-trash-o,
 span.fa-stack {
   cursor: pointer !important;
+}
+/*  */
+@media screen and (max-width: 1281px) {
+  .fix-width-select2,
+  #s2id_clients {
+    max-width: 240px;
+    min-width: 240px;
+  }
 }
