@@ -420,7 +420,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       $uploadform.attr('action', TransferServerURL + 'file/upload');
 
-      if (isFrance() && isGMS()) {
+      if (isFrance()) {
         $('input[name="notification"]').show();
         $('#notification').text(i18n[lang].notification);
         listFolder = $uploadform.find('div.dir-list');
@@ -717,7 +717,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           currentCat = parseInt(item.categoryNumber);
           currentCatLabel = labelCati18n(item);
 
-        }); //TODO: where is that undefined!!!!!!
+        });
         if (_.contains([0, 1, 3, 4, 5, 6, 7], currentCat)) {
           catPPP += createCategoryNode({
             categoryNumber: currentCat,
@@ -753,10 +753,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         allDocs:        i18n[lang].tree.root,
         uploadText:     i18n[lang].tree.upload,
         validationText: i18n[lang].tree.valid,
-        catPPP:   catPPP,
-        catGAR:   catGAR,
-        catGAD:   catGAD,
-        categoryNode: ''
+        catPPP:         catPPP,
+        catGAR:         catGAR,
+        catGAD:         catGAD,
+        categoryNode:   ''
       });
     },
 
@@ -771,29 +771,28 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         });
 
       for (i in group) {
-        if (i === '0') {cat.PPP = $.extend({}, cat.PPP, {0: group[i] })}
-        else if (i === '1') {cat.GAD = {1: group[i] } }
-        else if (i === '2') {cat.PPP = $.extend({}, cat.PPP, {2: group[i] })}
-        else if (i === '3') {cat.PPP = $.extend({}, cat.PPP, {3: group[i] })}
-        else if (i === '4') {cat.PPP = $.extend({}, cat.PPP, {4: group[i] })}
-        else if (i === '5') {cat.PPP = $.extend({}, cat.PPP, {5: group[i] })}
-        else if (i === '6') {cat.PPP = $.extend({}, cat.PPP, {6: group[i] })}
-        else if (i === '7') {cat.PPP = $.extend({}, cat.PPP, {7: group[i] })}
-        else if (i === '8') {cat.GAR = {8: group[i] }}
+        if (i === '0') {cat.PPP = $.extend({}, cat.PPP, {0: group[i]})}
+        else if (i === '1') {cat.GAD = {1: group[i]} }
+        else if (i === '2') {cat.PPP = $.extend({}, cat.PPP, {2: group[i]})}
+        else if (i === '3') {cat.PPP = $.extend({}, cat.PPP, {3: group[i]})}
+        else if (i === '4') {cat.PPP = $.extend({}, cat.PPP, {4: group[i]})}
+        else if (i === '5') {cat.PPP = $.extend({}, cat.PPP, {5: group[i]})}
+        else if (i === '6') {cat.PPP = $.extend({}, cat.PPP, {6: group[i]})}
+        else if (i === '7') {cat.PPP = $.extend({}, cat.PPP, {7: group[i]})}
+        else if (i === '8') {cat.GAR = {8: group[i]}}
       }
       console.log('cat', cat);
       return cat;
     },
 
     createMenu = function createMenu() {
-      if (isFrance()) { //TODO: CHANGE IT BACK!!!!!!!!!!
-        console.log('>>> FRANCE');
+      if (isFrance()) {
+        //console.log('>>> FRANCE');
         $('#sidenav').html(templateMenuFR(filterMenu()));
-        $('.level0').show();
+        //$('.level0').show();
       } else {
         $('#sidenav').html(templateMenu(filterMenu()));
       }
-
     },
 
     /****************************************************
@@ -1015,6 +1014,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           cancelButtonText:   i18n[lang].dialog.cancel,
           closeOnConfirm:     false
         },
+
         function() {
           return $.ajax({
             type:     'POST',
@@ -1222,7 +1222,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
      *  */
     loadFolder = function() {
 
-      if (isFrance() && isGMS()) {
+      if (isFrance()) {
         return $.Deferred().resolve();
       } else {
         return $.ajax({
@@ -1293,6 +1293,55 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
+    getEmployerFromLogin = function() {
+      //@devcode
+      if (username.substring(1, 7) === '000000') return 203100;
+
+      if (username && username.length === 9) {
+        return username.substring(1, 7);
+      } else {
+        return '';
+      }
+    },
+
+    getEmailGMS = function() {
+      return $.ajax({
+        type:       'GET',
+        url:        TransferServerURL + 'gms/' + getEmployerFromLogin(),
+        success:    function(data) {
+          var params = {
+            role: 'Gestionnaire', bureau: '', rue: '',
+            num: '', cp: '', ville: '',
+            phone: data[0][1] || '-',
+            fax: data[0][2] || '-',
+            email: data[0][0],
+            name: data[0][3]
+          };
+          $('#mycontacttmpdiv').html(_.template($('#mycontacttmp').html(), params));
+        },
+        error:      function() {
+          hideLoading();
+          console.log('error loading data');
+          Utils.errorMessage(i18n[lang].errorCnx, 4000);
+
+        },
+        dataType:   'json',
+        statusCode: {
+          403: function() {
+            hideLoading();
+            Utils.errorMessage(i18n[lang].errorCnx, 4000);
+            setTimeout(function() {
+              window.location = TransferBaseURL;
+            }, 4000);
+          }
+        }
+      });
+    },
+
+    setEventMyContacts = function() {
+      var tmpl = _.template($('#mycontacttmp').html());
+
+    },
     /****************************************************
      * EVENTS
      * */
@@ -1342,7 +1391,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           loadClientFiles(e.val)
             .then(function() {
               // doesn't work
-              //$('#validation').find('a').trigger('click');
+              //setTimeout($('#validation').find('a').trigger('click'), 0);
             });
         }).off('select2-removed').on('select2-removed', function() {
           $('input[name="clientName"]').val(username);
@@ -1856,6 +1905,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       setEventGMS();
 
+
     },
 
     initTableComplete = function() {
@@ -1940,7 +1990,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       $.when(portalCnx()).then(function() {
 
-        $.when(loadCategory(), loadData(), loadFolder(), loadClients()).then(function() {
+        $.when(loadCategory(), loadData(), loadFolder(), loadClients(), getEmailGMS()).then(function() {
 
           //Add label for reference of Document
           $.when(mergeLabelDoc()).then(function() {

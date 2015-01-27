@@ -122,36 +122,42 @@
 
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-12">
-              <div class="caption text-center">
-                <i class="fa fa-user fa-5x text-muted"></i>
-
-                <h4>Comptabilité</h4>
-                <h3>Cedrik Depierre</h3>
-                <address>
-                  <strong>Bureau de Bruxelles</strong><br>
-                  Avenue de Fonsny 40<br>
-                  BE-1060 Bruxelles<br>
-                  <span title="" data-original-title="" rel="tooltip"> <i class="fa fa-phone"></i> </span> +32 2 507 15 11<br>
-                  <span title="" data-original-title="" rel="tooltip"> <i class="fa fa-fax"></i> </span> +32 2 507 15 00<br>
-                </address>
-
-                <address>
-                  <strong>Cedrik Depierre</strong><br>
-                  <a href="mailto:#">cedrik.depierre@groups.be</a>
-                </address>
-              </div>
+            <div id="mycontacttmpdiv" class="col-md-12">
+              <!--Filled by JavaScript-->
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer text-center">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
       </div>
     </div>
   </div>
 </div>
 
+
+<!-- BEGIN: Underscore Template Definition. -->
+<script id="mycontacttmp" type="text/template" class="template">
+  <div class="caption text-center">
+    <i class="fa fa-user fa-5x text-muted"></i>
+
+    <h4>[[role]]</h4>
+    <h3>[[name]]</h3>
+    <address>
+      <strong>[[bureau]]</strong><br>
+      [[rue]] [[num]]<br>
+      [[cp]] [[ville]]<br>
+      <span title="" data-original-title="" rel="tooltip"> <i class="fa fa-phone"></i> </span> [[phone]]<br>
+      <span title="" data-original-title="" rel="tooltip"> <i class="fa fa-fax"></i> </span> [[fax]]<br>
+    </address>
+
+    <address>
+      <strong>[[name]]</strong><br>
+      <a href="mailto:[[email]]">[[email]]</a>
+    </address>
+  </div>
+</script>
+<!-- END: Underscore Template Definition. -->
 
 
 
