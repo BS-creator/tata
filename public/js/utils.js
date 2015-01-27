@@ -39,7 +39,7 @@ var Utils = (function() {
         return '0 Byte';
       }
       i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-      return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+      return Math.round(bytes / Math.pow(1024, i)) + ' ' + sizes[i];
     },
 
     /**
@@ -99,7 +99,6 @@ var Utils = (function() {
         localStorage.setItem('country', 'FR');
       }
     },
-
 
     reportError = function(error, message) {
       message = message || '';
