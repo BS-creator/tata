@@ -36,7 +36,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     AjaxData = [], // Data
     category = [], // Data
     refDocUsed = [], // Data
-    numberCol = 18, //number of column in the table
+    numberCol = 19, //number of column in the table
     username = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '',
     tokenTransfer = sessionStorage.getItem('tokenTransfer'),
     tokenPortal = sessionStorage.getItem('token'),
@@ -84,7 +84,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             row.label = labelDocI18n(cat);
           } else {
             if (!row.referenceDocument) {
-              row.label = row.fileName;
+              row.label = formatFileName(row.fileName);
             }
           }
         });
@@ -216,6 +216,13 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
     formatPath = function(value) {
       return value.replace('/data/' + username + '/', '');
+    },
+    formatFileName = function(value) {
+      var v = (value ? value.substring(0, 3) : value);
+      if (v === 'PPP' || v === 'GAR' || v === 'GES' || v === 'GAD') {
+        return value.substring(3);
+      }
+      return value;
     },
     getSelectedRows = function() {
       return table.rows('.active', {search: 'applied'}).data();
@@ -421,15 +428,16 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $uploadform.attr('action', TransferServerURL + 'file/upload');
 
       if (isFrance()) {
-        $('input[name="notification"]').show();
-        $('#notification').text(i18n[lang].notification);
+        if (isGMS()) {
+          $('input[name="notification"]').show();
+          $('#notification').text(i18n[lang].notification);
+        }
         listFolder = $uploadform.find('div.dir-list');
         listFolder.html('');
         _.forEach(i18n[lang].dirlist, function(v, k) {
           listFolder.append('<label class="radio"><input name="destFolder" value="' + k + '" type="radio" />' +
           v + '</label>');
         });
-
       }
 
       $uploadform.fileupload({
@@ -528,6 +536,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('#upload').removeClass('active');
       $('#validation').removeClass('active');
       resetFilters();
+      table.columns('.categorieFrance').visible(false, false);
       table.columns('.detailsLayer').visible(false, false);
       table.columns('.validation').visible(false, false);
       table.columns('.fileLayer').visible(true, false);
@@ -545,6 +554,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('#upload').removeClass('active');
       $('#validation').removeClass('active');
       resetFilters();
+      table.columns('.categorieFrance').visible(false, false);
       table.columns('.fileLayer').visible(false, false);
       table.columns('.validation').visible(false, false);
       table.columns('.detailsLayer').visible(true, false);
@@ -565,6 +575,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('#upload').addClass('active');
       $('#validation').removeClass('active');
       resetFilters();
+      table.columns('.categorieFrance').visible(false, false);
       table.columns('.fileLayer').visible(false, false);
       table.columns('.validation').visible(false, false);
       table.columns('.detailsLayer').visible(true, false);
@@ -581,6 +592,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('#upload').removeClass('active');
       $('#validation').removeClass('active');
       resetFilters();
+      table.columns('.categorieFrance').visible(false, false);
       table.columns('.detailsLayer').visible(false, false);
       table.columns('.validation').visible(false, false);
       table.columns('.fileLayer').visible(true, false);
@@ -630,6 +642,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         table
           .search('')
           .columns().search('');
+        table.columns('.categorieFrance').visible(false, false);
         table.columns('.detailsLayer').visible(false, false);
         table.columns('.fileLayer').visible(true, false);
         table.columns('.validation').visible(false, false);
@@ -705,7 +718,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         currentCatLabel = '',
         createLeafNode = _.template($('#menuL3').html()),
         createCategoryNode = _.template($('#menuL2').html()),
-        catPPP = '', catGAR, catGAD;
+        catPPP = '', catGAR = '', catGAD = '';
 
       _.forEach(menu, function(catArray) {
         _.forEach(catArray, function(item) {
@@ -800,7 +813,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
      * */
 
     updateMenuVisibleColumnList = function updateMenuVisibleColumnList() {
-      var exclude = [0, 1, 15, 16, 17, 18],
+      var exclude = [0, 1, 15, 16, 17, 18, 19],
         list = $('.side-menu-list'),
         i = 0,
         headerCol = '',
@@ -850,6 +863,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         row.alreadyDL = row.downloadCount > 0 ? 'text-muted' : 'text-primary';
 
         row.strippedPath = formatPath(row.path);
+
+        row.fileNameFormatted = formatFileName(row.fileName);
+
+        //row.label = formatFileName(row.label);
 
         row.employerNumber = parseInt(row.employerNumber) || '';
 
@@ -912,13 +929,13 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             targets:   2 // Date
           },
           {
-            className:  'detailsLayer ',
+            className:  'detailsLayer categorieFrance',
             targets:    3, // fileName
             visible:    false,
             searchable: true
           },
           {
-            className:  'detailsLayer',
+            className:  'detailsLayer categorieFrance',
             targets:    4, // uploadUserName
             visible:    false,
             searchable: true
@@ -965,7 +982,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             searchable: false
           },
           {
-            className:  'validation',
+            className:  'validation categorieFrance',
             targets:    14, //uploadStamp
             visible:    false,
             searchable: true
@@ -992,6 +1009,11 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             visible:    false,
             searchable: false,
             orderable:  false
+          },
+          {
+            targets:    19, //filename
+            visible:    false,
+            searchable: true
           }
         ],
         initComplete: initTableComplete
@@ -1295,12 +1317,13 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     getEmployerFromLogin = function() {
       //@devcode
-      if (username.substring(1, 7) === '000000') return 203100;
+      if (username.toUpperCase() === 'D00000001') return 203100;
+      if (username.toUpperCase() === 'GMSTEST') return 203100;
 
       if (username && username.length === 9) {
         return username.substring(1, 7);
       } else {
-        return '';
+        return '0';
       }
     },
 
@@ -1388,6 +1411,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           //data:        []
         }).off('select2-selecting').on('select2-selecting', function(e) {
           $('input[name="clientName"]').val(e.val);
+          $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' +
+                              i18n[lang].modalupload + ' à <span class="clientDest">' + e.object.text + '</span>');
           loadClientFiles(e.val)
             .then(function() {
               // doesn't work
@@ -1398,6 +1423,81 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           loadClientFiles(username);
         });
       }
+    },
+
+    setEventCategoryFR = function() {
+      $('#PPP').off('click').on('click', function() {
+        $('#upload').removeClass('active');
+        $('#validation').removeClass('active');
+        resetFilters();
+        table.columns('.fileLayer').visible(false, false);
+        table.columns('.detailsLayer').visible(false, false);
+        table.columns('.validation').visible(false, false);
+        table.columns('.categorieFrance').visible(true, false);
+
+        // adjust column sizing and redraw
+        table.columns.adjust().draw(false);
+        //filter on uploadUserName
+        table
+          .column(4).search('[^' + username + ']', true, false)
+          .column(19).search('^PPP', true, false).draw();
+        setBreadCrumb(i18n[lang].dirlist.PPP);
+        updateMenuVisibleColumnList();
+        event.preventDefault();
+      });
+      $('#GAD').on('click', function() {
+        $('#upload').removeClass('active');
+        $('#validation').removeClass('active');
+        resetFilters();
+        table.columns('.fileLayer').visible(false, false);
+        table.columns('.detailsLayer').visible(false, false);
+        table.columns('.validation').visible(false, false);
+        table.columns('.categorieFrance').visible(true, false);
+        // adjust column sizing and redraw
+        table.columns.adjust().draw(false);
+        //filter on uploadUserName
+        table
+          .column(4).search('[^' + username + ']', true, false)
+          .column(19).search('^GAD', true, false).draw();
+        setBreadCrumb(i18n[lang].dirlist.GAD);
+        updateMenuVisibleColumnList();
+        event.preventDefault();
+      });
+      $('#GES').on('click', function() {
+        $('#upload').removeClass('active');
+        $('#validation').removeClass('active');
+        resetFilters();
+        table.columns('.fileLayer').visible(false, false);
+        table.columns('.detailsLayer').visible(false, false);
+        table.columns('.validation').visible(false, false);
+        table.columns('.categorieFrance').visible(true, false);
+        // adjust column sizing and redraw
+        table.columns.adjust().draw(false);
+        //filter on uploadUserName
+        table
+          .column(4).search('[^' + username + ']', true, false)
+          .column(19).search('^GES', true, false).draw();
+        setBreadCrumb(i18n[lang].dirlist.GES);
+        updateMenuVisibleColumnList();
+        event.preventDefault();
+      });
+      $('#GAR').on('click', function() {
+        $('#upload').removeClass('active');
+        $('#validation').removeClass('active');
+        resetFilters();
+        table.columns('.fileLayer').visible(false, false);
+        table.columns('.detailsLayer').visible(false, false);
+        table.columns('.validation').visible(false, false);
+        table.columns('.categorieFrance').visible(true, false);
+        // adjust column sizing and redraw
+        table.columns.adjust().draw(false);
+        table
+          .column(4).search('[^' + username + ']', true, false)
+          .column(19).search('^GAR', true, false).draw();
+        setBreadCrumb(i18n[lang].dirlist.GAR);
+        updateMenuVisibleColumnList();
+        event.preventDefault();
+      })
     },
 
     setEventColumnListVisible = function() {
@@ -1904,7 +2004,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       setEventMultiValidate();
 
       setEventGMS();
-
+      setEventCategoryFR();
 
     },
 

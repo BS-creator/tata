@@ -405,29 +405,30 @@
             </thead>
             <tbody>
             <tr class="[[classNew]]">
-              <td class="center iconSelect"><i class="fa fa-square-o"></i></td>
+              <td class="center iconSelect"></td>
               <td class="text-center" data-order="[[downloadCount]]">
                 <a class="dlfile" data-file-id="[[fileId]]" data-filename="[[fileName]]">
                   <i class="fa [[dlClass]] fa-lg [[alreadyDL]]"></i>
-                  <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]</small>
+                  <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;</small>
                 </a></td>
-              <td class="text-center" data-order="[[date]]">[[dateFormatted]]</td>
-              <td><a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">[[fileName]]</a></td>
-              <td>[[uploadUserName]]</td>
-              <td>[[employerNumber]]</td>
-              <td><a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">[[label]]</a></td>
-              <td class="refdoc text-right">[[referenceDocument]]</td>
-              <td data-order="[[size]]" class="text-right">[[sizeFormatted]]</td>
-              <td class="text-center" data-order="[[extension]]">[[extensionFormatted]]</td>
-              <td data-order="[[path]]">[[strippedPath]]</td>
-              <td>[[referenceClient]]</td>
-              <td>[[counter]]</td>
-              <td>[[referenceGroupS]]</td>
-              <td data-order="[[uploadStampOrder]]" class="text-center"><span style="display:none">[[uploadStampOrder]] </span>[[uploadStamp]]</td>
+              <td class="text-center" data-order="[[date]]"></td>
+              <td><a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]"></a></td>
+              <td></td>
+              <td></td>
+              <td><a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]"></a></td>
+              <td class="refdoc text-right"></td>
+              <td data-order="[[size]]" class="text-right"></td>
+              <td class="text-center" data-order="[[extension]]"></td>
+              <td data-order="[[path]]"></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td data-order="[[uploadStampOrder]]" class="text-center"><span style="display:none">[[uploadStampOrder]] </span></td>
               <td class="text-center"><a class="remove" title="Remove" data-file-id="[[fileId]]"></a></td>
-              <td class="text-center">[[downloadCount]]</td>
-              <td class="text-center">[[isNew]]</td>
-              <td class="text-center"><a class="icon-validation" title="Validation" data-file-id="[[fileId]]"><i class="fa fa-check fa-lg"></i></a></td>
+              <td class="text-center"></td>
+              <td class="text-center"></td>
+              <td class="text-center"><a class="icon-validation" title="Validation" data-file-id="[[fileId]]"></a></td>
+              <td></td>
             </tr>
             </tbody>
           </table>
@@ -454,6 +455,7 @@
               <th class="text-center">download Count</th>
               <th class="text-center">isNew</th>
               <th class="text-center">Validation</th>
+              <th>filenameFormatted</th>
             </tr>
           </script>
           <!-- END: HEADER: Underscore Template Definition. -->
@@ -468,10 +470,10 @@
                   <small data-dl="[[downloadCount]]" class="text-muted">&nbsp;[[downloadCount]]</small>
                 </a></td>
               <td class="text-center" data-order="[[date]]">[[dateFormatted]]</td>
-              <td><a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">[[fileName]]</a></td>
+              <td><a class="dlfileLabel" data-file-id="[[fileId]]" data-order="[[fileNameFormatted]]" data-filename="[[fileName]]">[[fileNameFormatted]]</a></td>
               <td>[[uploadUserName]]</td>
               <td>[[employerNumber]]</td>
-              <td><a class="dlfileLabel" data-file-id="[[fileId]]" data-filename="[[fileName]]">[[label]]</a></td>
+              <td><a class="dlfileLabel" data-file-id="[[fileId]]" data-order="[[fileNameFormatted]]" data-filename="[[fileName]]">[[label]]</a></td>
               <td>[[referenceDocument]]</td>
               <td data-order="[[size]]" class="text-right">[[sizeFormatted]]</td>
               <td class="text-center" data-order="[[extension]]">[[extensionFormatted]]</td>
@@ -491,6 +493,7 @@
                   <i class="fa fa-square-o fa-lg"></i>
                 </a>
               </td>
+              <td>[[fileName]]</td>
             </tr>
           </script>
           <!-- END: Underscore Template Definition. -->

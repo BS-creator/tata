@@ -1700,7 +1700,7 @@ table tr th .pw-btn-group-th .pw-btn-th,
   border-color: #09e671;
 }
 /**********************************************
-                    DOWNLOAD BUTTON
+                    DYNAMIC BUTTON
 **********************************************/
 .downloadall,
 .deleteAll,
@@ -1723,6 +1723,9 @@ table tr th .pw-btn-group-th .pw-btn-th,
 .fa-trash-o,
 span.fa-stack {
   cursor: pointer !important;
+}
+.clientDest {
+  color: #082ec4;
 }
 /*  */
 @media screen and (max-width: 1281px) {
