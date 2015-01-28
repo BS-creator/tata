@@ -101,7 +101,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         countFile = 0;
 
       _.forEach(array, function(item) {
-        it = $(item[1].display);
+        it = $(item[1]);
         listID += it.data('file-id') + '&' + it.data('filename') + '@!';
         countFile++;
       });
@@ -428,9 +428,12 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $uploadform.attr('action', TransferServerURL + 'file/upload');
 
       if (isFrance()) {
+        $('input[name="notification"]').show();
         if (isGMS()) {
-          $('input[name="notification"]').show();
           $('#notification').text(i18n[lang].notification);
+        } else {
+          $('#notification').text(i18n[lang].notificationGMS);
+          $('input[name="clientName"]').val(username);
         }
         listFolder = $uploadform.find('div.dir-list');
         listFolder.html('');
@@ -652,6 +655,22 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           .column(7).search('^' + nodeID + '$', true, false)
           .draw(); //filter on referenceDocument
       }
+      updateMenuVisibleColumnList();
+      event.preventDefault();
+    },
+
+    menuValidateClick = function() {
+      $('#root').parent('li.level1').removeClass('active');
+      $('#upload').removeClass('active');
+      $('#validation').addClass('active');
+      resetFilters();
+      table.columns('.detailsLayer').visible(false, false);
+      table.columns('.fileLayer').visible(true, false);
+      table.columns('.validation').visible(true, false);
+      table.columns.adjust().draw(false); // adjust column sizing and redraw
+      table.column(10).search('Validation\/', true, false).draw(); //filter on Validation Folder
+      $('[class^=level] .active').removeClass('active');
+      setBreadCrumb(i18n[lang].tree.valid);
       updateMenuVisibleColumnList();
       event.preventDefault();
     },
@@ -1361,10 +1380,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
-    setEventMyContacts = function() {
-      var tmpl = _.template($('#mycontacttmp').html());
-
-    },
     /****************************************************
      * EVENTS
      * */
@@ -1375,22 +1390,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     hideLoading = function() {
       $('#loader').hide();
-    },
-
-    menuValidateClick = function() {
-      $('#root').parent('li.level1').removeClass('active');
-      $('#upload').removeClass('active');
-      $('#validation').addClass('active');
-      resetFilters();
-      table.columns('.detailsLayer').visible(false, false);
-      table.columns('.fileLayer').visible(true, false);
-      table.columns('.validation').visible(true, false);
-      table.columns.adjust().draw(false); // adjust column sizing and redraw
-      table.column(10).search('Validation\/', true, false).draw(); //filter on Validation Folder
-      $('[class^=level] .active').removeClass('active');
-      setBreadCrumb(i18n[lang].tree.valid);
-      updateMenuVisibleColumnList();
-      event.preventDefault();
     },
 
     setEventGMS = function() {
