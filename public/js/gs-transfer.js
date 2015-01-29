@@ -2215,19 +2215,21 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             createDataTable();
             createMenu();
 
-            //Specific for France and Accounting cabinet
-            isAccountingCabinet().then(function() {
-              if (isCabinet) {
-                getEmailGMS();
-                loadClientsOfCabinet().then(function() {
-                  getFTPClientOfAccountingCabinet();
-                })
-              } else {
-                isClientOfAccountingCabinet().then(function() {
-                  getEmailCabinet();
-                });
-              }
-            });
+            if (isFrance()) {
+              //Specific for France and Accounting cabinet
+              isAccountingCabinet().then(function() {
+                if (isCabinet) {
+                  getEmailGMS();
+                  loadClientsOfCabinet().then(function() {
+                    getFTPClientOfAccountingCabinet();
+                  })
+                } else {
+                  isClientOfAccountingCabinet().then(function() {
+                    getEmailCabinet();
+                  });
+                }
+              });
+            }
           });
         });
       });
