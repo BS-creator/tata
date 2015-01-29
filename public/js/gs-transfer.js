@@ -1229,7 +1229,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       }
     },
 
-    // clients login list for the GMS user
+  // clients login list for the GMS user
     loadClients = function() {
       //return $.Deferred().resolve();
       var i, len;
@@ -1342,8 +1342,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     getEmployerFromLogin = function() {
       //@devcode
-      if (username.toUpperCase() === 'D00000001') return 203100;
-      if (username.toUpperCase() === 'GMSTEST') return 203100;
+      if (username.toUpperCase() === 'D00000001') return 182800;
+      if (username.toUpperCase() === 'GMSTEST') return 990800;
 
       if (username && username.length === 9) {
         return username.substring(1, 7);
@@ -1354,12 +1354,14 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     isAccountingCabinet = function() {
       return $.ajax({
-        type:       'GET',
-        url:        TransferServerURL + 'cabinet/' + getEmployerFromLogin(),
-        success:    function(data) {
-          isCabinet = (data && ParseInt(data) > 0);
+        type:    'GET',
+        url:     TransferServerURL + 'cabinet/' + getEmployerFromLogin(),
+        success: function(data) {
+          console.log('isAccountingCabinet = ', data[0]);
+          isCabinet = (data && data[0] && parseInt(data[0]) > 0);
+          //isCabinet = true;
         },
-        error:      function() {
+        error:   function() {
           console.log('error loading accounting cabinet information');
           Utils.errorMessage(i18n[lang].errorCnx, 4000);
         }
@@ -1368,31 +1370,34 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     isClientOfAccountingCabinet = function() {
       return $.ajax({
-        type:       'GET',
-        url:        TransferServerURL + 'cabinet/client/' + getEmployerFromLogin(),
-        success:    function(data) {
-          isClientOfCabinet = (data && true);
-          cabinetID = data[0];
+        type:    'GET',
+        url:     TransferServerURL + 'cabinet/client/' + getEmployerFromLogin(),
+        success: function(data) {
+          console.log('isClientOfAccountingCabinet = ', data);
+          isClientOfCabinet = (data && data[0]);
+          cabinetID = (data ? data[0] : 0);
         },
-        error:      function() {
+        error:   function() {
           console.log('error loading accounting cabinet information');
           Utils.errorMessage(i18n[lang].errorCnx, 4000);
         }
       });
     },
 
+  //Get email of the cabinet
     getEmailCabinet = function() {
       return $.ajax({
         type:       'GET',
         url:        TransferServerURL + 'cabinet/contact/' + getEmployerFromLogin(),
         success:    function(data) {
+          console.log('getEmailCabinet = ', data);
           var params = {
-            role: 'Gestionnaire', bureau: '', rue: '',
-            num: '', cp: '', ville: '',
+            role:  'Gestionnaire', bureau: '', rue: '',
+            num:   '', cp: '', ville: '',
             phone: data[0][1] || '-',
-            fax: data[0][2] || '-',
+            fax:   data[0][2] || '-',
             email: data[0][0],
-            name: data[0][3]
+            name:  data[0][3]
           };
           $('#mycontacttmpdiv').html(_.template($('#mycontacttmp').html(), params));
         },
@@ -1414,23 +1419,23 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         }
       });
     },
-
   // clients of accounting cabinet
-    loadClientsOfCabinet = function() {
+    getFTPClientOfAccountingCabinet = function() {
       var i, len;
 
       if (isFrance() && isCabinet) {
         return $.ajax({
           type:    'GET',
-          url:     TransferServerURL + 'cabinet/ftpclient/' + ClientCabinetList.join('!'),
+          url:     TransferServerURL + 'cabinet/ftpclient/' + (ClientCabinetList.length > 0 ? ClientCabinetList.join('!') : 0),
           success: function(data) {
+            console.log('getFTPClientOfAccountingCabinet = ', data);
             len = ((data) ? data.length : 0);
             for (i = 0; i < len; i++) {
               FTPClientCabinetList.push({id: data[i], text: data[i]});
             }
           },
           error:   function(err) {
-            console.log('No Clients: ' + err);
+            console.log('No Clients: ' + err.responseText);
             /*console.log('ERROR: loading client');
              hideLoading();
              Utils.errorMessage(i18n[lang].errorCnx, 4000);*/
@@ -1442,14 +1447,15 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       }
     },
 
-    getFTPClientOfAccountingCabinet = function() {
+    loadClientsOfCabinet = function() {
       return $.ajax({
-        type:       'GET',
-        url:        TransferServerURL + 'cabinet/list/' + getEmployerFromLogin(),
-        success:    function(data) {
+        type:    'GET',
+        url:     TransferServerURL + 'cabinet/list/' + getEmployerFromLogin(),
+        success: function(data) {
+          console.log('loadClientsOfCabinet = ', data);
           ClientCabinetList = data || undefined;
         },
-        error:      function() {
+        error:   function() {
           console.log('error loading accounting cabinet information');
           Utils.errorMessage(i18n[lang].errorCnx, 4000);
         }
@@ -1461,13 +1467,14 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         type:       'GET',
         url:        TransferServerURL + 'gms/' + getEmployerFromLogin(),
         success:    function(data) {
+          console.log('getEmailGMS = ', data);
           var params = {
-            role: 'Gestionnaire', bureau: '', rue: '',
-            num: '', cp: '', ville: '',
-            phone: data[0][1] || '-',
-            fax: data[0][2] || '-',
-            email: data[0][0],
-            name: data[0][3]
+            role:  'Gestionnaire', bureau: '', rue: '',
+            num:   '', cp: '', ville: '',
+            phone: (data && data[0] && data[0][1]) || '-',
+            fax:   (data && data[0] && data[0][2]) || '-',
+            email: (data && data[0] && data[0][0]),
+            name:  (data && data[0] && data[0][3])
           };
           $('#mycontacttmpdiv').html(_.template($('#mycontacttmp').html(), params));
         },
@@ -1521,7 +1528,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         }).off('select2-selecting').on('select2-selecting', function(e) {
           $('input[name="clientName"]').val(e.val);
           $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' +
-                              i18n[lang].modalupload + ' à <span class="clientDest">' + e.object.text + '</span>');
+          i18n[lang].modalupload + ' à <span class="clientDest">' + e.object.text + '</span>');
           loadClientFiles(e.val)
             .then(function() {
               // doesn't work
@@ -2208,6 +2215,19 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             createDataTable();
             createMenu();
 
+            //Specific for France and Accounting cabinet
+            isAccountingCabinet().then(function() {
+              if (isCabinet) {
+                getEmailGMS();
+                loadClientsOfCabinet().then(function() {
+                  getFTPClientOfAccountingCabinet();
+                })
+              } else {
+                isClientOfAccountingCabinet().then(function() {
+                  getEmailCabinet();
+                });
+              }
+            });
           });
         });
       });
@@ -2275,6 +2295,12 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
   return {
     i18n:                        i18n,
+    clientList:                  clientList,
+    isCabinet:                   isCabinet,
+    cabinetID:                   cabinetID,
+    isClientOfCabinet:           isClientOfCabinet,
+    ClientCabinetList:           ClientCabinetList,
+    FTPClientCabinetList:        FTPClientCabinetList,
     filterMenu:                  filterMenu,
     signOut:                     signOut,
     getFilesID:                  getFilesID,
