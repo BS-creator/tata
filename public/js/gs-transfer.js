@@ -40,7 +40,12 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     username = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '',
     tokenTransfer = sessionStorage.getItem('tokenTransfer'),
     tokenPortal = sessionStorage.getItem('token'),
-    clientList = [],
+    clientList = [], //list of all FTP account in e_adresse (used by GMS)
+    isCabinet = false,
+    cabinetID = 0,
+    isClientOfCabinet = false,
+    ClientCabinetList = [],
+    FTPClientCabinetList = [],
 
     /*** HELPER ***/
     isGMS = function() {
@@ -101,7 +106,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         countFile = 0;
 
       _.forEach(array, function(item) {
-        it = $(item[1]);
+        if (item[1].display) it = $(item[1].display);
+        else it = $(item[1]);
         listID += it.data('file-id') + '&' + it.data('filename') + '@!';
         countFile++;
       });
@@ -1223,7 +1229,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       }
     },
 
-  // clients login list for the GMS user
+    // clients login list for the GMS user
     loadClients = function() {
       //return $.Deferred().resolve();
       var i, len;
@@ -1344,6 +1350,110 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       } else {
         return '0';
       }
+    },
+
+    isAccountingCabinet = function() {
+      return $.ajax({
+        type:       'GET',
+        url:        TransferServerURL + 'cabinet/' + getEmployerFromLogin(),
+        success:    function(data) {
+          isCabinet = (data && ParseInt(data) > 0);
+        },
+        error:      function() {
+          console.log('error loading accounting cabinet information');
+          Utils.errorMessage(i18n[lang].errorCnx, 4000);
+        }
+      });
+    },
+
+    isClientOfAccountingCabinet = function() {
+      return $.ajax({
+        type:       'GET',
+        url:        TransferServerURL + 'cabinet/client/' + getEmployerFromLogin(),
+        success:    function(data) {
+          isClientOfCabinet = (data && true);
+          cabinetID = data[0];
+        },
+        error:      function() {
+          console.log('error loading accounting cabinet information');
+          Utils.errorMessage(i18n[lang].errorCnx, 4000);
+        }
+      });
+    },
+
+    getEmailCabinet = function() {
+      return $.ajax({
+        type:       'GET',
+        url:        TransferServerURL + 'cabinet/contact/' + getEmployerFromLogin(),
+        success:    function(data) {
+          var params = {
+            role: 'Gestionnaire', bureau: '', rue: '',
+            num: '', cp: '', ville: '',
+            phone: data[0][1] || '-',
+            fax: data[0][2] || '-',
+            email: data[0][0],
+            name: data[0][3]
+          };
+          $('#mycontacttmpdiv').html(_.template($('#mycontacttmp').html(), params));
+        },
+        error:      function() {
+          hideLoading();
+          console.log('error loading data');
+          Utils.errorMessage(i18n[lang].errorCnx, 4000);
+
+        },
+        dataType:   'json',
+        statusCode: {
+          403: function() {
+            hideLoading();
+            Utils.errorMessage(i18n[lang].errorCnx, 4000);
+            setTimeout(function() {
+              window.location = TransferBaseURL;
+            }, 4000);
+          }
+        }
+      });
+    },
+
+  // clients of accounting cabinet
+    loadClientsOfCabinet = function() {
+      var i, len;
+
+      if (isFrance() && isCabinet) {
+        return $.ajax({
+          type:    'GET',
+          url:     TransferServerURL + 'cabinet/ftpclient/' + ClientCabinetList.join('!'),
+          success: function(data) {
+            len = ((data) ? data.length : 0);
+            for (i = 0; i < len; i++) {
+              FTPClientCabinetList.push({id: data[i], text: data[i]});
+            }
+          },
+          error:   function(err) {
+            console.log('No Clients: ' + err);
+            /*console.log('ERROR: loading client');
+             hideLoading();
+             Utils.errorMessage(i18n[lang].errorCnx, 4000);*/
+          }
+        });
+      } else {
+        //Not a Cabinet, pass...
+        return $.Deferred().resolve();
+      }
+    },
+
+    getFTPClientOfAccountingCabinet = function() {
+      return $.ajax({
+        type:       'GET',
+        url:        TransferServerURL + 'cabinet/list/' + getEmployerFromLogin(),
+        success:    function(data) {
+          ClientCabinetList = data || undefined;
+        },
+        error:      function() {
+          console.log('error loading accounting cabinet information');
+          Utils.errorMessage(i18n[lang].errorCnx, 4000);
+        }
+      });
     },
 
     getEmailGMS = function() {

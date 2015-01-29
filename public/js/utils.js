@@ -67,9 +67,15 @@ var Utils = (function() {
         //sessionStorage.setItem('tokenPortal', 'F19EG686BTITNPHX788I5WR682E5TBMP8PBHEHK6SJCVFMAUD469HLMN4NK9HUVKJTB17230RKELJ21L91');
 
       } else if (_.contains(url, '172.20.20.64')) {
-        sessionStorage.setItem('TransferBaseURL', '//172.20.20.64:4001/');
-        sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-        localStorage.setItem('country', 'BE');
+        sessionStorage.setItem('TransferBaseURL', '//172.20.20.64:4000/');
+        sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');
+        //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
+        localStorage.setItem('country', 'FR');
+
+      } else if (_.contains(url, 'pdevg1')) {
+        sessionStorage.setItem('TransferBaseURL', '//pdevg1:4000/');
+        sessionStorage.setItem('TransferServerURL', '//pdevg1:8018');
+        localStorage.setItem('country', 'FR');
 
       } else if (_.contains(url, 'deviapps')) {
         sessionStorage.setItem('TransferBaseURL', '//deviapps.groups.be/prestaweb/transfer/');
