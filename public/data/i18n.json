@@ -115,6 +115,7 @@
     "notification": "Prévenir l'utilisateur par email",
     "notificationGMS": "Prévenir le gestionnaire par email",
     "noNotif":      "Pas de notification, l'utilisateur n'a pas été prévenu!",
+    "noNotifMail":      "Pas de notification, le destinataire n'a pas d'email défini!",
     "errorValid":   "Erreur: tous les fichiers n'ont pas été validés!",
     "errorCnx":     "Erreur de connection au serveur: Authentification nécessaire.",
     "error0":       "Erreur: Problème lors de la récupération de la liste des fichiers sur le serveur. ",

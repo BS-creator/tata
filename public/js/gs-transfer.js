@@ -61,7 +61,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     getClientName = function() {
       var $client = $('input[name="clientName"]');
-      return ($client.val() === username) ? false : $client.val();
+      //return ($client.val() === username) ? false : $client.val();
+      return $client.val();
     },
 
     getPDFjsURL = function(serverURL, tokenTransfer, fileID, filename) {
@@ -1192,8 +1193,13 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           //Utils.smessage(i18n[lang].file.XXX, '', 'success', 2000);
           setTimeout(function() { window.location = TransferBaseURL + 'transferApp.html?upload'; }, 2000);
         },
-        error:    function() {
-          Utils.errorMessage(i18n[lang].noNotif, 5000);
+        error:    function(jqXHR) {
+          var error = JSON.parse(jqXHR.responseText);
+          if (error.code === '2') {
+            Utils.errorMessage(i18n[lang].noNotifMail, 5000);
+          }else {
+            Utils.errorMessage(i18n[lang].noNotif, 5000);
+          }
         },
         complete: function() {
           setCursorToAuto();
@@ -1343,8 +1349,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     getEmployerFromLogin = function() {
       //@devcode
-      if (username.toUpperCase() === 'D00000001') return 220300;//182800; // id client of CC
-      if (username.toUpperCase() === 'GMSTEST') return 990800;
+      //if (username.toUpperCase() === 'D00000001') return 182800;//220300; //182800; // id client of CC
+      //if (username.toUpperCase() === 'GMSTEST') return 990800;
 
       if (username && username.length === 9) {
         return username.substring(1, 7);

@@ -80,7 +80,7 @@ var Utils = (function() {
       } else if (_.contains(url, 'deviapps')) {
         sessionStorage.setItem('TransferBaseURL', '//deviapps.groups.be/prestaweb/transfer/');
         sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-        localStorage.setItem('country', 'BE');
+        localStorage.setItem('country', 'FR');
       } else if (_.contains(url, 'qaiapps')) {
         sessionStorage.setItem('TransferBaseURL', '//qaiapps.groups.be/transfer/');
         sessionStorage.setItem('TransferServerURL', '//qaiapps.groups.be/ariane/');
