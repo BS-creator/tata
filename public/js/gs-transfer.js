@@ -43,6 +43,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     clientList = [], //list of all FTP account in e_adresse (used by GMS)
     isCabinet = false,
     cabinetID = 0,
+    cabinetEmail = '',
     isClientOfCabinet = false,
     ClientCabinetList = [],
     FTPClientCabinetList = [],
@@ -754,8 +755,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           });
           currentCat = parseInt(item.categoryNumber);
           currentCatLabel = labelCati18n(item);
-
         });
+        //Put the category in the right French Category
         if (_.contains([0, 1, 3, 4, 5, 6, 7], currentCat)) {
           catPPP += createCategoryNode({
             categoryNumber: currentCat,
@@ -794,7 +795,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         catPPP:         catPPP,
         catGAR:         catGAR,
         catGAD:         catGAD,
-        categoryNode:   ''
+        categoryNode:   htmlCategoryNode
       });
     },
 
@@ -825,7 +826,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     createMenu = function createMenu() {
       if (isFrance()) {
-        //console.log('>>> FRANCE');
+        console.log('>>> FRANCE');
         $('#sidenav').html(templateMenuFR(filterMenu()));
         //$('.level0').show();
       } else {
@@ -1079,7 +1080,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         });
     },
 
-    deleteFile = function(filePath, cell) {
+    deleteFile = function(fileID, cell) {
       //The FTP can delete a file by its path or by its ID (same method on backend)
       //So it works if the fileID is in the filePath
 
@@ -1089,7 +1090,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         url:      TransferServerURL + 'file/',
         data:     {
           token:    tokenTransfer,
-          filePath: filePath
+          fileID: fileID
         },
         success:  function() {
           Utils.smessage(i18n[lang].file.del, '', 'success', 2000);
@@ -1342,7 +1343,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     getEmployerFromLogin = function() {
       //@devcode
-      if (username.toUpperCase() === 'D00000001') return 182800;
+      if (username.toUpperCase() === 'D00000001') return 220300;//182800; // id client of CC
       if (username.toUpperCase() === 'GMSTEST') return 990800;
 
       if (username && username.length === 9) {
@@ -1357,8 +1358,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         type:    'GET',
         url:     TransferServerURL + 'cabinet/' + getEmployerFromLogin(),
         success: function(data) {
-          console.log('isAccountingCabinet = ', data[0]);
-          isCabinet = (data && data[0] && parseInt(data[0]) > 0);
+          console.log('isAccountingCabinet = ', data);
+          isCabinet = (data && parseInt(data) > 0);
           //isCabinet = true;
         },
         error:   function() {
@@ -1391,15 +1392,24 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         url:        TransferServerURL + 'cabinet/contact/' + getEmployerFromLogin(),
         success:    function(data) {
           console.log('getEmailCabinet = ', data);
-          var params = {
-            role:  'Gestionnaire', bureau: '', rue: '',
-            num:   '', cp: '', ville: '',
-            phone: data[0][1] || '-',
-            fax:   data[0][2] || '-',
-            email: data[0][0],
-            name:  data[0][3]
-          };
-          $('#mycontacttmpdiv').html(_.template($('#mycontacttmp').html(), params));
+          var params = {};
+
+          if (data && data.length > 0) {
+            cabinetEmail = data[0];
+            params = {
+              role:  'Cabinet Comptable', bureau: '', rue: '',
+              num:   '', cp: '', ville: '',
+              phone:  '-',
+              fax:    '-',
+              email: cabinetEmail,
+              name:  '-'
+            };
+            $('#mycontacttmpdiv').html(_.template($('#mycontacttmp').html(), params));
+          } else {
+
+          }
+
+
         },
         error:      function() {
           hideLoading();
@@ -1468,15 +1478,19 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         url:        TransferServerURL + 'gms/' + getEmployerFromLogin(),
         success:    function(data) {
           console.log('getEmailGMS = ', data);
-          var params = {
-            role:  'Gestionnaire', bureau: '', rue: '',
-            num:   '', cp: '', ville: '',
-            phone: (data && data[0] && data[0][1]) || '-',
-            fax:   (data && data[0] && data[0][2]) || '-',
-            email: (data && data[0] && data[0][0]),
-            name:  (data && data[0] && data[0][3])
-          };
-          $('#mycontacttmpdiv').html(_.template($('#mycontacttmp').html(), params));
+          var params, d;
+          if (data && data[0]) {
+            d = data[0];
+            params = {
+              role:  'Gestionnaire', bureau: '-', rue: '-',
+              num:   '-', cp: '-', ville: '-',
+              phone: '-',
+              fax:   '-',
+              email: d.emailGMS,
+              name:  d.agentName
+            };
+            $('#mycontacttmpdiv').html(_.template($('#mycontacttmp').html(), params));
+          }
         },
         error:      function() {
           hideLoading();
@@ -2241,15 +2255,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       TransferServerURL = sessionStorage.getItem('TransferServerURL'),
         TransferBaseURL = sessionStorage.getItem('TransferBaseURL'),
         lang = sessionStorage.getItem('lang') || localStorage.lastLanguage || localStorage.lang,
-        TABLEID = '#tableID',
-        table = {}, //DataTable object
-        oTable = {}, //Jquery Data object
-        i18n = {}, // Language dictionary
-        AjaxData = [], // Data
-        category = [], // Data
-        refDocUsed = [], // Data
         username = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '',
-        numberCol = 18,
         tokenPortal = sessionStorage.getItem('token'),
         tokenTransfer = sessionStorage.getItem('tokenTransfer');
 
