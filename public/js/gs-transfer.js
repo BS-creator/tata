@@ -56,13 +56,29 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     isCabinet = false,
     cabinetID = 0,
     cabinetEmail = '',
+    GMSEmail = '',
     isClientOfCabinet = false,
     ClientCabinetList = [],
     FTPClientCabinetList = [],
 
     /*** HELPER ***/
     isGMS = function() {
+      //@devcode
+      //if (username && username.toUpperCase() === 'GMSTEST') return false;
+
       return (username && username.toUpperCase().indexOf('GMS') === 0);
+    },
+
+    isNormalClient = function() {
+      return !(isGMS() || isAccountingCabinet() || isClientOfAccountingCabinet());
+    },
+
+    isAccountingCabinet = function() {
+      return isCabinet;
+    },
+
+    isClientOfAccountingCabinet = function() {
+      return isClientOfCabinet;
     },
 
     isFrance = function() {
@@ -72,9 +88,17 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
     getClientName = function() {
-      var $client = $('input[name="clientName"]');
-      //return ($client.val() === username) ? false : $client.val();
-      return $client.val();
+      /*var $client = $('input[name="clientName"]');
+       return ($client.val() === username) ? false : $client.val();*/
+      return $('input[name="clientName"]').val();
+    },
+
+    getContactEmail = function() {
+      return $('#emailContact').html();
+    },
+
+    getEmailGMS = function() {
+      return GMSEmail;
     },
 
     getPDFjsURL = function(serverURL, tokenTransfer, fileID, filename) {
@@ -451,16 +475,17 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         $('input[name="notification"]').show();
         if (isGMS()) {
           $('#notification').text(i18n[lang].notification);
-        } else {
+        } else if (isAccountingCabinet()) {
+          $('#notification').text(i18n[lang].notification);
+        } else if (isClientOfAccountingCabinet()) {
+          $('#notification').text(i18n[lang].notificationCC);
+          $('input[name="email"]').val(loadEmailCabinet());
+        } else if (isNormalClient()) {
           $('#notification').text(i18n[lang].notificationGMS);
           $('input[name="clientName"]').val(username);
+          $('input[name="email"]').val(getEmailGMS());
         }
-        listFolder = $uploadform.find('div.dir-list');
-        listFolder.html('');
-        _.forEach(i18n[lang].dirlist, function(v, k) {
-          listFolder.append('<label class="radio"><input name="destFolder" value="' + k + '" type="radio" />' +
-          v + '</label>');
-        });
+
       }
 
       $uploadform.fileupload({
@@ -473,7 +498,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           $('#progress').find('.progress-bar').css('width', progress + '%');
         },
         add:         function(e, data) {
-          //TODO: add it to the list
+          //TODO: add it to the list and create 'UPLOAD' button
           /*var $uploadList = $('#uploadList');
            _.forEach(data.files, function(file) {
            $uploadList.append('<li>' + file.name + '</li>');
@@ -487,9 +512,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
               //console.log( "activeUploads = ", activeUploads );
             });
         },
-        start:       function() {
-          $('#progress').show();
-        },
+        start:       function() { $('#progress').show(); },
         done:        function() {
           activeUploads = $uploadform.fileupload('active');
           if (activeUploads < 2) {
@@ -516,6 +539,15 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           destFolders[key] + '/</label>'
         );
       }
+    },
+
+    listFolderUploadFR = function() {
+      var listFolder = $('#uploadForm').find('div.dir-list');
+      listFolder.html('');
+      _.forEach(i18n[lang].dirlist, function(v, k) {
+        listFolder.append('<label class="radio"><input name="destFolder" value="' + k + '" type="radio" />' +
+        v + '</label>');
+      });
     },
 
     /****************************************************
@@ -559,7 +591,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('#upload').removeClass('active');
       $('#validation').removeClass('active');
       resetFilters();
-      table.columns('.categorieFrance').visible(false, false);
+      table.columns('.categoryFrance').visible(false, false);
       table.columns('.detailsLayer').visible(false, false);
       table.columns('.validation').visible(false, false);
       table.columns('.fileLayer').visible(true, false);
@@ -577,7 +609,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('#upload').removeClass('active');
       $('#validation').removeClass('active');
       resetFilters();
-      table.columns('.categorieFrance').visible(false, false);
+      table.columns('.categoryFrance').visible(false, false);
       table.columns('.fileLayer').visible(false, false);
       table.columns('.validation').visible(false, false);
       table.columns('.detailsLayer').visible(true, false);
@@ -598,7 +630,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('#upload').addClass('active');
       $('#validation').removeClass('active');
       resetFilters();
-      table.columns('.categorieFrance').visible(false, false);
+      table.columns('.categoryFrance').visible(false, false);
       table.columns('.fileLayer').visible(false, false);
       table.columns('.validation').visible(false, false);
       table.columns('.detailsLayer').visible(true, false);
@@ -615,7 +647,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       $('#upload').removeClass('active');
       $('#validation').removeClass('active');
       resetFilters();
-      table.columns('.categorieFrance').visible(false, false);
+      table.columns('.categoryFrance').visible(false, false);
       table.columns('.detailsLayer').visible(false, false);
       table.columns('.validation').visible(false, false);
       table.columns('.fileLayer').visible(true, false);
@@ -665,7 +697,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         table
           .search('')
           .columns().search('');
-        table.columns('.categorieFrance').visible(false, false);
+        table.columns('.categoryFrance').visible(false, false);
         table.columns('.detailsLayer').visible(false, false);
         table.columns('.fileLayer').visible(true, false);
         table.columns('.validation').visible(false, false);
@@ -968,13 +1000,13 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             targets:   2 // Date
           },
           {
-            className:  'detailsLayer categorieFrance',
+            className:  'detailsLayer categoryFrance',
             targets:    3, // fileName
             visible:    false,
             searchable: true
           },
           {
-            className:  'detailsLayer categorieFrance',
+            className:  'detailsLayer categoryFrance',
             targets:    4, // uploadUserName
             visible:    false,
             searchable: true
@@ -1021,7 +1053,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             searchable: false
           },
           {
-            className:  'validation categorieFrance',
+            className:  'validation categoryFrance',
             targets:    14, //uploadStamp
             visible:    false,
             searchable: true
@@ -1102,7 +1134,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         type:     'DELETE',
         url:      TransferServerURL + 'file/',
         data:     {
-          token:    tokenTransfer,
+          token:  tokenTransfer,
           fileID: fileID
         },
         success:  function() {
@@ -1209,7 +1241,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           var error = JSON.parse(jqXHR.responseText);
           if (error.code === '2') {
             Utils.errorMessage(i18n[lang].noNotifMail, 5000);
-          }else {
+          } else {
             Utils.errorMessage(i18n[lang].noNotif, 5000);
           }
         },
@@ -1219,10 +1251,41 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
+    /*postNotification = function() {
+      setCursorToProgress();
+
+      var params = {
+        token:      tokenTransfer,
+        clientName: getClientName(),
+        lang:       lang
+      };
+
+      return $.ajax({
+        type:     'POST',
+        url:      TransferServerURL + 'notification/email',
+        data:     params,
+        success:  function() {
+          //Utils.smessage(i18n[lang].file.XXX, '', 'success', 2000);
+          setTimeout(function() { window.location = TransferBaseURL + 'transferApp.html?upload'; }, 2000);
+        },
+        error:    function(jqXHR) {
+          var error = JSON.parse(jqXHR.responseText);
+          if (error.code === '2') {
+            Utils.errorMessage(i18n[lang].noNotifMail, 5000);
+          } else {
+            Utils.errorMessage(i18n[lang].noNotif, 5000);
+          }
+        },
+        complete: function() {
+          setCursorToAuto();
+        }
+      });
+    },*/
+
   // clients' file list for the GMS user
     loadClientFiles = function(clientName) {
       showLoading();
-      if (isFrance() && isGMS()) {
+      if (isFrance() && (isGMS() || isAccountingCabinet())) {
         return $.ajax({
           type:       'POST',
           url:        TransferServerURL + 'file/list/',
@@ -1248,36 +1311,48 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       }
     },
 
-  // clients login list for the GMS user
+    buildClientListForSelect2 = function(data) {
+
+      _.forEach(data, function(i) {
+        clientList.push({
+          id:    i.clientLogin,
+          text:  i['label' + lang.charAt(0).toUpperCase()],
+          email: i.email
+        });
+      });
+      // @devcode
+      if (username && username.toUpperCase() === 'GMSTEST') {
+        clientList.push({id: 'D00000001', text: 'D00000001', email: 'julien.bisconti@groups.be'})
+      }
+    },
+
+    /**
+     * Load the list of client login for the GMS user or a cabinet */
     loadClients = function() {
       //return $.Deferred().resolve();
-      var i, len;
 
-      if (isFrance() && isGMS()) {
+      if (isGMS()) {
         return $.ajax({
           type:    'POST',
           url:     TransferServerURL + 'client/',
           data:    {token: tokenTransfer},
-          success: function(data) {
-            len = ((data) ? data.length : 0);
-            for (i = 0; i < len; i++) {
-              clientList.push({
-                id:   data[i].clientLogin,
-                text: data[i]['label' + lang.charAt(0).toUpperCase()]
-              });
-            }
-            // @devcode
-            clientList.push({id: 'D00000001', text: 'D00000001'})
-          },
+          success: buildClientListForSelect2,
           error:   function(err) {
-            console.log('No Clients: ' + err);
-            /*console.log('ERROR: loading client');
-             hideLoading();
-             Utils.errorMessage(i18n[lang].errorCnx, 4000);*/
+            console.log('No Clients: ' + JSON.stringify(err));
+          }
+        });
+      } else if (isAccountingCabinet()) {
+        return $.ajax({
+          type:    'GET',
+          url:     TransferServerURL + 'cabinet/ftpclient/' + getEmployerFromLogin(),
+         /* data:    {token: tokenTransfer},*/
+          success: buildClientListForSelect2,
+          error:   function(err) {
+            console.log('No Clients: ' + JSON.stringify(err));
           }
         });
       } else {
-        //Not a GMS, pass...
+        //Not a GMS, not a cabinet, pass...
         return $.Deferred().resolve();
       }
     },
@@ -1289,7 +1364,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     loadFolder = function() {
 
       if (isFrance()) {
-        return $.Deferred().resolve();//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        listFolderUploadFR();
+        return $.Deferred().resolve();
       } else {
         return $.ajax({
           type:       'POST',
@@ -1361,7 +1437,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     getEmployerFromLogin = function() {
       //@devcode
-      //if (username.toUpperCase() === 'D00000001') return 182800;//220300; //182800; // id client of CC
+      //if (username.toUpperCase() === 'D00000001') return 192900;//220300; //182800; // id client of CC
       //if (username.toUpperCase() === 'GMSTEST') return 990800;
 
       if (username && username.length === 9) {
@@ -1371,14 +1447,13 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       }
     },
 
-    isAccountingCabinet = function() {
+    loadIsAccountingCabinet = function() {
       return $.ajax({
         type:    'GET',
         url:     TransferServerURL + 'cabinet/' + getEmployerFromLogin(),
         success: function(data) {
-          console.log('isAccountingCabinet = ', data);
+          console.log('loadIsAccountingCabinet = ', data);
           isCabinet = (data && parseInt(data) > 0);
-          //isCabinet = true;
         },
         error:   function() {
           console.log('error loading accounting cabinet information');
@@ -1387,12 +1462,12 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
-    isClientOfAccountingCabinet = function() {
+    loadIsClientOfAccountingCabinet = function() {
       return $.ajax({
         type:    'GET',
         url:     TransferServerURL + 'cabinet/client/' + getEmployerFromLogin(),
         success: function(data) {
-          console.log('isClientOfAccountingCabinet = ', data);
+          console.log('loadIsClientOfAccountingCabinet = ', data);
           isClientOfCabinet = (data && data[0]);
           cabinetID = (data ? data[0] : 0);
         },
@@ -1404,7 +1479,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
   //Get email of the cabinet
-    getEmailCabinet = function() {
+    loadEmailCabinet = function() {
       return $.ajax({
         type:       'GET',
         url:        TransferServerURL + 'cabinet/contact/' + getEmployerFromLogin(),
@@ -1417,17 +1492,15 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             params = {
               role:  'Cabinet Comptable', bureau: '', rue: '',
               num:   '', cp: '', ville: '',
-              phone:  '-',
-              fax:    '-',
+              phone: '-',
+              fax:   '-',
               email: cabinetEmail,
               name:  '-'
             };
             $('#mycontacttmpdiv').html(_.template($('#mycontacttmp').html(), params));
           } else {
-
+            console.log('getEmailCabinet = No data found');
           }
-
-
         },
         error:      function() {
           hideLoading();
@@ -1448,7 +1521,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
   // clients of accounting cabinet
-    getFTPClientOfAccountingCabinet = function() {
+   /* getFTPClientOfAccountingCabinet = function() {
       var i, len;
 
       if (isFrance() && isCabinet) {
@@ -1464,18 +1537,18 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           },
           error:   function(err) {
             console.log('No Clients: ' + err.responseText);
-            /*console.log('ERROR: loading client');
+            *//*console.log('ERROR: loading client');
              hideLoading();
-             Utils.errorMessage(i18n[lang].errorCnx, 4000);*/
+             Utils.errorMessage(i18n[lang].errorCnx, 4000);*//*
           }
         });
       } else {
         //Not a Cabinet, pass...
         return $.Deferred().resolve();
       }
-    },
+    },*/
 
-    loadClientsOfCabinet = function() {
+    /*loadClientsOfCabinet = function() {
       return $.ajax({
         type:    'GET',
         url:     TransferServerURL + 'cabinet/list/' + getEmployerFromLogin(),
@@ -1488,9 +1561,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           Utils.errorMessage(i18n[lang].errorCnx, 4000);
         }
       });
-    },
+    },*/
 
-    getEmailGMS = function() {
+    loadEmailGMS = function() {
       return $.ajax({
         type:       'GET',
         url:        TransferServerURL + 'gms/' + getEmployerFromLogin(),
@@ -1499,6 +1572,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           var params, d;
           if (data && data[0]) {
             d = data[0];
+            GMSEmail = d.emailGMS;
             params = {
               role:  'Gestionnaire', bureau: '-', rue: '-',
               num:   '-', cp: '-', ville: '-',
@@ -1542,7 +1616,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
     setEventGMS = function() {
-      if (isGMS()) {
+      if (isGMS() || isAccountingCabinet()) {
         var $validation = $('#validation'),
           $selectClients = $('#clients'),
           option = document.createElement('option');
@@ -1556,96 +1630,53 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           placeholder: i18n[lang].button.client,
           allowClear:  true,
           data:        clientList
-          //data:        []
         }).off('select2-selecting').on('select2-selecting', function(e) {
+          /** Set contact information of the select user!!! **/
           $('input[name="clientName"]').val(e.val);
+          $('input[name="email"]').val(e.object.email);
           $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' +
-          i18n[lang].modalupload + ' à <span class="clientDest">' + e.object.text + '</span>');
+          i18n[lang].modalupload + ' à <span class="clientDest">' + e.choice.text + '</span>');
           loadClientFiles(e.val)
             .then(function() {
               // doesn't work
               //setTimeout($('#validation').find('a').trigger('click'), 0);
             });
         }).off('select2-removed').on('select2-removed', function() {
+          /** When removed, reset everything to contact the GMS of the current user!!! **/
           $('input[name="clientName"]').val(username);
+          $('input[name="email"]').val(getContactEmail());
           loadClientFiles(username);
+          $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].modalupload + '</span>');
+
         });
       }
     },
 
-    setEventCategoryFR = function() {
-      $('#PPP').off('click').on('click', function() {
-        $('#upload').removeClass('active');
-        $('#validation').removeClass('active');
-        resetFilters();
-        table.columns('.fileLayer').visible(false, false);
-        table.columns('.detailsLayer').visible(false, false);
-        table.columns('.validation').visible(false, false);
-        table.columns('.categorieFrance').visible(true, false);
+    filterCategoryFR = function(filter) {
+      $('#upload').removeClass('active');
+      $('#validation').removeClass('active');
+      resetFilters();
+      table.columns('.fileLayer').visible(false, false);
+      table.columns('.detailsLayer').visible(false, false);
+      table.columns('.validation').visible(false, false);
+      table.columns('.categoryFrance').visible(true, false);
 
-        // adjust column sizing and redraw
-        table.columns.adjust().draw(false);
-        //filter on uploadUserName
-        table
-          .column(4).search('[^' + username + ']', true, false)
-          .column(19).search('^PPP', true, false).draw();
-        setBreadCrumb(i18n[lang].dirlist.PPP);
-        updateMenuVisibleColumnList();
-        event.preventDefault();
-      });
-      $('#GAD').on('click', function() {
-        $('#upload').removeClass('active');
-        $('#validation').removeClass('active');
-        resetFilters();
-        table.columns('.fileLayer').visible(false, false);
-        table.columns('.detailsLayer').visible(false, false);
-        table.columns('.validation').visible(false, false);
-        table.columns('.categorieFrance').visible(true, false);
-        // adjust column sizing and redraw
-        table.columns.adjust().draw(false);
-        //filter on uploadUserName
-        table
-          .column(4).search('[^' + username + ']', true, false)
-          .column(19).search('^GAD', true, false).draw();
-        setBreadCrumb(i18n[lang].dirlist.GAD);
-        updateMenuVisibleColumnList();
-        event.preventDefault();
-      });
-      $('#GES').on('click', function() {
-        $('#upload').removeClass('active');
-        $('#validation').removeClass('active');
-        resetFilters();
-        table.columns('.fileLayer').visible(false, false);
-        table.columns('.detailsLayer').visible(false, false);
-        table.columns('.validation').visible(false, false);
-        table.columns('.categorieFrance').visible(true, false);
-        // adjust column sizing and redraw
-        table.columns.adjust().draw(false);
-        //filter on uploadUserName
-        table
-          .column(4).search('[^' + username + ']', true, false)
-          .column(19).search('^GES', true, false).draw();
-        setBreadCrumb(i18n[lang].dirlist.GES);
-        updateMenuVisibleColumnList();
-        event.preventDefault();
-      });
-      $('#GAR').on('click', function() {
-        $('#upload').removeClass('active');
-        $('#validation').removeClass('active');
-        resetFilters();
-        table.columns('.fileLayer').visible(false, false);
-        table.columns('.detailsLayer').visible(false, false);
-        table.columns('.validation').visible(false, false);
-        table.columns('.categorieFrance').visible(true, false);
-        // adjust column sizing and redraw
-        table.columns.adjust().draw(false);
-        table
-          .column(4).search('[^' + username + ']', true, false)
-          .column(19).search('^GAR', true, false).draw();
-        setBreadCrumb(i18n[lang].dirlist.GAR);
-        updateMenuVisibleColumnList();
-        event.preventDefault();
-      })
+      // adjust column sizing and redraw
+      table.columns.adjust().draw(false);
+      //filter on uploadUserName
+      table
+        .column(4).search('[^' + username + ']', true, false)
+        .column(19).search('^' + filter, true, false).draw();
+      setBreadCrumb(i18n[lang].dirlist[filter]);
+      updateMenuVisibleColumnList();
+      event.preventDefault();
+    },
+
+    setEventCategoryFR = function() {
+      $('#PPP').off('click').on('click', function() {filterCategoryFR('PPP')});
+      $('#GAD').off('click').on('click', function() {filterCategoryFR('GAD')});
+      $('#GES').off('click').on('click', function() {filterCategoryFR('GES')});
+      $('#GAR').off('click').on('click', function() {filterCategoryFR('GAR')});
     },
 
     setEventColumnListVisible = function() {
@@ -1695,11 +1726,11 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         addLowerButton();
         $('.downloadall').show();
         $('.deleteAll').show();
-        if (isGMS() && $('th.validation.sorting_disabled').length > 0) {$('.validAll').show();}
+        if ((isGMS() || isAccountingCabinet()) && $('th.validation.sorting_disabled').length > 0) {$('.validAll').show();}
       } else {
         $('.downloadall').toggle();
         $('.deleteAll').toggle();
-        if (isGMS() && $('th.validation.sorting_disabled').length > 0) {$('.validAll').toggle();}
+        if ((isGMS() || isAccountingCabinet()) && $('th.validation.sorting_disabled').length > 0) {$('.validAll').toggle();}
       }
     },
 
@@ -2133,7 +2164,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       setEventUpload();
       setEventLanguageSettings();
       setEventReload();
-      setEventuploadForm();
     },
 
     setEventsHTML = function() {
@@ -2238,7 +2268,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       $.when(portalCnx()).then(function() {
 
-        $.when(loadCategory(), loadData(), loadFolder(), loadClients(), getEmailGMS()).then(function() {
+        $.when(loadCategory(), loadData(), loadFolder()).then(function() {
 
           //Add label for reference of Document
           $.when(mergeLabelDoc()).then(function() {
@@ -2247,24 +2277,26 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             createDataTable();
             createMenu();
 
-            if (isFrance()) {
+            if (isFrance() && !isGMS()) {
               //Specific for France and Accounting cabinet
-              isAccountingCabinet().then(function() {
-                if (isCabinet) {
-                  getEmailGMS();
-                  loadClientsOfCabinet().then(function() {
-                    getFTPClientOfAccountingCabinet();
-                  })
+              loadIsAccountingCabinet().then(function() {
+
+                if (isAccountingCabinet()) {
+                  loadClients().then(function() {setEventuploadForm();});
+                  setEventGMS();
                 } else {
-                  isClientOfAccountingCabinet().then(function() {
-                    if(isClientOfCabinet) {
-                      getEmailCabinet();
+
+                  loadIsClientOfAccountingCabinet().then(function() {
+                    if (isClientOfAccountingCabinet()) {
+                      loadEmailCabinet().then(function() {setEventuploadForm();});
+                    } else {
+                      loadEmailGMS().then(function() {setEventuploadForm();});
                     }
                   });
                 }
               });
             }
-          });
+          })
         });
       });
     },
@@ -2324,11 +2356,13 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
   return {
     i18n:                        i18n,
     clientList:                  clientList,
-    isCabinet:                   isCabinet,
     cabinetID:                   cabinetID,
-    isClientOfCabinet:           isClientOfCabinet,
     ClientCabinetList:           ClientCabinetList,
     FTPClientCabinetList:        FTPClientCabinetList,
+    isGMS:                       isGMS,
+    isAccountingCabinet:         isAccountingCabinet,
+    isClientOfAccountingCabinet: isClientOfAccountingCabinet,
+    isNormalClient:              isNormalClient,
     filterMenu:                  filterMenu,
     signOut:                     signOut,
     getFilesID:                  getFilesID,

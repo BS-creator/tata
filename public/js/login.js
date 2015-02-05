@@ -93,11 +93,15 @@ $(function(swal, _, Utils) {
 
     Utils.setTransferURL();
 
-    //set language
-    sessionStorage.setItem('lang', Utils.getNavigatorLanguage());
-    $('.' + Utils.getNavigatorLanguage()).addClass('default-lang');
-    //console.log(' Utils.getNavigatorLanguage() = ' + Utils.getNavigatorLanguage());
-
+    if (!localStorage.lastLanguage) {
+      //set language
+      sessionStorage.setItem('lang', Utils.getNavigatorLanguage());
+      $('.' + Utils.getNavigatorLanguage()).addClass('default-lang');
+      //console.log(' Utils.getNavigatorLanguage() = ' + Utils.getNavigatorLanguage());
+    } else {
+      sessionStorage.setItem('lang', localStorage.lastLanguage);
+      $('.' + localStorage.lastLanguage).addClass('default-lang');
+    }
     //set event
     $('#submit-login').on('click', submitLogin);
     $('input').keypress(enterPressed);

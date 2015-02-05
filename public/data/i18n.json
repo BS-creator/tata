@@ -1,6 +1,6 @@
 {
   "fr": {
-    "button":       {
+    "button":          {
       "search":      "Recherche...",
       "reload":      "Rafraîchir",
       "colVisible":  "Afficher",
@@ -18,19 +18,19 @@
       "validation":  "Valider les fichiers",
       "notify":      "Prevenir Client"
     },
-    "breadrumb":    "Tous les fichiers triés par \"nouveaux\" et \"non téléchargés\"",
-    "result":       "Resultat: ",
-    "url":          {
+    "breadrumb":       "Tous les fichiers triés par \"nouveaux\" et \"non téléchargés\"",
+    "result":          "Resultat: ",
+    "url":             {
       "table":      "../cdn/DataTables/1.10.4/resources/language/FR.json",
       "datepicker": "../cdn/bootstrap/locale/bootstrap-datepicker.fr.js"
     },
-    "dirlist":      {
+    "dirlist":         {
       "PPP": "Paie & Post-Paie",
       "GES": "Gestion des entrées & sorties",
       "GAR": "Gestion des arrêts",
       "GAD": "Gestion administative"
     },
-    "col":          {
+    "col":             {
       "new":         "Nouveau",
       "date":        "Date",
       "name":        "Nom",
@@ -47,29 +47,29 @@
       "uploadStamp": "Heure Dépôt",
       "del":         "Effacer"
     },
-    "tree":         {
+    "tree":            {
       "root":   "Boîte de réception",
       "upload": "Boîte de dépôts",
       "valid":  "Fichiers à valider",
       "other":  "Autres Documents"
     },
-    "sideMenu":     {
+    "sideMenu":        {
       "config": "Configuration de la Table",
       "reset":  "Réinitialiser la vue"
     },
-    "file":         {
+    "file":            {
       "add":      "Fichier(s) ajouté(s)",
       "del":      "Fichier(s) supprimé(s)",
       "dl":       "Vos documents sont en cours de téléchargement. \n\n Merci de patienter.",
       "noselect": "Aucun fichier sélectionné!",
       "valid":    "Fichier(s) validé(s)"
     },
-    "datepicker":   {
+    "datepicker":      {
       "to":    "à",
       "start": "date début",
       "end":   "date fin"
     },
-    "dialog":       {
+    "dialog":          {
       "delAction":      "Suppression de fichier",
       "delSure":        "Êtes-vous sûr de vouloir supprimer ce(s) fichier(s)? \n Cela peut prendre un certain temps",
       "delConfirm":     "Supprimer",
@@ -81,7 +81,7 @@
       "signoutConfirm": "Sortir",
       "cancel":         "Annuler"
     },
-    "help":         {
+    "help":            {
       "skipLabel":   "SORTIR",
       "nextLabel":   "SUIVANT",
       "prevLabel":   "PRECEDENT",
@@ -105,22 +105,23 @@
       "columnMenu":  "Afficher/cacher les colonnes de la table. ",
       "logoff":      "Cliquez ici pour vous déconnecter de l'application."
     },
-    "warningQuota": "Cette application est exclusivement destinée au transfert de fichier. Veillez à bien supprimer vos fichiers après le téléchargement.",
-    "listAll":      "Tous",
-    "showHide":     "Afficher les colonnes",
-    "upload":       "Envoyer des Fichiers",
-    "modalupload":  "Envoyer des fichiers",
-    "modalbq":      "Liste des fichiers à ajouter.",
-    "modalbtn":     "Sélectionner les fichiers à envoyer",
-    "notification": "Prévenir l'utilisateur par email",
+    "warningQuota":    "Cette application est exclusivement destinée au transfert de fichier. Veillez à bien supprimer vos fichiers après le téléchargement.",
+    "listAll":         "Tous",
+    "showHide":        "Afficher les colonnes",
+    "upload":          "Envoyer des Fichiers",
+    "modalupload":     "Envoyer des fichiers",
+    "modalbq":         "Liste des fichiers à ajouter.",
+    "modalbtn":        "Sélectionner les fichiers à envoyer",
+    "notification":    "Prévenir l'utilisateur par email",
+    "notificationCC":  "Prévenir votre cabinet comptable par email",
     "notificationGMS": "Prévenir le gestionnaire par email",
-    "noNotif":      "Pas de notification, l'utilisateur n'a pas été prévenu!",
-    "noNotifMail":      "Pas de notification, le destinataire n'a pas d'email défini!",
-    "errorValid":   "Erreur: tous les fichiers n'ont pas été validés!",
-    "errorCnx":     "Erreur de connection au serveur: Authentification nécessaire.",
-    "error0":       "Erreur: Problème lors de la récupération de la liste des fichiers sur le serveur. ",
-    "error5xx":     "Service temporairement indisponible, veuillez réessayer plus tard.",
-    "errorSession": "Session expirée"
+    "noNotif":         "Pas de notification, l'utilisateur n'a pas été prévenu!",
+    "noNotifMail":     "Pas de notification, le destinataire n'a pas d'email défini!",
+    "errorValid":      "Erreur: tous les fichiers n'ont pas été validés!",
+    "errorCnx":        "Erreur de connection au serveur: Authentification nécessaire.",
+    "error0":          "Erreur: Problème lors de la récupération de la liste des fichiers sur le serveur. ",
+    "error5xx":        "Service temporairement indisponible, veuillez réessayer plus tard.",
+    "errorSession":    "Session expirée"
   },
   "nl": {
     "button":       {
