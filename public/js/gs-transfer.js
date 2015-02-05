@@ -453,8 +453,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     setEventuploadForm = function() {
       // set token for upload
       var $uploadform = $('#uploadForm'),
-        activeUploads = null,
-        listFolder;
+        activeUploads = null;
       $('input[name="token"]').val(tokenTransfer);
 
       $uploadform.attr('action', TransferServerURL + 'file/upload');
@@ -2282,6 +2281,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
                   });
                 }
               });
+            } else {
+              setEventuploadForm();
             }
           })
         });
