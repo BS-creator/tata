@@ -8,6 +8,7 @@ test/bower_components
 _doc
 cdn
 report
+*.log
 .idea
 out
 portalcdn

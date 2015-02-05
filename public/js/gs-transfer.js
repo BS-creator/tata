@@ -84,7 +84,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     isFrance = function() {
       return (localStorage.country === 'FR'
       || sessionStorage.country === 'FR'
-      || _.contains(window.location.hostname, '.groupsfrance.fr'));
+      || _.contains(window.location.hostname, '.groupsfrance'));
     },
 
     getClientName = function() {
@@ -103,6 +103,14 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     getPDFjsURL = function(serverURL, tokenTransfer, fileID, filename) {
       return TransferBaseURL + '../cdn/pdfjs/1.0.907/web/viewer.html?file=' + serverURL + 'file/' + tokenTransfer + '/' + fileID + '/' + filename;
+    },
+
+    redirectToLogin = function() {
+      if (_.contains(TransferBaseURL, 'online.')) {
+        window.location = TransferBaseURL.replace('transfer/', 'portal/');
+      } else {
+        window.location = TransferBaseURL;
+      }
     },
 
     getUsedDocRef = function(data) {
@@ -1111,14 +1119,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           return $.ajax({
             type:     'POST',
             url:      TransferServerURL + 'logoff/',
-            data:     {
-              token: tokenTransfer
-            },
+            data:     {token: tokenTransfer},
             complete: function() {
-              //swal({title: "OK", type: "success"});
-              //sessionStorage.setItem('token', '');
               sessionStorage.clear();
-              window.location = TransferBaseURL;
+              redirectToLogin();
             }
           });
         });
@@ -1313,7 +1317,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         return $.ajax({
           type:    'GET',
           url:     TransferServerURL + 'cabinet/ftpclient/' + getEmployerFromLogin(),
-         /* data:    {token: tokenTransfer},*/
+          /* data:    {token: tokenTransfer},*/
           success: buildClientListForSelect2,
           error:   function(err) {
             console.log('No Clients: ' + JSON.stringify(err));
@@ -1396,7 +1400,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             hideLoading();
             Utils.errorMessage(i18n[lang].errorCnx, 4000);
             setTimeout(function() {
-              window.location = TransferBaseURL;
+              redirectToLogin();
             }, 4000);
           }
         }
@@ -1482,54 +1486,54 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             hideLoading();
             Utils.errorMessage(i18n[lang].errorCnx, 4000);
             setTimeout(function() {
-              window.location = TransferBaseURL;
+              redirectToLogin();
             }, 4000);
           }
         }
       });
     },
   // clients of accounting cabinet
-   /* getFTPClientOfAccountingCabinet = function() {
-      var i, len;
+  /* getFTPClientOfAccountingCabinet = function() {
+   var i, len;
 
-      if (isFrance() && isCabinet) {
-        return $.ajax({
-          type:    'GET',
-          url:     TransferServerURL + 'cabinet/ftpclient/' + (ClientCabinetList.length > 0 ? ClientCabinetList.join('!') : 0),
-          success: function(data) {
-            console.log('getFTPClientOfAccountingCabinet = ', data);
-            len = ((data) ? data.length : 0);
-            for (i = 0; i < len; i++) {
-              FTPClientCabinetList.push({id: data[i], text: data[i]});
-            }
-          },
-          error:   function(err) {
-            console.log('No Clients: ' + err.responseText);
-            *//*console.log('ERROR: loading client');
-             hideLoading();
-             Utils.errorMessage(i18n[lang].errorCnx, 4000);*//*
-          }
-        });
-      } else {
-        //Not a Cabinet, pass...
-        return $.Deferred().resolve();
-      }
-    },*/
+   if (isFrance() && isCabinet) {
+   return $.ajax({
+   type:    'GET',
+   url:     TransferServerURL + 'cabinet/ftpclient/' + (ClientCabinetList.length > 0 ? ClientCabinetList.join('!') : 0),
+   success: function(data) {
+   console.log('getFTPClientOfAccountingCabinet = ', data);
+   len = ((data) ? data.length : 0);
+   for (i = 0; i < len; i++) {
+   FTPClientCabinetList.push({id: data[i], text: data[i]});
+   }
+   },
+   error:   function(err) {
+   console.log('No Clients: ' + err.responseText);
+   *//*console.log('ERROR: loading client');
+   hideLoading();
+   Utils.errorMessage(i18n[lang].errorCnx, 4000);*//*
+   }
+   });
+   } else {
+   //Not a Cabinet, pass...
+   return $.Deferred().resolve();
+   }
+   },*/
 
-    /*loadClientsOfCabinet = function() {
-      return $.ajax({
-        type:    'GET',
-        url:     TransferServerURL + 'cabinet/list/' + getEmployerFromLogin(),
-        success: function(data) {
-          console.log('loadClientsOfCabinet = ', data);
-          ClientCabinetList = data || undefined;
-        },
-        error:   function() {
-          console.log('error loading accounting cabinet information');
-          Utils.errorMessage(i18n[lang].errorCnx, 4000);
-        }
-      });
-    },*/
+  /*loadClientsOfCabinet = function() {
+   return $.ajax({
+   type:    'GET',
+   url:     TransferServerURL + 'cabinet/list/' + getEmployerFromLogin(),
+   success: function(data) {
+   console.log('loadClientsOfCabinet = ', data);
+   ClientCabinetList = data || undefined;
+   },
+   error:   function() {
+   console.log('error loading accounting cabinet information');
+   Utils.errorMessage(i18n[lang].errorCnx, 4000);
+   }
+   });
+   },*/
 
     loadEmailGMS = function() {
       return $.ajax({
@@ -1564,7 +1568,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             hideLoading();
             Utils.errorMessage(i18n[lang].errorCnx, 4000);
             setTimeout(function() {
-              window.location = TransferBaseURL;
+              redirectToLogin();
             }, 4000);
           }
         }
@@ -2214,7 +2218,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             hideLoading();
             Utils.errorMessage(i18n[lang].errorCnx, 4000);
             setTimeout(function() {
-              window.location = TransferBaseURL;
+              redirectToLogin();
             }, 4000);
           },
           dataType: 'json'
@@ -2314,7 +2318,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
           Utils.errorMessage('ERROR loading language data', 4000);
           setTimeout(function() {
-            window.location = TransferBaseURL;
+            redirectToLogin();
           }, 4000);
         }
       });
