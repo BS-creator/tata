@@ -1250,37 +1250,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
-    /*postNotification = function() {
-      setCursorToProgress();
-
-      var params = {
-        token:      tokenTransfer,
-        clientName: getClientName(),
-        lang:       lang
-      };
-
-      return $.ajax({
-        type:     'POST',
-        url:      TransferServerURL + 'notification/email',
-        data:     params,
-        success:  function() {
-          //Utils.smessage(i18n[lang].file.XXX, '', 'success', 2000);
-          setTimeout(function() { window.location = TransferBaseURL + 'transferApp.html?upload'; }, 2000);
-        },
-        error:    function(jqXHR) {
-          var error = JSON.parse(jqXHR.responseText);
-          if (error.code === '2') {
-            Utils.errorMessage(i18n[lang].noNotifMail, 5000);
-          } else {
-            Utils.errorMessage(i18n[lang].noNotif, 5000);
-          }
-        },
-        complete: function() {
-          setCursorToAuto();
-        }
-      });
-    },*/
-
   // clients' file list for the GMS user
     loadClientFiles = function(clientName) {
       showLoading();

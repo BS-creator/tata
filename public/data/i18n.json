@@ -112,7 +112,7 @@
     "modalupload":     "Envoyer des fichiers",
     "modalbq":         "Liste des fichiers à ajouter.",
     "modalbtn":        "Sélectionner les fichiers à envoyer",
-    "notification":    "Prévenir l'utilisateur par email",
+    "notification":    "Prévenir le gestionnaire par email",
     "notificationCC":  "Prévenir votre cabinet comptable par email",
     "notificationGMS": "Prévenir le gestionnaire par email",
     "noNotif":         "Pas de notification, l'utilisateur n'a pas été prévenu!",
