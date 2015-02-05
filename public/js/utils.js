@@ -58,7 +58,10 @@ var Utils = (function() {
 
     setTransferURL = function() {
       var url = window.location.hostname;
-      if (_.contains(url, 'localhost')) {
+      if(localStorage.TransferBaseURL) {
+        sessionStorage.setItem('TransferBaseURL', localStorage.TransferBaseURL);
+        sessionStorage.setItem('TransferServerURL', localStorage.TransferServerURL);
+      } else if (_.contains(url, 'localhost')) {
         /***** LOCAL *****/
         sessionStorage.setItem('TransferBaseURL', '//localhost:4000/transfer/');
         sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');

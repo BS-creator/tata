@@ -1,3 +1,15 @@
+//---------------------------------------------
+//SUPPORT FOR PWLIB TOKEN ADDED STRAIGHT INTO JQUERY
+
+var $ajax = $.ajax;
+$.ajax = function(params) {
+  params.headers = params.headers || {};
+  params.headers['Authorization'] = 'Groups groups_token='+sessionStorage.token || '00';
+  return $ajax.apply($, arguments);
+};
+
+//---------------------------------------------
+
 /**
  * Created by bisconti on 29/08/14.
  */
@@ -1277,7 +1289,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     loadFolder = function() {
 
       if (isFrance()) {
-        return $.Deferred().resolve();
+        return $.Deferred().resolve();//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       } else {
         return $.ajax({
           type:       'POST',
@@ -2245,7 +2257,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
                   })
                 } else {
                   isClientOfAccountingCabinet().then(function() {
-                    getEmailCabinet();
+                    if(isClientOfCabinet) {
+                      getEmailCabinet();
+                    }
                   });
                 }
               });
