@@ -59,50 +59,66 @@ var Utils = (function() {
     setTransferURL = function() {
       var url = window.location.hostname;
       if (_.contains(url, 'localhost')) {
-        /***** LOCAL *****/
-        sessionStorage.setItem('TransferBaseURL', '//localhost:4000/transfer/');
-        sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');
+    /***** LOCAL *****/
+        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//localhost:4000/transfer/');}
+        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');}
         //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-        localStorage.setItem('country', 'FR');
-        //sessionStorage.setItem('tokenPortal', 'F19EG686BTITNPHX788I5WR682E5TBMP8PBHEHK6SJCVFMAUD469HLMN4NK9HUVKJTB17230RKELJ21L91');
-
+        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
       } else if (_.contains(url, '172.20.20.64')) {
-        sessionStorage.setItem('TransferBaseURL', '//172.20.20.64:4000/');
-        sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');
+        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//172.20.20.64:4000/');}
+        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');}
         //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-        localStorage.setItem('country', 'FR');
-
+        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
       } else if (_.contains(url, 'pdevg1')) {
-        sessionStorage.setItem('TransferBaseURL', '//pdevg1:4000/');
-        sessionStorage.setItem('TransferServerURL', '//pdevg1:8018');
-        localStorage.setItem('country', 'FR');
+        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//pdevg1:4000/');}
+        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//pdevg1:8018');}
+        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
 
+    /**************
+     * DEV & QA
+     **************/
       } else if (_.contains(url, 'deviapps')) {
-        sessionStorage.setItem('TransferBaseURL', '//deviapps.groups.be/prestaweb/transfer/');
-        sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-        localStorage.setItem('country', 'FR');
+        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//deviapps.groups.be/prestaweb/transfer/');}
+        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');}
+        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
       } else if (_.contains(url, 'qaiapps')) {
-        sessionStorage.setItem('TransferBaseURL', '//qaiapps.groups.be/transfer/');
-        sessionStorage.setItem('TransferServerURL', '//qaiapps.groups.be/ariane/');
-        localStorage.setItem('country', 'BE');
+        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//qaiapps.groups.be/transfer/');}
+        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//qaiapps.groups.be/ariane/');}
+        if (!localStorage.country) {            localStorage.setItem('country', 'BE');}
 
-        /***** PRODUCTION *****/
+    /**************
+     * PRODUCTION: BELGIUM
+     * **************/
       } else if (_.contains(url, 'transfer.groups.be')) {
-        sessionStorage.setItem('TransferBaseURL', '//transfer.groups.be/');
-        sessionStorage.setItem('TransferServerURL', '//transfer.groups.be/ariane/');
-        localStorage.setItem('country', 'BE');
-      } else if (_.contains(url, 'transfer.groupsfrance.fr')) {
-        sessionStorage.setItem('TransferBaseURL', '//transfer.groupsfrance.fr/');
-        sessionStorage.setItem('TransferServerURL', '//transfer.groupsfrance.fr/ariane/');
-        localStorage.setItem('country', 'FR');
+        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//transfer.groups.be/transfer/');}
+        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//transfer.groups.be/ariane/');}
+        if (!localStorage.country) {            localStorage.setItem('country', 'BE');}
       } else if (_.contains(url, 'online.groups.be')) {
-        sessionStorage.setItem('TransferBaseURL', '//online.groups.be/transfer/');
-        sessionStorage.setItem('TransferServerURL', '//online.groups.be/ariane/');
-        localStorage.setItem('country', 'BE');
+        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//online.groups.be/transfer/');}
+        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//online.groups.be/ariane/');}
+        if (!localStorage.country) {            localStorage.setItem('country', 'BE');}
+    /**************
+     * PRODUCTION: TRANSFER FRANCE
+     * **************/
+      } else if (_.contains(url, 'transfer.groupsfrance.fr')) {
+        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//transfer.groupsfrance.fr/');}
+        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//transfer.groupsfrance.fr/ariane/');}
+        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
+      } else if (_.contains(url, 'transfer.groupsfrance.com')) {
+        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//transfer.groupsfrance.com/');}
+        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//transfer.groupsfrance.com/ariane/');}
+        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
+    /**************
+     * PRODUCTION: PORTAL FRANCE
+     * **************/
       } else if (_.contains(url, 'online.groupsfrance.fr')) {
-        sessionStorage.setItem('TransferBaseURL', '//online.groupsfrance.fr/transfer/');
-        sessionStorage.setItem('TransferServerURL', '//online.groupsfrance.fr/ariane/');
-        localStorage.setItem('country', 'FR');
+        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//online.groupsfrance.fr/transfer/');}
+        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//online.groupsfrance.fr/ariane/');}
+        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
+      } else if (_.contains(url, 'online.groupsfrance.com')) {
+        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//online.groupsfrance.com/transfer/');}
+        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//online.groupsfrance.com/ariane/');}
+        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
       }
     },
 

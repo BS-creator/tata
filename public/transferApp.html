@@ -153,7 +153,7 @@
 
     <address>
       <strong>[[name]]</strong><br>
-      <a href="mailto:[[email]]">[[email]]</a>
+      <a id="emailContact" href="mailto:[[email]]">[[email]]</a>
     </address>
   </div>
 </script>
@@ -205,7 +205,7 @@
                     <form class="" id="uploadForm" action="/" method="post"
                           enctype="multipart/form-data">
 
-                      <!-- dir-list: DEPRECATED-->
+                      <!-- dir-list: list of directory on the server-->
                       <div class="dir-list">
                         <!--loop-->
                         <!--<label class="radio control-label"><input type="radio" name="reportory" value="---">dirname</label>-->
@@ -222,6 +222,7 @@
                         <input name="upload" type="file" multiple="" size="50"/>
                         <input name="token" type="hidden" size="50"/>
                         <input name="clientName" type="hidden" size="50"/>
+                        <input name="email" type="hidden" size="100"/>
                         <input name="lang" type="hidden" value=""/>
                         <br/>
                         <input type="submit" value="Upload" style="display: none;" />
@@ -288,7 +289,6 @@
           <!-- BEGIN: Underscore Template Definition. -->
           <script id="menuL1" type="text/template" class="template">
             <ul>
-
               <li class="level1">
                 <a id="root" href="#">[[allDocs]]</a>
                 <ul>
