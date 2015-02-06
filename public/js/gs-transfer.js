@@ -483,7 +483,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         if (isGMS()) {
           $('#notification').text(i18n[lang].notification);
         } else if (isAccountingCabinet()) {
-          $('#notification').text(i18n[lang].notification);
+          $('#notification').text(i18n[lang].notificationGMS);
         } else if (isClientOfAccountingCabinet()) {
           $('#notification').text(i18n[lang].notificationCC);
           $('input[name="email"]').val(loadEmailCabinet());
@@ -546,6 +546,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           destFolders[key] + '/</label>'
         );
       }
+      listFolder.find('label:first-of-type > input[name="destFolder"]')[0].checked=true;
     },
 
     listFolderUploadFR = function() {
@@ -555,6 +556,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         listFolder.append('<label class="radio"><input name="destFolder" value="' + k + '" type="radio" />' +
         v + '</label>');
       });
+      listFolder.find('label:first-of-type > input[name="destFolder"]')[0].checked=true;
     },
 
     /****************************************************
