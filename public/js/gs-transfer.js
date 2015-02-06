@@ -106,11 +106,13 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
     redirectToLogin = function() {
-      if (_.contains(TransferBaseURL, 'online.')) {
-        window.location = TransferBaseURL.replace('transfer/', 'portal/');
+
+      if (_.contains(TransferBaseURL, 'online.') || (sessionStorage.token && sessionStorage.user)) {
+        window.location = TransferBaseURL.replace(/transfer\/.*$/i, 'portal/');
       } else {
         window.location = TransferBaseURL;
       }
+
     },
 
     getUsedDocRef = function(data) {
@@ -2264,9 +2266,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
                 if (isAccountingCabinet()) {
 
-                  loadClients().then(function() {setEventuploadForm();});
+                  loadClients().then(function() {setEventGMS(); setEventuploadForm();});
+                  setEventGMS(); //usually won't work but will at least show some UI
 
-                  setEventGMS();
                 } else {
 
                   loadIsClientOfAccountingCabinet().then(function() {
