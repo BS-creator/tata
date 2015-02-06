@@ -122,10 +122,11 @@
     "error0":          "Erreur: Problème lors de la récupération de la liste des fichiers sur le serveur. ",
     "error5xx":        "Service temporairement indisponible, veuillez réessayer plus tard.",
     "errorSession":    "Session expirée",
-    "myOwnAccount":    "(MON PROPRE COMPTE)"
+    "myOwnAccount":    "(MON PROPRE COMPTE)",
+    "clientListEmpty": "Erreur: Problème lors de la recuperation de la liste des clients."
   },
   "nl": {
-    "button":       {
+    "button":          {
       "search":      "Zoeken...",
       "reload":      "Opnieuw laden",
       "colVisible":  "Tonen",
@@ -142,13 +143,13 @@
       "client":      "Bedrijven",
       "validation":  "Bestanden valideren"
     },
-    "breadrumb":    "Alle bestanden, gesorteerd volgens \"nieuw\" en \"niet gedownload\"",
-    "result":       "Resultaten: ",
-    "url":          {
+    "breadrumb":       "Alle bestanden, gesorteerd volgens \"nieuw\" en \"niet gedownload\"",
+    "result":          "Resultaten: ",
+    "url":             {
       "table":      "../cdn/DataTables/1.10.4/resources/language/NL.json",
       "datepicker": "../cdn/bootstrap/locale/bootstrap-datepicker.nl.js"
     },
-    "col":          {
+    "col":             {
       "new":         "Nieuw",
       "date":        "Datum",
       "name":        "Naam",
@@ -165,29 +166,29 @@
       "uploadStamp": "Upload tijd",
       "del":         "Verwijderen"
     },
-    "tree":         {
+    "tree":            {
       "root":   "Inbox ",
       "upload": "Outbox",
       "valid":  "Bestanden valideren",
       "other":  "Andere bestanden"
     },
-    "sideMenu":     {
+    "sideMenu":        {
       "config": "Configuratie van de tabel",
       "reset":  "Standaardconfiguratie herstellen"
     },
-    "file":         {
+    "file":            {
       "add":      "Bestand(en) toegevoegd",
       "del":      "Bestand(en) verwijderd",
       "dl":       "Uw bestanden zijn aan het downloaden. \n\n Dank u voor uw geduld.",
       "noselect": "Geen bestand geselecteerd!.",
       "valid":    "Bestand(en) gevalideerd"
     },
-    "datepicker":   {
+    "datepicker":      {
       "to":    "tot",
       "start": "Begindatum",
       "end":   "Einddatum"
     },
-    "dialog":       {
+    "dialog":          {
       "delAction":      "Bestanden verwijderen",
       "delSure":        "Bent u zeker?",
       "delConfirm":     "Verwijderen",
@@ -199,7 +200,7 @@
       "signoutConfirm": "Uitloggen",
       "cancel":         "Annuleren"
     },
-    "help":         {
+    "help":            {
       "skipLabel":   "UITLOGGEN",
       "nextLabel":   "VOLGENDE",
       "prevLabel":   "VORIGE",
@@ -223,24 +224,25 @@
       "columnMenu":  "Tonen kolommen van het table. ",
       "remove":      "Klik op het  icoon om het bestand te verwijderen."
     },
-    "warningQuota": " Deze toepassing is voorzien voor de overdracht van bestanden. Gelieve regelmatig de bestanden te verwijderen.",
-    "listAll":      "Alle",
-    "showHide":     "Kolommen tonen",
-    "upload":       "Bestanden uploaden naar Group S",
-    "modalupload":  "Bestanden uploaden naar Group S",
-    "modalbq":      "Gelieve de doelmap te selecteren alvorens uw bestanden toe te voegen.",
-    "modalbtn":     "Selecteer de bestanden om toe te voegen",
-    "notification": "Bericht de gebruiker door email",
-    "noNotif":      "Geen notificatie, gebruiker niet bericht!",
-    "errorValid":   "Error: alles bestanden hebben niet gevalideert geweest!",
-    "errorCnx":     "Verbindingsfout: Authentificatie noodzakelijk.",
-    "error0":       "Verbindingsfout.",
-    "error5xx":     "Dienst tijdelijk onbeschikbaar. Probeer het later opnieuw.",
-    "errorSession": "Sessie verlopen",
-    "myOwnAccount": "(MIJN EIGEN FOLDERS)"
+    "warningQuota":    " Deze toepassing is voorzien voor de overdracht van bestanden. Gelieve regelmatig de bestanden te verwijderen.",
+    "listAll":         "Alle",
+    "showHide":        "Kolommen tonen",
+    "upload":          "Bestanden uploaden naar Group S",
+    "modalupload":     "Bestanden uploaden naar Group S",
+    "modalbq":         "Gelieve de doelmap te selecteren alvorens uw bestanden toe te voegen.",
+    "modalbtn":        "Selecteer de bestanden om toe te voegen",
+    "notification":    "Bericht de gebruiker door email",
+    "noNotif":         "Geen notificatie, gebruiker niet bericht!",
+    "errorValid":      "Error: alles bestanden hebben niet gevalideert geweest!",
+    "errorCnx":        "Verbindingsfout: Authentificatie noodzakelijk.",
+    "error0":          "Verbindingsfout.",
+    "error5xx":        "Dienst tijdelijk onbeschikbaar. Probeer het later opnieuw.",
+    "errorSession":    "Sessie verlopen",
+    "myOwnAccount":    "(MIJN EIGEN FOLDERS)",
+    "clientListEmpty": "Error: lijst van klanten niet terugtrekken."
   },
   "en": {
-    "button":       {
+    "button":          {
       "search":      "Searching...",
       "reload":      "Reload",
       "colVisible":  "Show Column",
@@ -257,12 +259,12 @@
       "client":      "Company",
       "validation":  "Validate files"
     },
-    "breadrumb":    "New Files not downloaded yet",
-    "result":       "Results: ",
-    "url":          {
+    "breadrumb":       "New Files not downloaded yet",
+    "result":          "Results: ",
+    "url":             {
       "table": "../cdn/DataTables/1.10.4/resources/language/EN.json"
     },
-    "col":          {
+    "col":             {
       "new":         "New",
       "date":        "Date",
       "name":        "Name",
@@ -279,29 +281,29 @@
       "uploadStamp": "Upload Time",
       "del":         "Delete"
     },
-    "tree":         {
+    "tree":            {
       "root":   "Inbox",
       "upload": "Outbox",
       "valid":  "File validation",
       "other":  "Other files"
     },
-    "sideMenu":     {
+    "sideMenu":        {
       "config": "Table Configuration",
       "reset":  "Reset Vue"
     },
-    "file":         {
+    "file":            {
       "add":      "File(s) added",
       "del":      "File(s) deleted",
       "dl":       "Your files are being downloaded. \n\n Thank you for your patience.",
       "noselect": "No file selected.",
       "valid":    "File(s) validated."
     },
-    "datepicker":   {
+    "datepicker":      {
       "to":    "to",
       "start": "Start Date",
       "end":   "End Date"
     },
-    "dialog":       {
+    "dialog":          {
       "delAction":      "Delete File",
       "delSure":        "Are you sure you want to delete file(s)? \n It may take a moment",
       "delConfirm":     "Delete",
@@ -313,7 +315,7 @@
       "signoutConfirm": "Log off",
       "cancel":         "Cancel"
     },
-    "help":         {
+    "help":            {
       "skipLabel":   "EXIT",
       "nextLabel":   "NEXT",
       "prevLabel":   "PREVIOUS",
@@ -337,20 +339,21 @@
       "columnMenu":  "Show/hide columns from the table. ",
       "logoff":      "Click here to log off."
     },
-    "warningQuota": "This application is exclusively aimed to transfer files. Please delete files once you've downloaded them.",
-    "listAll":      "all",
-    "showHide":     "Show / hide columns",
-    "upload":       "Upload files on the server",
-    "modalupload":  "Upload files to Group S server",
-    "modalbq":      "Please, select the folder of upload before uploading files.",
-    "modalbtn":     "Select files to upload",
-    "notification": "Notify the user by email.",
-    "noNotif":      "No notification, user not warned.",
-    "errorValid":   "Error: all files were not validate!",
-    "errorCnx":     "Connection Error: Authentication required.",
-    "error0":       "Error: Problem retrieving file list",
-    "error5xx":     "Service temporally unavailable, please try later.",
-    "errorSession": "Session expired",
-    "myOwnAccount": "(MY OWN ACCOUNT)"
+    "warningQuota":    "This application is exclusively aimed to transfer files. Please delete files once you've downloaded them.",
+    "listAll":         "all",
+    "showHide":        "Show / hide columns",
+    "upload":          "Upload files on the server",
+    "modalupload":     "Upload files to Group S server",
+    "modalbq":         "Please, select the folder of upload before uploading files.",
+    "modalbtn":        "Select files to upload",
+    "notification":    "Notify the user by email.",
+    "noNotif":         "No notification, user not warned.",
+    "errorValid":      "Error: all files were not validate!",
+    "errorCnx":        "Connection Error: Authentication required.",
+    "error0":          "Error: Problem retrieving file list",
+    "error5xx":        "Service temporally unavailable, please try later.",
+    "errorSession":    "Session expired",
+    "myOwnAccount":    "(MY OWN ACCOUNT)",
+    "clientListEmpty": "Error: Cannot retrieve client list."
   }
 }

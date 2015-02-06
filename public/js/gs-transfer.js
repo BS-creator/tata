@@ -1289,7 +1289,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     buildClientListForSelect2 = function(data) {
 
-      if(isAccountingCabinet()) {
+      if (isAccountingCabinet() || isGMS()) {
         clientList.push({id: username, text: i18n[lang].myOwnAccount, email: ''});
       }
 
@@ -1608,6 +1608,11 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
         $selectClients.show();
         $selectClients.select2('destroy');
+
+        if (!(clientList.length > 0)) {
+          Utils.errorMessage(i18n[lang].clientListEmpty, 3000);
+          return;
+        }
         $selectClients.select2({
           placeholder: i18n[lang].button.client,
           allowClear:  true,
@@ -2163,7 +2168,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       setEventMultiDownload();
       setEventMultiValidate();
 
-      setEventGMS();
+      //setEventGMS();
       setEventCategoryFR();
 
     },
@@ -2259,15 +2264,23 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             createDataTable();
             createMenu();
 
-            if (isGMS()) {  loadClients();  }
+            if (isGMS()) {
+              loadClients().then(function() {
+                setEventGMS();
+                setEventuploadForm();
+              });
+            }
+
             if (isFrance() && !isGMS()) {
               //Specific for France and Accounting cabinet
               loadIsAccountingCabinet().then(function() {
 
                 if (isAccountingCabinet()) {
 
-                  loadClients().then(function() {setEventGMS(); setEventuploadForm();});
-                  setEventGMS(); //usually won't work but will at least show some UI
+                  loadClients().then(function() {
+                    setEventGMS();
+                    setEventuploadForm();
+                  });
 
                 } else {
 
@@ -2284,8 +2297,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
                   });
                 }
               });
-            } else {
-              setEventuploadForm();
             }
           })
         });
