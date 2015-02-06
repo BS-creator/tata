@@ -121,7 +121,8 @@
     "errorCnx":        "Erreur de connection au serveur: Authentification nécessaire.",
     "error0":          "Erreur: Problème lors de la récupération de la liste des fichiers sur le serveur. ",
     "error5xx":        "Service temporairement indisponible, veuillez réessayer plus tard.",
-    "errorSession":    "Session expirée"
+    "errorSession":    "Session expirée",
+    "myOwnAccount":    "(MON PROPRE COMPTE)"
   },
   "nl": {
     "button":       {
@@ -235,7 +236,8 @@
     "errorCnx":     "Verbindingsfout: Authentificatie noodzakelijk.",
     "error0":       "Verbindingsfout.",
     "error5xx":     "Dienst tijdelijk onbeschikbaar. Probeer het later opnieuw.",
-    "errorSession": "Sessie verlopen"
+    "errorSession": "Sessie verlopen",
+    "myOwnAccount": "(MIJN EIGEN FOLDERS)"
   },
   "en": {
     "button":       {
@@ -348,6 +350,7 @@
     "errorCnx":     "Connection Error: Authentication required.",
     "error0":       "Error: Problem retrieving file list",
     "error5xx":     "Service temporally unavailable, please try later.",
-    "errorSession": "Session expired"
+    "errorSession": "Session expired",
+    "myOwnAccount": "(MY OWN ACCOUNT)"
   }
 }

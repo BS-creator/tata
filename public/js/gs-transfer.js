@@ -1287,6 +1287,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     buildClientListForSelect2 = function(data) {
 
+      if(isAccountingCabinet()) {
+        clientList.push({id: username, text: i18n[lang].myOwnAccount, email: ''});
+      }
+
       _.forEach(data, function(i) {
         clientList.push({
           id:    i.clientLogin,
