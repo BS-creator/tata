@@ -512,7 +512,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
            });*/
           data.submit()
             .error(function(jqXHR) {
-              Utils.errorMessage('Error... ' + jqXHR.textStatus, 4000);
+              Utils.errorMessage('Error... ' + jqXHR.statusText, 4000);
             })
             .success(function() {
               activeUploads = $uploadform.fileupload('active');
