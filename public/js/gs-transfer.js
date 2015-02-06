@@ -295,6 +295,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             //RESOLVED
             createDataTable();
             createMenu();
+            setEventGMS();
           }, function() {
             //REJECT
             console.log('>>>>> ERR: FAILED');
@@ -475,13 +476,17 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     setEventuploadForm = function() {
       // set token for upload
       var $uploadform = $('#uploadForm'),
-        activeUploads = null;
+        activeUploads = null,
+        notif;
       $('input[name="token"]').val(tokenTransfer);
 
       $uploadform.attr('action', TransferServerURL + 'file/upload');
 
       if (isFrance()) {
-        $('input[name="notification"]').show();
+        notif = $('input[name="notification"]')[0];
+        notif.style.display = 'inline-block';
+        notif.checked = true;
+
         if (isGMS()) {
           $('#notification').text(i18n[lang].notification);
         } else if (isAccountingCabinet()) {
@@ -548,7 +553,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           destFolders[key] + '/</label>'
         );
       }
-      listFolder.find('label:first-of-type > input[name="destFolder"]')[0].checked=true;
     },
 
     listFolderUploadFR = function() {
@@ -558,7 +562,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         listFolder.append('<label class="radio"><input name="destFolder" value="' + k + '" type="radio" />' +
         v + '</label>');
       });
-      listFolder.find('label:first-of-type > input[name="destFolder"]')[0].checked=true;
+      listFolder.find('label:first-of-type > input[name="destFolder"]')[0].checked = true;
     },
 
     /****************************************************
@@ -1216,6 +1220,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         data:     getFilesID().data,
         success:  function() {
           Utils.smessage(i18n[lang].file.valid, '', 'success', 2000);
+          postNotification(true);
           setTimeout(function() { window.location = TransferBaseURL + 'transferApp.html?validation'; }, 2000);
         },
         error:    function() {
@@ -1227,7 +1232,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
-    postNotification = function() {
+    postNotification = function(skipRedirect) {
       setCursorToProgress();
 
       var params = {
@@ -1242,6 +1247,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         data:     params,
         success:  function() {
           //Utils.smessage(i18n[lang].file.XXX, '', 'success', 2000);
+          if (skipRedirect) {return;}
           setTimeout(function() { window.location = TransferBaseURL + 'transferApp.html?upload'; }, 2000);
         },
         error:    function(jqXHR) {
@@ -1302,7 +1308,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
       // @devcode
       if (username && username.toUpperCase() === 'GMSTEST') {
-        clientList.push({id: 'D00000001', text: 'D00000001', email: 'julien.bisconti@groups.be'})
+        clientList.push({id: 'D00000001', text: 'D00000001', email: ''})
       }
     },
 
@@ -1603,8 +1609,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           $selectClients = $('#clients'),
           option = document.createElement('option');
 
-        $validation.show();
-        $validation.find('a').off('click').on('click', menuValidateClick);
+        if (isGMS()) { // Validation is for GMS only !!!
+          $validation.show();
+          $validation.find('a').off('click').on('click', menuValidateClick);
+        }
 
         $selectClients.show();
         $selectClients.select2('destroy');
@@ -1623,6 +1631,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           $('input[name="email"]').val(e.object.email);
           $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' +
           i18n[lang].modalupload + ' à <span class="clientDest">' + e.choice.text + '</span>');
+
           loadClientFiles(e.val)
             .then(function() {
               // doesn't work
@@ -1632,9 +1641,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           /** When removed, reset everything to contact the GMS of the current user!!! **/
           $('input[name="clientName"]').val(username);
           $('input[name="email"]').val(getContactEmail());
-          loadClientFiles(username);
           $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].modalupload + '</span>');
 
+          loadClientFiles(username);
         });
       }
     },
