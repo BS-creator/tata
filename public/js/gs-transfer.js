@@ -1304,6 +1304,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       //return $.Deferred().resolve();
 
       if (isGMS()) {
+        console.log('>>>>> load all Clients');
         return $.ajax({
           type:    'POST',
           url:     TransferServerURL + 'client/',
@@ -1314,6 +1315,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           }
         });
       } else if (isAccountingCabinet()) {
+        console.log('>>>>> load all Accounting Clients');
         return $.ajax({
           type:    'GET',
           url:     TransferServerURL + 'cabinet/ftpclient/' + getEmployerFromLogin(),
@@ -2249,19 +2251,26 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             createDataTable();
             createMenu();
 
+            if (isGMS()) {  loadClients();  }
             if (isFrance() && !isGMS()) {
               //Specific for France and Accounting cabinet
               loadIsAccountingCabinet().then(function() {
 
                 if (isAccountingCabinet()) {
+
                   loadClients().then(function() {setEventuploadForm();});
+
                   setEventGMS();
                 } else {
 
                   loadIsClientOfAccountingCabinet().then(function() {
+
                     if (isClientOfAccountingCabinet()) {
+
                       loadEmailCabinet().then(function() {setEventuploadForm();});
+
                     } else {
+
                       loadEmailGMS().then(function() {setEventuploadForm();});
                     }
                   });
