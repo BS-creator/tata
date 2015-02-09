@@ -55,6 +55,10 @@
   box-sizing: border-box;
   /* css3 */
 }
+.select2-search input {
+  padding: 0px 4px !important;
+  padding-right: 25px !important;
+}
 .select2-container .select2-choice {
   position: relative;
   margin: 0 12px 0 0;
@@ -845,7 +849,7 @@ MODAL SELECT2
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255,255,255,0.9);
   z-index: 99;
   -webkit-transition-property: all;
   -moz-transition-property: all;
