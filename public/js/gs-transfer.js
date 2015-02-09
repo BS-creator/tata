@@ -1332,8 +1332,11 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     /**
      * Load the list of client login for the GMS user or a cabinet */
     loadClients = function() {
-      //return $.Deferred().resolve();
 
+      // prevent the user from interacting while we load clients
+      $('.modal-select2').removeClass("modal-select2").addClass('modal-select2-open');
+
+      // check which clients we need to load
       if (isGMS()) {
         console.log('>>>>> load all Clients');
         return $.ajax({
