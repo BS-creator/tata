@@ -1295,10 +1295,17 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     buildClientListForSelect2 = function(data) {
 
+      // on first call, show a modal to the user
+      if(clientList.length == 0) {
+        $("div.modal-select2").show();
+      }
+
+      // add itself as a client
       if (isAccountingCabinet() || isGMS()) {
         clientList.push({id: username, text: i18n[lang].myOwnAccount, email: ''});
       }
 
+      // add the real clients
       _.forEach(data, function(i) {
         clientList.push({
           id:    i.clientLogin,
@@ -1306,6 +1313,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           email: i.email
         });
       });
+
       // @devcode
       if (username && username.toUpperCase() === 'GMSTEST') {
         clientList.push({id: 'D00000001', text: 'D00000001', email: ''})
