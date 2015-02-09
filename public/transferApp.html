@@ -195,7 +195,8 @@
 <!--
                     <p id="modalbq" class="lead text-muted text-info text-center">
 
-                    </p>-->
+                    </p>
+                    -->
 
                     <p class="notification">
                       <input type="checkbox" style="display: none" name="notification"  value="value">
@@ -336,7 +337,13 @@
           <!--TABLE CONTENT-->
           <div class="container-fluid">
             <div class="row">
-              <div class="filter"><!-- FILTERS -->
+
+              <!--SELECT CLIENTS-->
+
+              <input id="clients" class="pull-left fix-width-select2" />
+              <div class="modal-select2"></div>
+              <!-- FILTERS -->
+              <div class="filter">
                 <!--filtrer par-->
                 <div class="btn-group pull-left">
                   <button id="filterby" type="button" class="btn btn-default dropdown-toggle"
@@ -363,7 +370,6 @@
                 <input type="text" class="dateEnd" name="end" placeholder=""/>
               </div>
 
-              <input id="clients" class="pull-left fix-width-select2" />
 
 
               <!--refresh & toggle config table-->
@@ -571,6 +577,16 @@
     ga('create', 'UA-56126741-1', 'auto');
     ga('send', 'pageview');
   }
+</script>
+
+<script>
+  // select2 modal
+  $(document).ready(function(){
+    var select = document.getElementById('s2id_clients');
+    var modalSelect2 = document.getElementsByClassName('modal-select2');
+    select.addClass(' select2-dropdown-open');
+    modalSelect2.className('modal-select2-open');
+  });
 </script>
 
 </body>

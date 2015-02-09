@@ -14,6 +14,7 @@
 }
 #clients {
   display: none;
+  z-index: 999;
 }
 .fix-width-select2,
 #s2id_clients {
@@ -47,12 +48,12 @@
   /* css3 */
 }
 .select2-container .select2-choice {
-  margin-left: 12px;
+  position: relative;
+  margin: 0 12px 0 0;
   display: block;
   height: 50px;
   padding: 0 0 0 12px;
   overflow: hidden;
-  position: relative;
   font-weight: bold;
   border: 1px solid #ccc;
   white-space: nowrap;
@@ -68,6 +69,7 @@
   user-select: none;
   background-color: #fff;
   background-image: none;
+  z-index: 999;
   -webkit-transition-property: all 0.4s ease 0s;
   -moz-transition-property: all 0.4s ease 0s;
   -ms-transition-property: all 0.4s ease 0s;
