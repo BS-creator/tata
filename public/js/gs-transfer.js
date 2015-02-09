@@ -282,6 +282,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
     reloadNewData = function(data) {
+
+      // hide
+      $('.modal-select2-open').removeClass('modal-select2-open').addClass('modal-select2');
+
       //destroy dt
       table.destroy();
 
@@ -1295,9 +1299,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     buildClientListForSelect2 = function(data) {
 
       // on first call, show a modal to the user
-      if(clientList.length == 0) {
-        $("div.modal-select2").show();
-      }
+      var openModal = clientList.length == 0;
 
       // add itself as a client
       if (isAccountingCabinet() || isGMS()) {
@@ -1316,6 +1318,14 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       // @devcode
       if (username && username.toUpperCase() === 'GMSTEST') {
         clientList.push({id: 'D00000001', text: 'D00000001', email: ''})
+      }
+
+      // on first call, show a modal to the user (follow-up)
+      if(openModal) {
+        setTimeout(function() {
+          $('#clients').select2('open');
+          $('.modal-select2').removeClass("modal-select2").addClass('modal-select2-open');
+        }, 1000);
       }
     },
 
