@@ -7,7 +7,6 @@ $.ajax = function(params) {
   params.headers['Authorization'] = 'Groups groups_token='+sessionStorage.token || '00';
   return $ajax.apply($, arguments);
 };
-
 //---------------------------------------------
 
 /**
