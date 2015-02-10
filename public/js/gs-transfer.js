@@ -302,7 +302,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       } else {
         reloadNewData();
       }
-      toggleDLButton();
 
       //console.log('reloadPage' + new Date());
       /*.then(function() {
@@ -660,8 +659,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       table.columns('.fileLayer').visible(true, false);
       // adjust column sizing and redraw
       table.columns.adjust().draw(false);
-      //filter on uploadUserName
-      table.column(4).search('[^' + username + ']', true, false).draw();
+      table
+        //.column(10).search(/^((?!Validation\/).)*$/, true, false) // Don't show validation folder
+        .column(4).search('[^' + username + ']', true, false).draw(); //filter on uploadUserName
       selectMenu = 'ROOT';
       setBreadCrumb(i18n[lang].tree.root);
       updateMenuVisibleColumnList();
@@ -681,6 +681,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       table
         .column(4).search('[^' + username + ']', true, false)
         .column(7).search('^\\s*$', true, false)
+        //.column(10).search(/^((?!Validation\/).)*$/, true, false)
         .draw(); //filter on uploadUserName != username
       $('[class^=level] .active').removeClass('active');
       selectMenu = 'OTHER';
@@ -700,7 +701,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       table.columns('.validation').visible(false, false);
       table.columns('.detailsLayer').visible(true, false);
       table.columns.adjust().draw(false); // adjust column sizing and redraw
-      table.column(4).search(username).draw(); //filter on uploadUserName
+      table
+        //.column(10).search(/^((?!Validation\/).)*$/, true, false) // Don't show validation folder
+        .column(4).search(username).draw(); //filter on uploadUserName
       $('[class^=level] .active').removeClass('active');
       selectMenu = 'UPLOAD';
       setBreadCrumb(i18n[lang].tree.upload);
@@ -737,6 +740,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       numDocRegex += ')';
 
       table
+        //.column(10).search(/^((?!Validation\/).)*$/, true, false) // Don't show validation folder
         .column(4).search('[^' + username + ']', true, false)
         .column(7).search(numDocRegex, true, false)
         .draw(); //filter on ref docs
@@ -770,6 +774,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         table.columns('.validation').visible(false, false);
         table.columns.adjust().draw(false); // adjust column sizing and redraw
         table
+          //.column(10).search(/^((?!Validation\/).)*$/, true, false) // Don't show validation folder
           .column(4).search('[^' + username + ']', true, false)
           .column(7).search('^' + nodeID + '$', true, false)
           .draw(); //filter on referenceDocument
@@ -2242,6 +2247,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       oTable = $(TABLEID).dataTable();
       table
+        //.column(10).search(/^((?!Validation\/).)*$/, true, false) // Don't show validation folder
         .column(4).search('[^' + username + ']', true, false)
         .draw();
 
@@ -2271,6 +2277,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         if (selectMenu === 'UPLOAD') {
           $('#upload').find('a').trigger('click');
         }
+        $('.downloadall').hide();
+        $('.deleteAll').hide();
+        if (isGMS()) {$('.validAll').hide();}
       }, 500);
     },
 
