@@ -660,9 +660,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       table.columns.adjust().draw(false);
       //filter on uploadUserName
       table.column(4).search('[^' + username + ']', true, false).draw();
+      selectMenu = 'ROOT';
       setBreadCrumb(i18n[lang].tree.root);
       updateMenuVisibleColumnList();
-      selectMenu = 'ROOT';
       event.preventDefault();
     },
 
@@ -681,9 +681,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         .column(7).search('^\\s*$', true, false)
         .draw(); //filter on uploadUserName != username
       $('[class^=level] .active').removeClass('active');
+      selectMenu = 'OTHER';
       setBreadCrumb(i18n[lang].tree.other);
       updateMenuVisibleColumnList();
-      selectMenu = 'OTHER';
       event.preventDefault();
     },
 
@@ -700,9 +700,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       table.columns.adjust().draw(false); // adjust column sizing and redraw
       table.column(4).search(username).draw(); //filter on uploadUserName
       $('[class^=level] .active').removeClass('active');
+      selectMenu = 'UPLOAD';
       setBreadCrumb(i18n[lang].tree.upload);
       updateMenuVisibleColumnList();
-      selectMenu = 'UPLOAD';
       event.preventDefault();
     },
 
@@ -738,8 +738,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         .column(4).search('[^' + username + ']', true, false)
         .column(7).search(numDocRegex, true, false)
         .draw(); //filter on ref docs
-      updateMenuVisibleColumnList();
       selectMenu = 'ROOT';
+      updateMenuVisibleColumnList();
       event.preventDefault();
     },
 
@@ -772,8 +772,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           .column(7).search('^' + nodeID + '$', true, false)
           .draw(); //filter on referenceDocument
       }
-      updateMenuVisibleColumnList();
       selectMenu = 'ROOT';
+      updateMenuVisibleColumnList();
       event.preventDefault();
     },
 
@@ -788,9 +788,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       table.columns.adjust().draw(false); // adjust column sizing and redraw
       table.column(10).search('Validation\/', true, false).draw(); //filter on Validation Folder
       $('[class^=level] .active').removeClass('active');
+      selectMenu = 'VALIDATION';
       setBreadCrumb(i18n[lang].tree.valid);
       updateMenuVisibleColumnList();
-      selectMenu = 'ROOT';
       event.preventDefault();
     },
 
@@ -1140,7 +1140,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             searchable: true
           },
           {
-            className:  'validation',
+            //className:  'validation',
             targets:    18, //Validation
             visible:    false,
             searchable: false,
@@ -1760,16 +1760,15 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     toggleDLButton = function() {
       var trActive = $('tr.active');
-
       if (trActive && trActive.length > 0) {
         addLowerButton();
         $('.downloadall').show();
         $('.deleteAll').show();
-        if ((isGMS() || isAccountingCabinet()) && $('th.validation.sorting_disabled').length > 0) {$('.validAll').show();}
+        if (isGMS() && selectMenu === 'VALIDATION') {$('.validAll').show();}
       } else {
         $('.downloadall').toggle();
         $('.deleteAll').toggle();
-        if ((isGMS() || isAccountingCabinet()) && $('th.validation.sorting_disabled').length > 0) {$('.validAll').toggle();}
+        if (isGMS() && selectMenu === 'VALIDATION') {$('.validAll').toggle();}
       }
     },
 
@@ -1980,11 +1979,12 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     setEventFiltersButton = function() {
 
       $('#filterNew').off('click').on('click', function() {
+        $('#filterby').addClass('active');
         $('#breadcrumb').html(
           $('#breadcrumb').html() +
           '<li class="active">' + i18n[lang].button.filter.new + '</li>');
         table
-          .column(16).search('true')
+          .column(17).search('true')
           //.column(4).search('[^' + username + ']', true, false)
           .draw();
       });
@@ -2419,6 +2419,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     cabinetID:                   cabinetID,
     ClientCabinetList:           ClientCabinetList,
     FTPClientCabinetList:        FTPClientCabinetList,
+    selectMenu:                  selectMenu,
     isGMS:                       isGMS,
     isAccountingCabinet:         isAccountingCabinet,
     isClientOfAccountingCabinet: isClientOfAccountingCabinet,
