@@ -22,12 +22,12 @@ var Utils = (function() {
     },
 
     getURLParameter = function(sParam) {
-      var sPageURL = window.location.search.substring(1),
-        sURLVariables = sPageURL.split('&'),
-        i;
-      for (i = 0; i < sURLVariables.length; i++) {
-        if (sURLVariables[i] === sParam) {
-          return sURLVariables[i];
+      var sPageURL = window.location.search.substring(1);
+      var sURLVariables = sPageURL.split('&');
+      for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) {
+          return sParameterName[1];
         }
       }
     },
@@ -58,14 +58,14 @@ var Utils = (function() {
 
     setTransferURL = function() {
       var url = window.location.hostname;
-      if(localStorage.TransferBaseURL) {
+      if (localStorage.TransferBaseURL) {
         sessionStorage.setItem('TransferBaseURL', localStorage.TransferBaseURL);
         sessionStorage.setItem('TransferServerURL', localStorage.TransferServerURL);
       } else if (_.contains(url, 'localhost')) {
         /***** LOCAL *****/
         sessionStorage.setItem('TransferBaseURL', '//localhost:4000/transfer/');
-        //sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');
-        sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
+        sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');
+        //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
         if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
       } else if (_.contains(url, '172.20.20.64')) {
         if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//172.20.20.64:4000/');}
