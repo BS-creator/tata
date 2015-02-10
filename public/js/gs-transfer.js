@@ -359,7 +359,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       /***** VALIDATION BUTTON *****/
       multidl.append(
-        '<button class="btn-portal-bluegreen validAll mt-xs pull-right">' +
+        '<button class="btn-portal-bluegreen validAll mt-xs pull-left">' +
         '<i class="fa fa-check"></i>&nbsp;&nbsp;&nbsp;' +
         i18n[lang].button.validation +
         '</button>'

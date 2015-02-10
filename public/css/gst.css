@@ -898,11 +898,19 @@ MODAL SELECT2
   position: relative;
 }
 /**********************************************
-BREADCRUMP
+FLITER
+**********************************************/
+#filterby.active {
+  color: #ba5b08;
+  box-shadow: none;
+}
+/**********************************************
+dDCRUMP
 **********************************************/
 #breadcrumb {
   display: table-cell;
   line-height: 19px;
+  margin-bottom: 5px;
 }
 #breadcrumb li {
   margin: 0;
@@ -1495,7 +1503,7 @@ div.dataTables_length label {
 /* note */
 #warningQuota p {
   margin-top: 6px;
-  color: #b55907;
+  color: #ba5b08;
 }
 /********************************************
                 INFO.JS
@@ -1597,7 +1605,7 @@ div.dataTables_length label {
   cursor: pointer;
 }
 .validAll {
-  margin-left: 11px;
+  margin-right: 11px;
 }
 /**********************************************
                   Buttons
