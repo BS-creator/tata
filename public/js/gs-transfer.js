@@ -295,58 +295,19 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       return table.rows('.active', {search: 'applied'}).data();
     },
 
- /*   redirectToClient = function(client) {
-      var cat = Utils.getURLParameter('cat');
-      var url = TransferBaseURL;
-      if (cat) {
-        url += '?cat=' + cat;
-      }
-      if (client) {
-        url += '&client=' + client;
-        window.location.href = url;
-      } //else {
-        //ERROR
-      //}
-    },
-
-    redirectToClient2 = function(e) {
-      *//** Set contact information of the select user!!! **//*
-      $('input[name="clientName"]').val(e.val);
-      $('input[name="email"]').val(e.object.email);
-      $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' +
-      i18n[lang].modalupload + ' à <span class="clientDest">' + e.choice.text + '</span>');
-
-      loadClientFiles(e.val);
-    },*/
-
-/*    redirectToPreviousClient = function() {
-      var client = Utils.getURLParameter('client');
-      if (client) {
-        return loadClientFiles(client);
-      }
-
-    },
-
-    redirectToPreviousCat = function() {
-      console.log('CAT = ' + Utils.getURLParameter('cat'));
-      console.log('CLIENT = ' + Utils.getURLParameter('client'));
-      var cat = Utils.getURLParameter('cat');
-
-      if (cat) {
-        if (cat == 'ROOT') {$('#root').trigger('click');}
-        if (cat == 'UPLOAD') {$('#upload').find('a').trigger('click');}
-        if (cat == 'VALIDATION') {$('#validation').find('a').trigger('click');}
-        if (cat == 'PPP') {$('#PPP').trigger('click');}
-        if (cat == 'GES') {$('#GES').trigger('click');}
-        if (cat == 'GAR') {$('#GAR').trigger('click');}
-        if (cat == 'GAD') {$('#GAD').trigger('click');}
-      }
-
-    },*/
-
     reloadPage = function() {
-      console.log('selectMenu = ' + selectMenu);
+      //console.log('selectMenu = ' + selectMenu);
       loadClientFiles(getClientName());
+      //console.log('reloadPage' + new Date());
+      /*.then(function() {
+       if (selectMenu === 'ROOT') {$('#root').trigger('click');}
+       else if (selectMenu === 'UPLOAD') {$('#upload').find('a').trigger('click');}
+       else if (selectMenu === 'VALIDATION') {$('#validation').find('a').trigger('click');}
+       else if (selectMenu === 'PPP') {$('#PPP').trigger('click');}
+       else if (selectMenu === 'GES') {$('#GES').trigger('click');}
+       else if (selectMenu === 'GAR') {$('#GAR').trigger('click');}
+       else if (selectMenu === 'GAD') {$('#GAD').trigger('click');}
+       });*/
     },
 
     reloadNewData = function(data) {
@@ -356,7 +317,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       //destroy dt
       table.destroy();
-      // TODO: load data client if it is connected to a client!!
+      //TODO: load data client if it is connected to a client!!
 
       loadData().then(function() {
         //add new files from clients.
@@ -606,11 +567,16 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             $('.close').click();
             Utils.smessage('OK', ' ', 'success', 4000);
             if ($('input[name="notification"]').prop('checked')) {
-              postNotification().then(function() { console.log('notification sent'); });
+              postNotification()
+                .then(function() {
+                  console.log('notification sent');
+                  selectMenu = 'UPLOAD';
+                });
             } else {
+              selectMenu = 'UPLOAD';
               reloadPage();
-              //setTimeout(function() { window.location = TransferBaseURL + 'transferApp.html?upload'; }, 4000);
             }
+            //setTimeout(function() { window.location = TransferBaseURL + 'transferApp.html?upload'; }, 4000);
           }
         }
       });
@@ -636,6 +602,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         v + '</label>');
       });
       listFolder.find('label:first-of-type > input[name="destFolder"]')[0].checked = true;
+      $('.radio').find('input').off('click').on('click', function() {selectMenu = this.value;});
     },
 
     /****************************************************
@@ -804,7 +771,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       event.preventDefault();
     },
 
-    menuValidateClick = function() {
+    menuValidateClick = function(event) {
       $('#root').parent('li.level1').removeClass('active');
       $('#upload').removeClass('active');
       $('#validation').addClass('active');
@@ -938,7 +905,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
-    filterMenuCatFR = function() {
+/*    filterMenuCatFR = function() {
       refDocUsed = getUsedDocRef(AjaxData);
       var cat = {},
         i,
@@ -961,7 +928,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       }
       console.log('cat', cat);
       return cat;
-    },
+    },*/
 
     createMenu = function createMenu() {
       if (isFrance()) {
@@ -1010,8 +977,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
     templateTable = function() {
-
-      //TODO: make it REUSABLE --> parameter for tbody, theader and tableID
 
       var tpl = _.template($('#bodytpl').html());
 
@@ -1233,7 +1198,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             .row(cell.closest('tr'))
             .remove()
             .draw();
-          //window.location.reload();
+          reloadPage();
         },
         complete: function() {
           setCursorToAuto();
@@ -1251,7 +1216,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         data:     getFilesID().data,
         success:  function() {
           Utils.smessage(i18n[lang].file.del, '', 'success', 2000);
-          setTimeout(function() { window.location.reload(); }, 2000);
+          reloadPage();
+          //setTimeout(function() { window.location.reload(); }, 2000);
           resetCheckBox();
         },
         error:    function() {
@@ -1343,8 +1309,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         }
       });
     },
-
-  // clients' file list for the GMS user
+    /***
+     * Retrieve the file list of another user
+     * ***/
     loadClientFiles = function(clientName) {
       showLoading();
       if (isFrance() && (isGMS() || isAccountingCabinet())) {
@@ -1379,7 +1346,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       var openModal = clientList.length == 0;
 
       // add itself as a client
-      if (isAccountingCabinet() || isGMS()) {
+      if (isAccountingCabinet()) { //|| isGMS()
         clientList.push({id: username, text: i18n[lang].myOwnAccount, email: ''});
       }
 
@@ -1398,10 +1365,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       }
 
       // on first call, show a modal to the user (follow-up)
-      if(openModal) {
+      if (openModal) {
         setTimeout(function() {
           $('#clients').select2('open');
-          $('.modal-select2').removeClass("modal-select2").addClass('modal-select2-open');
+          $('.modal-select2').removeClass('modal-select2').addClass('modal-select2-open');
         }, 1000);
       }
     },
@@ -1411,7 +1378,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     loadClients = function() {
 
       // prevent the user from interacting while we load clients
-      $('.modal-select2').removeClass("modal-select2").addClass('modal-select2-open');
+      $('.modal-select2').removeClass('modal-select2').addClass('modal-select2-open');
 
       // check which clients we need to load
       if (isGMS()) {
@@ -1522,6 +1489,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         }
       });
     },
+    /***
+     *  Is the user connected an Accounting Cabinet
+     */
 
     loadIsAccountingCabinet = function() {
       return $.ajax({
@@ -1538,6 +1508,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
+    /***
+     *  Is the user connected a client of an Accounting Cabinet
+     */
     loadIsClientOfAccountingCabinet = function() {
       return $.ajax({
         type:    'GET',
@@ -1554,7 +1527,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
-  //Get email of the cabinet
+    /***
+     * Get email of the cabinet
+     * */
     loadEmailCabinet = function() {
       return $.ajax({
         type:       'GET',
@@ -1597,6 +1572,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
+    /***
+     * Get email of the GMS
+     * */
     loadEmailGMS = function() {
       return $.ajax({
         type:       'GET',
@@ -1713,14 +1691,13 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         .column(19).search('^' + filter, true, false).draw();
       setBreadCrumb(i18n[lang].dirlist[filter]);
       updateMenuVisibleColumnList();
-      event.preventDefault();
     },
 
     setEventCategoryFR = function() {
-      $('#PPP').off('click').on('click', function() {filterCategoryFR('PPP')});
-      $('#GAD').off('click').on('click', function() {filterCategoryFR('GAD')});
-      $('#GES').off('click').on('click', function() {filterCategoryFR('GES')});
-      $('#GAR').off('click').on('click', function() {filterCategoryFR('GAR')});
+      $('#PPP').off('click').on('click', function(event) {filterCategoryFR('PPP');event.preventDefault();});
+      $('#GAD').off('click').on('click', function(event) {filterCategoryFR('GAD');event.preventDefault();});
+      $('#GES').off('click').on('click', function(event) {filterCategoryFR('GES');event.preventDefault();});
+      $('#GAR').off('click').on('click', function(event) {filterCategoryFR('GAR');event.preventDefault();});
     },
 
     setEventColumnListVisible = function() {
@@ -1812,8 +1789,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         $('.login-lang').removeClass('default-lang');
         $('.' + lang).addClass('default-lang');
         sessionStorage.setItem('lang', lang);
-        reloadPage();
-        //window.location = TransferBaseURL + 'transferApp.html';
+        //reloadPage();
+        window.location.href = TransferBaseURL + 'transferApp.html';
         //window.location.reload();
       });
     },
@@ -2266,7 +2243,11 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           //$('#btn-upload-div').trigger('click');
           console.log('>>> NO files');
         }
-
+        console.log('selectMenu = ' + selectMenu);
+        if (selectMenu === 'UPLOAD') {
+          console.log('UPLOAD BUTTON');
+          $('#upload').find('a').trigger('click');
+        }
       }, 500);
     },
 
@@ -2332,10 +2313,14 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
               loadIsAccountingCabinet().then(function() {
 
                 if (isAccountingCabinet()) {
+
                   loadEmailGMS().then(function() {
+
                     loadClients().then(function() {
+
                       setEventGMS();
                       setEventuploadForm();
+
                     });
                   });
 
