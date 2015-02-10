@@ -83,9 +83,9 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
     isFrance = function() {
-      return (localStorage.country === 'FR'
-      || sessionStorage.country === 'FR'
-      || _.contains(window.location.hostname, '.groupsfrance'));
+      return (localStorage.country === 'FR' ||
+      sessionStorage.country === 'FR' ||
+      _.contains(window.location.hostname, '.groupsfrance'));
     },
 
     getClientName = function() {
@@ -297,7 +297,11 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     reloadPage = function() {
       //console.log('selectMenu = ' + selectMenu);
-      loadClientFiles(getClientName());
+      if (isGMS() || isAccountingCabinet()) {
+        loadClientFiles(getClientName());
+      } else {
+        reloadNewData();
+      }
       //console.log('reloadPage' + new Date());
       /*.then(function() {
        if (selectMenu === 'ROOT') {$('#root').trigger('click');}
@@ -321,7 +325,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       loadData().then(function() {
         //add new files from clients.
-        AjaxData = (data.target) ? AjaxData : (data || AjaxData);
+        AjaxData = (data && data.target) ? AjaxData : (data || AjaxData);
 
         $.when(mergeLabelDoc())
           .then(function() {
@@ -585,12 +589,14 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     listFolderUpload = function(destFolders) {
       var listFolder = $('#uploadForm').find('div.dir-list'), key;
       for (key in destFolders) {
-        listFolder.append(
-          '<label class="radio"><input name="destFolder" value="' +
-          destFolders[key] + '" type="radio" ' +
-          ((destFolders[key] === 'Presta') ? 'checked' : '') + ' />' +
-          destFolders[key] + '/</label>'
-        );
+        if (destFolders[key]) {
+          listFolder.append(
+            '<label class="radio"><input name="destFolder" value="' +
+            destFolders[key] + '" type="radio" ' +
+            ((destFolders[key] === 'Presta') ? 'checked' : '') + ' />' +
+            destFolders[key] + '/</label>'
+          );
+        }
       }
     },
 
@@ -905,30 +911,30 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
     },
 
-/*    filterMenuCatFR = function() {
-      refDocUsed = getUsedDocRef(AjaxData);
-      var cat = {},
-        i,
-        group = _.groupBy(_.filter(category, function(obj) {
-          if (_.contains(refDocUsed, parseInt(obj.referenceDocument))) { return obj; }
-        }), function(obj) {
-          return obj.categoryNumber;
-        });
+  /*    filterMenuCatFR = function() {
+   refDocUsed = getUsedDocRef(AjaxData);
+   var cat = {},
+   i,
+   group = _.groupBy(_.filter(category, function(obj) {
+   if (_.contains(refDocUsed, parseInt(obj.referenceDocument))) { return obj; }
+   }), function(obj) {
+   return obj.categoryNumber;
+   });
 
-      for (i in group) {
-        if (i === '0') {cat.PPP = $.extend({}, cat.PPP, {0: group[i]})}
-        else if (i === '1') {cat.GAD = {1: group[i]} }
-        else if (i === '2') {cat.PPP = $.extend({}, cat.PPP, {2: group[i]})}
-        else if (i === '3') {cat.PPP = $.extend({}, cat.PPP, {3: group[i]})}
-        else if (i === '4') {cat.PPP = $.extend({}, cat.PPP, {4: group[i]})}
-        else if (i === '5') {cat.PPP = $.extend({}, cat.PPP, {5: group[i]})}
-        else if (i === '6') {cat.PPP = $.extend({}, cat.PPP, {6: group[i]})}
-        else if (i === '7') {cat.PPP = $.extend({}, cat.PPP, {7: group[i]})}
-        else if (i === '8') {cat.GAR = {8: group[i]}}
-      }
-      console.log('cat', cat);
-      return cat;
-    },*/
+   for (i in group) {
+   if (i === '0') {cat.PPP = $.extend({}, cat.PPP, {0: group[i]})}
+   else if (i === '1') {cat.GAD = {1: group[i]} }
+   else if (i === '2') {cat.PPP = $.extend({}, cat.PPP, {2: group[i]})}
+   else if (i === '3') {cat.PPP = $.extend({}, cat.PPP, {3: group[i]})}
+   else if (i === '4') {cat.PPP = $.extend({}, cat.PPP, {4: group[i]})}
+   else if (i === '5') {cat.PPP = $.extend({}, cat.PPP, {5: group[i]})}
+   else if (i === '6') {cat.PPP = $.extend({}, cat.PPP, {6: group[i]})}
+   else if (i === '7') {cat.PPP = $.extend({}, cat.PPP, {7: group[i]})}
+   else if (i === '8') {cat.GAR = {8: group[i]}}
+   }
+   console.log('cat', cat);
+   return cat;
+   },*/
 
     createMenu = function createMenu() {
       if (isFrance()) {
@@ -1090,15 +1096,16 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             targets:   9 //extension or type
           },
           {
-            className:  'detailsLayer validation',
+            //className:  'detailsLayer validation', // don't show path (too big on screen)
             targets:    10, //path
             visible:    false,
             searchable: true
           },
           {
-            targets:    11, //referenceClient
-            visible:    false,
-            searchable: false
+            className:  'defaultView',
+            targets:    11 //referenceClient
+            //visible:    true,
+            //searchable: true
           },
           {
             targets:    12, //counter
@@ -1343,7 +1350,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     buildClientListForSelect2 = function(data) {
 
       // on first call, show a modal to the user
-      var openModal = clientList.length == 0;
+      var openModal = clientList.length === 0;
 
       // add itself as a client
       if (isAccountingCabinet()) { //|| isGMS()
@@ -1361,7 +1368,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       // @devcode
       if (username && username.toUpperCase() === 'GMSTEST') {
-        clientList.push({id: 'D00000001', text: 'D00000001', email: ''})
+        clientList.push({id: 'D00000001', text: 'D00000001', email: ''});
       }
 
       // on first call, show a modal to the user (follow-up)
@@ -1588,7 +1595,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             params = {
               role:  'Gestionnaire', bureau: '-', rue: '-',
               num:   '-', cp: '-', ville: '-',
-              phone: '-',
+              phone: d.phone || '-',
               fax:   '-',
               email: d.emailGMS,
               name:  d.agentName
@@ -1630,8 +1637,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     setEventGMS = function() {
       if (isGMS() || isAccountingCabinet()) {
         var $validation = $('#validation'),
-          $selectClients = $('#clients'),
-          option = document.createElement('option');
+          $selectClients = $('#clients');
 
         if (isGMS()) { // Validation is for GMS only !!!
           $validation.show();
@@ -1641,7 +1647,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         $selectClients.show();
         $selectClients.select2('destroy');
 
-        if (!(clientList.length > 0)) {
+        if (clientList.length < 1) {
           Utils.errorMessage(i18n[lang].clientListEmpty, 3000);
           return;
         }
@@ -1694,10 +1700,22 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
     setEventCategoryFR = function() {
-      $('#PPP').off('click').on('click', function(event) {filterCategoryFR('PPP');event.preventDefault();});
-      $('#GAD').off('click').on('click', function(event) {filterCategoryFR('GAD');event.preventDefault();});
-      $('#GES').off('click').on('click', function(event) {filterCategoryFR('GES');event.preventDefault();});
-      $('#GAR').off('click').on('click', function(event) {filterCategoryFR('GAR');event.preventDefault();});
+      $('#PPP').off('click').on('click', function(event) {
+        filterCategoryFR('PPP');
+        event.preventDefault();
+      });
+      $('#GAD').off('click').on('click', function(event) {
+        filterCategoryFR('GAD');
+        event.preventDefault();
+      });
+      $('#GES').off('click').on('click', function(event) {
+        filterCategoryFR('GES');
+        event.preventDefault();
+      });
+      $('#GAR').off('click').on('click', function(event) {
+        filterCategoryFR('GAR');
+        event.preventDefault();
+      });
     },
 
     setEventColumnListVisible = function() {
@@ -2243,9 +2261,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           //$('#btn-upload-div').trigger('click');
           console.log('>>> NO files');
         }
-        console.log('selectMenu = ' + selectMenu);
+        //console.log('selectMenu = ' + selectMenu);
         if (selectMenu === 'UPLOAD') {
-          console.log('UPLOAD BUTTON');
           $('#upload').find('a').trigger('click');
         }
       }, 500);
@@ -2257,8 +2274,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     portalCnx = function() {
 
       var url = TransferServerURL + 'login/portal/';
-      if (tokenPortal) {
-
+      if (tokenPortal && !tokenTransfer) {
         return $.ajax({
           type:     'POST',
           url:      url,
@@ -2340,7 +2356,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
                 }
               });
             }
-          })
+          });
         });
       });
     },
@@ -2348,12 +2364,12 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     main = function() {
 
       Utils.setTransferURL();
-      TransferServerURL = sessionStorage.getItem('TransferServerURL'),
-        TransferBaseURL = sessionStorage.getItem('TransferBaseURL'),
-        lang = sessionStorage.getItem('lang') || localStorage.lastLanguage || localStorage.lang,
-        username = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '',
-        tokenPortal = sessionStorage.getItem('token'),
-        tokenTransfer = sessionStorage.getItem('tokenTransfer');
+      TransferServerURL = sessionStorage.getItem('TransferServerURL');
+      TransferBaseURL = sessionStorage.getItem('TransferBaseURL');
+      lang = sessionStorage.getItem('lang') || localStorage.lastLanguage || localStorage.lang;
+      username = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '';
+      tokenPortal = sessionStorage.getItem('token');
+      tokenTransfer = sessionStorage.getItem('tokenTransfer');
 
       $('[rel="tooltip"]').tooltip();
 
