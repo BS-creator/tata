@@ -1762,7 +1762,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     /***** UPLOAD *****/
     setI18nUpload = function() {
       //TODO: put it in CSS, just use it to translate!!!
-      $('#btn-upload-div').find('span').html('<i class="fa fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].upload);
+      $('#btn-upload-div').find('span').html('<i class="fa fa-upload"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].upload);
       $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].modalupload);
       $('#modalbq').html(i18n[lang].modalbq);
       $('input[type=file]').bootstrapFileInput(i18n[lang].modalbtn);

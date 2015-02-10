@@ -249,7 +249,7 @@ BREADCRUMP
 **********************************************/
 #breadcrumb {
     display: table-cell;
-    line-height: 30px;
+    line-height: 19px;
 }
 
 #breadcrumb li {
@@ -309,6 +309,7 @@ LOADER
                 SIDENAV
 ********************************************/
 #sidenav {
+margin-top: 25px;
   padding: 0;
   ul {
     padding: 0;
@@ -317,9 +318,10 @@ LOADER
 .level0 {
   font-size: 14px;
   line-height: 50px;
+  height: 50px;
   color: #fff;
   background-color: @color-17;
-  padding-left: 40px;
+  padding-left: 23px;
   .transition;
   &:before {
     font-family: FontAwesome;
@@ -337,14 +339,16 @@ LOADER
     }
   }
 }
-#upload, #validation { margin-top: 30.1px !important; }
-#upload a, #validation a,
+#upload { margin-top: 30px !important; }
+#upload a,
 li.level1 > a {
+  line-height: 50px;
+  height: 50px;
   font-size: 14px;
   /* transition */
   .transition;
 }
-#upload a, #validation a,
+#upload a,
 li[class^="level"] > a {
   display: block;
   margin-bottom: 0;
@@ -353,18 +357,15 @@ li[class^="level"] > a {
   text-overflow: ellipsis;
   cursor: pointer;
 }
-#upload a, #validation a,
+#upload a,
 li.level1 > a {
-  padding: 13px 0px 13px 19px;
+  padding: 0 0 0 19px;
   background-color: @color-18;
   color: #FFF;
 }
 #upload:hover > a,
 #upload:focus > a,
 #upload:active > a,
-#validation:hover > a,
-#validation:focus > a,
-#validation:active > a,
 li.level1:hover > a,
 li.level1:focus > a,
 li.level1:active > a {
@@ -373,9 +374,7 @@ li.level1:active > a {
 #upload:active > a,
 li.level1:active > a,
 #upload.active > a,
-li.level1.active > a,
-#validation:active > a,
-#validation.active > a {
+li.level1.active > a {
   background-color: lighten(@color-18,8);
 }
 li.level2 > a {
@@ -403,7 +402,7 @@ li.level3.active > a {
 }
 li.level3 > a {
   padding: 0 0 0 50px;
-  line-height: 25px;
+  line-height: 30px;
   font-size: 12px;
   background-color: transparent;
   color: #777;
@@ -701,7 +700,7 @@ td:last-child {
 
 /* define height */
 table.dataTable thead th {
-    padding: 17px 18px 16px;
+    padding: 16px 18px;
 }
 
 /* Icon check */
@@ -884,13 +883,6 @@ div.dataTables_length label {
     display: none;
 }
 
-#btn-upload-div,
-#btn-upload-div span {
-    text-align: left;
-}
-#btn-upload-div {
-    padding: 17px 10px 16px 19px !important;
-}
 .dlfileLabel {
   cursor: pointer;
 }
@@ -940,24 +932,19 @@ table tr th .pw-btn-group-th,
   display: inline-block;
   vertical-align: middle;
   text-align: center;
-  padding:  17px 30px;
 
-  /* add ... */
-  .etc;
-
-  /* type */
+  padding:  0px 30px;
   font-family: 'robotoregular';
   font-weight: 300;
   font-size: 14px !important;
-  line-height: 1em;
-
-  /* style */
+  height: 50px;
+  line-height: 50px;
   background-image: none;
   border-radius: 0;
   border-width: 1px;
   border-style: solid;
-  cursor: pointer;
-
+  cursor: pointer !important;
+  .etc;
   .unselectable;
   .transition;
 
@@ -978,7 +965,6 @@ table tr th .pw-btn-group-th,
   color: #222;
 }
 
-
 .btn-portal-blue {
   margin-bottom: 1px;
   background-color:   @color-18;
@@ -997,29 +983,32 @@ table tr th .pw-btn-group-th,
 }
 
 .btn-portal-green {
-  background-color:   desaturate(darken(@color-15,3),10);
+ /* background-color:   desaturate(darken(@color-15,3),10);*/
+  background-color:   transparent;
   border-color:       desaturate(darken(@color-15,3),10);
-  color: #FFF;
+  color:              desaturate(darken(@color-15,3),10);
 }
 .btn-portal-green:hover,
 .btn-portal-green:focus,
 .btn-portal-green:active,
 .btn-portal-green.active {
-  background-color:   lighten(@color-15,2);
-  border-color:       lighten(@color-15,2);
+  background-color:   desaturate(darken(@color-15,3),10);
+  border-color:       desaturate(darken(@color-15,3),10);
+  color:              white;
 }
 
 .btn-portal-red {
-  background-color:   desaturate(lighten(@color-8, 10),30);
+  background-color:   transparent;
   border-color:       desaturate(lighten(@color-8, 10),30);
-  color: #FFF;
+  color:              desaturate(lighten(@color-8, 10),30);
 }
 .btn-portal-red:hover,
 .btn-portal-red:focus,
 .btn-portal-red:active,
 .btn-portal-red.active {
-  background-color:   lighten(@color-8, 20);
-  border-color:       lighten(@color-8, 20);
+  background-color:   desaturate(lighten(@color-8, 10),30);
+  border-color:       desaturate(lighten(@color-8, 10),30);
+  color:              white;
 }
 
 .btn-portal-lightblue {
@@ -1033,6 +1022,49 @@ table tr th .pw-btn-group-th,
 .btn-portal-lightblue.active {
   background-color:   lighten(@color-15, 7);
   border-color:       lighten(@color-15, 7);
+}
+#validation {
+  margin-top: @m;
+  padding-left: @s;
+}
+
+#validation a,
+#btn-upload-div {
+  display: inline-block;
+  width: 100%;
+  margin: auto 0;
+  padding: 17px 20px 17px 20px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 14px;
+  font-family: 'robotoregular';
+  font-weight: 300;
+  line-height: 1em;
+  background-image: none;
+  border-radius: 0;
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer !important;
+  .etc;/* add ... */
+  .unselectable;
+  .transition;
+}
+#validation a,
+#btn-upload-div {
+  margin-bottom: 1px;
+  background-color:   transparent;
+  border-color:       @color-18;
+  color:              @color-18;
+}
+#validation:hover a,
+#validation:focus a,
+#validation:active a,
+#btn-upload-div:hover,
+#btn-upload-div:focus,
+#btn-upload-div:active {
+  background-color:   lighten(@color-18,6);
+  border-color:       lighten(@color-18,6);
+  color: #fff;
 }
 /**********************************************
                     DYNAMIC BUTTON

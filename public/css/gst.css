@@ -53,11 +53,11 @@
   -moz-box-sizing: border-box;
   /* firefox */
   box-sizing: border-box;
-  /* css3 */
 }
+.select2-drop,
+.select2-search,
 .select2-search input {
   padding: 0px 4px !important;
-  padding-right: 25px !important;
 }
 .select2-container .select2-choice {
   position: relative;
@@ -66,7 +66,6 @@
   height: 50px;
   padding: 0 0 0 12px;
   overflow: hidden;
-  font-weight: bold;
   border: 1px solid #ccc;
   white-space: nowrap;
   line-height: 50px;
@@ -201,7 +200,7 @@ html[dir="rtl"] .select2-container .select2-choice > .select2-chosen {
 .select2-drop-auto-width .select2-search {
   padding-top: 4px;
 }
-.select2-container .select2-choice .select2-arrow {
+.inerntainer .select2-choice .select2-arrow {
   display: inline-block;
   width: 18px;
   height: 100%;
@@ -849,7 +848,7 @@ MODAL SELECT2
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(255,255,255,0.9);
+  background-color: rgba(255, 255, 255, 0.9);
   z-index: 99;
   -webkit-transition-property: all;
   -moz-transition-property: all;
@@ -903,7 +902,7 @@ BREADCRUMP
 **********************************************/
 #breadcrumb {
   display: table-cell;
-  line-height: 30px;
+  line-height: 19px;
 }
 #breadcrumb li {
   margin: 0;
@@ -954,6 +953,7 @@ LOADER
                 SIDENAV
 ********************************************/
 #sidenav {
+  margin-top: 25px;
   padding: 0;
 }
 #sidenav ul {
@@ -962,9 +962,10 @@ LOADER
 .level0 {
   font-size: 14px;
   line-height: 50px;
+  height: 50px;
   color: #fff;
   background-color: #08abc4;
-  padding-left: 40px;
+  padding-left: 23px;
   -webkit-transition-property: all;
   -moz-transition-property: all;
   -ms-transition-property: all;
@@ -999,13 +1000,13 @@ LOADER
   font-family: FontAwesome;
   content: "\f115";
 }
-#upload,
-#validation {
-  margin-top: 30.1px !important;
+#upload {
+  margin-top: 30px !important;
 }
 #upload a,
-#validation a,
 li.level1 > a {
+  line-height: 50px;
+  height: 50px;
   font-size: 14px;
   /* transition */
   -webkit-transition-property: all;
@@ -1030,7 +1031,6 @@ li.level1 > a {
   transition-delay: 0s;
 }
 #upload a,
-#validation a,
 li[class^="level"] > a {
   display: block;
   margin-bottom: 0;
@@ -1040,18 +1040,14 @@ li[class^="level"] > a {
   cursor: pointer;
 }
 #upload a,
-#validation a,
 li.level1 > a {
-  padding: 13px 0px 13px 19px;
+  padding: 0 0 0 19px;
   background-color: #086cc4;
   color: #FFF;
 }
 #upload:hover > a,
 #upload:focus > a,
 #upload:active > a,
-#validation:hover > a,
-#validation:focus > a,
-#validation:active > a,
 li.level1:hover > a,
 li.level1:focus > a,
 li.level1:active > a {
@@ -1060,9 +1056,7 @@ li.level1:active > a {
 #upload:active > a,
 li.level1:active > a,
 #upload.active > a,
-li.level1.active > a,
-#validation:active > a,
-#validation.active > a {
+li.level1.active > a {
   background-color: #0a82eb;
 }
 li.level2 > a {
@@ -1109,7 +1103,7 @@ li.level3.active > a {
 }
 li.level3 > a {
   padding: 0 0 0 50px;
-  line-height: 25px;
+  line-height: 30px;
   font-size: 12px;
   background-color: transparent;
   color: #777;
@@ -1435,7 +1429,7 @@ td:last-child {
 }
 /* define height */
 table.dataTable thead th {
-  padding: 17px 18px 16px;
+  padding: 16px 18px;
 }
 /* Icon check */
 th:first-child,
@@ -1599,13 +1593,6 @@ div.dataTables_length label {
 .introjs-helperNumberLayer {
   display: none;
 }
-#btn-upload-div,
-#btn-upload-div span {
-  text-align: left;
-}
-#btn-upload-div {
-  padding: 17px 10px 16px 19px !important;
-}
 .dlfileLabel {
   cursor: pointer;
 }
@@ -1654,22 +1641,20 @@ table tr th .pw-btn-group-th .pw-btn-th,
   display: inline-block;
   vertical-align: middle;
   text-align: center;
-  padding: 17px 30px;
-  /* add ... */
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  /* type */
+  padding: 0px 30px;
   font-family: 'robotoregular';
   font-weight: 300;
   font-size: 14px !important;
-  line-height: 1em;
-  /* style */
+  height: 50px;
+  line-height: 50px;
   background-image: none;
   border-radius: 0;
   border-width: 1px;
   border-style: solid;
-  cursor: pointer;
+  cursor: pointer !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
@@ -1728,28 +1713,31 @@ table tr th .pw-btn-group-th .pw-btn-th,
   border-color: #08abc4;
 }
 .btn-portal-green {
-  background-color: #11ac59;
+  /* background-color:   desaturate(darken(@color-15,3),10);*/
+  background-color: transparent;
   border-color: #11ac59;
-  color: #FFF;
+  color: #11ac59;
 }
 .btn-portal-green:hover,
 .btn-portal-green:focus,
 .btn-portal-green:active,
 .btn-portal-green.active {
-  background-color: #08ce65;
-  border-color: #08ce65;
+  background-color: #11ac59;
+  border-color: #11ac59;
+  color: white;
 }
 .btn-portal-red {
-  background-color: #cf4530;
+  background-color: transparent;
   border-color: #cf4530;
-  color: #FFF;
+  color: #cf4530;
 }
 .btn-portal-red:hover,
 .btn-portal-red:focus,
 .btn-portal-red:active,
 .btn-portal-red.active {
-  background-color: #f7543b;
-  border-color: #f7543b;
+  background-color: #cf4530;
+  border-color: #cf4530;
+  color: white;
 }
 .btn-portal-lightblue {
   background-color: #08c460;
@@ -1762,6 +1750,75 @@ table tr th .pw-btn-group-th .pw-btn-th,
 .btn-portal-lightblue.active {
   background-color: #09e671;
   border-color: #09e671;
+}
+#validation {
+  margin-top: 19.1px;
+  padding-left: 11.8px;
+}
+#validation a,
+#btn-upload-div {
+  display: inline-block;
+  width: 100%;
+  margin: auto 0;
+  padding: 17px 20px 17px 20px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 14px;
+  font-family: 'robotoregular';
+  font-weight: 300;
+  line-height: 1em;
+  background-image: none;
+  border-radius: 0;
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* add ... */
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
+}
+#validation a,
+#btn-upload-div {
+  margin-bottom: 1px;
+  background-color: transparent;
+  border-color: #086cc4;
+  color: #086cc4;
+}
+#validation:hover a,
+#validation:focus a,
+#validation:active a,
+#btn-upload-div:hover,
+#btn-upload-div:focus,
+#btn-upload-div:active {
+  background-color: #097ce1;
+  border-color: #097ce1;
+  color: #fff;
 }
 /**********************************************
                     DYNAMIC BUTTON
