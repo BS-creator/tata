@@ -6,6 +6,7 @@
 
 #clients {
   display: none;
+  z-index: 999;
 }
 
 .fix-width-select2,
@@ -39,14 +40,16 @@
   /* firefox */
   box-sizing: border-box;
   /* css3 */
+  padding: 0px 4px !important;
+  padding-right: 25px !important;
 }
 .select2-container .select2-choice {
-  margin-left: 12px;
+  position: relative;
+  margin: 0 12px 0 0;
   display: block;
   height: 50px;
   padding: 0 0 0 12px;
   overflow: hidden;
-  position: relative;
   font-weight: bold;
   border: 1px solid #ccc;
   white-space: nowrap;
@@ -62,6 +65,7 @@
   user-select: none;
   background-color: #fff;
   background-image: none;
+  z-index: 999;
   .transition(all .4s ease 0s);
 }
 html[dir="rtl"] .select2-container .select2-choice {

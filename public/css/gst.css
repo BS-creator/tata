@@ -22,6 +22,7 @@
 }
 #clients {
   display: none;
+  z-index: 999;
 }
 .fix-width-select2,
 #s2id_clients {
@@ -54,13 +55,17 @@
   box-sizing: border-box;
   /* css3 */
 }
+.select2-search input {
+  padding: 0px 4px !important;
+  padding-right: 25px !important;
+}
 .select2-container .select2-choice {
-  margin-left: 12px;
+  position: relative;
+  margin: 0 12px 0 0;
   display: block;
   height: 50px;
   padding: 0 0 0 12px;
   overflow: hidden;
-  position: relative;
   font-weight: bold;
   border: 1px solid #ccc;
   white-space: nowrap;
@@ -76,6 +81,7 @@
   user-select: none;
   background-color: #fff;
   background-image: none;
+  z-index: 999;
   -webkit-transition-property: all 0.4s ease 0s;
   -moz-transition-property: all 0.4s ease 0s;
   -ms-transition-property: all 0.4s ease 0s;
@@ -833,6 +839,64 @@ input:active,
 input.active {
   color: #222;
   border: 1px solid #adadad;
+}
+/*********************************************
+MODAL SELECT2
+*********************************************/
+.modal-select2-open {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255,255,255,0.9);
+  z-index: 99;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
+}
+.modal-select2 {
+  display: none;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
+}
+#clients {
+  position: relative;
 }
 /**********************************************
 BREADCRUMP

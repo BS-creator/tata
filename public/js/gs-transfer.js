@@ -8,7 +8,6 @@ $.ajax = function(params) {
   params.headers['Authorization'] = 'Groups groups_token=' + sessionStorage.token || '00';
   return $ajax.apply($, arguments);
 };
-
 //---------------------------------------------
 
 /**
@@ -351,6 +350,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
     reloadNewData = function(data) {
+
+      // hide
+      $('.modal-select2-open').removeClass('modal-select2-open').addClass('modal-select2');
+
       //destroy dt
       table.destroy();
       // TODO: load data client if it is connected to a client!!
@@ -1372,10 +1375,15 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
     buildClientListForSelect2 = function(data) {
 
+      // on first call, show a modal to the user
+      var openModal = clientList.length == 0;
+
+      // add itself as a client
       if (isAccountingCabinet() || isGMS()) {
         clientList.push({id: username, text: i18n[lang].myOwnAccount, email: ''});
       }
 
+      // add the real clients
       _.forEach(data, function(i) {
         clientList.push({
           id:    i.clientLogin,
@@ -1383,17 +1391,29 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           email: i.email
         });
       });
+
       // @devcode
       if (username && username.toUpperCase() === 'GMSTEST') {
         clientList.push({id: 'D00000001', text: 'D00000001', email: ''})
+      }
+
+      // on first call, show a modal to the user (follow-up)
+      if(openModal) {
+        setTimeout(function() {
+          $('#clients').select2('open');
+          $('.modal-select2').removeClass("modal-select2").addClass('modal-select2-open');
+        }, 1000);
       }
     },
 
     /**
      * Load the list of client login for the GMS user or a cabinet */
     loadClients = function() {
-      //return $.Deferred().resolve();
 
+      // prevent the user from interacting while we load clients
+      $('.modal-select2').removeClass("modal-select2").addClass('modal-select2-open');
+
+      // check which clients we need to load
       if (isGMS()) {
         console.log('>>>>> load all Clients');
         return $.ajax({
