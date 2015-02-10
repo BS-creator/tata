@@ -965,7 +965,7 @@ LOADER
   height: 50px;
   color: #fff;
   background-color: #08abc4;
-  padding-left: 23px;
+  padding-left: 29px;
   -webkit-transition-property: all;
   -moz-transition-property: all;
   -ms-transition-property: all;
@@ -1637,6 +1637,7 @@ table tr th .pw-btn-group-th .pw-btn-th,
 .btn-portal-red,
 .btn-portal-default,
 .btn-portal-green,
+.btn-portal-bluegreen,
 .btn-portal-lightblue {
   display: inline-block;
   vertical-align: middle;
@@ -1737,6 +1738,19 @@ table tr th .pw-btn-group-th .pw-btn-th,
 .btn-portal-red.active {
   background-color: #cf4530;
   border-color: #cf4530;
+  color: white;
+}
+.btn-portal-bluegreen {
+  background-color: transparent;
+  border-color: #08abc4;
+  color: #0796ac;
+}
+.btn-portal-bluegreen:hover,
+.btn-portal-bluegreen:focus,
+.btn-portal-bluegreen:active,
+.btn-portal-bluegreen.active {
+  background-color: #08abc4;
+  border-color: #08abc4;
   color: white;
 }
 .btn-portal-lightblue {
