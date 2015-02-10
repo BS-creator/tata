@@ -302,6 +302,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       } else {
         reloadNewData();
       }
+      toggleDLButton();
+
       //console.log('reloadPage' + new Date());
       /*.then(function() {
        if (selectMenu === 'ROOT') {$('#root').trigger('click');}
@@ -1102,8 +1104,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             searchable: true
           },
           {
-            className:  'defaultView',
-            targets:    11 //referenceClient
+            className: 'defaultView',
+            targets:   11 //referenceClient
             //visible:    true,
             //searchable: true
           },
@@ -1979,7 +1981,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     setEventFiltersButton = function() {
 
       $('#filterNew').off('click').on('click', function() {
-        $('#filterby').addClass('active');
+        var filterby = $('#filterby');
+        if (!filterby.hasClass('active')) {filterby.addClass('active');}
         $('#breadcrumb').html(
           $('#breadcrumb').html() +
           '<li class="active">' + i18n[lang].button.filter.new + '</li>');
@@ -1990,6 +1993,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
 
       $('#filterDL').off('click').on('click', function() {
+        var filterby = $('#filterby');
+        if (!filterby.hasClass('active')) {filterby.addClass('active');}
         $('#breadcrumb').html(
           $('#breadcrumb').html() +
           '<li class="active">' + i18n[lang].button.filter.notDL + '</li>');
@@ -2000,6 +2005,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       });
 
       $('#filterClear').off('click').on('click', function() {
+        $('#filterby').removeClass('active');
         $('#breadcrumb').html(
           $('#breadcrumb').html() +
           '<li class="active">' + i18n[lang].button.filter.clear + '</li>');
