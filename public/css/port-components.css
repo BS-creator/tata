@@ -1,6 +1,11 @@
+@import "../../portalcdn/css/portal-app.css";
+@import "../../portalcdn/css/roboto-light.css";
+@import "../../portalcdn/css/roboto-regular.css";
+@import "../../portalcdn/css/roboto-medium.css";
+@import "../../portalcdn/css/libre-baskerville.css";
 /* @author  :   Gilles Collard - Group S */
 /* @date    :   2014-10 */
-/* @version :   BETA 1.0 */
+/* @version :  1.0 */
 .focus-100:hover,
 .focus-100:focus,
 .focus-100:active,
@@ -53,54 +58,6 @@
 }
 .librebaskervilleitalic {
   font-family: 'librebaskervilleitalic';
-}
-/*.app-muted {
-    color: #d9d9d9;
-    cursor: default;
-}
-.app-m {
-    font-size: 25px;
-}
-.app-l {
-    font-size: 50px;
-}
-.app-xl {
-    font-size: 70px;
-}
-.app-xxl {
-    font-size: 120px;
-}*/
-li,
-p,
-a {
-  font-family: 'robotoregular';
-  line-height: 1.618033;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-h1 small,
-h2 small,
-h3 small,
-h4 small,
-h5 small,
-h6 small,
-.title-font {
-  font-family: 'robotoCondensedregular';
-}
-.btn-type {
-  font-family: 'robotolight';
-  font-size: 16px;
-  letter-spacing: 0.05em;
-}
-.upper {
-  text-transform: uppercase;
-}
-.lower {
-  text-transform: lowercase;
 }
 /*-------------------------------*\
             colors
@@ -842,20 +799,18 @@ GROUP S blue
   font-family: 'robotoregular';
   font-size: 16px;
   letter-spacing: 0.05em;
-  line-height: 1.618033;
 }
 input[type="text"],
 input[type="password"],
 input[type="email"] {
   margin: 0;
-  padding: 10px 11.8px;
+  padding-right: 11.8px;
+  padding-left: 11.8px;
   height: 50px;
   line-height: 50px;
   font-family: 'robotoregular';
   font-size: 16px;
   letter-spacing: 0.05em;
-  line-height: 1.618033;
-  /* style */
   background-image: none;
   background-color: transparent;
   border-width: 2px;
@@ -885,26 +840,248 @@ input[type="email"] {
 /*-------------------*\
         RENDER
 \*-------------------*/
-.btn-render {
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0;
-  padding: 10px 30.1px;
+#form-create-user {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+#form-create-user h1 {
+  color: #086cc4;
+  opacity: .9;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+#form-create-user .client {
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+#form-create-user .ipt-default,
+#form-create-user .ipt-default-ico {
+  display: block;
+  position: relative;
+  margin: 1.618em 0 0 0;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+#form-create-user .ipt-default-ico input {
+  padding-left: 61px;
+}
+#form-create-user .ipt-default-ico i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 1.6em;
+  text-align: center;
+  border-radius: 0.1rem 0 0 0.1rem;
+  background: #bbbbbb;
+  color: #fff;
+  cursor: default;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+#form-create-user input {
+  position: relative;
+  width: 100%;
+  padding-left: 19px;
   height: 50px;
   line-height: 50px;
   font-family: 'robotoregular';
   font-size: 16px;
   letter-spacing: 0.05em;
-  line-height: 1.618033;
+  border: 2px solid #bbbbbb;
+  border-radius: 0.1rem;
+  background-color: transparent;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
+}
+#form-create-user textarea {
+  width: 100%;
+  resize: vertical;
+  margin: 0 0 1.618em 0;
+  padding: 11px 19px;
+  border: 2px solid #bbbbbb;
+  border-radius: 0.1rem;
+  background-color: transparent;
+  font-family: 'robotoregular';
+  font-size: 16px;
+  letter-spacing: 0.05em;
+}
+#form-create-user button {
+  position: relative;
+  height: 50px;
+  /*line-height: 47px;*/
+  margin: 0;
+  color: white;
+  text-transform: uppercase;
+  font-family: 'robotoregular';
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  background-color: #086cc4;
+  border: 2px solid #086cc4;
+  border-radius: 0.1rem;
+  opacity: .8;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+#form-create-user button:hover,
+#form-create-user button:focus,
+#form-create-user button:active {
+  opacity: 1;
+}
+#form-create-user .btn-minus {
+  display: none;
+}
+#form-create-user .btn-plus,
+#form-create-user .btn-minus {
+  position: relative;
+  height: 50px;
+  line-height: 48px;
+  margin: 1.618em 0 0 0;
+  padding: 0 19px;
+  color: #086cc4;
+  font-family: 'robotoregular';
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  background-color: transparent;
+  border: 2px solid #086cc4;
+  border-radius: 0.1rem;
+  opacity: .8;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  -ms-transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -ms-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
+}
+#form-create-user .btn-plus:hover,
+#form-create-user .btn-minus:hover,
+#form-create-user .btn-plus:focus,
+#form-create-user .btn-minus:focus,
+#form-create-user .btn-plus:active,
+#form-create-user .btn-minus:active {
+  opacity: 1;
+  color: white;
+  background-color: #086cc4;
+  border: 2px solid #086cc4;
+}
+.btn-render {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 11.8px 30.1px;
+  height: 50px;
   text-align: center;
+  font-family: 'robotoregular';
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-image: none;
   border-width: 2px;
   border-radius: 1px;
   border-style: solid;
+  background-image: none;
   cursor: pointer;
+  opacity: .4;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
@@ -935,6 +1112,18 @@ input[type="email"] {
 /*-----------------*\
         SPRAY
 \*-----------------*/
+.ipt-default-ico {
+  border-color: #c1c1c1;
+  color: #acacac;
+  opacity: 1;
+}
+.ipt-default-ico:hover,
+.ipt-default-ico:focus,
+.ipt-default-ico:active .ipt-default-ico.active {
+  border-color: #c6c6c6;
+  color: #939393;
+  opacity: 1;
+}
 .ipt-default {
   border-color: #dfdfdf;
   color: #acacac;
@@ -963,22 +1152,22 @@ input[type="email"] {
   display: inline-block;
   vertical-align: middle;
   margin: 0;
-  padding: 10px 30.1px;
+  padding: 11.8px 30.1px;
   height: 50px;
-  line-height: 50px;
+  text-align: center;
   font-family: 'robotoregular';
   font-size: 16px;
   letter-spacing: 0.05em;
-  line-height: 1.618033;
-  text-align: center;
+  color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-image: none;
   border-width: 2px;
   border-radius: 1px;
   border-style: solid;
+  background-image: none;
   cursor: pointer;
+  opacity: .4;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
@@ -1028,22 +1217,22 @@ input[type="email"] {
   display: inline-block;
   vertical-align: middle;
   margin: 0;
-  padding: 10px 30.1px;
+  padding: 11.8px 30.1px;
   height: 50px;
-  line-height: 50px;
+  text-align: center;
   font-family: 'robotoregular';
   font-size: 16px;
   letter-spacing: 0.05em;
-  line-height: 1.618033;
-  text-align: center;
+  color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-image: none;
   border-width: 2px;
   border-radius: 1px;
   border-style: solid;
+  background-image: none;
   cursor: pointer;
+  opacity: .4;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
@@ -1088,22 +1277,22 @@ input[type="email"] {
   display: inline-block;
   vertical-align: middle;
   margin: 0;
-  padding: 10px 30.1px;
+  padding: 11.8px 30.1px;
   height: 50px;
-  line-height: 50px;
+  text-align: center;
   font-family: 'robotoregular';
   font-size: 16px;
   letter-spacing: 0.05em;
-  line-height: 1.618033;
-  text-align: center;
+  color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-image: none;
   border-width: 2px;
   border-radius: 1px;
   border-style: solid;
+  background-image: none;
   cursor: pointer;
+  opacity: .4;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
@@ -1148,22 +1337,22 @@ input[type="email"] {
   display: inline-block;
   vertical-align: middle;
   margin: 0;
-  padding: 10px 30.1px;
+  padding: 11.8px 30.1px;
   height: 50px;
-  line-height: 50px;
+  text-align: center;
   font-family: 'robotoregular';
   font-size: 16px;
   letter-spacing: 0.05em;
-  line-height: 1.618033;
-  text-align: center;
+  color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-image: none;
   border-width: 2px;
   border-radius: 1px;
   border-style: solid;
+  background-image: none;
   cursor: pointer;
+  opacity: .4;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
@@ -1259,16 +1448,12 @@ input[type="email"] {
   padding: 0;
   margin: 0;
 }
-.dropdown-menu li {
-  line-height: 1.61803;
-}
 .dropdown-menu li > a {
   display: block;
   padding: 12px 50px;
   clear: both;
   font-weight: 300;
   font-size: 16px;
-  line-height: 1.61803;
   color: #333;
   white-space: nowrap;
   text-decoration: none !important;
@@ -1280,8 +1465,6 @@ input[type="email"] {
   background-color: #F5F5F5;
 }
 .username {
-  /*    background-color: darken(#244b90,8);
-        border-radius: @l;*/
   border: 2px solid #fff;
   padding: 0 19.1px;
   color: #ffffff;
@@ -1297,11 +1480,11 @@ input[type="email"] {
 header {
   display: block;
   padding: 0 19.1px 0 0;
-  line-height: 1.61803;
   font-size: 16px;
   font-family: robotolight;
   background-color: #086CC3;
   height: 80.9px;
+  line-height: 80.9px;
 }
 header > ul {
   width: 100%;
