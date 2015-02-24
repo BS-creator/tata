@@ -64,17 +64,17 @@ var Utils = (function() {
       } else if (_.contains(url, 'localhost')) {
         /***** LOCAL *****/
         sessionStorage.setItem('TransferBaseURL', '//localhost:4000/transfer/');
-        sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');
+        sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8019/');
         //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
+        if (!localStorage.country) {            localStorage.setItem('country', 'BE');}
       } else if (_.contains(url, '172.20.20.64')) {
         if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//172.20.20.64:4000/');}
-        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');}
+        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8019/');}
         //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
         if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
       } else if (_.contains(url, 'pdevg1')) {
         if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//pdevg1:4000/');}
-        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//pdevg1:8018');}
+        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//pdevg1:8019');}
         if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
 
     /**************

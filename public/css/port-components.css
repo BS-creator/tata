@@ -804,8 +804,7 @@ input[type="text"],
 input[type="password"],
 input[type="email"] {
   margin: 0;
-  padding-right: 11.8px;
-  padding-left: 11.8px;
+  padding: 10px 11.8px;
   height: 50px;
   line-height: 50px;
   font-family: 'robotoregular';
@@ -840,63 +839,15 @@ input[type="email"] {
 /*-------------------*\
         RENDER
 \*-------------------*/
-#form-create-user {
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-}
 #form-create-user h1 {
   color: #086cc4;
   opacity: .9;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-}
-#form-create-user .client {
-  -webkit-transition-property: all;
-  -moz-transition-property: all;
-  -ms-transition-property: all;
-  -o-transition-property: all;
-  transition-property: all;
-  -webkit-transition-duration: 0.2s;
-  -moz-transition-duration: 0.2s;
-  -ms-transition-duration: 0.2s;
-  -o-transition-duration: 0.2s;
-  transition-duration: 0.2s;
-  -webkit-transition-timing-function: ease;
-  -moz-transition-timing-function: ease;
-  -ms-transition-timing-function: ease;
-  -o-transition-timing-function: ease;
-  transition-timing-function: ease;
-  -webkit-transition-delay: 0s;
-  -moz-transition-delay: 0s;
-  -ms-transition-delay: 0s;
-  -o-transition-delay: 0s;
-  transition-delay: 0s;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
 }
 #form-create-user .ipt-default,
 #form-create-user .ipt-default-ico {
   display: block;
   position: relative;
   margin: 1.618em 0 0 0;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
 }
 #form-create-user .ipt-default-ico input {
   padding-left: 61px;
@@ -911,15 +862,9 @@ input[type="email"] {
   font-size: 1.6em;
   text-align: center;
   border-radius: 0.1rem 0 0 0.1rem;
-  background: #bbbbbb;
+  background: #c1c1c1;
   color: #fff;
   cursor: default;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
 }
 #form-create-user input {
   position: relative;
@@ -930,7 +875,7 @@ input[type="email"] {
   font-family: 'robotoregular';
   font-size: 16px;
   letter-spacing: 0.05em;
-  border: 2px solid #bbbbbb;
+  border: 2px solid #c1c1c1;
   border-radius: 0.1rem;
   background-color: transparent;
   -webkit-transition-property: all;
@@ -957,9 +902,8 @@ input[type="email"] {
 #form-create-user textarea {
   width: 100%;
   resize: vertical;
-  margin: 0 0 1.618em 0;
   padding: 11px 19px;
-  border: 2px solid #bbbbbb;
+  border: 2px solid #c1c1c1;
   border-radius: 0.1rem;
   background-color: transparent;
   font-family: 'robotoregular';
@@ -970,7 +914,7 @@ input[type="email"] {
   position: relative;
   height: 50px;
   /*line-height: 47px;*/
-  margin: 0;
+  margin: 1.618em 0 0 0;
   color: white;
   text-transform: uppercase;
   font-family: 'robotoregular';
@@ -1000,26 +944,15 @@ input[type="email"] {
   -ms-transition-delay: 0s;
   -o-transition-delay: 0s;
   transition-delay: 0s;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
 }
 #form-create-user button:hover,
 #form-create-user button:focus,
 #form-create-user button:active {
   opacity: 1;
 }
-#form-create-user .btn-minus {
-  display: none;
-}
-#form-create-user .btn-plus,
-#form-create-user .btn-minus {
+#form-create-user .btn-add {
   position: relative;
   height: 50px;
-  line-height: 48px;
   margin: 1.618em 0 0 0;
   padding: 0 19px;
   color: #086cc4;
@@ -1051,12 +984,9 @@ input[type="email"] {
   -o-transition-delay: 0s;
   transition-delay: 0s;
 }
-#form-create-user .btn-plus:hover,
-#form-create-user .btn-minus:hover,
-#form-create-user .btn-plus:focus,
-#form-create-user .btn-minus:focus,
-#form-create-user .btn-plus:active,
-#form-create-user .btn-minus:active {
+#form-create-user .btn-add:hover,
+#form-create-user .btn-add:focus,
+#form-create-user .btn-add:active {
   opacity: 1;
   color: white;
   background-color: #086cc4;
@@ -1196,7 +1126,7 @@ input[type="email"] {
   transition-delay: 0s;
   border-color: #00407a;
   background-color: #00407a;
-  color: #ffffff;
+  color: white;
   opacity: 1;
 }
 .btn-blue:hover,
@@ -1204,13 +1134,13 @@ input[type="email"] {
 .btn-blue:active {
   border-color: #0065bd;
   background-color: #0065bd;
-  color: #ffffff;
+  color: white;
   opacity: 1;
 }
 .btn-blue.active {
   border-color: #63a4dd;
   background-color: #63a4dd;
-  color: #ffffff;
+  color: white;
   opacity: 1;
 }
 .btn-green {
@@ -1261,7 +1191,7 @@ input[type="email"] {
   transition-delay: 0s;
   border-color: #009a60;
   background-color: #009a60;
-  color: #ffffff;
+  color: white;
   opacity: 1;
 }
 .btn-green:hover,
@@ -1270,7 +1200,7 @@ input[type="email"] {
 .btn-green.active {
   border-color: #00c27b;
   background-color: #00c27b;
-  color: #ffffff;
+  color: white;
   opacity: 1;
 }
 .btn-white {
@@ -1328,9 +1258,9 @@ input[type="email"] {
 .btn-white:focus,
 .btn-white:active,
 .btn-white.active {
-  border-color: #ffffff;
+  border-color: white;
   background-color: transparent;
-  color: #ffffff;
+  color: white;
   opacity: 1;
 }
 .btn-connexion {
@@ -1379,18 +1309,18 @@ input[type="email"] {
   -ms-transition-delay: 0s;
   -o-transition-delay: 0s;
   transition-delay: 0s;
-  border-color: #ffffff;
+  border-color: white;
   background-color: transparent;
-  color: #ffffff;
+  color: white;
   opacity: 0.4;
 }
 .btn-connexion:hover,
 .btn-connexion:focus,
 .btn-connexion:active,
 .btn-connexion.active {
-  border-color: #ffffff;
+  border-color: white;
   background-color: transparent;
-  color: #ffffff;
+  color: white;
   opacity: 0.75;
 }
 /*-------------------------------*\

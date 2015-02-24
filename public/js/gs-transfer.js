@@ -13,7 +13,8 @@ $.ajax = function(params) {
 /**
  * Created by bisconti on 29/08/14.
  */
-/*globals $, _, moment, introJs, swal, console, Utils */
+/*globals $, _, ko, moment, introJs, swal, console, Utils */
+
 var gsTransfer = (function(_, moment, introJs, swal, Utils) {
   'use strict';
 
@@ -1793,7 +1794,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       //TODO: put it in CSS, just use it to translate!!!
       $('#btn-upload-div').find('span').html('<i class="fa fa-upload"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].upload);
       $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].modalupload);
-      $('#modalbq').html(i18n[lang].modalbq);
+      if (!isFrance()) {$('#modalbq').html(i18n[lang].modalbq);}
       $('input[type=file]').bootstrapFileInput(i18n[lang].modalbtn);
 
     },
@@ -2263,6 +2264,18 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       setEventsHTML();
 
+      //TODO: IMPROVE KNOCKOUT USAGE!!!
+
+      function AppViewModel() {
+        this.myContact = ko.observable(i18n[lang].button.myContact);
+        this.logout = ko.observable(i18n[lang].button.signout);
+        this.close = ko.observable(i18n[lang].button.close);
+
+      }
+
+      // Activates knockout.js
+      ko.applyBindings(new AppViewModel());
+
       //redirectToPreviousCat();
 
       setTimeout(function() {
@@ -2370,6 +2383,10 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
                   });
                 }
               });
+            }
+
+            if (!isFrance() && !isGMS()) {
+              setEventuploadForm();
             }
           });
         });

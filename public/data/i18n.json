@@ -6,6 +6,8 @@
       "colVisible":  "Afficher",
       "multiDL":     "Télécharger les fichiers",
       "multiDelete": "Supprimer les fichiers",
+      "myContact":   "Mes contacts",
+      "close":       "Ferme",
       "filter":      {
         "filterby": "Filtrer par",
         "new":      "Nouveaux fichiers",
@@ -110,7 +112,7 @@
     "showHide":        "Afficher les colonnes",
     "upload":          "Déposer des fichiers",
     "modalupload":     "Envoyer des fichiers",
-    "modalbq":         "Liste des fichiers à ajouter.",
+    "modalbq":         "Veillez à sélectionner votre dossier de destination avant d'ajouter vos fichiers.",
     "modalbtn":        "Sélectionner les fichiers à envoyer",
     "notification":    "Prévenir l'utilisateur par email",
     "notificationCC":  "Prévenir votre cabinet comptable par email",
@@ -132,6 +134,8 @@
       "colVisible":  "Tonen",
       "multiDL":     "Bestanden downloaden",
       "multiDelete": "Bestanden verwijderen",
+      "myContact":   "Mijn contacten",
+      "close":       "Sluiten",
       "filter":      {
         "filterby": "Filter door",
         "new":      "Nieuwe bestanden",
@@ -248,6 +252,8 @@
       "colVisible":  "Show Column",
       "multiDL":     "Download files",
       "multiDelete": "Delete files",
+      "myContact":   "My contacts",
+      "close":       "Close",
       "filter":      {
         "filterby": "Filter by",
         "new":      "New Files",

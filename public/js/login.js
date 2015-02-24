@@ -22,9 +22,9 @@ $(function(swal, _, Utils) {
         button: 'INLOGGEN'
       },
       en: {
-        login:  'login',
-        password: 'password',
-        button: 'LOGIN'
+        login:  'Username',
+        password: 'Password',
+        button: 'SIGN IN'
       }
 
     };
@@ -57,7 +57,7 @@ $(function(swal, _, Utils) {
       success: function(data) {
         if (data.token) {
           sessionStorage.setItem('tokenTransfer', data.token);
-          sessionStorage.setItem('username', credentials.login);
+          sessionStorage.setItem('username', credentials.login.toUpperCase());
           //redirect to Transfer;
           window.location = TransferBaseURL + 'transferApp.html';
         }
