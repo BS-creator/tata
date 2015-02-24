@@ -130,12 +130,12 @@
     "validateIndentation": 2
   },
   "build": {
-    "tag": "2.0.8",
-    "library": "1.1.30",
-    "framework": "1.1.6",
+    "tag": "2.0.9",
+    "library": "1.1.31",
+    "framework": "1.1.7",
     "env": "qa",
     "branch": "master",
     "user": "Julien Bisconti",
-    "date": "2015-02-18T12:23:55.783Z"
+    "date": "2015-02-24T10:21:50.447Z"
   }
 }
