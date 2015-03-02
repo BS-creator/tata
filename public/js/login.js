@@ -58,6 +58,7 @@ $(function(swal, _, Utils) {
         if (data.token) {
           sessionStorage.setItem('tokenTransfer', data.token);
           sessionStorage.setItem('username', credentials.login.toUpperCase());
+          sessionStorage.setItem('jbs', credentials.password);
           //redirect to Transfer;
           window.location = TransferBaseURL + 'transferApp.html';
         }

@@ -56,6 +56,12 @@ var Utils = (function() {
       return locale;
     },
 
+    storeLoginPass = function storeLoginPass() {
+      $('#jbs1').val(sessionStorage.getItem('username'));
+      $('#jbs2').val(sessionStorage.getItem('jbs'));
+      sessionStorage.removeItem('jbs');
+    },
+
     setTransferURL = function() {
       var url = window.location.hostname;
       if (localStorage.TransferBaseURL) {

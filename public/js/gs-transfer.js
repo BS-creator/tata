@@ -62,6 +62,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     ClientCabinetList = [],
     FTPClientCabinetList = [],
     selectMenu = 'ROOT',
+    VM = {}, // ==> View Model in KnockOut.js
 
     /*** HELPER ***/
     isGMS = function() {
@@ -2264,18 +2265,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       setEventsHTML();
 
-      //TODO: IMPROVE KNOCKOUT USAGE!!!
-
-      function AppViewModel() {
-        this.myContact = ko.observable(i18n[lang].button.myContact);
-        this.logout = ko.observable(i18n[lang].button.signout);
-        this.close = ko.observable(i18n[lang].button.close);
-
-      }
-
-      // Activates knockout.js
-      ko.applyBindings(new AppViewModel());
-
       //redirectToPreviousCat();
 
       setTimeout(function() {
@@ -2345,6 +2334,20 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
             createDataTable();
             createMenu();
 
+            //TODO: IMPROVE KNOCKOUT USAGE!!!
+
+            function AppViewModel() {
+              this.myContact = ko.observable(i18n[lang].button.myContact);
+              this.logout = ko.observable(i18n[lang].button.signout);
+              this.close = ko.observable(i18n[lang].button.close);
+
+            }
+
+            VM = new AppViewModel();
+            // Activates knockout.js
+            ko.cleanNode(VM);
+            ko.applyBindings(VM);
+
             if (isGMS()) {
               loadClients().then(function() {
                 setEventGMS();
@@ -2394,6 +2397,8 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
     main = function() {
+
+      Utils.storeLoginPass();
 
       Utils.setTransferURL();
       TransferServerURL = sessionStorage.getItem('TransferServerURL');
