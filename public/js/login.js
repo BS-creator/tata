@@ -2,6 +2,16 @@
  * Created by bisconti on 29/08/14.
  */
 
+/*code to send cookie with every request */
+$.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+  options.crossDomain ={
+    crossDomain: true
+  };
+  options.xhrFields = {
+    withCredentials: true
+  };
+});
+
 /*globals swal, _ */
 $(function(swal, _, Utils) {
   'use strict';
