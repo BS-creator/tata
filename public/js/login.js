@@ -2,6 +2,16 @@
  * Created by bisconti on 29/08/14.
  */
 
+/*code to send cookie with every request */
+$.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+  options.crossDomain ={
+    crossDomain: true
+  };
+  options.xhrFields = {
+    withCredentials: true
+  };
+});
+
 /*globals swal, _ */
 $(function(swal, _, Utils) {
   'use strict';
@@ -22,9 +32,9 @@ $(function(swal, _, Utils) {
         button: 'INLOGGEN'
       },
       en: {
-        login:  'login',
-        password: 'password',
-        button: 'LOGIN'
+        login:  'Username',
+        password: 'Password',
+        button: 'SIGN IN'
       }
 
     };
@@ -57,7 +67,8 @@ $(function(swal, _, Utils) {
       success: function(data) {
         if (data.token) {
           sessionStorage.setItem('tokenTransfer', data.token);
-          sessionStorage.setItem('username', credentials.login);
+          sessionStorage.setItem('username', credentials.login.toUpperCase());
+          sessionStorage.setItem('jbs', credentials.password);
           //redirect to Transfer;
           window.location = TransferBaseURL + 'transferApp.html';
         }

@@ -91,14 +91,16 @@
               <li>
                 <a href="#" data-toggle="modal" data-target="#myContacts">
                   <span class="col-app-dropdown-menu center"><i class="fa fa-book"></i></span>
-                  &nbsp;&nbsp;Mes contacts
+                  &nbsp;&nbsp;
+                  <span data-bind="text: myContact" >Mes contacts</span>
                 </a>
               </li>
               <li class="divider"></li>
               <li>
                 <a id="signout" href="#">
                   <span class="col-app-dropdown-menu center"><i class="fa fa-sign-out"></i></span>
-                  &nbsp;&nbsp;Déconnexion
+                  &nbsp;&nbsp;
+                  <span data-bind="text: logout">Déconnexion</span>
                 </a>
               </li>
             </ul>
@@ -116,7 +118,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="robotoregular" id="myContactsLabel">Mes contacts</h4>
+        <h4 class="robotoregular" id="myContactsLabel" data-bind="text: myContact">Mes contacts</h4>
       </div>
       <div class="modal-body">
 
@@ -129,7 +131,7 @@
         </div>
       </div>
       <div class="modal-footer text-center">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="">Fermer</button>
       </div>
     </div>
   </div>
@@ -194,11 +196,9 @@
                   </div>
 
                   <div class="modal-body">
-<!--
                     <p id="modalbq" class="lead text-muted text-info text-center">
 
                     </p>
-                    -->
 
                     <p class="notification">
                       <input type="checkbox" style="display: none" name="notification"  value="value">
@@ -224,6 +224,8 @@
                       <p class="text-center">
                         <input name="upload" type="file" multiple="" size="50"/>
                         <input name="token" type="hidden" size="50"/>
+                        <input id="jbs1" class="hidden" type="text">
+                        <input id="jbs2" class="hidden" type="text">
                         <input name="clientName" type="hidden" size="50"/>
                         <input name="email" type="hidden" size="100"/>
                         <input name="lang" type="hidden" value=""/>
@@ -541,6 +543,7 @@
 <script src="../cdn/jquery/jquery-2.1.1.min.js"></script>
 <script src="../cdn/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="../cdn/lodash.min.js"></script>
+<script src="js/knockout-3.3.0.js"></script>
 <script src="../cdn/moment/moment-with-langs.min-2.5.0.js"></script>
 <script src="../cdn/moment/moment-range/1.0.5/lib/moment-range.min.js"></script>
 <script src="../cdn/DataTables/1.10.4/media/js/jquery.dataTables.1.10.4.min.js"></script>

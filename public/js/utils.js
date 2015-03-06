@@ -32,6 +32,109 @@ var Utils = (function() {
       }
     },
 
+    /*
+    executeOnce(callback[, thisObject[, argumentToPass1[, argumentToPass2[, …[, argumentToPassN]]]]], identifier[, onlyHere])
+    * */
+    executeOnce = function executeOnce() {
+      var argc = arguments.length, bImplGlob = typeof arguments[argc - 1] === "string";
+      if (bImplGlob) { argc++; }
+      if (argc < 3) { throw new TypeError("executeOnce - not enough arguments"); }
+      var fExec = arguments[0], sKey = arguments[argc - 2];
+      if (typeof fExec !== "function") { throw new TypeError("executeOnce - first argument must be a function"); }
+      if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { throw new TypeError("executeOnce - invalid identifier"); }
+      if (decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) === "1") { return false; }
+      fExec.apply(argc > 3 ? arguments[1] : null, argc > 4 ? Array.prototype.slice.call(arguments, 2, argc - 2) : []);
+      document.cookie = encodeURIComponent(sKey) + "=1; expires=Fri, 31 Dec 9999 23:59:59 GMT" + (bImplGlob || !arguments[argc - 1] ? "; path=/" : "");
+      return true;
+    },
+
+  /*\
+   |*|
+   |*|  :: Translate relative paths to absolute paths ::
+   |*|
+   |*|  https://developer.mozilla.org/en-US/docs/Web/API/document.cookie
+   |*|  https://developer.mozilla.org/User:fusionchess
+   |*|
+   |*|  The following code is released under the GNU Public License, version 3 or later.
+   |*|  http://www.gnu.org/licenses/gpl-3.0-standalone.html
+   |*|
+   \*/
+
+    relPathToAbs = function relPathToAbs(sRelPath) {
+      var nUpLn, sDir = "", sPath = location.pathname.replace(/[^\/]*$/, sRelPath.replace(/(\/|^)(?:\.?\/+)+/g, "$1"));
+      for (var nEnd, nStart = 0; nEnd = sPath.indexOf("/../", nStart), nEnd > -1; nStart = nEnd + nUpLn) {
+        nUpLn = /^\/(?:\.\.\/)*/.exec(sPath.slice(nEnd))[0].length;
+        sDir = (sDir + sPath.substring(nStart, nEnd)).replace(new RegExp("(?:\\\/+[^\\\/]*){0," + ((nUpLn - 1) / 3) + "}$"), "/");
+      }
+      return sDir + sPath.substr(nStart);
+    },
+  /*\
+   |*|
+   |*|  :: cookies.js ::
+   |*|
+   |*|  A complete cookies reader/writer framework with full unicode support.
+   |*|
+   |*|  Revision #1 - September 4, 2014
+   |*|
+   |*|  https://developer.mozilla.org/en-US/docs/Web/API/document.cookie
+   |*|  https://developer.mozilla.org/User:fusionchess
+   |*|
+   |*|  This framework is released under the GNU Public License, version 3 or later.
+   |*|  http://www.gnu.org/licenses/gpl-3.0-standalone.html
+   |*|
+   |*|  Syntaxes:
+   |*|
+   |*|  * docCookies.setItem(name, value[, end[, path[, domain[, secure]]]])
+   |*|  * docCookies.getItem(name)
+   |*|  * docCookies.removeItem(name[, path[, domain]])
+   |*|  * docCookies.hasItem(name)
+   |*|  * docCookies.keys()
+   |*|
+   \*/
+
+    docCookies = {
+      getItem:    function(sKey) {
+        if (!sKey) { return null; }
+        return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*"
+          + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+      },
+      setItem:    function(sKey, sValue, vEnd, sPath, sDomain, bSecure) {
+        if (!sKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(sKey)) { return false; }
+        var sExpires = "";
+        if (vEnd) {
+          switch (vEnd.constructor) {
+            case Number:
+              sExpires = vEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + vEnd;
+              break;
+            case String:
+              sExpires = "; expires=" + vEnd;
+              break;
+            case Date:
+              sExpires = "; expires=" + vEnd.toUTCString();
+              break;
+          }
+        }
+        document.cookie = encodeURIComponent(sKey) + "=" + encodeURIComponent(sValue)
+        + sExpires + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "") + (bSecure ? "; secure" : "");
+        return true;
+      },
+      removeItem: function(sKey, sPath, sDomain) {
+        if (!this.hasItem(sKey)) { return false; }
+        document.cookie = encodeURIComponent(sKey)
+        + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (sDomain ? "; domain=" + sDomain : "") + (sPath ? "; path=" + sPath : "");
+        return true;
+      },
+      hasItem:    function(sKey) {
+        if (!sKey) { return false; }
+        return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+      },
+      keys:       function() {
+        var aKeys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
+        for (var nLen = aKeys.length, nIdx = 0; nIdx < nLen; nIdx++) { aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]); }
+        return aKeys;
+      }
+    },
+
     bytesToSize = function(bytes) {
       var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'],
         i;
@@ -56,6 +159,7 @@ var Utils = (function() {
       return locale;
     },
 
+
     setTransferURL = function() {
       var url = window.location.hostname;
       if (localStorage.TransferBaseURL) {
@@ -64,64 +168,64 @@ var Utils = (function() {
       } else if (_.contains(url, 'localhost')) {
         /***** LOCAL *****/
         sessionStorage.setItem('TransferBaseURL', '//localhost:4000/transfer/');
-        sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');
+        sessionStorage.setItem('TransferServerURL', '//localhost:8019/');
         //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
+        /*if (!localStorage.country) {            localStorage.setItem('country', 'BE');}*/
       } else if (_.contains(url, '172.20.20.64')) {
-        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//172.20.20.64:4000/');}
-        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8018/');}
+        if (!sessionStorage.TransferBaseURL) { sessionStorage.setItem('TransferBaseURL', '//172.20.20.64:4000/');}
+        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8019/');}
         //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
+        /*if (!localStorage.country) {            localStorage.setItem('country', 'FR');}*/
       } else if (_.contains(url, 'pdevg1')) {
-        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//pdevg1:4000/');}
-        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//pdevg1:8018');}
-        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
+        if (!sessionStorage.TransferBaseURL) { sessionStorage.setItem('TransferBaseURL', '//pdevg1:4000/');}
+        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//pdevg1:8019');}
+        /*if (!localStorage.country) {            localStorage.setItem('country', 'FR');}*/
 
-    /**************
-     * DEV & QA
-     **************/
+        /**************
+         * DEV & QA
+         **************/
       } else if (_.contains(url, 'deviapps')) {
-        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//deviapps.groups.be/prestaweb/transfer/');}
+        if (!sessionStorage.TransferBaseURL) { sessionStorage.setItem('TransferBaseURL', '//deviapps.groups.be/prestaweb/transfer/');}
         if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');}
-        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
+        /*if (!localStorage.country) {            localStorage.setItem('country', 'FR');}*/
       } else if (_.contains(url, 'qaiapps')) {
-        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//qaiapps.groups.be/transfer/');}
+        if (!sessionStorage.TransferBaseURL) { sessionStorage.setItem('TransferBaseURL', '//qaiapps.groups.be/transfer/');}
         if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//qaiapps.groups.be/ariane/');}
-        if (!localStorage.country) {            localStorage.setItem('country', 'BE');}
+        /*if (!localStorage.country) {            localStorage.setItem('country', 'BE');}*/
 
-    /**************
-     * PRODUCTION: BELGIUM
-     * **************/
+        /**************
+         * PRODUCTION: BELGIUM
+         * **************/
       } else if (_.contains(url, 'transfer.groups.be')) {
-        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//transfer.groups.be/transfer/');}
+        if (!sessionStorage.TransferBaseURL) { sessionStorage.setItem('TransferBaseURL', '//transfer.groups.be/transfer/');}
         if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//transfer.groups.be/ariane/');}
-        if (!localStorage.country) {            localStorage.setItem('country', 'BE');}
+        /*if (!localStorage.country) {            localStorage.setItem('country', 'BE');}*/
       } else if (_.contains(url, 'online.groups.be')) {
-        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//online.groups.be/transfer/');}
+        if (!sessionStorage.TransferBaseURL) { sessionStorage.setItem('TransferBaseURL', '//online.groups.be/transfer/');}
         if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//online.groups.be/ariane/');}
-        if (!localStorage.country) {            localStorage.setItem('country', 'BE');}
-    /**************
-     * PRODUCTION: TRANSFER FRANCE
-     * **************/
+        /*if (!localStorage.country) {            localStorage.setItem('country', 'BE');}*/
+        /**************
+         * PRODUCTION: TRANSFER FRANCE
+         * **************/
       } else if (_.contains(url, 'transfer.groupsfrance.fr')) {
-        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//transfer.groupsfrance.fr/');}
+        if (!sessionStorage.TransferBaseURL) { sessionStorage.setItem('TransferBaseURL', '//transfer.groupsfrance.fr/');}
         if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//transfer.groupsfrance.fr/ariane/');}
-        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
+        if (!localStorage.country) { localStorage.setItem('country', 'FR');}
       } else if (_.contains(url, 'transfer.groupsfrance.com')) {
-        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//transfer.groupsfrance.com/');}
+        if (!sessionStorage.TransferBaseURL) { sessionStorage.setItem('TransferBaseURL', '//transfer.groupsfrance.com/');}
         if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//transfer.groupsfrance.com/ariane/');}
-        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
-    /**************
-     * PRODUCTION: PORTAL FRANCE
-     * **************/
+        if (!localStorage.country) { localStorage.setItem('country', 'FR');}
+        /**************
+         * PRODUCTION: PORTAL FRANCE
+         * **************/
       } else if (_.contains(url, 'online.groupsfrance.fr')) {
-        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//online.groupsfrance.fr/transfer/');}
+        if (!sessionStorage.TransferBaseURL) { sessionStorage.setItem('TransferBaseURL', '//online.groupsfrance.fr/transfer/');}
         if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//online.groupsfrance.fr/ariane/');}
-        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
+        if (!localStorage.country) { localStorage.setItem('country', 'FR');}
       } else if (_.contains(url, 'online.groupsfrance.com')) {
-        if (!sessionStorage.TransferBaseURL) {  sessionStorage.setItem('TransferBaseURL',   '//online.groupsfrance.com/transfer/');}
+        if (!sessionStorage.TransferBaseURL) { sessionStorage.setItem('TransferBaseURL', '//online.groupsfrance.com/transfer/');}
         if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//online.groupsfrance.com/ariane/');}
-        if (!localStorage.country) {            localStorage.setItem('country', 'FR');}
+        if (!localStorage.country) { localStorage.setItem('country', 'FR');}
       }
     },
 
@@ -153,6 +257,9 @@ var Utils = (function() {
     getURLParameter:      getURLParameter,
     endsWith:             endsWith,
     bytesToSize:          bytesToSize,
-    getNavigatorLanguage: getNavigatorLanguage
+    getNavigatorLanguage: getNavigatorLanguage,
+    docCookies:           docCookies,
+    relPathToAbs:         relPathToAbs,
+    executeOnce:          executeOnce
   }
 }());

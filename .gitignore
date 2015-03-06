@@ -9,7 +9,8 @@ _doc
 cdn
 report
 *.log
-.idea
 out
 portalcdn
 **/\_*
+*.zip
+report
