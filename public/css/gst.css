@@ -714,11 +714,6 @@ LOGIN FORM
 #logindiv {
   min-height: 700px;
 }
-input[type="text"],
-input[type="password"],
-input[type="email"] {
-  border-width: 1px !important;
-}
 /**********************************************
 TOP NAV
 ***********************************************/
@@ -796,36 +791,10 @@ MODAL
   content: "\f00e\00a0\00a0\00a0";
   font-size: 16px;
 }
-input[type=text] {
-  /*    float: left;*/
-  padding: 15px 12px;
-  margin: 0;
-  font-size: 16px;
-  font-weight: normal;
+input[type=text],
+input[type=password] {
   color: #999;
   border: 1px solid #ccc;
-  /* transition */
-  -webkit-transition-property: all;
-  -moz-transition-property: all;
-  -ms-transition-property: all;
-  -o-transition-property: all;
-  transition-property: all;
-  -webkit-transition-duration: 0.2s;
-  -moz-transition-duration: 0.2s;
-  -ms-transition-duration: 0.2s;
-  -o-transition-duration: 0.2s;
-  transition-duration: 0.2s;
-  -webkit-transition-timing-function: ease;
-  -moz-transition-timing-function: ease;
-  -ms-transition-timing-function: ease;
-  -o-transition-timing-function: ease;
-  transition-timing-function: ease;
-  -webkit-transition-delay: 0s;
-  -moz-transition-delay: 0s;
-  -ms-transition-delay: 0s;
-  -o-transition-delay: 0s;
-  transition-delay: 0s;
-  opacity: 1;
 }
 input:hover,
 input:focus,
@@ -833,6 +802,12 @@ input:active,
 input.active {
   color: #222;
   border: 1px solid #adadad;
+}
+#login,
+#password {
+  padding-top: 0;
+  padding-bottom: 0;
+  width: 100%;
 }
 /*********************************************
 MODAL SELECT2
@@ -915,13 +890,6 @@ dDCRUMP
 }
 #breadcrumb li:last-child:after {
   content: '';
-}
-/* LOGIN */
-input[type="text"],
-input[type="password"] {
-  font-weight: 300;
-  font-size: 14px;
-  height: 50px;
 }
 input[type="text"]:focus,
 input[type="password"]:focus {
@@ -1349,10 +1317,10 @@ DATEPICKER
   user-select: none;
 }
 .input-daterange input:first-child {
-  border-radius: 0;
+  border-radius: 1px;
 }
 .input-daterange input:last-child {
-  border-radius: 0;
+  border-radius: 1px;
 }
 /*********************************************
 TABLE
@@ -1420,8 +1388,6 @@ td:last-child {
   /* Firefox 16+, Opera 12.50+ */
 }
 .table tbody tr.active td {
-  /*background-color:       @gs-xlt-blue !important;
-    color: #FFF !important;*/
   background-color: #f0f8ff !important;
   color: #606060;
 }

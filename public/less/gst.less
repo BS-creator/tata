@@ -122,11 +122,6 @@ LOGIN FORM
 #logindiv {
   min-height: 700px;
 }
-input[type="text"],
-input[type="password"],
-input[type="email"] {
-  border-width: 1px !important;
-}
 
 /**********************************************
 TOP NAV
@@ -196,26 +191,26 @@ MODAL
     content: "\f00e\00a0\00a0\00a0";
     font-size: 16px;
 }
-// Form elements
+// Form element
 
-input[type=text] {
-  /*    float: left;*/
-  padding: 15px 12px;
-  margin: 0;
-  font-size: 16px;
-  font-weight: normal;
+input[type=text],
+input[type=password]{
   color: #999;
   border: 1px solid #ccc;
-  /* transition */
-  .transition;
-  opacity: 1;
 }
+
 input:hover,
 input:focus,
 input:active,
 input.active  {
   color: #222;
   border: 1px solid #adadad;
+}
+#login,
+#password {
+  padding-top: 0;
+  padding-bottom: 0;
+  width: 100%;
 }
 
 /*********************************************
@@ -264,15 +259,6 @@ dDCRUMP
 
 #breadcrumb li:last-child:after {
     content: '';
-}
-
-/* LOGIN */
-
-input[type="text"],
-input[type="password"] {
-    font-weight: 300;
-    font-size: 14px;
-    height: 50px;
 }
 
 input[type="text"]:focus,
@@ -606,11 +592,11 @@ DATEPICKER
 }
 
 .input-daterange input:first-child {
-    border-radius: 0;
+    border-radius: 1px;
 }
 
 .input-daterange input:last-child {
-    border-radius: 0;
+    border-radius: 1px;
 }
 
 /*********************************************
@@ -687,9 +673,6 @@ td:last-child {
 }
 
 .table tbody tr.active td {
-    /*background-color:       @gs-xlt-blue !important;
-    color: #FFF !important;*/
-
     background-color: lighten(@gs-blue, 60%) !important;
     color: #606060;
 }
