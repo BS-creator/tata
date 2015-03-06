@@ -796,9 +796,10 @@ GROUP S blue
         FORM ELEMENT
 \*------------------------*/
 .form-type {
-  font-family: 'robotoregular';
-  font-size: 16px;
+  /*  .robotoregular;
+  font-size: 16px;*/
   letter-spacing: 0.05em;
+  font: normal 16px/50px "robotoregular";
 }
 input[type="text"],
 input[type="password"],
@@ -808,9 +809,10 @@ input[type="email"] {
   padding-left: 11.8px;
   height: 50px;
   line-height: 50px;
-  font-family: 'robotoregular';
-  font-size: 16px;
+  /*  .robotoregular;
+  font-size: 16px;*/
   letter-spacing: 0.05em;
+  font: normal 16px/50px "robotoregular";
   background-image: none;
   background-color: transparent;
   border-width: 2px;
@@ -927,9 +929,10 @@ input[type="email"] {
   padding-left: 19px;
   height: 50px;
   line-height: 50px;
-  font-family: 'robotoregular';
-  font-size: 16px;
+  /*  .robotoregular;
+  font-size: 16px;*/
   letter-spacing: 0.05em;
+  font: normal 16px/50px "robotoregular";
   border: 2px solid #bbbbbb;
   border-radius: 0.1rem;
   background-color: transparent;
@@ -962,9 +965,10 @@ input[type="email"] {
   border: 2px solid #bbbbbb;
   border-radius: 0.1rem;
   background-color: transparent;
-  font-family: 'robotoregular';
-  font-size: 16px;
+  /*  .robotoregular;
+  font-size: 16px;*/
   letter-spacing: 0.05em;
+  font: normal 16px/50px "robotoregular";
 }
 #form-create-user button {
   position: relative;
@@ -973,9 +977,10 @@ input[type="email"] {
   margin: 0;
   color: white;
   text-transform: uppercase;
-  font-family: 'robotoregular';
-  font-size: 16px;
+  /*  .robotoregular;
+  font-size: 16px;*/
   letter-spacing: 0.05em;
+  font: normal 16px/50px "robotoregular";
   background-color: #086cc4;
   border: 2px solid #086cc4;
   border-radius: 0.1rem;
@@ -1023,9 +1028,10 @@ input[type="email"] {
   margin: 1.618em 0 0 0;
   padding: 0 19px;
   color: #086cc4;
-  font-family: 'robotoregular';
-  font-size: 16px;
+  /*  .robotoregular;
+  font-size: 16px;*/
   letter-spacing: 0.05em;
+  font: normal 16px/50px "robotoregular";
   background-color: transparent;
   border: 2px solid #086cc4;
   border-radius: 0.1rem;
@@ -1066,12 +1072,14 @@ input[type="email"] {
   display: inline-block;
   vertical-align: middle;
   margin: 0;
-  padding: 11.8px 30.1px;
+  padding: 0 30.1px;
   height: 50px;
+  line-height: 48px;
   text-align: center;
-  font-family: 'robotoregular';
-  font-size: 16px;
+  /*  .robotoregular;
+  font-size: 16px;*/
   letter-spacing: 0.05em;
+  font: normal 16px/50px "robotoregular";
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
@@ -1152,12 +1160,14 @@ input[type="email"] {
   display: inline-block;
   vertical-align: middle;
   margin: 0;
-  padding: 11.8px 30.1px;
+  padding: 0 30.1px;
   height: 50px;
+  line-height: 48px;
   text-align: center;
-  font-family: 'robotoregular';
-  font-size: 16px;
+  /*  .robotoregular;
+  font-size: 16px;*/
   letter-spacing: 0.05em;
+  font: normal 16px/50px "robotoregular";
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
@@ -1217,12 +1227,14 @@ input[type="email"] {
   display: inline-block;
   vertical-align: middle;
   margin: 0;
-  padding: 11.8px 30.1px;
+  padding: 0 30.1px;
   height: 50px;
+  line-height: 48px;
   text-align: center;
-  font-family: 'robotoregular';
-  font-size: 16px;
+  /*  .robotoregular;
+  font-size: 16px;*/
   letter-spacing: 0.05em;
+  font: normal 16px/50px "robotoregular";
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
@@ -1277,12 +1289,14 @@ input[type="email"] {
   display: inline-block;
   vertical-align: middle;
   margin: 0;
-  padding: 11.8px 30.1px;
+  padding: 0 30.1px;
   height: 50px;
+  line-height: 48px;
   text-align: center;
-  font-family: 'robotoregular';
-  font-size: 16px;
+  /*  .robotoregular;
+  font-size: 16px;*/
   letter-spacing: 0.05em;
+  font: normal 16px/50px "robotoregular";
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
@@ -1337,12 +1351,14 @@ input[type="email"] {
   display: inline-block;
   vertical-align: middle;
   margin: 0;
-  padding: 11.8px 30.1px;
+  padding: 0 30.1px;
   height: 50px;
+  line-height: 48px;
   text-align: center;
-  font-family: 'robotoregular';
-  font-size: 16px;
+  /*  .robotoregular;
+  font-size: 16px;*/
   letter-spacing: 0.05em;
+  font: normal 16px/50px "robotoregular";
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
