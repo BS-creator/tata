@@ -419,7 +419,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
           params.data.fileID.indexOf('&') + 1,
           params.data.fileID.indexOf('@'));
 
-        window.location.href = TransferServerURL + 'file/' + tokenTransfer + '/' + fileID + '/' + filename;
+        window.location.href = TransferServerURL + 'file/' + fileID + '/' + filename;
 
         incrementAllSelectedRows();
 
