@@ -63,7 +63,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     refDocUsed = [], // Data
     numberCol = 19, //number of column in the table
     username = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '',
-    password = '',
     tokenTransfer = sessionStorage.getItem('tokenTransfer'),
     selectMenu = 'ROOT',
     VM = {}, // ==> View Model in KnockOut.js
@@ -71,7 +70,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     /*** HELPER ***/
 
     getPDFjsURL = function(serverURL, fileID, filename) {
-      return TransferBaseURL + '../cdn/pdfjs/1.0.907/web/viewer.html?file=' + serverURL + 'file/' + fileID + '/' + filename;
+      return TransferBaseURL + '../cdn/pdfjs/1.0.1149/web/viewer.html?file=' + serverURL + 'file/' + fileID + '/' + filename;
     },
 
     redirectToLogin = function() {
@@ -368,21 +367,26 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
     dlLabel = function(e) {
-      //TODO
       var $this = $(this),
         filename = $this.data('filename'),
         fileID = $this.data('file-id'),
         url = TransferServerURL + 'file/' + fileID + '/' + filename;
 
-      if (filename && (Utils.endsWith(filename, '.PDF') || Utils.endsWith(filename, '.pdf'))) {
-        url = getPDFjsURL(TransferServerURL, fileID, filename);
-        window.open(url, '_blank');
-      } else {
+      /** TODO
+       * PDF.js does not send cookie!!!!
+       * Don't have time to debug....
+       * temporarily removing it
+       * */
+
+      //if (filename && (Utils.endsWith(filename, '.PDF') || Utils.endsWith(filename, '.pdf'))) {
+      // url = getPDFjsURL(TransferServerURL, fileID, filename);
+      // window.open(url, '_blank');
+      //} else {
         Utils.smessage(i18n[lang].file.dl, '', 'warning', 4000);
 
         //$this.attr('href', url);
         window.location.href = url;
-      }
+      //}
       incrementCounter($this.closest('tr').find('a').first());
       e.stopImmediatePropagation();
     },
