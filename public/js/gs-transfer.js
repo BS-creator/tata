@@ -1638,37 +1638,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
       }, 500);
     },
 
-    /***
-     * set token for FTP
-     * ***/
-    portalCnx = function() {
-
-      var url = TransferServerURL + 'login/portal/';
-      if (tokenPortal && !tokenTransfer) {
-        return $.ajax({
-          type:     'POST',
-          url:      url,
-          data:     {tokenPortal: tokenPortal},
-          success:  function(data) {
-            tokenTransfer = (data ? data.token : '');
-            sessionStorage.setItem('tokenTransfer', tokenTransfer);
-          },
-          error:    function() {
-            AjaxData = [];
-            hideLoading();
-            Utils.errorMessage(i18n[lang].errorCnx, 4000);
-            setTimeout(function() {
-              redirectToLogin();
-            }, 4000);
-          },
-          dataType: 'json'
-        });
-      } else {
-        console.log('>>> no Token from Portal received...');
-        //Utils.errorMessage('Pas de token du Portail recu...', 4000);
-      }
-    },
-
     /****************************************************
      * MAIN
      * */
