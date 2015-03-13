@@ -170,26 +170,15 @@ var Utils = (function() {
         sessionStorage.setItem('TransferBaseURL', '//localhost:4000/transfer/');
         sessionStorage.setItem('TransferServerURL', '//localhost:8019/');
         //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-        /*if (!localStorage.country) {            localStorage.setItem('country', 'BE');}*/
-      } else if (_.contains(url, '172.20.20.64')) {
-        if (!sessionStorage.TransferBaseURL) { sessionStorage.setItem('TransferBaseURL', '//172.20.20.64:4000/');}
-        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//172.20.20.64:8019/');}
-        //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane/');
-        /*if (!localStorage.country) {            localStorage.setItem('country', 'FR');}*/
-      } else if (_.contains(url, 'pdevg1')) {
-        if (!sessionStorage.TransferBaseURL) { sessionStorage.setItem('TransferBaseURL', '//pdevg1:4000/');}
-        if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//pdevg1:8019');}
-        /*if (!localStorage.country) {            localStorage.setItem('country', 'FR');}*/
-
         /**************
          * DEV & QA
          **************/
       } else if (_.contains(url, 'deviapps')) {
-        if (!sessionStorage.TransferBaseURL) { sessionStorage.setItem('TransferBaseURL', '//deviapps.groups.be/prestaweb/transfer/');}
+        sessionStorage.setItem('TransferBaseURL', '//deviapps.groups.be/prestaweb/transfer/');
         if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane-transfer/');}
         /*if (!localStorage.country) {            localStorage.setItem('country', 'FR');}*/
       } else if (_.contains(url, 'qaiapps')) {
-        if (!sessionStorage.TransferBaseURL) { sessionStorage.setItem('TransferBaseURL', '//qaiapps.groups.be/transfer/');}
+        sessionStorage.setItem('TransferBaseURL', '//qaiapps.groups.be/transfer/');
         if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//qaiapps.groups.be/ariane-transfer/');}
         /*if (!localStorage.country) {            localStorage.setItem('country', 'BE');}*/
 
@@ -197,7 +186,7 @@ var Utils = (function() {
          * PRODUCTION: BELGIUM
          * **************/
       } else if (_.contains(url, 'transfer.groups.be')) {
-        if (!sessionStorage.TransferBaseURL) { sessionStorage.setItem('TransferBaseURL', '//transfer.groups.be/transfer/');}
+        sessionStorage.setItem('TransferBaseURL', '//transfer.groups.be/transfer/');
         if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//transfer.groups.be/ariane-transfer/');}
         /*if (!localStorage.country) {            localStorage.setItem('country', 'BE');}*/
       }

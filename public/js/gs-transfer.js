@@ -3,16 +3,16 @@
 //SUPPORT FOR PWLIB TOKEN ADDED STRAIGHT INTO JQUERY
 
 /*var $ajax = $.ajax;
-$.ajax = function(params) {
-  params.headers = params.headers || {};
-  params.headers['Authorization'] = 'Groups groups_token=' + (sessionStorage.token || '00');
-  params.headers['Credentials'] = 'GroupsFTP username=' + sessionStorage.username + ' password=' + sessionStorage.jbs;
-  return $ajax.apply($, arguments);
-};*/
+ $.ajax = function(params) {
+ params.headers = params.headers || {};
+ params.headers['Authorization'] = 'Groups groups_token=' + (sessionStorage.token || '00');
+ params.headers['Credentials'] = 'GroupsFTP username=' + sessionStorage.username + ' password=' + sessionStorage.jbs;
+ return $ajax.apply($, arguments);
+ };*/
 
 /*code to send cookie with every request */
-$.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-  options.crossDomain ={
+$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+  options.crossDomain = {
     crossDomain: true
   };
   options.xhrFields = {
@@ -74,13 +74,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
     },
 
     redirectToLogin = function() {
-
-      if (_.contains(TransferBaseURL, 'online.') || (sessionStorage.token && sessionStorage.user)) {
-        window.location = TransferBaseURL.replace(/transfer\/.*$/i, 'portal/');
-      } else {
-        window.location = TransferBaseURL;
-      }
-
+      window.location = TransferBaseURL;
     },
 
     getUsedDocRef = function(data) {
@@ -130,9 +124,7 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
 
       return {
         countFile: countFile,
-        data:      {
-          fileID:     listID,
-        }
+        data:      {fileID: listID}
       };
     },
 
@@ -378,15 +370,15 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
        * temporarily removing it
        * */
 
-      //if (filename && (Utils.endsWith(filename, '.PDF') || Utils.endsWith(filename, '.pdf'))) {
-      // url = getPDFjsURL(TransferServerURL, fileID, filename);
-      // window.open(url, '_blank');
-      //} else {
+      if (filename && (Utils.endsWith(filename, '.PDF') || Utils.endsWith(filename, '.pdf'))) {
+        url = getPDFjsURL(TransferServerURL, fileID, filename);
+        window.open(url, '_blank');
+      } else {
         Utils.smessage(i18n[lang].file.dl, '', 'warning', 4000);
 
         //$this.attr('href', url);
         window.location.href = url;
-      //}
+      }
       incrementCounter($this.closest('tr').find('a').first());
       e.stopImmediatePropagation();
     },
