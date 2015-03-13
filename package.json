@@ -1,7 +1,7 @@
 {
   "name": "transfer",
   "repo": "transfer",
-  "version": "2.0.14",
+  "version": "2.0.15",
   "devDependencies": {
     "autoprefixer": "^3.1.0",
     "cli-color": "^0.3.2",
@@ -130,12 +130,12 @@
     "validateIndentation": 2
   },
   "build": {
-    "tag": "2.0.14",
-    "library": "1.1.36",
+    "tag": "2.0.15",
+    "library": "1.1.37",
     "framework": "1.1.8",
     "env": "qa",
     "branch": "master",
     "user": "Julien Bisconti",
-    "date": "2015-03-12T08:01:10.145Z"
+    "date": "2015-03-13T07:39:03.201Z"
   }
 }
