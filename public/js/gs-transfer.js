@@ -364,12 +364,6 @@ var gsTransfer = (function(_, moment, introJs, swal, Utils) {
         fileID = $this.data('file-id'),
         url = TransferServerURL + 'file/' + fileID + '/' + filename;
 
-      /** TODO
-       * PDF.js does not send cookie!!!!
-       * Don't have time to debug....
-       * temporarily removing it
-       * */
-
       if (filename && (Utils.endsWith(filename, '.PDF') || Utils.endsWith(filename, '.pdf'))) {
         url = getPDFjsURL(TransferServerURL, fileID, filename);
         window.open(url, '_blank');
