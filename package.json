@@ -28,6 +28,7 @@
     "grunt-processhtml": "^0.3.6",
     "grunt-reduce": "^1.0.0",
     "grunt-rev": "~0.1.0",
+    "grunt-rsync": "^0.6.2",
     "grunt-scp": "^0.1.8",
     "grunt-string-replace": "^1.0.0",
     "grunt-svgmin": "~0.4.0",
