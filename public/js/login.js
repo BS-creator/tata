@@ -68,9 +68,8 @@ $(function(swal, _, Utils) {
         if (data.token) {
           sessionStorage.setItem('tokenTransfer', data.token);
           sessionStorage.setItem('username', credentials.login.toUpperCase());
-          //sessionStorage.setItem('jbs', credentials.password);
           //redirect to Transfer;
-          window.location = TransferBaseURL + 'transferApp.html';
+          window.location = 'transferApp.html';
         }
       },
       dataType: 'json',
@@ -81,12 +80,6 @@ $(function(swal, _, Utils) {
         $('#loader').hide();
         if (xhr.status === 403) {
           Utils.errorMessage('Login / password incorrect.', 3000);
-          /*swal({
-           title: "ERROR",
-           text : "Login / password incorrect.",
-           type : "error",
-           timer: 3000
-           });*/
         } else {
           Utils.errorMessage('Connection problem.', 3000);
         }
