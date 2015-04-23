@@ -615,7 +615,7 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
 **********************************************/
 @media (max-width: 1154px) {
   div.btn-group:nth-child(4) {
-    margin-top: 4.55px;
+    margin-top: 5px;
     margin-left: 0 !important;
     float: left;
   }
@@ -626,14 +626,14 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
   .reloadme,
   #help,
   #toggle-side-menu {
-    margin-top: 4.55px;
+    margin-top: 5px;
     margin-left: 0 !important;
     float: left;
   }
 }
 @media (max-width: 350px) {
   #searchBox {
-    margin-top: 4.55px;
+    margin-top: 5px;
     margin-left: 0 !important;
     float: left;
   }
@@ -675,8 +675,8 @@ body {
 HEADER
 ****************************************************/
 header {
-  height: 80.9px;
-  line-height: 80.9px;
+  height: 80px;
+  line-height: 80px;
   background-color: #0064bb;
 }
 ul.lang {
@@ -1735,8 +1735,8 @@ table tr th .pw-btn-group-th .pw-btn-th,
   border-color: #09e671;
 }
 #validation {
-  margin-top: 19.1px;
-  padding-left: 11.8px;
+  margin-top: 20px;
+  padding-left: 12px;
 }
 #validation a,
 #btn-upload-div {
