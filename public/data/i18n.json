@@ -23,7 +23,7 @@
     "breadrumb":       "Tous les fichiers triés par \"nouveaux\" et \"non téléchargés\"",
     "result":          "Résultat: ",
     "url":             {
-      "table":      "../cdn/DataTables/1.10.4/resources/language/FR.json",
+      "table":      "../cdn/DataTables/1.10.4/resources/language/fr.json",
       "datepicker": "../cdn/bootstrap/locale/bootstrap-datepicker.fr.js"
     },
     "dirlist":         {
