@@ -2012,7 +2012,6 @@ header .btn-group {
   height: 80px;
 }
 .list-inline > li .btn-group {
-  line-height: 2.61803;
   vertical-align: inherit;
 }
 .pull-left {
@@ -2298,7 +2297,7 @@ body > header li.brand *,
 @keyframes zoom-in-out {
   from {
     transform: scale(1);
-    color: #A093AF;
+    color: white;
   }
   20% {
     transform: scale(1.2);
@@ -2306,7 +2305,7 @@ body > header li.brand *,
   }
   30% {
     transform: scale(1);
-    color: #A093AF;
+    color: white;
   }
   to {
     transform: scale(1);
@@ -2315,7 +2314,7 @@ body > header li.brand *,
 @-webkit-keyframes zoom-in-out {
   from {
     -webkit-transform: scale(1);
-    color: #A093AF;
+    color: white;
   }
   20% {
     -webkit-transform: scale(1.2);
@@ -2323,7 +2322,7 @@ body > header li.brand *,
   }
   30% {
     -webkit-transform: scale(1);
-    color: #A093AF;
+    color: white;
   }
   to {
     -webkit-transform: scale(1);

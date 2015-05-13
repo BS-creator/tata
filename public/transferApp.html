@@ -260,36 +260,6 @@
           <div id="sidenav">
 
           </div>
-          <!-- BEGIN: Underscore Template Definition. -->
-          <script id="menuFR" type="text/template" class="template">
-            <ul>
-
-              <li class="level1">
-                <a id="root" href="#">[[allDocs]]</a>
-                <ul>
-                  <li id="PPP" class="level0">&nbsp;&nbsp;Paie &amp; Post-Paie
-                    [[catPPP]]</li>
-                  <li id="GES" class="level0">&nbsp;&nbsp;Gestion des entrées et sorties</li>
-                  <li id="GAR" class="level0">&nbsp;&nbsp;Gestion des arrêts
-                    [[catGAR]]</li>
-                  <li id="GAD" class="level0">&nbsp;&nbsp;Gestion administrative
-                    [[catGAD]]</li>
-                  <li>
-                    <ul><!--to split in previous folders-->
-                      [[categoryNode]]
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li id="upload">
-                <a href="#">[[uploadText]]</a>
-              </li>
-              <li id="validation">
-                <a href="#">[[validationText]]</a>
-              </li>
-            </ul>
-          </script>
-          <!-- END: Underscore Template Definition. -->
 
           <!-- BEGIN: Underscore Template Definition. -->
           <script id="menuL1" type="text/template" class="template">
@@ -314,7 +284,7 @@
           <!-- BEGIN: Underscore Template Definition. -->
           <script id="menuL2" type="text/template" class="template">
             <li class="level2" data-category="[[categoryNumber]]">
-              <a href="#">[[categoryNumber]] - [[categoryName]]</a>
+              <a href="#">[[categoryNumber]] - [[categoryName]] </a>
               <ul>
                 [[ leafNode ]]
               </ul>
@@ -325,7 +295,10 @@
           <!-- BEGIN: Underscore Template Definition. -->
           <script id="menuL3" type="text/template" class="template">
             <li id="[[referenceDocument]]" data-refdoc="[[referenceDocument]]" class="level3">
-              <a href="#">[[referenceDocument]] - [[typeDocument]]</a>
+              <a href="#">
+                <span class="pull-left">[[referenceDocument]] - [[typeDocument]]</span>
+                <span class="badge pull-right">[[countFiles]]</span>
+              </a>
             </li>
           </script>
           <!-- END: Underscore Template Definition. -->
@@ -350,7 +323,7 @@
               <div class="filter">
                 <!--filtrer par-->
                 <div class="btn-group pull-left">
-                  <button id="filterby" type="button" class="btn btn-default dropdown-toggle"
+                  <button id="filterby" type="button" class="btn btn-portal-default dropdown-toggle"
                           data-toggle="dropdown">
                     &nbsp;&nbsp;&nbsp;
                   </button>
@@ -378,13 +351,13 @@
 
               <!--refresh & toggle config table-->
               <div class="btn-group pull-right ml-s">
-                <button type="button" class="btn btn-default reloadme" title="refresh">
+                <button type="button" class="btn btn-portal-default reloadme" title="refresh">
                   &nbsp;&nbsp;&nbsp;
                 </button>
-                <button id="help" type="button" class="btn btn-default" title="help">
+                <button id="help" type="button" class="btn btn-portal-default" title="help">
                   &nbsp;&nbsp;&nbsp;
                 </button>
-                <button id="toggle-side-menu" type="button" class="btn btn-default">
+                <button id="toggle-side-menu" type="button" class="btn btn-portal-default">
                   &nbsp;&nbsp;&nbsp;
                 </button>
               </div>
@@ -543,7 +516,7 @@
 <script src="../cdn/jquery/jquery-2.1.1.min.js"></script>
 <script src="../cdn/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="../cdn/lodash.min.js"></script>
-<script src="js/knockout-3.3.0.js"></script>
+<!--<script src="js/knockout-3.3.0.js"></script>-->
 <script src="../cdn/moment/moment-with-langs.min-2.5.0.js"></script>
 <script src="../cdn/moment/moment-range/1.0.5/lib/moment-range.min.js"></script>
 <script src="../cdn/DataTables/1.10.4/media/js/jquery.dataTables.1.10.4.min.js"></script>
