@@ -12,29 +12,31 @@
                     RESPONSIVE
 **********************************************/
 @media (max-width: 1154px) {
-    div.btn-group:nth-child(4){
-        margin-top: @xxs;
-        margin-left: 0 !important;
-        float: left;
-    }
+  div.btn-group:nth-child(4) {
+    margin-top: @xxs;
+    margin-left: 0 !important;
+    float: left;
+  }
 }
+
 @media (max-width: 650px) {
-    #datepicker,
-    #s2id_clients,
-    .reloadme,
-    #help,
-    #toggle-side-menu {
-        margin-top: @xxs;
-        margin-left: 0 !important;
-        float: left;
-    }
+  #datepicker,
+  #s2id_clients,
+  .reloadme,
+  #help,
+  #toggle-side-menu {
+    margin-top: @xxs;
+    margin-left: 0 !important;
+    float: left;
+  }
 }
+
 @media (max-width: 350px) {
-    #searchBox {
-        margin-top: @xxs;
-        margin-left: 0 !important;
-        float: left;
-    }
+  #searchBox {
+    margin-top: @xxs;
+    margin-left: 0 !important;
+    float: left;
+  }
 }
 
 /***************************************************
@@ -46,10 +48,12 @@ body {
   margin: 0;
   font-size: 12px;
 }
+
 .collapse-newspaper,
 .collapse-notification {
   display: none !important;
 }
+
 #main {
   position: relative;
   width: 100%;
@@ -58,12 +62,15 @@ body {
   margin: 0 auto -80px;
   padding-top: 10px;
 }
+
 #footer-grave {
   height: 60px;
 }
+
 #footer {
   height: 60px;
 }
+
 ////////////////////////////////FOOTER
 
 body {
@@ -77,39 +84,39 @@ body {
 HEADER
 ****************************************************/
 header {
-    height: @xxl;
-    line-height: @xxl;
-    background-color: #0064bb;
+  height: @xxl;
+  line-height: @xxl;
+  background-color: #0064bb;
 }
 
 ul.lang {
-    margin: 0;
-    padding: 0 19px 0 0;
-    color: white;
-    letter-spacing: .1em;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
+  margin: 0;
+  padding: 0 19px 0 0;
+  color: white;
+  letter-spacing: .1em;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
 }
 
 #header-logo {
-    padding-left: 10px;
+  padding-left: 10px;
 }
 
 .lang a {
-    color: #00306a; /* @gs-dk-blue */
+  color: #00306a; /* @gs-dk-blue */
 }
 
 .lang a:hover,
 .lang a:focus,
 .lang a:active {
-    color: #479fed;
+  color: #479fed;
 }
 
 a.default-lang {
-    color: #479fed;
-    border: 1px solid #479fed;
-    padding: 2px;
+  color: #479fed;
+  border: 1px solid #479fed;
+  padding: 2px;
 }
 
 #logindiv {
@@ -128,15 +135,15 @@ TOP NAV
 ***********************************************/
 #top-nav ul,
 td#top-nav ul:not(i) {
-    margin: 0;
-    height: 50px;
-    line-height: 50px;
-    font-size: 16px;
-    color: #a0a0a0;
+  margin: 0;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  color: #a0a0a0;
 }
 
 #top-nav .univers-name {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 #signout,
@@ -152,15 +159,16 @@ td#top-nav ul:not(i) {
 #toggle-side-menu:focus,
 #toggle-side-menu:active,
 #toggle-side-menu.active {
-    color: #505050;
+  color: #505050;
 }
 
 /**********************************************
 MODAL
 **********************************************/
 .modal-content {
-    border-radius: 2px;
+  border-radius: 2px;
 }
+
 .modal-body {
   .notification {
     margin: 30px auto 0;
@@ -169,32 +177,34 @@ MODAL
     font-size: 16px;
   }
 }
+
 #uploadForm {
   div.dir-list {
-      text-align: left;
-      float: none;
-      margin: 0 auto 30px;
-      max-width: 191px;
-      label {
-        font-weight: normal;
-        font-size: 14px;
-      }
+    text-align: left;
+    float: none;
+    margin: 0 auto 30px;
+    max-width: 191px;
+    label {
+      font-weight: normal;
+      font-size: 14px;
+    }
   }
 }
 
 .progress {
-    display: none;
+  display: none;
 }
 
 .file-input-wrapper:before {
-    font-family: "FontAwesome";
-    content: "\f00e\00a0\00a0\00a0";
-    font-size: 16px;
+  font-family: "FontAwesome";
+  content: "\f00e\00a0\00a0\00a0";
+  font-size: 16px;
 }
+
 // Form element
 
 input[type=text],
-input[type=password]{
+input[type=password] {
   color: #999;
   border: 1px solid #ccc;
 }
@@ -202,10 +212,11 @@ input[type=password]{
 input:hover,
 input:focus,
 input:active,
-input.active  {
+input.active {
   color: #222;
   border: 1px solid #adadad;
 }
+
 #login,
 #password {
   padding-top: 0;
@@ -222,24 +233,28 @@ MODAL SELECT2
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(255,255,255,0.9);
+  background-color: rgba(255, 255, 255, 0.9);
   z-index: 99;
   .transition;
 }
+
 .modal-select2 {
   display: none;
   .transition;
 }
+
 #clients {
   position: relative;
 }
+
 /**********************************************
 FLITER
 **********************************************/
 #filterby.active {
-  color: darken(@color-9,2);
+  color: darken(@color-9, 2);
   box-shadow: none;
 }
+
 /**********************************************
 dDCRUMP
 **********************************************/
@@ -249,59 +264,60 @@ dDCRUMP
 }
 
 #breadcrumb li {
-    margin: 0;
+  margin: 0;
 }
 
 #breadcrumb li:after {
-    content: '\00a0/';
+  content: '\00a0/';
 }
 
 #breadcrumb li:last-child:after {
-    content: '';
+  content: '';
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.06) inset, 0px 0px 8px rgba(102, 175, 233, 0.45);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.06) inset, 0px 0px 8px rgba(102, 175, 233, 0.45);
 }
-
 
 /**********************************************
 LOADER
 ***********************************************/
 #loader {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    /* overflow: show; */
-    margin: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+  display: none;
+  position: fixed;
+  z-index: 999;
+  /* overflow: show; */
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 #loader p {
-    position: fixed;
-    z-index: 1000;
-    height: 2em;
-    width: 2em;
-    margin: auto;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+  position: fixed;
+  z-index: 1000;
+  height: 2em;
+  width: 2em;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
+
 /********************************************
                 SIDENAV
 ********************************************/
 #sidenav {
-margin-top: 24px;
+  margin-top: 24px;
   padding: 0;
   ul {
     padding: 0;
   }
 }
+
 .level0 {
   font-size: 14px;
   line-height: 50px;
@@ -317,7 +333,7 @@ margin-top: 24px;
   &:hover,
   &:focus,
   &:active {
-    background-color: lighten(@color-17,6);
+    background-color: lighten(@color-17, 6);
   }
   &.active {
     &:before {
@@ -326,7 +342,11 @@ margin-top: 24px;
     }
   }
 }
-#upload { margin-top: 30px !important; }
+
+#upload {
+  margin-top: 30px !important;
+}
+
 #upload a,
 li.level1 > a {
   line-height: 50px;
@@ -335,6 +355,7 @@ li.level1 > a {
   /* transition */
   .transition;
 }
+
 #upload a,
 li[class^="level"] > a {
   display: block;
@@ -344,35 +365,41 @@ li[class^="level"] > a {
   text-overflow: ellipsis;
   cursor: pointer;
 }
+
 #upload a,
 li.level1 > a {
   padding: 0 0 0 19px;
   background-color: @color-18;
   color: #FFF;
 }
+
 #upload:hover > a,
 #upload:focus > a,
 #upload:active > a,
 li.level1:hover > a,
 li.level1:focus > a,
 li.level1:active > a {
-  background-color: lighten(@color-18,6);
+  background-color: lighten(@color-18, 6);
 }
+
 #upload:active > a,
 li.level1:active > a,
 #upload.active > a,
 li.level1.active > a {
-  background-color: lighten(@color-18,8);
+  background-color: lighten(@color-18, 8);
 }
+
 li.level2 > a {
   padding: 9px 0px 9px 30px;
   background-color: #f2f2f2;
   color: #606060;
 }
+
 li.level2 > a,
 li.level3 > a {
   .transition;
 }
+
 li.level2:hover > a,
 li.level2:focus > a,
 li.level3:hover > a,
@@ -380,13 +407,15 @@ li.level3:focus > a {
   border-left: 3px solid @color-18;
   color: @gs-blue;
 }
+
 li.level2:active > a,
 li.level2.active > a,
 li.level3:active > a,
 li.level3.active > a {
-  border-left: 3px solid lighten(@color-18,8);
+  border-left: 3px solid lighten(@color-18, 8);
   color: @gs-blue;
 }
+
 li.level3 > a {
   padding: 0 0 0 50px;
   line-height: 30px;
@@ -404,10 +433,12 @@ li.level2 > a {
   font-family: FontAwesome;
   content: "\f015\00a0\00a0";
 }
+
 #upload a:before {
   font-family: FontAwesome;
   content: "\f093\00a0\00a0";
 }
+
 #validation {
   display: none;
   a:before {
@@ -416,7 +447,7 @@ li.level2 > a {
   }
 }
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
   li.level3 > a {
     padding: 9px 0px 9px 50px;
   }
@@ -432,7 +463,7 @@ li.level2 > a {
   position: absolute;
   bottom: 0;
   height: 100%;
-  background-color:   @gs-blue;
+  background-color: @gs-blue;
   color: white;
 }
 
@@ -441,23 +472,26 @@ li.level2 > a {
   line-height: @xl;
   marin-bottom: 1px;
 }
+
 .side-menu-head-icon {
   line-height: 74px;
   marin-bottom: 1px;
 }
+
 .side-menu-head-icon:hover,
 .side-menu-head-icon:focus,
 .side-menu-head-icon:active,
 .side-menu-head-icon.active {
-  background-color:   darken(@gs-lt-blue, 10%);
+  background-color: darken(@gs-lt-blue, 10%);
 }
+
 .side-menu-head,
 .side-menu-head-icon {
   margin: 0px;
   font-size: 16px;
   text-transform: uppercase;
-  background-color:   @gs-blue;
-  color:              lighten(@gs-lt-blue,30%);
+  background-color: @gs-blue;
+  color: lighten(@gs-lt-blue, 30%);
 }
 
 .side-menu-head-icon {
@@ -465,9 +499,11 @@ li.level2 > a {
   color: white;
   opacity: .6;
 }
+
 .side-menu-head-icon i {
   .transition;
 }
+
 .side-menu-head-icon:hover,
 .side-menu-head-icon:focus,
 .side-menu-head-icon:active,
@@ -480,11 +516,13 @@ li.level2 > a {
   margin: 1px 0 0 0;
   padding: 0;
 }
+
 .side-menu-list > li.active:before {
   font-size: 14px;
   font-family: 'FontAwesome';
   content: "\f00c\00a0\00a0\00a0";
 }
+
 .side-menu-list > li:before {
   font-size: 14px;
   font-family: 'FontAwesome';
@@ -500,35 +538,38 @@ li.level2 > a {
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 14px;
-  color:                  lighten(@gs-lt-blue, 30%);
-  background-color:        @gs-blue;
+  color: lighten(@gs-lt-blue, 30%);
+  background-color: @gs-blue;
   cursor: pointer;
   .transition;
 }
+
 .side-menu-list > li:hover,
 .side-menu-list > li:focus {
   background-color: darken(@gs-lt-blue, 10%);
   .transition;
 }
-.side-menu-list > li.active {
-  background-color:       @gs-lt-blue;
-}
 
+.side-menu-list > li.active {
+  background-color: @gs-lt-blue;
+}
 
 /*          INIT CONF            */
 #init-conf:before {
   font-family: "FontAwesome";
   content: "\f192\00a0\00a0\00a0";
 }
+
 #init-conf {
   border: 0;
-  background-color:       darken(@gs-lt-blue, 10%);
+  background-color: darken(@gs-lt-blue, 10%);
 }
+
 #init-conf:hover,
 #init-conf:focus,
 #init-conf:active,
 #init-conf.active {
-  background-color:       @gs-lt-blue;
+  background-color: @gs-lt-blue;
   opacity: 1;
 }
 
@@ -550,12 +591,13 @@ NAV
 #signout i {
   font-size: 18px;
 }
+
 /*********************************************
 CONTENT
 *********************************************/
 
 #contentTable {
-    overflow: hidden;
+  overflow: hidden;
   #searchBox {
     max-width: 130px;
   }
@@ -570,32 +612,32 @@ DATEPICKER
 ****************************************************/
 
 #datepicker input {
-    float: left;
-    max-width: 130px;
-    text-align: center;
+  float: left;
+  max-width: 130px;
+  text-align: center;
 }
 
 .dp-to {
-    float: left;
-    box-shadow: 0;
-    height: 50px;
-    margin: 0;
-    padding: 14px 11px 14px 11px;
-    cursor: default;
-    font-size: 14px;
-    background-color: #f2f2f2;
-    color: #888;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    .unselectable;
+  float: left;
+  box-shadow: 0;
+  height: 50px;
+  margin: 0;
+  padding: 14px 11px 14px 11px;
+  cursor: default;
+  font-size: 14px;
+  background-color: #f2f2f2;
+  color: #888;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  .unselectable;
 }
 
 .input-daterange input:first-child {
-    border-radius: 1px;
+  border-radius: 1px;
 }
 
 .input-daterange input:last-child {
-    border-radius: 1px;
+  border-radius: 1px;
 }
 
 /*********************************************
@@ -603,249 +645,263 @@ TABLE
 *********************************************/
 
 .ColVis {
-    display: none;
+  display: none;
 }
 
 .dataTables_scroll {
-    border: 1px solid #ccc;
+  border: 1px solid #ccc;
 }
 
 .dataTables_wrapper.no-footer .dataTables_scrollBody {
-    border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
 
 table.table,
 #tableID {
-    margin: 0 !important;
+  margin: 0 !important;
 }
 
 th {
-    padding: 15px 0;
-    border-right: 1px solid #f2f2f2;
+  padding: 15px 0;
+  border-right: 1px solid #f2f2f2;
 }
 
 /* <th> text default/active colors  */
 .sorting,
 .sorting_disabled {
-    color: #9d9d9d;
+  color: #9d9d9d;
 }
 
 .sorting_asc,
 .sorting_desc {
-    color: #333;
+  color: #333;
 }
 
 th:last-child {
-    border-right: none;
+  border-right: none;
 }
 
 table.dataTable thead th,
 table.dataTable thead td {
-    padding: 10px 18px;
-    border-bottom: 1px solid #ccc;
+  padding: 10px 18px;
+  border-bottom: 1px solid #ccc;
 }
 
 td {
-    max-width: 8%;
-    /* add ... */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  max-width: 8%;
+  /* add ... */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 .refdoc {
   max-width: 60px !important;
 }
+
 td:last-child {
-    border-right: none;
+  border-right: none;
 }
 
 .table tbody tr.active:hover td,
 .table tbody tr.active:focus td {
-    /*background-color:       @gs-lt-blue !important;
-    color: #FFF !important;*/
-    background-color: lighten(@gs-blue, 55%) !important;
-    color: #606060;
-    -webkit-transition: all 0.2s ease; /* Safari 3.2+, Chrome */
-    -moz-transition: all 0.2s ease; /* Firefox 4-15 */
-    -o-transition: all 0.2s ease; /* Opera 10.5-12.00 */
-    transition: all 0.2s ease; /* Firefox 16+, Opera 12.50+ */
+  /*background-color:       @gs-lt-blue !important;
+  color: #FFF !important;*/
+  background-color: lighten(@gs-blue, 55%) !important;
+  color: #606060;
+  -webkit-transition: all 0.2s ease; /* Safari 3.2+, Chrome */
+  -moz-transition: all 0.2s ease; /* Firefox 4-15 */
+  -o-transition: all 0.2s ease; /* Opera 10.5-12.00 */
+  transition: all 0.2s ease; /* Firefox 16+, Opera 12.50+ */
 }
 
 .table tbody tr.active td {
-    background-color: lighten(@gs-blue, 60%) !important;
-    color: #606060;
+  background-color: lighten(@gs-blue, 60%) !important;
+  color: #606060;
 }
 
 .table tbody tr.active td a,
 .table tbody tr.active td i:not(1),
 .table tbody tr.active td small {
-    color: #656565;
+  color: #656565;
 }
 
 /* define height */
 table.dataTable thead th {
-    padding: 16px 18px;
+  padding: 16px 18px;
 }
 
 /* Icon check */
 th:first-child,
 td:first-child {
-    text-align: center;
-    color: #989898;
-    font-size: 12px;
+  text-align: center;
+  color: #989898;
+  font-size: 12px;
 }
 
 tr.active td:first-child i.fa-check,
 tr.active td:first-child i.fa-check-square-o {
-    color: @gs-green !important;
+  color: @gs-green !important;
 }
 
 /*********************************************
 PAGINATION
 **********************************************/
 .page {
-    margin: 19.1px 0;
+  margin: 19.1px 0;
 }
 
 .dataTables_wrapper .dataTables_paginate {
-    float: none;
-    padding-top: 0;
-    text-align: center;
+  float: none;
+  padding-top: 0;
+  text-align: center;
 }
 
 div.dataTables_paginate ul.pagination {
-    margin: 0px;
+  margin: 0px;
 }
 
 .pagination {
-    border-radius: 0 !important;
+  border-radius: 0 !important;
 }
 
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 .pagination > li > a {
-    padding: 9px 14px;
+  padding: 9px 14px;
 }
 
 .pagination > li.active,
 .pagination > li > a,
 .pagination > li > span {
-    color: #378fdd;
+  color: #378fdd;
 }
 
 .bottom {
-    display: table;
-    text-align: center !important;
-    width: 100%;
+  display: table;
+  text-align: center !important;
+  width: 100%;
 }
 
 .dataTables_wrapper .dataTables_length {
-    float: none;
+  float: none;
 }
 
 div.dataTables_length label {
-    float: none;
-    text-align: center;
+  float: none;
+  text-align: center;
 }
 
 .dataTables_wrapper .dataTables_info {
-    float: none;
+  float: none;
 }
-
 
 /* note */
 #warningQuota p {
-    margin-top: 6px;
-    color: darken(@color-9,2);
+  margin-top: 6px;
+  color: darken(@color-9, 2);
 }
+
 /********************************************
                 INFO.JS
 ********************************************/
 /* text */
 .introjs-tooltip {
-    padding: 19px;
-    font-size: 14px;
+  padding: 19px;
+  font-size: 14px;
 }
 
 .introjs-bullets ul {
-    clear: both;
-    margin: 15px auto;
-    padding: 0px;
-    display: inline-block;
+  clear: both;
+  margin: 15px auto;
+  padding: 0px;
+  display: inline-block;
 }
+
 .introjs-bullets ul li a {
-    width: 7px;
-    height: 7px;
+  width: 7px;
+  height: 7px;
 }
+
 .introjs-tooltipbuttons {
-    margin: 0 auto 15px;
+  margin: 0 auto 15px;
 }
+
 .introjs-button {
-    margin: 0;
-    padding-top: 0.8em;
-    padding-bottom: 0.8em;
-    border: none;
-    text-decoration: none;
-    text-shadow: none;
-    font: 22px FontAwesome;
-    background-color: transparent;
-    background-image: none;
+  margin: 0;
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  border: none;
+  text-decoration: none;
+  text-shadow: none;
+  font: 22px FontAwesome;
+  background-color: transparent;
+  background-image: none;
 }
+
 .introjs-button:hover,
 .introjs-button:active,
 .introjs-button:focus,
 .introjs-button.active {
-    border: 0;
-    background-color: transparent;
-    background-image: none;
-    box-shadow: none;
+  border: 0;
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
 }
+
 .introjs-tooltipbuttons {
-    margin: 0;
-    white-space: normal;
+  margin: 0;
+  white-space: normal;
 }
+
 .introjs-prevbutton:before {
-    content: "\f053";
-    float: left;
+  content: "\f053";
+  float: left;
 }
+
 .introjs-nextbutton:before {
-    content: "\f054";
-    float: right;
+  content: "\f054";
+  float: right;
 }
+
 .introjs-prevbutton {
-    float: left;
-    padding-top:0;
-    padding-left:0;
-    margin: 0;
+  float: left;
+  padding-top: 0;
+  padding-left: 0;
+  margin: 0;
 }
+
 .introjs-nextbutton {
-    float: right;
-    padding-top:0;
-    padding-right: 0;
-    margin: 0;
+  float: right;
+  padding-top: 0;
+  padding-right: 0;
+  margin: 0;
 }
+
 .introjs-helperNumberLayer {
-    top: -18px;
-    left: -18px;
-    font-size: 14px;
-    background: #080;
-    border: 1px solid #FFF;
+  top: -18px;
+  left: -18px;
+  font-size: 14px;
+  background: #080;
+  border: 1px solid #FFF;
 }
+
 .introjs-skipbutton {
-    padding: 0;
-    margin: 0;
-    font-size: 0px;
+  padding: 0;
+  margin: 0;
+  font-size: 0px;
 }
+
 .introjs-helperLayer,
 .introjs-helperLayer *,
 .introjs-helperLayer:before,
@@ -858,18 +914,19 @@ div.dataTables_length label {
 .introjs-tooltipReferenceLayer:after,
 .introjs-tooltipReferenceLayer *:before,
 .introjs-tooltipReferenceLayer *:after {
-    box-sizing: content-box !important;
-    -moz-box-sizing: content-box !important;
-    -webkit-box-sizing: content-box !important;
+  box-sizing: content-box !important;
+  -moz-box-sizing: content-box !important;
+  -webkit-box-sizing: content-box !important;
 }
 
 .introjs-helperNumberLayer {
-    display: none;
+  display: none;
 }
 
 .dlfileLabel {
   cursor: pointer;
 }
+
 .validAll {
   margin-right: 11px;
 }
@@ -879,12 +936,12 @@ div.dataTables_length label {
 *********************************************/
 table thead tr th .pw-btn-group-th,
 table tr th .pw-btn-group-th,
-.pw-btn-group-th{
+.pw-btn-group-th {
   display: inline-block;
   position: relative;
   vertical-align: middle;
   text-align: center;
-  .pw-btn-th{
+  .pw-btn-th {
     margin: 0;
     float: left;
     position: relative;
@@ -918,7 +975,7 @@ table tr th .pw-btn-group-th,
   vertical-align: middle;
   text-align: center;
 
-  padding:  0px 30px;
+  padding: 0px 30px;
   font-family: 'robotoregular';
   font-weight: 300;
   font-size: 14px !important;
@@ -942,6 +999,7 @@ table tr th .pw-btn-group-th,
   border-color: #ccc;
   color: #999;
 }
+
 .btn-portal-default:hover,
 .btn-portal-default:focus,
 .btn-portal-default:active,
@@ -952,74 +1010,83 @@ table tr th .pw-btn-group-th,
 
 .btn-portal-blue {
   margin-bottom: 1px;
-  background-color:   @color-18;
-  border-color:       @color-18;
-  color:              white;
+  background-color: @color-18;
+  border-color: @color-18;
+  color: white;
 }
+
 .btn-portal-blue:hover,
 .btn-portal-blue:focus,
 .btn-portal-blue:active {
-  background-color:   lighten(@color-18,6);
-  border-color:       lighten(@color-18,6);
+  background-color: lighten(@color-18, 6);
+  border-color: lighten(@color-18, 6);
 }
+
 .btn-portal-blue.active {
-  background-color:   @color-17;
-  border-color:       @color-17;
+  background-color: @color-17;
+  border-color: @color-17;
 }
 
 .btn-portal-green {
- /* background-color:   desaturate(darken(@color-15,3),10);*/
-  background-color:   transparent;
-  border-color:       desaturate(darken(@color-15,3),10);
-  color:              desaturate(darken(@color-15,3),10);
+  /* background-color:   desaturate(darken(@color-15,3),10);*/
+  background-color: transparent;
+  border-color: desaturate(darken(@color-15, 3), 10);
+  color: desaturate(darken(@color-15, 3), 10);
 }
+
 .btn-portal-green:hover,
 .btn-portal-green:focus,
 .btn-portal-green:active,
 .btn-portal-green.active {
-  background-color:   desaturate(darken(@color-15,3),10);
-  border-color:       desaturate(darken(@color-15,3),10);
-  color:              white;
+  background-color: desaturate(darken(@color-15, 3), 10);
+  border-color: desaturate(darken(@color-15, 3), 10);
+  color: white;
 }
 
 .btn-portal-red {
-  background-color:   transparent;
-  border-color:       desaturate(lighten(@color-8, 10),30);
-  color:              desaturate(lighten(@color-8, 10),30);
+  background-color: transparent;
+  border-color: desaturate(lighten(@color-8, 10), 30);
+  color: desaturate(lighten(@color-8, 10), 30);
 }
+
 .btn-portal-red:hover,
 .btn-portal-red:focus,
 .btn-portal-red:active,
 .btn-portal-red.active {
-  background-color:   desaturate(lighten(@color-8, 10),30);
-  border-color:       desaturate(lighten(@color-8, 10),30);
-  color:              white;
+  background-color: desaturate(lighten(@color-8, 10), 30);
+  border-color: desaturate(lighten(@color-8, 10), 30);
+  color: white;
 }
+
 .btn-portal-bluegreen {
-  background-color:   transparent;
-  border-color:       @color-17;
-  color:              darken(@color-17,5);
+  background-color: transparent;
+  border-color: @color-17;
+  color: darken(@color-17, 5);
 }
+
 .btn-portal-bluegreen:hover,
 .btn-portal-bluegreen:focus,
 .btn-portal-bluegreen:active,
 .btn-portal-bluegreen.active {
-  background-color:   @color-17;
-  border-color:       @color-17;
-  color:              white;
+  background-color: @color-17;
+  border-color: @color-17;
+  color: white;
 }
+
 .btn-portal-lightblue {
-  background-color:   @color-15;
-  border-color:       @color-15;
+  background-color: @color-15;
+  border-color: @color-15;
   color: #FFF;
 }
+
 .btn-portal-lightblue:hover,
 .btn-portal-lightblue:focus,
 .btn-portal-lightblue:active,
 .btn-portal-lightblue.active {
-  background-color:   lighten(@color-15, 7);
-  border-color:       lighten(@color-15, 7);
+  background-color: lighten(@color-15, 7);
+  border-color: lighten(@color-15, 7);
 }
+
 #validation {
   margin-top: @m;
   padding-left: @s;
@@ -1042,41 +1109,45 @@ table tr th .pw-btn-group-th,
   border-width: 1px;
   border-style: solid;
   cursor: pointer !important;
-  .etc;/* add ... */
+  .etc; /* add ... */
   .unselectable;
   .transition;
 }
+
 #validation a,
 #btn-upload-div {
   margin-bottom: 1px;
-  background-color:   transparent;
-  border-color:       @color-18;
-  color:              @color-18;
+  background-color: transparent;
+  border-color: @color-18;
+  color: @color-18;
 }
+
 #validation:hover a,
 #validation:focus a,
 #validation:active a,
 #btn-upload-div:hover,
 #btn-upload-div:focus,
 #btn-upload-div:active {
-  background-color:   lighten(@color-18,6);
-  border-color:       lighten(@color-18,6);
+  background-color: lighten(@color-18, 6);
+  border-color: lighten(@color-18, 6);
   color: #fff;
 }
+
 /**********************************************
                     DYNAMIC BUTTON
 **********************************************/
-.downloadall, .deleteAll, .validAll
-{
+.downloadall, .deleteAll, .validAll {
   display: none;
 }
+
 /**********************************************
                     ICONS
 **********************************************/
-.app-transfer{
-  font-size:68px;
+.app-transfer {
+  font-size: 68px;
   color: #808080;
 }
+
 .icon-validation,
 .fa-download,
 .fa-trash,
@@ -1088,16 +1159,17 @@ span.fa-stack {
   cursor: pointer !important;
 }
 
-.clientDest{
+.clientDest {
   color: @color-1;
 }
+
 .badge {
   margin-top: 6px;
   margin-right: 6px;
 }
 
 /*  */
-@media screen and (max-width:1281px){
+@media screen and (max-width: 1281px) {
   .fix-width-select2,
   #s2id_clients {
     max-width: 240px;

@@ -1374,7 +1374,7 @@ td:last-child {
 .table tbody tr.active:hover td,
 .table tbody tr.active:focus td {
   /*background-color:       @gs-lt-blue !important;
-    color: #FFF !important;*/
+  color: #FFF !important;*/
   background-color: #d6ecff !important;
   color: #606060;
   -webkit-transition: all 0.2s ease;

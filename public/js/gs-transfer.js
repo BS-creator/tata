@@ -202,12 +202,15 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
   var reloadNewData = function (data) {
 
+    showLoading();
     // hide
     $('.modal-select2-open').removeClass('modal-select2-open').addClass('modal-select2');
 
     loadData().then(function () {
       //add new files from clients.
       AjaxData = (data && data.target) ? AjaxData : (data || AjaxData);
+      //countFilePerCat.length = 0;
+      while (countFilePerCat.length > 0) { countFilePerCat.pop();}
       $.when(mergeLabelDoc()).then(function () {
         //RESOLVED
         //destroy dt
