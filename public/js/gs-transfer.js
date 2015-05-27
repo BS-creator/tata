@@ -767,11 +767,11 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       initComplete: initTableComplete
     });
   };
-  var /****************************************************
-       * AJAX
-       * */
+  /****************************************************
+   * AJAX
+   * */
 
-      signOut                     = function () {
+  var signOut = function () {
 
     swal({
       title:              i18n[lang].dialog.signout,
@@ -784,7 +784,11 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       closeOnConfirm:     false
     }, function () {
       return $.ajax({
-        type: 'POST', url: TransferServerURL + 'logoff/', data: {token: tokenTransfer}, complete: function () {
+        type: 'POST',
+        url: TransferServerURL + 'logoff/',
+        data: {token: tokenTransfer},
+        complete: function () {
+          deleteCookie("ariane-transfer");
           sessionStorage.clear();
           redirectToLogin();
         }
