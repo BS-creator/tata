@@ -788,7 +788,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         url: TransferServerURL + 'logoff/',
         data: {token: tokenTransfer},
         complete: function () {
-          deleteCookie("ariane-transfer");
+          Utils.deleteCookie("ariane-transfer");
           sessionStorage.clear();
           redirectToLogin();
         }

@@ -150,7 +150,7 @@
     "breadrumb":       "Alle bestanden, gesorteerd volgens \"nieuw\" en \"niet gedownload\"",
     "result":          "Resultaten: ",
     "url":             {
-      "table":      "../cdn/DataTables/1.10.4/resources/language/NL.json",
+      "table":      "../cdn/DataTables/1.10.4/resources/language/nl.json",
       "datepicker": "../cdn/bootstrap/locale/bootstrap-datepicker.nl.js"
     },
     "col":             {
@@ -268,7 +268,7 @@
     "breadrumb":       "New Files not downloaded yet",
     "result":          "Results: ",
     "url":             {
-      "table": "../cdn/DataTables/1.10.4/resources/language/EN.json"
+      "table": "../cdn/DataTables/1.10.4/resources/language/en.json"
     },
     "col":             {
       "new":         "New",

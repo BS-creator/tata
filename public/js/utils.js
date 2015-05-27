@@ -225,6 +225,6 @@ var Utils = (function () {
     docCookies:           docCookies,
     relPathToAbs:         relPathToAbs,
     executeOnce:          executeOnce,
-    deleteCookie:         deleteCookie,
+    deleteCookie:         deleteCookie
   }
 }());
