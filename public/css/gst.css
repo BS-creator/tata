@@ -1057,6 +1057,14 @@ li.level3 > a {
   -o-transition-delay: 0s;
   transition-delay: 0s;
 }
+li.level3 {
+  position: relative;
+  padding-right: 40px;
+}
+li.level3 .badge {
+  position: absolute;
+  right: 5px;
+}
 li.level2:hover > a,
 li.level2:focus > a,
 li.level3:hover > a,
