@@ -54,6 +54,10 @@ $(function(swal, _, Utils) {
       password: $('#password').val()
     };
 
+    Utils.docCookies.removeItem('ariane');
+    Utils.docCookies.removeItem('ariane-transfer');
+
+
     $('#loader').show();
     if (!TransferServerURL) {
       TransferServerURL = sessionStorage.getItem('TransferServerURL');

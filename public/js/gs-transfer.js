@@ -225,7 +225,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
    * DOWNLOAD (ZIP)
    * */
 
-  var addLowerButton              = function () {
+  var addLowerButton           = function () {
     var multidl = $('.multiDL');
     multidl.html('');
     /***** DOWNLOAD BUTTON *****/
@@ -266,7 +266,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       });
     });
   };
-  var incrementCounter            = function (link) {
+  var incrementCounter         = function (link) {
     link.find('i').remove();
     var small = link.find('small'), // cache object
         dl    = parseInt(small.data('dl')) + 1;
@@ -276,7 +276,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     small.data('dl', dl); // increment by one the download count
     small.html('&nbsp;' + dl);
   };
-  var dlIcon                      = function (e) {
+  var dlIcon                   = function (e) {
     var $this = $(this);
     Utils.smessage(i18n[lang].file.dl, ' ', 'warning', 4000);
 
@@ -289,7 +289,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
     e.stopImmediatePropagation();
   };
-  var dlLabel                     = function (e) {
+  var dlLabel                  = function (e) {
     var $this = $(this), filename = $this.data('filename'), fileID = $this.data('file-id'), url = TransferServerURL + 'file/' + fileID + '/' + filename;
 
     if (filename && (Utils.endsWith(filename, '.PDF') || Utils.endsWith(filename, '.pdf'))) {
@@ -304,18 +304,18 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     incrementCounter($this.closest('tr').find('a').first());
     e.stopImmediatePropagation();
   };
-  var incrementAllSelectedRows    = function () {
+  var incrementAllSelectedRows = function () {
     _.forEach($(TABLEID).find('.active'), function (row) {
       incrementCounter($(row).find('a').first());
     });
   };
-  var resetCheckBox               = function () {
+  var resetCheckBox            = function () {
 
     _.forEach($(TABLEID).find('.active'), function (line) {
       $(line).removeClass('active').find('i.fa-check-square-o').toggleClass('fa-square-o fa-check-square-o');
     });
   };
-  var downloadAll                 = function () {
+  var downloadAll              = function () {
 
     var params = getFilesID(), fileID, filename, form;
 
@@ -354,7 +354,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
    * UPLOAD
    * */
 
-  var setEventuploadForm          = function () {
+  var setEventuploadForm       = function () {
     // set token for upload
     var $uploadform = $('#uploadForm'), activeUploads = null, notif;
     $('input[name="token"]').val(tokenTransfer);
@@ -400,7 +400,8 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       }
     });
   };
-  var listFolderUpload            = function (destFolders) {
+
+  var listFolderUpload = function (destFolders) {
     var listFolder = $('#uploadForm').find('div.dir-list'), key;
     for (key in destFolders) {
       if (destFolders[key]) {
@@ -408,20 +409,12 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       }
     }
   };
-  var listFolderUploadFR          = function () {
-    var listFolder                                                               = $('#uploadForm').find('div.dir-list');
-    listFolder.html('');
-    _.forEach(i18n[lang].dirlist, function (v, k) {
-      listFolder.append('<label class="radio"><input name="destFolder" value="' + k + '" type="radio" />' + v + '</label>');
-    });
-    listFolder.find('label:first-of-type > input[name="destFolder"]')[0].checked = true;
-    $('.radio').find('input').off('click').on('click', function () {selectMenu = this.value;});
-  };
-  var /****************************************************
-       * MENU
-       * */
 
-      resetFilters                = function () {
+  /****************************************************
+   * MENU
+   * */
+
+  var resetFilters                = function () {
 
     table.search('').columns().search('');
     $('#breadcrumb').html('&nbsp;');
@@ -440,9 +433,9 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   };
   var setBreadCrumb               = function (text, textChild) {
     if (textChild) {
-      $('#breadcrumb').html(i18n[lang].result + '<li class="active noclick">' + text + '</li><li class="active noclick">' + textChild + '</li>');
+      $('#breadcrumb').html('<span style="color: #BA5B08;">' + i18n[lang].result + '</span><li class="active noclick">' + text + '</li><li class="active noclick">' + textChild + '</li>');
     } else if (text) {
-      $('#breadcrumb').html(i18n[lang].result + '<li class="active noclick">' + text + '</li>');
+      $('#breadcrumb').html('<span style="color: #BA5B08;">' + i18n[lang].result + '</span><li class="active noclick">' + text + '</li>');
     } else {
       console.log('error Setting BreadCrumb.');
     }
@@ -452,7 +445,6 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     $('#upload').removeClass('active');
     $('#validation').removeClass('active');
     resetFilters();
-    table.columns('.categoryFrance').visible(false, false);
     table.columns('.detailsLayer').visible(false, false);
     table.columns('.validation').visible(false, false);
     table.columns('.fileLayer').visible(true, false);
@@ -470,7 +462,6 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     $('#upload').removeClass('active');
     $('#validation').removeClass('active');
     resetFilters();
-    table.columns('.categoryFrance').visible(false, false);
     table.columns('.fileLayer').visible(false, false);
     table.columns('.validation').visible(false, false);
     table.columns('.detailsLayer').visible(true, false);
@@ -490,7 +481,6 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     $('#upload').addClass('active');
     $('#validation').removeClass('active');
     resetFilters();
-    table.columns('.categoryFrance').visible(false, false);
     table.columns('.fileLayer').visible(false, false);
     table.columns('.validation').visible(false, false);
     table.columns('.detailsLayer').visible(true, false);
@@ -508,7 +498,6 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     $('#upload').removeClass('active');
     $('#validation').removeClass('active');
     resetFilters();
-    table.columns('.categoryFrance').visible(false, false);
     table.columns('.detailsLayer').visible(false, false);
     table.columns('.validation').visible(false, false);
     table.columns('.fileLayer').visible(true, false);
@@ -551,7 +540,6 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     if (nodeID > -1 && $this.hasClass('level3')) {
       //clear filters
       table.search('').columns().search('');
-      table.columns('.categoryFrance').visible(false, false);
       table.columns('.detailsLayer').visible(false, false);
       table.columns('.fileLayer').visible(true, false);
       table.columns('.validation').visible(false, false);
@@ -715,10 +703,10 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       }, {
         className: 'defaultView', targets: 2 // Date
       }, {
-        className: 'detailsLayer categoryFrance', targets: 3, // fileName
+        className: 'detailsLayer ', targets: 3, // fileName
         visible:   false, searchable: true
       }, {
-        className: 'detailsLayer categoryFrance', targets: 4, // uploadUserName
+        className: 'detailsLayer ', targets: 4, // uploadUserName
         visible:   false, searchable: true
       }, {
         className: 'fileLayer defaultView', targets: 5 //employerNumber
@@ -745,7 +733,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         targets: 13, //referenceGroupS
         visible: false, searchable: false
       }, {
-        className: 'validation categoryFrance', targets: 14, //uploadStamp
+        className: 'validation ', targets: 14, //uploadStamp
         visible:   false, searchable: true
       }, {
         className:  'defaultView', targets: 15, // remove
@@ -771,7 +759,9 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
    * AJAX
    * */
 
-  var signOut = function () {
+  var signOut                     = function () {
+    Utils.docCookies.removeItem('ariane');
+    Utils.docCookies.removeItem('ariane-transfer');
 
     swal({
       title:              i18n[lang].dialog.signout,
@@ -784,9 +774,9 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       closeOnConfirm:     false
     }, function () {
       return $.ajax({
-        type: 'POST',
-        url: TransferServerURL + 'logoff/',
-        data: {token: tokenTransfer},
+        type:     'POST',
+        url:      TransferServerURL + 'logoff/',
+        data:     {token: tokenTransfer},
         complete: function () {
           Utils.deleteCookie("ariane-transfer");
           sessionStorage.clear();
@@ -830,11 +820,11 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       }
     });
   };
-  var /**
-       *
-       *  list of folder to upload files to.
-       *  */
-      loadFolder                  = function () {
+  /**
+   *
+   *  list of folder to upload files to.
+   *  */
+  var loadFolder                  = function () {
 
     return $.ajax({
       type:          'GET', url: TransferServerURL + 'folder/', success: function (data) {
@@ -848,28 +838,28 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       }
     });
   };
-  var      // Category of type of document in central db
-      loadCategory                = function () {
-        var service = 'category/false';
-        //var service = 'category/' ;
-        //if(token){ console.log("token = "+token +" defined ==> OK");}
-        return $.ajax({
-          type:          'GET', url: TransferServerURL + service, success: function (data) {
-            category = data;
-          }, statusCode: {
-            403: function () {
-              hideLoading();
-              console.log('error loading category');
-              Utils.errorMessage(i18n[lang].errorCnx, 4000);
-            }
-          }
-        });
-      };
-  var /***
-       * list files on the server FTP.
-       */
+  // Category of type of document in central db
+  var loadCategory               = function () {
+    var service = 'category/false';
+    //var service = 'category/' ;
+    //if(token){ console.log("token = "+token +" defined ==> OK");}
+    return $.ajax({
+      type:          'GET', url: TransferServerURL + service, success: function (data) {
+        category = data;
+      }, statusCode: {
+        403: function () {
+          hideLoading();
+          console.log('error loading category');
+          Utils.errorMessage(i18n[lang].errorCnx, 4000);
+        }
+      }
+    });
+  };
+  /***
+   * list files on the server FTP.
+   */
 
-      loadData                    = function () {
+  var loadData                   = function () {
 
     return $.ajax({
       type:        'GET', url: TransferServerURL + 'file/list/', success: function (data) {
@@ -890,17 +880,17 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       }
     });
   };
-  var /****************************************************
-       * EVENTS
-       * */
+  /****************************************************
+   * EVENTS
+   * */
 
-      showLoading                 = function () {
+  var showLoading                = function () {
     $('#loader').show();
   };
-  var hideLoading                 = function () {
+  var hideLoading                = function () {
     $('#loader').hide();
   };
-  var setEventColumnListVisible   = function () {
+  var setEventColumnListVisible  = function () {
     $('.side-menu-list > li').off('click').on('click', function () {
       var $this = $(this), index = $this.data('index'), visible = table.column(index).visible();
       $this.toggleClass('active');
@@ -911,14 +901,14 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       resetDefaultView();
     });
   };
-  var setI18nSideMenuColumnList   = function () {
+  var setI18nSideMenuColumnList  = function () {
     $('#toggle-side-menu').html('<i class="fa fa-columns"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.colVisible);
     var $smh = $('p.side-menu-head');
     $smh.text(i18n[lang].sideMenu.config);
     $smh.append('&nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right"></i>');
     $('#init-conf').html(i18n[lang].sideMenu.reset);
   };
-  var setEventSideMenuColumnList  = function () {
+  var setEventSideMenuColumnList = function () {
 
     // slide off #side-menu
     oTable.on('length.dt', function () {
@@ -933,7 +923,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
     updateMenuVisibleColumnList();
   };
-  var toggleDLButton              = function () {
+  var toggleDLButton             = function () {
     var trActive = $('tr.active');
     if (trActive && trActive.length > 0) {
       addLowerButton();
@@ -944,16 +934,16 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       $('.deleteAll').toggle();
     }
   };
-  var /***** MENU FILTERS *****/
-      setEventMenuFilters         = function () {
+  /***** MENU FILTERS *****/
+  var setEventMenuFilters        = function () {
     $('#root').off('click').on('click', menuRootClick);
     $('#upload').children('a').off('click').on('click', menuUploadClick);
     $('li.level2').children('a').off('click').on('click', menuCategoryClick);
     $('#other').off('click').on('click', menuOtherClick);
     $('li.level3').children('a').off('click').on('click', menuRefDocClick);
   };
-  var /***** UPLOAD *****/
-      setI18nUpload               = function () {
+  /***** UPLOAD *****/
+  var setI18nUpload              = function () {
     //TODO: put it in CSS, just use it to translate!!!
     $('#btn-upload-div').find('span').html('<i class="fa fa-upload"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].upload);
     $('#modalh4').html('<i class="fa fa-2x fa-upload"></i>&nbsp;&nbsp;' + i18n[lang].modalupload);
@@ -961,13 +951,13 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     $('input[type=file]').bootstrapFileInput(i18n[lang].modalbtn);
 
   };
-  var setEventUpload              = function () {
+  var setEventUpload             = function () {
     $('#upload-modal').find('.btn-upload').off('click').on('click', function () {
       $(this).toggleClass('active', 'active');
     });
   };
-  var /***** LANGUAGE SETTINGS *****/
-      setEventLanguageSettings    = function () {
+  /***** LANGUAGE SETTINGS *****/
+  var setEventLanguageSettings   = function () {
     //TODO: knockout.js???
     $('.' + lang).addClass('default-lang');
 
@@ -981,22 +971,22 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       //window.location.reload();
     });
   };
-  var /***** DOWNLOAD *****/
-      setEventDownload            = function () {
+  /***** DOWNLOAD *****/
+  var setEventDownload           = function () {
     $(TABLEID).on('click', '.dlfile', dlIcon);
 
     //download Single file by click on label
     $(TABLEID).on('click', '.dlfileLabel', dlLabel);
   };
-  var /***** MULTIDOWNLOAD *****/
-      setI18nMultiDownload        = function () {
+  /***** MULTIDOWNLOAD *****/
+  var setI18nMultiDownload       = function () {
     $('.downloadall').html('<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDL);
   };
-  var setEventMultiDownload       = function () {
+  var setEventMultiDownload      = function () {
     $('.downloadall').off('click').on('click', downloadAll);
   };
-  var /***** DELETE *****/
-      setEventDeleteFile          = function () {
+  /***** DELETE *****/
+  var setEventDeleteFile         = function () {
     $('.remove').off('click').on('click', function () {
       var $this = $(this);
       swal({
@@ -1013,12 +1003,12 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       });
     });
   };
-  var /***** MULTI DELETE *****/
+   /***** MULTI DELETE *****/
 
-      setI18nMultiDelete          = function () {
+   var  setI18nMultiDelete         = function () {
     $('.deleteAll').html('<i class="fa fa-trash"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDelete);
   };
-  var setEventMultiDelete         = function () {
+  var setEventMultiDelete        = function () {
     $('.deleteAll').off('click').on('click', function () {
       swal({
         title:              i18n[lang].dialog.delAction,
@@ -1034,7 +1024,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       });
     });
   };
-  var toggleAllIconCheck          = function (activated) {
+  var toggleAllIconCheck         = function (activated) {
     if (activated) {
       $('.iconSelect').find('i').removeClass('fa-square-o fa-check-square-o').addClass('fa-check-square-o');
       $('td').closest('tr').addClass('active');
@@ -1044,8 +1034,8 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       $('td').closest('tr').removeClass('active');
     }
   };
-  var /***** CHECKBOX SELECT ALL *****/
-      setEventCheckBox            = function () {
+  /***** CHECKBOX SELECT ALL *****/
+  var setEventCheckBox           = function () {
 
     $('#btnSelectAll').off('click').on('click', function (e) {
       e.preventDefault();
@@ -1065,15 +1055,15 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     });
 
   };
-  var /***** FILTER *****/
+  /***** FILTER *****/
 
-      setI18nFiltersButton        = function () {
+  var setI18nFiltersButton       = function () {
     $('#filterby').html(i18n[lang].button.filter.filterby + '&nbsp;&nbsp;&nbsp;<span class="caret"></span>'); //
     $('#filterNew').html('<i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.new);
     $('#filterDL').html('<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.notDL);
     $('#filterClear').html('<i class="fa fa-times"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.clear);
   };
-  var setEventFiltersButton       = function () {
+  var setEventFiltersButton      = function () {
 
     $('#filterNew').off('click').on('click', function () {
       var filterby = $('#filterby');
@@ -1100,17 +1090,17 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     });
 
   };
-  var /***** SEARCH *****/
+  /***** SEARCH *****/
 
-      setI18nSearch               = function () {
+  var setI18nSearch              = function () {
     $('input[name=search]').attr('placeholder', i18n[lang].button.search);
   };
-  var setEventSearch              = function () {
+  var setEventSearch             = function () {
     $('input[name=search]').on('keyup', function () {
       table.search(this.value).draw();
     });
   };
-  var setEventReload              = function () {
+  var setEventReload             = function () {
     var reloadBtn = $('.reloadme');
     /*reloadBtn.html('<i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.reload);*/
     reloadBtn.html('<i class="fa fa-refresh"></i>');
@@ -1122,12 +1112,12 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       reloadNewData();
     });
   };
-  var setI18nDatePicker           = function () {
+  var setI18nDatePicker          = function () {
     $('.dp-to').text(i18n[lang].datepicker.to);
     $('.dateBegin').attr('placeholder', i18n[lang].datepicker.start);
     $('.dateEnd').attr('placeholder', i18n[lang].datepicker.end);
   };
-  var setEventDatePicker          = function () {
+  var setEventDatePicker         = function () {
 
     var db = $('.dateBegin'), de = $('.dateEnd');
 
@@ -1155,14 +1145,14 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       //minViewMode: 1 //month view
     });
   };
-  var setI18nBreadCrumb           = function () {
+  var setI18nBreadCrumb          = function () {
     setBreadCrumb(i18n[lang].breadrumb);
     //$( '#breadcrumb' ).html( i18n[lang].result + '<li class="active">' + i18n[lang].breadrumb + '</li>' );
   };
-  var setI18nQuotaWarning         = function () {
+  var setI18nQuotaWarning        = function () {
     $('#warningQuota').html('<p>' + i18n[lang].warningQuota + '</p>');
   };
-  var setI18nHelpButton           = function () {
+  var setI18nHelpButton          = function () {
     var helpBtn = $('#help');
     /*
      helpBtn.html('<i class="fa fa-question"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.help);
@@ -1224,7 +1214,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     });
 
   };
-  var setEventPreData             = function () {
+  var setEventPreData            = function () {
 
     setI18nUpload();
     setI18nMultiDelete();
@@ -1239,7 +1229,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     setEventLanguageSettings();
     setEventReload();
   };
-  var setEventsHTML               = function () {
+  var setEventsHTML              = function () {
 
     setEventSideMenuColumnList();
     setEventMenuFilters();
@@ -1253,15 +1243,14 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     setEventMultiDownload();
 
   };
-  var initTableComplete           = function () {
+  var initTableComplete          = function () {
 
     table.clear();
 
     templateTable();
 
     oTable = $(TABLEID).dataTable();
-    table//.column(10).search(/^((?!Validation\/).)*$/, true, false) // Don't show validation folder
-      .column(4).search('[^' + username + ']', true, false).draw();
+    table.column(4).search('[^' + username + ']', true, false).draw();
 
     hideLoading();
 
@@ -1292,14 +1281,12 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       $('.deleteAll').hide();
     }, 500);
   };
-  var /****************************************************
-       * MAIN
-       * */
-      render                      = function () {
+  /****************************************************
+   * MAIN
+   * */
+  var render                     = function () {
     showLoading();
     setEventPreData();
-
-    /* $.when(portalCnx()).then(function() {*/
 
     $.when(loadCategory(), loadData(), loadFolder()).then(function () {
 
@@ -1310,25 +1297,12 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         createDataTable();
         createMenu();
 
-        //TODO: IMPROVE KNOCKOUT USAGE!!!
-
-        /*function AppViewModel() {
-         this.myContact = ko.observable(i18n[lang].button.myContact);
-         this.logout    = ko.observable(i18n[lang].button.signout);
-         this.close     = ko.observable(i18n[lang].button.close);
-         }
-
-         VM = new AppViewModel();
-         // Activates knockout.js
-         ko.cleanNode(VM);
-         ko.applyBindings(VM);*/
         setEventuploadForm();
 
       });
     });
-    /*});*/
   };
-  var main                        = function () {
+  var main                       = function () {
 
     Utils.setTransferURL();
 
@@ -1336,8 +1310,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     TransferBaseURL   = sessionStorage.getItem('TransferBaseURL');
     lang              = sessionStorage.getItem('lang') || localStorage.lastLanguage || localStorage.lang;
     username          = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '';
-    /*tokenPortal = sessionStorage.getItem('token');*/
-    tokenTransfer = sessionStorage.getItem('tokenTransfer');
+    tokenTransfer     = sessionStorage.getItem('tokenTransfer');
 
     $('[rel="tooltip"]').tooltip();
 
@@ -1365,7 +1338,6 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         // load data and create table
         render();
       } else {
-
         Utils.errorMessage('ERROR loading language data', 4000);
         setTimeout(function () {
           redirectToLogin();

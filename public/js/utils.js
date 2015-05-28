@@ -193,7 +193,7 @@ var Utils = (function () {
     }
   };
 
-  var reportError = function (error, message) {
+  /*var reportError = function (error, message) {
     message = message || '';
     console.error(
       'ERROR: ' + message + ' [' + error.toString() + ']\n' +
@@ -212,7 +212,7 @@ var Utils = (function () {
     error.lineNumber   = error.lineNumber || lineno || null;
     error.columnNumber = error.columnNumber || colno || null;
     reportError(error, 'Uncatched Exception');
-  };
+  };*/
 
   return {
     smessage:             smessage,
