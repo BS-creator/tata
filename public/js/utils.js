@@ -149,6 +149,14 @@ var Utils = (function () {
     return Math.round(bytes / Math.pow(1024, i)) + ' ' + sizes[i];
   };
 
+  var htmlEncode = function (txt, withBr) {
+    var div         = document.createElement('div');
+    div.textContent = txt;
+    var html        = div.innerHTML;
+    html            = withBr ? html.replace(/(\r)?\n/g, '$&<br/>') : html;
+    return html
+  };
+
   /**
    * Returns one of supported language, default if not.
    * Supported languages: 'nl', 'fr', 'en' (default).
@@ -163,6 +171,17 @@ var Utils = (function () {
     return locale;
   };
 
+  function getURLServer(transfer) {
+    if (_.contains(window.location.href, 'localhost')
+      && !_.contains(sessionStorage.TransferServerURL, 'deviapps') ) {
+      //console.log('localhost or not deviapps');
+      if (transfer) return sessionStorage.TransferServerURL.replace(/localhost:8018/g, "localhost:8019");
+      else return sessionStorage.TransferServerURL;
+    } else {
+      //console.log('not locahost');
+      return sessionStorage.TransferServerURL.replace(/ariane-transfer/g, "ariane");
+    }
+  }
 
   var setTransferURL = function () {
     var url = window.location.hostname;
@@ -172,8 +191,8 @@ var Utils = (function () {
     } else if (_.contains(url, 'localhost')) {
       /***** LOCAL *****/
       sessionStorage.setItem('TransferBaseURL', '//localhost:4000/transfer/');
-      sessionStorage.setItem('TransferServerURL', '//localhost:8019/');
-      //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane-transfer/');
+      //sessionStorage.setItem('TransferServerURL', '//localhost:8019/');
+      sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane-transfer/');
       /**************
        * DEV & QA
        **************/
@@ -193,32 +212,13 @@ var Utils = (function () {
     }
   };
 
-  /*var reportError = function (error, message) {
-    message = message || '';
-    console.error(
-      'ERROR: ' + message + ' [' + error.toString() + ']\n' +
-      '\nName:\t\t' + (error.name || '-') +
-      '\nMessage:\t' + (error.message || '-') +
-      '\nFile:\t\t\t' + (error.fileName || '-') +
-      '\nSource:\t\t' + ((error.toSource && error.toSource()) || '-') +
-      '\nLine #:\t\t' + (error.lineNumber || '-') +
-      '\nColumn #:\t' + (error.columnNumber || '-') +
-      '\n\nStack:\n\n' + (error.stack || '-')
-    );
-  };
-
-  window.onerror = function (message, filename, lineno, colno, error) {
-    error.fileName     = error.fileName || filename || null;
-    error.lineNumber   = error.lineNumber || lineno || null;
-    error.columnNumber = error.columnNumber || colno || null;
-    reportError(error, 'Uncatched Exception');
-  };*/
-
   return {
     smessage:             smessage,
     errorMessage:         errorMessage,
     setTransferURL:       setTransferURL,
     getURLParameter:      getURLParameter,
+    getURLServer:         getURLServer,
+    htmlEncode:           htmlEncode,
     endsWith:             endsWith,
     bytesToSize:          bytesToSize,
     getNavigatorLanguage: getNavigatorLanguage,

@@ -84,6 +84,8 @@ $(function(swal, _, Utils) {
         $('#loader').hide();
         if (xhr.status === 403) {
           Utils.errorMessage('Login / password incorrect.', 3000);
+        } else if (xhr.status >= 500) {
+          Utils.errorMessage('Service Unavailable.', 3000);
         } else {
           Utils.errorMessage('Connection problem.', 3000);
         }

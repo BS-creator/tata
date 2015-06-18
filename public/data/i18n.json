@@ -47,7 +47,8 @@
       "count":       "Compteur",
       "refGS":       "Ref",
       "uploadStamp": "Heure Dépôt",
-      "del":         "Effacer"
+      "del":         "Effacer",
+      "comment":     "Commentaires"
     },
     "tree":            {
       "root":   "Boîte de réception",
@@ -168,7 +169,8 @@
       "count":       "Teller",
       "refGS":       "Ref. Group S",
       "uploadStamp": "Upload tijd",
-      "del":         "Verwijderen"
+      "del":         "Verwijderen",
+      "comment":     "Opmerking"
     },
     "tree":            {
       "root":   "Inbox ",
@@ -285,7 +287,8 @@
       "count":       "Counter",
       "refGS":       "Ref Group S",
       "uploadStamp": "Upload Time",
-      "del":         "Delete"
+      "del":         "Delete",
+      "comment":     "Comments"
     },
     "tree":            {
       "root":   "Inbox",

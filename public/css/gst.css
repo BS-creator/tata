@@ -705,14 +705,11 @@ a.default-lang {
   border: 1px solid #479fed;
   padding: 2px;
 }
-#logindiv {
-  min-height: 700px;
-}
 /**********************************************
 LOGIN FORM
 ***********************************************/
 #logindiv {
-  min-height: 700px;
+  min-height: 400px;
 }
 /**********************************************
 TOP NAV
@@ -1841,6 +1838,21 @@ span.fa-stack {
 .badge {
   margin-top: 6px;
   margin-right: 6px;
+}
+.comment {
+  max-width: 70px;
+}
+.tooltip-inner {
+  max-width: 320px;
+  word-break: break-word;
+  word-break: break-all;
+}
+.notabene {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  border-color: #097ce1;
 }
 /*  */
 @media screen and (max-width: 1281px) {

@@ -6,10 +6,11 @@
   <title>Group S Transfer</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
+  <meta name="author" content="Group S">
   <link rel="shortcut icon" href="favicon.ico">
 
   <!-- build:css css/file.min.css -->
-  <link rel="stylesheet" href="../cdn/bootstrap/3.2.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="../cdn/bootstrap/3.3.2/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="../cdn/font-awesome/4.2.0/css/font-awesome.min.css"/>
   <link rel="stylesheet" href="css/datepicker.css">
   <link rel="stylesheet" href="../cdn/DataTables/1.10.4/media/css/jquery.dataTables.1.10.4.min.css"/>
@@ -162,7 +163,6 @@
 <!-- END: Underscore Template Definition. -->
 
 
-
 <div id="main" class="pt-s">
   <div class="container-fluid">
 
@@ -222,10 +222,9 @@
                       </div>
 
                       <p class="text-center">
+                        <textarea name="note" class="notabene" placeholder="Commentaires" cols="50" rows="5"></textarea>
                         <input name="upload" type="file" multiple="" size="50"/>
                         <input name="token" type="hidden" size="50"/>
-                        <input id="jbs1" class="hidden" type="text">
-                        <input id="jbs2" class="hidden" type="text">
                         <input name="clientName" type="hidden" size="50"/>
                         <input name="email" type="hidden" size="100"/>
                         <input name="lang" type="hidden" value=""/>
@@ -272,10 +271,7 @@
                 </ul>
               </li>
               <li id="upload">
-                <a href="#">[[uploadText]]</a>
-              </li>
-              <li id="validation" class="pl-s">
-                <a href="#">[[validationText]]</a>
+                <a href="#">[[uploadText]] <span class="badge pull-right" style="margin-top: 15px;">[[uploadCount]]</span></a>
               </li>
             </ul>
           </script>
@@ -284,7 +280,7 @@
           <!-- BEGIN: Underscore Template Definition. -->
           <script id="menuL2" type="text/template" class="template">
             <li class="level2" data-category="[[categoryNumber]]">
-              <a href="#">[[categoryNumber]] - [[categoryName]] </a>
+              <a href="#">[[categoryNumber]] - [[categoryName]]</a>
               <ul>
                 [[ leafNode ]]
               </ul>
@@ -317,19 +313,24 @@
 
               <!--SELECT CLIENTS-->
 
-              <input id="clients" class="pull-left fix-width-select2" />
+              <input id="clients" class="pull-left fix-width-select2"/>
+
               <div class="modal-select2"></div>
+            </div>
+            <div class="row">
+
+
               <!-- FILTERS -->
               <div class="filter">
                 <!--filtrer par-->
                 <div class="btn-group pull-left">
-                  <button id="filterby" type="button" class="btn btn-portal-default dropdown-toggle"
+                  <button id="filterby" type="button" class="btn btn-default dropdown-toggle"
                           data-toggle="dropdown">
                     &nbsp;&nbsp;&nbsp;
                   </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a id="filterNew" href="#"></a></li>
-                    <li class="divider"></li>
+                    <!--<li><a id="filterNew" href="#"></a></li>
+                    <li class="divider"></li>-->
                     <li><a id="filterDL" href="#"></a></li>
                     <li class="divider"></li>
                     <li><a id="filterClear" href="#"></a></li>
@@ -348,16 +349,15 @@
               </div>
 
 
-
               <!--refresh & toggle config table-->
               <div class="btn-group pull-right ml-s">
-                <button type="button" class="btn btn-portal-default reloadme" title="refresh">
+                <button type="button" class="btn btn-default reloadme" title="refresh">
                   &nbsp;&nbsp;&nbsp;
                 </button>
-                <button id="help" type="button" class="btn btn-portal-default" title="help">
+                <button id="help" type="button" class="btn btn-default" title="help">
                   &nbsp;&nbsp;&nbsp;
                 </button>
-                <button id="toggle-side-menu" type="button" class="btn btn-portal-default">
+                <button id="toggle-side-menu" type="button" class="btn btn-default">
                   &nbsp;&nbsp;&nbsp;
                 </button>
               </div>
@@ -384,7 +384,7 @@
 
           <table id="tableID" class="display table table-striped">
             <thead>
-              <!--TEMPLATE-->
+            <!--TEMPLATE-->
             </thead>
             <tbody>
             <tr class="[[classNew]]">
@@ -411,6 +411,7 @@
               <td class="text-center"></td>
               <td class="text-center"></td>
               <td class="text-center"><a class="icon-validation" title="Validation" data-file-id="[[fileId]]"></a></td>
+              <td></td>
               <td></td>
             </tr>
             </tbody>
@@ -439,6 +440,7 @@
               <th class="text-center">isNew</th>
               <th class="text-center">Validation</th>
               <th>filenameFormatted</th>
+              <th>[[comment]]</th>
             </tr>
           </script>
           <!-- END: HEADER: Underscore Template Definition. -->
@@ -477,6 +479,7 @@
                 </a>
               </td>
               <td>[[fileName]]</td>
+              <td class="comments" data-toggle="tooltip" data-placement="left" data-html="true" title="[[uploaderComment]]">[[uploaderCommentLimit]]</td>
             </tr>
           </script>
           <!-- END: Underscore Template Definition. -->
@@ -517,7 +520,6 @@
 <script src="../cdn/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="../cdn/lodash.min.js"></script>
 <script src="../library/@@libraryVersion@@/js/analytics/onerror.js"></script>
-<!--<script src="js/knockout-3.3.0.js"></script>-->
 <script src="../cdn/moment/moment.2.8.4.min.js"></script>
 <script src="../cdn/moment/moment-range/1.0.5/lib/moment-range.min.js"></script>
 <script src="../cdn/DataTables/1.10.4/media/js/jquery.dataTables.1.10.4.min.js"></script>

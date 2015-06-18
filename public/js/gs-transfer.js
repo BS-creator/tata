@@ -76,18 +76,28 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
   var getUsedDocRef = function (data) {
     var a = [];
+    var ref;
+
+    //reset number of file
+    while (countFilePerCat.length > 0) { countFilePerCat.pop();  }
+    countFilePerCat['upload'] = 0;
+    countFilePerCat['other'] = 0;
+
     _.forEach(data, function (item) {
-      var ref = parseInt(item.referenceDocument);
+      ref = parseInt(item.referenceDocument);
 
       if (!isNaN(ref) && username !== item.uploadUserName) {
         a.push(ref);
         countFilePerCat[ref] ? countFilePerCat[ref] += 1 : countFilePerCat[ref] = 1;
       } else {
         a.push(-1);
-        countFilePerCat['other'] ? countFilePerCat['other'] += 1 : countFilePerCat['other'] = 1;
+        if (username !== item.uploadUserName) {countFilePerCat['other'] += 1; }
       }
+
+      if (item.uploadUserName === username) {countFilePerCat['upload'] += 1; }
+
     });
-    //console.log("countFilePerCat = ", countFilePerCat);
+
     return _.uniq(a);
   };
 
@@ -130,19 +140,21 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     };
   };
 
-  var setCursorToAuto     = function () {
+  var setCursorToAuto = function () {
     $('body').css('cursor', 'auto');
     $('.sweet-alert button').css('cursor', 'auto');
   };
+
   var setCursorToProgress = function () {
     $('body').css('cursor', 'progress');
     $('.sweet-alert button').css('cursor', 'progress');
   };
+
   /****************************************************
    * INTERNATIONALIZATION i18n
    * */
 
-  var labelDocI18n        = function (item) {
+  var labelDocI18n = function (item) {
 
     var doc = {
       fr:      function () { return item.labelDocFR; },
@@ -152,7 +164,8 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     };
     return (doc[lang] || doc['default'])();
   };
-  var labelCati18n        = function (item) {
+
+  var labelCati18n = function (item) {
     var cat = {
       fr:      function () { return item.labelCategoryFR;},
       nl:      function () { return item.labelCategoryNL;},
@@ -161,11 +174,12 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     };
     return (cat[lang] || cat['default'])();
   };
+
   /****************************************************
    * FORMAT COLUMNS
    * */
 
-  var formatExtension     = function (value) {
+  var formatExtension = function (value) {
 
     if (value || value !== '') {
       var v = value.toLowerCase(), extension = {
@@ -209,8 +223,6 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     loadData().then(function () {
       //add new files from clients.
       AjaxData = (data && data.target) ? AjaxData : (data || AjaxData);
-      //countFilePerCat.length = 0;
-      while (countFilePerCat.length > 0) { countFilePerCat.pop();}
       $.when(mergeLabelDoc()).then(function () {
         //RESOLVED
         //destroy dt
@@ -290,8 +302,12 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     e.stopImmediatePropagation();
   };
   var dlLabel                  = function (e) {
-    var $this = $(this), filename = $this.data('filename'), fileID = $this.data('file-id'), url = TransferServerURL + 'file/' + fileID + '/' + filename;
+    var $this    = $(this);
+    var filename = $this.data('filename');
+    var fileID   = $this.data('file-id');
+    var url      = TransferServerURL + 'file/' + fileID + '/' + filename;
 
+    // view the PDF directly
     if (filename && (Utils.endsWith(filename, '.PDF') || Utils.endsWith(filename, '.pdf'))) {
       url = getPDFjsURL(TransferServerURL, fileID, filename);
       window.open(url, '_blank');
@@ -369,27 +385,29 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
         $('#progress').find('.progress-bar').css('width', progress + '%');
       }, add:      function (e, data) {
-        //TODO: add it to the list and create 'UPLOAD' button
-        /*var $uploadList = $('#uploadList');
-         _.forEach(data.files, function(file) {
-         $uploadList.append('<li>' + file.name + '</li>');
-         });*/
         data.submit().error(function (jqXHR) {
-          Utils.errorMessage('Error... ' + jqXHR.statusText, 4000);
+          Utils.errorMessage('Error: ' + jqXHR.status + ' - ' + jqXHR.statusText, 4000);
         }).success(function () {
           activeUploads = $uploadform.fileupload('active');
-          //console.log( "activeUploads = ", activeUploads );
         });
-      }, start:    function () { $('#progress').show(); }, done: function () {
+
+      }, start:    function () {
+        $('#progress').show();
+      }, done:     function () {
         activeUploads = $uploadform.fileupload('active');
         if (activeUploads < 2) {
-          $('#progress').hide();
+          var p = $('#progress');
+          p.find('.progress-bar').css('width', '0%');
+          p.hide();
           $('.close').click();
           Utils.smessage('OK', ' ', 'success', 4000);
           if ($('input[name="notification"]').prop('checked')) {
             postNotification().then(function () {
               console.log('notification sent');
               selectMenu = 'UPLOAD';
+              /* TODO: CHECK
+               reloadPage();
+               setCursorToAuto();*/
             });
           } else {
             selectMenu = 'UPLOAD';
@@ -400,6 +418,15 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       }
     });
   };
+//
+  // send cookie
+  //
+  /*TODO: CHECK
+   $uploadform.fileupload('option', {
+   xhrFields: {
+   withCredentials: true
+   }
+   });*/
 
   var listFolderUpload = function (destFolders) {
     var listFolder = $('#uploadForm').find('div.dir-list'), key;
@@ -438,6 +465,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       $('#breadcrumb').html('<span style="color: #BA5B08;">' + i18n[lang].result + '</span><li class="active noclick">' + text + '</li>');
     } else {
       console.log('error Setting BreadCrumb.');
+      $('#breadcrumb').html();
     }
   };
   var menuRootClick               = function (event) {
@@ -450,8 +478,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     table.columns('.fileLayer').visible(true, false);
     // adjust column sizing and redraw
     table.columns.adjust().draw(false);
-    table//.column(10).search(/^((?!Validation\/).)*$/, true, false) // Don't show validation folder
-      .column(4).search('[^' + username + ']', true, false).draw(); //filter on uploadUserName
+    table.column(4).search('[^' + username + ']', true, false).draw(); //filter on uploadUserName
     selectMenu = 'ROOT';
     setBreadCrumb(i18n[lang].tree.root);
     updateMenuVisibleColumnList();
@@ -517,17 +544,17 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     numDocRegex = numDocRegex.replace(/\|([^\|]*)$/, '$1'); //remove last '|'
     numDocRegex += ')';
 
-    table//.column(10).search(/^((?!Validation\/).)*$/, true, false) // Don't show validation folder
-      .column(4).search('[^' + username + ']', true, false).column(7).search(numDocRegex, true, false).draw(); //filter
-                                                                                                               // on
-                                                                                                               // ref
-                                                                                                               // docs
+    table.column(4).search('[^' + username + ']', true, false)
+      .column(7).search(numDocRegex, true, false).draw(); //filter on ref docs
     selectMenu = 'ROOT';
     updateMenuVisibleColumnList();
     event.preventDefault();
   };
   var menuRefDocClick             = function (event) {
-    var $this = $(event.currentTarget).parent('li'), nodeID = $this.attr('id'), nodeText = $this.text(), nodeParentText = $this.closest('li.level2').children('a').text();
+    var $this          = $(event.currentTarget).parent('li');
+    var nodeID         = $this.attr('id');
+    var nodeText       = $this.text();
+    var nodeParentText = $this.closest('li.level2').children('a').text();
 
     setBreadCrumb(nodeParentText, nodeText);
 
@@ -545,7 +572,8 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       table.columns('.validation').visible(false, false);
       table.columns.adjust().draw(false); // adjust column sizing and redraw
       table//.column(10).search(/^((?!Validation\/).)*$/, true, false) // Don't show validation folder
-        .column(4).search('[^' + username + ']', true, false).column(7).search('^' + nodeID + '$', true, false).draw(); //filter on referenceDocument
+        .column(4).search('[^' + username + ']', true, false)
+        .column(7).search('^' + nodeID + '$', true, false).draw(); //filter on referenceDocument
     }
     selectMenu = 'ROOT';
     updateMenuVisibleColumnList();
@@ -582,15 +610,24 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     });
 
     //other category
-    //DONE: added manually!!!! it is too custom to make it a rule!!!
+    //
+    //added manually!!!! it is too custom to make it a rule!!!
+    //
     if (_.contains(refDocUsed, -1)) {
-      htmlCategoryNode += '<li class="level2" >' + '<a id="other" href="#">' + i18n[lang].tree.other + '</a>' + '</li>';
+      htmlCategoryNode += '<li class="level2" >'
+        + '<a id="other" href="#">' + i18n[lang].tree.other
+        + '<span class="badge pull-right" style="margin-top: 0px;  margin-right: 10px;">'
+        + (countFilePerCat['other'] ? countFilePerCat['other'] : 0)
+        + '</span>'
+        + '</a>'
+        + '</li>';
     }
-
+    var uploadCount = countFilePerCat['upload'] ? countFilePerCat['upload'] : 0;
     return _.template($('#menuL1').html())({
       allDocs:        i18n[lang].tree.root,
       uploadText:     i18n[lang].tree.upload,
       validationText: i18n[lang].tree.valid,
+      uploadCount:    uploadCount,
       categoryNode:   htmlCategoryNode
     });
   };
@@ -604,22 +641,25 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   };
   var createMenu                  = function createMenu() {
     $('#sidenav').html(templateMenu(filterMenu()));
-
   };
   /****************************************************
    * MENU COLUMN VISIBLE
    * */
 
   var updateMenuVisibleColumnList = function updateMenuVisibleColumnList() {
-    var exclude = [0, 1, 15, 16, 17, 18, 19], list = $('.side-menu-list'), i = 0, headerCol = '', li = '';
+    var exclude       = [0, 1, 15, 16, 17, 18, 19];
+    var list          = $('.side-menu-list');
+    var i             = 0;
+    var headerCol, li = '';
+    var numberCol     = 20; //number of column in the table
 
     list.html('');
-    while (i < numberCol) {
+    while (i <= numberCol) {
       if (!_.contains(exclude, i)) {
         headerCol    = table.columns(i).header().to$().html();
         li           = document.createElement('li');
         li.innerHTML = '&nbsp;&nbsp;&nbsp;' + headerCol;
-        li.setAttribute('data-index', i);
+        li.setAttribute('data-index', '' + i);
         if (table.column(i).visible()) {
           li.className += 'active';
         }
@@ -640,15 +680,14 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   var templateTable               = function templateTable() {
 
     var tpl = _.template($('#bodytpl').html());
+    var date;
 
     _.forEach(AjaxData, function (row) {
 
       row.classNew = row.isNew ? 'isNew' : 'notNew';
 
       row.downloadCount = parseInt(row.downloadCount);
-      if (isNaN(row.downloadCount)) {
-        row.downloadCount = -1;
-      }
+      if (isNaN(row.downloadCount)) { row.downloadCount = -1; }
 
       row.alreadyDL = row.downloadCount > 0 ? 'text-muted' : 'text-primary';
 
@@ -665,14 +704,18 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       row.dlClass = row.uploadUserName === username ? 'fa-upload' : 'fa-download';
 
       row.dateFormatted      = moment(row.date, 'YYYY-MM-DD').format('DD/MM/YYYY');
+      row.date               = moment(row.date, 'YYYY-MM-DD').format('X');
       row.sizeFormatted      = formatSize(row.size);
       row.extensionFormatted = formatExtension(row.extension, row);
 
-      var date             = moment(row.uploadStamp, 'MM/DD/YYYY hh:mm:ss a');
+      date                 = moment(row.uploadStamp, 'MM/DD/YYYY hh:mm:ss a');
       row.uploadStamp      = date.format('DD/MM/YYYY HH:mm:ss');
       row.uploadStampOrder = date.format('YYYY/MM/DD HH:mm:ss');
 
-      if (row.uploadUserName === 'trf_fich') { row.uploadUserName = "Group S"}
+      row.uploaderCommentLimit = Utils.htmlEncode(row.uploaderComment, false).substring(0, 20);
+      row.uploaderComment      = Utils.htmlEncode(Utils.htmlEncode(row.uploaderComment, true), false);
+
+      if (row.uploadUserName === 'trf_fich') {row.uploadUserName = "Group S"}
 
       table.rows.add($(tpl(row).trim()));
     });
@@ -751,6 +794,10 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       }, {
         targets: 19, //filename
         visible: false, searchable: true
+      }, {
+        className: 'comment',
+        targets:   20, //uploader comment
+        visible:   true, searchable: true
       }],
       initComplete: initTableComplete
     });
@@ -778,7 +825,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         url:      TransferServerURL + 'logoff/',
         data:     {token: tokenTransfer},
         complete: function () {
-          Utils.deleteCookie("ariane-transfer");
+          document.cookie = 'ariane-transfer=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
           sessionStorage.clear();
           redirectToLogin();
         }
@@ -791,16 +838,15 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
     setCursorToProgress();
     return $.ajax({
-      type:        'DELETE', url: TransferServerURL + 'file/', data: {
+      type:       'DELETE', url: TransferServerURL + 'file/', data: {
         token: tokenTransfer, fileID: fileID
-      }, success:  function () {
+      }, success: function () {
         Utils.smessage(i18n[lang].file.del, '', 'success', 2000);
 
         table.row(cell.closest('tr')).remove().draw();
         reloadPage();
-      }, complete: function () {
-        setCursorToAuto();
-      }
+      },
+      complete:   function () { setCursorToAuto(); }
 
     });
   };
@@ -811,8 +857,8 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       type:        'DELETE', url: TransferServerURL + 'file/multi', data: getFilesID().data, success: function () {
         Utils.smessage(i18n[lang].file.del, '', 'success', 2000);
         reloadPage();
-        //setTimeout(function() { window.location.reload(); }, 2000);
         resetCheckBox();
+        setEventMultiDelete();
       }, error:    function () {
         Utils.errorMessage(i18n[lang].error5xx, 5000);
       }, complete: function () {
@@ -844,14 +890,13 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     //var service = 'category/' ;
     //if(token){ console.log("token = "+token +" defined ==> OK");}
     return $.ajax({
-      type:          'GET', url: TransferServerURL + service, success: function (data) {
+      type:  'GET', url: TransferServerURL + service, success: function (data) {
         category = data;
-      }, statusCode: {
-        403: function () {
-          hideLoading();
-          console.log('error loading category');
-          Utils.errorMessage(i18n[lang].errorCnx, 4000);
-        }
+      },
+      error: function () {
+        hideLoading();
+        console.log('error loading category');
+        Utils.errorMessage(i18n[lang].errorCnx, 4000);
       }
     });
   };
@@ -892,7 +937,9 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   };
   var setEventColumnListVisible  = function () {
     $('.side-menu-list > li').off('click').on('click', function () {
-      var $this = $(this), index = $this.data('index'), visible = table.column(index).visible();
+      var $this   = $(this);
+      var index   = $this.data('index');
+      var visible = table.column(index).visible();
       $this.toggleClass('active');
       table.column(index).visible(!visible);
     });
@@ -958,7 +1005,6 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   };
   /***** LANGUAGE SETTINGS *****/
   var setEventLanguageSettings   = function () {
-    //TODO: knockout.js???
     $('.' + lang).addClass('default-lang');
 
     $('.login-lang').off('click').on('click', function () {
@@ -1003,9 +1049,9 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       });
     });
   };
-   /***** MULTI DELETE *****/
+  /***** MULTI DELETE *****/
 
-   var  setI18nMultiDelete         = function () {
+  var setI18nMultiDelete         = function () {
     $('.deleteAll').html('<i class="fa fa-trash"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDelete);
   };
   var setEventMultiDelete        = function () {
@@ -1059,19 +1105,19 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
   var setI18nFiltersButton       = function () {
     $('#filterby').html(i18n[lang].button.filter.filterby + '&nbsp;&nbsp;&nbsp;<span class="caret"></span>'); //
-    $('#filterNew').html('<i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.new);
+    //$('#filterNew').html('<i class="fa fa-file-o"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.new);
     $('#filterDL').html('<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.notDL);
     $('#filterClear').html('<i class="fa fa-times"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.filter.clear);
   };
   var setEventFiltersButton      = function () {
 
-    $('#filterNew').off('click').on('click', function () {
-      var filterby = $('#filterby');
-      if (!filterby.hasClass('active')) {filterby.addClass('active');}
-      $('#breadcrumb').html($('#breadcrumb').html() + '<li class="active">' + i18n[lang].button.filter.new + '</li>');
-      table.column(17).search('true')//.column(4).search('[^' + username + ']', true, false)
-        .draw();
-    });
+    /*$('#filterNew').off('click').on('click', function () {
+     var filterby = $('#filterby');
+     if (!filterby.hasClass('active')) {filterby.addClass('active');}
+     $('#breadcrumb').html($('#breadcrumb').html() + '<li class="active">' + i18n[lang].button.filter.new + '</li>');
+     table.column(17).search('true')//.column(4).search('[^' + username + ']', true, false)
+     .draw();
+     });*/
 
     $('#filterDL').off('click').on('click', function () {
       var filterby = $('#filterby');
@@ -1262,8 +1308,6 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     });
 
     setEventsHTML();
-
-    //redirectToPreviousCat();
 
     setTimeout(function () {
 
