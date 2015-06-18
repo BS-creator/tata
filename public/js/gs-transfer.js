@@ -79,9 +79,9 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     var ref;
 
     //reset number of file
-    while (countFilePerCat.length > 0) { countFilePerCat.pop();  }
+    while (countFilePerCat.length > 0) { countFilePerCat.pop(); }
     countFilePerCat['upload'] = 0;
-    countFilePerCat['other'] = 0;
+    countFilePerCat['other']  = 0;
 
     _.forEach(data, function (item) {
       ref = parseInt(item.referenceDocument);
@@ -647,7 +647,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
    * */
 
   var updateMenuVisibleColumnList = function updateMenuVisibleColumnList() {
-    var exclude       = [0, 1, 15, 16, 17, 18, 19];
+    var exclude       = [0, 1, 16, 17, 18, 19, 20];
     var list          = $('.side-menu-list');
     var i             = 0;
     var headerCol, li = '';
@@ -739,65 +739,48 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       }, //pagingType: 'full',
       order:        [[1, 'asc'], [2, 'desc']],
       columnDefs:   [{
-        className: 'defaultView', targets: 0, //checkbox
-        orderable: false, searchable: true
-      }, {
-        className: 'defaultView', targets: 1 //Download
-      }, {
-        className: 'defaultView', targets: 2 // Date
-      }, {
-        className: 'detailsLayer ', targets: 3, // fileName
-        visible:   false, searchable: true
-      }, {
-        className: 'detailsLayer ', targets: 4, // uploadUserName
-        visible:   false, searchable: true
-      }, {
-        className: 'fileLayer defaultView', targets: 5 //employerNumber
-      }, {
-        className: 'fileLayer defaultView', targets: 6 // label
-      }, {
-        className: 'fileLayer defaultView', targets: 7 //referenceDocument
-      }, {
-        className: 'defaultView', targets: 8 // size
-      }, {
-        className: 'defaultView', targets: 9 //extension or type
-      }, {
-        //className:  'detailsLayer validation', // don't show path (too big on screen)
-        targets: 10, //path
-        visible: false, searchable: true
-      }, {
-        className: 'defaultView', targets: 11 //referenceClient
-        //visible:    true,
-        //searchable: true
-      }, {
-        targets: 12, //counter
-        visible: false, searchable: false
-      }, {
-        targets: 13, //referenceGroupS
-        visible: false, searchable: false
-      }, {
-        className: 'validation ', targets: 14, //uploadStamp
-        visible:   false, searchable: true
-      }, {
-        className:  'defaultView', targets: 15, // remove
-        searchable: false, orderable: false
-      }, {
-        targets: 16, // downloadCount
-        visible: false, searchable: true
-      }, {
-        targets: 17, //isNew
-        visible: false, searchable: true
-      }, {
-        //className:  'validation',
-        targets: 18, //Validation
-        visible: false, searchable: false, orderable: false
-      }, {
-        targets: 19, //filename
-        visible: false, searchable: true
-      }, {
-        className: 'comment',
-        targets:   20, //uploader comment
-        visible:   true, searchable: true
+        //checkbox
+        targets: 0, orderable: false, searchable: true, className: 'defaultView'
+      }, {//Download
+        targets: 1, className: 'defaultView'
+      }, {// Date
+        targets: 2, className: 'defaultView'
+      }, {// fileName
+        targets: 3, visible: false, searchable: true, className: 'detailsLayer '
+      }, {// uploadUserName
+        targets: 4, visible: false, searchable: true, className: 'detailsLayer '
+      }, {//employerNumber
+        targets: 5, className: 'fileLayer defaultView'
+      }, {// label
+        targets: 6, className: 'fileLayer defaultView'
+      }, {//referenceDocument
+        targets: 7, className: 'fileLayer defaultView'
+      }, {// size
+        targets: 8, className: 'defaultView'
+      }, {//extension or type
+        targets: 9, className: 'defaultView'
+      }, {//path --  don't show path (too big on screen)
+        targets: 10, visible: false, searchable: true
+      }, {//referenceClient
+        targets: 11, className: 'defaultView'
+      }, {//counter
+        targets: 12, visible: false, searchable: false
+      }, {//referenceGroupS
+        targets: 13, visible: false, searchable: false
+      }, {//uploadStamp
+        targets: 14, visible:   false, searchable: true, className: 'validation '
+      }, {//uploader comment
+        targets: 15, visible:   true, searchable: true, className: 'comment'
+      }, {// downloadCount
+        targets: 16, visible: false, searchable: true
+      }, {//isNew
+        targets: 17, visible: false, searchable: true
+      }, { //Validation
+        targets: 18, visible: false, searchable: false, orderable: false
+      }, {//filename
+        targets: 19, visible: false, searchable: true
+      }, {// remove
+        targets: 20, searchable: false, orderable: false, className:  'defaultView'
       }],
       initComplete: initTableComplete
     });

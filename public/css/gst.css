@@ -1287,11 +1287,11 @@ CONTENT
   overflow: hidden;
 }
 #contentTable #searchBox {
-  max-width: 130px;
+  max-width: 140px;
 }
 #contentTable .dateBegin,
 #contentTable .dateEnd {
-  max-width: 100px;
+  max-width: 140px;
 }
 /****************************************************
 DATEPICKER
