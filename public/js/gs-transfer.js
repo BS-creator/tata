@@ -53,18 +53,17 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   var TransferServerURL = sessionStorage.getItem('TransferServerURL'),
       TransferBaseURL   = sessionStorage.getItem('TransferBaseURL'),
       lang              = sessionStorage.getItem('lang'),
-      TABLEID           = '#tableID',
-      table             = {}, //DataTable object
-      oTable            = {}, //Jquery Data object
-      i18n              = {}, // Language
-      AjaxData          = [], // Data
-      category          = [], // Data
-      refDocUsed        = [], // Data
-      numberCol         = 19, //number of column in the table
-      username          = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '',
-      tokenTransfer     = sessionStorage.getItem('tokenTransfer'),
-      selectMenu        = 'ROOT',
-      countFilePerCat   = [];
+  var TABLEID           = '#tableID';
+  var table             = {}; //DataTable object
+  var oTable = {}; //Jquery Data object
+  var i18n = {}; // Language
+  var AjaxData = []; // Data
+  var category = []; // Data
+  var refDocUsed = []; // Data
+  var username          = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '';
+  var tokenTransfer     = sessionStorage.getItem('tokenTransfer');
+  var selectMenu        = 'ROOT';
+  var countFilePerCat   = [];
 
   /*** HELPER ***/
 
@@ -226,18 +225,32 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       $.when(mergeLabelDoc()).then(function () {
         //RESOLVED
         //destroy dt
-        table.destroy();
+        try {
+          table.destroy(false);
+        } catch (e) {
+          console.warn(e);
+          //I18N.common.stabilityWarning
+          // setTimeout(function() { throw e; }, 0);
+        }
+        //table.empty();
+        //RESOLVED
         createDataTable();
         createMenu();
-      }, function () { console.log('>>>>> ERR: FAILED'); });
-    });
+      }, function () {
+        //REJECT
+        console.error('>>>>> reloadNewData: FAILED');
+      });
+    }, function () {
+      //REJECT
+      console.error('>>>>> reloadNewData: FAILED');
+    })
   };
 
   /****************************************************
    * DOWNLOAD (ZIP)
    * */
 
-  var addLowerButton           = function () {
+  var addLowerButton = function addLowerButton() {
     var multidl = $('.multiDL');
     multidl.html('');
     /***** DOWNLOAD BUTTON *****/
@@ -320,6 +333,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     incrementCounter($this.closest('tr').find('a').first());
     e.stopImmediatePropagation();
   };
+
   var incrementAllSelectedRows = function () {
     _.forEach($(TABLEID).find('.active'), function (row) {
       incrementCounter($(row).find('a').first());
@@ -376,7 +390,9 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     $('input[name="token"]').val(tokenTransfer);
 
     $uploadform.attr('action', TransferServerURL + 'file/upload');
-
+    if (_.contains(window.location.href, 'localhost')) {
+      $uploadform.attr('action', '//localhost:8018/file/upload');
+    }
     $uploadform.fileupload({
 
       limitMultiFileUploads: 10, //autoUpload: false,
@@ -520,7 +536,12 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     updateMenuVisibleColumnList();
     event.preventDefault();
   };
-  var menuCategoryClick           = function (event) {
+
+  /**
+   * When the user click on a category, return all document in that category
+   * @param event
+   */
+  var menuCategoryClick = function (event) {
 
     $('#upload').removeClass('active');
     $('#validation').removeClass('active');
@@ -609,6 +630,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       htmlLeafNode = '';
     });
 
+    //
     //other category
     //
     //added manually!!!! it is too custom to make it a rule!!!
@@ -642,6 +664,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   var createMenu                  = function createMenu() {
     $('#sidenav').html(templateMenu(filterMenu()));
   };
+
   /****************************************************
    * MENU COLUMN VISIBLE
    * */
@@ -669,6 +692,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     }
     setEventColumnListVisible();
   };
+
   /****************************************************
    * TABLE
    * */
@@ -720,7 +744,8 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       table.rows.add($(tpl(row).trim()));
     });
   };
-  var createDataTable             = function createDataTable() {
+
+  var createDataTable = function createDataTable() {
 
     templateHeader();
 
@@ -785,6 +810,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       initComplete: initTableComplete
     });
   };
+
   /****************************************************
    * AJAX
    * */
@@ -833,11 +859,15 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
     });
   };
-  var deleteAll                   = function () {
+  var deleteAll        = function () {
+    $('.deleteAll').off('click');
     setCursorToProgress();
 
     return $.ajax({
-      type:        'DELETE', url: TransferServerURL + 'file/multi', data: getFilesID().data, success: function () {
+      type:        'DELETE', 
+      url: TransferServerURL + 'file/multi', 
+      data: getFilesID().data, 
+      success: function () {
         Utils.smessage(i18n[lang].file.del, '', 'success', 2000);
         reloadPage();
         resetCheckBox();
@@ -883,6 +913,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       }
     });
   };
+
   /***
    * list files on the server FTP.
    */
@@ -890,7 +921,8 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   var loadData                   = function () {
 
     return $.ajax({
-      type:        'GET', url: TransferServerURL + 'file/list/', success: function (data) {
+      type:        'GET', url: TransferServerURL + 'file/list/', 
+      success: function (data) {
         AjaxData = data;
       }, error:    function () {
         hideLoading();
@@ -938,6 +970,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     $smh.append('&nbsp;&nbsp;&nbsp;<i class="fa fa-chevron-right"></i>');
     $('#init-conf').html(i18n[lang].sideMenu.reset);
   };
+
   var setEventSideMenuColumnList = function () {
 
     // slide off #side-menu
@@ -986,6 +1019,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       $(this).toggleClass('active', 'active');
     });
   };
+
   /***** LANGUAGE SETTINGS *****/
   var setEventLanguageSettings   = function () {
     $('.' + lang).addClass('default-lang');
@@ -1000,6 +1034,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       //window.location.reload();
     });
   };
+
   /***** DOWNLOAD *****/
   var setEventDownload           = function () {
     $(TABLEID).on('click', '.dlfile', dlIcon);
@@ -1007,6 +1042,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     //download Single file by click on label
     $(TABLEID).on('click', '.dlfileLabel', dlLabel);
   };
+
   /***** MULTIDOWNLOAD *****/
   var setI18nMultiDownload       = function () {
     $('.downloadall').html('<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDL);
@@ -1014,6 +1050,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   var setEventMultiDownload      = function () {
     $('.downloadall').off('click').on('click', downloadAll);
   };
+
   /***** DELETE *****/
   var setEventDeleteFile         = function () {
     $('.remove').off('click').on('click', function () {
@@ -1063,6 +1100,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       $('td').closest('tr').removeClass('active');
     }
   };
+
   /***** CHECKBOX SELECT ALL *****/
   var setEventCheckBox           = function () {
 
@@ -1119,6 +1157,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     });
 
   };
+
   /***** SEARCH *****/
 
   var setI18nSearch              = function () {
@@ -1254,6 +1293,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     setI18nHelpButton();
     setI18nSearch();
     setI18nSideMenuColumnList();
+
     setEventUpload();
     setEventLanguageSettings();
     setEventReload();
@@ -1272,7 +1312,8 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     setEventMultiDownload();
 
   };
-  var initTableComplete          = function () {
+
+  var initTableComplete = function () {
 
     table.clear();
 
@@ -1294,6 +1335,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
     setTimeout(function () {
 
+      $('[data-toggle="tooltip"]').tooltip();
       setI18nQuotaWarning();
 
       if (AjaxData.length === 0) {
