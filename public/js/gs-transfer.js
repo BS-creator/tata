@@ -52,7 +52,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
   var TransferServerURL = sessionStorage.getItem('TransferServerURL'),
       TransferBaseURL   = sessionStorage.getItem('TransferBaseURL'),
-      lang              = sessionStorage.getItem('lang'),
+      lang              = sessionStorage.getItem('lang');
   var TABLEID           = '#tableID';
   var table             = {}; //DataTable object
   var oTable = {}; //Jquery Data object
@@ -864,9 +864,9 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     setCursorToProgress();
 
     return $.ajax({
-      type:        'DELETE', 
-      url: TransferServerURL + 'file/multi', 
-      data: getFilesID().data, 
+      type:        'DELETE',
+      url: TransferServerURL + 'file/multi',
+      data: getFilesID().data,
       success: function () {
         Utils.smessage(i18n[lang].file.del, '', 'success', 2000);
         reloadPage();
@@ -921,7 +921,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   var loadData                   = function () {
 
     return $.ajax({
-      type:        'GET', url: TransferServerURL + 'file/list/', 
+      type:        'GET', url: TransferServerURL + 'file/list/',
       success: function (data) {
         AjaxData = data;
       }, error:    function () {
