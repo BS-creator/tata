@@ -4,7 +4,7 @@
 
 /*globals $,_ */
 
-var migration = (function migration() {
+var migrationUser = (function migration() {
 
   var hashArray;
   var login;
@@ -74,6 +74,7 @@ var migration = (function migration() {
     $('.onlyOneUserb').html(i18n[lang].onlyOneUserb);
     $('#firstname').attr('placeholder', i18n[lang].firstname);
     $('#lastname').attr('placeholder', i18n[lang].lastname);
+    $('#submit-info').html(i18n[lang].button);
 
   }
 
@@ -191,24 +192,15 @@ var migration = (function migration() {
 
     // check email validity
     if (!email || !validateEmail(email)) {
-      swal({
-        title: i18n[lang].validEmail,
-        type:  "error"
-      });
+      swal({title: i18n[lang].validEmail, type: "error"});
       return;
     }
     if (!firstname) {
-      swal({
-        title: i18n[lang].validfn,
-        type:  "error"
-      });
+      swal({title: i18n[lang].validfn, type: "error"});
       return;
     }
     if (!lastname) {
-      swal({
-        title: i18n[lang].validln,
-        type:  "error"
-      });
+      swal({title: i18n[lang].validln, type: "error"});
       return;
     }
 
@@ -256,6 +248,7 @@ var migration = (function migration() {
     password:        password,
     appBack:         appBack,
     accountType:     accountType,
+    getAnalyticsURL: getAnalyticsURL,
     redirectOnError: redirectOnError,
     gethash:         gethash
   }

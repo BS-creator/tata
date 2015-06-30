@@ -48,11 +48,11 @@ $(function (swal, _, Utils) {
     }
   }
 
-  function getAnalyticsURL(){
+  function getAnalyticsURL() {
     if (_.contains(window.location.href, 'localhost')) {
-      return TransferServerURL.replace(/8019/g, '8011')
-    }else {
-      return TransferServerURL.replace(/ariane-transfer/g, 'analytics')
+      return sessionStorage.TransferServerURL.replace(/8019/g, '8011')
+    } else {
+      return sessionStorage.TransferServerURL.replace(/ariane-transfer/g, 'analytics')
     }
   }
 
