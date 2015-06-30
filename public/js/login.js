@@ -59,10 +59,11 @@ $(function (swal, _, Utils) {
   function getMigrationForm(login, password) {
     return $.ajax({
       type:     'GET',
+      xhrFields : { withCredentials: false  },
       url:      getAnalyticsURL() + 'accountnotes/2/' + login,
       success:  function (data) {
         //continue to app transfer
-        console.log(data);
+        //console.log(data);
       }, error: function (xhr) {
         //console.log(xhr);
         //redirect to form
@@ -94,9 +95,9 @@ $(function (swal, _, Utils) {
       data:     credentials,
       success:  function (data) {
         if (data.token) {
+          sessionStorage.setItem('tokenTransfer', data.token);
+          sessionStorage.setItem('username', credentials.login.toUpperCase());
           getMigrationForm(login, password).then(function () {
-            sessionStorage.setItem('tokenTransfer', data.token);
-            sessionStorage.setItem('username', credentials.login.toUpperCase());
             //redirect to Transfer;
             window.location = 'transferApp.html';
           });

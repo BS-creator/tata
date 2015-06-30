@@ -29,7 +29,7 @@ var migrationUser = (function migration() {
       onlyOneUserb:    'Si ce compte est utilisé par plusieurs personnes, indiquer le nom/prénom/email de l\'utilisateur principal',
       validEmail:      'Une adresse email valide est nécessaire.',
       validfn:         'Un prénom valide est nécessaire.',
-      validln:         'Un nom de famille valide est nécessaire.'
+      validln:         'Un nom de famille est nécessaire.'
     },
     nl: {
       header:          'Migratie Formulier',
@@ -149,12 +149,11 @@ var migrationUser = (function migration() {
   function redirectSuccess() {
     swal({
       title:          'OK',
-      type:           'error',
+      type:           'success',
       timer:          3000,
       closeOnConfirm: false
     }, function () {
       redirectAppBack();
-
     });
   }
 

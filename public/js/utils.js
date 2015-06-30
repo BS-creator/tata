@@ -191,8 +191,8 @@ var Utils = (function () {
     } else if (_.contains(url, 'localhost')) {
       /***** LOCAL *****/
       sessionStorage.setItem('TransferBaseURL', '//localhost:4000/transfer/');
-      //sessionStorage.setItem('TransferServerURL', '//localhost:8019/');
-      sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane-transfer/');
+      sessionStorage.setItem('TransferServerURL', '//localhost:8019/');
+      //sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane-transfer/');
       /**************
        * DEV & QA
        **************/
