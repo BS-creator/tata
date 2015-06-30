@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="../cdn/jquery-fileupload/css/jquery.fileupload-ui-noscript.css">
   </noscript>
   <!-- endbuild -->
+  <script>
+    if (sessionStorage.migration) {window.location.href = 'formulaire.migration.html';}
+  </script>
 </head>
 <body>
 <!--[if lt IE 10]>
@@ -518,7 +521,7 @@
 
 <!-- build:js js/file.min.js-->
 <script src="../cdn/jquery/jquery-2.1.1.min.js"></script>
-<script src="../cdn/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="../cdn/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="../cdn/lodash.min.js"></script>
 <script src="../library/@@libraryVersion@@/js/analytics/onerror.js"></script>
 <script src="../cdn/moment/moment.2.8.4.min.js"></script>

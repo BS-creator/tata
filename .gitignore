@@ -13,5 +13,6 @@ out
 portalcdn
 **/\_*
 *.zip
-report
 public/css/*.auto.css
+
+library

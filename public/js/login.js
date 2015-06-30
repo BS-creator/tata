@@ -3,41 +3,41 @@
  */
 
 /*code to send cookie with every request */
-$.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-  options.crossDomain ={
+$.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+  options.crossDomain = {
     crossDomain: true
   };
-  options.xhrFields = {
+  options.xhrFields   = {
     withCredentials: true
   };
 });
 
 /*globals swal, _ */
-$(function(swal, _, Utils) {
+$(function (swal, _, Utils) {
   'use strict';
 
   /***  GLOBAL VARIABLES ***/
   var TransferServerURL = sessionStorage.getItem('TransferServerURL'),
-    TransferBaseURL = sessionStorage.getItem('TransferBaseURL'),
-    lang = sessionStorage.getItem('lang') || localStorage.lastLanguage,
-    i18n = {
-      fr: {
-        login:  'Nom d\'utilisateur',
-        password: 'Mot de passe',
-        button: 'ENTRER'
-      },
-      nl: {
-        login:  'Gebruikersnaam',
-        password: 'Wachtwoord',
-        button: 'INLOGGEN'
-      },
-      en: {
-        login:  'Username',
-        password: 'Password',
-        button: 'SIGN IN'
-      }
+      TransferBaseURL   = sessionStorage.getItem('TransferBaseURL'),
+      lang              = sessionStorage.getItem('lang') || localStorage.lastLanguage,
+      i18n              = {
+        fr: {
+          login:    'Nom d\'utilisateur',
+          password: 'Mot de passe',
+          button:   'ENTRER'
+        },
+        nl: {
+          login:    'Gebruikersnaam',
+          password: 'Wachtwoord',
+          button:   'INLOGGEN'
+        },
+        en: {
+          login:    'Username',
+          password: 'Password',
+          button:   'SIGN IN'
+        }
 
-    };
+      };
 
   function enterPressed(e) {
     if ((e.which && e.which === 13) || (e.keyCode && e.keyCode === 13)) {
@@ -48,39 +48,66 @@ $(function(swal, _, Utils) {
     }
   }
 
+  function getAnalyticsURL(){
+    if (_.contains(window.location.href, 'localhost')) {
+      return TransferServerURL.replace(/8019/g, '8011')
+    }else {
+      return TransferServerURL.replace(/ariane-transfer/g, 'analytics')
+    }
+  }
+
+  function getMigrationForm(login, password) {
+    return $.ajax({
+      type:     'GET',
+      url:      getAnalyticsURL() + 'accountnotes/2/' + login,
+      success:  function (data) {
+        //continue to app transfer
+        console.log(data);
+      }, error: function (xhr) {
+        //console.log(xhr);
+        //redirect to form
+        window.location.href = 'formulaire.migration.html#login=' + login + '&password=' + password + '&appback=transfer&accountType=2';
+      }
+    })
+  }
+
   function submitLogin() {
+    var login       = $.trim($('#login').val());
+    var password    = $('#password').val();
     var credentials = {
-      login:    $('#login').val(),
-      password: $('#password').val()
+      login:    login,
+      password: password
     };
 
     Utils.docCookies.removeItem('ariane');
     Utils.docCookies.removeItem('ariane-transfer');
 
-
     $('#loader').show();
     if (!TransferServerURL) {
       TransferServerURL = sessionStorage.getItem('TransferServerURL');
-      TransferBaseURL = sessionStorage.getItem('TransferBaseURL');
-      lang = sessionStorage.getItem('lang') || localStorage.lastLanguage;
+      TransferBaseURL   = sessionStorage.getItem('TransferBaseURL');
+      lang              = sessionStorage.getItem('lang') || localStorage.lastLanguage;
     }
     $.ajax({
-      type:    'POST',
-      url:     TransferServerURL + 'login',
-      data:    credentials,
-      success: function(data) {
+      type:     'POST',
+      url:      TransferServerURL + 'login',
+      data:     credentials,
+      success:  function (data) {
         if (data.token) {
-          sessionStorage.setItem('tokenTransfer', data.token);
-          sessionStorage.setItem('username', credentials.login.toUpperCase());
-          //redirect to Transfer;
-          window.location = 'transferApp.html';
+          getMigrationForm(login, password).then(function () {
+            sessionStorage.setItem('tokenTransfer', data.token);
+            sessionStorage.setItem('username', credentials.login.toUpperCase());
+            //redirect to Transfer;
+            window.location = 'transferApp.html';
+          });
+
         }
       },
       dataType: 'json',
       /*complete: function() {
        $('#loader').hide();
        },*/
-      error:   function(xhr) {
+      error:    function (xhr) {
         $('#loader').hide();
         if (xhr.status === 403) {
           Utils.errorMessage('Login / password incorrect.', 3000);
@@ -115,7 +142,7 @@ $(function(swal, _, Utils) {
     //set event
     $('#submit-login').on('click', submitLogin);
     $('input').keypress(enterPressed);
-    $('.login-lang').on('click', function() {
+    $('.login-lang').on('click', function () {
       var lang = $(this).html().toLowerCase();
       $('.login-lang').removeClass('default-lang');
       $('.' + lang).addClass('default-lang');

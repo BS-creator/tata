@@ -205,7 +205,7 @@ module.exports = function(grunt) {
         }
       },
 
-      'string-replace': {
+     /* 'string-replace': {
         version: {
           files:   {
             'public/index.html': 'public/login.html'
@@ -220,7 +220,7 @@ module.exports = function(grunt) {
             }]
           }
         }
-      },
+      },*/
 
       // Copies remaining files to places other tasks can use
       copy:             {

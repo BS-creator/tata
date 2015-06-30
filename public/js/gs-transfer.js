@@ -1371,7 +1371,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       });
     });
   };
-  var main                       = function () {
+  var main                       = function main() {
 
     Utils.setTransferURL();
 
