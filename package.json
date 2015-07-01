@@ -1,7 +1,7 @@
 {
   "name": "transfer",
   "repo": "transfer",
-  "version": "2.1.13",
+  "version": "2.1.14",
   "publishConfig": {
     "registry": "http://deviapps.groups.be/sinopia/"
   },
@@ -53,12 +53,12 @@
     "node": ">=0.10.0"
   },
   "build": {
-    "tag": "2.1.13",
+    "tag": "2.1.14",
     "library": "1.6.19",
     "framework": "1.4.7",
     "env": "qa",
     "branch": "master",
     "user": "Julien Bisconti",
-    "date": "2015-06-30T10:06:52.058Z"
+    "date": "2015-07-01T09:00:22.188Z"
   }
 }
