@@ -1377,7 +1377,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
     TransferServerURL = sessionStorage.getItem('TransferServerURL');
     TransferBaseURL   = sessionStorage.getItem('TransferBaseURL');
-    lang              = sessionStorage.getItem('lang') || localStorage.lastLanguage || localStorage.lang;
+    lang              = sessionStorage.getItem('lang') || localStorage.lastLanguage;
     username          = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '';
     tokenTransfer     = sessionStorage.getItem('tokenTransfer');
 

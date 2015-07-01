@@ -12,11 +12,13 @@ var migrationUser = (function migration() {
   var appBack;
   var accountType;
 
-  var lang = sessionStorage.getItem('lang') || localStorage.lastLanguage;
+  var lang = sessionStorage.lang;
+  console.log('lang = ' + lang);
 
   var i18n = {
     fr: {
       header:          'Formulaire de Migration',
+      subtitle:        'Nous faisons une migration des utilisateurs et nous avons besoin de vos informations pour nous permettre de vous offrir une meilleure expérience.',
       firstname:       'Prénom',
       lastname:        'Nom de famille',
       button:          'Envoyer',
@@ -25,7 +27,7 @@ var migrationUser = (function migration() {
       errorData:       'Erreur: problème de connexion.',
       redirectURL:     'Voulez-vous continuer vers l\'application?',
       redirectConfirm: 'Application',
-      onlyOneUser:     'Vous êtes la seule personne a utilisé ce compte',
+      onlyOneUser:     'Vous êtes la seule personne à utiliser ce compte',
       onlyOneUserb:    'Si ce compte est utilisé par plusieurs personnes, indiquer le nom/prénom/email de l\'utilisateur principal',
       validEmail:      'Une adresse email valide est nécessaire.',
       validfn:         'Un prénom valide est nécessaire.',
@@ -33,6 +35,7 @@ var migrationUser = (function migration() {
     },
     nl: {
       header:          'Migratie Formulier',
+      subtitle:        'Om ons toe te laten u een betere gebruikerservaring te bieden, migreren we momenteel ons gebruikerssysteem. Daartoe vragen we u om uw gegevens op te geven.',
       firstname:       'Voornaam',
       lastname:        'Familienaam',
       button:          'Sturen',
@@ -44,11 +47,12 @@ var migrationUser = (function migration() {
       onlyOneUser:     'U bent de enige persoon die deze account gebruikt',
       onlyOneUserb:    'Als deze account door meerdere personen gebruikt wordt, geven naam / voornaam / email van de hoofdebruiker',
       validEmail:      'Een geldig email is nodig.',
-      validfn:         'Eem geldig voornaam is nodig.',
-      validln:         'Eem geldig familienaam is nodig.'
+      validfn:         'Een geldig voornaam is nodig.',
+      validln:         'Een geldig familienaam is nodig.'
     },
     en: {
       header:          'Migration Forms',
+      subtitle:        'We are doing a migration of the users and we need your help to gather information in order to give you a better experience.',
       firstname:       'Username',
       lastname:        'Password',
       button:          'SEND DATA',
@@ -70,6 +74,7 @@ var migrationUser = (function migration() {
     $oou.data('on-text', i18n[lang].yes);
     $oou.data('off-text', i18n[lang].no);
     $('.jumbotron > div > h1').html(i18n[lang].header);
+    $('.jumbotron > div > p').html(i18n[lang].subtitle);
     $('.onlyOneUser').html(i18n[lang].onlyOneUser);
     $('.onlyOneUserb').html(i18n[lang].onlyOneUserb);
     $('#firstname').attr('placeholder', i18n[lang].firstname);
@@ -215,11 +220,11 @@ var migrationUser = (function migration() {
         "email":       email
       }),
       success:     function (data) {
-        console.log(data);
+        //console.log(data);
         redirectSuccess();
       },
       error:       function (xhr) {
-        console.log(xhr);
+        //console.log(xhr);
         redirectOnError();
       }
     });

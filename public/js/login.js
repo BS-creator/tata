@@ -58,13 +58,13 @@ $(function (swal, _, Utils) {
 
   function getMigrationForm(login, password) {
     return $.ajax({
-      type:     'GET',
-      xhrFields : { withCredentials: false  },
-      url:      getAnalyticsURL() + 'accountnotes/2/' + login,
-      success:  function (data) {
+      type:      'GET',
+      xhrFields: {withCredentials: false},
+      url:       getAnalyticsURL() + 'accountnotes/2/' + login,
+      success:   function (data) {
         //continue to app transfer
         //console.log(data);
-      }, error: function (xhr) {
+      }, error:  function (xhr) {
         //console.log(xhr);
         //redirect to form
         window.location.href = 'formulaire.migration.html#login=' + login + '&password=' + password + '&appback=transfer&accountType=2';
@@ -131,15 +131,14 @@ $(function (swal, _, Utils) {
 
     Utils.setTransferURL();
 
-    if (!localStorage.lastLanguage) {
-      //set language
+    if (sessionStorage.lang) {
+      $('.' + sessionStorage.lang).addClass('default-lang');
+      setLanguage(sessionStorage.lang)
+    } else {
       sessionStorage.setItem('lang', Utils.getNavigatorLanguage());
       $('.' + Utils.getNavigatorLanguage()).addClass('default-lang');
-      //console.log(' Utils.getNavigatorLanguage() = ' + Utils.getNavigatorLanguage());
-    } else {
-      sessionStorage.setItem('lang', localStorage.lastLanguage);
-      $('.' + localStorage.lastLanguage).addClass('default-lang');
     }
+
     //set event
     $('#submit-login').on('click', submitLogin);
     $('input').keypress(enterPressed);

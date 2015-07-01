@@ -198,11 +198,13 @@ var Utils = (function () {
        **************/
     } else if (_.contains(url, 'deviapps')) {
       sessionStorage.setItem('TransferBaseURL', '//deviapps.groups.be/prestaweb/transfer/');
-      if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane-transfer/');}
+      sessionStorage.setItem('TransferServerURL', '//deviapps.groups.be/ariane-transfer/');
     } else if (_.contains(url, 'qaiapps')) {
       sessionStorage.setItem('TransferBaseURL', '//qaiapps.groups.be/transfer/');
-      if (!sessionStorage.TransferServerURL) {sessionStorage.setItem('TransferServerURL', '//qaiapps.groups.be/ariane-transfer/');}
-
+      sessionStorage.setItem('TransferServerURL', '//qaiapps.groups.be/ariane-transfer/');
+    } else if (_.contains(url, 'qatransfer')) {
+      sessionStorage.setItem('TransferBaseURL', '//qatransfer.groups.be/transfer/');
+      sessionStorage.setItem('TransferServerURL', '//qatransfer.groups.be/ariane-transfer/');
       /**************
        * PRODUCTION: BELGIUM
        * **************/
