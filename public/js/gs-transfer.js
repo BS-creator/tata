@@ -1415,8 +1415,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     });
   };
 
-//TODO: replace by module design pattern
-  $(main());
+  $(main);
 
   return {
     i18n:                        i18n,
