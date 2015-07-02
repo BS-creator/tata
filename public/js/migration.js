@@ -18,7 +18,10 @@ var migrationUser = (function migration() {
   var i18n = {
     fr: {
       header:          'Formulaire de Migration',
-      subtitle:        'Nous faisons une migration des utilisateurs et nous avons besoin de vos informations pour nous permettre de vous offrir une meilleure expérience.',
+      subtitle:        'Le développement du nouveau portail Group S Online est en cours de finalisation. ' +
+                       'Ce portail vous permettra bientôt d’accéder à toutes vos applications Group S à partir d’un point d’accès unique. ' +
+                       'Pour préparer au mieux ce lancement, nous vous invitons à compléter le formulaire ci-dessous.' +
+                       'Des informations complémentaires vous serons prochainement communiquées quant au lancement officiel du portail',
       firstname:       'Prénom',
       lastname:        'Nom de famille',
       button:          'Envoyer',
@@ -35,7 +38,10 @@ var migrationUser = (function migration() {
     },
     nl: {
       header:          'Migratie Formulier',
-      subtitle:        'Om ons toe te laten u een betere gebruikerservaring te bieden, migreren we momenteel ons gebruikerssysteem. Daartoe vragen we u om uw gegevens op te geven.',
+      subtitle:        'De ontwikkeling van de nieuwe portaal Group S Online bevindt zich in de laatste rechte lijn. ' +
+                       ' Dit portaal zal u toelaten om, vanaf één enkele pagina, toegang te krijgen tot al uw Group S applicaties.' +
+                       ' Om de lancering zo goed mogelijk voor te bereiden, willen we u vragen om onderstaand formulier in te vullen. ' +
+                       ' U zal binnenkort verder geïnformeerd worden over de officiële lancering van de portaal.',
       firstname:       'Voornaam',
       lastname:        'Familienaam',
       button:          'Sturen',
@@ -52,7 +58,10 @@ var migrationUser = (function migration() {
     },
     en: {
       header:          'Migration Forms',
-      subtitle:        'We are doing a migration of the users and we need your help to gather information in order to give you a better experience.',
+      subtitle:        'The development of the new portal Group S Online is being finalized.' +
+                       ' This portal will soon allow you to access to all your Group S application from a single access point. ' +
+                       ' In order to better prepare this launching, we would like to ask you to complete this form.' +
+                       ' Further information will be delivered soon regarding the official launching of the portal.',
       firstname:       'Username',
       lastname:        'Password',
       button:          'SEND DATA',
