@@ -13,7 +13,6 @@ var migrationUser = (function migration() {
   var accountType;
 
   var lang = sessionStorage.lang;
-  console.log('lang = ' + lang);
 
   var i18n = {
     fr: {
@@ -107,8 +106,12 @@ var migrationUser = (function migration() {
   }
 
   function getAnalyticsURL() {
-    if (_.contains(window.location.href, 'localhost') && sessionStorage.TransferServerURL) {
-      return sessionStorage.TransferServerURL.replace(/8019/g, '8011')
+    if (_.contains(window.location.href, 'localhost')) {
+      if (_.contains(sessionStorage.TransferServerURL, 'localhost')){
+        return sessionStorage.TransferServerURL.replace(/8019/g, '8011')
+      } else {
+        return sessionStorage.TransferServerURL.replace(/ariane-transfer/g, 'analytics')
+      }
     } else {
       return sessionStorage.TransferServerURL.replace(/ariane-transfer/g, 'analytics')
     }
