@@ -64,7 +64,7 @@ $(function (swal, _, Utils) {
     return $.ajax({
       type:      'GET',
       xhrFields: {withCredentials: false},
-      url:       getAnalyticsURL() + 'accountnotes/2/' + login,
+      url:       getAnalyticsURL() + 'accountnotes/2/' + login.toUpperCase(),
       success:   function (data) {
         //continue to app transfer
         //console.log(data);
