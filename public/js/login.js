@@ -50,7 +50,11 @@ $(function (swal, _, Utils) {
 
   function getAnalyticsURL() {
     if (_.contains(window.location.href, 'localhost')) {
-      return sessionStorage.TransferServerURL.replace(/8019/g, '8011')
+      if (_.contains(sessionStorage.TransferServerURL, 'localhost')){
+        return sessionStorage.TransferServerURL.replace(/8019/g, '8011')
+      } else {
+        return sessionStorage.TransferServerURL.replace(/ariane-transfer/g, 'analytics')
+      }
     } else {
       return sessionStorage.TransferServerURL.replace(/ariane-transfer/g, 'analytics')
     }

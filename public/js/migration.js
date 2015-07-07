@@ -161,6 +161,9 @@ var migrationUser = (function migration() {
     if (appBack === 'transfer') {
       window.location.href = sessionStorage.getItem('TransferBaseURL') + 'transferApp.html'
     }
+    if (appBack === 'back') {
+      window.history.go(-1);
+    }
   }
 
   function redirectSuccess() {
