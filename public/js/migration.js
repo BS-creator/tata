@@ -18,9 +18,9 @@ var migrationUser = (function migration() {
     fr: {
       header:          'Formulaire de Migration',
       subtitle:        'Le développement du nouveau portail Group S Online est en cours de finalisation. ' +
-                       'Ce portail vous permettra bientôt d’accéder à toutes vos applications Group S à partir d’un point d’accès unique. ' +
-                       'Pour préparer au mieux ce lancement, nous vous invitons à compléter le formulaire ci-dessous.' +
-                       'Des informations complémentaires vous serons prochainement communiquées quant au lancement officiel du portail',
+                       'Ce portail vous permettra prochainement d’accéder à toutes vos applications Group S à partir d’un point d’accès unique. ' +
+                       'Pour préparer au mieux ce lancement, nous vous invitons à compléter le formulaire ci-dessous. ' +
+                       'Des informations complémentaires vous seront prochainement communiquées quant au lancement officiel du portail.',
       firstname:       'Prénom',
       lastname:        'Nom de famille',
       button:          'Envoyer',
