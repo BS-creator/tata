@@ -61,8 +61,8 @@ var migrationUser = (function migration() {
                        ' This portal will soon allow you to access to all your Group S application from a single access point. ' +
                        ' In order to better prepare this launching, we would like to ask you to complete this form.' +
                        ' Further information will be delivered soon regarding the official launching of the portal.',
-      firstname:       'Username',
-      lastname:        'Password',
+      firstname:       'First Name',
+      lastname:        'Last Name',
       button:          'SEND DATA',
       yes:             'YES',
       no:              'NO',
