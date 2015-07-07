@@ -129,7 +129,7 @@ var migrationUser = (function migration() {
       switch (tmp[0]) {
         case "login":
           if (tmp[1]) {
-            login = tmp[1];
+            login = tmp[1].toUpperCase();
             $('#login').val(login); //console.log('login');
           }
           break;
