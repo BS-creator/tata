@@ -5,6 +5,7 @@
 /*globals $,_ */
 
 var migrationUser = (function migration() {
+  'use strict';
 
   var hashArray;
   var login;
@@ -50,7 +51,7 @@ var migrationUser = (function migration() {
       redirectURL:     'Wilt u door de applicatie gaan?',
       redirectConfirm: 'Applicatie',
       onlyOneUser:     'U bent de enige persoon die deze account gebruikt',
-      onlyOneUserb:    'Als deze account door meerdere personen gebruikt wordt, geven naam / voornaam / email van de hoofdebruiker',
+      onlyOneUserb:    'Als deze account door meerdere personen gebruikt wordt, geef dan naam/voornaam/email van de hoofdgebruiker.',
       validEmail:      'Een geldig email is nodig.',
       validfn:         'Een geldig voornaam is nodig.',
       validln:         'Een geldig familienaam is nodig.'

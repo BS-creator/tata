@@ -1,34 +1,23 @@
-// jscs:disable requireMultipleVarDecl
-//---------------------------------------------
-//SUPPORT FOR PWLIB TOKEN ADDED STRAIGHT INTO JQUERY
-
-/*var $ajax = $.ajax;
- $.ajax = function(params) {
- params.headers = params.headers || {};
- params.headers['Authorization'] = 'Groups groups_token=' + (sessionStorage.token || '00');
- params.headers['Credentials'] = 'GroupsFTP username=' + sessionStorage.username + ' password=' + sessionStorage.jbs;
- return $ajax.apply($, arguments);
- };*/
-
-/*code to send cookie with every request */
-$.ajaxPrefilter(function (options, originalOptions, jqXHR) {
-  options.crossDomain = {
-    crossDomain: true
-  };
-  options.xhrFields   = {
-    withCredentials: true
-  };
-});
-
-//---------------------------------------------
-
 /**
  * Created by bisconti on 29/08/14.
  */
-/*globals $, _, ko, moment, introJs, swal, console, Utils */
+/*globals $, _, moment, introJs, swal, console, Utils */
 
 var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   'use strict';
+  //---------------------------------------------
+  /*code to send cookie with every request */
+  $.ajaxPrefilter(function (options, originalOptions, jqXHR) {
+    options.crossDomain = {
+      crossDomain: true
+    };
+    options.xhrFields   = {
+      withCredentials: true
+    };
+  });
+
+  //---------------------------------------------
+
 
   _.templateSettings = {
     interpolate: /\[\[([\s\S]+?)\]\]/g, //evaluate:/\[\[-([\s\S]+?)\]\]/g,
@@ -40,19 +29,19 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     // that should be evaluated without insertion into
     // the resulting string.
     /*
-     // DEFAULT SETTINGS
-     _.templateSettings = {
-     interpolate : /<%=([\s\S]+?)%>/g,
-     evaluate : /<%([\s\S]+?)%>/g,
-     escape : /<%-([\s\S]+?)%>/g
-     };*/
+      // DEFAULT SETTINGS
+      _.templateSettings = {
+      interpolate : /<%=([\s\S]+?)%>/g,
+      evaluate : /<%([\s\S]+?)%>/g,
+      escape : /<%-([\s\S]+?)%>/g
+      };*/
   };
 
   /***  GLOBAL VARIABLES ***/
 
-  var TransferServerURL = sessionStorage.getItem('TransferServerURL'),
-      TransferBaseURL   = sessionStorage.getItem('TransferBaseURL'),
-      lang              = sessionStorage.getItem('lang');
+  var TransferServerURL = sessionStorage.getItem('TransferServerURL');
+  var TransferBaseURL   = sessionStorage.getItem('TransferBaseURL');
+  var lang              = sessionStorage.getItem('lang');
   var TABLEID           = '#tableID';
   var table             = {}; //DataTable object
   var oTable = {}; //Jquery Data object
@@ -257,22 +246,6 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     multidl.append('<button class="btn-portal-green downloadall mt-xs">' + '<i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDL + '</button>');
     $('.downloadall').off('click').on('click', downloadAll);
 
-    /***** VALIDATION BUTTON *****/
-    multidl.append('<button class="btn-portal-bluegreen validAll mt-xs pull-left">' + '<i class="fa fa-check"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.validation + '</button>');
-    $('.validAll').off('click').on('click', function () {
-      swal({
-        title:              i18n[lang].dialog.validAction,
-        text:               i18n[lang].dialog.validSure,
-        type:               'warning',
-        showCancelButton:   true,
-        confirmButtonColor: '#DD6B55',
-        confirmButtonText:  i18n[lang].dialog.validConfirm,
-        cancelButtonText:   i18n[lang].dialog.cancel,
-        closeOnConfirm:     false
-      }, function () {
-        validateAll();
-      });
-    });
 
     /***** DELETE BUTTON *****/
     multidl.append('<button class="btn-portal-red deleteAll mt-xs pull-right">' + '<i class="fa fa-trash"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.multiDelete + '</button>');
@@ -294,7 +267,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   var incrementCounter         = function (link) {
     link.find('i').remove();
     var small = link.find('small'), // cache object
-        dl    = parseInt(small.data('dl')) + 1;
+      dl    = parseInt(small.data('dl')) + 1;
     link.prepend('<i class="fa fa-download fa-lg text-muted"></i>'); //mark as already downloaded
 
     link.parent().data('order', dl);
@@ -386,7 +359,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
 
   var setEventuploadForm       = function () {
     // set token for upload
-    var $uploadform = $('#uploadForm'), activeUploads = null, notif;
+    var $uploadform = $('#uploadForm'), activeUploads = null;
     $('input[name="token"]').val(tokenTransfer);
 
     $uploadform.attr('action', TransferServerURL + 'file/upload');
@@ -417,32 +390,12 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
           p.hide();
           $('.close').click();
           Utils.smessage('OK', ' ', 'success', 4000);
-          if ($('input[name="notification"]').prop('checked')) {
-            postNotification().then(function () {
-              console.log('notification sent');
-              selectMenu = 'UPLOAD';
-              /* TODO: CHECK
-               reloadPage();
-               setCursorToAuto();*/
-            });
-          } else {
-            selectMenu = 'UPLOAD';
-            reloadPage();
-          }
-          //setTimeout(function() { window.location = TransferBaseURL + 'transferApp.html?upload'; }, 4000);
+          selectMenu = 'UPLOAD';
+          reloadPage();
         }
       }
     });
   };
-//
-  // send cookie
-  //
-  /*TODO: CHECK
-   $uploadform.fileupload('option', {
-   xhrFields: {
-   withCredentials: true
-   }
-   });*/
 
   var listFolderUpload = function (destFolders) {
     var listFolder = $('#uploadForm').find('div.dir-list'), key;
@@ -510,8 +463,8 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     table.columns('.detailsLayer').visible(true, false);
     table.columns.adjust().draw(false); // adjust column sizing and redraw
     table.column(4).search('[^' + username + ']', true, false).column(7).search('^\\s*$', true, false)//.column(10).search(/^((?!Validation\/).)*$/,
-      // true, false)
-      .draw(); //filter on uploadUserName != username
+    // true, false)
+    .draw(); //filter on uploadUserName != username
     $('[class^=level] .active').removeClass('active');
     selectMenu = 'OTHER';
     setBreadCrumb(i18n[lang].tree.other);
@@ -529,7 +482,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     table.columns('.detailsLayer').visible(true, false);
     table.columns.adjust().draw(false); // adjust column sizing and redraw
     table//.column(10).search(/^((?!Validation\/).)*$/, true, false) // Don't show validation folder
-      .column(4).search(username).draw(); //filter on uploadUserName
+    .column(4).search(username).draw(); //filter on uploadUserName
     $('[class^=level] .active').removeClass('active');
     selectMenu = 'UPLOAD';
     setBreadCrumb(i18n[lang].tree.upload);
@@ -550,7 +503,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     table.columns('.validation').visible(false, false);
     table.columns('.fileLayer').visible(true, false);
     var $this       = $(event.currentTarget).parent('li'), levl3 = $this.find('.level3'), //list children
-        numDocRegex = '(', child = {}, i;
+      numDocRegex = '(', child = {}, i;
 
     $('[class^=level] .active').removeClass('active');
     setBreadCrumb($this.children('a').text());
@@ -566,7 +519,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     numDocRegex += ')';
 
     table.column(4).search('[^' + username + ']', true, false)
-      .column(7).search(numDocRegex, true, false).draw(); //filter on ref docs
+    .column(7).search(numDocRegex, true, false).draw(); //filter on ref docs
     selectMenu = 'ROOT';
     updateMenuVisibleColumnList();
     event.preventDefault();
@@ -593,8 +546,8 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       table.columns('.validation').visible(false, false);
       table.columns.adjust().draw(false); // adjust column sizing and redraw
       table//.column(10).search(/^((?!Validation\/).)*$/, true, false) // Don't show validation folder
-        .column(4).search('[^' + username + ']', true, false)
-        .column(7).search('^' + nodeID + '$', true, false).draw(); //filter on referenceDocument
+      .column(4).search('[^' + username + ']', true, false)
+      .column(7).search('^' + nodeID + '$', true, false).draw(); //filter on referenceDocument
     }
     selectMenu = 'ROOT';
     updateMenuVisibleColumnList();
@@ -624,7 +577,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       htmlCategoryNode += createCategoryNode({
         categoryNumber: currentCat,
         categoryName:   currentCatLabel,
-        categoryFiles:  "test",
+        categoryFiles:  'test',
         leafNode:       htmlLeafNode
       });
       htmlLeafNode = '';
@@ -637,12 +590,12 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     //
     if (_.contains(refDocUsed, -1)) {
       htmlCategoryNode += '<li class="level2" >'
-        + '<a id="other" href="#">' + i18n[lang].tree.other
-        + '<span class="badge pull-right" style="margin-top: 0px;  margin-right: 10px;">'
-        + (countFilePerCat['other'] ? countFilePerCat['other'] : 0)
-        + '</span>'
-        + '</a>'
-        + '</li>';
+      + '<a id="other" href="#"><span style="float: left;">' + i18n[lang].tree.other + '</span>'
+      + '<span class="badge pull-right" style="margin-top: 0px;  margin-right: 10px;">'
+      + (countFilePerCat['other'] ? countFilePerCat['other'] : 0)
+      + '</span>'
+      + '</a>'
+      + '</li>';
     }
     var uploadCount = countFilePerCat['upload'] ? countFilePerCat['upload'] : 0;
     return _.template($('#menuL1').html())({
@@ -739,7 +692,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       row.uploaderCommentLimit = Utils.htmlEncode(row.uploaderComment, false).substring(0, 20);
       row.uploaderComment      = Utils.htmlEncode(Utils.htmlEncode(row.uploaderComment, true), false);
 
-      if (row.uploadUserName === 'trf_fich') {row.uploadUserName = "Group S"}
+      if (row.uploadUserName === 'trf_fich') {row.uploadUserName = 'Group S';}
 
       table.rows.add($(tpl(row).trim()));
     });
@@ -1133,19 +1086,19 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   var setEventFiltersButton      = function () {
 
     /*$('#filterNew').off('click').on('click', function () {
-     var filterby = $('#filterby');
-     if (!filterby.hasClass('active')) {filterby.addClass('active');}
-     $('#breadcrumb').html($('#breadcrumb').html() + '<li class="active">' + i18n[lang].button.filter.new + '</li>');
-     table.column(17).search('true')//.column(4).search('[^' + username + ']', true, false)
-     .draw();
-     });*/
+      var filterby = $('#filterby');
+      if (!filterby.hasClass('active')) {filterby.addClass('active');}
+      $('#breadcrumb').html($('#breadcrumb').html() + '<li class="active">' + i18n[lang].button.filter.new + '</li>');
+      table.column(17).search('true')//.column(4).search('[^' + username + ']', true, false)
+      .draw();
+      });*/
 
     $('#filterDL').off('click').on('click', function () {
       var filterby = $('#filterby');
       if (!filterby.hasClass('active')) {filterby.addClass('active');}
       $('#breadcrumb').html($('#breadcrumb').html() + '<li class="active">' + i18n[lang].button.filter.notDL + '</li>');
       table.column(16).search('^0$', true, false)//.column( 4 ).search( '[^' + username + ']', true, false )
-        .draw();
+      .draw();
     });
 
     $('#filterClear').off('click').on('click', function () {
@@ -1173,9 +1126,9 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     /*reloadBtn.html('<i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.reload);*/
     reloadBtn.html('<i class="fa fa-refresh"></i>');
     /*reloadBtn.off('click').on('click', function() {
-     window.location = TransferBaseURL + 'transferApp.html';
-     //window.location.reload();
-     });*/
+      window.location = TransferBaseURL + 'transferApp.html';
+    //window.location.reload();
+    });*/
     reloadBtn.off('click').on('click', function () {
       reloadNewData();
     });
@@ -1223,8 +1176,8 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   var setI18nHelpButton          = function () {
     var helpBtn = $('#help');
     /*
-     helpBtn.html('<i class="fa fa-question"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.help);
-     */
+       helpBtn.html('<i class="fa fa-question"></i>&nbsp;&nbsp;&nbsp;' + i18n[lang].button.help);
+       */
     helpBtn.html('<i class="fa fa-question"></i>');
     helpBtn.off('click').on('click', function () {
       //console.log("test");
@@ -1267,178 +1220,178 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
         }, {
           element: '#toggle-side-menu', intro: i18n[lang].help.columnMenu, position: 'left'
         }/*,
-         {
-         element:  '#signout',
-         intro:    i18n[lang].help.logoff,
-         position: 'left'
-         }*/]
-      });
-      intro.setOption('skipLabel', '');
-      intro.setOption('nextLabel', ''); //'→');
-      intro.setOption('prevLabel', ''); //'←');
-      intro.setOption('doneLabel', '');
-      /*intro.setOption('showButtons', false);*/
-      intro.start();
-    });
+           {
+element:  '#signout',
+intro:    i18n[lang].help.logoff,
+position: 'left'
+}*/]
+});
+intro.setOption('skipLabel', '');
+intro.setOption('nextLabel', ''); //'→');
+intro.setOption('prevLabel', ''); //'←');
+intro.setOption('doneLabel', '');
+/*intro.setOption('showButtons', false);*/
+intro.start();
+});
 
-  };
-  var setEventPreData            = function () {
+};
+var setEventPreData            = function () {
 
-    setI18nUpload();
-    setI18nMultiDelete();
-    setI18nMultiDownload();
-    setI18nFiltersButton();
-    setI18nDatePicker();
-    setI18nBreadCrumb();
-    setI18nHelpButton();
-    setI18nSearch();
-    setI18nSideMenuColumnList();
+  setI18nUpload();
+  setI18nMultiDelete();
+  setI18nMultiDownload();
+  setI18nFiltersButton();
+  setI18nDatePicker();
+  setI18nBreadCrumb();
+  setI18nHelpButton();
+  setI18nSearch();
+  setI18nSideMenuColumnList();
 
-    setEventUpload();
-    setEventLanguageSettings();
-    setEventReload();
-  };
-  var setEventsHTML              = function () {
+  setEventUpload();
+  setEventLanguageSettings();
+  setEventReload();
+};
+var setEventsHTML              = function () {
 
-    setEventSideMenuColumnList();
-    setEventMenuFilters();
-    setEventSearch();
-    setEventDownload();
-    setEventFiltersButton();
-    setEventCheckBox();
-    setEventDatePicker();
-    setEventDeleteFile();
-    setEventMultiDelete();
-    setEventMultiDownload();
+  setEventSideMenuColumnList();
+  setEventMenuFilters();
+  setEventSearch();
+  setEventDownload();
+  setEventFiltersButton();
+  setEventCheckBox();
+  setEventDatePicker();
+  setEventDeleteFile();
+  setEventMultiDelete();
+  setEventMultiDownload();
 
-  };
+};
 
-  var initTableComplete = function () {
+var initTableComplete = function () {
 
-    table.clear();
+  table.clear();
 
-    templateTable();
+  templateTable();
 
-    oTable = $(TABLEID).dataTable();
-    table.column(4).search('[^' + username + ']', true, false).draw();
+  oTable = $(TABLEID).dataTable();
+  table.column(4).search('[^' + username + ']', true, false).draw();
 
-    hideLoading();
+  hideLoading();
 
-    //set upload form events
-    $(TABLEID).off('draw.dt').on('draw.dt', function () {
+  //set upload form events
+  $(TABLEID).off('draw.dt').on('draw.dt', function () {
       setEventCheckBox();
       setEventDeleteFile();
 
-    });
+      });
 
-    setEventsHTML();
+  setEventsHTML();
 
-    setTimeout(function () {
+  setTimeout(function () {
 
       $('[data-toggle="tooltip"]').tooltip();
       setI18nQuotaWarning();
 
       if (AjaxData.length === 0) {
-        //$('#btn-upload-div').trigger('click');
-        console.log('>>> NO files');
+      //$('#btn-upload-div').trigger('click');
+      console.log('>>> NO files');
       }
       //console.log('selectMenu = ' + selectMenu);
       if (selectMenu === 'UPLOAD') {
-        $('#upload').find('a').trigger('click');
+      $('#upload').find('a').trigger('click');
       }
       $('.downloadall').hide();
       $('.deleteAll').hide();
-    }, 500);
-  };
-  /****************************************************
-   * MAIN
-   * */
-  var render                     = function () {
-    showLoading();
-    setEventPreData();
+      }, 500);
+};
+/****************************************************
+ * MAIN
+ * */
+var render                     = function () {
+  showLoading();
+  setEventPreData();
 
-    $.when(loadCategory(), loadData(), loadFolder()).then(function () {
+  $.when(loadCategory(), loadData(), loadFolder()).then(function () {
 
-      //Add label for reference of Document
-      $.when(mergeLabelDoc()).then(function () {
+    //Add label for reference of Document
+    $.when(mergeLabelDoc()).then(function () {
 
-        //Template of Table and Menu
-        createDataTable();
-        createMenu();
+      //Template of Table and Menu
+      createDataTable();
+      createMenu();
 
-        setEventuploadForm();
+      setEventuploadForm();
 
-      });
     });
-  };
-  var main                       = function main() {
+  });
+};
+var main                       = function main() {
 
-    Utils.setTransferURL();
+  Utils.setTransferURL();
 
-    TransferServerURL = sessionStorage.getItem('TransferServerURL');
-    TransferBaseURL   = sessionStorage.getItem('TransferBaseURL');
-    lang              = sessionStorage.getItem('lang') || localStorage.lastLanguage;
-    username          = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '';
-    tokenTransfer     = sessionStorage.getItem('tokenTransfer');
+  TransferServerURL = sessionStorage.getItem('TransferServerURL');
+  TransferBaseURL   = sessionStorage.getItem('TransferBaseURL');
+  lang              = sessionStorage.getItem('lang') || localStorage.lastLanguage;
+  username          = sessionStorage.getItem('username') ? sessionStorage.getItem('username').toLowerCase() : '';
+  tokenTransfer     = sessionStorage.getItem('tokenTransfer');
 
-    $('[rel="tooltip"]').tooltip();
+  $('[rel="tooltip"]').tooltip();
 
-    //$('.user-name').html(username.toUpperCase());
-    $('.username').find('span').html(username.toUpperCase());
+  //$('.user-name').html(username.toUpperCase());
+  $('.username').find('span').html(username.toUpperCase());
 
-    // LOGOUT
-    $('#signout').off('click').on('click', signOut);
+  // LOGOUT
+  $('#signout').off('click').on('click', signOut);
 
-    //i18n
-    $.getJSON('data/i18n.json', function (data) {
-      i18n = data;
+  //i18n
+  $.getJSON('data/i18n.json', function (data) {
+    i18n = data;
 
-      //Default Language
-      if ((lang !== 'en') && (lang !== 'fr') && (lang !== 'nl')) {
-        lang = 'fr';
-      }
+    //Default Language
+    if ((lang !== 'en') && (lang !== 'fr') && (lang !== 'nl')) {
+      lang = 'fr';
+    }
 
-      if (lang !== 'en') {
-        $.getScript(i18n[lang].url.datepicker);
-      }
+    if (lang !== 'en') {
+      $.getScript(i18n[lang].url.datepicker);
+    }
 
-      if (i18n[lang]) { // if language is set,
-        $('input[name="lang"]').val(lang);
-        // load data and create table
-        render();
-      } else {
-        Utils.errorMessage('ERROR loading language data', 4000);
-        setTimeout(function () {
-          redirectToLogin();
-        }, 4000);
-      }
-    });
-  };
+    if (i18n[lang]) { // if language is set,
+      $('input[name="lang"]').val(lang);
+      // load data and create table
+      render();
+    } else {
+      Utils.errorMessage('ERROR loading language data', 4000);
+      setTimeout(function () {
+        redirectToLogin();
+      }, 4000);
+    }
+  });
+};
 
-  $(main);
+$(main);
 
-  return {
-    i18n:                        i18n,
-    countFilePerCat:             countFilePerCat,
-    AjaxData:                    AjaxData,
-    category:                    category,
-    refDocUsed:                  refDocUsed,
-    filterMenu:                  filterMenu,
-    signOut:                     signOut,
-    getFilesID:                  getFilesID,
-    getSelectedRows:             getSelectedRows,
-    setBreadCrumb:               setBreadCrumb,
-    createMenu:                  createMenu,
-    createTable:                 createDataTable,
-    menuRootClick:               menuRootClick,
-    menuCategoryClick:           menuCategoryClick,
-    menuOtherClick:              menuOtherClick,
-    menuRefDocClick:             menuRefDocClick,
-    toggleDLButton:              toggleDLButton,
-    toggleAllIconCheck:          toggleAllIconCheck,
-    updateMenuVisibleColumnList: updateMenuVisibleColumnList,
-    showLoading:                 showLoading,
-    hideLoading:                 hideLoading
-  };
+return {
+  i18n:                        i18n,
+  countFilePerCat:             countFilePerCat,
+  AjaxData:                    AjaxData,
+  category:                    category,
+  refDocUsed:                  refDocUsed,
+  filterMenu:                  filterMenu,
+  signOut:                     signOut,
+  getFilesID:                  getFilesID,
+  getSelectedRows:             getSelectedRows,
+  setBreadCrumb:               setBreadCrumb,
+  createMenu:                  createMenu,
+  createTable:                 createDataTable,
+  menuRootClick:               menuRootClick,
+  menuCategoryClick:           menuCategoryClick,
+  menuOtherClick:              menuOtherClick,
+  menuRefDocClick:             menuRefDocClick,
+  toggleDLButton:              toggleDLButton,
+  toggleAllIconCheck:          toggleAllIconCheck,
+  updateMenuVisibleColumnList: updateMenuVisibleColumnList,
+  showLoading:                 showLoading,
+  hideLoading:                 hideLoading
+};
 
 }(_, moment, introJs, swal, Utils));
