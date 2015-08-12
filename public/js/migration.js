@@ -14,7 +14,7 @@ var migrationUser = (function migration() {
   var appBack;
   var accountType;
 
-  var lang = sessionStorage.lang;
+  var lang = sessionStorage.lang || 'en';
 
   var i18n = {
     fr: {
