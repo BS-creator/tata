@@ -57,7 +57,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
   /*** HELPER ***/
 
   var getPDFjsURL = function (serverURL, fileID, filename) {
-    return TransferBaseURL + '../cdn/pdfjs/1.0.1149/web/viewer.html?file=' + serverURL + 'file/' + fileID + '/' + filename;
+    return TransferBaseURL + '../cdn/pdfjs/1.1.366/web/viewer.html?file=' + serverURL + 'file/' + fileID + '/' + filename;
   };
 
   var redirectToLogin = function () { window.location = TransferBaseURL; };
