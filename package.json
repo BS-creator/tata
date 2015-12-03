@@ -1,7 +1,7 @@
 {
   "name": "transfer",
   "repo": "transfer",
-  "version": "2.1.22",
+  "version": "2.1.31",
   "publishConfig": {
     "registry": "http://deviapps.groups.be/sinopia/"
   },
@@ -33,6 +33,7 @@
     "grunt-rev": "~0.1.0",
     "grunt-rsync": "^0.6.2",
     "grunt-scp": "^0.1.8",
+    "grunt-sonar-runner": "^2.4.3",
     "grunt-string-replace": "^1.0.0",
     "grunt-svgmin": "~0.4.0",
     "grunt-text-replace": "^0.3.12",
@@ -53,12 +54,12 @@
     "node": ">=0.10.0"
   },
   "build": {
-    "tag": "2.1.22",
-    "library": "1.8.3",
-    "framework": "1.4.8",
+    "tag": "2.1.31",
+    "library": "1.8.34",
+    "framework": "1.4.9",
     "env": "qa",
     "branch": "master",
     "user": "Deviapps Buildman",
-    "date": "2015-07-10T07:53:18.120Z"
+    "date": "2015-11-05T13:30:17.521Z"
   }
 }

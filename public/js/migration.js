@@ -2,17 +2,19 @@
  * Created by bisconti on 26/06/15.
  */
 
-/*globals $,_ */
+/*globals $,_, Utils */
 
 var migrationUser = (function migration() {
+  'use strict';
 
+  Utils.setTransferURL();
   var hashArray;
   var login;
   var password;
   var appBack;
   var accountType;
 
-  var lang = sessionStorage.lang;
+  var lang = sessionStorage.lang || 'en';
 
   var i18n = {
     fr: {
@@ -50,7 +52,7 @@ var migrationUser = (function migration() {
       redirectURL:     'Wilt u door de applicatie gaan?',
       redirectConfirm: 'Applicatie',
       onlyOneUser:     'U bent de enige persoon die deze account gebruikt',
-      onlyOneUserb:    'Als deze account door meerdere personen gebruikt wordt, geven naam / voornaam / email van de hoofdebruiker',
+      onlyOneUserb:    'Als deze account door meerdere personen gebruikt wordt, geef dan naam/voornaam/email van de hoofdgebruiker.',
       validEmail:      'Een geldig email is nodig.',
       validfn:         'Een geldig voornaam is nodig.',
       validln:         'Een geldig familienaam is nodig.'
@@ -129,7 +131,7 @@ var migrationUser = (function migration() {
       switch (tmp[0]) {
         case "login":
           if (tmp[1]) {
-            login = tmp[1].toUpperCase();
+            login = tmp[1].toUpperCase().trim();
             $('#login').val(login); //console.log('login');
           }
           break;
@@ -151,6 +153,11 @@ var migrationUser = (function migration() {
             $('[name="accountType"]').val(tmp[1]); //console.log('accountType');
           }
           break;
+        case "lang":
+          if (tmp[1]) {
+            lang = tmp[1];
+            sessionStorage.lang = lang;
+          }
       }
     });
 
