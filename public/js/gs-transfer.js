@@ -447,7 +447,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     table.columns('.fileLayer').visible(true, false);
     // adjust column sizing and redraw
     table.columns.adjust().draw(false);
-    table.column(4).search('[^' + username + ']', true, false).draw(); //filter on uploadUserName
+    table.column(4).search('[^' + username.replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&") + ']', true, false).draw(); //filter on uploadUserName
     selectMenu = 'ROOT';
     setBreadCrumb(i18n[lang].tree.root);
     updateMenuVisibleColumnList();
@@ -462,7 +462,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     table.columns('.validation').visible(false, false);
     table.columns('.detailsLayer').visible(true, false);
     table.columns.adjust().draw(false); // adjust column sizing and redraw
-    table.column(4).search('[^' + username + ']', true, false).column(7).search('^\\s*$', true, false)//.column(10).search(/^((?!Validation\/).)*$/,
+    table.column(4).search('[^' + username.replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&") + ']', true, false).column(7).search('^\\s*$', true, false)//.column(10).search(/^((?!Validation\/).)*$/,
       // true, false)
       .draw(); //filter on uploadUserName != username
     $('[class^=level] .active').removeClass('active');
@@ -482,7 +482,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     table.columns('.detailsLayer').visible(true, false);
     table.columns.adjust().draw(false); // adjust column sizing and redraw
     table//.column(10).search(/^((?!Validation\/).)*$/, true, false) // Don't show validation folder
-      .column(4).search(username).draw(); //filter on uploadUserName
+      .column(4).search(username.replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&")).draw(); //filter on uploadUserName
     $('[class^=level] .active').removeClass('active');
     selectMenu = 'UPLOAD';
     setBreadCrumb(i18n[lang].tree.upload);
@@ -518,7 +518,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     numDocRegex = numDocRegex.replace(/\|([^\|]*)$/, '$1'); //remove last '|'
     numDocRegex += ')';
 
-    table.column(4).search('[^' + username + ']', true, false)
+    table.column(4).search('[^' + username.replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&") + ']', true, false)
       .column(7).search(numDocRegex, true, false).draw(); //filter on ref docs
     selectMenu = 'ROOT';
     updateMenuVisibleColumnList();
@@ -546,7 +546,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
       table.columns('.validation').visible(false, false);
       table.columns.adjust().draw(false); // adjust column sizing and redraw
       table//.column(10).search(/^((?!Validation\/).)*$/, true, false) // Don't show validation folder
-        .column(4).search('[^' + username + ']', true, false)
+        .column(4).search('[^' + username.replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&") + ']', true, false)
         .column(7).search('^' + nodeID + '$', true, false).draw(); //filter on referenceDocument
     }
     selectMenu = 'ROOT';
@@ -1275,7 +1275,7 @@ var gsTransfer = (function (_, moment, introJs, swal, Utils) {
     templateTable();
 
     oTable = $(TABLEID).dataTable();
-    table.column(4).search('[^' + username + ']', true, false).draw();
+    table.column(4).search('[^' + username.replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&") + ']', true, false).draw();
 
     hideLoading();
 
